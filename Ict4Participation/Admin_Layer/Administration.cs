@@ -18,6 +18,7 @@ namespace Admin_Layer
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Class_Layer;
 
     /// <summary>
     /// Communicates between the GUI and classes

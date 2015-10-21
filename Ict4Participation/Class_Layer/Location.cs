@@ -1,0 +1,64 @@
+﻿//-----------------------------------------------------------------------
+// <copyright file="Location.cs" company="ICT4Participation">
+//     Copyright (c) ICT4Participation. All rights reserved.
+// </copyright>
+// <author>ICT4Participation</author>
+//-----------------------------------------------------------------------
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Class_Layer
+{    
+    /// <summary>
+    /// Location in a PointF format or in string format
+    /// </summary>
+    public class Location
+    {
+        #region Properties
+        /// <summary>
+        /// Gets the precise ocation in PointF format
+        /// </summary>
+        public PointF PreciseLocation { get; private set; }
+        
+        /// <summary>
+        /// Gets the described location in string format
+        /// </summary>
+        public string DescribedLocation { get; private set; }
+        #endregion
+
+        #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Location"/> class.
+        /// </summary>
+        /// <param name="preciseLocation">The precise location</param>
+        public Location(PointF preciseLocation)
+        {
+            this.PreciseLocation = preciseLocation;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Location"/> class.
+        /// </summary>
+        /// <param name="describedLocation">The described location</param>
+        public Location(string describedLocation)
+        {
+            this.DescribedLocation = describedLocation;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Location"/> class.
+        /// </summary>
+        /// <param name="preciseLocation">The precise location</param>
+        /// <param name="describedLocation">The described location</param>
+        public Location(PointF preciseLocation, string describedLocation)
+        {
+            this.PreciseLocation = preciseLocation;
+            this.DescribedLocation = describedLocation;
+        }
+        #endregion
+    }
+}
