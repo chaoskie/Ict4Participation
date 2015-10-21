@@ -50,6 +50,24 @@
     <Compile Include="Afspraken.Designer.cs">
       <DependentUpon>Afspraken.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChatForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChatForm.Designer.cs">
+      <DependentUpon>ChatForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HoofdForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HoofdForm.Designer.cs">
+      <DependentUpon>HoofdForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hulpvraag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Hulpvraag.Designer.cs">
+      <DependentUpon>Hulpvraag.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -73,6 +91,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Admin_Layer\Admin_Layer.csproj">
+      <Project>{5d4d65c5-92d8-4d4a-874d-bb0cad13e7ce}</Project>
+      <Name>Admin_Layer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
