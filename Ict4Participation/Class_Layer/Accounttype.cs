@@ -17,9 +17,9 @@ namespace Class_Layer
     /// Different kinds of account types
     /// </summary>
     public enum Accounttype
-    {
+    {   /*
         [Description("Administrator, this user has the most rights")]
-        Administrator,
+        Administrator,*/
         [Description("Hulpbehoevende, this user may post posts and reviews")]
         Hulpbehoevende,
         [Description("Hulpverlener, this user may view posts and reviews")]
