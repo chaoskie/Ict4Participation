@@ -22,8 +22,8 @@ namespace Class_Layer
         public const int PBKDF2_ITERATIONS = 10000;
 
         public const int ITERATION_INDEX = 0;
-        public const int SALT_INDEX = 2;
-        public const int PBKDF2_INDEX = 3;
+        public const int SALT_INDEX = 1;
+        public const int PBKDF2_INDEX = 2;
 
         /// <summary>
         /// Creates a salted PBKDF2 hash of the password.
