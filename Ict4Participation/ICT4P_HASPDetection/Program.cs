@@ -92,6 +92,7 @@ namespace ICT4P_HASPDetection
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
             //Check if file matches credentials
             return Class_Layer.PasswordHashing.ValidatePassword(Credmatch, AuthCode);
