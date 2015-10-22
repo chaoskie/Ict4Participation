@@ -16,7 +16,7 @@ namespace Ict4Participation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Inloggen());
+            Application.Run(new Inloggen(false));
         }
     }
 }

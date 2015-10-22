@@ -21,10 +21,12 @@ namespace Ict4Participation
     {
         private Administration Administration;
 
-        public Inloggen()
+        public Inloggen(bool usbAdmin)
         {
             this.InitializeComponent();
             this.Administration = new Administration();
+
+            //if admin, continue to other screen with details
         }
 
         private void btnRegistreren_Click(object sender, EventArgs e)

@@ -52,7 +52,7 @@ namespace ICT4P_HASPDetection
                     {
                         Application.EnableVisualStyles();
                         Application.SetCompatibleTextRenderingDefault(false);
-                        Application.Run(new Ict4Participation.Inloggen());
+                        Application.Run(new Ict4Participation.Inloggen(true));
                     }
                 }
             }
