@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class_Layer", "Class_Layer\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit_Tests", "Unit_Tests\Unit_Tests.csproj", "{6B08CC08-DB0E-4824-BAD7-884C5F36B2D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICT4P_HASPDetection", "ICT4P_HASPDetection\ICT4P_HASPDetection.csproj", "{679C5854-71C4-4ACB-BCDC-5B59BEC92C5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{6B08CC08-DB0E-4824-BAD7-884C5F36B2D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B08CC08-DB0E-4824-BAD7-884C5F36B2D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B08CC08-DB0E-4824-BAD7-884C5F36B2D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{679C5854-71C4-4ACB-BCDC-5B59BEC92C5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{679C5854-71C4-4ACB-BCDC-5B59BEC92C5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{679C5854-71C4-4ACB-BCDC-5B59BEC92C5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{679C5854-71C4-4ACB-BCDC-5B59BEC92C5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
