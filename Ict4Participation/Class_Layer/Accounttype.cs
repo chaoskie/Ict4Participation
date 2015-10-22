@@ -6,6 +6,7 @@
 //-----------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,19 +18,11 @@ namespace Class_Layer
     /// </summary>
     public enum Accounttype
     {
-        /// <summary>
-        /// Administrator, has the most rights
-        /// </summary>
+        [Description("Administrator, this user has the most rights")]
         Administrator,
-
-        /// <summary>
-        /// Hulpbehoevende, may post posts and reviews
-        /// </summary>
+        [Description("Hulpbehoevende, this user may post posts and reviews")]
         Hulpbehoevende,
-
-        /// <summary>
-        /// Hulpverlener, may view posts and review, and may chat
-        /// </summary>
+        [Description("Hulpverlener, this user may view posts and reviews")]
         Hulpverlener
     }
 }

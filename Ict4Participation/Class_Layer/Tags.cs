@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,34 +19,17 @@ namespace Class_Layer
     /// </summary>
     public enum Tags  //TODO ADD DESCRIPTION PROPERTIES
     {
-        /// <summary>
-        /// The user has a car
-        /// </summary>
+        [Description("The user has a car")]
         Auto,
-
-        /// <summary>
-        /// The user has a drivers license
-        /// </summary>
+        [Description("The user has a drivers license")]
         Rijbewijs,
-
-        /// <summary>
-        /// The user is muscular
-        /// </summary>
+        [Description("The user is muscular")]
         Getraind,
-
-        /// <summary>
-        /// The user has long endurance
-        /// </summary>
+        [Description("The user has a long endurance")]
         Goede_conditie,
-
-        /// <summary>
-        /// The user knows alot about tech
-        /// </summary>
+        [Description("The user knows a lot about technology")]
         Technisch,
-
-        /// <summary>
-        /// The user is socialable
-        /// </summary>
+        [Description("The user is sociable")]
         Spraakzaam
     }
 }
