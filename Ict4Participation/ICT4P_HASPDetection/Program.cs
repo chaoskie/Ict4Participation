@@ -15,28 +15,13 @@ namespace ICT4P_HASPDetection
 {
     class Program
     {
+        static string LastDriverConnected;
+
         static void Main(string[] args)
-        {
-
-        }
-
-        #region USB handlers
-        private void DeviceInsertEvent(object sender, EventArrivedEventArgs e)
-        {
-            //If the restart on plug in option is checked, check if right USB device is connected, then restart
-            if (isExternalHardDiskConnected())
-            {
-                Console.WriteLine("External Hard Disk detected");
-            }
-        }
-        #endregion
-
-        #region USB detector
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             //INSERTION
             //Set up the query upon activation
-            WqlEventQuery insertQuery = new WqlEventQuery("SELECT * FROM __InstanceCreationEvent WITHIN 2 WHERE TargetInstance ISA 'Win32_PointingDevice'");
+            WqlEventQuery insertQuery = new WqlEventQuery("SELECT * FROM __InstanceCreationEvent WITHIN 2 WHERE TargetInstance ISA 'Win32_LogicalDisk'");
 
             //Create a watcher to trigger
             ManagementEventWatcher insertWatcher = new ManagementEventWatcher(insertQuery);
@@ -47,29 +32,18 @@ namespace ICT4P_HASPDetection
             System.Threading.Thread.Sleep(200000000);
         }
 
-        /// <summary>
-        /// Checks for right device
-        /// </summary>
-        /// <param name="vendorid"></param>
-        /// <returns></returns>
-        public bool isExternalHardDiskConnected()
+        #region USB handlers
+        static void DeviceInsertEvent(object sender, EventArrivedEventArgs e)
         {
-            List<String> removableDisks = new List<string>();
-            ManagementClass wmi = new ManagementClass("Win32_DiskDrive");
-            var allDiskDrives = wmi.GetInstances();
-
-            foreach (var disk in allDiskDrives)
+            ManagementBaseObject instance = (ManagementBaseObject)e.NewEvent["TargetInstance"];
+            foreach (var property in instance.Properties)
             {
-                if (!Convert.ToString(disk["MediaType"]).ToLower().Contains("fixed"))
+                if (property.Name == "Caption")
                 {
-                    removableDisks.Add(Convert.ToString(disk["SerialNumber"]) + " " + Convert.ToString(disk["Description"]));
+                    LastDriverConnected = property.Value.ToString();
+                    
                 }
             }
-            if (removableDisks.Count > 0)
-            {
-                return true;
-            }
-            return false;
         }
         #endregion
     }
