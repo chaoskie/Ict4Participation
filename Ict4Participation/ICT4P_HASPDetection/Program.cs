@@ -18,16 +18,24 @@ namespace ICT4P_HASPDetection
 {
     class Program
     {
+        /// <summary>
+        /// Authentication code in file to match with
+        /// </summary>
         static string Credmatch = "ICT4Participation 1.0 Lars Blom, Koen Schilders, Lukas Derksen, Rowan Dings @ Fontys semester 2 maatwerk s21m";
+
+        /// <summary>
+        /// Hide and show parameters, DO NOT TOUCH
+        /// </summary>
         const int SW_HIDE = 0;
         const int SW_SHOW = 5;
 
         static void Main(string[] args)
         {
+            //Hide the console screen and let it work in the background
             var handle = Win32Call.GetConsoleWindow();
             Win32Call.ShowWindow(handle, SW_HIDE);
 
-            //INSERTION
+            //Check for USB insertion
             //Set up the query upon activation
             WqlEventQuery insertQuery = new WqlEventQuery("SELECT * FROM __InstanceCreationEvent WITHIN 2 WHERE TargetInstance ISA 'Win32_LogicalDisk'");
 
@@ -37,17 +45,25 @@ namespace ICT4P_HASPDetection
             //Start the watcher
             insertWatcher.Start();
 
+            //Sleep for a long time so the app doesn't close until then
             System.Threading.Thread.Sleep(200000000);
         }
 
-        
+        /// <summary>
+        /// Method to trigger upon watcher call
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         static void DeviceInsertEvent(object sender, EventArrivedEventArgs e)
         {
+            //Create instance of inserted object
             ManagementBaseObject instance = (ManagementBaseObject)e.NewEvent["TargetInstance"];
+            //Browse through properties of inserted object and find the drive letter
             foreach (var property in instance.Properties)
             {
                 if (property.Name == "Caption")
                 {
+                    //Verify that plugged in USB has the correct authentication file
                     if (verifiedUSBContent(property.Value.ToString()))
                     {
                         Application.EnableVisualStyles();
@@ -61,7 +77,7 @@ namespace ICT4P_HASPDetection
         static bool verifiedUSBContent(string DLetter)
         {
             string AuthCode = string.Empty;
-            //If filename is present, stream said file
+            //If filename is present, read said file
             try
             {
                 using (FileStream stream = new FileStream(String.Format("{0}\\Auth", DLetter), FileMode.Open))
@@ -81,6 +97,7 @@ namespace ICT4P_HASPDetection
             return Class_Layer.PasswordHashing.ValidatePassword(Credmatch, AuthCode);
         }
 
+        //Code to generate a new authentication file
         public static void Writefile()
         {
             using (FileStream stream = new FileStream("Auth", FileMode.Create))
