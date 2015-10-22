@@ -17,7 +17,7 @@ namespace Class_Layer
     /// <summary>
     /// Skills a user can have
     /// </summary>
-    public enum Tags  //TODO ADD DESCRIPTION PROPERTIES
+    public enum Tags  
     {
         [Description("The user has a car")]
         Auto,

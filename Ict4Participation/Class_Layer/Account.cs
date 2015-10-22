@@ -78,7 +78,11 @@ namespace Class_Layer
             this.AvatarPath = avatarPath;
             this.Information = information;
             this.Sex = sex;
-            this.VOGPath = vogPath;
+
+            if (Role == Accounttype.Hulpverlener)
+            {
+                this.VOGPath = vogPath;
+            }
         }
 
         /// <summary>
