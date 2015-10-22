@@ -68,29 +68,8 @@ namespace Class_Layer
         /// <param name="avatarPath">The path of the avatar of the user</param>
         /// <param name="information">Information about the user</param>
         /// <param name="sex">The sex (male/female) of the user</param>
-        public Account(int accountID, string name, Location loc, Accounttype role, string avatarPath, string information, string sex)
-        {
-            this.AccountID = accountID;
-            this.Naam = name;
-            this.Loc = loc;
-            this.Role = role;
-            this.AvatarPath = avatarPath;
-            this.Information = information;
-            this.Sex = sex;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Account"/> class.
-        /// </summary>
-        /// <param name="accountID">The ID of the user</param>
-        /// <param name="name">The name of the user</param>
-        /// <param name="loc">The location of the user</param>
-        /// <param name="role">The role of the user</param>
-        /// <param name="avatarPath">The path of the avatar of the user</param>
-        /// <param name="information">Information about the user</param>
-        /// <param name="sex">The sex (male/female) of the user</param>
         /// <param name="vogPath">The path of the VOG document</param>
-        public Account(int accountID, string name, Location loc, Accounttype role, string avatarPath, string information, string sex, string vogPath)
+        public Account(int accountID, string name, Location loc, Accounttype role, string avatarPath, string information, string sex, string vogPath = "")
         {
             this.AccountID = accountID;
             this.Naam = name;
@@ -115,7 +94,14 @@ namespace Class_Layer
         /// <param name="vogPath">The path of the VOG document</param>
         public void EditAccount(int accountID, string name, Location loc, Accounttype role, string avatarPath, string information, string sex, string vogPath)
         {
-            // function here
+            this.AccountID = accountID;
+            this.Naam = name;
+            this.Loc = loc;
+            this.Role = role;
+            this.AvatarPath = avatarPath;
+            this.Information = information;
+            this.Sex = sex;
+            this.VOGPath = vogPath;
         }
     }
 }
