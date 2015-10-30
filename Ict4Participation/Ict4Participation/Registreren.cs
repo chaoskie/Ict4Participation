@@ -51,9 +51,9 @@ namespace Ict4Participation
             string city = this.tbCity.Text;
             string sex = this.cbSex.SelectedItem.ToString();
 
-            /* Accounttype role;
-             Enum.TryParse<Accounttype>(this.cbRoles.SelectedValue.ToString(), out role);
-             */
+            Accounttype role;
+            Enum.TryParse<Accounttype>(this.cbRoles.SelectedValue.ToString(), out role);
+            
             string photopath = ofd.FileName;
 
             string id = this.tbID.Text;
@@ -95,9 +95,9 @@ namespace Ict4Participation
             }
 
             if (allOK) {
-                //Form form = new Registreren2(this, name, adress, city, sex, role, photopath, id, password);
-                //form.Show();
-                //this.Hide();
+                Form form = new Registreren2(this, name, adress, city, sex, role, photopath, id, password);
+                form.Show();
+                this.Hide();
             } else {
                 MessageBox.Show(error);
             }

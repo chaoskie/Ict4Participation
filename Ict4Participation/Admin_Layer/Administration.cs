@@ -91,5 +91,10 @@ namespace Admin_Layer
         {
             return null;
         }
+
+        public List<string> getAccounttypes()
+        {
+            return Enum.GetNames(typeof(Accounttype)).ToList();
+        }
     }
 }
