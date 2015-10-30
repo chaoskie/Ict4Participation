@@ -21,15 +21,18 @@ namespace Database_Layer
     public static class Database
     {
         /// HOST IP
-        private static string host = "25.127.111.142";
+        private static string host = "25.128.155.180";
         /// HOST USERNAME
-        private static string username = "C##PTS21M";
+        private static string username = "PLUMBUM"; 
         /// HOST PASSWORD
-        private static string password = "PTS21M";
-        private static string connectionstring =
+        private static string password = "root";
+        private static string connectionstring = "User Id=" + username + ";Password=" + password + ";Data Source= //" + host + ":1521/XE;";
+            /*
             "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=" + host
             + ")(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=ORCL))); "
-            + "User Id=" + username + "; Password=" + password + ";";
+            + "User Id=" + username + "; Password=" + password + ";";*/
+        
+        //conn.ConnectionString = "User Id=" + user + ";Password=" + password + ";Data Source= //192.168.20.111:1521/XE;";
 
         /// <summary>
         /// Selects and retrieves values from the database 
