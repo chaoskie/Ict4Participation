@@ -21,11 +21,11 @@ namespace Database_Layer
     public static class Database
     {
         /// HOST IP
-        private static string host = "";
+        private static string host = "25.127.111.142";
         /// HOST USERNAME
-        private static string username = "";
+        private static string username = "C##PTS21M";
         /// HOST PASSWORD
-        private static string password = "";
+        private static string password = "PTS21M";
         private static string connectionstring =
             "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=" + host
             + ")(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=ORAVT))); "
