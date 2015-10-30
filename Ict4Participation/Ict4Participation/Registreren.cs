@@ -28,6 +28,9 @@ namespace Ict4Participation
         {
             this.InitializeComponent();
             this.previous = p;
+
+            this.cbRoles.SelectedIndex = 0;
+            this.cbSex.SelectedIndex = 0;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -91,14 +94,13 @@ namespace Ict4Participation
                 error += "Het wachtwoord is niet sterk genoeg! Minimaal 1 hoofdletter, 1 kleine letter en 1 nummer/speciaal karakter.";
             }
 
-            /* if (allOK) {
-                 Form form = new Registreren2(this, name, adress, city, sex, role, photopath, id, password);
-                 form.Show();
-                 this.Hide();
-             } else {
-                 MessageBox.Show(error);
-             }*/
-
+            if (allOK) {
+                //Form form = new Registreren2(this, name, adress, city, sex, role, photopath, id, password);
+                //form.Show();
+                //this.Hide();
+            } else {
+                MessageBox.Show(error);
+            }
         }
 
         private void btnChoosePhoto_Click(object sender, EventArgs e)
