@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Database_Layer;
 
 namespace Class_Layer
 {
@@ -106,6 +107,12 @@ namespace Class_Layer
             this.Information = information;
             this.Sex = sex;
             this.VOGPath = vogPath;
+        }
+
+        //testmethode voor database
+        static public void testdatabase()
+        {
+            Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc\"");
         }
     }
 }

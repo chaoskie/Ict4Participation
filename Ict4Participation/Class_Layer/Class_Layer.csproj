@@ -53,6 +53,12 @@
     <Compile Include="Review.cs" />
     <Compile Include="Tags.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Database_Layer\Database_Layer.csproj">
+      <Project>{64743987-6e5c-4b53-8271-21cc94cdf66c}</Project>
+      <Name>Database_Layer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

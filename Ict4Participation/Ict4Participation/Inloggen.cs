@@ -26,6 +26,8 @@ namespace Ict4Participation
             this.InitializeComponent();
             this.Administration = new Administration();
 
+            Administration.testDatabase();
+
             //if admin, continue to other screen with details
         }
 

@@ -51,6 +51,7 @@ namespace Ict4Participation
             string city = this.tbCity.Text;
             string sex = this.cbSex.SelectedItem.ToString();
 
+            /*
             Accounttype role;
             Enum.TryParse<Accounttype>(this.cbRoles.SelectedValue.ToString(), out role);
             
@@ -82,7 +83,7 @@ namespace Ict4Participation
                 allOK = false;
                 error += "Geslacht is niet correct!\n";
             }
-            /* NOG NIET GOED! */
+             NOG NIET GOED! 
             if (ofd.FileName == null)
             {
                 allOK = false;
@@ -101,6 +102,7 @@ namespace Ict4Participation
             } else {
                 MessageBox.Show(error);
             }
+            */
         }
 
         private void btnChoosePhoto_Click(object sender, EventArgs e)

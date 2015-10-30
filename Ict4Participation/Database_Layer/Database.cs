@@ -28,7 +28,7 @@ namespace Database_Layer
         private static string password = "PTS21M";
         private static string connectionstring =
             "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=" + host
-            + ")(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=ORAVT))); "
+            + ")(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=ORCL))); "
             + "User Id=" + username + "; Password=" + password + ";";
 
         /// <summary>
@@ -40,19 +40,27 @@ namespace Database_Layer
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
-                c.Open();
-                OracleCommand cmd = new OracleCommand(@query);
-                cmd.Connection = c;
                 try
                 {
-                    OracleDataReader r = cmd.ExecuteReader();
-                    DataTable result = new DataTable();
-                    result.Load(r);
-                    c.Close();
-                    return result;
+                    c.Open();
+                    OracleCommand cmd = new OracleCommand(@query);
+                    cmd.Connection = c;
+                    try
+                    {
+                        OracleDataReader r = cmd.ExecuteReader();
+                        DataTable result = new DataTable();
+                        result.Load(r);
+                        c.Close();
+                        return result;
+                    }
+                    catch (OracleException)
+                    {
+                        throw;
+                    }
                 }
-                catch (OracleException)
+                catch (OracleException e)
                 {
+                    string s = e.Message;
                     throw;
                 }
             }

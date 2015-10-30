@@ -10,15 +10,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Class_Layer;
 
 namespace Admin_Layer
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Class_Layer;
 
     /// <summary>
     /// Communicates between the GUI and classes
@@ -95,6 +95,13 @@ namespace Admin_Layer
         public List<string> getAccounttypes()
         {
             return Enum.GetNames(typeof(Accounttype)).ToList();
+        }
+
+
+        //testmethod voor database
+        static public void testDatabase()
+        {
+            Account.testdatabase();
         }
     }
 }
