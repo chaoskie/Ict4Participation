@@ -40,6 +40,8 @@ namespace Admin_Layer
             return false;
         }
 
+        #region Question handling
+
         /// <summary>
         /// Post a question
         /// </summary>
@@ -54,6 +56,29 @@ namespace Admin_Layer
             else
                 return "Er ging iets fout! Raadpleeg de administrator indien deze fout blijft voordoen.";
         }
+
+        /// <summary>
+        /// Retrieves a list of all the question titles
+        /// </summary>
+        /// <param name="all">Whether they have to be all the questions, or just the main user</param>
+        /// <returns>A list regarding these names</returns>
+        public List<string> GetQuestionNames(bool all = true)
+        {
+            return Question.FindQuestions(all, MainUser.AccountID).Cast<Question>().Select(x => x.Title).ToList();
+        }
+
+        /// <summary>
+        /// Retrieves the information of a selected question title, by index
+        /// </summary>
+        /// <param name="index">The index of the selected title</param>
+        /// <param name="all">Whether there's a selection from the complete list, or just the main user</param>
+        /// <returns></returns>
+        public string GetQuestionDetails(int index, bool all = true)
+        {
+            return Question.FindQuestions(all, MainUser.AccountID)[index].ToString();
+        }
+
+        #endregion
 
         /// <summary>
         /// Post a review

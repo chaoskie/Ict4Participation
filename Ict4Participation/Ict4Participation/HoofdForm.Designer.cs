@@ -110,7 +110,7 @@
             this.tsbtnShowRequests.Name = "tsbtnShowRequests";
             this.tsbtnShowRequests.Size = new System.Drawing.Size(225, 24);
             this.tsbtnShowRequests.Text = "Aanvragen weergeven";
-            this.tsbtnShowRequests.Click += new System.EventHandler(this.tsbtnShowRequests_Click);
+            this.tsbtnShowRequests.Click += new System.EventHandler(this.tsbtnShowAllRequests_Click);
             // 
             // tsbtnShowAllRequests
             // 

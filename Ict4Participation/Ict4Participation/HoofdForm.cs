@@ -54,24 +54,26 @@ namespace Ict4Participation
         private void tsbtnPlaceQuestion_Click(object sender, EventArgs e)
         {
             Form form = new PlaatsHulpvraag(this, Administration);
+            form.Show();
+            this.Hide();
         }
 
         //TODO
         #region Requests / Help questions
 
-        private void tsbtnShowRequests_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void tsbtnShowAllRequests_Click(object sender, EventArgs e)
         {
-
+            Form form = new HulpVragen(this, Administration, true);
+            form.Show();
+            this.Hide();
         }
 
         private void tsbtnShowOwnRequests_Click(object sender, EventArgs e)
         {
-
+            Form form = new HulpVragen(this, Administration, false);
+            form.Show();
+            this.Hide();
         }
 
         #endregion

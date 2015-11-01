@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -88,7 +89,7 @@ namespace Class_Layer
                 //Set questionID
                 foreach (DataRow row in dtQuestion.Rows)
                 {
-                    qID = Convert.ToInt32(row["ID"]);
+                    qID = Convert.ToInt32(row["max(ID)"]);
                 }
 
                 q = new Question(qID, title, schedule, description, questionLocation);
@@ -101,9 +102,54 @@ namespace Class_Layer
             return creationSuccess;
         }
 
-        public static bool FindQuestionPoster(int postID)
+        /// <summary>
+        /// Retrieves questions from the database
+        /// </summary>
+        /// <param name="all">Whether they have to be all the questions, or just the op</param>
+        /// <param name="accountid">the ID of the op, if all is not true</param>
+        /// <returns></returns>
+        public static List<Question> FindQuestions(bool all = true, int accountid = 0)
         {
-            return false;
+            List<Question> q = new List<Question>();
+            DataTable dtQuestion;
+            //If all posts are meant to be retrieved
+            if (all)
+            {
+                dtQuestion = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Question\"");
+            }
+            //else retrieve all the user's posts
+            else
+            {
+                dtQuestion = Database_Layer.Database.RetrieveQuery(
+                    String.Format("SELECT * FROM \"Question\" WHERE \"PosterACC_ID\" = '{0}'",
+                    accountid));
+            }
+
+            foreach (DataRow row in dtQuestion.Rows)
+            {
+                //Find location and create an instance
+                DataTable dtLocation = Database_Layer.Database.RetrieveQuery(
+                      String.Format("SELECT * FROM \"Location\" WHERE \"ID\" = '{0}'", row["LOCATION_ID"]));
+                Location loc = null;
+                foreach (DataRow rowLoc in dtLocation.Rows)
+                {
+                     loc = new Location(
+                        new PointF(
+                            (float)rowLoc["Longitude"],
+                            (float)rowLoc["Latitude"]),
+                            rowLoc["Description"].ToString()
+                        );
+                }
+
+                //Add question to list
+                q.Add(new Question(Convert.ToInt32(row["ID"]),
+                    row["Title"].ToString(),
+                    Convert.ToDateTime(row["TimeTable"]),
+                    row["Description"].ToString(),
+                    loc
+                    ));
+            }
+            return q;
         }
 
         /// <summary>
@@ -120,6 +166,14 @@ namespace Class_Layer
             this.Schedule = schedule;
             this.Description = description;
             this.Schedule = schedule;
+        }
+
+        //Returns a full description
+        public override string ToString()
+        {
+            return string.Format(
+                "Hulp gewenst op: {0} \n Beschrijving: {1} \n Locatie: {2}",
+                Schedule.ToString(), Description, QuestionLocation.ToString());
         }
     }
 }

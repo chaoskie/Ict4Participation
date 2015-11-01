@@ -60,5 +60,10 @@ namespace Class_Layer
             this.DescribedLocation = describedLocation;
         }
         #endregion
+
+        public override string ToString()
+        {
+            return String.Format("{0} op {1} , {2}", DescribedLocation, PreciseLocation.X, PreciseLocation.Y);
+        }
     }
 }

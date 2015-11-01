@@ -125,6 +125,9 @@
     <EmbeddedResource Include="HoofdForm.resx">
       <DependentUpon>HoofdForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HulpVragen.resx">
+      <DependentUpon>HulpVragen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PlaatsHulpvraag.resx">
       <DependentUpon>PlaatsHulpvraag.cs</DependentUpon>
     </EmbeddedResource>

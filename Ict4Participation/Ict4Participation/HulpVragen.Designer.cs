@@ -29,13 +29,16 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lbHulpvragen = new System.Windows.Forms.ListBox();
             this.btnNieuw = new System.Windows.Forms.Button();
             this.btnAnnuleren = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.btnPlaats = new System.Windows.Forms.Button();
+            this.lblQuestionName = new System.Windows.Forms.Label();
+            this.lblQuestionInfo = new System.Windows.Forms.Label();
+            this.lbSkills = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // label1
@@ -48,17 +51,16 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Overzicht hulpvragen:";
             // 
-            // listBox1
+            // lbHulpvragen
             // 
-            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Items.AddRange(new object[] {
-            "Hulp met stoel"});
-            this.listBox1.Location = new System.Drawing.Point(12, 32);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(310, 84);
-            this.listBox1.TabIndex = 1;
+            this.lbHulpvragen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbHulpvragen.FormattingEnabled = true;
+            this.lbHulpvragen.ItemHeight = 20;
+            this.lbHulpvragen.Location = new System.Drawing.Point(12, 32);
+            this.lbHulpvragen.Name = "lbHulpvragen";
+            this.lbHulpvragen.Size = new System.Drawing.Size(310, 344);
+            this.lbHulpvragen.TabIndex = 1;
+            this.lbHulpvragen.SelectedIndexChanged += new System.EventHandler(this.lbHulpvragen_SelectedIndexChanged);
             // 
             // btnNieuw
             // 
@@ -78,26 +80,25 @@
             this.btnAnnuleren.Name = "btnAnnuleren";
             this.btnAnnuleren.Size = new System.Drawing.Size(153, 67);
             this.btnAnnuleren.TabIndex = 2;
-            this.btnAnnuleren.Text = "Annuleren";
+            this.btnAnnuleren.Text = "Terug";
             this.btnAnnuleren.UseVisualStyleBackColor = true;
             this.btnAnnuleren.Click += new System.EventHandler(this.btnAnnuleren_Click);
             // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(12, 142);
+            this.textBox1.Location = new System.Drawing.Point(328, 151);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(310, 177);
+            this.textBox1.Size = new System.Drawing.Size(450, 225);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "Henk: Hoi ik wil je wel helpen met de stoel.\r\nIk: Oke!";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(8, 119);
+            this.label2.Location = new System.Drawing.Point(324, 128);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(176, 20);
             this.label2.TabIndex = 0;
@@ -106,33 +107,66 @@
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(12, 325);
+            this.textBox2.Location = new System.Drawing.Point(328, 396);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(210, 65);
+            this.textBox2.Size = new System.Drawing.Size(350, 65);
             this.textBox2.TabIndex = 4;
             // 
             // btnPlaats
             // 
             this.btnPlaats.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPlaats.Location = new System.Drawing.Point(228, 325);
+            this.btnPlaats.Location = new System.Drawing.Point(684, 396);
             this.btnPlaats.Name = "btnPlaats";
             this.btnPlaats.Size = new System.Drawing.Size(94, 65);
             this.btnPlaats.TabIndex = 2;
-            this.btnPlaats.Text = "Plaats";
+            this.btnPlaats.Text = "Reageer";
             this.btnPlaats.UseVisualStyleBackColor = true;
+            // 
+            // lblQuestionName
+            // 
+            this.lblQuestionName.AutoSize = true;
+            this.lblQuestionName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuestionName.Location = new System.Drawing.Point(324, 9);
+            this.lblQuestionName.Name = "lblQuestionName";
+            this.lblQuestionName.Size = new System.Drawing.Size(231, 20);
+            this.lblQuestionName.TabIndex = 5;
+            this.lblQuestionName.Text = "<Geen vraag geselecteerd>";
+            // 
+            // lblQuestionInfo
+            // 
+            this.lblQuestionInfo.AutoSize = true;
+            this.lblQuestionInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuestionInfo.Location = new System.Drawing.Point(328, 29);
+            this.lblQuestionInfo.Name = "lblQuestionInfo";
+            this.lblQuestionInfo.Size = new System.Drawing.Size(176, 16);
+            this.lblQuestionInfo.TabIndex = 6;
+            this.lblQuestionInfo.Text = "<Geen vraag geselecteerd>";
+            // 
+            // lbSkills
+            // 
+            this.lbSkills.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbSkills.FormattingEnabled = true;
+            this.lbSkills.ItemHeight = 20;
+            this.lbSkills.Location = new System.Drawing.Point(642, 12);
+            this.lbSkills.Name = "lbSkills";
+            this.lbSkills.Size = new System.Drawing.Size(136, 124);
+            this.lbSkills.TabIndex = 7;
             // 
             // HulpVragen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 476);
+            this.ClientSize = new System.Drawing.Size(790, 476);
+            this.Controls.Add(this.lbSkills);
+            this.Controls.Add(this.lblQuestionInfo);
+            this.Controls.Add(this.lblQuestionName);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnPlaats);
             this.Controls.Add(this.btnAnnuleren);
             this.Controls.Add(this.btnNieuw);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.lbHulpvragen);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "HulpVragen";
@@ -146,12 +180,15 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lbHulpvragen;
         private System.Windows.Forms.Button btnNieuw;
         private System.Windows.Forms.Button btnAnnuleren;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button btnPlaats;
+        private System.Windows.Forms.Label lblQuestionName;
+        private System.Windows.Forms.Label lblQuestionInfo;
+        private System.Windows.Forms.ListBox lbSkills;
     }
 }
