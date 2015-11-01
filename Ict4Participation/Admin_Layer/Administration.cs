@@ -245,47 +245,15 @@ namespace Admin_Layer
         private List<string> AllAccountData(Account a)
         {
             List<string> rt = new List<string>();
-            rt.Add(AccountID(a));
-            rt.Add(AccountName(a));
-            rt.Add(AccountLocation(a));
-            rt.Add(AccountAvatarPath(a));
-            rt.Add(AccountInformation(a));
-            rt.Add(AccountRole(a));
-            rt.Add(AccountSex(a));
-            rt.Add(AccountEmail(a));
+            rt.Add(a.AccountID.ToString());
+            rt.Add(a.Naam);
+            rt.Add(a.Loc.ToString());
+            rt.Add(a.AvatarPath);
+            rt.Add(a.Information);
+            rt.Add(a.Role.ToString());
+            rt.Add(a.Sex);
+            rt.Add(a.Email);
             return rt;
-        }
-        private string AccountID(Account a)
-        {
-            return a.AccountID.ToString();
-        }
-        private string AccountAvatarPath(Account a)
-        {
-            return a.AvatarPath;
-        }
-        private string AccountEmail(Account a)
-        {
-            return a.Email;
-        }
-        private string AccountInformation(Account a)
-        {
-            return a.Information;
-        }
-        private string AccountLocation(Account a)
-        {
-            return a.Loc.ToString();
-        }
-        private string AccountName(Account a)
-        {
-            return a.Naam;
-        }
-        private string AccountRole(Account a)
-        {
-            return a.Role.ToString();
-        }
-        private string AccountSex(Account a)
-        {
-            return a.Sex;
         }
         #endregion
 
