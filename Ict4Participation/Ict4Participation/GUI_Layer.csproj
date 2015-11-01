@@ -66,12 +66,6 @@
     <Compile Include="HoofdForm.Designer.cs">
       <DependentUpon>HoofdForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Hulpvraag.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Hulpvraag.Designer.cs">
-      <DependentUpon>Hulpvraag.cs</DependentUpon>
-    </Compile>
     <Compile Include="HulpVragen.cs">
       <SubType>Form</SubType>
     </Compile>
