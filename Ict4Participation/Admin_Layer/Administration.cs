@@ -22,22 +22,18 @@ namespace Admin_Layer
     {
         public Account MainUser;
         private List<Account> Accounts;
+        private List<Question> LoadedQuestions;
+        private List<Comment> LoadedComments;
+        private int lastloadedOPID;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Administration"/> class.
         /// </summary>
         public Administration()
         {
-            // Implement
-        }
-
-        /// <summary>
-        /// Post a comment
-        /// </summary>
-        /// <returns>Returns the result of the action</returns>
-        public bool PostComment()
-        {
-            return false;
+            Accounts = new List<Account>();
+            LoadedQuestions = new List<Question>();
+            LoadedComments = new List<Comment>();
         }
 
         #region Question handling
@@ -64,7 +60,8 @@ namespace Admin_Layer
         /// <returns>A list regarding these names</returns>
         public List<string> GetQuestionNames(bool all = true)
         {
-            return Question.FindQuestions(all, MainUser.AccountID).Cast<Question>().Select(x => x.Title).ToList();
+            LoadedQuestions = Question.FindQuestions(all, MainUser.AccountID);
+            return LoadedQuestions.Cast<Question>().Select(x => x.Title).ToList();
         }
 
         /// <summary>
@@ -75,7 +72,27 @@ namespace Admin_Layer
         /// <returns></returns>
         public string GetQuestionDetails(int index, bool all = true)
         {
-            return Question.FindQuestions(all, MainUser.AccountID)[index].ToString();
+            return LoadedQuestions[index].GetDescription(LoadedQuestions[index].PostID, out lastloadedOPID);
+        }
+
+        /// <summary>
+        /// Retrieves the comments about a post
+        /// </summary>
+        /// <param name="postID"></param>
+        /// <returns></returns>
+        public List<string> GetQuestionComments(int index)
+        {
+            return Comment.GetQuestionComments(LoadedQuestions[index].PostID, out LoadedComments);
+        }
+
+        /// <summary>
+        /// Places a new comment for said question
+        /// </summary>
+        /// <param name="title">The comment</param>
+        /// <param name="index">The index of the selected question</param>
+        public void PlaceQuestionComment(string title, int index)
+        {
+            Comment.PlaceComment(MainUser.AccountID, LoadedQuestions[index].PostID, title);
         }
 
         #endregion

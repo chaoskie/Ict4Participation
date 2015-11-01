@@ -39,6 +39,7 @@
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.vrijwilligersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hulpbehoevendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.administratorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
@@ -47,7 +48,6 @@
             this.lblName = new System.Windows.Forms.Label();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.btnGereed = new System.Windows.Forms.Button();
-            this.administratorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbAvatar)).BeginInit();
             this.SuspendLayout();
@@ -115,14 +115,14 @@
             // tsbtnShowAllRequests
             // 
             this.tsbtnShowAllRequests.Name = "tsbtnShowAllRequests";
-            this.tsbtnShowAllRequests.Size = new System.Drawing.Size(152, 24);
+            this.tsbtnShowAllRequests.Size = new System.Drawing.Size(115, 24);
             this.tsbtnShowAllRequests.Text = "Alle";
             this.tsbtnShowAllRequests.Click += new System.EventHandler(this.tsbtnShowAllRequests_Click);
             // 
             // tsbtnShowOwnRequests
             // 
             this.tsbtnShowOwnRequests.Name = "tsbtnShowOwnRequests";
-            this.tsbtnShowOwnRequests.Size = new System.Drawing.Size(152, 24);
+            this.tsbtnShowOwnRequests.Size = new System.Drawing.Size(115, 24);
             this.tsbtnShowOwnRequests.Text = "Eigen";
             this.tsbtnShowOwnRequests.Click += new System.EventHandler(this.tsbtnShowOwnRequests_Click);
             // 
@@ -149,6 +149,12 @@
             this.hulpbehoevendenToolStripMenuItem.Name = "hulpbehoevendenToolStripMenuItem";
             this.hulpbehoevendenToolStripMenuItem.Size = new System.Drawing.Size(200, 24);
             this.hulpbehoevendenToolStripMenuItem.Text = "Hulpbehoevenden";
+            // 
+            // administratorsToolStripMenuItem
+            // 
+            this.administratorsToolStripMenuItem.Name = "administratorsToolStripMenuItem";
+            this.administratorsToolStripMenuItem.Size = new System.Drawing.Size(200, 24);
+            this.administratorsToolStripMenuItem.Text = "Administrators";
             // 
             // toolStripSeparator1
             // 
@@ -209,12 +215,6 @@
             this.btnGereed.TabIndex = 18;
             this.btnGereed.Text = "Verander profiel";
             this.btnGereed.UseVisualStyleBackColor = true;
-            // 
-            // administratorsToolStripMenuItem
-            // 
-            this.administratorsToolStripMenuItem.Name = "administratorsToolStripMenuItem";
-            this.administratorsToolStripMenuItem.Size = new System.Drawing.Size(200, 24);
-            this.administratorsToolStripMenuItem.Text = "Administrators";
             // 
             // HoofdForm
             // 

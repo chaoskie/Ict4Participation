@@ -32,9 +32,9 @@
             this.lbHulpvragen = new System.Windows.Forms.ListBox();
             this.btnNieuw = new System.Windows.Forms.Button();
             this.btnAnnuleren = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbComments = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbChat = new System.Windows.Forms.TextBox();
             this.btnPlaats = new System.Windows.Forms.Button();
             this.lblQuestionName = new System.Windows.Forms.Label();
             this.lblQuestionInfo = new System.Windows.Forms.Label();
@@ -84,15 +84,15 @@
             this.btnAnnuleren.UseVisualStyleBackColor = true;
             this.btnAnnuleren.Click += new System.EventHandler(this.btnAnnuleren_Click);
             // 
-            // textBox1
+            // tbComments
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(328, 151);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(450, 225);
-            this.textBox1.TabIndex = 3;
+            this.tbComments.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbComments.Location = new System.Drawing.Point(328, 151);
+            this.tbComments.Multiline = true;
+            this.tbComments.Name = "tbComments";
+            this.tbComments.ReadOnly = true;
+            this.tbComments.Size = new System.Drawing.Size(450, 225);
+            this.tbComments.TabIndex = 3;
             // 
             // label2
             // 
@@ -104,14 +104,14 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Berichten op hulpvraag:";
             // 
-            // textBox2
+            // tbChat
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(328, 396);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(350, 65);
-            this.textBox2.TabIndex = 4;
+            this.tbChat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbChat.Location = new System.Drawing.Point(328, 396);
+            this.tbChat.Multiline = true;
+            this.tbChat.Name = "tbChat";
+            this.tbChat.Size = new System.Drawing.Size(350, 65);
+            this.tbChat.TabIndex = 4;
             // 
             // btnPlaats
             // 
@@ -122,6 +122,7 @@
             this.btnPlaats.TabIndex = 2;
             this.btnPlaats.Text = "Reageer";
             this.btnPlaats.UseVisualStyleBackColor = true;
+            this.btnPlaats.Click += new System.EventHandler(this.btnPlaats_Click);
             // 
             // lblQuestionName
             // 
@@ -161,8 +162,8 @@
             this.Controls.Add(this.lbSkills);
             this.Controls.Add(this.lblQuestionInfo);
             this.Controls.Add(this.lblQuestionName);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbChat);
+            this.Controls.Add(this.tbComments);
             this.Controls.Add(this.btnPlaats);
             this.Controls.Add(this.btnAnnuleren);
             this.Controls.Add(this.btnNieuw);
@@ -183,9 +184,9 @@
         private System.Windows.Forms.ListBox lbHulpvragen;
         private System.Windows.Forms.Button btnNieuw;
         private System.Windows.Forms.Button btnAnnuleren;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbComments;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbChat;
         private System.Windows.Forms.Button btnPlaats;
         private System.Windows.Forms.Label lblQuestionName;
         private System.Windows.Forms.Label lblQuestionInfo;

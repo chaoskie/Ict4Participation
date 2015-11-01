@@ -65,14 +65,37 @@ namespace Ict4Participation
             //load in details
             lblQuestionInfo.Text = Administration.GetQuestionDetails(ind, allLoaded);
             lblQuestionName.Text = lbHulpvragen.SelectedItem.ToString();
+            //Load in comments
+            foreach (string s in Administration.GetQuestionComments(ind))
+            {
+                tbComments.Text += s + Environment.NewLine;
+            }
+            currentSelection = ind;
         }
 
+        //Replies with a comment
+        private void btnPlaats_Click(object sender, EventArgs e)
+        {
+            //place comment
+            Administration.PlaceQuestionComment(tbChat.Text, currentSelection);
+            //clear text
+            tbChat.Clear();
+            //reload comments
+            tbComments.Clear();
+            foreach (string s in Administration.GetQuestionComments(currentSelection))
+            {
+                tbComments.Text += s + Environment.NewLine;
+            }
+        }
+
+        //Closes this screen, and brings the user back to the main menu
         private void btnAnnuleren_Click(object sender, EventArgs e)
         {
-            this.Close();
             this.previous.Show();
+            this.Close();
         }
 
+        //Closes this screen, and brings the user back to the main menu
         private void HulpVragen_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.previous.Show();

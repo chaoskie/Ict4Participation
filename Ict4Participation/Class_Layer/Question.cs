@@ -153,6 +153,25 @@ namespace Class_Layer
         }
 
         /// <summary>
+        /// Retrieves the name and ID of the original poster
+        /// </summary>
+        /// <param name="postid">ID of the post</param>
+        /// <param name="ID">ID of the user</param>
+        /// <returns>the name of the original poster</returns>
+        public static string GetOP(int postid, out int ID)
+        {
+            string name = String.Empty;
+            ID = 0;
+            DataTable dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc\" WHERE \"ID\" = (SELECT \"PosterACC_ID\" FROM \"Question\" WHERE \"ID\" = " + postid + ")");
+            foreach (DataRow row in dt.Rows)
+            {
+                ID = Convert.ToInt32(row["ID"]);
+                name = row["Name"].ToString();
+            }
+            return name;
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Question"/> class.
         /// </summary>
         /// <param name="postID">The ID of the question</param>
@@ -169,11 +188,11 @@ namespace Class_Layer
         }
 
         //Returns a full description
-        public override string ToString()
+        public string GetDescription(int postid, out int ID)
         {
             return string.Format(
-                "Hulp gewenst op: {0} \n Beschrijving: {1} \n Locatie: {2}",
-                Schedule.ToString(), Description, QuestionLocation.ToString());
+                "Door: {0} \nHulp gewenst op: {1} \nBeschrijving: {2} \nLocatie: {3}",
+                GetOP(postid, out ID), Schedule.ToString(), Description, QuestionLocation.ToString());
         }
     }
 }
