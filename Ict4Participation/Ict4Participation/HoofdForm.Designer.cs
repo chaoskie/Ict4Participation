@@ -28,37 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HoofdForm));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.tsbtnLogOut = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.plaatsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.aanvragenWeergevenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.alleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eigenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbtnPlaceQuestion = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbtnShowRequests = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbtnShowAllRequests = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbtnShowOwnRequests = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.vrijwilligersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hulpbehoevendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.administratorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.pbAvatar = new System.Windows.Forms.PictureBox();
+            this.lblName = new System.Windows.Forms.Label();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.btnGereed = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.administratorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbAvatar)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
             // 
             this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
+            this.tsbtnLogOut,
             this.toolStripSeparator3,
             this.toolStripDropDownButton1,
             this.toolStripDropDownButton2,
@@ -72,68 +70,61 @@
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripLabel1
+            // tsbtnLogOut
             // 
-            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(61, 24);
-            this.toolStripLabel1.Text = "Zoeken:";
+            this.tsbtnLogOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbtnLogOut.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnLogOut.Name = "tsbtnLogOut";
+            this.tsbtnLogOut.Size = new System.Drawing.Size(78, 24);
+            this.tsbtnLogOut.Text = "Afmelden";
+            this.tsbtnLogOut.Click += new System.EventHandler(this.tsbtnLogOut_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripDropDownButton1
             // 
             this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.plaatsToolStripMenuItem1,
-            this.aanvragenWeergevenToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
+            this.tsbtnPlaceQuestion,
+            this.tsbtnShowRequests});
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
             this.toolStripDropDownButton1.Size = new System.Drawing.Size(91, 24);
             this.toolStripDropDownButton1.Text = "Hulpvraag";
             // 
-            // plaatsToolStripMenuItem1
+            // tsbtnPlaceQuestion
             // 
-            this.plaatsToolStripMenuItem1.Name = "plaatsToolStripMenuItem1";
-            this.plaatsToolStripMenuItem1.Size = new System.Drawing.Size(225, 24);
-            this.plaatsToolStripMenuItem1.Text = "Plaats";
+            this.tsbtnPlaceQuestion.Name = "tsbtnPlaceQuestion";
+            this.tsbtnPlaceQuestion.Size = new System.Drawing.Size(225, 24);
+            this.tsbtnPlaceQuestion.Text = "Plaats";
+            this.tsbtnPlaceQuestion.Click += new System.EventHandler(this.tsbtnPlaceQuestion_Click);
             // 
-            // aanvragenWeergevenToolStripMenuItem
+            // tsbtnShowRequests
             // 
-            this.aanvragenWeergevenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.alleToolStripMenuItem,
-            this.eigenToolStripMenuItem});
-            this.aanvragenWeergevenToolStripMenuItem.Name = "aanvragenWeergevenToolStripMenuItem";
-            this.aanvragenWeergevenToolStripMenuItem.Size = new System.Drawing.Size(225, 24);
-            this.aanvragenWeergevenToolStripMenuItem.Text = "Aanvragen weergeven";
+            this.tsbtnShowRequests.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbtnShowAllRequests,
+            this.tsbtnShowOwnRequests});
+            this.tsbtnShowRequests.Name = "tsbtnShowRequests";
+            this.tsbtnShowRequests.Size = new System.Drawing.Size(225, 24);
+            this.tsbtnShowRequests.Text = "Aanvragen weergeven";
+            this.tsbtnShowRequests.Click += new System.EventHandler(this.tsbtnShowRequests_Click);
             // 
-            // alleToolStripMenuItem
+            // tsbtnShowAllRequests
             // 
-            this.alleToolStripMenuItem.Name = "alleToolStripMenuItem";
-            this.alleToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
-            this.alleToolStripMenuItem.Text = "Alle";
+            this.tsbtnShowAllRequests.Name = "tsbtnShowAllRequests";
+            this.tsbtnShowAllRequests.Size = new System.Drawing.Size(152, 24);
+            this.tsbtnShowAllRequests.Text = "Alle";
+            this.tsbtnShowAllRequests.Click += new System.EventHandler(this.tsbtnShowAllRequests_Click);
             // 
-            // eigenToolStripMenuItem
+            // tsbtnShowOwnRequests
             // 
-            this.eigenToolStripMenuItem.Name = "eigenToolStripMenuItem";
-            this.eigenToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
-            this.eigenToolStripMenuItem.Text = "Eigen";
-            // 
-            // toolStripComboBox1
-            // 
-            this.toolStripComboBox1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(190, 27);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
+            this.tsbtnShowOwnRequests.Name = "tsbtnShowOwnRequests";
+            this.tsbtnShowOwnRequests.Size = new System.Drawing.Size(152, 24);
+            this.tsbtnShowOwnRequests.Text = "Eigen";
+            this.tsbtnShowOwnRequests.Click += new System.EventHandler(this.tsbtnShowOwnRequests_Click);
             // 
             // toolStripDropDownButton2
             // 
@@ -142,7 +133,6 @@
             this.vrijwilligersToolStripMenuItem,
             this.hulpbehoevendenToolStripMenuItem,
             this.administratorsToolStripMenuItem});
-            this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
             this.toolStripDropDownButton2.Size = new System.Drawing.Size(81, 24);
@@ -160,45 +150,49 @@
             this.hulpbehoevendenToolStripMenuItem.Size = new System.Drawing.Size(200, 24);
             this.hulpbehoevendenToolStripMenuItem.Text = "Hulpbehoevenden";
             // 
-            // administratorsToolStripMenuItem
+            // toolStripSeparator1
             // 
-            this.administratorsToolStripMenuItem.Name = "administratorsToolStripMenuItem";
-            this.administratorsToolStripMenuItem.Size = new System.Drawing.Size(200, 24);
-            this.administratorsToolStripMenuItem.Text = "Administrators";
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
-            // toolStripButton1
+            // toolStripSeparator2
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(78, 24);
-            this.toolStripButton1.Text = "Afmelden";
+            this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
-            // toolStripSeparator3
+            // toolStripComboBox1
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 27);
+            this.toolStripComboBox1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripComboBox1.Name = "toolStripComboBox1";
+            this.toolStripComboBox1.Size = new System.Drawing.Size(190, 27);
             // 
-            // pictureBox1
+            // toolStripLabel1
             // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.pictureBox1.Location = new System.Drawing.Point(18, 28);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 96);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
+            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(61, 20);
+            this.toolStripLabel1.Text = "Zoeken:";
             // 
-            // label1
+            // pbAvatar
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(124, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(148, 20);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Albrecht Nogwattes";
+            this.pbAvatar.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pbAvatar.Location = new System.Drawing.Point(18, 28);
+            this.pbAvatar.Name = "pbAvatar";
+            this.pbAvatar.Size = new System.Drawing.Size(100, 96);
+            this.pbAvatar.TabIndex = 4;
+            this.pbAvatar.TabStop = false;
+            // 
+            // lblName
+            // 
+            this.lblName.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblName.AutoSize = true;
+            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.Location = new System.Drawing.Point(124, 30);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(148, 20);
+            this.lblName.TabIndex = 16;
+            this.lblName.Text = "Albrecht Nogwattes";
             // 
             // monthCalendar1
             // 
@@ -216,38 +210,32 @@
             this.btnGereed.Text = "Verander profiel";
             this.btnGereed.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // administratorsToolStripMenuItem
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(124, 50);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 20);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "69 Jaar";
+            this.administratorsToolStripMenuItem.Name = "administratorsToolStripMenuItem";
+            this.administratorsToolStripMenuItem.Size = new System.Drawing.Size(200, 24);
+            this.administratorsToolStripMenuItem.Text = "Administrators";
             // 
             // HoofdForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 306);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnGereed);
             this.Controls.Add(this.monthCalendar1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.lblName);
+            this.Controls.Add(this.pbAvatar);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(550, 0);
+            this.MinimumSize = new System.Drawing.Size(550, 39);
             this.Name = "HoofdForm";
             this.Text = "Hoofdmenu";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.HoofdForm_FormClosed);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbAvatar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -256,26 +244,25 @@
         #endregion
 
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton tsbtnLogOut;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ToolStripMenuItem plaatsToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem aanvragenWeergevenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem alleToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem eigenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsbtnPlaceQuestion;
+        private System.Windows.Forms.ToolStripMenuItem tsbtnShowRequests;
+        private System.Windows.Forms.ToolStripMenuItem tsbtnShowAllRequests;
+        private System.Windows.Forms.ToolStripMenuItem tsbtnShowOwnRequests;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
         private System.Windows.Forms.ToolStripMenuItem vrijwilligersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hulpbehoevendenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem administratorsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pbAvatar;
+        private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.Button btnGereed;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStripMenuItem administratorsToolStripMenuItem;
 
     }
 }

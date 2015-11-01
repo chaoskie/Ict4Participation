@@ -30,6 +30,10 @@ namespace Ict4Participation
                  MessageBox.Show("Oeps! Er is iets misgegaan tijdens het verbinden. \n Probeer opnieuw of raadpleeg een administrator!");
 
             //if admin, continue to other screen with details
+            if (usbAdmin)
+            {
+
+            }
         }
 
         private void btnRegistreren_Click(object sender, EventArgs e)

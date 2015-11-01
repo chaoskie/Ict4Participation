@@ -23,6 +23,8 @@ namespace Class_Layer
         [Description("Hulpbehoevende, this user may post posts and reviews")]
         Hulpbehoevende,
         [Description("Hulpverlener, this user may view posts and reviews")]
-        Hulpverlener
+        Hulpverlener,
+        [Description("Administrator, this user may unleash hell upon all the users")]
+        Administrator
     }
 }

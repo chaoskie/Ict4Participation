@@ -122,6 +122,12 @@
     <Compile Include="Zoeken.Designer.cs">
       <DependentUpon>Zoeken.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="HoofdForm.resx">
+      <DependentUpon>HoofdForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlaatsHulpvraag.resx">
+      <DependentUpon>PlaatsHulpvraag.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

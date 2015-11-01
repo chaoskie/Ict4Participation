@@ -31,7 +31,7 @@ namespace Ict4Participation
 
         private void btnNieuw_Click(object sender, EventArgs e)
         {
-            PlaatsHulpvraag form = new PlaatsHulpvraag(this);
+            //PlaatsHulpvraag form = new PlaatsHulpvraag(this);
             form.Show();
             this.Hide();
         }

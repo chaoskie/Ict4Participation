@@ -88,6 +88,7 @@ namespace Class_Layer
                 //If exists && matches
                 if (PasswordHashing.ValidatePassword(password, (row["Salt"].ToString() + row["PassHash"].ToString())))
                 {
+                    #region Find account credentials, fill in account information
                     matchingaccount = true;
                     //Find location
                     Location loc = null;
@@ -99,8 +100,14 @@ namespace Class_Layer
                             (float)locRow["Latitude"]),
                             locRow["Description"].ToString());
                     }
-                    //Cast role (admins / B are not saved in the database)
-                    Accounttype t = row["Role"].ToString() == "H" ? Accounttype.Hulpbehoevende : Accounttype.Hulpverlener;
+                    //Cast role 
+                    Accounttype t;
+                    if (row["Role"].ToString() != "B")
+                    {
+                        t = row["Role"].ToString() == "H" ? Accounttype.Hulpbehoevende : Accounttype.Hulpverlener;
+                    }
+                    else
+                        t = Accounttype.Administrator;
 
                     //Create account
                     acc = new Account(Convert.ToInt32(row["ID"]),
@@ -113,6 +120,8 @@ namespace Class_Layer
                         row["Email"].ToString(),
                         row["VOG"].ToString()
                         );
+                    #endregion
+
                     break;
                 }
             }

@@ -29,54 +29,51 @@ namespace Ict4Participation
             this.InitializeComponent();
             this.Administration = a;
             this.previous = p;
+
+            lblName.Text = a.MainAccountData(2);
+            pbAvatar.ImageLocation = a.MainAccountData(4);
         }
 
+        //Closes the entire app
         private void HoofdForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.previous.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        //Logs the user out
+        private void tsbtnLogOut_Click(object sender, EventArgs e)
         {
-            HulpVragen form = new HulpVragen(this);
+            Administration.LogOut();
+            //Show the log in form, do not grant admin rights
+            Form form = new Inloggen(false);
             form.Show();
             this.Hide();
         }
 
-        private void btnLogout_Click(object sender, EventArgs e)
+        //Opens up the right form to place a question
+        private void tsbtnPlaceQuestion_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Form form = new PlaatsHulpvraag(this, Administration);
         }
 
-        private void btnAfspraken_Click(object sender, EventArgs e)
-        {
-            Afspraken form = new Afspraken(this);
-            form.Show();
-            this.Hide();
-        }
+        //TODO
+        #region Requests / Help questions
 
-        private void btnZoeken_Click(object sender, EventArgs e)
-        {
-            Zoeken form = new Zoeken(this);
-            form.Show();
-            this.Hide();
-        }
-
-        private void btnReview_Click(object sender, EventArgs e)
-        {
-            PlaatsReview form = new PlaatsReview(this);
-            form.Show();
-            this.Hide();
-        }
-
-        private void btnProfiles_Click(object sender, EventArgs e)
+        private void tsbtnShowRequests_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void toolStripComboBox1_Click(object sender, EventArgs e)
+        private void tsbtnShowAllRequests_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void tsbtnShowOwnRequests_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
     }
 }

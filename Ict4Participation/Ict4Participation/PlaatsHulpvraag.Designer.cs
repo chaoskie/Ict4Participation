@@ -39,6 +39,8 @@
             this.btnGereed = new System.Windows.Forms.Button();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnVerwijder = new System.Windows.Forms.Button();
+            this.btnAnnuleer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -58,7 +60,6 @@
             this.tbTitel.Name = "tbTitel";
             this.tbTitel.Size = new System.Drawing.Size(310, 26);
             this.tbTitel.TabIndex = 1;
-            this.tbTitel.Text = "Hulp met installeren van een nieuwe stoel";
             // 
             // tbHulpvraag
             // 
@@ -68,8 +69,6 @@
             this.tbHulpvraag.Name = "tbHulpvraag";
             this.tbHulpvraag.Size = new System.Drawing.Size(310, 99);
             this.tbHulpvraag.TabIndex = 2;
-            this.tbHulpvraag.Text = "Onlangs heb ik een nieuwe stoel gekocht. Echter kan ik deze niet in elkaar zetten" +
-    " zonder hulp van een sterke jongeman.";
             // 
             // label2
             // 
@@ -86,11 +85,9 @@
             this.lbSkills.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbSkills.FormattingEnabled = true;
             this.lbSkills.ItemHeight = 20;
-            this.lbSkills.Items.AddRange(new object[] {
-            "Getraind"});
             this.lbSkills.Location = new System.Drawing.Point(12, 295);
             this.lbSkills.Name = "lbSkills";
-            this.lbSkills.Size = new System.Drawing.Size(310, 84);
+            this.lbSkills.Size = new System.Drawing.Size(199, 84);
             this.lbSkills.TabIndex = 3;
             // 
             // label3
@@ -125,17 +122,18 @@
             this.btnVoegToe.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVoegToe.Location = new System.Drawing.Point(217, 259);
             this.btnVoegToe.Name = "btnVoegToe";
-            this.btnVoegToe.Size = new System.Drawing.Size(105, 30);
+            this.btnVoegToe.Size = new System.Drawing.Size(105, 58);
             this.btnVoegToe.TabIndex = 5;
             this.btnVoegToe.Text = "Voeg Toe";
             this.btnVoegToe.UseVisualStyleBackColor = true;
+            this.btnVoegToe.Click += new System.EventHandler(this.btnVoegToe_Click);
             // 
             // btnGereed
             // 
             this.btnGereed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGereed.Location = new System.Drawing.Point(12, 385);
+            this.btnGereed.Location = new System.Drawing.Point(170, 385);
             this.btnGereed.Name = "btnGereed";
-            this.btnGereed.Size = new System.Drawing.Size(310, 44);
+            this.btnGereed.Size = new System.Drawing.Size(152, 44);
             this.btnGereed.TabIndex = 6;
             this.btnGereed.Text = "Gereed";
             this.btnGereed.UseVisualStyleBackColor = true;
@@ -160,11 +158,35 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Tijd:";
             // 
+            // btnVerwijder
+            // 
+            this.btnVerwijder.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVerwijder.Location = new System.Drawing.Point(217, 321);
+            this.btnVerwijder.Name = "btnVerwijder";
+            this.btnVerwijder.Size = new System.Drawing.Size(105, 58);
+            this.btnVerwijder.TabIndex = 8;
+            this.btnVerwijder.Text = "Verwijder";
+            this.btnVerwijder.UseVisualStyleBackColor = true;
+            this.btnVerwijder.Click += new System.EventHandler(this.btnVerwijder_Click);
+            // 
+            // btnAnnuleer
+            // 
+            this.btnAnnuleer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAnnuleer.Location = new System.Drawing.Point(12, 385);
+            this.btnAnnuleer.Name = "btnAnnuleer";
+            this.btnAnnuleer.Size = new System.Drawing.Size(152, 44);
+            this.btnAnnuleer.TabIndex = 9;
+            this.btnAnnuleer.Text = "Annuleer";
+            this.btnAnnuleer.UseVisualStyleBackColor = true;
+            this.btnAnnuleer.Click += new System.EventHandler(this.btnAnnuleer_Click);
+            // 
             // PlaatsHulpvraag
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 441);
+            this.Controls.Add(this.btnAnnuleer);
+            this.Controls.Add(this.btnVerwijder);
             this.Controls.Add(this.dtpDate);
             this.Controls.Add(this.btnGereed);
             this.Controls.Add(this.btnVoegToe);
@@ -200,5 +222,7 @@
         private System.Windows.Forms.Button btnGereed;
         private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnVerwijder;
+        private System.Windows.Forms.Button btnAnnuleer;
     }
 }
