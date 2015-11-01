@@ -67,9 +67,15 @@ namespace Class_Layer
         public string Sex { get; private set; }
         #endregion
 
-        public static bool Register(string name, Location loc, string password, string avatarPath, string VOG, string description, Accounttype role, string sex, string email)
+        public static Account Register(string name, Location loc, string password, string avatarPath, string VOG, string description, Accounttype role, string sex, string email)
         {
-            return true;
+            //TODO
+            //Returns: Account to set as MainUser in the admin class
+            //Outs: the ID of the newly created account
+            //Insert into the database
+            //Retrieve the exact same stuff from the database, fetch the ID
+            //Out the ID
+            return null;
         }
 
         /// <summary>
