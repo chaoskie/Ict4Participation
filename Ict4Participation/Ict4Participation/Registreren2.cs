@@ -20,29 +20,14 @@ namespace Ict4Participation
     public partial class Registreren2 : Form
     {
         private Form previous;
-        private string Name;
-        private string Adress;
-        private string City;
-        private string Sex;
-        private string Role;
-        private string Photopath;
-        private int Id;
-        private string Password;
+        private Administration Administration;
 
-        public Registreren2(Form p, string name, string adress, string city, string sex, string role, string photopath, int id, string password)
+        public Registreren2(Form p, Administration a)
         {
             this.InitializeComponent();
             this.previous = p;
             this.comboBox1.SelectedIndex = 0;
-
-            this.Name = name;
-            this.Adress = adress;
-            this.City = city;
-            this.Sex = sex;
-            this.Role = role;
-            this.Photopath = photopath;
-            this.Id = id;
-            this.Password = password;
+            this.Administration = a;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -58,6 +43,7 @@ namespace Ict4Participation
 
         private void btnRegistreer_Click(object sender, EventArgs e)
         {
+            //WTF?
             (((Registreren)this.previous).previous).Show();
             this.Close();
         }

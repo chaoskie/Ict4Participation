@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Class_Layer;
 
@@ -25,6 +26,7 @@ namespace Admin_Layer
         private List<Question> LoadedQuestions;
         private List<Comment> LoadedComments;
         private int lastloadedOPID;
+        string nameTEMP; string locTEMP; string passwordTEMP; string avatarPathTEMP; string roleTEMP; string sexTEMP;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Administration"/> class.
@@ -115,6 +117,83 @@ namespace Admin_Layer
             return false;
         }
 
+
+        #region Account handling
+
+        /// <summary>
+        /// Validates the first half of the account (for the first form / screen)
+        /// </summary>
+        /// <param name="name">Name to validate</param>
+        /// <param name="loc">Location to validate</param>
+        /// <param name="password">Password to validate</param>
+        /// <param name="avatarPath">AvatarPath to validate</param>
+        /// <param name="role">Role to validate</param>
+        /// <param name="sex">Sex to validate</param>
+        /// <param name="Message">Error message given upon invalid parameters</param>
+        /// <returns>Whether it is a full success, or there is at least 1 invalid parameter</returns>
+        public bool CreateAccount(string name, string loc, string password, string avatarPath, string role, string sex, out string Message)
+        {
+            this.nameTEMP = name;
+            this.locTEMP = loc;
+            this.passwordTEMP = password;
+            this.avatarPathTEMP = avatarPath;
+            this.roleTEMP = role;
+            this.sexTEMP = sex;
+            bool allOK = true;
+            string error = string.Empty;
+
+            if (Regex.IsMatch(name.Trim(), @"^[A-Z][A-Za-z]+$") == false)
+            {
+                allOK = false;
+                error += "Naam is niet correct!\n";
+            }
+            //if (!Regex.IsMatch(adress, @"^[A-Z]\D{1,}\s?\d{1,}$"))
+            //{
+            //    allOK = false;
+            //    error += "Addres is niet correct!\n";
+            //}
+            //if (!Regex.IsMatch(city, @"^[A-Z']\D{1,}$"))
+            //{
+            //    allOK = false;
+            //    error += "Woonplaats is niet correct!\n";
+            //}
+            if (!Regex.IsMatch(sex, @"^[MF]$"))
+            {
+                allOK = false;
+                error += "Geslacht is niet correct!\n";
+            }
+            if (avatarPath != string.Empty)
+            {
+                allOK = false;
+                error += "Geen foto geselecteerd!\n";
+            }
+            if (!Regex.IsMatch(password, @"^(?=.*[^a-zA-Z])(?=.*[a-z])(?=.*[A-Z])\S{8,}$"))
+            {
+                allOK = false;
+                error += "Het wachtwoord is niet sterk genoeg! Minimaal 1 hoofdletter, 1 kleine letter en 1 nummer/speciaal karakter.";
+            }
+            Message = error;
+            return allOK;
+        }
+
+        /// <summary>
+        /// Validates the second half of the account (for the second form / screen)
+        /// </summary>
+        /// <param name="VOG">The VOG to validate</param>
+        /// <param name="description">The description to validate</param>
+        /// <param name="email">The email to validate</param>
+        /// <param name="Message">The error message given upon invalid parameters</param>
+        /// <returns></returns>
+        public bool CreateAccountFinal(string VOG, string description, string email, out string Message)
+        {
+            //TODO: Check the other strings
+            //Out error message
+            //Create account through
+            //Account.Register();
+            Message = "Function not yet fully implemented!";
+            return false;
+        }
+
         /// <summary>
         /// Logs the user in with the matching credentials
         /// </summary>
@@ -126,11 +205,17 @@ namespace Admin_Layer
             return Account.CreateMainAccount(gebruikersnaam, password, out MainUser);
         }
 
+        /// <summary>
+        /// Logs the user out
+        /// </summary>
+        /// <returns>if succeeded (always)</returns>
         public bool LogOut()
         {
             MainUser = null;
             return true;
         }
+
+        #endregion
 
         //Since the GUI doesn't know what an account is, it has to be done the long way (without a reference)
         #region fetch account data

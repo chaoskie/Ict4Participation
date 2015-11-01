@@ -67,6 +67,11 @@ namespace Class_Layer
         public string Sex { get; private set; }
         #endregion
 
+        public static bool Register(string name, Location loc, string password, string avatarPath, string VOG, string description, Accounttype role, string sex, string email)
+        {
+            return true;
+        }
+
         /// <summary>
         /// Creates the main user account
         /// </summary>

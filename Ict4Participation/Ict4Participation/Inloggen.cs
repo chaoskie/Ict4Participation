@@ -38,7 +38,7 @@ namespace Ict4Participation
 
         private void btnRegistreren_Click(object sender, EventArgs e)
         {
-            Registreren form = new Registreren(this);
+            Registreren form = new Registreren(this, Administration);
             form.Show();
             this.Hide();
         }
