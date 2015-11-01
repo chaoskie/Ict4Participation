@@ -63,8 +63,8 @@ namespace Database_Layer
                 }
                 catch (OracleException e)
                 {
-                    string s = e.Message;
-                    throw;
+                    Console.Write(e.Message);
+                    return null;
                 }
             }
         }

@@ -25,6 +25,8 @@ namespace Admin_Layer
     /// </summary>
     public class Administration
     {
+        public Account MainUser;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Administration"/> class.
         /// </summary>
@@ -87,9 +89,15 @@ namespace Admin_Layer
             return false;
         }
 
-        public Account LogIn(string gebruikersnaam, string password)
+        /// <summary>
+        /// Logs the user in with the matching credentials
+        /// </summary>
+        /// <param name="gebruikersnaam">the username</param>
+        /// <param name="password">the password</param>
+        /// <returns>Whether this user exists / success of creation</returns>
+        public bool LogIn(string gebruikersnaam, string password)
         {
-            return null;
+            return Account.CreateMainAccount(gebruikersnaam, password, out MainUser);
         }
 
         public List<string> getAccounttypes()
@@ -99,9 +107,9 @@ namespace Admin_Layer
 
 
         //testmethod voor database
-        static public void testDatabase()
+        static public bool testDatabase()
         {
-            Account.testdatabase();
+            return Account.testdatabase();
         }
     }
 }

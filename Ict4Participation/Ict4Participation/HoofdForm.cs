@@ -22,11 +22,12 @@ namespace Ict4Participation
     public partial class HoofdForm : Form
     {
         private Form previous;
+        private Administration Administration;
 
-        public HoofdForm(Form p)
+        public HoofdForm(Form p, Administration a)
         {
             this.InitializeComponent();
-
+            this.Administration = a;
             this.previous = p;
         }
 

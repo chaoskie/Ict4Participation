@@ -26,7 +26,8 @@ namespace Ict4Participation
             this.InitializeComponent();
             this.Administration = new Administration();
 
-            Administration.testDatabase();
+             if (!Administration.testDatabase())
+                 MessageBox.Show("Oeps! Er is iets misgegaan tijdens het verbinden. \n Probeer opnieuw of raadpleeg een administrator!");
 
             //if admin, continue to other screen with details
         }
@@ -40,20 +41,16 @@ namespace Ict4Participation
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            /*      TODO
-             * 
-             * Account acc = this.Administration.LogIn(this.tbUsername.Text, this.tbPassword.Text);
-
-            if (acc != null)
+            if (Administration.LogIn(tbUsername.Text, tbPassword.Text))
             {
-                Form form = new HoofdForm(this, acc);
+                Form form = new HoofdForm(this, Administration);
                 form.Show();
                 this.Hide();
             }
             else
             {
                 MessageBox.Show("De combinatie van gebruikersnaam en wachtwoord bestaat niet!");
-            }*/
+            }
         }
     }
 }
