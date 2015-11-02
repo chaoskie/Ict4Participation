@@ -107,8 +107,8 @@ namespace Class_Layer
                     foreach (DataRow locRow in dtLoc.Rows)
                     {
                         loc = new Location(new PointF(
-                            (float)locRow["Longitude"],
-                            (float)locRow["Latitude"]),
+                            (float)(Convert.ToDecimal(locRow["Longitude"])),
+                            (float)(Convert.ToDecimal(locRow["Latitude"]))),
                             locRow["Description"].ToString());
                     }
                     //Cast role 

@@ -32,7 +32,7 @@ namespace Class_Layer
         public static void PlaceComment(int accountID, int questionID, string title)
         {
             //insert into database
-            Database_Layer.Database.ExecuteQuery(String.Format("INSERT INTO \"COMMENT\" VALUES (null, {0}, {1}, '{2}')"
+            Database_Layer.Database.ExecuteQuery(String.Format("INSERT INTO \"Comment\" (\"PosterACC_ID\", \"QUESTION_ID\", \"Description\") VALUES ({0}, {1}, '{2}')"
                 , accountID, questionID, title));
         }
 
@@ -44,7 +44,7 @@ namespace Class_Layer
         /// <returns>A single line of a comment</returns>
         public static List<string> GetQuestionComments(int postID, out List<Comment> Comments)
         {
-            Comments = null;
+            Comments = new List<Comment>();
             List<string> commentinfo = new List<string>();
             //retrieve every comment matching to that question
             DataTable dtComment = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Comment\" WHERE \"QUESTION_ID\" = " + postID);

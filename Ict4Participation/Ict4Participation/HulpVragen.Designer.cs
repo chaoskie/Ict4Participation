@@ -91,6 +91,7 @@
             this.tbComments.Multiline = true;
             this.tbComments.Name = "tbComments";
             this.tbComments.ReadOnly = true;
+            this.tbComments.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbComments.Size = new System.Drawing.Size(450, 225);
             this.tbComments.TabIndex = 3;
             // 
@@ -136,11 +137,10 @@
             // 
             // lblQuestionInfo
             // 
-            this.lblQuestionInfo.AutoSize = true;
             this.lblQuestionInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblQuestionInfo.Location = new System.Drawing.Point(328, 29);
             this.lblQuestionInfo.Name = "lblQuestionInfo";
-            this.lblQuestionInfo.Size = new System.Drawing.Size(176, 16);
+            this.lblQuestionInfo.Size = new System.Drawing.Size(308, 99);
             this.lblQuestionInfo.TabIndex = 6;
             this.lblQuestionInfo.Text = "<Geen vraag geselecteerd>";
             // 

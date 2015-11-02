@@ -45,11 +45,13 @@ namespace Class_Layer
         /// <param name="questionLocation">the location of the question</param>
         /// <param name="q">a returned question</param>
         /// <returns>Whether the question was able to be posted</returns>
-        public static bool CreateQuestion(int accountid, string title, DateTime schedule, string description, Location questionLocation, out Question q)
+        public static bool CreateQuestion(int accountid, string title, DateTime dateSchedule, string description, Location questionLocation, out Question q)
         {
             bool creationSuccess = false;
             bool doInsertLocation = false;
             q = null;
+            string schedule = dateSchedule.ToString("dd-MMM-yyyy HH:mm:s");
+
             try
             {
                 //Check if location already exists
@@ -79,7 +81,8 @@ namespace Class_Layer
 
                 //Insert question 
                 Database_Layer.Database.ExecuteQuery(
-                    String.Format("INSERT INTO \"Question\" VALUES (null, '{0}', {1}, {2}, '{3}', {4})",
+                    String.Format("INSERT INTO \"Question\" (\"Title\", \"PosterACC_ID\", \"Timetable\", \"Description\", \"LOCATION_ID\") "
+                + "VALUES ('{0}', {1}, TO_DATE('{2}', 'dd-mon-yyyy HH24:mi:ss'), '{3}', {4})",
                     title, accountid, schedule, description, locID));
                 //Retrieve question ID / post ID
                 DataTable dtQuestion = Database_Layer.Database.RetrieveQuery(
@@ -92,7 +95,7 @@ namespace Class_Layer
                     qID = Convert.ToInt32(row["max(ID)"]);
                 }
 
-                q = new Question(qID, title, schedule, description, questionLocation);
+                q = new Question(qID, title, dateSchedule, description, questionLocation);
                 creationSuccess = true;
             }
             catch (Exception e)
@@ -133,12 +136,10 @@ namespace Class_Layer
                 Location loc = null;
                 foreach (DataRow rowLoc in dtLocation.Rows)
                 {
-                     loc = new Location(
-                        new PointF(
-                            (float)rowLoc["Longitude"],
-                            (float)rowLoc["Latitude"]),
-                            rowLoc["Description"].ToString()
-                        );
+                    loc = new Location(new PointF(
+                        (float)(Convert.ToDecimal(rowLoc["Longitude"])),
+                        (float)(Convert.ToDecimal(rowLoc["Latitude"]))),
+                        rowLoc["Description"].ToString());
                 }
 
                 //Add question to list
@@ -185,6 +186,7 @@ namespace Class_Layer
             this.Schedule = schedule;
             this.Description = description;
             this.Schedule = schedule;
+            this.QuestionLocation = questionLocation;
         }
 
         //Returns a full description

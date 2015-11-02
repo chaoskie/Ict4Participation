@@ -263,6 +263,10 @@ namespace Admin_Layer
         {
             return Account.testdatabase();
         }
+        static public string giveTestHash()
+        {
+            return PasswordHashing.CreateHash("default");
+        }
         #endregion
     }
 }

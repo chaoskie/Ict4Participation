@@ -24,6 +24,7 @@ namespace Ict4Participation
         private Administration Administration;
         private int currentSelection;
         private bool allLoaded;
+        private bool isRefresh;
 
         //load in either all the questions, or their own
         public HulpVragen(Form p, Administration a, bool all)
@@ -48,29 +49,35 @@ namespace Ict4Participation
         //changes the information about the question on the right
         private void lbHulpvragen_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int ind = lbHulpvragen.SelectedIndex;
-            //refresh questions
-            lbHulpvragen.DataSource = null;
-            lbHulpvragen.DataSource = Administration.GetQuestionNames(allLoaded);
-            //check if not too large &&
-            //set selection to right one
-            if (ind > lbHulpvragen.Items.Count - 1)
+            if (!isRefresh)
             {
-                ind = lbHulpvragen.SelectedIndex = lbHulpvragen.Items.Count - 1;
+                tbComments.Text = string.Empty;
+                int ind = lbHulpvragen.SelectedIndex;
+                //refresh questions
+                isRefresh = true;
+                lbHulpvragen.DataSource = null;
+                lbHulpvragen.DataSource = Administration.GetQuestionNames(allLoaded);
+                //check if not too large &&
+                //set selection to right one
+                if (ind > lbHulpvragen.Items.Count - 1)
+                {
+                    ind = lbHulpvragen.SelectedIndex = lbHulpvragen.Items.Count - 1;
+                }
+                else
+                {
+                    lbHulpvragen.SelectedIndex = ind;
+                }
+                //load in details
+                lblQuestionInfo.Text = Administration.GetQuestionDetails(ind, allLoaded);
+                lblQuestionName.Text = lbHulpvragen.SelectedItem.ToString();
+                //Load in comments
+                foreach (string s in Administration.GetQuestionComments(ind))
+                {
+                    tbComments.Text += s + Environment.NewLine;
+                }
+                currentSelection = ind;
+                isRefresh = false;
             }
-            else
-            {
-                lbHulpvragen.SelectedIndex = ind;
-            }
-            //load in details
-            lblQuestionInfo.Text = Administration.GetQuestionDetails(ind, allLoaded);
-            lblQuestionName.Text = lbHulpvragen.SelectedItem.ToString();
-            //Load in comments
-            foreach (string s in Administration.GetQuestionComments(ind))
-            {
-                tbComments.Text += s + Environment.NewLine;
-            }
-            currentSelection = ind;
         }
 
         //Replies with a comment
