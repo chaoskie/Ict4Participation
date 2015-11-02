@@ -21,7 +21,7 @@ namespace Database_Layer
     public static class Database
     {
         /// HOST IP
-        private static string host = "25.128.155.180";
+        private static string host = "192.168.20.27";
         /// HOST USERNAME
         private static string username = "PLUMBUM"; 
         /// HOST PASSWORD
