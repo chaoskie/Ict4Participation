@@ -66,7 +66,7 @@ namespace Class_Layer
                 if (doInsertLocation)
                 {
                     Database_Layer.Database.ExecuteQuery(
-                        String.Format("INSERT INTO \"Location\" VALUES (null, '{0}', '{1}', '{2}')",
+                        String.Format("INSERT INTO \"Location\" (\"Longitude\", \"Latitude\", \"Description\") VALUES ('{0}', '{1}', '{2}')",
                         questionLocation.PreciseLocation.X, questionLocation.PreciseLocation.Y, questionLocation.DescribedLocation));
                     //Retrieve location ID. again.
                     dtLocation = Database_Layer.Database.RetrieveQuery(
