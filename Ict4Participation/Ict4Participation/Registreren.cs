@@ -47,24 +47,42 @@ namespace Ict4Participation
 
         private void btnProceed_Click(object sender, EventArgs e)
         {
+            bool allGood = true;
             string ErrorMessage = string.Empty;
             string name = this.tbName.Text;
-            string adress = this.tbAdress.Text;
+            string address = this.tbAdress.Text;
             string city = this.tbCity.Text;
             string sex = this.cbSex.SelectedItem.ToString();
-            string role = this.cbRoles.SelectedValue.ToString();            
+            string role = this.cbRoles.SelectedItem.ToString();            
             string avatarPath = ofd.FileName;
             string password = this.tbPassword1.Text;
-            if (Administration.CreateAccount(name, String.Format("{0}, {1}", adress, city), password, avatarPath, role, sex, out ErrorMessage))
+
+            if (String.IsNullOrWhiteSpace(name))
+                ErrorMessage += "De naam is niet ingevuld!\n"; allGood = false;
+            if (String.IsNullOrWhiteSpace(address))
+                ErrorMessage += "Het adres is niet ingevuld!\n"; allGood = false;
+            if (String.IsNullOrWhiteSpace(city))
+                ErrorMessage += "De woonplaats is niet ingevuld!\n"; allGood = false;
+            if (String.IsNullOrWhiteSpace(sex))
+                ErrorMessage += "Het geslacht is niet ingevuld!\n"; allGood = false;
+            if (String.IsNullOrWhiteSpace(role))
+                ErrorMessage += "De rol is niet ingevuld!\n"; allGood = false;
+            if (String.IsNullOrWhiteSpace(avatarPath))
+                ErrorMessage += "Het fotopath is niet ingevuld!\n"; allGood = false;
+
+            if (allGood)
             {
-                Form form = new Registreren2(this, Administration);
-                form.Show();
-                this.Hide();
+                if (Administration.CreateAccount(name, String.Format("{0}, {1}", address, city), password, avatarPath, role, sex, out ErrorMessage))
+                {
+                    Form form = new Registreren2(this, Administration);
+                    form.Show();
+                    this.Hide();
+                }
+                else
+                    MessageBox.Show(ErrorMessage);
             }
             else
-            {
                 MessageBox.Show(ErrorMessage);
-            }
         }
 
         private void btnChoosePhoto_Click(object sender, EventArgs e)
