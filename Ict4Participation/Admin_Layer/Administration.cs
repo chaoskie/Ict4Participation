@@ -263,6 +263,11 @@ namespace Admin_Layer
             return AllAccountData(MainUser)[index - 1];
         }
 
+        public List<string> AllSkillTypes()
+        {
+            return Enum.GetValues(typeof(Tags)).Cast<Tags>().Select(x => x.ToString()).ToList();
+        }
+
         public List<string> AllAccountTypes()
         {
             return Enum.GetValues(typeof(Accounttype)).Cast<Accounttype>().Select(x => x.ToString()).ToList();
