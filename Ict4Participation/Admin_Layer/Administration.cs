@@ -133,47 +133,64 @@ namespace Admin_Layer
         /// <returns>Whether it is a full success, or there is at least 1 invalid parameter</returns>
         public bool CreateAccount(string name, string loc, string password, string avatarPath, string role, string sex, out string Message)
         {
+            bool filledIn = true;
+            bool rightFormat = false;
             this.nameTEMP = name;
             this.locTEMP = loc;
             this.passwordTEMP = password;
             this.avatarPathTEMP = avatarPath;
             this.roleTEMP = role;
             this.sexTEMP = sex;
-            bool allOK = true;
             string error = string.Empty;
 
-            if (Regex.IsMatch(name.Trim(), @"^[A-Z][A-Za-z]+$") == false)
+            //Check if everything is filled in
+            if (String.IsNullOrWhiteSpace(name))
+                error += "De naam is niet ingevuld!\n"; filledIn = false;
+            if (String.IsNullOrWhiteSpace(loc))
+                error += "De woonplaats of adres is niet ingevuld!\n"; filledIn = false;
+            if (String.IsNullOrWhiteSpace(sex))
+                error += "Het geslacht is niet ingevuld!\n"; filledIn = false;
+            if (String.IsNullOrWhiteSpace(role))
+                error += "De rol is niet ingevuld!\n"; filledIn = false;
+            if (String.IsNullOrWhiteSpace(avatarPath))
+                error += "Het fotopath is niet ingevuld!\n"; filledIn = false;
+
+            if (filledIn)
             {
-                allOK = false;
-                error += "Naam is niet correct!\n";
-            }
-            //if (!Regex.IsMatch(adress, @"^[A-Z]\D{1,}\s?\d{1,}$"))
-            //{
-            //    allOK = false;
-            //    error += "Addres is niet correct!\n";
-            //}
-            //if (!Regex.IsMatch(city, @"^[A-Z']\D{1,}$"))
-            //{
-            //    allOK = false;
-            //    error += "Woonplaats is niet correct!\n";
-            //}
-            if (!Regex.IsMatch(sex, @"^[MF]$"))
-            {
-                allOK = false;
-                error += "Geslacht is niet correct!\n";
-            }
-            if (avatarPath != string.Empty)
-            {
-                allOK = false;
-                error += "Geen foto geselecteerd!\n";
-            }
-            if (!Regex.IsMatch(password, @"^(?=.*[^a-zA-Z])(?=.*[a-z])(?=.*[A-Z])\S{8,}$"))
-            {
-                allOK = false;
-                error += "Het wachtwoord is niet sterk genoeg! Minimaal 1 hoofdletter, 1 kleine letter en 1 nummer/speciaal karakter.";
+                rightFormat = true;
+                if (Regex.IsMatch(name.Trim(), @"^[A-Z][A-Za-z]+$") == false)
+                {
+                    rightFormat = false;
+                    error += "Naam is niet correct!\n";
+                }
+                //if (!Regex.IsMatch(adress, @"^[A-Z]\D{1,}\s?\d{1,}$"))
+                //{
+                //    allOK = false;
+                //    error += "Addres is niet correct!\n";
+                //}
+                //if (!Regex.IsMatch(city, @"^[A-Z']\D{1,}$"))
+                //{
+                //    allOK = false;
+                //    error += "Woonplaats is niet correct!\n";
+                //}
+                if (!Regex.IsMatch(sex, @"^[MF]$"))
+                {
+                    rightFormat = false;
+                    error += "Geslacht is niet correct!\n";
+                }
+                if (avatarPath != string.Empty)
+                {
+                    rightFormat = false;
+                    error += "Geen foto geselecteerd!\n";
+                }
+                if (!Regex.IsMatch(password, @"^(?=.*[^a-zA-Z])(?=.*[a-z])(?=.*[A-Z])\S{8,}$"))
+                {
+                    rightFormat = false;
+                    error += "Het wachtwoord is niet sterk genoeg! Minimaal 1 hoofdletter, 1 kleine letter en 1 nummer/speciaal karakter.";
+                }
             }
             Message = error;
-            return allOK;
+            return rightFormat;
         }
 
         /// <summary>
