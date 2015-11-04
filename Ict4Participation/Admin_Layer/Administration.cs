@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -239,6 +240,20 @@ namespace Admin_Layer
         {
             MainUser = null;
             return true;
+        }
+
+        #endregion
+
+        #region encoding and decoding of text to HTML and back
+
+        public string ToHtmlText(string text)
+        {
+            return WebUtility.HtmlEncode(text);
+        }
+
+        public string FromHtmlText(string text)
+        {
+            return WebUtility.HtmlDecode(text);
         }
 
         #endregion
