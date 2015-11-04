@@ -29,7 +29,7 @@ namespace Ict4Participation
             this.previous = p;
             this.Administration = a;
 
-            cbSkills.DataSource = Administration.AllAccountTypes();
+            cbSkills.DataSource = Administration.AllSkillTypes();
             this.cbSkills.SelectedIndex = 0;
 
             this.dtpDate.CustomFormat = "d MMMM yyyy - hh:mm:ss";

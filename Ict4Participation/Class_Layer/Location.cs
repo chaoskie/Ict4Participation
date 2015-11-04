@@ -20,10 +20,19 @@ namespace Class_Layer
     {
         #region Properties
         /// <summary>
-        /// Gets the precise ocation in PointF format
+        /// Gets the precise location in PointF format
         /// </summary>
-        public PointF PreciseLocation { get; private set; }
-        
+        private PointF PreciseLocation;
+
+        public string Long
+        {
+            get { return PreciseLocation.X.ToString().Replace(',','.'); }
+        }
+        public string Lat
+        {
+            get { return PreciseLocation.Y.ToString().Replace(',','.'); }
+        }
+
         /// <summary>
         /// Gets the described location in string format
         /// </summary>

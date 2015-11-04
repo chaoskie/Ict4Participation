@@ -64,7 +64,7 @@ namespace Database_Layer
                 catch (OracleException e)
                 {
                     Console.Write(e.Message);
-                    return null;
+                    return new DataTable();
                 }
             }
         }

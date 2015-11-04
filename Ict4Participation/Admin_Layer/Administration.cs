@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -243,6 +244,20 @@ namespace Admin_Layer
 
         #endregion
 
+        #region encoding and decoding of text to HTML and back
+
+        public string ToHtmlText(string text)
+        {
+            return WebUtility.HtmlEncode(text);
+        }
+
+        public string FromHtmlText(string text)
+        {
+            return WebUtility.HtmlDecode(text);
+        }
+
+        #endregion
+
         //Since the GUI doesn't know what an account is, it has to be done the long way (without a reference)
         #region fetch account data
         /// <summary>
@@ -261,6 +276,11 @@ namespace Admin_Layer
         public string MainAccountData(int index)
         {
             return AllAccountData(MainUser)[index - 1];
+        }
+
+        public List<string> AllSkillTypes()
+        {
+            return Enum.GetValues(typeof(Tags)).Cast<Tags>().Select(x => x.ToString()).ToList();
         }
 
         public List<string> AllAccountTypes()
