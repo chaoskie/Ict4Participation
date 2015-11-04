@@ -47,7 +47,7 @@ namespace Class_Layer
             Comments = new List<Comment>();
             List<string> commentinfo = new List<string>();
             //retrieve every comment matching to that question
-            DataTable dtComment = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Comment\" WHERE \"QUESTION_ID\" = " + postID);
+            DataTable dtComment = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Comment\" WHERE \"QUESTION_ID\" = " + postID + " ORDER BY \"ID\"");
             foreach (DataRow row in dtComment.Rows)
             {
                 Comments.Add(new Comment(
