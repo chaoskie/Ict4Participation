@@ -45,7 +45,13 @@ namespace Ict4Participation
             this.Hide();
         }
 
-        private void btnLogIn_Click(object sender, EventArgs e)
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                LogIn(sender, e);
+        }
+
+        private void LogIn(object sender, EventArgs e)
         {
             if (Administration.LogIn(tbUsername.Text, tbPassword.Text))
             {

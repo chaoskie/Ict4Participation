@@ -122,6 +122,9 @@
     <EmbeddedResource Include="HulpVragen.resx">
       <DependentUpon>HulpVragen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Inloggen.resx">
+      <DependentUpon>Inloggen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PlaatsHulpvraag.resx">
       <DependentUpon>PlaatsHulpvraag.cs</DependentUpon>
     </EmbeddedResource>
@@ -134,6 +137,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Registreren.resx">
+      <DependentUpon>Registreren.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
