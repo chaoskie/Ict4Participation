@@ -29,6 +29,7 @@ namespace Ict4Participation
         {
             this.InitializeComponent();
             this.previous = p;
+            this.Administration = a;
 
             this.cbRoles.SelectedIndex = 0;
             this.cbSex.SelectedIndex = 0;
@@ -56,7 +57,7 @@ namespace Ict4Participation
             string avatarPath = ofd.FileName;
             string password = this.tbPassword1.Text;
 
-            if (Administration.CreateAccount(name, String.Format("{0}, {1}", address, city), password, avatarPath, role, sex, out ErrorMessage))
+            if (Administration.CreateAccount(name, address, city, password, avatarPath, role, sex, out ErrorMessage))
             {
                 Form form = new Registreren2(this, Administration);
                 form.Show();

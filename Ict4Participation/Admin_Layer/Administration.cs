@@ -131,30 +131,29 @@ namespace Admin_Layer
         /// <param name="sex">Sex to validate</param>
         /// <param name="Message">Error message given upon invalid parameters</param>
         /// <returns>Whether it is a full success, or there is at least 1 invalid parameter</returns>
-        public bool CreateAccount(string name, string loc, string password, string avatarPath, string role, string sex, out string Message)
+        public bool CreateAccount(string name, string address, string city, string password, string avatarPath, string role, string sex, out string Message)
         {
             bool filledIn = true;
             bool rightFormat = false;
-            this.nameTEMP = name;
-            this.locTEMP = loc;
-            this.passwordTEMP = password;
-            this.avatarPathTEMP = avatarPath;
-            this.roleTEMP = role;
-            this.sexTEMP = sex;
             string error = string.Empty;
 
             //Check if everything is filled in
             if (String.IsNullOrWhiteSpace(name))
                 error += "De naam is niet ingevuld!\n"; filledIn = false;
-            if (String.IsNullOrWhiteSpace(loc))
-                error += "De woonplaats of adres is niet ingevuld!\n"; filledIn = false;
+            if (String.IsNullOrWhiteSpace(address))
+                error += "Het adres is niet ingevuld!\n"; filledIn = false;
+            if (String.IsNullOrWhiteSpace(city))
+                error += "De woonplaats is niet ingevuld!\n"; filledIn = false;
             if (String.IsNullOrWhiteSpace(sex))
                 error += "Het geslacht is niet ingevuld!\n"; filledIn = false;
             if (String.IsNullOrWhiteSpace(role))
                 error += "De rol is niet ingevuld!\n"; filledIn = false;
             if (String.IsNullOrWhiteSpace(avatarPath))
-                error += "Het fotopath is niet ingevuld!\n"; filledIn = false;
+                error += "Er is geen profielfoto gekozen!\n"; filledIn = false;
+            if (String.IsNullOrWhiteSpace(password))
+                error += "Er is is geen wachtwoord ingevuld!\n"; filledIn = false;
 
+            //If so, check if everything is in the right format
             if (filledIn)
             {
                 rightFormat = true;
@@ -187,6 +186,16 @@ namespace Admin_Layer
                 {
                     rightFormat = false;
                     error += "Het wachtwoord is niet sterk genoeg! Minimaal 1 hoofdletter, 1 kleine letter en 1 nummer/speciaal karakter.";
+                }
+                //If everything is in the right format, set the temporaries for the next screen
+                if (rightFormat)
+                {
+                    this.nameTEMP = name;
+                    this.locTEMP = String.Format("{0}, {1}", address, city);
+                    this.passwordTEMP = password;
+                    this.avatarPathTEMP = avatarPath;
+                    this.roleTEMP = role;
+                    this.sexTEMP = sex;
                 }
             }
             Message = error;
