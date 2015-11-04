@@ -57,7 +57,7 @@ namespace Class_Layer
                 //Check if location already exists
                 DataTable dtLocation = Database_Layer.Database.RetrieveQuery(
                     String.Format("SELECT ID FROM \"Location\" WHERE \"Longitude\" = '{0}' AND \"Latitude\" = '{1}' AND \"Description\" = '{2}'",
-                    questionLocation.PreciseLocation.X, questionLocation.PreciseLocation.Y, questionLocation.DescribedLocation));
+                    questionLocation.Long, questionLocation.Lat, questionLocation.DescribedLocation));
                 doInsertLocation = dtLocation != null ? false : true;
 
                 int locID = 0;
@@ -67,11 +67,11 @@ namespace Class_Layer
                 {
                     Database_Layer.Database.ExecuteQuery(
                         String.Format("INSERT INTO \"Location\" (\"Longitude\", \"Latitude\", \"Description\") VALUES ('{0}', '{1}', '{2}')",
-                        questionLocation.PreciseLocation.X, questionLocation.PreciseLocation.Y, questionLocation.DescribedLocation));
+                        questionLocation.Long, questionLocation.Lat, questionLocation.DescribedLocation));
                     //Retrieve location ID. again.
                     dtLocation = Database_Layer.Database.RetrieveQuery(
                         String.Format("SELECT ID FROM \"Location\" WHERE \"Longitude\" = '{0}' AND \"Latitude\" = '{1}' AND \"Description\" = '{2}'",
-                        questionLocation.PreciseLocation.X, questionLocation.PreciseLocation.Y, questionLocation.DescribedLocation));
+                        questionLocation.Long, questionLocation.Lat, questionLocation.DescribedLocation));
                 }
                 //Set locationID
                 foreach (DataRow row in dtLocation.Rows)
