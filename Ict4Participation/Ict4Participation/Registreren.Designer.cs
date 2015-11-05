@@ -46,7 +46,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.tbID = new System.Windows.Forms.TextBox();
+            this.tbEmail = new System.Windows.Forms.TextBox();
             this.tbPassword1 = new System.Windows.Forms.TextBox();
             this.tbPassword2 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -231,7 +231,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.tbID);
+            this.groupBox3.Controls.Add(this.tbEmail);
             this.groupBox3.Controls.Add(this.tbPassword1);
             this.groupBox3.Controls.Add(this.tbPassword2);
             this.groupBox3.Controls.Add(this.label8);
@@ -245,14 +245,12 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Accountgegevens";
             // 
-            // tbID
+            // tbEmail
             // 
-            this.tbID.Location = new System.Drawing.Point(110, 25);
-            this.tbID.Name = "tbID";
-            this.tbID.ReadOnly = true;
-            this.tbID.Size = new System.Drawing.Size(194, 26);
-            this.tbID.TabIndex = 3;
-            this.tbID.Text = "v323016";
+            this.tbEmail.Location = new System.Drawing.Point(110, 25);
+            this.tbEmail.Name = "tbEmail";
+            this.tbEmail.Size = new System.Drawing.Size(194, 26);
+            this.tbEmail.TabIndex = 3;
             // 
             // tbPassword1
             // 
@@ -276,9 +274,9 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(6, 28);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(69, 20);
+            this.label8.Size = new System.Drawing.Size(52, 20);
             this.label8.TabIndex = 4;
-            this.label8.Text = "Inlog ID:";
+            this.label8.Text = "Email:";
             // 
             // label9
             // 
@@ -343,7 +341,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox tbID;
+        private System.Windows.Forms.TextBox tbEmail;
         private System.Windows.Forms.TextBox tbPassword1;
         private System.Windows.Forms.TextBox tbPassword2;
         private System.Windows.Forms.Label label8;

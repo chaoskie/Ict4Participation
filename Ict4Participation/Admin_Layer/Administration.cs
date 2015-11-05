@@ -29,7 +29,7 @@ namespace Admin_Layer
         private List<Comment> LoadedComments;
         private List<Review> LoadedReviews;
         private int lastloadedOPID;
-        string nameTEMP; string locTEMP; string passwordTEMP; string avatarPathTEMP; string roleTEMP; string sexTEMP;
+        string emailTEMP; string nameTEMP; string locTEMP; string passwordTEMP; string avatarPathTEMP; string roleTEMP; string sexTEMP;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Administration"/> class.
@@ -150,7 +150,7 @@ namespace Admin_Layer
         /// <param name="sex">Sex to validate</param>
         /// <param name="Message">Error message given upon invalid parameters</param>
         /// <returns>Whether it is a full success, or there is at least 1 invalid parameter</returns>
-        public bool CreateAccount(string name, string address, string city, string password, string avatarPath, string role, string sex, out string Message)
+        public bool CreateAccount(string name, string address, string city, string password, string avatarPath, string role, string sex, string email, out string Message)
         {
             bool filledIn = true;
             bool rightFormat = false;
@@ -215,6 +215,7 @@ namespace Admin_Layer
                     this.avatarPathTEMP = avatarPath;
                     this.roleTEMP = role;
                     this.sexTEMP = sex;
+                    this.emailTEMP = email;
                 }
             }
             Message = error;
@@ -229,7 +230,7 @@ namespace Admin_Layer
         /// <param name="email">The email to validate</param>
         /// <param name="Message">The error message given upon invalid parameters</param>
         /// <returns></returns>
-        public bool CreateAccountFinal(string VOG, string description, string email, out string Message)
+        public bool CreateAccountFinal(string VOG, string description, List<string> skills, out string Message)
         {
             //TODO: Check the other strings
             //Out error message

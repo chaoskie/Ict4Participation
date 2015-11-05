@@ -31,6 +31,7 @@ namespace Ict4Participation
             this.previous = p;
             this.Administration = a;
 
+            this.cbRoles.DataSource = Administration.AllAccountTypes();
             this.cbRoles.SelectedIndex = 0;
             this.cbSex.SelectedIndex = 0;
         }
@@ -56,12 +57,23 @@ namespace Ict4Participation
             string role = this.cbRoles.SelectedItem.ToString();
             string avatarPath = ofd.FileName;
             string password = this.tbPassword1.Text;
+            string email = this.tbEmail.Text;
 
-            if (Administration.CreateAccount(name, address, city, password, avatarPath, role, sex, out ErrorMessage))
+            //Check if the account is filled in correctly
+            if (Administration.CreateAccount(name, address, city, password, avatarPath, role, sex, email, out ErrorMessage))
             {
-                Form form = new Registreren2(this, Administration);
-                form.Show();
-                this.Hide();
+                //If role is 'hulpbehoevende', it's done
+                if (cbRoles.SelectedIndex == 0)
+                {
+
+                }
+                else
+                {
+                    //else, send the 'hulpverlener' to the next screen
+                    Form form = new Registreren2(this, Administration);
+                    form.Show();
+                    this.Hide();
+                }
             }
             else
                 MessageBox.Show(ErrorMessage);
