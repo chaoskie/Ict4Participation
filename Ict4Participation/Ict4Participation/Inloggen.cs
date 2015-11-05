@@ -55,15 +55,24 @@ namespace Ict4Participation
 
         private void LogIn(object sender, EventArgs e)
         {
-            if (Administration.LogIn(tbUsername.Text, tbPassword.Text))
+            if (tbUsername.TextLength >= 3)
             {
-                Form form = new HoofdForm(Administration);
-                form.Show();
-                this.Hide();
+                if (Administration.LogIn(tbUsername.Text, tbPassword.Text))
+                {
+                    Form form = new HoofdForm(Administration);
+                    form.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    tbPassword.Text = string.Empty;
+                    MessageBox.Show("De combinatie van gebruikersnaam en wachtwoord bestaat niet!", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                MessageBox.Show("De combinatie van gebruikersnaam en wachtwoord bestaat niet!", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tbPassword.Text = string.Empty;
+                MessageBox.Show("Gebruikersnaam is te kort.", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
