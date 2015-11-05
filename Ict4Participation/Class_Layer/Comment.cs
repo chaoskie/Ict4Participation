@@ -47,12 +47,12 @@ namespace Class_Layer
             DataTable dt = Database_Layer.Database.RetrieveQuery(
             "SELECT * FROM "
             + "(SELECT c.\"QUESTION_ID\" as QID, c.\"Description\" as Post, a.\"Name\" as Poster FROM \"Comment\" c "
-            + "JOIN \"Acc\" a"
-            + "ON a.\"ID\"=c.\"PosterACC_ID\")"
+            + "JOIN \"Acc\" a "
+            + "ON a.\"ID\"=c.\"PosterACC_ID\") "
             + "WHERE QID = " + postID);
             foreach (DataRow row in dt.Rows)
             {
-                commentstr.Add(String.Format("{0}: {1}", row["Name"].ToString(), row["Comment"].ToString()));
+                commentstr.Add(String.Format("{0}: {1}", row["Poster"].ToString(), row["Post"].ToString()));
             }
 
             //For the comment objects
