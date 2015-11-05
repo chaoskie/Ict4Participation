@@ -93,7 +93,9 @@ namespace Ict4Participation
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 filename = ofd.FileName;
-                if (filename.ToLower().Contains(".jpg") || filename.ToLower().Contains(".png") || filename.ToLower().Contains(".bmp") || filename.ToLower().Contains(".gif") || filename.ToLower().Contains(".jpeg"))
+                if (filename.ToLower().Contains(".jpg") || filename.ToLower().Contains(".png") || 
+                        filename.ToLower().Contains(".bmp") || filename.ToLower().Contains(".gif") || 
+                        filename.ToLower().Contains(".jpeg"))
                 {
                     this.tbPhotoPath.Text = filename;
                 }
