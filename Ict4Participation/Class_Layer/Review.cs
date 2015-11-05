@@ -47,13 +47,32 @@ namespace Class_Layer
         /// <param name="rating">The rating of the review</param>
         /// <param name="accountID">The accountID of the author</param>
         /// <param name="description">The description of the review</param>
-        public Review(int postID, string title, int rating, int posterID, int postedtoID, string description)
+        private Review(int postID, string title, int rating, int posterID, int postedtoID, string description)
             : base(postID, title)
         {
             this.Rating = rating;
             this.PosterID = posterID;
             this.PostedToID = postedtoID;
             this.Description = description;
+        }
+
+        /// <summary>
+        /// Adds a new review about a specified user to the database
+        /// </summary>
+        /// <param name="rating">The rating of the review</param>
+        /// <param name="title">The title of the review</param>
+        /// <param name="postedtoID">The ID of the reviewed</param>
+        /// <param name="posterID">The ID of the reviewer</param>
+        /// <param name="description">The description of the review</param>
+        /// <returns>String containing information about the review placement</returns>
+        public static string PlaceReview(int rating, string title, int postedtoID, int posterID, string description)
+        {
+            Database_Layer.Database.ExecuteQuery(
+                String.Format("INSERT INTO \"Review\" (\"Rating\", \"Title\", \"PostedACC_ID\", \"PosterACC_ID\", \"Description\") VALUES ({0}, '{1}', {2}, {3}, '{4}')",
+                              rating, title, postedtoID, posterID, description)
+                             );
+
+            return String.Format("{0}-sterren review geplaatst!", rating);
         }
 
         /// <summary>

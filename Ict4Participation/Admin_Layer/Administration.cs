@@ -108,14 +108,24 @@ namespace Admin_Layer
 
         #endregion
 
+        #region Review handling
+
         /// <summary>
-        /// Post a review
+        /// Posts a review about a user
         /// </summary>
-        /// <returns>Returns the result of the action</returns>
-        public bool PostReview()
+        /// <param name="userID">The userID of the reviewed user</param>
+        /// <param name="title">The title of the review</param>
+        /// <param name="description">The description of the review</param>
+        /// <param name="rating">The rating of the review</param>
+        /// <param name="Message">The message given upon review postage</param>
+        /// <returns>Whether it was a success or not</returns>
+        public bool PostReview(int userID, string title, string description, int rating, out string Message)
         {
-            return false;
+            Message = Review.PlaceReview(rating, title, userID, MainUser.AccountID, description);
+            return true;
         }
+
+        #endregion
 
         /// <summary>
         /// Arrange a meeting
@@ -255,16 +265,24 @@ namespace Admin_Layer
         /// </summary>
         /// <param name="accType"></param>
         /// <returns></returns>
-        public List<string> GetAccounts(string accType, bool bsearch = false, string search = "")
+        public List<string> GetAccounts(string accType = "", bool bsearch = false, string search = "")
         {
-            if (bsearch)
+            if (!String.IsNullOrWhiteSpace(accType))
             {
-                LoadedAccounts = Account.FetchAllAccounts().FindAll(item => (item.Role.ToString() == accType) && (item.Naam.ToLower()).Contains(search.ToLower()));
-                return LoadedAccounts.Select(s => s.Naam).ToList();
+                if (bsearch)
+                {
+                    LoadedAccounts = Account.FetchAllAccounts().FindAll(item => (item.Role.ToString() == accType) && (item.Naam.ToLower()).Contains(search.ToLower()));
+                    return LoadedAccounts.Select(s => s.Naam).ToList();
+                }
+                else
+                {
+                    LoadedAccounts = Account.FetchAllAccounts().FindAll(item => (item.Role.ToString() == accType));
+                    return LoadedAccounts.Select(s => s.Naam).ToList();
+                }
             }
             else
             {
-                LoadedAccounts = Account.FetchAllAccounts().FindAll(item => (item.Role.ToString() == accType));
+                LoadedAccounts = Account.FetchAllAccounts();
                 return LoadedAccounts.Select(s => s.Naam).ToList();
             }
         }

@@ -20,15 +20,21 @@ namespace Ict4Participation
     public partial class PlaatsReview : Form
     {
         private Administration administration;
+        private int userID;
+        private string username;
 
         private Form previous;
-        public PlaatsReview(Form p, Administration a)
+        public PlaatsReview(Form p, Administration a, int userID, string username)
         {
             this.InitializeComponent();
             this.administration = a;
             this.previous = p;
+            this.userID = userID;
+            this.username = username;
+            changeStars();
+            cbHulpverlener.DataSource = administration.GetAccounts("Hulpverlener");
 
-            //OLD this.cb1.CheckState = CheckState.Indeterminate;
+            cbHulpverlener.Text = username;
         }
 
         private void PlaatsReview_FormClosed(object sender, FormClosedEventArgs e)
@@ -36,60 +42,36 @@ namespace Ict4Participation
             this.previous.Show();
         }
 
-        private void changeStars(object sender, EventArgs e)
+        private void changeStars()
         {
-
+            //Search through the controls to find the matching star to set visible (nud value 1 = star 1 visible)
+            var pb = StarsPanel.Controls.Find("pbStar" + nudStar.Value, true).FirstOrDefault().Visible = true;
+            //Search through the controls to find the matching star, yet 1 number higher (in case of decrease)
+            var pbhi = StarsPanel.Controls.Find("pbStar" + Convert.ToInt32(nudStar.Value + 1), true).FirstOrDefault();
+            if (pbhi != null) pbhi.Visible = false;
         }
 
         private void btnPlaceReview_Click(object sender, EventArgs e)
         {
-            this.previous.Show();
-            this.Close();
+            string message = string.Empty;
+            //Check if username exists
+            if (administration.GetAccounts().Exists(c => c == cbHulpverlener.Text))
+            {
+                //Post review
+                administration.PostReview(userID, tbTitle.Text, tbDescription.Text, Convert.ToInt32(nudStar.Value), out message);
+                MessageBox.Show(message);
+                this.previous.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Gebruiker bestaat niet!");
+            }
         }
 
         private void nudStar_ValueChanged(object sender, EventArgs e)
         {
-            StarsChange();
-            switch ((int)nudStar.Value)
-            {
-                case 0:
-                    StarsChange();
-                    break;
-                case 1:
-                    pbStar1.Visible = true;
-                    break;
-                case 2:
-                    pbStar1.Visible = true;
-                    pbStar2.Visible = true;
-                    break;
-                case 3:
-                    pbStar1.Visible = true;
-                    pbStar2.Visible = true;
-                    pbStar3.Visible = true;
-          
-                    break;
-                case 4:
-                    pbStar1.Visible = true;
-                    pbStar2.Visible = true;
-                    pbStar3.Visible = true;
-                    pbStar4.Visible = true;
-                    break;
-                case 5:
-                    pbStar1.Visible = true;
-                    pbStar2.Visible = true;
-                    pbStar3.Visible = true;
-                    pbStar4.Visible = true;
-                    pbStar5.Visible = true;
-                    break;
-            }
-        }
-        public void StarsChange()
-        {
-            pbStar1.Visible = false;
-            pbStar2.Visible = false;
-            pbStar3.Visible = false;
-            pbStar4.Visible = false;
-            pbStar5.Visible = false;
+            changeStars();
         }
     }
 }

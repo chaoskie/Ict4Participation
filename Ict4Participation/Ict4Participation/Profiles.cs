@@ -23,14 +23,18 @@ namespace Ict4Participation
         private Administration administration;
         private int userIndex;
 
+        private string username;
+        private int userID;
+
         public Profiles(Administration a, int accIndex)
         {
             InitializeComponent();
             this.administration = a;
             this.userIndex = accIndex;
 
+            userID = Convert.ToInt32(administration.AccountData(accIndex, 1));
             pbAvatar.ImageLocation = administration.AccountData(accIndex, 4);
-            lblName.Text = administration.AccountData(accIndex, 2);
+            lblName.Text = username = administration.AccountData(accIndex, 2);
             lblRole.Text = administration.AccountData(accIndex, 6);
         }
 
@@ -57,15 +61,15 @@ namespace Ict4Participation
         #region reviews
         private void plaatsenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO REVIEW PLAATSEN
-            Form form = new PlaatsReview(this, administration);
+            Form form = new PlaatsReview(this, administration, userID, username);
             form.Show();
+            this.Hide();
         }
 
         private void weergevenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string details = string.Empty;
-            foreach (string s in administration.GetAccountReviews(Convert.ToInt32(administration.AccountData(userIndex, 1))))
+            foreach (string s in administration.GetAccountReviews(Convert.ToInt32(userID)))
             {
                 details += s + Environment.NewLine;
             }
