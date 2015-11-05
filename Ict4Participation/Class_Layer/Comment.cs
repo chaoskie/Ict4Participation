@@ -42,32 +42,26 @@ namespace Class_Layer
         /// <returns>The name of the user</returns>
         public static List<string> GetQuestionComments(int postID, out List<Comment> Comments)
         {
-
+            //Create comment objects
+            Comments = new List<Comment>();
+            //Create comment details
             List<string> commentstr = new List<string>();
+            //Fetch comments
             DataTable dt = Database_Layer.Database.RetrieveQuery(
             "SELECT * FROM "
-            + "(SELECT c.\"QUESTION_ID\" as QID, c.\"Description\" as Post, a.\"Name\" as Poster FROM \"Comment\" c "
+            + "(SELECT c.\"ID\" as CID, c.\"QUESTION_ID\" as QID, c.\"Description\" as Post, a.\"Name\" as Poster FROM \"Comment\" c "
             + "JOIN \"Acc\" a "
             + "ON a.\"ID\"=c.\"PosterACC_ID\") "
             + "WHERE QID = " + postID);
             foreach (DataRow row in dt.Rows)
             {
+                //Create comments
                 commentstr.Add(String.Format("{0}: {1}", row["Poster"].ToString(), row["Post"].ToString()));
-            }
-
-            //For the comment objects
-            Comments = new List<Comment>();
-            List<string> commentinfo = new List<string>();
-            //retrieve every comment matching to that question
-            DataTable dtComment = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Comment\" WHERE \"QUESTION_ID\" = " + postID + " ORDER BY \"ID\"");
-            foreach (DataRow row in dtComment.Rows)
-            {
                 Comments.Add(new Comment(
-                    Convert.ToInt32(row["ID"]),
-                    row["Description"].ToString()
-                    ));
+                   Convert.ToInt32(row["CID"]),
+                   row["Post"].ToString()
+                   ));
             }
-
             return commentstr;
         }
 
