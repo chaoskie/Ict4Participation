@@ -68,7 +68,7 @@ namespace Class_Layer
         #endregion
 
         public static Account Register(string name, Location loc, string password, string avatarPath, string VOG, string description, Accounttype role, string sex, string email, out int id)
-        {
+        { 
             //TODO
             //Returns: Account to set as MainUser in the admin class
             //Outs: the ID of the newly created account
@@ -100,15 +100,8 @@ namespace Class_Layer
                     break;
             }
 
-            string query1 = "INSERT INTO \"Acc\" (\"Name\", \"LOCATION_ID\", \"PassHash\", \"Salt\", \"Avatar\", \"VOG\", \"Description\", \"Role\", \"Sex\", \"Email\") VALUES(" +
-                "'" + name + "'" + ", " + locID + ", " + "'" + passHash + "'" + ", " + "'" + passSalt + "'" + ", " + "'" + avatarPath + "'" + ", " + "'" + VOG + "'" + ", " + 
-                "'" + description + "'" + ", " + "'" + roleText + "'" + ", " + "'" + sex + "'" + ", " + "'" + email + "'" + ")";
-
-            string query2 = "SELECT ID FROM \"Acc\" WHERE \"Name\" = " + name + " AND \"LOCATION_ID\" = " + locID + " AND \"PassHash\" = " + passHash + " AND \"Salt\" = " + passSalt + " AND \"Avatar\" = " +
-                avatarPath + " AND \"VOG\" = " + VOG + " AND \"Description\" = " + description + " AND \"Role\" = " + role + " AND \"Sex\" = " + sex + " AND \"Email\" = " + email;
-
-            Database.ExecuteQuery(query1);
-            DataTable dt = Database.RetrieveQuery(query2);
+            Database_Layer.Database.NewUser(name, locID, passHash, passSalt, avatarPath, VOG, description, roleText, sex, email);
+            DataTable dt = Database.GetUserID(name, locID, passHash, passSalt, avatarPath, VOG, description, roleText, sex, email);
 
             id = 0;
             return null;

@@ -160,7 +160,7 @@ namespace Database_Layer
                 c.Open();
                 OracleCommand cmd = new OracleCommand(
                     "INSERT INTO \"Question\" (\"Title\", \"PosterACC_ID\", \"Timetable\", \"Description\", \"LOCATION_ID\") " +
-                    "VALUES (':A', :B, TO_DATE(':C', 'dd-mon-yyyy HH24:mi:ss'), ':D', :E)"
+                    "VALUES (:A, :B, TO_DATE(:C, 'dd-mon-yyyy HH24:mi:ss'), :D, :E)"
                     );
                 cmd.Parameters.Add(new OracleParameter("A", title));
                 cmd.Parameters.Add(new OracleParameter("B", accountid));
@@ -185,7 +185,7 @@ namespace Database_Layer
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("INSERT INTO \"Question_Skill\" (\"SKILL_NAME\",\"QUESTION_ID\") VALUES (':A', :B)");
+                OracleCommand cmd = new OracleCommand("INSERT INTO \"Question_Skill\" (\"SKILL_NAME\",\"QUESTION_ID\") VALUES (:A, :B)");
                 cmd.Parameters.Add(new OracleParameter("A", skill));
                 cmd.Parameters.Add(new OracleParameter("B", qID));
                 cmd.Connection = c;
@@ -203,18 +203,24 @@ namespace Database_Layer
         #endregion
 
         #region account
-        public static void NewUser(string query)
+        public static void NewUser(string name, int locID, string passHash, string salt, string avatar, string vog, string description, string roleText, string sex, string email)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
-                /*
-             string query1 = "INSERT INTO \"Acc\" (\"Name\", \"LOCATION_ID\", \"PassHash\", \"Salt\", \"Avatar\", \"VOG\", \"Description\", \"Role\", \"Sex\", \"Email\") VALUES(" +
-                "'" + name + "'" + ", " + locID + ", " + "'" + passHash + "'" + ", " + "'" + passSalt + "'" + ", " + "'" + avatarPath + "'" + ", " + "'" + VOG + "'" + ", " + 
-                "'" + description + "'" + ", " + "'" + roleText + "'" + ", " + "'" + sex + "'" + ", " + "'" + email + "'" + ")";
-                 */
                 c.Open();
-                OracleCommand cmd = new OracleCommand(":qq");
-                cmd.Parameters.Add(new OracleParameter("qq", query));
+                OracleCommand cmd = new OracleCommand("INSERT INTO \"Acc\" (\"Name\", \"LOCATION_ID\", \"PassHash\", \"Salt\", \"Avatar\", \"VOG\", \"Description\", \"Role\", \"Sex\", \"Email\") " +
+                   "VALUES( :x, :y, :z, :a, :b, :c, :d, :e, :f, :g)"
+                   );
+                cmd.Parameters.Add(new OracleParameter("x", name));
+                cmd.Parameters.Add(new OracleParameter("y", locID));
+                cmd.Parameters.Add(new OracleParameter("z", passHash));
+                cmd.Parameters.Add(new OracleParameter("a", salt));
+                cmd.Parameters.Add(new OracleParameter("b", avatar));
+                cmd.Parameters.Add(new OracleParameter("c", vog));
+                cmd.Parameters.Add(new OracleParameter("d", description));
+                cmd.Parameters.Add(new OracleParameter("e", roleText));
+                cmd.Parameters.Add(new OracleParameter("f", sex));
+                cmd.Parameters.Add(new OracleParameter("g", email));
                 cmd.Connection = c;
                 try
                 {
@@ -222,6 +228,42 @@ namespace Database_Layer
                 }
                 catch (OracleException)
                 {
+                    throw;
+                }
+                c.Close();
+            }
+        }
+
+        public static DataTable GetUserID(string name, int locID, string passHash, string salt, string avatar, string vog, string description, string roleText, string sex, string email)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand(
+                    "SELECT \"ID\" FROM \"Acc\" WHERE \"Name\"=:x, \"LOCATION_ID\"=:y, \"PassHash\"=:z, \"Salt\"=:a, \"Avatar\"=:b, \"VOG\"=:c, \"Description\"=:d, \"Role\"=:e, \"Sex\"=:f, \"Email\"=:g)"
+                   );
+                cmd.Parameters.Add(new OracleParameter("x", name));
+                cmd.Parameters.Add(new OracleParameter("y", locID));
+                cmd.Parameters.Add(new OracleParameter("z", passHash));
+                cmd.Parameters.Add(new OracleParameter("a", salt));
+                cmd.Parameters.Add(new OracleParameter("b", avatar));
+                cmd.Parameters.Add(new OracleParameter("c", vog));
+                cmd.Parameters.Add(new OracleParameter("d", description));
+                cmd.Parameters.Add(new OracleParameter("e", roleText));
+                cmd.Parameters.Add(new OracleParameter("f", sex));
+                cmd.Parameters.Add(new OracleParameter("g", email));
+                cmd.Connection = c;
+                try
+                {
+                    OracleDataReader r = cmd.ExecuteReader();
+                    DataTable result = new DataTable();
+                    result.Load(r);
+                    c.Close();
+                    return result;
+                }
+                catch (Exception e)
+                {
+                    string debug = e.Message;
                     throw;
                 }
                 c.Close();
