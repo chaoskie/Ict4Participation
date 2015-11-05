@@ -103,6 +103,7 @@ namespace Class_Layer
             string query1 = "INSERT INTO \"Acc\" (\"Name\", \"LOCATION_ID\", \"PassHash\", \"Salt\", \"Avatar\", \"VOG\", \"Description\", \"Role\", \"Sex\", \"Email\") VALUES(" +
                 "'" + name + "'" + ", " + locID + ", " + "'" + passHash + "'" + ", " + "'" + passSalt + "'" + ", " + "'" + avatarPath + "'" + ", " + "'" + VOG + "'" + ", " + 
                 "'" + description + "'" + ", " + "'" + roleText + "'" + ", " + "'" + sex + "'" + ", " + "'" + email + "'" + ")";
+
             string query2 = "SELECT ID FROM \"Acc\" WHERE \"Name\" = " + name + " AND \"LOCATION_ID\" = " + locID + " AND \"PassHash\" = " + passHash + " AND \"Salt\" = " + passSalt + " AND \"Avatar\" = " +
                 avatarPath + " AND \"VOG\" = " + VOG + " AND \"Description\" = " + description + " AND \"Role\" = " + role + " AND \"Sex\" = " + sex + " AND \"Email\" = " + email;
 
