@@ -103,12 +103,14 @@ namespace Class_Layer
                     roleText = "V";
                     break;
             }
-
+            id = 0;
             Database_Layer.Database.NewUser(name, locID, passHash, passSalt, avatarPath, VOG, description, roleText, sex, email);
             DataTable dt = Database.GetUserID(name, locID, passHash, passSalt, avatarPath, VOG, description, roleText, sex, email);
-
-            id = 0;
-            return null;
+            foreach (DataRow row in dt.Rows)
+            {
+                id = Convert.ToInt32(row["ID"]);
+            }
+            return new Account(id, name, loc, role, avatarPath, description, sex, email, VOG);
         }
 
         /// <summary>
