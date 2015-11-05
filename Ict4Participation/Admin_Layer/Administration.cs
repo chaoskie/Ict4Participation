@@ -272,7 +272,7 @@ namespace Admin_Layer
             {
                 foreach (string skill in skillsTEMP)
                 {
-
+                    Account.CreateAccountSkills(skill, MainUser.AccountID);
                 }
             }
 

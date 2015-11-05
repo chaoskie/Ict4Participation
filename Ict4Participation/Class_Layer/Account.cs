@@ -144,6 +144,15 @@ namespace Class_Layer
         }
 
         /// <summary>
+        /// Inserts skills for specified account
+        /// </summary>
+        /// <param name="skills"></param>
+        public static void CreateAccountSkills(string skill, int userid)
+        {
+            Database_Layer.Database.SkillInsertAcc(skill, userid);
+        }
+
+        /// <summary>
         /// Retrieves all the accounts from the database
         /// </summary>
         /// <returns>All the accounts made on this point</returns>

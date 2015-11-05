@@ -275,6 +275,27 @@ namespace Database_Layer
                 }
             }
         }
+
+        public static void SkillInsertAcc(string skill, int aID)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("INSERT INTO \"Acc_Skill\" (\"SKILL_NAME\",\"QUESTION_ID\") VALUES (:A, :B)");
+                cmd.Parameters.Add(new OracleParameter("A", skill));
+                cmd.Parameters.Add(new OracleParameter("B", aID));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException)
+                {
+                    throw;
+                }
+                c.Close();
+            }
+        }
         #endregion
 
         #region review
