@@ -36,51 +36,33 @@ namespace Class_Layer
         }
 
         /// <summary>
-        /// Retrieves a list of comments matching the question
-        /// </summary>
-        /// <param name="postID">The question post ID</param>
-        /// <param name="Comments">The comments objects which are created</param>
-        /// <returns>A single line of a comment</returns>
-        public static List<string> GetQuestionComments(int postID, out List<Comment> Comments)
-        {
-            Comments = new List<Comment>();
-            List<string> commentinfo = new List<string>();
-            //retrieve every comment matching to that question
-
-            DataTable dtComment = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Comment\" WHERE \"QUESTION_ID\" = " + postID + " ORDER BY \"ID\"");
-            foreach (DataRow row in dtComment.Rows)
-            {
-                Comments.Add(new Comment(
-                    Convert.ToInt32(row["ID"]),
-                    row["Description"].ToString()
-                    ));
-            }
-            foreach (Comment c in Comments)
-            {
-                //(addrange in geval van aanpassing onder))
-                commentinfo.Add(c.GetFullComment(c.PostID));
-            }
-            return commentinfo;
-        }
-
-        /// <summary>
         /// Finds the user(name) of the posted comment
         /// </summary>
         /// <param name="postid">THe comment post id</param>
         /// <returns>The name of the user</returns>
-        public static string GetOP(int postid)
+        public static List<string> GetQuestionComments(int postID, out List<Comment> Comments)
         {
-            //
-            // VERANDER DEZE NAAR EEN MOGELIJK JOIN
-            // EN MAAK HIERVAN EEN LIST
-            //
-            string name = String.Empty;
-            DataTable dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc\" WHERE \"ID\" = (SELECT \"PosterACC_ID\" FROM \"Comment\" WHERE \"ID\" = " + postid + ")");
+            //Create comment objects
+            Comments = new List<Comment>();
+            //Create comment details
+            List<string> commentstr = new List<string>();
+            //Fetch comments
+            DataTable dt = Database_Layer.Database.RetrieveQuery(
+            "SELECT * FROM "
+            + "(SELECT c.\"ID\" as CID, c.\"QUESTION_ID\" as QID, c.\"Description\" as Post, a.\"Name\" as Poster FROM \"Comment\" c "
+            + "JOIN \"Acc\" a "
+            + "ON a.\"ID\"=c.\"PosterACC_ID\") "
+            + "WHERE QID = " + postID);
             foreach (DataRow row in dt.Rows)
             {
-                name = row["Name"].ToString();
+                //Create comments
+                commentstr.Add(String.Format("{0}: {1}", row["Poster"].ToString(), row["Post"].ToString()));
+                Comments.Add(new Comment(
+                   Convert.ToInt32(row["CID"]),
+                   row["Post"].ToString()
+                   ));
             }
-            return name;
+            return commentstr;
         }
 
         /// <summary>
@@ -90,16 +72,6 @@ namespace Class_Layer
             : base(postID, title)
         {
             //nothing much
-        }
-
-        /// <summary>
-        /// Yields the entire comment in format
-        /// </summary>
-        /// <param name="postid"></param>
-        /// <returns>The comment</returns>
-        public string GetFullComment(int postid)
-        {
-            return String.Format("{0}: {1}", GetOP(postid), Title);
         }
     }
 }

@@ -41,19 +41,37 @@ namespace Ict4Participation
         private void lbRubrics_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Get selected item from lbRubrics
+            string itemText = lbRubrics.SelectedItem.ToString();
 
             // Get subitems from item through administration class
+            List<string> list = null;
+            switch (itemText.ToLower())
+            {
+                case "vragen":
+                    list = this.Administration.GetQuestionNames();
+                    break;
+                case "gebruikers":
+                    list = this.Administration.ReturnUsers();
+                    break;
+                case "reviews":
+                    list = this.Administration.ReturnReviews();
+                    break;
+            }
 
             // Clear and Fill lbPosts with the subitems
-
-            // Select first item of lbPosts
+            this.lbPosts.DataSource = null;
+            this.lbPosts.DataSource = list;
         }
 
         private void lbPosts_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Get selected item from lbPosts
+            Object itemText = lbPosts.SelectedItem;
 
             // Get post through administration class
+            List<Object> list = null;
+
+            if (typeof(Object).Name == )
 
             // Clear and Fill lbPostDetails with post details
 
