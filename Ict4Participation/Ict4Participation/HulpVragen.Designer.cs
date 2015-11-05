@@ -109,6 +109,7 @@
             // 
             this.tbChat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbChat.Location = new System.Drawing.Point(328, 396);
+            this.tbChat.MaxLength = 500;
             this.tbChat.Multiline = true;
             this.tbChat.Name = "tbChat";
             this.tbChat.Size = new System.Drawing.Size(350, 65);

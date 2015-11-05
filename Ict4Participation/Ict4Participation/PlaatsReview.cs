@@ -26,7 +26,7 @@ namespace Ict4Participation
 
             this.previous = p;
 
-            this.cb1.CheckState = CheckState.Indeterminate;
+            //OLD this.cb1.CheckState = CheckState.Indeterminate;
         }
 
         private void PlaatsReview_FormClosed(object sender, FormClosedEventArgs e)
@@ -36,12 +36,58 @@ namespace Ict4Participation
 
         private void changeStars(object sender, EventArgs e)
         {
+
         }
 
         private void btnPlaceReview_Click(object sender, EventArgs e)
         {
             this.previous.Show();
             this.Close();
+        }
+
+        private void nudStar_ValueChanged(object sender, EventArgs e)
+        {
+            StarsChange();
+            switch ((int)nudStar.Value)
+            {
+                case 0:
+                    StarsChange();
+                    break;
+                case 1:
+                    pbStar1.Visible = true;
+                    break;
+                case 2:
+                    pbStar1.Visible = true;
+                    pbStar2.Visible = true;
+                    break;
+                case 3:
+                    pbStar1.Visible = true;
+                    pbStar2.Visible = true;
+                    pbStar3.Visible = true;
+          
+                    break;
+                case 4:
+                    pbStar1.Visible = true;
+                    pbStar2.Visible = true;
+                    pbStar3.Visible = true;
+                    pbStar4.Visible = true;
+                    break;
+                case 5:
+                    pbStar1.Visible = true;
+                    pbStar2.Visible = true;
+                    pbStar3.Visible = true;
+                    pbStar4.Visible = true;
+                    pbStar5.Visible = true;
+                    break;
+            }
+        }
+        public void StarsChange()
+        {
+            pbStar1.Visible = false;
+            pbStar2.Visible = false;
+            pbStar3.Visible = false;
+            pbStar4.Visible = false;
+            pbStar5.Visible = false;
         }
     }
 }
