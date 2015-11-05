@@ -94,13 +94,18 @@ namespace Class_Layer
         /// </summary>
         /// <param name="l">The location to be validated</param>
         /// <returns>Whether it exists or not</returns>
-        public static bool ValidateLocation(Location l)
+        public static bool ValidateLocation(Location l, out int locID)
         {
             bool exists = false;
+            locID = 0;
             DataTable dtLocation = Database_Layer.Database.RetrieveQuery(
                        String.Format("SELECT ID FROM \"Location\" WHERE \"Longitude\" = '{0}' AND \"Latitude\" = '{1}' AND \"Description\" = '{2}'",
                        l.Long, l.Lat, l.DescribedLocation));
             exists = dtLocation == null ? false : true;
+            foreach (DataRow row in dtLocation.Rows)
+            {
+                locID = Convert.ToInt32(row["ID"]);
+            }
             return exists;
         }
 

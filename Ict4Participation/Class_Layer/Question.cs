@@ -59,7 +59,7 @@ namespace Class_Layer
                 int locID = 0;
 
                 //Check if exists, if not: insert instead
-                doInsertLocation = Location.ValidateLocation(questionLocation) == true ? false : true;
+                doInsertLocation = Location.ValidateLocation(questionLocation, out locID) == true ? false : true;
 
                 //If it exists, don't insert a new location, else do
                 if (doInsertLocation)
