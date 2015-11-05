@@ -86,13 +86,21 @@ namespace Ict4Participation
 
         private void btnChoosePhoto_Click(object sender, EventArgs e)
         {
-            ofd.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
-            string path = string.Empty;
+            ofd.DefaultExt = ".png";
+            ofd.Filter = "All Files (*.*)|*.*|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|BMP Files (*.bmp)|*.bmp|GIF Files (*.gif)|*.gif|JPEG Files (*.jpeg)|*.jpeg";
+            string filename = string.Empty;
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                path = ofd.FileName;
-                this.tbPhotoPath.Text = path;
+                filename = ofd.FileName;
+                if (filename.ToLower().Contains(".jpg") || filename.ToLower().Contains(".png") || filename.ToLower().Contains(".bmp") || filename.ToLower().Contains(".gif") || filename.ToLower().Contains(".jpeg"))
+                {
+                    this.tbPhotoPath.Text = filename;
+                }
+                else
+                {
+                    MessageBox.Show("Profielfoto is geen afbeelding!");
+                }
             }
         }
     }
