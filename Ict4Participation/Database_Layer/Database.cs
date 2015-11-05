@@ -27,13 +27,7 @@ namespace Database_Layer
         /// HOST PASSWORD
         private static string password = "root";
         private static string connectionstring = "User Id=" + username + ";Password=" + password + ";Data Source= //" + host + ":1521/XE;";
-            /*
-            "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=" + host
-            + ")(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=ORCL))); "
-            + "User Id=" + username + "; Password=" + password + ";";*/
-        
-        //conn.ConnectionString = "User Id=" + user + ";Password=" + password + ";Data Source= //192.168.20.111:1521/XE;";
-
+           
         /// <summary>
         /// Selects and retrieves values from the database 
         /// </summary>
@@ -56,8 +50,9 @@ namespace Database_Layer
                         c.Close();
                         return result;
                     }
-                    catch (OracleException)
+                    catch (OracleException e)
                     {
+                        Console.Write(e.Message);
                         throw;
                     }
                 }
@@ -81,11 +76,14 @@ namespace Database_Layer
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand(
-                        @"SELECT " + select +
+                OracleCommand cmd = new OracleCommand("SELECT @select FROM @from WHERE @where"
+                        /*@"SELECT " + select +
                         @" FROM " + from +
-                        @" WHERE " + where
+                        @" WHERE " + where*/
                         );
+                cmd.Parameters.Add(new OracleParameter("@select", select));
+                cmd.Parameters.Add(new OracleParameter("@from", from));
+                cmd.Parameters.Add(new OracleParameter("@where", where));
                 cmd.Connection = c;
                 try
                 {
