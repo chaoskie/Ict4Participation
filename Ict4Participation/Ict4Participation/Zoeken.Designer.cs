@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.tbSearch = new System.Windows.Forms.TextBox();
+            this.lbUsers = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnShowProfile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -46,35 +45,24 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Zoeken:";
             // 
-            // textBox1
+            // tbSearch
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(12, 32);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(204, 26);
-            this.textBox1.TabIndex = 1;
+            this.tbSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbSearch.Location = new System.Drawing.Point(12, 32);
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.Size = new System.Drawing.Size(310, 26);
+            this.tbSearch.TabIndex = 1;
+            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
             // 
-            // button1
+            // lbUsers
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(222, 30);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 30);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Zoeken";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // listBox1
-            // 
-            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Items.AddRange(new object[] {
-            "Kees"});
-            this.listBox1.Location = new System.Drawing.Point(12, 98);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(310, 184);
-            this.listBox1.TabIndex = 3;
+            this.lbUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbUsers.FormattingEnabled = true;
+            this.lbUsers.ItemHeight = 20;
+            this.lbUsers.Location = new System.Drawing.Point(12, 98);
+            this.lbUsers.Name = "lbUsers";
+            this.lbUsers.Size = new System.Drawing.Size(310, 184);
+            this.lbUsers.TabIndex = 3;
             // 
             // label2
             // 
@@ -86,26 +74,25 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Gevonden resultaten:";
             // 
-            // btnAdd
+            // btnShowProfile
             // 
-            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(12, 288);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(310, 67);
-            this.btnAdd.TabIndex = 2;
-            this.btnAdd.Text = "Geef profiel weer";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnShowProfile.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowProfile.Location = new System.Drawing.Point(12, 288);
+            this.btnShowProfile.Name = "btnShowProfile";
+            this.btnShowProfile.Size = new System.Drawing.Size(310, 67);
+            this.btnShowProfile.TabIndex = 2;
+            this.btnShowProfile.Text = "Geef profiel weer";
+            this.btnShowProfile.UseVisualStyleBackColor = true;
+            this.btnShowProfile.Click += new System.EventHandler(this.btnShowProfile_Click);
             // 
             // Zoeken
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 367);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.lbUsers);
+            this.Controls.Add(this.btnShowProfile);
+            this.Controls.Add(this.tbSearch);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -113,7 +100,6 @@
             this.MinimizeBox = false;
             this.Name = "Zoeken";
             this.Text = "Zoeken";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Zoeken_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,10 +108,9 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.TextBox tbSearch;
+        private System.Windows.Forms.ListBox lbUsers;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnShowProfile;
     }
 }

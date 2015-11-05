@@ -255,14 +255,31 @@ namespace Admin_Layer
         /// <returns></returns>
         public List<string> GetAccounts(string accType)
         {
+            //TODO
             return null;
         }
 
-        public List<string> GetAccountReviews(int userid)
+        public List<string> SearchAccounts(string search)
         {
-            return Review.GetUserReviews(userid, out LoadedReviews);
+            //TODO
+            return null;
         }
 
+        /// <summary>
+        /// Returns all the account reviews of either the poster, or the posted, specified by a bool and ID
+        /// </summary>
+        /// <param name="userid">The poster, or receiver of a review</param>
+        /// <param name="isPoster">Whether it is a poster, or a receiver (false)</param>
+        /// <returns>A list with all the details of the reviews</returns>
+        public List<string> GetAccountReviews(int userid, bool isPoster = false)
+        {
+            return Review.GetUserReviews(userid, out LoadedReviews, isPoster);
+        }
+
+        /// <summary>
+        /// Returns all the account reviews
+        /// </summary>
+        /// <returns>A list with all the details of the reviews</returns>
         public List<string> GetAccountReviews()
         {
             return Review.GetAllUserReviews(out LoadedReviews);
