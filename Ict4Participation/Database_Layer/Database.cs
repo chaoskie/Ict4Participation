@@ -240,24 +240,15 @@ namespace Database_Layer
             }
         }
 
-        public static DataTable GetUserID(string name, int locID, string passHash, string salt, string avatar, string vog, string description, string roleText, string sex, string email)
+        public static DataTable GetUserID(string passHash)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand(
-                    "SELECT \"ID\" FROM \"Acc\" WHERE \"Name\"=:x AND \"LOCATION_ID\"=:y AND \"PassHash\"=:z AND \"Salt\"=:a AND \"Avatar\"=:b AND \"VOG\"=:c AND \"Description\"=:d AND \"Role\"=:e AND \"Sex\"=:f AND \"Email\"=:g"
+                    "SELECT \"ID\" FROM \"Acc\" WHERE \"PassHash\"=:z"
                    );
-                cmd.Parameters.Add(new OracleParameter("x", name));
-                cmd.Parameters.Add(new OracleParameter("y", locID));
                 cmd.Parameters.Add(new OracleParameter("z", passHash));
-                cmd.Parameters.Add(new OracleParameter("a", salt));
-                cmd.Parameters.Add(new OracleParameter("b", avatar));
-                cmd.Parameters.Add(new OracleParameter("c", vog));
-                cmd.Parameters.Add(new OracleParameter("d", description));
-                cmd.Parameters.Add(new OracleParameter("e", roleText));
-                cmd.Parameters.Add(new OracleParameter("f", sex));
-                cmd.Parameters.Add(new OracleParameter("g", email));
                 cmd.Connection = c;
                 try
                 {
