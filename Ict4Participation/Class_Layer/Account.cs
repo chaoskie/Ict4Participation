@@ -105,7 +105,7 @@ namespace Class_Layer
             }
             id = 0;
             Database_Layer.Database.NewUser(name, locID, passHash, passSalt, avatarPath, VOG, description, roleText, sex, email);
-            DataTable dt = Database.GetUserID(name, locID, passHash, passSalt, avatarPath, VOG, description, roleText, sex, email);
+            DataTable dt = Database.GetUserID(passHash);
             foreach (DataRow row in dt.Rows)
             {
                 id = Convert.ToInt32(row["ID"]);
