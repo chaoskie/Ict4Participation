@@ -54,5 +54,11 @@ namespace Class_Layer
             reviews = new List<Review>();
             return null;
         }
+
+        public static List<string> GetAllUserReviews(int accountID, out List<Review> reviews)
+        {
+            reviews = new List<Review>();
+            return null;
+        }
     }
 }

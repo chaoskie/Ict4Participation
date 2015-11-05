@@ -262,6 +262,11 @@ namespace Admin_Layer
         {
             return Review.GetUserReviews(userid, out LoadedReviews);
         }
+
+        public List<string> GetAccountReviews()
+        {
+            return Review.GetAllUserReviews(out LoadedReviews);
+        }
         #endregion
 
         #region encoding and decoding of text to HTML and back

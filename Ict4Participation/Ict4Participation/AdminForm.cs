@@ -51,10 +51,10 @@ namespace Ict4Participation
                     list = this.Administration.GetQuestionNames();
                     break;
                 case "gebruikers":
-                    list = this.Administration.ReturnUsers();
+                    list = this.Administration.GetAccounts("All");
                     break;
                 case "reviews":
-                    list = this.Administration.ReturnReviews();
+                    list = this.Administration.GetAccountReviews();
                     break;
             }
 
@@ -71,7 +71,7 @@ namespace Ict4Participation
             // Get post through administration class
             List<Object> list = null;
 
-            if (typeof(Object).Name == )
+            //if (typeof(Object).Name == )
 
             // Clear and Fill lbPostDetails with post details
 
