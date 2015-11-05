@@ -106,8 +106,8 @@ namespace Database_Layer
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand(":qq");
-                cmd.Parameters.Add(new OracleParameter("qq", query));
+                OracleCommand cmd = new OracleCommand(query);
+                //cmd.Parameters.Add(new OracleParameter("qq", query));
                 cmd.Connection = c;
                 try
                 {
