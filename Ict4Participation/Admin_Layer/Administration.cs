@@ -26,6 +26,7 @@ namespace Admin_Layer
         private List<Account> Accounts;
         private List<Question> LoadedQuestions;
         private List<Comment> LoadedComments;
+        private List<Review> LoadedReviews;
         private int lastloadedOPID;
         string nameTEMP; string locTEMP; string passwordTEMP; string avatarPathTEMP; string roleTEMP; string sexTEMP;
 
@@ -247,6 +248,20 @@ namespace Admin_Layer
             return true;
         }
 
+        /// <summary>
+        /// Returns all the accounts of specified account type
+        /// </summary>
+        /// <param name="accType"></param>
+        /// <returns></returns>
+        public List<string> GetAccounts(string accType)
+        {
+            return null;
+        }
+
+        public List<string> GetAccountReviews(int userid)
+        {
+            return Review.GetUserReviews(userid, out LoadedReviews);
+        }
         #endregion
 
         #region encoding and decoding of text to HTML and back
@@ -319,27 +334,5 @@ namespace Admin_Layer
             return PasswordHashing.CreateHash("default");
         }
         #endregion
-
-        // Return all users
-        public List<Account> ReturnUsers()
-        {
-            List<Account> returnList;
-
-            // get all questions from class_layer
-            returnList = null;
-
-            return returnList;
-        }
-
-        // Return all reviews
-        public List<Review> ReturnReviews()
-        {
-            List<Review> returnList;
-
-            // get all reviews from class_layer
-            returnList = null;
-
-            return returnList;
-        }
     }
 }
