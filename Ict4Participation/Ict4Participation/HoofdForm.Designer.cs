@@ -37,8 +37,8 @@
             this.tsbtnShowAllRequests = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbtnShowOwnRequests = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.vrijwilligersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hulpbehoevendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmVrijwilligers = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmHulpbehoevenden = new System.Windows.Forms.ToolStripMenuItem();
             this.administratorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -130,25 +130,27 @@
             // 
             this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.vrijwilligersToolStripMenuItem,
-            this.hulpbehoevendenToolStripMenuItem,
+            this.tsmVrijwilligers,
+            this.tsmHulpbehoevenden,
             this.administratorsToolStripMenuItem});
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
             this.toolStripDropDownButton2.Size = new System.Drawing.Size(81, 24);
             this.toolStripDropDownButton2.Text = "Profielen";
             // 
-            // vrijwilligersToolStripMenuItem
+            // tsmVrijwilligers
             // 
-            this.vrijwilligersToolStripMenuItem.Name = "vrijwilligersToolStripMenuItem";
-            this.vrijwilligersToolStripMenuItem.Size = new System.Drawing.Size(200, 24);
-            this.vrijwilligersToolStripMenuItem.Text = "Vrijwilligers";
+            this.tsmVrijwilligers.Name = "tsmVrijwilligers";
+            this.tsmVrijwilligers.Size = new System.Drawing.Size(200, 24);
+            this.tsmVrijwilligers.Text = "Vrijwilligers";
+            this.tsmVrijwilligers.Click += new System.EventHandler(this.tsmVrijwilligers_Click);
             // 
-            // hulpbehoevendenToolStripMenuItem
+            // tsmHulpbehoevenden
             // 
-            this.hulpbehoevendenToolStripMenuItem.Name = "hulpbehoevendenToolStripMenuItem";
-            this.hulpbehoevendenToolStripMenuItem.Size = new System.Drawing.Size(200, 24);
-            this.hulpbehoevendenToolStripMenuItem.Text = "Hulpbehoevenden";
+            this.tsmHulpbehoevenden.Name = "tsmHulpbehoevenden";
+            this.tsmHulpbehoevenden.Size = new System.Drawing.Size(200, 24);
+            this.tsmHulpbehoevenden.Text = "Hulpbehoevenden";
+            this.tsmHulpbehoevenden.Click += new System.EventHandler(this.tsmHulpbehoevenden_Click);
             // 
             // administratorsToolStripMenuItem
             // 
@@ -252,8 +254,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsbtnShowAllRequests;
         private System.Windows.Forms.ToolStripMenuItem tsbtnShowOwnRequests;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
-        private System.Windows.Forms.ToolStripMenuItem vrijwilligersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hulpbehoevendenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmVrijwilligers;
+        private System.Windows.Forms.ToolStripMenuItem tsmHulpbehoevenden;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;

@@ -75,5 +75,17 @@ namespace Ict4Participation
         }
 
         #endregion
+
+        private void tsmVrijwilligers_Click(object sender, EventArgs e)
+        {
+            Form form = new Zoeken(true, Administration);
+            form.Show();
+        }
+
+        private void tsmHulpbehoevenden_Click(object sender, EventArgs e)
+        {
+            Form form = new Zoeken(false, Administration);
+            form.Show();
+        }
     }
 }

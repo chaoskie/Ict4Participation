@@ -19,24 +19,36 @@ namespace Ict4Participation
 {
     public partial class Zoeken : Form
     {
-        private Form previous;
+        Administration administration;
 
-        public Zoeken(Form p)
+        //Find the helpers by default
+        public Zoeken(bool findV, Administration a)
         {
             this.InitializeComponent();
-
-            this.previous = p;
+            this.administration = a;
+            lbUsers.DataSource = null;
+            
+            if (findV)
+            {
+                lbUsers.DataSource = administration.GetAccounts("V");
+            }
+            else
+            {
+                lbUsers.DataSource = administration.GetAccounts("H");
+            }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnShowProfile_Click(object sender, EventArgs e)
         {
-            this.previous.Show();
             this.Close();
         }
 
-        private void Zoeken_FormClosed(object sender, FormClosedEventArgs e)
+        private void tbSearch_TextChanged(object sender, EventArgs e)
         {
-            this.previous.Show();
+            //TODO
+            //Set datasource to new list
+            lbUsers.DataSource = null;
+            //lbUsers.DataSource = administration.GetAccounts("");
         }
     }
 }

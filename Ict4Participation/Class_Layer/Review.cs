@@ -7,12 +7,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Class_Layer
-{ 
+{
     /// <summary>
     /// Subclass of the post class
     /// </summary>
@@ -26,7 +27,12 @@ namespace Class_Layer
         /// <summary>
         /// Gets the accountID of the author
         /// </summary>
-        public int AccountID { get; private set; }
+        public int PosterID { get; private set; }
+
+        /// <summary>
+        /// Gets the accountID of the author
+        /// </summary>
+        public int PostedToID { get; private set; }
 
         /// <summary>
         /// Gets the description of the review
@@ -41,24 +47,74 @@ namespace Class_Layer
         /// <param name="rating">The rating of the review</param>
         /// <param name="accountID">The accountID of the author</param>
         /// <param name="description">The description of the review</param>
-        public Review(int postID, string title, int rating, int accountID, string description)
+        public Review(int postID, string title, int rating, int posterID, int postedtoID, string description)
             : base(postID, title)
         {
             this.Rating = rating;
-            this.AccountID = accountID;
+            this.PosterID = posterID;
+            this.PostedToID = postedtoID;
             this.Description = description;
         }
 
-        public static List<string> GetUserReviews(int accountID, out List<Review> reviews)
+        /// <summary>
+        /// Yields all the reviews from the database, matching the user ID
+        /// </summary>
+        /// <param name="accountID">The ID of the user as stated in the database</param>
+        /// <param name="reviews">The reviews about this user</param>
+        /// <returns>A list containing the description of all these reviews</returns>
+        public static List<string> GetUserReviews(int accountID, out List<Review> reviews, bool isPoster = false)
         {
             reviews = new List<Review>();
-            return null;
+            string who = string.Empty;
+            who = isPoster ? "PosterACC_ID" : "PostedACC_ID";
+            DataTable dtReview = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Review\" WHERE \"" + who + "\" = " + accountID);
+            foreach (DataRow row in dtReview.Rows)
+            {
+                reviews.Add(new Review(
+                    Convert.ToInt32(row["ID"]),
+                    row["Title"].ToString(),
+                    Convert.ToInt32(row["Rating"]),
+                    Convert.ToInt32(row["PosterACC_ID"]),
+                    Convert.ToInt32(row["PostedACC_ID"]),
+                    row["Description"].ToString()
+                    ));
+            }
+
+            List<string> reviewdetails = new List<string>();
+            foreach (Review r in reviews)
+            {
+                reviewdetails.Add(r.Rating + " " + r.Title);
+            }
+            return reviewdetails;
         }
 
+        /// <summary>
+        /// Yields all the reviews from the database
+        /// </summary>
+        /// <param name="reviews">All of them!</param>
+        /// <returns>ALL THE REVIEWS</returns>
         public static List<string> GetAllUserReviews(out List<Review> reviews)
         {
             reviews = new List<Review>();
-            return null;
+            DataTable dtReview = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Review\"");
+            foreach (DataRow row in dtReview.Rows)
+            {
+                reviews.Add(new Review(
+                    Convert.ToInt32(row["ID"]),
+                    row["Title"].ToString(),
+                    Convert.ToInt32(row["Rating"]),
+                    Convert.ToInt32(row["PosterACC_ID"]),
+                    Convert.ToInt32(row["PostedACC_ID"]),
+                    row["Description"].ToString()
+                    ));
+            }
+
+            List<string> reviewdetails = new List<string>();
+            foreach (Review r in reviews)
+            {
+                reviewdetails.Add(r.Rating + " " + r.Title);
+            }
+            return reviewdetails;
         }
     }
 }
