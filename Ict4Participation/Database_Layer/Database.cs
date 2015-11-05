@@ -240,7 +240,7 @@ namespace Database_Layer
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand(
-                    "SELECT \"ID\" FROM \"Acc\" WHERE \"Name\"=:x, \"LOCATION_ID\"=:y, \"PassHash\"=:z, \"Salt\"=:a, \"Avatar\"=:b, \"VOG\"=:c, \"Description\"=:d, \"Role\"=:e, \"Sex\"=:f, \"Email\"=:g)"
+                    "SELECT \"ID\" FROM \"Acc\" WHERE \"Name\"=:x AND \"LOCATION_ID\"=:y AND \"PassHash\"=:z AND \"Salt\"=:a AND \"Avatar\"=:b AND \"VOG\"=:c AND \"Description\"=:d AND \"Role\"=:e AND \"Sex\"=:f AND \"Email\"=:g"
                    );
                 cmd.Parameters.Add(new OracleParameter("x", name));
                 cmd.Parameters.Add(new OracleParameter("y", locID));

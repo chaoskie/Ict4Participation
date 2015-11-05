@@ -83,7 +83,10 @@ namespace Class_Layer
             // Third string in the array is the hash
             string passHash = passArray[1] + ":" + passArray[2];
             int locID = 0;
-            Location.ValidateLocation(loc, out locID);
+            if (Location.ValidateLocation(loc, out locID) == false)
+            {
+                locID = Location.InsertLocation(loc);
+            }
 
             string roleText = string.Empty;
 

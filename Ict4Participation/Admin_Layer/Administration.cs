@@ -7,8 +7,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -29,7 +31,8 @@ namespace Admin_Layer
         private List<Comment> LoadedComments;
         private List<Review> LoadedReviews;
         private int lastloadedOPID;
-        string emailTEMP; string nameTEMP; string locTEMP; string passwordTEMP; string avatarPathTEMP; string roleTEMP; string sexTEMP;
+        string emailTEMP; string nameTEMP; Location locTEMP; string passwordTEMP; string avatarPathTEMP; 
+        Accounttype roleTEMP; string sexTEMP; string VOGTEMP; string descriptionTEMP; List<string> skillsTEMP;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Administration"/> class.
@@ -158,25 +161,43 @@ namespace Admin_Layer
 
             //Check if everything is filled in
             if (String.IsNullOrWhiteSpace(name))
+            {
                 error += "De naam is niet ingevuld!\n"; filledIn = false;
+            }
             if (String.IsNullOrWhiteSpace(address))
+            {
                 error += "Het adres is niet ingevuld!\n"; filledIn = false;
+            }
             if (String.IsNullOrWhiteSpace(city))
+            {
                 error += "De woonplaats is niet ingevuld!\n"; filledIn = false;
+            }
             if (String.IsNullOrWhiteSpace(sex))
+            {
                 error += "Het geslacht is niet ingevuld!\n"; filledIn = false;
+            }
             if (String.IsNullOrWhiteSpace(role))
+            {
                 error += "De rol is niet ingevuld!\n"; filledIn = false;
+            }
+            if (String.IsNullOrWhiteSpace(email))
+            {
+                error += "Het email is niet ingevuld!\n"; filledIn = false;
+            }
             if (String.IsNullOrWhiteSpace(avatarPath))
+            {
                 error += "Er is geen profielfoto gekozen!\n"; filledIn = false;
+            }
             if (String.IsNullOrWhiteSpace(password))
+            {
                 error += "Er is is geen wachtwoord ingevuld!\n"; filledIn = false;
+            }
 
             //If so, check if everything is in the right format
             if (filledIn)
             {
                 rightFormat = true;
-                if (Regex.IsMatch(name.Trim(), @"^[A-Z][A-Za-z]+$") == false)
+                if (Regex.IsMatch(name.Trim(), @"^[A-Z][A-Za-z]+ [A-Z][A-Za-z]+$") == false)
                 {
                     rightFormat = false;
                     error += "Naam is niet correct!\n";
@@ -196,7 +217,7 @@ namespace Admin_Layer
                     rightFormat = false;
                     error += "Geslacht is niet correct!\n";
                 }
-                if (avatarPath != string.Empty)
+                if (avatarPath == string.Empty)
                 {
                     rightFormat = false;
                     error += "Geen foto geselecteerd!\n";
@@ -210,10 +231,10 @@ namespace Admin_Layer
                 if (rightFormat)
                 {
                     this.nameTEMP = name;
-                    this.locTEMP = String.Format("{0}, {1}", address, city);
+                    this.locTEMP = new Location(String.Format("{0}, {1}", address, city));
                     this.passwordTEMP = password;
                     this.avatarPathTEMP = avatarPath;
-                    this.roleTEMP = role;
+                    Enum.TryParse(role, out roleTEMP);
                     this.sexTEMP = sex;
                     this.emailTEMP = email;
                 }
@@ -230,14 +251,36 @@ namespace Admin_Layer
         /// <param name="email">The email to validate</param>
         /// <param name="Message">The error message given upon invalid parameters</param>
         /// <returns></returns>
-        public bool CreateAccountFinal(string VOG, string description, List<string> skills, out string Message)
+        public bool CreateAccountHPart(string VOG, string description, List<string> skills, out string Message)
         {
             //TODO: Check the other strings
             //Out error message
-            //Create account through
-            //Account.Register();
             Message = "Function not yet fully implemented!";
             return false;
+        }
+
+        public bool RegisterAccount()
+        {
+            //Create account through
+            int createdID = 0;
+            MainUser = Account.Register(nameTEMP, locTEMP, passwordTEMP, avatarPathTEMP, VOGTEMP, descriptionTEMP, roleTEMP, sexTEMP, emailTEMP, out createdID);
+
+            //Send email with credentials
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("s21mplumbum@gmail.com");
+            mail.To.Add(emailTEMP);
+            mail.Subject = "Account credentials for ICT4Participation";
+            mail.Body = "Hello and thank you for registering an account at ICT4Participation \n Use the following credentials to log in: \n User ID: " + createdID;
+
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("s21mplumbum@gmail.com", "Em72@Gmai111");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+
+            return true;
         }
 
         /// <summary>

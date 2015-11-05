@@ -101,7 +101,7 @@ namespace Class_Layer
             DataTable dtLocation = Database_Layer.Database.RetrieveQuery(
                        String.Format("SELECT ID FROM \"Location\" WHERE \"Longitude\" = '{0}' AND \"Latitude\" = '{1}' AND \"Description\" = '{2}'",
                        l.Long, l.Lat, l.DescribedLocation));
-            exists = dtLocation == null ? false : true;
+            exists = dtLocation.Rows.Count == 0 ? false : true;
             foreach (DataRow row in dtLocation.Rows)
             {
                 locID = Convert.ToInt32(row["ID"]);

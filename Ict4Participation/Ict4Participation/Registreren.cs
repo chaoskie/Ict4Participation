@@ -65,7 +65,12 @@ namespace Ict4Participation
                 //If role is 'hulpbehoevende', it's done
                 if (cbRoles.SelectedIndex == 0)
                 {
-
+                     if (Administration.RegisterAccount())
+                     {
+                         Form form = new HoofdForm(Administration);
+                         form.Show();
+                         this.Hide();
+                     }
                 }
                 else
                 {
