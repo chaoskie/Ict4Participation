@@ -255,8 +255,11 @@ namespace Admin_Layer
         {
             //TODO: Check the other strings
             //Out error message
+            this.VOGTEMP = VOG;
+            this.descriptionTEMP = description;
+            this.skillsTEMP = skills;
             Message = "Function not yet fully implemented!";
-            return false;
+            return true;
         }
 
         public bool RegisterAccount()
@@ -264,6 +267,14 @@ namespace Admin_Layer
             //Create account through
             int createdID = 0;
             MainUser = Account.Register(nameTEMP, locTEMP, passwordTEMP, avatarPathTEMP, VOGTEMP, descriptionTEMP, roleTEMP, sexTEMP, emailTEMP, out createdID);
+            //Create skill references if 'hulpverlener'
+            if (roleTEMP == Accounttype.Hulpverlener)
+            {
+                foreach (string skill in skillsTEMP)
+                {
+
+                }
+            }
 
             //Send email with credentials
             MailMessage mail = new MailMessage();
