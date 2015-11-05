@@ -70,6 +70,7 @@ namespace Ict4Participation
                 //load in details
                 lblQuestionInfo.Text = Administration.GetQuestionDetails(ind, allLoaded);
                 lblQuestionName.Text = lbHulpvragen.SelectedItem.ToString();
+                lbSkills.Items.AddRange(Administration.GetQuestionSkills(ind, allLoaded).Cast<string>().ToArray());
                 //Load in comments
                 foreach (string s in Administration.GetQuestionComments(ind))
                 {
