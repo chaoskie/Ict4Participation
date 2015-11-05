@@ -23,7 +23,8 @@ namespace Admin_Layer
     public class Administration
     {
         public Account MainUser;
-        private List<Account> Accounts;
+        private List<Account> LoadedAccounts;
+        private List<Account> AllAccounts;
         private List<Question> LoadedQuestions;
         private List<Comment> LoadedComments;
         private List<Review> LoadedReviews;
@@ -35,7 +36,8 @@ namespace Admin_Layer
         /// </summary>
         public Administration()
         {
-            Accounts = new List<Account>();
+            AllAccounts = new List<Account>();
+            LoadedAccounts = new List<Account>();
             LoadedQuestions = new List<Question>();
             LoadedComments = new List<Comment>();
         }
