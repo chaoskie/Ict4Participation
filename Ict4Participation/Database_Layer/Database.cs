@@ -129,7 +129,7 @@ namespace Database_Layer
         /// <param name="Desc">user input text</param>
         public static void PlaceComment(int accountID, int questionID, string Desc)
         {
-          using (OracleConnection c = new OracleConnection(@connectionstring))
+            using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand("INSERT INTO \"Comment\" (\"PosterACC_ID\", \"QUESTION_ID\", \"Description\") VALUES (:AI, :QI, :DC)");
@@ -152,5 +152,54 @@ namespace Database_Layer
 
         #endregion
 
+        #region Question
+        public static void NewQuestion(string title, int accountid, string schedule, string description, int locID)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand(
+                    "INSERT INTO \"Question\" (\"Title\", \"PosterACC_ID\", \"Timetable\", \"Description\", \"LOCATION_ID\") " +
+                    "VALUES (':A', :B, TO_DATE(':C', 'dd-mon-yyyy HH24:mi:ss'), ':D', :E)"
+                    );
+                cmd.Parameters.Add(new OracleParameter("A", title));
+                cmd.Parameters.Add(new OracleParameter("B", accountid));
+                cmd.Parameters.Add(new OracleParameter("C", schedule));
+                cmd.Parameters.Add(new OracleParameter("D", description));
+                cmd.Parameters.Add(new OracleParameter("E", locID));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException)
+                {
+                    throw;
+                }
+                c.Close();
+            }
+        }
+
+        public static void SkillInsert(string skill, int qID)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("INSERT INTO \"Question_Skill\" (\"SKILL_NAME\",\"QUESTION_ID\") VALUES (':A', :B)");
+                cmd.Parameters.Add(new OracleParameter("A", skill));
+                cmd.Parameters.Add(new OracleParameter("B", qID));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException)
+                {
+                    throw;
+                }
+                c.Close();
+            }
+        }
+        #endregion
     }
 }

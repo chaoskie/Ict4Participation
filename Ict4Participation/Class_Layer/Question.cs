@@ -66,10 +66,7 @@ namespace Class_Layer
                 { locID = Location.InsertLocation(questionLocation); }
 
                 //Insert question 
-                Database_Layer.Database.ExecuteQuery(
-                    String.Format("INSERT INTO \"Question\" (\"Title\", \"PosterACC_ID\", \"Timetable\", \"Description\", \"LOCATION_ID\") "
-                + "VALUES ('{0}', {1}, TO_DATE('{2}', 'dd-mon-yyyy HH24:mi:ss'), '{3}', {4})",
-                    title, accountid, schedule, description, locID));
+                Database_Layer.Database.NewQuestion(title, accountid, schedule, description, locID);
                 //Retrieve question ID / post ID
                 DataTable dtQuestion = Database_Layer.Database.RetrieveQuery(
                     String.Format("SELECT max(ID) FROM \"Question\" WHERE \"PosterACC_ID\" = '{0}'",
@@ -80,14 +77,10 @@ namespace Class_Layer
                 {
                     qID = Convert.ToInt32(row["max(ID)"]);
                 }
-
                 //Insert matching skills to database
                 foreach (string skill in skills)
                 {
-                    Database_Layer.Database.ExecuteQuery(
-                        String.Format("INSERT INTO \"Question_Skill\" (\"SKILL_NAME\",\"QUESTION_ID\") VALUES ('{0}', {1})",
-                        skill, qID)
-                        );
+                    Database_Layer.Database.SkillInsert(skill, qID);
                 }
 
                 q = new Question(qID, title, dateSchedule, description, questionLocation, skills);
@@ -95,7 +88,7 @@ namespace Class_Layer
             }
             catch (Exception e)
             {
-
+                //TODO
             }
             return creationSuccess;
         }
