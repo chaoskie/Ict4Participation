@@ -29,11 +29,10 @@ namespace Class_Layer
         /// <param name="accountID">The OP</param>
         /// <param name="questionID">The Question ID</param>
         /// <param name="title">The comment</param>
-        public static void PlaceComment(int accountID, int questionID, string title)
+        public static void PlaceComment(int accountID, int questionID, string Desc)
         {
             //insert into database
-            Database_Layer.Database.ExecuteQuery(String.Format("INSERT INTO \"Comment\" (\"PosterACC_ID\", \"QUESTION_ID\", \"Description\") VALUES ({0}, {1}, '{2}')"
-                , accountID, questionID, title));
+            Database_Layer.Database.PlaceComment(accountID, questionID, Desc);
         }
 
         /// <summary>
@@ -47,6 +46,7 @@ namespace Class_Layer
             Comments = new List<Comment>();
             List<string> commentinfo = new List<string>();
             //retrieve every comment matching to that question
+
             DataTable dtComment = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Comment\" WHERE \"QUESTION_ID\" = " + postID + " ORDER BY \"ID\"");
             foreach (DataRow row in dtComment.Rows)
             {

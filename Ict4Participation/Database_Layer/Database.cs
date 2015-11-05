@@ -23,11 +23,11 @@ namespace Database_Layer
         /// HOST IP
         private static string host = "192.168.20.27";
         /// HOST USERNAME
-        private static string username = "PLUMBUM"; 
+        private static string username = "PLUMBUM";
         /// HOST PASSWORD
         private static string password = "root";
         private static string connectionstring = "User Id=" + username + ";Password=" + password + ";Data Source= //" + host + ":1521/XE;";
-           
+
         /// <summary>
         /// Selects and retrieves values from the database 
         /// </summary>
@@ -76,14 +76,10 @@ namespace Database_Layer
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("SELECT @select FROM @from WHERE @where"
-                        /*@"SELECT " + select +
-                        @" FROM " + from +
-                        @" WHERE " + where*/
-                        );
-                cmd.Parameters.Add(new OracleParameter("@select", select));
-                cmd.Parameters.Add(new OracleParameter("@from", from));
-                cmd.Parameters.Add(new OracleParameter("@where", where));
+                OracleCommand cmd = new OracleCommand("SELECT :x FROM :y WHERE :z");
+                cmd.Parameters.Add(new OracleParameter("x", select));
+                cmd.Parameters.Add(new OracleParameter("y", from));
+                cmd.Parameters.Add(new OracleParameter("z", where));
                 cmd.Connection = c;
                 try
                 {
@@ -110,7 +106,8 @@ namespace Database_Layer
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand(@query);
+                OracleCommand cmd = new OracleCommand(":qq");
+                cmd.Parameters.Add(new OracleParameter("qq", query));
                 cmd.Connection = c;
                 try
                 {
@@ -123,5 +120,31 @@ namespace Database_Layer
                 c.Close();
             }
         }
+        #region comments
+
+        public static void PlaceComment(int accountID, int questionID, string Desc)
+        {
+          using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("INSERT INTO \"Comment\" (\"PosterACC_ID\", \"QUESTION_ID\", \"Description\") VALUES (:AI, :QI, :DC)");
+                cmd.Parameters.Add(new OracleParameter("AI", accountID));
+                cmd.Parameters.Add(new OracleParameter("QI", questionID));
+                cmd.Parameters.Add(new OracleParameter("DC", Desc));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+                c.Close();
+            }
+        }
+
+        #endregion
     }
 }
