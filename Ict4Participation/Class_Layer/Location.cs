@@ -7,12 +7,13 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Class_Layer
-{    
+{
     /// <summary>
     /// Location in a PointF format or in string format
     /// </summary>
@@ -26,11 +27,11 @@ namespace Class_Layer
 
         public string Long
         {
-            get { return PreciseLocation.X.ToString().Replace(',','.'); }
+            get { return PreciseLocation.X.ToString().Replace(',', '.'); }
         }
         public string Lat
         {
-            get { return PreciseLocation.Y.ToString().Replace(',','.'); }
+            get { return PreciseLocation.Y.ToString().Replace(',', '.'); }
         }
 
         /// <summary>
@@ -68,7 +69,65 @@ namespace Class_Layer
             this.PreciseLocation = preciseLocation;
             this.DescribedLocation = describedLocation;
         }
+
+        /// <summary>
+        /// Initializes a new instance of the Location class through the ID
+        /// </summary>
+        /// <param name="LocationID">The ID of the location</param>
+        public Location(int LocationID)
+        {
+            DataTable dtLocation = Database_Layer.Database.RetrieveQuery(
+                      String.Format("SELECT * FROM \"Location\" WHERE \"ID\" = '{0}'", LocationID));
+            foreach (DataRow rowLoc in dtLocation.Rows)
+            {
+                this.PreciseLocation = new PointF(
+                    (float)(Convert.ToDecimal(rowLoc["Longitude"])),
+                    (float)(Convert.ToDecimal(rowLoc["Latitude"]))
+                    );
+                this.DescribedLocation = rowLoc["Description"].ToString();
+            }
+        }
         #endregion
+
+        /// <summary>
+        /// Validates if the location already exists in the database
+        /// </summary>
+        /// <param name="l">The location to be validated</param>
+        /// <returns>Whether it exists or not</returns>
+        public static bool ValidateLocation(Location l)
+        {
+            bool exists = false;
+            DataTable dtLocation = Database_Layer.Database.RetrieveQuery(
+                       String.Format("SELECT ID FROM \"Location\" WHERE \"Longitude\" = '{0}' AND \"Latitude\" = '{1}' AND \"Description\" = '{2}'",
+                       l.Long, l.Lat, l.DescribedLocation));
+            exists = dtLocation == null ? false : true;
+            return exists;
+        }
+
+        /// <summary>
+        /// Inserts the location into the database, and returns the ID of the newly inserted location
+        /// </summary>
+        /// <param name="l">The location which needs to be added</param>
+        /// <returns>an int, regarding the ID of the location</returns>
+        public static int InsertLocation(Location l)
+        {
+            int locID = 0;
+
+            //Insert the location into the database
+            Database_Layer.Database.ExecuteQuery(
+                        String.Format("INSERT INTO \"Location\" (\"Longitude\", \"Latitude\", \"Description\") VALUES ('{0}', '{1}', '{2}')",
+                        l.Long, l.Lat, l.DescribedLocation));
+            //Retrieve location ID of the newly inserted location
+            DataTable dtLocation = Database_Layer.Database.RetrieveQuery(
+                String.Format("SELECT ID FROM \"Location\" WHERE \"Longitude\" = '{0}' AND \"Latitude\" = '{1}' AND \"Description\" = '{2}'",
+                l.Long, l.Lat, l.DescribedLocation));
+
+            foreach (DataRow row in dtLocation.Rows)
+            {
+                locID = Convert.ToInt32(row["ID"]);
+            }
+            return locID;
+        }
 
         public override string ToString()
         {
