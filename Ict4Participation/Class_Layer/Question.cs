@@ -54,30 +54,14 @@ namespace Class_Layer
 
             try
             {
-                //Check if location already exists
-                DataTable dtLocation = Database_Layer.Database.RetrieveQuery(
-                    String.Format("SELECT ID FROM \"Location\" WHERE \"Longitude\" = '{0}' AND \"Latitude\" = '{1}' AND \"Description\" = '{2}'",
-                    questionLocation.Long, questionLocation.Lat, questionLocation.DescribedLocation));
-                doInsertLocation = dtLocation != null ? false : true;
-
                 int locID = 0;
+
+                //Check if exists, if not: insert instead
+                doInsertLocation = Location.ValidateLocation(questionLocation) == true ? false : true;
 
                 //If it exists, don't insert a new location, else do
                 if (doInsertLocation)
-                {
-                    Database_Layer.Database.ExecuteQuery(
-                        String.Format("INSERT INTO \"Location\" (\"Longitude\", \"Latitude\", \"Description\") VALUES ('{0}', '{1}', '{2}')",
-                        questionLocation.Long, questionLocation.Lat, questionLocation.DescribedLocation));
-                    //Retrieve location ID. again.
-                    dtLocation = Database_Layer.Database.RetrieveQuery(
-                        String.Format("SELECT ID FROM \"Location\" WHERE \"Longitude\" = '{0}' AND \"Latitude\" = '{1}' AND \"Description\" = '{2}'",
-                        questionLocation.Long, questionLocation.Lat, questionLocation.DescribedLocation));
-                }
-                //Set locationID
-                foreach (DataRow row in dtLocation.Rows)
-                {
-                    locID = Convert.ToInt32(row["ID"]);
-                }
+                { locID = Location.InsertLocation(questionLocation); }
 
                 //Insert question 
                 Database_Layer.Database.ExecuteQuery(
@@ -130,17 +114,8 @@ namespace Class_Layer
 
             foreach (DataRow row in dtQuestion.Rows)
             {
-                //Find location and create an instance
-                DataTable dtLocation = Database_Layer.Database.RetrieveQuery(
-                      String.Format("SELECT * FROM \"Location\" WHERE \"ID\" = '{0}'", row["LOCATION_ID"]));
-                Location loc = null;
-                foreach (DataRow rowLoc in dtLocation.Rows)
-                {
-                    loc = new Location(new PointF(
-                        (float)(Convert.ToDecimal(rowLoc["Longitude"])),
-                        (float)(Convert.ToDecimal(rowLoc["Latitude"]))),
-                        rowLoc["Description"].ToString());
-                }
+                //Create a new instance of the matching location
+                Location loc = new Location(Convert.ToInt32(row["LOCATION_ID"]));
 
                 //Add question to list
                 q.Add(new Question(Convert.ToInt32(row["ID"]),
