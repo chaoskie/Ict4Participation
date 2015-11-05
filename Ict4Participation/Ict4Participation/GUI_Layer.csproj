@@ -137,6 +137,9 @@
     <EmbeddedResource Include="PlaatsHulpvraag.resx">
       <DependentUpon>PlaatsHulpvraag.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PlaatsReview.resx">
+      <DependentUpon>PlaatsReview.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -168,6 +171,9 @@
       <Project>{5d4d65c5-92d8-4d4a-874d-bb0cad13e7ce}</Project>
       <Name>Admin_Layer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\star.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -28,17 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlaatsReview));
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.cb1 = new System.Windows.Forms.CheckBox();
-            this.cb2 = new System.Windows.Forms.CheckBox();
-            this.cb3 = new System.Windows.Forms.CheckBox();
-            this.cb4 = new System.Windows.Forms.CheckBox();
-            this.cb5 = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnPlaceReview = new System.Windows.Forms.Button();
+            this.nudStar = new System.Windows.Forms.NumericUpDown();
+            this.pbStar1 = new System.Windows.Forms.PictureBox();
+            this.pbStar2 = new System.Windows.Forms.PictureBox();
+            this.pbStar3 = new System.Windows.Forms.PictureBox();
+            this.pbStar4 = new System.Windows.Forms.PictureBox();
+            this.pbStar5 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStar2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStar3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStar4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStar5)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -59,67 +67,6 @@
             this.label1.Size = new System.Drawing.Size(102, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "Hulpverlener:";
-            // 
-            // cb1
-            // 
-            this.cb1.AutoSize = true;
-            this.cb1.Checked = true;
-            this.cb1.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.cb1.Location = new System.Drawing.Point(12, 99);
-            this.cb1.Name = "cb1";
-            this.cb1.Size = new System.Drawing.Size(15, 14);
-            this.cb1.TabIndex = 3;
-            this.cb1.UseVisualStyleBackColor = true;
-            this.cb1.Click += new System.EventHandler(this.changeStars);
-            // 
-            // cb2
-            // 
-            this.cb2.AutoSize = true;
-            this.cb2.Checked = true;
-            this.cb2.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.cb2.Location = new System.Drawing.Point(33, 99);
-            this.cb2.Name = "cb2";
-            this.cb2.Size = new System.Drawing.Size(15, 14);
-            this.cb2.TabIndex = 3;
-            this.cb2.UseVisualStyleBackColor = true;
-            this.cb2.Click += new System.EventHandler(this.changeStars);
-            // 
-            // cb3
-            // 
-            this.cb3.AutoSize = true;
-            this.cb3.Checked = true;
-            this.cb3.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.cb3.Location = new System.Drawing.Point(54, 99);
-            this.cb3.Name = "cb3";
-            this.cb3.Size = new System.Drawing.Size(15, 14);
-            this.cb3.TabIndex = 3;
-            this.cb3.UseVisualStyleBackColor = true;
-            this.cb3.Click += new System.EventHandler(this.changeStars);
-            // 
-            // cb4
-            // 
-            this.cb4.AutoSize = true;
-            this.cb4.Checked = true;
-            this.cb4.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.cb4.Location = new System.Drawing.Point(75, 99);
-            this.cb4.Name = "cb4";
-            this.cb4.Size = new System.Drawing.Size(15, 14);
-            this.cb4.TabIndex = 3;
-            this.cb4.UseVisualStyleBackColor = true;
-            this.cb4.Click += new System.EventHandler(this.changeStars);
-            // 
-            // cb5
-            // 
-            this.cb5.AutoSize = true;
-            this.cb5.Checked = true;
-            this.cb5.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-            this.cb5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cb5.Location = new System.Drawing.Point(95, 99);
-            this.cb5.Name = "cb5";
-            this.cb5.Size = new System.Drawing.Size(15, 14);
-            this.cb5.TabIndex = 3;
-            this.cb5.UseVisualStyleBackColor = true;
-            this.cb5.Click += new System.EventHandler(this.changeStars);
             // 
             // label2
             // 
@@ -145,11 +92,11 @@
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(10, 154);
+            this.textBox1.MaxLength = 255;
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(312, 111);
             this.textBox1.TabIndex = 4;
-            this.textBox1.Text = "Henk is een goede jongen.";
             // 
             // btnPlaceReview
             // 
@@ -162,18 +109,87 @@
             this.btnPlaceReview.UseVisualStyleBackColor = true;
             this.btnPlaceReview.Click += new System.EventHandler(this.btnPlaceReview_Click);
             // 
+            // nudStar
+            // 
+            this.nudStar.Location = new System.Drawing.Point(12, 99);
+            this.nudStar.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.nudStar.Name = "nudStar";
+            this.nudStar.Size = new System.Drawing.Size(41, 20);
+            this.nudStar.TabIndex = 6;
+            this.nudStar.ValueChanged += new System.EventHandler(this.nudStar_ValueChanged);
+            // 
+            // pbStar1
+            // 
+            this.pbStar1.Image = ((System.Drawing.Image)(resources.GetObject("pbStar1.Image")));
+            this.pbStar1.Location = new System.Drawing.Point(72, 99);
+            this.pbStar1.Name = "pbStar1";
+            this.pbStar1.Size = new System.Drawing.Size(30, 30);
+            this.pbStar1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbStar1.TabIndex = 7;
+            this.pbStar1.TabStop = false;
+            this.pbStar1.Visible = false;
+            // 
+            // pbStar2
+            // 
+            this.pbStar2.Image = ((System.Drawing.Image)(resources.GetObject("pbStar2.Image")));
+            this.pbStar2.Location = new System.Drawing.Point(108, 99);
+            this.pbStar2.Name = "pbStar2";
+            this.pbStar2.Size = new System.Drawing.Size(30, 30);
+            this.pbStar2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbStar2.TabIndex = 8;
+            this.pbStar2.TabStop = false;
+            this.pbStar2.Visible = false;
+            // 
+            // pbStar3
+            // 
+            this.pbStar3.Image = ((System.Drawing.Image)(resources.GetObject("pbStar3.Image")));
+            this.pbStar3.Location = new System.Drawing.Point(144, 99);
+            this.pbStar3.Name = "pbStar3";
+            this.pbStar3.Size = new System.Drawing.Size(30, 30);
+            this.pbStar3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbStar3.TabIndex = 9;
+            this.pbStar3.TabStop = false;
+            this.pbStar3.Visible = false;
+            // 
+            // pbStar4
+            // 
+            this.pbStar4.Image = ((System.Drawing.Image)(resources.GetObject("pbStar4.Image")));
+            this.pbStar4.Location = new System.Drawing.Point(180, 99);
+            this.pbStar4.Name = "pbStar4";
+            this.pbStar4.Size = new System.Drawing.Size(30, 30);
+            this.pbStar4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbStar4.TabIndex = 10;
+            this.pbStar4.TabStop = false;
+            this.pbStar4.Visible = false;
+            // 
+            // pbStar5
+            // 
+            this.pbStar5.Image = ((System.Drawing.Image)(resources.GetObject("pbStar5.Image")));
+            this.pbStar5.Location = new System.Drawing.Point(216, 99);
+            this.pbStar5.Name = "pbStar5";
+            this.pbStar5.Size = new System.Drawing.Size(30, 30);
+            this.pbStar5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbStar5.TabIndex = 11;
+            this.pbStar5.TabStop = false;
+            this.pbStar5.Visible = false;
+            // 
             // PlaatsReview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 350);
+            this.Controls.Add(this.pbStar5);
+            this.Controls.Add(this.pbStar4);
+            this.Controls.Add(this.pbStar3);
+            this.Controls.Add(this.pbStar2);
+            this.Controls.Add(this.pbStar1);
+            this.Controls.Add(this.nudStar);
             this.Controls.Add(this.btnPlaceReview);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.cb5);
-            this.Controls.Add(this.cb4);
-            this.Controls.Add(this.cb3);
-            this.Controls.Add(this.cb2);
-            this.Controls.Add(this.cb1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
@@ -184,6 +200,12 @@
             this.Name = "PlaatsReview";
             this.Text = "Plaats Review";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PlaatsReview_FormClosed);
+            ((System.ComponentModel.ISupportInitialize)(this.nudStar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStar2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStar3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStar4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbStar5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -193,14 +215,15 @@
 
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox cb1;
-        private System.Windows.Forms.CheckBox cb2;
-        private System.Windows.Forms.CheckBox cb3;
-        private System.Windows.Forms.CheckBox cb4;
-        private System.Windows.Forms.CheckBox cb5;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnPlaceReview;
+        private System.Windows.Forms.NumericUpDown nudStar;
+        private System.Windows.Forms.PictureBox pbStar1;
+        private System.Windows.Forms.PictureBox pbStar2;
+        private System.Windows.Forms.PictureBox pbStar3;
+        private System.Windows.Forms.PictureBox pbStar4;
+        private System.Windows.Forms.PictureBox pbStar5;
     }
 }

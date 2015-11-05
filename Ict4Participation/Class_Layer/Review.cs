@@ -48,5 +48,17 @@ namespace Class_Layer
             this.AccountID = accountID;
             this.Description = description;
         }
+
+        public static List<string> GetUserReviews(int accountID, out List<Review> reviews)
+        {
+            reviews = new List<Review>();
+            return null;
+        }
+
+        public static List<string> GetAllUserReviews(out List<Review> reviews)
+        {
+            reviews = new List<Review>();
+            return null;
+        }
     }
 }
