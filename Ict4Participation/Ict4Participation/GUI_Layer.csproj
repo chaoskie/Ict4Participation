@@ -155,6 +155,9 @@
     <EmbeddedResource Include="Registreren.resx">
       <DependentUpon>Registreren.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Registreren2.resx">
+      <DependentUpon>Registreren2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Zoeken.resx">
       <DependentUpon>Zoeken.cs</DependentUpon>
     </EmbeddedResource>

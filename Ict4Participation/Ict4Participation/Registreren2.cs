@@ -21,12 +21,13 @@ namespace Ict4Participation
     {
         private Form previous;
         private Administration Administration;
+        OpenFileDialog ofd = new OpenFileDialog();
 
         public Registreren2(Form p, Administration a)
         {
             this.InitializeComponent();
             this.previous = p;
-            this.comboBox1.SelectedIndex = 0;
+            this.cbSkills.SelectedIndex = 0;
             this.Administration = a;
         }
 
@@ -43,9 +44,46 @@ namespace Ict4Participation
 
         private void btnRegistreer_Click(object sender, EventArgs e)
         {
-            //WTF?
-            (((Registreren)this.previous).previous).Show();
+            //Registreer
+            string message = string.Empty;
+            Administration.CreateAccountHPart(tbVOGPath.Text, "", lbSkills.Items.Cast<string>().ToList(), out message);
             this.Close();
+        }
+
+        private void btnAddSkill_Click(object sender, EventArgs e)
+        {
+            //check if skill doesn't already exist
+            if (lbSkills.Items.Contains(cbSkills.Text))
+            {
+                MessageBox.Show("Skill al toegevoegd!");
+            }
+            else
+            {
+                //add skill
+                lbSkills.Items.Add(cbSkills.Text);
+            }
+        }
+
+        private void btnRemoveSkills_Click(object sender, EventArgs e)
+        {
+            //check if skill is selected
+            if (lbSkills.SelectedIndex != -1)
+            {
+                //remove skill
+                lbSkills.Items.RemoveAt(lbSkills.SelectedIndex);
+            }
+        }
+
+        private void btnAddVOG_Click(object sender, EventArgs e)
+        {
+            ofd.Filter = "PDF Files (*.pdf)|*.pdf";
+            string path = string.Empty;
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                path = ofd.FileName;
+                this.tbVOGPath.Text = path;
+            }
         }
     }
 }
