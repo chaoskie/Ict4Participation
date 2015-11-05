@@ -19,10 +19,13 @@ namespace Class_Layer
     /// </summary>
     public class Core
     {
+        #region Properties
         private Socket socket { get; set; }
         private EndPoint epClient1;
         private EndPoint epClient2;
+        #endregion
 
+        #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="Core"/> class.
         /// </summary>
@@ -33,7 +36,9 @@ namespace Class_Layer
             // Set socket options
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Connect to a user
         /// </summary>
@@ -115,18 +120,21 @@ namespace Class_Layer
         /// <summary>
         /// Receive a message
         /// </summary>
-        public void ReceiveMessage()
-        {
-            // implement
-        }
+        //public void ReceiveMessage()
+        //{
+        //    // implement
+        //}
+
+
+        // The messages cannot be deleted
 
         /// <summary>
         /// Delete a message
         /// </summary>
-        public void DeleteMessage()
-        {
-            // implement
-        }
+        //public void DeleteMessage()
+        //{
+        //    // implement
+        //}
 
         /// <summary>
         /// Logs chat
@@ -141,7 +149,8 @@ namespace Class_Layer
         /// </summary>
         public void Disconnect()
         {
-            // implement
+            socket.Close();
         }
+        #endregion
     }
 }

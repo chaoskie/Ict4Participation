@@ -71,15 +71,22 @@ namespace Ict4Participation
             if (!String.IsNullOrWhiteSpace(tbTitel.Text))
             {
                 //Call the admin class to handle the question creation, which yields a success / failure string
-                MessageBox.Show(Administration.PostQuestion(tbTitel.Text, dtpDate.Value, tbHulpvraag.Text));
-                this.previous.Show();
+                MessageBox.Show(Administration.PostQuestion(tbTitel.Text, dtpDate.Value, tbHulpvraag.Text, lbSkills.Items.Cast<string>().ToList()));
                 this.Close();
             }
         }
 
         private void PlaatsHulpvraag_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.previous.Show();
+            if (previous is HoofdForm)
+            {
+                this.previous.Show();
+            }
+            if (previous is HulpVragen)
+            {
+                Form form = new HulpVragen(((HulpVragen)previous).previous, Administration, true);
+                form.Show();
+            }
         }
     }
 }

@@ -35,6 +35,8 @@ namespace Class_Layer
         /// </summary>
         public Location QuestionLocation { get; private set; }
 
+        public List<string> Skills { get; private set; }
+
         /// <summary>
         /// Posts a question
         /// </summary>
@@ -45,7 +47,7 @@ namespace Class_Layer
         /// <param name="questionLocation">the location of the question</param>
         /// <param name="q">a returned question</param>
         /// <returns>Whether the question was able to be posted</returns>
-        public static bool CreateQuestion(int accountid, string title, DateTime dateSchedule, string description, Location questionLocation, out Question q)
+        public static bool CreateQuestion(int accountid, string title, DateTime dateSchedule, string description, Location questionLocation, List<string> skills, out Question q)
         {
             bool creationSuccess = false;
             bool doInsertLocation = false;
@@ -57,7 +59,7 @@ namespace Class_Layer
                 int locID = 0;
 
                 //Check if exists, if not: insert instead
-                doInsertLocation = Location.ValidateLocation(questionLocation) == true ? false : true;
+                doInsertLocation = Location.ValidateLocation(questionLocation, out locID) == true ? false : true;
 
                 //If it exists, don't insert a new location, else do
                 if (doInsertLocation)
@@ -79,7 +81,16 @@ namespace Class_Layer
                     qID = Convert.ToInt32(row["max(ID)"]);
                 }
 
-                q = new Question(qID, title, dateSchedule, description, questionLocation);
+                //Insert matching skills to database
+                foreach (string skill in skills)
+                {
+                    Database_Layer.Database.ExecuteQuery(
+                        String.Format("INSERT INTO \"Question_Skill\" (\"SKILL_NAME\",\"QUESTION_ID\") VALUES ('{0}', {1})",
+                        skill, qID)
+                        );
+                }
+
+                q = new Question(qID, title, dateSchedule, description, questionLocation, skills);
                 creationSuccess = true;
             }
             catch (Exception e)
@@ -117,12 +128,21 @@ namespace Class_Layer
                 //Create a new instance of the matching location
                 Location loc = new Location(Convert.ToInt32(row["LOCATION_ID"]));
 
+                //Find and add skills
+                DataTable dtSkills = Database_Layer.Database.RetrieveQuery(String.Format("SELECT * FROM \"Question_Skill\" WHERE \"QUESTION_ID\" = {0}", row["ID"].ToString()));
+                List<string> skills = new List<string>();
+                foreach (DataRow skill in dtSkills.Rows)
+                {
+                    skills.Add(skill["SKILL_NAME"].ToString());
+                }
+
                 //Add question to list
                 q.Add(new Question(Convert.ToInt32(row["ID"]),
                     row["Title"].ToString(),
                     Convert.ToDateTime(row["TimeTable"]),
                     row["Description"].ToString(),
-                    loc
+                    loc,
+                    skills
                     ));
             }
             return q;
@@ -155,13 +175,14 @@ namespace Class_Layer
         /// <param name="schedule">The scheduled time of the question</param>
         /// <param name="description">The description of the question</param>
         /// <param name="questionLocation">The location of the question</param>
-        private Question(int postID, string title, DateTime schedule, string description, Location questionLocation)
+        private Question(int postID, string title, DateTime schedule, string description, Location questionLocation, List<string> skills)
             : base(postID, title)
         {
             this.Schedule = schedule;
             this.Description = description;
             this.Schedule = schedule;
             this.QuestionLocation = questionLocation;
+            this.Skills = skills;
         }
 
         //Returns a full description

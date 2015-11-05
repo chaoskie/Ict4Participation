@@ -45,10 +45,10 @@ namespace Admin_Layer
         /// Post a question
         /// </summary>
         /// <returns>Returns the result of the action</returns>
-        public string PostQuestion(string title, DateTime schedule, string description)
+        public string PostQuestion(string title, DateTime schedule, string description, List<string> skills)
         {
             Question q = null;
-            if (Question.CreateQuestion(MainUser.AccountID, title, schedule, description, MainUser.Loc, out q))
+            if (Question.CreateQuestion(MainUser.AccountID, title, schedule, description, MainUser.Loc, skills, out q))
             {
                 return String.Format("De volgende vraag is succesvol gepost: \n {0}", q.Title);
             }
@@ -76,6 +76,11 @@ namespace Admin_Layer
         public string GetQuestionDetails(int index, bool all = true)
         {
             return LoadedQuestions[index].GetDescription(LoadedQuestions[index].PostID, out lastloadedOPID);
+        }
+
+        public List<string> GetQuestionSkills(int index, bool all = true)
+        {
+            return LoadedQuestions[index].Skills;
         }
 
         /// <summary>

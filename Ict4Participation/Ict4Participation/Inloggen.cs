@@ -34,13 +34,15 @@ namespace Ict4Participation
             //if admin, continue to other screen with details
             if (usbAdmin)
             {
-
+                AdminForm form = new AdminForm(this, this.Administration);
+                form.Show();
+                this.Hide();
             }
         }
 
         private void btnRegistreren_Click(object sender, EventArgs e)
         {
-            Registreren form = new Registreren(this, Administration);
+            Registreren form = new Registreren(this, this.Administration);
             form.Show();
             this.Hide();
         }
@@ -55,7 +57,7 @@ namespace Ict4Participation
         {
             if (Administration.LogIn(tbUsername.Text, tbPassword.Text))
             {
-                Form form = new HoofdForm(this, Administration);
+                Form form = new HoofdForm(Administration);
                 form.Show();
                 this.Hide();
             }
