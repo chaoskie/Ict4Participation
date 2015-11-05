@@ -64,6 +64,8 @@ namespace Database_Layer
             }
         }
 
+        #region OLD sql statements, not parameterized
+        /*
         /// <summary>
         /// Selects and retrieves values from the database
         /// </summary>
@@ -120,6 +122,10 @@ namespace Database_Layer
                 c.Close();
             }
         }
+
+        */
+#endregion
+
         #region comments
         /// <summary>
         /// Parameterizes the querry send to the DB
@@ -264,9 +270,90 @@ namespace Database_Layer
                 catch (Exception e)
                 {
                     string debug = e.Message;
+                    c.Close();
+                    throw;
+                }
+            }
+        }
+        #endregion
+
+        #region review
+        public static void InsertReview(int rating, string title, int postedToID, int posterID ,string desc)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("INSERT INTO \"Review\" (\"Rating\", \"Title\", \"PostedACC_ID\", \"PosterACC_ID\", \"Description\") "+
+                    "VALUES (:a, :b, :c, :d, :e)");
+                cmd.Parameters.Add(new OracleParameter("a", rating));
+                cmd.Parameters.Add(new OracleParameter("b", title));
+                cmd.Parameters.Add(new OracleParameter("c", postedToID));
+                cmd.Parameters.Add(new OracleParameter("d", posterID));
+                cmd.Parameters.Add(new OracleParameter("e", desc));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException)
+                {
                     throw;
                 }
                 c.Close();
+            }
+        }
+
+        #endregion
+
+        #region location
+        public static void InsertLocation(string Long, string Lat, string DescribedLocation)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                //String.Format("INSERT INTO \"Location\" (\"Longitude\", \"Latitude\", \"Description\") VALUES ('{0}', '{1}', '{2}')",
+                c.Open();
+                OracleCommand cmd = new OracleCommand("INSERT INTO \"Location\" (\"Longitude\", \"Latitude\", \"Description\") "+
+                    "VALUES (:a, :b, :c)");
+                cmd.Parameters.Add(new OracleParameter("a", Long));
+                cmd.Parameters.Add(new OracleParameter("b", Lat));
+                cmd.Parameters.Add(new OracleParameter("c", DescribedLocation));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException)
+                {
+                    throw;
+                }
+                c.Close();
+            }
+        }
+
+        public static DataTable GetLocation(string Long, string Lat, string DescribedLocation)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("SELECT ID FROM \"Location\" WHERE \"Longitude\" = :a AND \"Latitude\" = :b AND \"Description\" = :c");
+                cmd.Parameters.Add(new OracleParameter("a", Long));
+                cmd.Parameters.Add(new OracleParameter("b", Lat));
+                cmd.Parameters.Add(new OracleParameter("c", DescribedLocation));
+                cmd.Connection = c;
+                try
+                {
+                    OracleDataReader r = cmd.ExecuteReader();
+                    DataTable result = new DataTable();
+                    result.Load(r);
+                    c.Close();
+                    return result;
+                }
+                catch (Exception e)
+                {
+                    string debug = e.Message; 
+                    c.Close();
+                    throw;
+                }
             }
         }
         #endregion

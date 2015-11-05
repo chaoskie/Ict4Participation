@@ -67,11 +67,7 @@ namespace Class_Layer
         /// <returns>String containing information about the review placement</returns>
         public static string PlaceReview(int rating, string title, int postedtoID, int posterID, string description)
         {
-            Database_Layer.Database.ExecuteQuery(
-                String.Format("INSERT INTO \"Review\" (\"Rating\", \"Title\", \"PostedACC_ID\", \"PosterACC_ID\", \"Description\") VALUES ({0}, '{1}', {2}, {3}, '{4}')",
-                              rating, title, postedtoID, posterID, description)
-                             );
-
+            Database_Layer.Database.InsertReview(rating, title, postedtoID, posterID, description);
             return String.Format("{0}-sterren review geplaatst!", rating);
         }
 

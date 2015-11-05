@@ -119,13 +119,9 @@ namespace Class_Layer
             int locID = 0;
 
             //Insert the location into the database
-            Database_Layer.Database.ExecuteQuery(
-                        String.Format("INSERT INTO \"Location\" (\"Longitude\", \"Latitude\", \"Description\") VALUES ('{0}', '{1}', '{2}')",
-                        l.Long, l.Lat, l.DescribedLocation));
+            Database_Layer.Database.InsertLocation(l.Long, l.Lat, l.DescribedLocation);
             //Retrieve location ID of the newly inserted location
-            DataTable dtLocation = Database_Layer.Database.RetrieveQuery(
-                String.Format("SELECT ID FROM \"Location\" WHERE \"Longitude\" = '{0}' AND \"Latitude\" = '{1}' AND \"Description\" = '{2}'",
-                l.Long, l.Lat, l.DescribedLocation));
+            DataTable dtLocation = Database_Layer.Database.GetLocation(l.Long, l.Lat, l.DescribedLocation);
 
             foreach (DataRow row in dtLocation.Rows)
             {
