@@ -197,7 +197,7 @@ namespace Admin_Layer
             if (filledIn)
             {
                 rightFormat = true;
-                if (Regex.IsMatch(name.Trim(), @"^[A-Z][A-Za-z]+ [A-Z][A-Za-z]+$") == false)
+                if (Regex.IsMatch(name.Trim(), @"^[A-Z][A-Za-z\.]*(?:\s[A-Za-z][a-z]+)+$") == false)
                 {
                     rightFormat = false;
                     error += "Naam is niet correct!\n";
