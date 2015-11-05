@@ -121,7 +121,12 @@ namespace Database_Layer
             }
         }
         #region comments
-
+        /// <summary>
+        /// Parameterizes the querry send to the DB
+        /// </summary>
+        /// <param name="accountID">user that places response</param>
+        /// <param name="questionID">question that receives new response</param>
+        /// <param name="Desc">user input text</param>
         public static void PlaceComment(int accountID, int questionID, string Desc)
         {
           using (OracleConnection c = new OracleConnection(@connectionstring))
@@ -146,5 +151,6 @@ namespace Database_Layer
         }
 
         #endregion
+
     }
 }
