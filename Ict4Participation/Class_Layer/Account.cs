@@ -67,7 +67,7 @@ namespace Class_Layer
         public string Sex { get; private set; }
         #endregion
 
-        public static Account Register(string name, Location loc, string password, string avatarPath, string VOG, string description, Accounttype role, string sex, string email)
+        public static Account Register(string name, Location loc, string password, string avatarPath, string VOG, string description, Accounttype role, string sex, string email, out int id)
         {
             //TODO
             //Returns: Account to set as MainUser in the admin class
@@ -75,6 +75,42 @@ namespace Class_Layer
             //Insert into the database
             //Retrieve the exact same stuff from the database, fetch the ID
             //Out the ID
+            string passTotal = PasswordHashing.CreateHash(password);
+            string[] passArray = passTotal.Split(':');
+
+            // Second string in array is the salt
+            string passSalt = passArray[0] + ":";
+            // Third string in the array is the hash
+            string passHash = passArray[1] + ":" + passArray[2];
+            int locID =0;
+            Location.ValidateLocation(loc, out locID);
+
+            string roleText = string.Empty;
+            
+            //V = hulpverlener B = administrator H = hulpbehoevende
+            switch(role) {
+                case Accounttype.Administrator:
+                    roleText = "B";
+                    break;
+                case Accounttype.Hulpbehoevende:
+                    roleText = "H";
+                    break;
+                case Accounttype.Hulpverlener:
+                    roleText = "V";
+                    break;
+            }
+
+            string query1 = "INSERT INTO \"Acc\" (\"Name\", \"LOCATION_ID\", \"PassHash\", \"Salt\", \"Avatar\", \"VOG\", \"Description\", \"Role\", \"Sex\", \"Email\") VALUES(" +
+                "'" + name + "'" + ", " + locID + ", " + "'" + passHash + "'" + ", " + "'" + passSalt + "'" + ", " + "'" + avatarPath + "'" + ", " + "'" + VOG + "'" + ", " + 
+                "'" + description + "'" + ", " + "'" + roleText + "'" + ", " + "'" + sex + "'" + ", " + "'" + email + "'" + ")";
+
+            string query2 = "SELECT ID FROM \"Acc\" WHERE \"Name\" = " + name + " AND \"LOCATION_ID\" = " + locID + " AND \"PassHash\" = " + passHash + " AND \"Salt\" = " + passSalt + " AND \"Avatar\" = " +
+                avatarPath + " AND \"VOG\" = " + VOG + " AND \"Description\" = " + description + " AND \"Role\" = " + role + " AND \"Sex\" = " + sex + " AND \"Email\" = " + email;
+
+            Database.ExecuteQuery(query1);
+            DataTable dt = Database.RetrieveQuery(query2);
+
+            id = 0;
             return null;
         }
 

@@ -63,7 +63,7 @@ namespace Ict4Participation
             }
             else
             {
-                MessageBox.Show("De combinatie van gebruikersnaam en wachtwoord bestaat niet!");
+                MessageBox.Show("De combinatie van gebruikersnaam en wachtwoord bestaat niet!", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

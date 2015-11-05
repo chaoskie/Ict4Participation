@@ -201,5 +201,32 @@ namespace Database_Layer
             }
         }
         #endregion
+
+        #region account
+        public static void NewUser(string query)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                /*
+             string query1 = "INSERT INTO \"Acc\" (\"Name\", \"LOCATION_ID\", \"PassHash\", \"Salt\", \"Avatar\", \"VOG\", \"Description\", \"Role\", \"Sex\", \"Email\") VALUES(" +
+                "'" + name + "'" + ", " + locID + ", " + "'" + passHash + "'" + ", " + "'" + passSalt + "'" + ", " + "'" + avatarPath + "'" + ", " + "'" + VOG + "'" + ", " + 
+                "'" + description + "'" + ", " + "'" + roleText + "'" + ", " + "'" + sex + "'" + ", " + "'" + email + "'" + ")";
+                 */
+                c.Open();
+                OracleCommand cmd = new OracleCommand(":qq");
+                cmd.Parameters.Add(new OracleParameter("qq", query));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException)
+                {
+                    throw;
+                }
+                c.Close();
+            }
+        }
+        #endregion
     }
 }
