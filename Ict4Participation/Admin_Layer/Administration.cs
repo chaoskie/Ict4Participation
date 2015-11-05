@@ -319,5 +319,27 @@ namespace Admin_Layer
             return PasswordHashing.CreateHash("default");
         }
         #endregion
+
+        // Return all users
+        public List<Account> ReturnUsers()
+        {
+            List<Account> returnList;
+
+            // get all questions from class_layer
+            returnList = null;
+
+            return returnList;
+        }
+
+        // Return all reviews
+        public List<Review> ReturnReviews()
+        {
+            List<Review> returnList;
+
+            // get all reviews from class_layer
+            returnList = null;
+
+            return returnList;
+        }
     }
 }
