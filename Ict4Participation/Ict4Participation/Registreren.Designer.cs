@@ -194,7 +194,6 @@
             this.tbPhotoPath.ReadOnly = true;
             this.tbPhotoPath.Size = new System.Drawing.Size(99, 26);
             this.tbPhotoPath.TabIndex = 3;
-            this.tbPhotoPath.Text = "Niets geselecteerd";
             // 
             // groupBox1
             // 
