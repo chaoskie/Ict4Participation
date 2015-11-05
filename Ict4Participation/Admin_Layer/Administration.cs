@@ -158,6 +158,7 @@ namespace Admin_Layer
             bool filledIn = true;
             bool rightFormat = false;
             string error = string.Empty;
+            name = name.Trim();
 
             //Check if everything is filled in
             if (String.IsNullOrWhiteSpace(name))
@@ -197,7 +198,7 @@ namespace Admin_Layer
             if (filledIn)
             {
                 rightFormat = true;
-                if (Regex.IsMatch(name.Trim(), @"^[A-Z][A-Za-z\.]*(?:\s[A-Za-z][a-z]+)+$") == false)
+                if (Regex.IsMatch(name, @"^[A-Z][A-Za-z\.]*(?:\s[A-Za-z][a-z]+)+$") == false)
                 {
                     rightFormat = false;
                     error += "Naam is niet correct!\n";
