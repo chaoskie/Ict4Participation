@@ -21,14 +21,12 @@ namespace Ict4Participation
 
     public partial class HoofdForm : Form
     {
-        private Form previous;
         private Administration Administration;
 
-        public HoofdForm(Form p, Administration a)
+        public HoofdForm(Administration a)
         {
             this.InitializeComponent();
             this.Administration = a;
-            this.previous = p;
 
             lblName.Text = a.MainAccountData(2);
             pbAvatar.ImageLocation = a.MainAccountData(4);
@@ -37,7 +35,7 @@ namespace Ict4Participation
         //Closes the entire app
         private void HoofdForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.previous.Close();
+
         }
 
         //Logs the user out

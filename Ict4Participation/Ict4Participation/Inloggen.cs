@@ -57,7 +57,7 @@ namespace Ict4Participation
         {
             if (Administration.LogIn(tbUsername.Text, tbPassword.Text))
             {
-                Form form = new HoofdForm(this, Administration);
+                Form form = new HoofdForm(Administration);
                 form.Show();
                 this.Hide();
             }
