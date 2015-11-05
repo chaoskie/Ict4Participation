@@ -20,6 +20,7 @@ namespace Ict4Participation
     public partial class Zoeken : Form
     {
         Administration administration;
+        private string V;
 
         //Find the helpers by default
         public Zoeken(bool findV, Administration a)
@@ -27,28 +28,38 @@ namespace Ict4Participation
             this.InitializeComponent();
             this.administration = a;
             lbUsers.DataSource = null;
-            
+
             if (findV)
             {
-                lbUsers.DataSource = administration.GetAccounts("V");
+                this.V = "Hulpverlener";
+                lbUsers.DataSource = administration.GetAccounts("Hulpverlener");
             }
             else
             {
-                lbUsers.DataSource = administration.GetAccounts("H");
+                this.V = "Hulpbehoevende";
+                lbUsers.DataSource = administration.GetAccounts("Hulpbehoevende");
             }
         }
 
         private void btnShowProfile_Click(object sender, EventArgs e)
         {
+            Form form = new Profiles(administration, lbUsers.SelectedIndex);
+            form.Show();
             this.Close();
         }
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
         {
-            //TODO
-            //Set datasource to new list
-            lbUsers.DataSource = null;
-            //lbUsers.DataSource = administration.GetAccounts("");
+            if (!String.IsNullOrWhiteSpace(tbSearch.Text))
+            {
+                //Set datasource to new list
+                lbUsers.DataSource = null;
+                lbUsers.DataSource = administration.GetAccounts(V, true, tbSearch.Text);
+            }
+            else
+            {
+                lbUsers.DataSource = null;
+            }
         }
     }
 }

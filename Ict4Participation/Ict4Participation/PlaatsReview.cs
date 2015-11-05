@@ -19,11 +19,13 @@ namespace Ict4Participation
 {
     public partial class PlaatsReview : Form
     {
+        private Administration administration;
+
         private Form previous;
-        public PlaatsReview(Form p)
+        public PlaatsReview(Form p, Administration a)
         {
             this.InitializeComponent();
-
+            this.administration = a;
             this.previous = p;
 
             //OLD this.cb1.CheckState = CheckState.Indeterminate;

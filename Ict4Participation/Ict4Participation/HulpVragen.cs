@@ -106,8 +106,6 @@ namespace Ict4Participation
         //Closes this screen, and brings the user back to the main menu
         private void btnAnnuleren_Click(object sender, EventArgs e)
         {
-            Form form = new HoofdForm(Administration);
-            form.Show();
             this.Close();
         }
 

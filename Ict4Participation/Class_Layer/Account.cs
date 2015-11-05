@@ -68,7 +68,7 @@ namespace Class_Layer
         #endregion
 
         public static Account Register(string name, Location loc, string password, string avatarPath, string VOG, string description, Accounttype role, string sex, string email, out int id)
-        { 
+        {
             //TODO
             //Returns: Account to set as MainUser in the admin class
             //Outs: the ID of the newly created account
@@ -82,13 +82,14 @@ namespace Class_Layer
             string passSalt = passArray[0] + ":";
             // Third string in the array is the hash
             string passHash = passArray[1] + ":" + passArray[2];
-            int locID =0;
+            int locID = 0;
             Location.ValidateLocation(loc, out locID);
 
             string roleText = string.Empty;
-            
+
             //V = hulpverlener B = administrator H = hulpbehoevende
-            switch(role) {
+            switch (role)
+            {
                 case Accounttype.Administrator:
                     roleText = "B";
                     break;
@@ -128,44 +129,70 @@ namespace Class_Layer
                 //If exists && matches
                 if (PasswordHashing.ValidatePassword(password, (row["Salt"].ToString() + row["PassHash"].ToString())))
                 {
-                    #region Find account credentials, fill in account information
                     matchingaccount = true;
-                    //Find location
-                    Location loc = null;
-                    DataTable dtLoc = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Location\" WHERE \"ID\" = " + row["LOCATION_ID"]);
-                    foreach (DataRow locRow in dtLoc.Rows)
-                    {
-                        loc = new Location(new PointF(
-                            (float)(Convert.ToDecimal(locRow["Longitude"])),
-                            (float)(Convert.ToDecimal(locRow["Latitude"]))),
-                            locRow["Description"].ToString());
-                    }
-                    //Cast role 
-                    Accounttype t;
-                    if (row["Role"].ToString() != "B")
-                    {
-                        t = row["Role"].ToString() == "H" ? Accounttype.Hulpbehoevende : Accounttype.Hulpverlener;
-                    }
-                    else
-                        t = Accounttype.Administrator;
-
-                    //Create account
-                    acc = new Account(Convert.ToInt32(row["ID"]),
-                        row["Name"].ToString(),
-                        loc,
-                        t,
-                        row["Avatar"].ToString(),
-                        row["Description"].ToString(),
-                        row["Sex"].ToString(),
-                        row["Email"].ToString(),
-                        row["VOG"].ToString()
-                        );
-                    #endregion
+                    acc = CreateAccount(row);
 
                     break;
                 }
             }
             return matchingaccount;
+        }
+
+        /// <summary>
+        /// Retrieves all the accounts from the database
+        /// </summary>
+        /// <returns>All the accounts made on this point</returns>
+        public static List<Account> FetchAllAccounts()
+        {
+            List<Account> accs = new List<Account>();
+
+            DataTable dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc\"");
+            foreach (DataRow row in dt.Rows)
+            {
+                accs.Add(CreateAccount(row));
+            }
+            return accs;
+        }
+
+        /// <summary>
+        /// Finds account credentials and fills in account information
+        /// </summary>
+        /// <param name="row">the datarow to process</param>
+        /// <returns>an account</returns>
+        private static Account CreateAccount(DataRow row)
+        {
+            Account acc = null;
+            Location loc = null;
+            //Find location
+            DataTable dtLoc = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Location\" WHERE \"ID\" = " + row["LOCATION_ID"]);
+            foreach (DataRow locRow in dtLoc.Rows)
+            {
+                loc = new Location(new PointF(
+                    (float)(Convert.ToDecimal(locRow["Longitude"])),
+                    (float)(Convert.ToDecimal(locRow["Latitude"]))),
+                    locRow["Description"].ToString());
+            }
+            //Cast role 
+            Accounttype t;
+            if (row["Role"].ToString() != "B")
+            {
+                t = row["Role"].ToString() == "H" ? Accounttype.Hulpbehoevende : Accounttype.Hulpverlener;
+            }
+            else
+                t = Accounttype.Administrator;
+
+            //Create account
+            acc = new Account(Convert.ToInt32(row["ID"]),
+                row["Name"].ToString(),
+                loc,
+                t,
+                row["Avatar"].ToString(),
+                row["Description"].ToString(),
+                row["Sex"].ToString(),
+                row["Email"].ToString(),
+                row["VOG"].ToString()
+                );
+            return acc;
         }
 
         /// <summary>

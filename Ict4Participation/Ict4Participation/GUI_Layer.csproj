@@ -140,6 +140,9 @@
     <EmbeddedResource Include="PlaatsReview.resx">
       <DependentUpon>PlaatsReview.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Profiles.resx">
+      <DependentUpon>Profiles.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -255,16 +255,18 @@ namespace Admin_Layer
         /// </summary>
         /// <param name="accType"></param>
         /// <returns></returns>
-        public List<string> GetAccounts(string accType)
+        public List<string> GetAccounts(string accType, bool bsearch = false, string search = "")
         {
-            //TODO
-            return null;
-        }
-
-        public List<string> SearchAccounts(string search)
-        {
-            //TODO
-            return null;
+            if (bsearch)
+            {
+                LoadedAccounts = Account.FetchAllAccounts().FindAll(item => (item.Role.ToString() == accType) && (item.Naam.ToLower()).Contains(search.ToLower()));
+                return LoadedAccounts.Select(s => s.Naam).ToList();
+            }
+            else
+            {
+                LoadedAccounts = Account.FetchAllAccounts().FindAll(item => (item.Role.ToString() == accType));
+                return LoadedAccounts.Select(s => s.Naam).ToList();
+            }
         }
 
         /// <summary>
@@ -320,6 +322,24 @@ namespace Admin_Layer
         public string MainAccountData(int index)
         {
             return AllAccountData(MainUser)[index - 1];
+        }
+
+        /// <summary>
+        /// Contains the following account data:
+        /// <para>1 ID</para> 
+        /// <para>2 Name </para>
+        /// <para>3 Location </para>
+        /// <para>4 AvatarPath </para>
+        /// <para>5 Information </para>
+        /// <para>6 Role </para>
+        /// <para>7 Sex </para>
+        /// <para>8 Email </para>
+        /// </summary>
+        /// <param name="index">The index of the one you want to select (ID = 1, Name = 2, etc)</param>
+        /// <returns>The selected value of the index</returns>
+        public string AccountData(int index, int userinfoindex)
+        {
+            return AllAccountData(LoadedAccounts[index])[userinfoindex - 1];
         }
 
         public List<string> AllSkillTypes()

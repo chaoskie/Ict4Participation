@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnVoegToe = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
+            this.pbAvatar = new System.Windows.Forms.PictureBox();
+            this.btnChat = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.afspraakMakenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,48 +38,39 @@
             this.reviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.plaatsenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.weergevenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label3 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.lblRole = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pbAvatar)).BeginInit();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // lblName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(111, 135);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(127, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Henk Nogwattes";
+            this.lblName.AutoSize = true;
+            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.Location = new System.Drawing.Point(111, 135);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(127, 20);
+            this.lblName.TabIndex = 0;
+            this.lblName.Text = "Henk Nogwattes";
             // 
-            // pictureBox1
+            // pbAvatar
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(125, 32);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(102, 100);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.pbAvatar.Location = new System.Drawing.Point(125, 32);
+            this.pbAvatar.Name = "pbAvatar";
+            this.pbAvatar.Size = new System.Drawing.Size(102, 100);
+            this.pbAvatar.TabIndex = 1;
+            this.pbAvatar.TabStop = false;
             // 
-            // btnVoegToe
+            // btnChat
             // 
-            this.btnVoegToe.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVoegToe.Location = new System.Drawing.Point(249, 185);
-            this.btnVoegToe.Name = "btnVoegToe";
-            this.btnVoegToe.Size = new System.Drawing.Size(89, 64);
-            this.btnVoegToe.TabIndex = 13;
-            this.btnVoegToe.Text = "Chat";
-            this.btnVoegToe.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(109, 155);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(129, 20);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "Waardering: *****";
+            this.btnChat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChat.Location = new System.Drawing.Point(249, 185);
+            this.btnChat.Name = "btnChat";
+            this.btnChat.Size = new System.Drawing.Size(89, 64);
+            this.btnChat.TabIndex = 13;
+            this.btnChat.Text = "Chat";
+            this.btnChat.UseVisualStyleBackColor = true;
+            this.btnChat.Click += new System.EventHandler(this.btnChat_Click);
             // 
             // button4
             // 
@@ -91,6 +81,7 @@
             this.button4.TabIndex = 18;
             this.button4.Text = "<< Terug";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.buttonTerug_Click);
             // 
             // menuStrip2
             // 
@@ -108,14 +99,16 @@
             // afspraakMakenToolStripMenuItem
             // 
             this.afspraakMakenToolStripMenuItem.Name = "afspraakMakenToolStripMenuItem";
-            this.afspraakMakenToolStripMenuItem.Size = new System.Drawing.Size(104, 20);
+            this.afspraakMakenToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
             this.afspraakMakenToolStripMenuItem.Text = "Afspraak maken";
+            this.afspraakMakenToolStripMenuItem.Click += new System.EventHandler(this.afspraakMakenToolStripMenuItem_Click);
             // 
             // detailsWeergevenToolStripMenuItem
             // 
             this.detailsWeergevenToolStripMenuItem.Name = "detailsWeergevenToolStripMenuItem";
-            this.detailsWeergevenToolStripMenuItem.Size = new System.Drawing.Size(114, 20);
+            this.detailsWeergevenToolStripMenuItem.Size = new System.Drawing.Size(143, 24);
             this.detailsWeergevenToolStripMenuItem.Text = "Details weergeven";
+            this.detailsWeergevenToolStripMenuItem.Click += new System.EventHandler(this.detailsWeergevenToolStripMenuItem_Click);
             // 
             // reviewToolStripMenuItem
             // 
@@ -123,46 +116,47 @@
             this.plaatsenToolStripMenuItem,
             this.weergevenToolStripMenuItem});
             this.reviewToolStripMenuItem.Name = "reviewToolStripMenuItem";
-            this.reviewToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.reviewToolStripMenuItem.Size = new System.Drawing.Size(68, 24);
             this.reviewToolStripMenuItem.Text = "Review";
             // 
             // plaatsenToolStripMenuItem
             // 
             this.plaatsenToolStripMenuItem.Name = "plaatsenToolStripMenuItem";
-            this.plaatsenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.plaatsenToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.plaatsenToolStripMenuItem.Text = "Plaatsen";
+            this.plaatsenToolStripMenuItem.Click += new System.EventHandler(this.plaatsenToolStripMenuItem_Click);
             // 
             // weergevenToolStripMenuItem
             // 
             this.weergevenToolStripMenuItem.Name = "weergevenToolStripMenuItem";
-            this.weergevenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.weergevenToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.weergevenToolStripMenuItem.Text = "Weergeven";
+            this.weergevenToolStripMenuItem.Click += new System.EventHandler(this.weergevenToolStripMenuItem_Click);
             // 
-            // label3
+            // lblRole
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(125, 175);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(98, 20);
-            this.label3.TabIndex = 22;
-            this.label3.Text = "Hulpverlener";
+            this.lblRole.AutoSize = true;
+            this.lblRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRole.Location = new System.Drawing.Point(129, 155);
+            this.lblRole.Name = "lblRole";
+            this.lblRole.Size = new System.Drawing.Size(98, 20);
+            this.lblRole.TabIndex = 22;
+            this.lblRole.Text = "Hulpverlener";
             // 
             // Profiles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(350, 261);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblRole);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnVoegToe);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnChat);
+            this.Controls.Add(this.pbAvatar);
+            this.Controls.Add(this.lblName);
             this.Controls.Add(this.menuStrip2);
             this.Name = "Profiles";
             this.Text = "Profiles";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbAvatar)).EndInit();
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
@@ -172,10 +166,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button btnVoegToe;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.PictureBox pbAvatar;
+        private System.Windows.Forms.Button btnChat;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem afspraakMakenToolStripMenuItem;
@@ -183,6 +176,6 @@
         private System.Windows.Forms.ToolStripMenuItem reviewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem plaatsenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem weergevenToolStripMenuItem;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblRole;
     }
 }
