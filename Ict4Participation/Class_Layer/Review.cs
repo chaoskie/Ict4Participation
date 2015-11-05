@@ -55,7 +55,7 @@ namespace Class_Layer
             return null;
         }
 
-        public static List<string> GetAllUserReviews(int accountID, out List<Review> reviews)
+        public static List<string> GetAllUserReviews(out List<Review> reviews)
         {
             reviews = new List<Review>();
             return null;
