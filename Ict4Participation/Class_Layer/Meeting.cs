@@ -119,49 +119,13 @@ namespace Class_Layer
         #endregion
 
         /// <summary>
-        /// Retrieves all the meetings from the database
-        /// </summary>
-        /// <returns>Yields a list of said meetings</returns>
-        public static List<Meeting> GetAllMeetings()
-        {
-            List<Meeting> foundmeetings = new List<Meeting>();
-            DataTable dt = Database_Layer.Database.RetrieveQuery(
-                "SELECT RequesterName, RequestedName, Timet, LocationID, MID FROM"
-                + "(SELECT RequesterName, \"Name\" as RequestedName, rr, rd, Timet, LocationID, MID FROM ( "
-                + "SELECT \"Name\" as RequesterName, ac.\"ID\", me.\"RequestedACC_ID\" as rd, me.\"RequesterACC_ID\" as rr, me.\"Timetable\" as Timet, me.location_id as LocationID, me.\"ID\" as MID FROM \"Acc\" ac "
-                + "JOIN \"Meeting\" me "
-                + "ON me.\"RequesterACC_ID\"=ac.\"ID\" "
-                + ") tt "
-                + "JOIN \"Acc\" ac "
-                + "ON tt.rd=ac.\"ID\" "
-                + ") ");
-            foreach (DataRow row in dt.Rows)
-            {
-                var outputParam = row["LocationID"];
-                int locID = 0;
-                if (!(outputParam is DBNull))
-                { locID = Convert.ToInt32(row["LocationID"]); }
-
-                foundmeetings.Add(new Meeting(
-                    Convert.ToInt32(row["MID"]),
-                    row["Timet"].ToString(),
-                    new Location(Convert.ToInt32(locID)),
-                    row["RequesterName"].ToString(),
-                    row["RequestedName"].ToString()
-                    ));
-            }
-            return foundmeetings;
-        }
-
-        /// <summary>
-        /// Retrieves all the meetings belonging to a specific user from the database
+        /// Retrieves all the meetings belonging to a specific user from the database. Or unspecified
         /// </summary>
         /// <param name="userid">the userID of the specific user</param>
         /// <returns>Yields a list of said meetings</returns>
-        public static List<Meeting> GetAllMeetings(int userid)
+        public static List<Meeting> GetAllMeetings(Nullable<int> userid = null)
         {
-            List<Meeting> foundmeetings = new List<Meeting>();
-            DataTable dt = Database_Layer.Database.RetrieveQuery(
+            string query = 
                 "SELECT RequesterName, RequestedName, Timet, LocationID, MID FROM"
                 + "(SELECT RequesterName, \"Name\" as RequestedName, rr, rd, Timet, LocationID, MID FROM ( "
                 + "SELECT \"Name\" as RequesterName, ac.\"ID\", me.\"RequestedACC_ID\" as rd, me.\"RequesterACC_ID\" as rr, me.\"Timetable\" as Timet, me.location_id as LocationID, me.\"ID\" as MID FROM \"Acc\" ac "
@@ -170,8 +134,13 @@ namespace Class_Layer
                 + ") tt "
                 + "JOIN \"Acc\" ac "
                 + "ON tt.rd=ac.\"ID\" "
-                + ") "
-                + "WHERE rr = " + userid + " OR rd = " + userid + " ");
+                + ") ";
+            if (userid != null)
+            {
+                query += "WHERE rr = " + userid + " OR rd = " + userid + " ";
+            }
+            List<Meeting> foundmeetings = new List<Meeting>();
+            DataTable dt = Database_Layer.Database.RetrieveQuery(query);
             foreach (DataRow row in dt.Rows)
             {
                 var outputParam = row["LocationID"];
