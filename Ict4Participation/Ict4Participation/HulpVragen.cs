@@ -60,7 +60,7 @@ namespace Ict4Participation
         {
             if (!isRefresh)
             {
-                tbComments.Text = string.Empty;
+                panelChat.Controls.Clear();
                 int ind = lbHulpvragen.SelectedIndex;
                 if (ind != -1)
                 {
@@ -84,13 +84,45 @@ namespace Ict4Participation
                     lbSkills.Items.Clear();
                     lbSkills.Items.AddRange(Administration.GetQuestionSkills(ind, allLoaded).Cast<string>().ToArray());
                     //Load in comments
-                    foreach (string s in Administration.GetQuestionComments(ind))
-                    {
-                        tbComments.Text += s + Environment.NewLine;
-                    }
-                    currentSelection = ind;
+                    UpdateComments();
+
                 }
                 isRefresh = false;
+            }
+        }
+
+        private void UpdateComments()
+        {
+            int ind = lbHulpvragen.SelectedIndex;
+            //Voor panel
+            int previousy = 0;
+            foreach (string s in Administration.GetQuestionComments(ind))
+            {
+                //LABELS
+                //Check how many lines it'd take to give the label extra space
+                int numLines = 1;
+                using (System.Drawing.Graphics graphics = System.Drawing.Graphics.FromImage(new Bitmap(1, 1)))
+                {
+                    SizeF size = graphics.MeasureString(s, new Font("Microsoft Sans Serif", 10, FontStyle.Regular, GraphicsUnit.Point));
+                    numLines = (int)Math.Ceiling(size.Width / 399) + 1;
+                }
+                var label = new Label
+                {
+                    Text = s,
+                    Location = new Point(50, previousy),
+                    AutoSize = false,
+                    Size = new Size(400, 10 * numLines),
+                    Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular, GraphicsUnit.Point)
+                };
+                panelChat.Controls.Add(label);
+                //Define the previous Y
+                previousy += 10 * numLines;
+
+                //BUTTONS
+
+                //Scroll down
+                panelChat.VerticalScroll.Value = panelChat.VerticalScroll.Maximum;
+                panelChat.PerformLayout();
             }
         }
 
@@ -102,11 +134,8 @@ namespace Ict4Participation
             //clear text
             tbChat.Clear();
             //reload comments
-            tbComments.Clear();
-            foreach (string s in Administration.GetQuestionComments(currentSelection))
-            {
-                tbComments.Text += s + Environment.NewLine;
-            }
+            panelChat.Controls.Clear();
+            UpdateComments();
         }
 
         //Closes this screen, and brings the user back to the main menu
