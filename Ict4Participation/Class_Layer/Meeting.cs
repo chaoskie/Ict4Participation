@@ -116,7 +116,17 @@ namespace Class_Layer
         public static List<Meeting> GetAllMeetings()
         {
             List<Meeting> foundmeetings = new List<Meeting>();
-            foreach (DataRow row in Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Meeting\"").Rows)
+            foreach (DataRow row in Database_Layer.Database.RetrieveQuery(
+                String.Format(
+                "SELECT RequesterName, RequestedName, Time, LocationID FROM"
+                + "(SELECT RequesterName, \"Name\" as RequestedName, rr, rd, Time, LocationID FROM ( "
+                + "SELECT \"Name\" as RequesterName, ac.\"ID\", me.\"RequestedACC_ID\" as rd, me.\"RequesterACC_ID\" as rr, me.\"Timetable\" as Time, me.location_id as LocationID FROM  \"Acc\" ac "
+                + "JOIN \"Meeting\" me "
+                + "ON me.\"RequesterACC_ID\"=ac.\"ID\" "
+                + ") tt "
+                + "JOIN \"Acc\" ac "
+                + "ON tt.rd=ac.\"ID\" "
+                + ") ")).Rows)
             {
                 foundmeetings.Add(new Meeting(
                     Convert.ToInt32(row["ID"]),
@@ -137,14 +147,25 @@ namespace Class_Layer
         public static List<Meeting> GetAllMeetings(int userid)
         {
             List<Meeting> foundmeetings = new List<Meeting>();
-            foreach (DataRow row in Database_Layer.Database.RetrieveQuery(String.Format("SELECT * FROM \"Meeting\" WHERE \"RequesterACC_ID\" = {0} OR \"RequestedACC_ID\" = {0}", userid)).Rows)
+            foreach (DataRow row in Database_Layer.Database.RetrieveQuery(
+                String.Format(
+                "SELECT RequesterName, RequestedName, Time, LocationID FROM"
+                + "(SELECT RequesterName, \"Name\" as RequestedName, rr, rd, Time, LocationID FROM ( "
+                + "SELECT \"Name\" as RequesterName, ac.\"ID\", me.\"RequestedACC_ID\" as rd, me.\"RequesterACC_ID\" as rr, me.\"Timetable\" as Time, me.location_id as LocationID FROM  \"Acc\" ac "
+                + "JOIN \"Meeting\" me "
+                + "ON me.\"RequesterACC_ID\"=ac.\"ID\" "
+                + ") tt "
+                + "JOIN \"Acc\" ac "
+                + "ON tt.rd=ac.\"ID\" "
+                + ") "
+                + "WHERE rr = {0} OR rd = {1} ", userid)).Rows)
             {
                 foundmeetings.Add(new Meeting(
                     Convert.ToInt32(row["ID"]),
                     Convert.ToDateTime(row["Timetable"]),
                     new Location(Convert.ToInt32(row["LOCATION_ID"])),
-                    "",
-                    ""
+                    row["RequesterName"].ToString(),
+                    row["RequesterName"].ToString()
                     ));
             }
             return foundmeetings;
