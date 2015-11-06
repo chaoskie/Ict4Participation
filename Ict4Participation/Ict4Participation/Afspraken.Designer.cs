@@ -28,18 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbInformation = new System.Windows.Forms.TextBox();
             this.lblType = new System.Windows.Forms.Label();
+            this.rtbInfo = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
-            // 
-            // tbInformation
-            // 
-            this.tbInformation.Location = new System.Drawing.Point(12, 32);
-            this.tbInformation.Multiline = true;
-            this.tbInformation.Name = "tbInformation";
-            this.tbInformation.ReadOnly = true;
-            this.tbInformation.Size = new System.Drawing.Size(310, 339);
-            this.tbInformation.TabIndex = 0;
             // 
             // lblType
             // 
@@ -51,13 +42,22 @@
             this.lblType.TabIndex = 5;
             this.lblType.Text = "type:";
             // 
+            // rtbInfo
+            // 
+            this.rtbInfo.Location = new System.Drawing.Point(16, 32);
+            this.rtbInfo.Name = "rtbInfo";
+            this.rtbInfo.ReadOnly = true;
+            this.rtbInfo.Size = new System.Drawing.Size(306, 339);
+            this.rtbInfo.TabIndex = 6;
+            this.rtbInfo.Text = "";
+            // 
             // Afspraken
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 383);
+            this.ClientSize = new System.Drawing.Size(338, 383);
+            this.Controls.Add(this.rtbInfo);
             this.Controls.Add(this.lblType);
-            this.Controls.Add(this.tbInformation);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -70,8 +70,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox tbInformation;
         private System.Windows.Forms.Label lblType;
+        private System.Windows.Forms.RichTextBox rtbInfo;
 
     }
 }

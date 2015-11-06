@@ -26,6 +26,7 @@ namespace Ict4Participation
         {
             this.InitializeComponent();
             administration = a;
+            rtbInfo.Enabled = false;
 
             lblType.Text = loadMeeting ? "Afspraken:" : "Reviews";
             containsMeetings = loadMeeting;
@@ -35,7 +36,7 @@ namespace Ict4Participation
                 //Load meetings
                 foreach (string s in administration.GetMainAccountMeetings())
                 {
-                    tbInformation.Text += s + Environment.NewLine;
+                    rtbInfo.Text += s + Environment.NewLine + Environment.NewLine;
                 }
             }
             else
@@ -45,7 +46,7 @@ namespace Ict4Participation
                 bool isPoster = administration.MainAccountData(6) == "Hulpverlener" ? false : true;
                 foreach (string s in administration.GetAccountReviews(isPoster))
                 {
-                    tbInformation.Text += s + Environment.NewLine;
+                    rtbInfo.Text += s + Environment.NewLine + Environment.NewLine;
                 }
             }
         }
