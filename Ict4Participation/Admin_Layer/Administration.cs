@@ -419,8 +419,10 @@ namespace Admin_Layer
                     error += "Het wachtwoord is niet sterk genoeg! Minimaal 1 hoofdletter, 1 kleine letter en 1 nummer/speciaal karakter.";
                 }
             }
-            //TODO
-            //MainUser = Account.Update(all the parameters);
+            if (rightFormat)
+            {
+                MainUser = Account.Update(MainUser.AccountID, MainUser.Role, name, new Location(String.Format("{0}, {1}", address, city)), sex, password, avatarPath, email);
+            }
 
             return rightFormat;
         }
