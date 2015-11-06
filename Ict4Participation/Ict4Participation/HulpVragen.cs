@@ -102,7 +102,8 @@ namespace Ict4Participation
             int previousy = 0;
             Delbuttons = new List<Button>();
             Editbuttons = new List<Button>();
-            foreach (string s in Administration.GetQuestionComments(ind))
+            List<string> comments = Administration.GetQuestionComments(ind);
+            foreach (string s in comments)
             {
                 #region Add Label
                 //LABELS
@@ -124,40 +125,44 @@ namespace Ict4Participation
                 panelChat.Controls.Add(label);
                 #endregion
 
-                #region Add Delete Button
-                //REMOVE BUTTON
-                Button newDelButton = new Button
+                if (Administration.MainAccountData(1) == Administration.GetCommentPosterID(loops))
                 {
-                    Name = "btnDel" + loops.ToString(),
-                    Text = "d",
-                    Location = new Point(0, previousy),
-                    AutoSize = false,
-                    Size = new Size(18, 18),
-                    Font = new Font("Microsoft Sans Serif", 6, FontStyle.Regular, GraphicsUnit.Point)
-                };
-                Delbuttons.Add(newDelButton);
-                panelChat.Controls.Add(newDelButton);
-                #endregion
+                    #region Add Delete Button
+                    //REMOVE BUTTON
+                    Button newDelButton = new Button
+                    {
+                        Name = "btnDel" + loops.ToString(),
+                        Text = "d",
+                        Location = new Point(0, previousy),
+                        AutoSize = false,
+                        Size = new Size(18, 18),
+                        Font = new Font("Microsoft Sans Serif", 6, FontStyle.Regular, GraphicsUnit.Point)
+                    };
+                    Delbuttons.Add(newDelButton);
+                    panelChat.Controls.Add(newDelButton);
+                    #endregion
 
-                #region Add Edit Button
-                //EDIT BUTTON
-                Button newEditButton = new Button
-                {
-                    Name = "btnEdit" + loops.ToString(),
-                    Text = "e",
-                    Location = new Point(20, previousy),
-                    AutoSize = false,
-                    Size = new Size(18, 18),
-                    Font = new Font("Microsoft Sans Serif", 6, FontStyle.Regular, GraphicsUnit.Point)
-                };
-                Editbuttons.Add(newEditButton);
-                panelChat.Controls.Add(newEditButton);
-                #endregion
+                    #region Add Edit Button
+                    //EDIT BUTTON
+                    Button newEditButton = new Button
+                    {
+                        Name = "btnEdit" + loops.ToString(),
+                        Text = "e",
+                        Location = new Point(20, previousy),
+                        AutoSize = false,
+                        Size = new Size(18, 18),
+                        Font = new Font("Microsoft Sans Serif", 6, FontStyle.Regular, GraphicsUnit.Point)
+                    };
+                    Editbuttons.Add(newEditButton);
+                    panelChat.Controls.Add(newEditButton);
+                    #endregion
 
                 #region Add Button Handlers
                 newDelButton.Click += btnDeleteComment;
                 newEditButton.Click += newEditButton_Click;
                 #endregion
+
+                }
 
                 //Define the previous Y
                 previousy += 10 * numLines;
