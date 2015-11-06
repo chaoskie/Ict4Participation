@@ -49,10 +49,10 @@ namespace Class_Layer
             //Fetch comments
             DataTable dt = Database_Layer.Database.RetrieveQuery(
             "SELECT * FROM "
-            + "(SELECT c.\"ID\" as CID, c.\"QUESTION_ID\" as QID, c.\"Description\" as Post, a.\"Name\" as Poster FROM \"Comment\" c "
+            + "(SELECT c.\"ID\" as CID, c.\"QUESTION_ID\" as QID, c.\"Description\" as Post, a.\"Name\" as Poster, c.\"POSTDATE\" as timet FROM \"Comment\" c "
             + "JOIN \"Acc\" a "
             + "ON a.\"ID\"=c.\"PosterACC_ID\") "
-            + "WHERE QID = " + postID);
+            + "WHERE QID = " + postID + "ORDER BY timet");
             foreach (DataRow row in dt.Rows)
             {
                 //Create comments
