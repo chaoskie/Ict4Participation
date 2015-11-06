@@ -340,6 +340,10 @@ namespace Admin_Layer
             return rightformat;
         }
 
+        /// <summary>
+        /// Registers an account with the saved credentials from CreateAccount (and CreateAccountHPart)
+        /// </summary>
+        /// <returns>If it succeeded or not</returns>
         public bool RegisterAccount()
         {
             //Create account through
@@ -370,6 +374,24 @@ namespace Admin_Layer
             SmtpServer.Send(mail);
 
             return true;
+        }
+
+        /// <summary>
+        /// Edits the account with the specified credentials. If a credential is not filled in, no checks will be performed over it
+        /// </summary>
+        /// <param name="name">The name to update to</param>
+        /// <param name="address">The address to update to</param>
+        /// <param name="city">The city to update to</param>
+        /// <param name="sex">The sex to update to</param>
+        /// <param name="password">The password to update to</param>
+        /// <param name="avatarPath">The avatarpath to update to</param>
+        /// <param name="email">The email to update to (mail will be sent to both old and new email)</param>
+        /// <param name="error">The error in case anything went wrong</param>
+        /// <returns>Whether it was a success or not</returns>
+        public bool EditAccount(string name, string address, string city, string sex, string password, string avatarPath, string email, out string error)
+        {
+            error = "Not implented yet!";
+            return false;
         }
 
         /// <summary>

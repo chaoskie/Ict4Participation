@@ -217,22 +217,24 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(124, 350);
+            this.btnCancel.Location = new System.Drawing.Point(12, 350);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(97, 30);
+            this.btnCancel.Size = new System.Drawing.Size(146, 30);
             this.btnCancel.TabIndex = 12;
             this.btnCancel.Text = "Annuleren";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(227, 350);
+            this.btnSave.Location = new System.Drawing.Point(179, 350);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(97, 30);
+            this.btnSave.Size = new System.Drawing.Size(145, 30);
             this.btnSave.TabIndex = 11;
-            this.btnSave.Text = "Ga verder";
+            this.btnSave.Text = "Pas aan";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // UpdateProfile
             // 
