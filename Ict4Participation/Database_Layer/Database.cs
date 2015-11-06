@@ -268,6 +268,28 @@ namespace Database_Layer
                 c.Close();
             }
         }
+
+        public static void DeleteQuestion(int qID)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("DELETE FROM \"Question_Skill\" WHERE \"QUESTION_ID\" = :A;" +
+                    " DELETE FROM \"Comment\" WHERE \"QUESTION_ID\" = :A;" +
+                " DELETE FROM \"Question\" WHERE \"ID\" = :A;");
+                cmd.Parameters.Add(new OracleParameter("A", qID));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException)
+                {
+                    throw;
+                }
+                c.Close();
+            }
+        }
         #endregion
 
         #region account
