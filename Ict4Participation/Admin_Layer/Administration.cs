@@ -168,9 +168,22 @@ namespace Admin_Layer
             return false;
         }
 
-        public List<string> GetAccountMeetings()
+        /// <summary>
+        /// Retrieves all the detailed information about ALL the meetings
+        /// </summary>
+        /// <returns>Yields a list of the tostrings</returns>
+        public List<string> GetAllAccountMeetings()
         {
-            return null;
+            return Meeting.GetAllMeetings().Cast<string>().Select(meeting => meeting.ToString()).ToList();
+        }
+
+        /// <summary>
+        /// Retrieves all the detailed information about ALL the meetings OF THE MAIN USER
+        /// </summary>
+        /// <returns>Yields a list of the tostrings</returns>
+        public List<string> GetMainAccountMeetings()
+        {
+            return Meeting.GetAllMeetings(MainUser.AccountID).Cast<string>().Select(meeting => meeting.ToString()).ToList();
         }
         #endregion
 

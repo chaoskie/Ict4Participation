@@ -32,8 +32,11 @@ namespace Ict4Participation
 
             if (loadMeeting)
             {
-                //TODO
                 //Load meetings
+                foreach (string s in administration.GetMainAccountMeetings())
+                {
+                    tbInformation.Text += s + Environment.NewLine;
+                }
             }
             else
             {

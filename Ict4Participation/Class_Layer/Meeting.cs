@@ -33,17 +33,21 @@ namespace Class_Layer
         /// </summary>
         public Location Loc { get; private set; }
 
+        public string Details { get; private set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Meeting"/> class.
         /// </summary>
+        /// <param name="id">the ID of the meeting</param>
         /// <param name="beginTime">The begin time of the meeting</param>
-        /// <param name="endTime">The end time of the meeting</param>
-        /// <param name="loc">The location of the meetinf</param>
-        private Meeting(int id, DateTime beginTime, Location loc)
+        /// <param name="loc">The location of the meeting</param>
+        private Meeting(int id, DateTime beginTime, Location loc, string username1, string username2)
         {
             this.BeginTime = beginTime;
             this.Loc = loc;
             this.ID = id;
+            string locationdetails = Loc.ToString();
+            this.Details = String.Format("Tijdstip: {0} \nLocatie: {1}\nUitgenodigden: {2} met {3}", BeginTime.Date, locationdetails.ToString(), username1, username2);
         }
 
         //TODO
@@ -60,7 +64,8 @@ namespace Class_Layer
         public static string CreateMeeting(int userIDmaker, int userIDrequester, DateTime time, int locID)
         {
             string timetable = time.ToString("dd-MMM-yyyy HH:mm:s");
-            return "";
+            Database_Layer.Database.InsertMeetingA(userIDmaker, userIDrequester, timetable, locID);
+            return "Afspraak met tijd en locatie aangemaakt!";
         }
 
         /// <summary>
@@ -73,7 +78,8 @@ namespace Class_Layer
         public static string CreateMeeting(int userIDmaker, int userIDrequester, DateTime time)
         {
             string timetable = time.ToString("dd-MMM-yyyy HH:mm:s");
-            return "";
+            Database_Layer.Database.InsertMeetingB(userIDmaker, userIDrequester, timetable);
+            return "Afspraak met tijd alleen aangemaakt!";
         }
 
         /// <summary>
@@ -85,7 +91,8 @@ namespace Class_Layer
         /// <returns></returns>
         public static string CreateMeeting(int userIDmaker, int userIDrequester, int locID)
         {
-            return "";
+            Database_Layer.Database.InsertMeetingC(userIDmaker, userIDrequester, locID);
+            return "Afspraak met locatie alleen aangemaakt!";
         }
 
         /// <summary>
@@ -96,7 +103,8 @@ namespace Class_Layer
         /// <returns></returns>
         public static string CreateMeeting(int userIDmaker, int userIDrequester)
         {
-            return "";
+            Database_Layer.Database.InsertMeetingD(userIDmaker, userIDrequester);
+            return "Afspraak aangemaakt!";
         }
 
         #endregion
@@ -113,7 +121,9 @@ namespace Class_Layer
                 foundmeetings.Add(new Meeting(
                     Convert.ToInt32(row["ID"]),
                     Convert.ToDateTime(row["Timetable"]),
-                    new Location(Convert.ToInt32(row["LOCATION_ID"]))
+                    new Location(Convert.ToInt32(row["LOCATION_ID"])),
+                    "",
+                    ""
                     ));
             }
             return foundmeetings;
@@ -132,10 +142,18 @@ namespace Class_Layer
                 foundmeetings.Add(new Meeting(
                     Convert.ToInt32(row["ID"]),
                     Convert.ToDateTime(row["Timetable"]),
-                    new Location(Convert.ToInt32(row["LOCATION_ID"]))
+                    new Location(Convert.ToInt32(row["LOCATION_ID"])),
+                    "",
+                    ""
                     ));
             }
             return foundmeetings;
+
+        }
+
+        public override string ToString()
+        {
+            return Details;
         }
     }
 }
