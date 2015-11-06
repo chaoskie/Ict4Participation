@@ -89,8 +89,8 @@ namespace Ict4Participation
                     UpdateComments();
 
                 }
-                isRefresh = false;
                 currentSelection = ind;
+                isRefresh = false;
             }
         }
 
