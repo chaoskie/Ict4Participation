@@ -303,11 +303,35 @@ namespace Admin_Layer
         {
             //TODO: Check the other strings
             //Out error message
-            this.VOGTEMP = VOG;
-            this.descriptionTEMP = description;
-            this.skillsTEMP = skills;
-            Message = "Function not yet fully implemented!";
-            return true;
+            bool filledIn = true;
+            bool rightformat = false;
+
+            string error = string.Empty; 
+
+            //Check if everything is filled in
+            if (String.IsNullOrWhiteSpace(VOG))
+            {
+                error += "Het VOG is niet opgegeven!\n"; filledIn = false;
+            }
+
+            if (filledIn)
+            {
+                rightformat = true;
+
+                if (!VOG.ToLower().Contains(".pdf"))
+                {
+                    rightformat = false;
+                }
+
+                if (rightformat)
+                {
+                    this.VOGTEMP = VOG;
+                    this.descriptionTEMP = description;
+                    this.skillsTEMP = skills;
+                }
+            }
+            Message = error;
+            return rightformat;
         }
 
         public bool RegisterAccount()
