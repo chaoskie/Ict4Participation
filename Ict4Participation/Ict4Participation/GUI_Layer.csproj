@@ -122,6 +122,12 @@
     <Compile Include="Registreren2.Designer.cs">
       <DependentUpon>Registreren2.cs</DependentUpon>
     </Compile>
+    <Compile Include="UpdateProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateProfile.Designer.cs">
+      <DependentUpon>UpdateProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Zoeken.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Registreren2.resx">
       <DependentUpon>Registreren2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateProfile.resx">
+      <DependentUpon>UpdateProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Zoeken.resx">
       <DependentUpon>Zoeken.cs</DependentUpon>
