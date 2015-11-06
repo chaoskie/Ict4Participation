@@ -45,6 +45,25 @@ namespace Admin_Layer
             LoadedComments = new List<Comment>();
         }
 
+        #region Comment handling
+
+        public void EditComment(int index, string text)
+        {
+            if (!string.IsNullOrWhiteSpace(text))
+            {
+                //TODO
+                //Comment.ChangeComment(int commentID, string text);
+            }
+        }
+
+        public void DeleteComment(int index)
+        {
+            //TODO
+            //Comment.DeleteComment(LoadedComments[index].PostID);
+        }
+
+        #endregion
+
         #region Question handling
 
         /// <summary>

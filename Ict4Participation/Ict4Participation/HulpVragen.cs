@@ -26,6 +26,8 @@ namespace Ict4Participation
         private bool allLoaded;
         private bool isRefresh;
         private bool questionOpened;
+        List<Button> Delbuttons;
+        List<Button> Editbuttons;
 
         //load in either all the questions, or their own
         public HulpVragen(Form p, Administration a, bool all)
@@ -88,6 +90,7 @@ namespace Ict4Participation
 
                 }
                 isRefresh = false;
+                currentSelection = ind;
             }
         }
 
@@ -95,35 +98,90 @@ namespace Ict4Participation
         {
             int ind = lbHulpvragen.SelectedIndex;
             //Voor panel
+            int loops = 0;
             int previousy = 0;
+            Delbuttons = new List<Button>();
+            Editbuttons = new List<Button>();
             foreach (string s in Administration.GetQuestionComments(ind))
             {
+                #region Add Label
                 //LABELS
                 //Check how many lines it'd take to give the label extra space
                 int numLines = 1;
                 using (System.Drawing.Graphics graphics = System.Drawing.Graphics.FromImage(new Bitmap(1, 1)))
                 {
                     SizeF size = graphics.MeasureString(s, new Font("Microsoft Sans Serif", 10, FontStyle.Regular, GraphicsUnit.Point));
-                    numLines = (int)Math.Ceiling(size.Width / 399) + 1;
+                    numLines = (int)Math.Ceiling(size.Width / 380) + 1;
                 }
                 var label = new Label
                 {
                     Text = s,
                     Location = new Point(50, previousy),
                     AutoSize = false,
-                    Size = new Size(400, 10 * numLines),
+                    Size = new Size(380, 10 * numLines),
                     Font = new Font("Microsoft Sans Serif", 10, FontStyle.Regular, GraphicsUnit.Point)
                 };
                 panelChat.Controls.Add(label);
+                #endregion
+
+                #region Add Delete Button
+                //REMOVE BUTTON
+                Button newDelButton = new Button
+                {
+                    Name = "btnDel" + loops.ToString(),
+                    Text = "d",
+                    Location = new Point(0, previousy),
+                    AutoSize = false,
+                    Size = new Size(18, 18),
+                    Font = new Font("Microsoft Sans Serif", 6, FontStyle.Regular, GraphicsUnit.Point)
+                };
+                Delbuttons.Add(newDelButton);
+                panelChat.Controls.Add(newDelButton);
+                #endregion
+
+                #region Add Edit Button
+                //EDIT BUTTON
+                Button newEditButton = new Button
+                {
+                    Name = "btnEdit" + loops.ToString(),
+                    Text = "e",
+                    Location = new Point(20, previousy),
+                    AutoSize = false,
+                    Size = new Size(18, 18),
+                    Font = new Font("Microsoft Sans Serif", 6, FontStyle.Regular, GraphicsUnit.Point)
+                };
+                Editbuttons.Add(newEditButton);
+                panelChat.Controls.Add(newEditButton);
+                #endregion
+
+                #region Add Button Handlers
+                newDelButton.Click += btnDeleteComment;
+                newEditButton.Click += newEditButton_Click;
+                #endregion
+
                 //Define the previous Y
                 previousy += 10 * numLines;
-
-                //BUTTONS
-
-                //Scroll down
-                panelChat.VerticalScroll.Value = panelChat.VerticalScroll.Maximum;
-                panelChat.PerformLayout();
+                loops++;
             }
+            //Scroll down
+            panelChat.VerticalScroll.Value = panelChat.VerticalScroll.Maximum;
+            panelChat.PerformLayout();
+        }
+
+        //Edit a comment
+        void newEditButton_Click(object sender, EventArgs e)
+        {
+            //Edits the comment. Possibly through a new screen
+            int index = Convert.ToInt32(((Button)sender).Name.Substring(7));
+            Administration.EditComment(index,Prompt.ShowDialog("Pas de comment aan naar de volgende text:", "Edit comment"));
+        }
+
+        //Delete a comment
+        private void btnDeleteComment(object sender, EventArgs e)
+        {
+            //Deletes the comment
+            int index = Convert.ToInt32(((Button)sender).Name.Substring(6));
+            Administration.DeleteComment(index);
         }
 
         //Replies with a comment
@@ -152,6 +210,29 @@ namespace Ict4Participation
                 Form form = new HoofdForm(Administration);
                 form.Show();
             }
+        }
+    }
+
+    public static class Prompt
+    {
+        public static string ShowDialog(string text, string caption)
+        {
+            Form prompt = new Form();
+            prompt.Width = 500;
+            prompt.Height = 150;
+            prompt.FormBorderStyle = FormBorderStyle.FixedDialog;
+            prompt.Text = caption;
+            prompt.StartPosition = FormStartPosition.CenterScreen;
+            Label textLabel = new Label() { Left = 50, Top = 20, Text = text, AutoSize = true };
+            TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 400 };
+            Button confirmation = new Button() { Text = "Pas aan!", Left = 350, Width = 100, Top = 70, DialogResult = DialogResult.OK };
+            confirmation.Click += (sender, e) => { prompt.Close(); };
+            prompt.Controls.Add(textBox);
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(textLabel);
+            prompt.AcceptButton = confirmation;
+
+            return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : "";
         }
     }
 }

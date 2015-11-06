@@ -36,6 +36,27 @@ namespace Class_Layer
         }
 
         /// <summary>
+        /// Deletes the comment with the specified ID
+        /// </summary>
+        /// <param name="id">The ID of the comment</param>
+        public static void DeleteComment(int id)
+        {
+            //TODO
+            //Call database for delete query
+        }
+
+        /// <summary>
+        /// Updates the comment with the specified ID to the specified string
+        /// </summary>
+        /// <param name="id">The ID of the comment</param>
+        /// <param name="text">The soon to be text of the comment</param>
+        public static void EditComment(int id, string text)
+        {
+            //TODO
+            //Call database for update query
+        }
+
+        /// <summary>
         /// Finds the user(name) of the posted comment
         /// </summary>
         /// <param name="postid">THe comment post id</param>
