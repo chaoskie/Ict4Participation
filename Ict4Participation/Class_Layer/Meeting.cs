@@ -59,7 +59,6 @@ namespace Class_Layer
             this.Details = String.Format("Tijdstip: {0}Locatie: {1}Uitgenodigden: {2} met {3}", BeginTime + Environment.NewLine, locinfo + Environment.NewLine, username1, username2);
         }
 
-        //TODO
         #region Create meeting, database mostly
 
         /// <summary>

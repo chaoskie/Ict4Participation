@@ -168,8 +168,10 @@ namespace Class_Layer
             return accs;
         }
 
+        //TODO
         public static Account Update(int ID, Accounttype acctype, string name, Location loc, string sex, string password, string avatarPath, string email)
         {
+            //TODO
             //Update the account through a database update query
             Account acc = null;
             Account.CreateMainAccount(ID.ToString(), password, out acc);
