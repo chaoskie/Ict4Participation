@@ -179,6 +179,7 @@ namespace Ict4Participation
             //Edits the comment. Possibly through a new screen
             int index = Convert.ToInt32(((Button)sender).Name.Substring(7));
             Administration.EditComment(index,Prompt.ShowDialog("Pas de comment aan naar de volgende text:", "Edit comment"));
+            UpdateComments();
         }
 
         //Delete a comment
@@ -187,6 +188,7 @@ namespace Ict4Participation
             //Deletes the comment
             int index = Convert.ToInt32(((Button)sender).Name.Substring(6));
             Administration.DeleteComment(index);
+            UpdateComments();
         }
 
         //Replies with a comment

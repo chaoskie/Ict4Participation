@@ -202,8 +202,8 @@ namespace Database_Layer
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand("UPDATE \"Comment\" SET \"Description\" = :B WHERE \"ID\" = :A");
-                cmd.Parameters.Add(new OracleParameter("A", commentID));
                 cmd.Parameters.Add(new OracleParameter("B", commentText));
+                cmd.Parameters.Add(new OracleParameter("A", commentID));
                 cmd.Connection = c;
                 try
                 {
