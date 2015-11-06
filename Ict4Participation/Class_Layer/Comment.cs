@@ -23,6 +23,8 @@ namespace Class_Layer
         /// </summary>
         public int PostedToID { get; private set; }
 
+        public int PosterID { get; private set; }
+
         /// <summary>
         /// Creates a new comment to be inserted into the database
         /// </summary>
@@ -39,10 +41,10 @@ namespace Class_Layer
         /// Deletes the comment with the specified ID
         /// </summary>
         /// <param name="id">The ID of the comment</param>
-        public static void DeleteComment(int id)
+        public static void DeleteComment(int id, bool isAdmin)
         {
             //Call database for delete query
-            Database_Layer.Database.RemoveComment(id);
+            Database_Layer.Database.RemoveComment(id, isAdmin);
         }
 
         /// <summary>
@@ -70,7 +72,7 @@ namespace Class_Layer
             //Fetch comments
             DataTable dt = Database_Layer.Database.RetrieveQuery(
             "SELECT * FROM "
-            + "(SELECT c.\"ID\" as CID, c.\"QUESTION_ID\" as QID, c.\"Description\" as Post, a.\"Name\" as Poster, c.\"POSTDATE\" as timet FROM \"Comment\" c "
+            + "(SELECT c.\"ID\" as CID, c.\"QUESTION_ID\" as QID, c.\"Description\" as Post, a.\"Name\" as Poster, c.\"POSTDATE\" as timet, \"PosterACC_ID\" as PosterID FROM \"Comment\" c "
             + "JOIN \"Acc\" a "
             + "ON a.\"ID\"=c.\"PosterACC_ID\") "
             + "WHERE QID = " + postID + "ORDER BY timet");
@@ -80,7 +82,9 @@ namespace Class_Layer
                 commentstr.Add(String.Format("{0}: {1}", row["Poster"].ToString(), row["Post"].ToString()));
                 Comments.Add(new Comment(
                    Convert.ToInt32(row["CID"]),
-                   row["Post"].ToString()
+                   row["Post"].ToString(),
+                   Convert.ToInt32(row["PosterID"]),
+                   Convert.ToInt32(row["QID"])
                    ));
             }
             return commentstr;
@@ -89,9 +93,11 @@ namespace Class_Layer
         /// <summary>
         /// Initializes a new instance of the <see cref="Comment"/> class.
         /// </summary>
-        private Comment(int postID, string title)
+        private Comment(int postID, string title, int posterID, int postedToID)
             : base(postID, title)
         {
+            this.PosterID = posterID;
+            this.PostedToID = postedToID;
             //nothing much
         }
     }

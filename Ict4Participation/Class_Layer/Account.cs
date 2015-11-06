@@ -69,7 +69,6 @@ namespace Class_Layer
 
         public static Account Register(string name, Location loc, string password, string avatarPath, string VOG, string description, Accounttype role, string sex, string email, out int id)
         {
-            //TODO
             //Returns: Account to set as MainUser in the admin class
             //Outs: the ID of the newly created account
             //Insert into the database

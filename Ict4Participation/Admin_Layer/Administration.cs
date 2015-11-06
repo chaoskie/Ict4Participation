@@ -47,19 +47,31 @@ namespace Admin_Layer
 
         #region Comment handling
 
+        /// <summary>
+        /// Edits the specified comment
+        /// </summary>
+        /// <param name="index">index as the same as in the loaded comment list</param>
+        /// <param name="text">text as wanted to have text</param>
         public void EditComment(int index, string text)
         {
             if (!string.IsNullOrWhiteSpace(text))
             {
-                //TODO
                 Comment.EditComment(LoadedComments[index].PostID, text);
             }
         }
 
-        public void DeleteComment(int index)
+        /// <summary>
+        /// Removes the specified comment
+        /// </summary>
+        /// <param name="index">index as the same as in the loaded comment list</param>
+        public void DeleteComment(int index, bool isAdmin = false)
         {
-            //TODO
-            Comment.DeleteComment(LoadedComments[index].PostID);
+            Comment.DeleteComment(LoadedComments[index].PostID, isAdmin);
+        }
+
+        public string GetCommentPosterID(int index)
+        {
+            return LoadedComments[index].PosterID.ToString();
         }
 
         #endregion
@@ -326,7 +338,6 @@ namespace Admin_Layer
         /// <returns></returns>
         public bool CreateAccountHPart(string VOG, string description, List<string> skills, out string Message)
         {
-            //TODO: Check the other strings
             //Out error message
             bool filledIn = true;
             bool rightformat = false;

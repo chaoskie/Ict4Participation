@@ -88,7 +88,7 @@ namespace Class_Layer
             }
             catch (Exception e)
             {
-                //TODO
+                Console.WriteLine(e.Message);
             }
             return creationSuccess;
         }
