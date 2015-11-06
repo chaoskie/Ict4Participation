@@ -47,9 +47,9 @@
             this.lblName = new System.Windows.Forms.Label();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.btnGereed = new System.Windows.Forms.Button();
-            this.tsBtnView = new System.Windows.Forms.ToolStripSplitButton();
-            this.tsBtnReviews = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsBtnMeetings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsBtnBekijkInfo = new System.Windows.Forms.ToolStripDropDownButton();
+            this.reviewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.afsprakenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbAvatar)).BeginInit();
             this.SuspendLayout();
@@ -60,7 +60,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbtnLogOut,
             this.toolStripSeparator3,
-            this.tsBtnView,
+            this.tsBtnBekijkInfo,
             this.toolStripDropDownButton1,
             this.toolStripDropDownButton2,
             this.toolStripSeparator1,
@@ -206,31 +206,31 @@
             this.btnGereed.Text = "Verander profiel";
             this.btnGereed.UseVisualStyleBackColor = true;
             // 
-            // tsBtnView
+            // tsBtnBekijkInfo
             // 
-            this.tsBtnView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsBtnView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsBtnReviews,
-            this.tsBtnMeetings});
-            this.tsBtnView.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnView.Image")));
-            this.tsBtnView.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsBtnView.Name = "tsBtnView";
-            this.tsBtnView.Size = new System.Drawing.Size(64, 24);
-            this.tsBtnView.Text = "Bekijk";
+            this.tsBtnBekijkInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsBtnBekijkInfo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reviewsToolStripMenuItem,
+            this.afsprakenToolStripMenuItem});
+            this.tsBtnBekijkInfo.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnBekijkInfo.Image")));
+            this.tsBtnBekijkInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnBekijkInfo.Name = "tsBtnBekijkInfo";
+            this.tsBtnBekijkInfo.Size = new System.Drawing.Size(61, 24);
+            this.tsBtnBekijkInfo.Text = "Bekijk";
             // 
-            // tsBtnReviews
+            // reviewsToolStripMenuItem
             // 
-            this.tsBtnReviews.Name = "tsBtnReviews";
-            this.tsBtnReviews.Size = new System.Drawing.Size(152, 24);
-            this.tsBtnReviews.Text = "Reviews";
-            this.tsBtnReviews.Click += new System.EventHandler(this.tsBtnReviews_Click);
+            this.reviewsToolStripMenuItem.Name = "reviewsToolStripMenuItem";
+            this.reviewsToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.reviewsToolStripMenuItem.Text = "Reviews";
+            this.reviewsToolStripMenuItem.Click += new System.EventHandler(this.reviewsToolStripMenuItem_Click);
             // 
-            // tsBtnMeetings
+            // afsprakenToolStripMenuItem
             // 
-            this.tsBtnMeetings.Name = "tsBtnMeetings";
-            this.tsBtnMeetings.Size = new System.Drawing.Size(152, 24);
-            this.tsBtnMeetings.Text = "Afspraken";
-            this.tsBtnMeetings.Click += new System.EventHandler(this.tsBtnMeetings_Click);
+            this.afsprakenToolStripMenuItem.Name = "afsprakenToolStripMenuItem";
+            this.afsprakenToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.afsprakenToolStripMenuItem.Text = "Afspraken";
+            this.afsprakenToolStripMenuItem.Click += new System.EventHandler(this.afsprakenToolStripMenuItem_Click);
             // 
             // HoofdForm
             // 
@@ -277,9 +277,9 @@
         private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.Button btnGereed;
         private System.Windows.Forms.ToolStripMenuItem administratorsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSplitButton tsBtnView;
-        private System.Windows.Forms.ToolStripMenuItem tsBtnReviews;
-        private System.Windows.Forms.ToolStripMenuItem tsBtnMeetings;
+        private System.Windows.Forms.ToolStripDropDownButton tsBtnBekijkInfo;
+        private System.Windows.Forms.ToolStripMenuItem reviewsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem afsprakenToolStripMenuItem;
 
     }
 }

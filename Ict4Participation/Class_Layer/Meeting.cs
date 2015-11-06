@@ -26,7 +26,7 @@ namespace Class_Layer
         /// <summary>
         /// Gets the begin time of the meeting
         /// </summary>
-        public DateTime BeginTime { get; private set; }
+        public string BeginTime { get; private set; }
 
         /// <summary>
         /// Gets the location of the meeting
@@ -41,13 +41,22 @@ namespace Class_Layer
         /// <param name="id">the ID of the meeting</param>
         /// <param name="beginTime">The begin time of the meeting</param>
         /// <param name="loc">The location of the meeting</param>
-        private Meeting(int id, DateTime beginTime, Location loc, string username1, string username2)
+        private Meeting(int id, string beginTime, Location loc, string username1, string username2)
         {
+            string locinfo = loc.ToString();
+            if (string.IsNullOrWhiteSpace(beginTime))
+            {
+                beginTime = "nog niet aangegeven";
+            }
+
+            if (loc.ToString() == " op 0 , 0")
+            {
+                locinfo = "nog niet aangegeven";
+            }
             this.BeginTime = beginTime;
             this.Loc = loc;
             this.ID = id;
-            string locationdetails = Loc.ToString();
-            this.Details = String.Format("Tijdstip: {0} \nLocatie: {1}\nUitgenodigden: {2} met {3}", BeginTime.Date, locationdetails.ToString(), username1, username2);
+            this.Details = String.Format("Tijdstip: {0}Locatie: {1}Uitgenodigden: {2} met {3}", BeginTime + Environment.NewLine, locinfo + Environment.NewLine, username1, username2);
         }
 
         //TODO
@@ -116,24 +125,29 @@ namespace Class_Layer
         public static List<Meeting> GetAllMeetings()
         {
             List<Meeting> foundmeetings = new List<Meeting>();
-            foreach (DataRow row in Database_Layer.Database.RetrieveQuery(
-                String.Format(
-                "SELECT RequesterName, RequestedName, Time, LocationID FROM"
-                + "(SELECT RequesterName, \"Name\" as RequestedName, rr, rd, Time, LocationID FROM ( "
-                + "SELECT \"Name\" as RequesterName, ac.\"ID\", me.\"RequestedACC_ID\" as rd, me.\"RequesterACC_ID\" as rr, me.\"Timetable\" as Time, me.location_id as LocationID FROM  \"Acc\" ac "
+            DataTable dt = Database_Layer.Database.RetrieveQuery(
+                "SELECT RequesterName, RequestedName, Timet, LocationID, MID FROM"
+                + "(SELECT RequesterName, \"Name\" as RequestedName, rr, rd, Timet, LocationID, MID FROM ( "
+                + "SELECT \"Name\" as RequesterName, ac.\"ID\", me.\"RequestedACC_ID\" as rd, me.\"RequesterACC_ID\" as rr, me.\"Timetable\" as Timet, me.location_id as LocationID, me.\"ID\" as MID FROM \"Acc\" ac "
                 + "JOIN \"Meeting\" me "
                 + "ON me.\"RequesterACC_ID\"=ac.\"ID\" "
                 + ") tt "
                 + "JOIN \"Acc\" ac "
                 + "ON tt.rd=ac.\"ID\" "
-                + ") ")).Rows)
+                + ") ");
+            foreach (DataRow row in dt.Rows)
             {
+                var outputParam = row["LocationID"];
+                int locID = 0;
+                if (!(outputParam is DBNull))
+                { locID = Convert.ToInt32(row["LocationID"]); }
+
                 foundmeetings.Add(new Meeting(
-                    Convert.ToInt32(row["ID"]),
-                    Convert.ToDateTime(row["Timetable"]),
-                    new Location(Convert.ToInt32(row["LOCATION_ID"])),
-                    "",
-                    ""
+                    Convert.ToInt32(row["MID"]),
+                    row["Timet"].ToString(),
+                    new Location(Convert.ToInt32(locID)),
+                    row["RequesterName"].ToString(),
+                    row["RequestedName"].ToString()
                     ));
             }
             return foundmeetings;
@@ -147,29 +161,33 @@ namespace Class_Layer
         public static List<Meeting> GetAllMeetings(int userid)
         {
             List<Meeting> foundmeetings = new List<Meeting>();
-            foreach (DataRow row in Database_Layer.Database.RetrieveQuery(
-                String.Format(
-                "SELECT RequesterName, RequestedName, Time, LocationID FROM"
-                + "(SELECT RequesterName, \"Name\" as RequestedName, rr, rd, Time, LocationID FROM ( "
-                + "SELECT \"Name\" as RequesterName, ac.\"ID\", me.\"RequestedACC_ID\" as rd, me.\"RequesterACC_ID\" as rr, me.\"Timetable\" as Time, me.location_id as LocationID FROM  \"Acc\" ac "
+            DataTable dt = Database_Layer.Database.RetrieveQuery(
+                "SELECT RequesterName, RequestedName, Timet, LocationID, MID FROM"
+                + "(SELECT RequesterName, \"Name\" as RequestedName, rr, rd, Timet, LocationID, MID FROM ( "
+                + "SELECT \"Name\" as RequesterName, ac.\"ID\", me.\"RequestedACC_ID\" as rd, me.\"RequesterACC_ID\" as rr, me.\"Timetable\" as Timet, me.location_id as LocationID, me.\"ID\" as MID FROM \"Acc\" ac "
                 + "JOIN \"Meeting\" me "
                 + "ON me.\"RequesterACC_ID\"=ac.\"ID\" "
                 + ") tt "
                 + "JOIN \"Acc\" ac "
                 + "ON tt.rd=ac.\"ID\" "
                 + ") "
-                + "WHERE rr = {0} OR rd = {1} ", userid)).Rows)
+                + "WHERE rr = " + userid + " OR rd = " + userid + " ");
+            foreach (DataRow row in dt.Rows)
             {
+                var outputParam = row["LocationID"];
+                int locID = 0;
+                if(!(outputParam is DBNull))
+                {locID = Convert.ToInt32(row["LocationID"]);}
+
                 foundmeetings.Add(new Meeting(
-                    Convert.ToInt32(row["ID"]),
-                    Convert.ToDateTime(row["Timetable"]),
-                    new Location(Convert.ToInt32(row["LOCATION_ID"])),
+                    Convert.ToInt32(row["MID"]),
+                    row["Timet"].ToString(),
+                    new Location(Convert.ToInt32(locID)),
                     row["RequesterName"].ToString(),
-                    row["RequesterName"].ToString()
+                    row["RequestedName"].ToString()
                     ));
             }
             return foundmeetings;
-
         }
 
         public override string ToString()

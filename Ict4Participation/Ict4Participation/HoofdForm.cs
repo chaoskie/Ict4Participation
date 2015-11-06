@@ -88,14 +88,17 @@ namespace Ict4Participation
         }
 
         #region view own Reviews and Meetings
-        private void tsBtnReviews_Click(object sender, EventArgs e)
+
+        private void reviewsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form form = new Afspraken(Administration, false);
+            form.Show();
         }
 
-        private void tsBtnMeetings_Click(object sender, EventArgs e)
+        private void afsprakenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form form = new Afspraken(Administration, true);
+            form.Show();
         }
         #endregion
     }

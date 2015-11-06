@@ -174,7 +174,7 @@ namespace Admin_Layer
         /// <returns>Yields a list of the tostrings</returns>
         public List<string> GetAllAccountMeetings()
         {
-            return Meeting.GetAllMeetings().Cast<string>().Select(meeting => meeting.ToString()).ToList();
+            return Meeting.GetAllMeetings().Select(meeting => meeting.Details).ToList();
         }
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace Admin_Layer
         /// <returns>Yields a list of the tostrings</returns>
         public List<string> GetMainAccountMeetings()
         {
-            return Meeting.GetAllMeetings(MainUser.AccountID).Cast<string>().Select(meeting => meeting.ToString()).ToList();
+            return Meeting.GetAllMeetings(MainUser.AccountID).Select(meeting => meeting.Details).ToList();
         }
         #endregion
 
