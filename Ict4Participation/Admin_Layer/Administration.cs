@@ -31,7 +31,7 @@ namespace Admin_Layer
         private List<Comment> LoadedComments;
         private List<Review> LoadedReviews;
         private int lastloadedOPID;
-        string emailTEMP; string nameTEMP; Location locTEMP; string passwordTEMP; string avatarPathTEMP; 
+        string emailTEMP; string nameTEMP; Location locTEMP; string passwordTEMP; string avatarPathTEMP;
         Accounttype roleTEMP; string sexTEMP; string VOGTEMP; string descriptionTEMP; List<string> skillsTEMP;
 
         /// <summary>
@@ -165,8 +165,12 @@ namespace Admin_Layer
         /// <returns>Returns the result of the action</returns>
         public string CreateMeeting(int otheruserID, DateTime time, string location)
         {
+            int locID = 0;
             Location loc = new Location(location);
-            int locID = Location.InsertLocation(loc);
+            if (!Location.ValidateLocation(loc, out locID))
+            {
+                locID = Location.InsertLocation(loc);
+            }
             return Meeting.CreateMeeting(MainUser.AccountID, otheruserID, time, locID);
         }
 
@@ -308,7 +312,7 @@ namespace Admin_Layer
             bool filledIn = true;
             bool rightformat = false;
 
-            string error = string.Empty; 
+            string error = string.Empty;
 
             //Check if everything is filled in
             if (String.IsNullOrWhiteSpace(VOG))
