@@ -349,6 +349,26 @@ namespace Database_Layer
                 c.Close();
             }
         }
+
+        public static void DeleteUser(int userID)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("UPDATE \"Acc\" SET \"Name\" = CONCAT(field,'(VERWIJDERD)') \"PassHash\" = '0' WHERE \"ID\" = :A");
+                cmd.Parameters.Add(new OracleParameter("A", userID));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException)
+                {
+                    throw;
+                }
+                c.Close();
+            }
+        }
         #endregion
 
         #region review
