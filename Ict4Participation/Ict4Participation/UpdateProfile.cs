@@ -7,15 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Data
+using Admin_Layer;
 
 namespace Ict4Participation
 {
     public partial class UpdateProfile : Form
     {
-        public UpdateProfile()
+        private Administration administration;
+
+        public UpdateProfile(Administration a)
         {
             InitializeComponent();
+            this.administration = a;
         }
 
         
