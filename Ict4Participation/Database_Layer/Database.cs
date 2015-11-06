@@ -268,6 +268,28 @@ namespace Database_Layer
                 c.Close();
             }
         }
+
+        public static void DeleteQuestion(int qID)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("DELETE FROM \"Question_Skill\" WHERE \"QUESTION_ID\" = :A;" +
+                    " DELETE FROM \"Comment\" WHERE \"QUESTION_ID\" = :A;" +
+                " DELETE FROM \"Question\" WHERE \"ID\" = :A;");
+                cmd.Parameters.Add(new OracleParameter("A", qID));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException)
+                {
+                    throw;
+                }
+                c.Close();
+            }
+        }
         #endregion
 
         #region account
@@ -337,6 +359,26 @@ namespace Database_Layer
                 OracleCommand cmd = new OracleCommand("INSERT INTO \"Acc_Skill\" (\"SKILL_NAME\",\"QUESTION_ID\") VALUES (:A, :B)");
                 cmd.Parameters.Add(new OracleParameter("A", skill));
                 cmd.Parameters.Add(new OracleParameter("B", aID));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException)
+                {
+                    throw;
+                }
+                c.Close();
+            }
+        }
+
+        public static void DeleteUser(int userID)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("UPDATE \"Acc\" SET \"Name\" = CONCAT(field,'(VERWIJDERD)') \"PassHash\" = '0' WHERE \"ID\" = :A");
+                cmd.Parameters.Add(new OracleParameter("A", userID));
                 cmd.Connection = c;
                 try
                 {
