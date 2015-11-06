@@ -84,6 +84,12 @@
     <Compile Include="Inloggen.Designer.cs">
       <DependentUpon>Inloggen.cs</DependentUpon>
     </Compile>
+    <Compile Include="MaakAfspraak.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MaakAfspraak.Designer.cs">
+      <DependentUpon>MaakAfspraak.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlaatsHulpvraag.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Inloggen.resx">
       <DependentUpon>Inloggen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MaakAfspraak.resx">
+      <DependentUpon>MaakAfspraak.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlaatsHulpvraag.resx">
       <DependentUpon>PlaatsHulpvraag.cs</DependentUpon>

@@ -101,5 +101,11 @@ namespace Ict4Participation
             form.Show();
         }
         #endregion
+
+        private void btnProfile_Click(object sender, EventArgs e)
+        {
+            Form form = new UpdateProfile(Administration);
+            form.Show();
+        }
     }
 }

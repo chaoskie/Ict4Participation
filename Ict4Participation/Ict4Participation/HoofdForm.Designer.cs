@@ -32,6 +32,9 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbtnLogOut = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsBtnBekijkInfo = new System.Windows.Forms.ToolStripDropDownButton();
+            this.reviewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.afsprakenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.tsbtnPlaceQuestion = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbtnShowRequests = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,10 +49,7 @@
             this.pbAvatar = new System.Windows.Forms.PictureBox();
             this.lblName = new System.Windows.Forms.Label();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.btnGereed = new System.Windows.Forms.Button();
-            this.tsBtnBekijkInfo = new System.Windows.Forms.ToolStripDropDownButton();
-            this.reviewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.afsprakenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnProfile = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbAvatar)).BeginInit();
             this.SuspendLayout();
@@ -84,6 +84,32 @@
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 27);
+            // 
+            // tsBtnBekijkInfo
+            // 
+            this.tsBtnBekijkInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsBtnBekijkInfo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reviewsToolStripMenuItem,
+            this.afsprakenToolStripMenuItem});
+            this.tsBtnBekijkInfo.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnBekijkInfo.Image")));
+            this.tsBtnBekijkInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsBtnBekijkInfo.Name = "tsBtnBekijkInfo";
+            this.tsBtnBekijkInfo.Size = new System.Drawing.Size(61, 24);
+            this.tsBtnBekijkInfo.Text = "Bekijk";
+            // 
+            // reviewsToolStripMenuItem
+            // 
+            this.reviewsToolStripMenuItem.Name = "reviewsToolStripMenuItem";
+            this.reviewsToolStripMenuItem.Size = new System.Drawing.Size(144, 24);
+            this.reviewsToolStripMenuItem.Text = "Reviews";
+            this.reviewsToolStripMenuItem.Click += new System.EventHandler(this.reviewsToolStripMenuItem_Click);
+            // 
+            // afsprakenToolStripMenuItem
+            // 
+            this.afsprakenToolStripMenuItem.Name = "afsprakenToolStripMenuItem";
+            this.afsprakenToolStripMenuItem.Size = new System.Drawing.Size(144, 24);
+            this.afsprakenToolStripMenuItem.Text = "Afspraken";
+            this.afsprakenToolStripMenuItem.Click += new System.EventHandler(this.afsprakenToolStripMenuItem_Click);
             // 
             // toolStripDropDownButton1
             // 
@@ -196,48 +222,23 @@
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 17;
             // 
-            // btnGereed
+            // btnProfile
             // 
-            this.btnGereed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGereed.Location = new System.Drawing.Point(257, 254);
-            this.btnGereed.Name = "btnGereed";
-            this.btnGereed.Size = new System.Drawing.Size(265, 44);
-            this.btnGereed.TabIndex = 18;
-            this.btnGereed.Text = "Verander profiel";
-            this.btnGereed.UseVisualStyleBackColor = true;
-            // 
-            // tsBtnBekijkInfo
-            // 
-            this.tsBtnBekijkInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsBtnBekijkInfo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.reviewsToolStripMenuItem,
-            this.afsprakenToolStripMenuItem});
-            this.tsBtnBekijkInfo.Image = ((System.Drawing.Image)(resources.GetObject("tsBtnBekijkInfo.Image")));
-            this.tsBtnBekijkInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsBtnBekijkInfo.Name = "tsBtnBekijkInfo";
-            this.tsBtnBekijkInfo.Size = new System.Drawing.Size(61, 24);
-            this.tsBtnBekijkInfo.Text = "Bekijk";
-            // 
-            // reviewsToolStripMenuItem
-            // 
-            this.reviewsToolStripMenuItem.Name = "reviewsToolStripMenuItem";
-            this.reviewsToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
-            this.reviewsToolStripMenuItem.Text = "Reviews";
-            this.reviewsToolStripMenuItem.Click += new System.EventHandler(this.reviewsToolStripMenuItem_Click);
-            // 
-            // afsprakenToolStripMenuItem
-            // 
-            this.afsprakenToolStripMenuItem.Name = "afsprakenToolStripMenuItem";
-            this.afsprakenToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
-            this.afsprakenToolStripMenuItem.Text = "Afspraken";
-            this.afsprakenToolStripMenuItem.Click += new System.EventHandler(this.afsprakenToolStripMenuItem_Click);
+            this.btnProfile.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProfile.Location = new System.Drawing.Point(257, 254);
+            this.btnProfile.Name = "btnProfile";
+            this.btnProfile.Size = new System.Drawing.Size(265, 44);
+            this.btnProfile.TabIndex = 18;
+            this.btnProfile.Text = "Verander profiel";
+            this.btnProfile.UseVisualStyleBackColor = true;
+            this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
             // 
             // HoofdForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 306);
-            this.Controls.Add(this.btnGereed);
+            this.Controls.Add(this.btnProfile);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.pbAvatar);
@@ -275,7 +276,7 @@
         private System.Windows.Forms.PictureBox pbAvatar;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
-        private System.Windows.Forms.Button btnGereed;
+        private System.Windows.Forms.Button btnProfile;
         private System.Windows.Forms.ToolStripMenuItem administratorsToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton tsBtnBekijkInfo;
         private System.Windows.Forms.ToolStripMenuItem reviewsToolStripMenuItem;

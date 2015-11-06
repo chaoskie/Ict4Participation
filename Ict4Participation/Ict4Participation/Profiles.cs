@@ -50,7 +50,8 @@ namespace Ict4Participation
 
         private void afspraakMakenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO
+            Form form = new MaakAfspraak(administration, userIndex);
+            form.Show();
         }
 
         private void detailsWeergevenToolStripMenuItem_Click(object sender, EventArgs e)

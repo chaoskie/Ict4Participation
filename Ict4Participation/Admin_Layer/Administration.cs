@@ -163,9 +163,11 @@ namespace Admin_Layer
         /// Arrange a meeting
         /// </summary>
         /// <returns>Returns the result of the action</returns>
-        public bool ArrangeMeeting()
+        public string CreateMeeting(int otheruserID, DateTime time, string location)
         {
-            return false;
+            Location loc = new Location(location);
+            int locID = Location.InsertLocation(loc);
+            return Meeting.CreateMeeting(MainUser.AccountID, otheruserID, time, locID);
         }
 
         /// <summary>
