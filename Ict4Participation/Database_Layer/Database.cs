@@ -377,7 +377,7 @@ namespace Database_Layer
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand("INSERT INTO \"Meeting\" (\"RequesterACC_ID\", \"RequestedACC_ID\", \"Timetable\", \"LOCATION_ID\") "+
-                "VALUES (:a, :b, :c, :d)");
+                "VALUES (:a, :b,  TO_DATE(:c, 'dd-mon-yyyy HH24:mi:ss'), :d)");
                 cmd.Parameters.Add(new OracleParameter("a", originID));
                 cmd.Parameters.Add(new OracleParameter("b", requestID));
                 cmd.Parameters.Add(new OracleParameter("c", date));
@@ -421,7 +421,7 @@ namespace Database_Layer
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand("INSERT INTO \"Meeting\" (\"RequesterACC_ID\", \"RequestedACC_ID\", \"Timetable\") " +
-                "VALUES (:a, :b, :c)");
+                "VALUES (:a, :b, TO_DATE(:c, 'dd-mon-yyyy HH24:mi:ss'))");
                 cmd.Parameters.Add(new OracleParameter("a", originID));
                 cmd.Parameters.Add(new OracleParameter("b", requestID));
                 cmd.Parameters.Add(new OracleParameter("c", date));
