@@ -23,6 +23,9 @@ namespace Ict4Participation
             InitializeComponent();
             this.administration = a;
 
+            dtpTime.Format = DateTimePickerFormat.Custom;
+            dtpTime.CustomFormat = "dd-MMM-yyyy HH:mm:s";
+
             userID = Convert.ToInt32(administration.AccountData(accIndex, 1));
             lblName.Text = username = administration.AccountData(accIndex, 2);
         }

@@ -103,6 +103,7 @@
             // 
             // dtpTime
             // 
+            this.dtpTime.CustomFormat = "";
             this.dtpTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.dtpTime.Location = new System.Drawing.Point(12, 61);
             this.dtpTime.Name = "dtpTime";
@@ -121,6 +122,7 @@
             this.Controls.Add(this.tbLoc);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblName);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MaakAfspraak";
             this.Text = "Maak afspraak";
             this.ResumeLayout(false);

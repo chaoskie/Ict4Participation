@@ -377,7 +377,7 @@ namespace Database_Layer
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand("INSERT INTO \"Meeting\" (\"RequesterACC_ID\", \"RequestedACC_ID\", \"Timetable\", \"LOCATION_ID\") "+
-                "VALUES (:a :b :c :d)");
+                "VALUES (:a, :b, :c, :d)");
                 cmd.Parameters.Add(new OracleParameter("a", originID));
                 cmd.Parameters.Add(new OracleParameter("b", requestID));
                 cmd.Parameters.Add(new OracleParameter("c", date));
@@ -400,7 +400,7 @@ namespace Database_Layer
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand("INSERT INTO \"Meeting\" (\"RequesterACC_ID\", \"RequestedACC_ID\") " +
-                "VALUES (:a :b)");
+                "VALUES (:a, :b)");
                 cmd.Parameters.Add(new OracleParameter("a", originID));
                 cmd.Parameters.Add(new OracleParameter("b", requestID));
                 cmd.Connection = c;
@@ -421,7 +421,7 @@ namespace Database_Layer
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand("INSERT INTO \"Meeting\" (\"RequesterACC_ID\", \"RequestedACC_ID\", \"Timetable\") " +
-                "VALUES (:a :b :c)");
+                "VALUES (:a, :b, :c)");
                 cmd.Parameters.Add(new OracleParameter("a", originID));
                 cmd.Parameters.Add(new OracleParameter("b", requestID));
                 cmd.Parameters.Add(new OracleParameter("c", date));
@@ -443,7 +443,7 @@ namespace Database_Layer
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand("INSERT INTO \"Meeting\" (\"RequesterACC_ID\", \"RequestedACC_ID\", \"LOCATION_ID\") " +
-                "VALUES (:a :b :d)");
+                "VALUES (:a, :b, :d)");
                 cmd.Parameters.Add(new OracleParameter("a", originID));
                 cmd.Parameters.Add(new OracleParameter("b", requestID));
                 cmd.Parameters.Add(new OracleParameter("d", locID));
