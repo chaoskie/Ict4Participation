@@ -338,7 +338,6 @@ namespace Admin_Layer
         /// <returns></returns>
         public bool CreateAccountHPart(string VOG, string description, List<string> skills, out string Message)
         {
-            //TODO: Check the other strings
             //Out error message
             bool filledIn = true;
             bool rightformat = false;
