@@ -128,8 +128,37 @@ namespace Admin_Layer
             return true;
         }
 
+        /// <summary>
+        /// Returns all the account reviews of either the poster, or the posted, specified by a bool and ID
+        /// </summary>
+        /// <param name="userid">The poster, or receiver of a review</param>
+        /// <param name="isPoster">Whether it is a poster, or a receiver (false)</param>
+        /// <returns>A list with all the details of the reviews</returns>
+        public List<string> GetAccountReviews(int userid, bool isPoster = false)
+        {
+            return Review.GetUserReviews(userid, out LoadedReviews, isPoster);
+        }
+
+        /// <summary>
+        /// Returns all the account reviews
+        /// </summary>
+        /// <returns>A list with all the details of the reviews</returns>
+        public List<string> GetAccountReviews()
+        {
+            return Review.GetAllUserReviews(out LoadedReviews);
+        }
+
+        /// <summary>
+        /// Returns all the account reviews of the main user
+        /// </summary>
+        /// <returns>A list with all the details of the reviews</returns>
+        public List<string> GetAccountReviews(bool isPoster = false)
+        {
+            return Review.GetUserReviews(MainUser.AccountID, out LoadedReviews, isPoster);
+        }
         #endregion
 
+        #region Meeting handling
         /// <summary>
         /// Arrange a meeting
         /// </summary>
@@ -139,6 +168,11 @@ namespace Admin_Layer
             return false;
         }
 
+        public List<string> GetAccountMeetings()
+        {
+            return null;
+        }
+        #endregion
 
         #region Account handling
 
@@ -343,34 +377,6 @@ namespace Admin_Layer
             }
         }
 
-        /// <summary>
-        /// Returns all the account reviews of either the poster, or the posted, specified by a bool and ID
-        /// </summary>
-        /// <param name="userid">The poster, or receiver of a review</param>
-        /// <param name="isPoster">Whether it is a poster, or a receiver (false)</param>
-        /// <returns>A list with all the details of the reviews</returns>
-        public List<string> GetAccountReviews(int userid, bool isPoster = false)
-        {
-            return Review.GetUserReviews(userid, out LoadedReviews, isPoster);
-        }
-
-        /// <summary>
-        /// Returns all the account reviews
-        /// </summary>
-        /// <returns>A list with all the details of the reviews</returns>
-        public List<string> GetAccountReviews()
-        {
-            return Review.GetAllUserReviews(out LoadedReviews);
-        }
-
-        /// <summary>
-        /// Returns all the account reviews of the main user
-        /// </summary>
-        /// <returns>A list with all the details of the reviews</returns>
-        public List<string> GetAccountReviews(bool isPoster = false)
-        {
-            return Review.GetUserReviews(MainUser.AccountID, out LoadedReviews, isPoster);
-        }
         #endregion
 
         #region encoding and decoding of text to HTML and back

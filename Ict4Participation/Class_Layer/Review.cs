@@ -94,13 +94,7 @@ namespace Class_Layer
                     row["Description"].ToString()
                     ));
             }
-
-            List<string> reviewdetails = new List<string>();
-            foreach (Review r in reviews)
-            {
-                reviewdetails.Add(r.Rating + " " + r.Title);
-            }
-            return reviewdetails;
+            return GetDetails(reviews);
         }
 
         /// <summary>
@@ -123,11 +117,20 @@ namespace Class_Layer
                     row["Description"].ToString()
                     ));
             }
+            return GetDetails(reviews);
+        }
 
+        /// <summary>
+        /// Gets the details of a list of reviews
+        /// </summary>
+        /// <param name="reviews">the reviews</param>
+        /// <returns>Yields the detailed information</returns>
+        private static List<string> GetDetails(List<Review> reviews)
+        {
             List<string> reviewdetails = new List<string>();
             foreach (Review r in reviews)
             {
-                reviewdetails.Add(r.Rating + " " + r.Title);
+                reviewdetails.Add(String.Format("{0}-Sterren: {1} \n{2}",r.Rating, r.Title, r.Description));
             }
             return reviewdetails;
         }
