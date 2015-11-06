@@ -36,6 +36,12 @@ namespace Ict4Participation
             this.allLoaded = all;
             this.questionOpened = false;
 
+            //Check if the user is a 'hulpverlener', which in that case, they should not be allowed to do as much as usual.
+            if (this.Administration.MainAccountData(6) == "Hulpverlener")
+            {
+                btnNieuw.Enabled = false;
+            }
+
             //load in questions
             lbHulpvragen.DataSource = Administration.GetQuestionNames(allLoaded);
         }

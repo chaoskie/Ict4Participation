@@ -28,6 +28,13 @@ namespace Ict4Participation
             this.InitializeComponent();
             this.Administration = a;
 
+            //Check if the user is a 'hulpverlener', which in that case, they should not be allowed to do as much as usual.
+            if (this.Administration.MainAccountData(6) == "Hulpverlener")
+            {
+                tsbtnPlaceQuestion.Visible = false;
+                tsbtnShowOwnRequests.Visible = false;
+            }
+
             lblName.Text = a.MainAccountData(2);
             pbAvatar.ImageLocation = a.MainAccountData(4);
         }

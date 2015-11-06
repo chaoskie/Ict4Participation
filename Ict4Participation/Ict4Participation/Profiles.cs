@@ -32,6 +32,12 @@ namespace Ict4Participation
             this.administration = a;
             this.userIndex = accIndex;
 
+            //Check if the user is a 'hulpverlener', which in that case, they should not be allowed to do as much as usual.
+            if (this.administration.MainAccountData(6) == "Hulpverlener")
+            {
+                plaatsenToolStripMenuItem.Visible = false;
+            }
+
             userID = Convert.ToInt32(administration.AccountData(accIndex, 1));
             pbAvatar.ImageLocation = administration.AccountData(accIndex, 4);
             lblName.Text = username = administration.AccountData(accIndex, 2);
