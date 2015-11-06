@@ -85,7 +85,7 @@ namespace Ict4Participation
 
         private void btnChoosePhoto_Click(object sender, EventArgs e)
         {
-            ofd.DefaultExt = ".png";
+            ofd.DefaultExt = ".jpg";
             ofd.Filter = "All Files (*.*)|*.*|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|BMP Files (*.bmp)|*.bmp|GIF Files (*.gif)|*.gif|JPEG Files (*.jpeg)|*.jpeg";
             string filename = string.Empty;
 

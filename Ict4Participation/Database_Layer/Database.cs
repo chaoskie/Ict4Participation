@@ -124,7 +124,7 @@ namespace Database_Layer
         }
 
         */
-#endregion
+        #endregion
 
         #region comments
         /// <summary>
@@ -156,14 +156,66 @@ namespace Database_Layer
             }
         }
 
-        public static void RemoveComment(int commentID)
+        public static void RemoveComment(int commentID, bool adminDel)
         {
-            //TODO
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                if (adminDel) //when an admin deletes the comment
+                {
+                    OracleCommand cmd = new OracleCommand("UPDATE \"Comment\" SET \"Description\" = 'Administrator heeft reactie verwijderd.' WHERE \"ID\" = :A");
+                    cmd.Parameters.Add(new OracleParameter("A", commentID));
+                    cmd.Connection = c;
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (OracleException e)
+                    {
+                        Console.WriteLine(e.Message);
+                        throw;
+                    }
+                    c.Close();
+                }
+                else //when a user deletes the comment
+                {
+                    OracleCommand cmd = new OracleCommand("UPDATE \"Comment\" SET \"Description\" = 'Gebruiker heeft reactie verwijderd.' WHERE \"ID\" = :A");
+                    cmd.Parameters.Add(new OracleParameter("A", commentID));
+                    cmd.Connection = c;
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (OracleException e)
+                    {
+                        Console.WriteLine(e.Message);
+                        throw;
+                    }
+                    c.Close();
+                }
+            }
         }
 
         public static void UpdateComment(int commentID, string commentText)
         {
-            //TODO
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("UPDATE \"Comment\" SET \"Description\" = :B WHERE \"ID\" = :A");
+                cmd.Parameters.Add(new OracleParameter("A", commentID));
+                cmd.Parameters.Add(new OracleParameter("B", commentText));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw;
+                }
+                c.Close();
+            }
         }
 
         #endregion
@@ -300,12 +352,12 @@ namespace Database_Layer
         #endregion
 
         #region review
-        public static void InsertReview(int rating, string title, int postedToID, int posterID ,string desc)
+        public static void InsertReview(int rating, string title, int postedToID, int posterID, string desc)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("INSERT INTO \"Review\" (\"Rating\", \"Title\", \"PostedACC_ID\", \"PosterACC_ID\", \"Description\") "+
+                OracleCommand cmd = new OracleCommand("INSERT INTO \"Review\" (\"Rating\", \"Title\", \"PostedACC_ID\", \"PosterACC_ID\", \"Description\") " +
                     "VALUES (:a, :b, :c, :d, :e)");
                 cmd.Parameters.Add(new OracleParameter("a", rating));
                 cmd.Parameters.Add(new OracleParameter("b", title));
@@ -334,7 +386,7 @@ namespace Database_Layer
             {
                 //String.Format("INSERT INTO \"Location\" (\"Longitude\", \"Latitude\", \"Description\") VALUES ('{0}', '{1}', '{2}')",
                 c.Open();
-                OracleCommand cmd = new OracleCommand("INSERT INTO \"Location\" (\"Longitude\", \"Latitude\", \"Description\") "+
+                OracleCommand cmd = new OracleCommand("INSERT INTO \"Location\" (\"Longitude\", \"Latitude\", \"Description\") " +
                     "VALUES (:a, :b, :c)");
                 cmd.Parameters.Add(new OracleParameter("a", Long));
                 cmd.Parameters.Add(new OracleParameter("b", Lat));
@@ -372,7 +424,7 @@ namespace Database_Layer
                 }
                 catch (Exception e)
                 {
-                    string debug = e.Message; 
+                    string debug = e.Message;
                     c.Close();
                     throw;
                 }
@@ -386,7 +438,7 @@ namespace Database_Layer
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("INSERT INTO \"Meeting\" (\"RequesterACC_ID\", \"RequestedACC_ID\", \"Timetable\", \"LOCATION_ID\") "+
+                OracleCommand cmd = new OracleCommand("INSERT INTO \"Meeting\" (\"RequesterACC_ID\", \"RequestedACC_ID\", \"Timetable\", \"LOCATION_ID\") " +
                 "VALUES (:a, :b,  TO_DATE(:c, 'dd-mon-yyyy HH24:mi:ss'), :d)");
                 cmd.Parameters.Add(new OracleParameter("a", originID));
                 cmd.Parameters.Add(new OracleParameter("b", requestID));
