@@ -100,7 +100,14 @@ namespace Admin_Layer
         /// <returns>A list regarding these names</returns>
         public List<string> GetQuestionNames(bool all = true)
         {
-            LoadedQuestions = Question.FindQuestions(all, MainUser.AccountID);
+            if (!all)
+            {
+                LoadedQuestions = Question.FindQuestions(all, MainUser.AccountID);
+            }
+            else
+            {
+                LoadedQuestions = Question.FindQuestions(all);
+            }
             return LoadedQuestions.Cast<Question>().Select(x => x.Title).ToList();
         }
 

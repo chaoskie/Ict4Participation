@@ -30,7 +30,7 @@ namespace Ict4Participation
             this.previous = p;
 
             // Select first index of lbRubrics
-            this.lbRubrics.SelectedIndex = 0;
+            this.lbTables.SelectedIndex = 0;
         }
 
         private void AdminForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -41,7 +41,7 @@ namespace Ict4Participation
         private void lbRubrics_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Get selected item from lbRubrics
-            string itemText = lbRubrics.SelectedItem.ToString();
+            string itemText = lbTables.SelectedItem.ToString();
 
             // Get subitems from item through administration class
             List<string> list = null;
@@ -51,7 +51,7 @@ namespace Ict4Participation
                     list = this.Administration.GetQuestionNames();
                     break;
                 case "gebruikers":
-                    list = this.Administration.GetAccounts("All");
+                    list = this.Administration.GetAccounts();
                     break;
                 case "reviews":
                     list = this.Administration.GetAccountReviews();
@@ -59,47 +59,98 @@ namespace Ict4Participation
             }
 
             // Clear and Fill lbPosts with the subitems
-            this.lbPosts.DataSource = null;
-            this.lbPosts.DataSource = list;
+            this.lbPost.DataSource = null;
+            this.lbPost.DataSource = list;
         }
 
         private void lbPosts_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Get selected item from lbPosts
-            Object itemText = lbPosts.SelectedItem;
+            int index = lbPost.SelectedIndex;
+            if (index != -1)
+            {
+                lbPostDetails.Items.Clear();
+                lbPostComments.Items.Clear();
 
-            // Get post through administration class
-            List<Object> list = null;
+                // Clear and fill lbPostDetails with post details
+                // And clear and fill lbPostComments with post comments
+                if (lbTables.SelectedIndex == 0)
+                {
+                    #region Questions
+                    string[] str = Administration.GetQuestionDetails(index, true).Split('\n');
+                    foreach (string s in str)
+                    {
+                        lbPostDetails.Items.Add(s);
+                    }
 
-            //if (typeof(Object).Name == )
-
-            // Clear and Fill lbPostDetails with post details
-
-            // Clear and Fill lbPostComments with post comments
-
-            // Set lblPostOwner text to post owner
-
-            // Set lblPostDate text to post date
+                    List<string> comments = Administration.GetQuestionComments(index);
+                    foreach (string s in comments)
+                    {
+                        lbPostComments.Items.Add(s);
+                    }
+                    #endregion
+                }
+                if (lbTables.SelectedIndex == 1)
+                {
+                    #region Users
+                    lbPostDetails.Items.Add(Administration.AccountData(index,1));
+                    lbPostDetails.Items.Add(Administration.AccountData(index,2));
+                    lbPostDetails.Items.Add(Administration.AccountData(index,3));
+                    lbPostDetails.Items.Add(Administration.AccountData(index,4));
+                    lbPostDetails.Items.Add(Administration.AccountData(index,5));
+                    lbPostDetails.Items.Add(Administration.AccountData(index,6));
+                    lbPostDetails.Items.Add(Administration.AccountData(index,7));
+                    lbPostDetails.Items.Add(Administration.AccountData(index,8));
+                    #endregion
+                }
+                if (lbTables.SelectedIndex == 2)
+                {
+                    #region Reviews
+                    #endregion
+                }
+            }
         }
 
         private void btnEditPost_Click(object sender, EventArgs e)
         {
-            // Edit post
+            //TODO
+            // Call for right administration function to edit the desired class
+            // As wel as update it into the database
+
+            //Refresh list
         }
 
         private void btnDeletePost_Click(object sender, EventArgs e)
         {
-            // Delete post
+            //TODO
+            // Check which table is selected
+            // Call for right administration function to delete the right 'post'
+
+            //Refresh list
         }
 
         private void btnEditComment_Click(object sender, EventArgs e)
         {
+            //TODO
+            //Check is anything is selected
             // Edit comment
+            // Call for prompt to fill in other details
+            // Check selectionindex
+            // Call right administration function to fullfill desires, based on index
+            // LOADED IN COMMENTS ARE BASED ON THE SAME INDEX
+
+            //Refresh list
         }
 
         private void btnDeleteComment_Click(object sender, EventArgs e)
         {
+            //TODO
+            //Check if anything is selected
             // Delete comment
+            // Call right administration to delete right comment, based on index
+            // LOADED IN COMMENTS ARE BASED ON THE SAME INDEX
+
+            //Refresh list
         }
     }
 }

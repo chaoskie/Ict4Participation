@@ -32,7 +32,7 @@ namespace Ict4Participation
              //Clipboard.SetText(Administration.giveTestHash());
 
             //if admin, continue to other screen with details
-            if (usbAdmin)
+            if (true)
             {
                 AdminForm form = new AdminForm(this, this.Administration);
                 form.Show();
