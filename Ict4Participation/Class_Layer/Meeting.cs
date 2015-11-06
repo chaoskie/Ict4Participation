@@ -78,7 +78,7 @@ namespace Class_Layer
         public static string CreateMeeting(int userIDmaker, int userIDrequester, DateTime time)
         {
             string timetable = time.ToString("dd-MMM-yyyy HH:mm:s");
-            Database_Layer.Database.InsertMeetingB(userIDmaker, userIDrequester, timetable);
+            Database_Layer.Database.InsertMeetingA(userIDmaker, userIDrequester, timetable);
             return "Afspraak met tijd alleen aangemaakt!";
         }
 
@@ -91,7 +91,7 @@ namespace Class_Layer
         /// <returns></returns>
         public static string CreateMeeting(int userIDmaker, int userIDrequester, int locID)
         {
-            Database_Layer.Database.InsertMeetingC(userIDmaker, userIDrequester, locID);
+            Database_Layer.Database.InsertMeetingA(userIDmaker, userIDrequester, locID);
             return "Afspraak met locatie alleen aangemaakt!";
         }
 
@@ -103,7 +103,7 @@ namespace Class_Layer
         /// <returns></returns>
         public static string CreateMeeting(int userIDmaker, int userIDrequester)
         {
-            Database_Layer.Database.InsertMeetingD(userIDmaker, userIDrequester);
+            Database_Layer.Database.InsertMeetingA(userIDmaker, userIDrequester);
             return "Afspraak aangemaakt!";
         }
 
