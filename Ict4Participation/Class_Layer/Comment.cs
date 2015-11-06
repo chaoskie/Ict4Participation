@@ -41,8 +41,8 @@ namespace Class_Layer
         /// <param name="id">The ID of the comment</param>
         public static void DeleteComment(int id)
         {
-            //TODO
             //Call database for delete query
+            Database_Layer.Database.RemoveComment(id);
         }
 
         /// <summary>
@@ -52,8 +52,8 @@ namespace Class_Layer
         /// <param name="text">The soon to be text of the comment</param>
         public static void EditComment(int id, string text)
         {
-            //TODO
             //Call database for update query
+            Database_Layer.Database.UpdateComment(id, text);
         }
 
         /// <summary>

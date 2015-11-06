@@ -52,14 +52,14 @@ namespace Admin_Layer
             if (!string.IsNullOrWhiteSpace(text))
             {
                 //TODO
-                //Comment.ChangeComment(int commentID, string text);
+                Comment.EditComment(LoadedComments[index].PostID, text);
             }
         }
 
         public void DeleteComment(int index)
         {
             //TODO
-            //Comment.DeleteComment(LoadedComments[index].PostID);
+            Comment.DeleteComment(LoadedComments[index].PostID);
         }
 
         #endregion

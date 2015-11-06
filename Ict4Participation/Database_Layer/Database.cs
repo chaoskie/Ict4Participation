@@ -156,6 +156,16 @@ namespace Database_Layer
             }
         }
 
+        public static void RemoveComment(int commentID)
+        {
+            //TODO
+        }
+
+        public static void UpdateComment(int commentID, string commentText)
+        {
+            //TODO
+        }
+
         #endregion
 
         #region Question
