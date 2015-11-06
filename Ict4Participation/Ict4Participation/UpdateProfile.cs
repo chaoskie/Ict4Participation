@@ -14,6 +14,7 @@ namespace Ict4Participation
     public partial class UpdateProfile : Form
     {
         private Administration administration;
+        OpenFileDialog ofd = new OpenFileDialog();
 
         public UpdateProfile(Administration a)
         {
@@ -38,6 +39,28 @@ namespace Ict4Participation
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnChoosePhoto_Click(object sender, EventArgs e)
+        {
+            ofd.DefaultExt = ".png";
+            ofd.Filter = "All Files (*.*)|*.*|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|BMP Files (*.bmp)|*.bmp|GIF Files (*.gif)|*.gif|JPEG Files (*.jpeg)|*.jpeg";
+            string filename = string.Empty;
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                filename = ofd.FileName;
+                if (filename.ToLower().Contains(".jpg") || filename.ToLower().Contains(".png") ||
+                        filename.ToLower().Contains(".bmp") || filename.ToLower().Contains(".gif") ||
+                        filename.ToLower().Contains(".jpeg"))
+                {
+                    this.tbPhotoPath.Text = filename;
+                }
+                else
+                {
+                    MessageBox.Show("Profielfoto is geen afbeelding!");
+                }
+            }
         }
     }
 }

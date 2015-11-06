@@ -390,8 +390,39 @@ namespace Admin_Layer
         /// <returns>Whether it was a success or not</returns>
         public bool EditAccount(string name, string address, string city, string sex, string password, string avatarPath, string email, out string error)
         {
-            error = "Not implented yet!";
-            return false;
+            bool rightFormat = true;
+            error = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                if (Regex.IsMatch(name, @"^[A-Z][A-Za-z\.]*(?:\s[A-Za-z][a-z]+)+$") == false)
+                {
+                    rightFormat = false;
+                    error += "Naam is niet correct!\n";
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(sex))
+            {
+                if (!Regex.IsMatch(sex, @"^[MF]$"))
+                {
+                    rightFormat = false;
+                    error += "Geslacht is niet correct!\n";
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(password))
+            {
+                if (!Regex.IsMatch(password, @"^(?=.*[^a-zA-Z])(?=.*[a-z])(?=.*[A-Z])\S{8,}$"))
+                {
+                    rightFormat = false;
+                    error += "Het wachtwoord is niet sterk genoeg! Minimaal 1 hoofdletter, 1 kleine letter en 1 nummer/speciaal karakter.";
+                }
+            }
+            //TODO
+            //MainUser = Account.Update(all the parameters);
+
+            return rightFormat;
         }
 
         /// <summary>

@@ -88,6 +88,7 @@
             this.btnChoosePhoto.TabIndex = 15;
             this.btnChoosePhoto.Text = "Bladeren...";
             this.btnChoosePhoto.UseVisualStyleBackColor = true;
+            this.btnChoosePhoto.Click += new System.EventHandler(this.btnChoosePhoto_Click);
             // 
             // label6
             // 
