@@ -159,7 +159,8 @@
             this.cbRoles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbRoles.FormattingEnabled = true;
             this.cbRoles.Items.AddRange(new object[] {
-            "Vrijwilliger"});
+            "Hulpbehoevende",
+            "Hulpverlener"});
             this.cbRoles.Location = new System.Drawing.Point(110, 25);
             this.cbRoles.Name = "cbRoles";
             this.cbRoles.Size = new System.Drawing.Size(194, 28);

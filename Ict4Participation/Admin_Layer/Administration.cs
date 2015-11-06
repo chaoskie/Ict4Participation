@@ -362,6 +362,15 @@ namespace Admin_Layer
         {
             return Review.GetAllUserReviews(out LoadedReviews);
         }
+
+        /// <summary>
+        /// Returns all the account reviews of the main user
+        /// </summary>
+        /// <returns>A list with all the details of the reviews</returns>
+        public List<string> GetAccountReviews(bool isPoster = false)
+        {
+            return Review.GetUserReviews(MainUser.AccountID, out LoadedReviews, isPoster);
+        }
         #endregion
 
         #region encoding and decoding of text to HTML and back

@@ -31,7 +31,6 @@ namespace Ict4Participation
             this.previous = p;
             this.Administration = a;
 
-            this.cbRoles.DataSource = Administration.AllAccountTypes();
             this.cbRoles.SelectedIndex = 0;
             this.cbSex.SelectedIndex = 0;
         }

@@ -35,7 +35,7 @@ namespace Ict4Participation
         //Closes the entire app
         private void HoofdForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-
+            Application.Exit();
         }
 
         //Logs the user out
@@ -56,7 +56,6 @@ namespace Ict4Participation
             this.Hide();
         }
 
-        //TODO
         #region Requests / Help questions
 
 
@@ -87,5 +86,17 @@ namespace Ict4Participation
             Form form = new Zoeken(false, Administration);
             form.Show();
         }
+
+        #region view own Reviews and Meetings
+        private void tsBtnReviews_Click(object sender, EventArgs e)
+        {
+            Form form = new Afspraken(Administration, false);
+        }
+
+        private void tsBtnMeetings_Click(object sender, EventArgs e)
+        {
+            Form form = new Afspraken(Administration, true);
+        }
+        #endregion
     }
 }

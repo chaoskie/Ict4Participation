@@ -28,30 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.tbInformation = new System.Windows.Forms.TextBox();
+            this.lblType = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // tbInformation
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.tbInformation.Location = new System.Drawing.Point(12, 32);
+            this.tbInformation.Multiline = true;
+            this.tbInformation.Name = "tbInformation";
+            this.tbInformation.ReadOnly = true;
+            this.tbInformation.Size = new System.Drawing.Size(310, 339);
+            this.tbInformation.TabIndex = 0;
+            // 
+            // lblType
+            // 
+            this.lblType.AutoSize = true;
+            this.lblType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lblType.Location = new System.Drawing.Point(12, 9);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(43, 20);
+            this.lblType.TabIndex = 5;
+            this.lblType.Text = "type:";
             // 
             // Afspraken
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 383);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblType);
+            this.Controls.Add(this.tbInformation);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Afspraken";
-            this.Text = "Afspraken";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Afspraken_FormClosed);
+            this.Text = "Informatie";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -59,7 +70,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbInformation;
+        private System.Windows.Forms.Label lblType;
+
     }
 }
 

@@ -13,23 +13,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Admin_Layer;
 
 namespace Ict4Participation
 {
     public partial class Afspraken : Form
     {
-        private Form previous;
+        private Administration administration;
+        private bool containsMeetings;
 
-        public Afspraken(Form p)
+        public Afspraken(Administration a, bool loadMeeting)
         {
             this.InitializeComponent();
+            administration = a;
 
-            this.previous = p;
-        }
+            lblType.Text = loadMeeting ? "Afspraken:" : "Reviews";
+            containsMeetings = loadMeeting;
 
-        private void Afspraken_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            this.previous.Show();
+            if (loadMeeting)
+            {
+                //TODO
+                //Load meetings
+            }
+            else
+            {
+                //If the logged in user is a 'hulpverlener', he wants to see the reviews posted to his account
+                //If the logged in user is a 'hulpbehoevende', he wants to see the reviews he posted to people
+                bool isPoster = administration.MainAccountData(6) == "Hulpverlener" ? false : true;
+                foreach (string s in administration.GetAccountReviews(isPoster))
+                {
+                    tbInformation.Text += s + Environment.NewLine;
+                }
+            }
         }
     }
 }

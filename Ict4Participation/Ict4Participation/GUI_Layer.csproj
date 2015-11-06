@@ -125,6 +125,9 @@
     <EmbeddedResource Include="AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Afspraken.resx">
+      <DependentUpon>Afspraken.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HoofdForm.resx">
       <DependentUpon>HoofdForm.cs</DependentUpon>
     </EmbeddedResource>
