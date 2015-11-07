@@ -122,12 +122,9 @@ namespace Ict4Participation
 
         private void btnEditPost_Click(object sender, EventArgs e)
         {
+
             if (lbPost.SelectedIndex != -1)
             {
-
-                // Call for right administration function to edit the desired class
-                // As well as update it into the database
-
                 #region Question editing
                 if (lbTables.SelectedIndex == 0)
                 {
@@ -323,29 +320,14 @@ namespace Ict4Participation
                 #region Review editing
                 if (lbTables.SelectedIndex == 2)
                 {
-
-                }
-                #endregion
-            }
-        }
-
-
-        /*
-        public delegate TV EditFunc<in T, in T2, TU, out TV>(T input, T2 input, out TU output);
-
-        static bool Handler(int index, string edit, out string Error);
-
-        EditFunc<int, string, string, bool> func = Handler;
-
-
-        private void Handle(///CORRECT ADMINISTRATION METHOD///, object sender, EventArgs e)
-        {
-            string edit = Prompt.ShowDialog("Pas de gebruiker aan naar het volgende: ", "Aanpassen");
+                    //Edit rating
+                    if (lbPostDetails.SelectedIndex == 0)
+                    {
+                        string edit = Prompt.ShowDialog("Pas de rating aan naar het volgende: ", "Aanpassen");
                         string error;
-                        //Validate username (to check if it exists)
-                        if (///THAT METHOD/// == true)
+                        if (Administration.ChangeReviewRating(lbPostDetails.SelectedIndex, edit, out error))
                         {
-                            MessageBox.Show("Hulpvraag aangepast!");
+                            MessageBox.Show("Review aangepast!");
                             //Refresh
                         }
                         else
@@ -354,39 +336,105 @@ namespace Ict4Participation
                             Clipboard.SetText(edit);
                             btnEditPost_Click(sender, e);
                         }
-        }*/
+                    }
+                    //Edit title
+                    if (lbPostDetails.SelectedIndex == 1)
+                    {
+                        string edit = Prompt.ShowDialog("Pas de titel aan naar het volgende: ", "Aanpassen");
+                        string error;
+                        if (Administration.ChangeReviewTitle(lbPostDetails.SelectedIndex, edit, out error))
+                        {
+                            MessageBox.Show("Review aangepast!");
+                            //Refresh
+                        }
+                        else
+                        {
+                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
+                            Clipboard.SetText(edit);
+                            btnEditPost_Click(sender, e);
+                        }
+                    }
+                    //Edit description
+                    if (lbPostDetails.SelectedIndex == 3)
+                    {
+                        string edit = Prompt.ShowDialog("Pas de beschrijving aan naar het volgende: ", "Aanpassen");
+                        string error;
+                        if (Administration.ChangeReviewDescription(lbPostDetails.SelectedIndex, edit, out error))
+                        {
+                            MessageBox.Show("Review aangepast!");
+                            //Refresh
+                        }
+                        else
+                        {
+                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
+                            Clipboard.SetText(edit);
+                            btnEditPost_Click(sender, e);
+                        }
+                    }
+                }
+                #endregion
+            }
+        }
 
         private void btnDeletePost_Click(object sender, EventArgs e)
         {
             //TODO
-            // Check which table is selected
-            // Call for right administration function to delete the right 'post'
+            //If question is selected
+            if (lbTables.SelectedIndex == 0)
+            {
+
+            }
+            //If user is selected
+            if (lbTables.SelectedIndex == 1)
+            {
+
+            }
+            //If review is selected
+            if (lbTables.SelectedIndex == 2)
+            {
+
+            }
 
             //Refresh list
+            Refresh();
         }
 
         private void btnEditComment_Click(object sender, EventArgs e)
         {
-            //TODO
-            //Check is anything is selected
-            // Edit comment
-            // Call for prompt to fill in other details
-            // Check selectionindex
-            // Call right administration function to fullfill desires, based on index
-            // LOADED IN COMMENTS ARE BASED ON THE SAME INDEX
+            //Check if anything is selected
+            if (lbPostComments.SelectedIndex != -1)
+            {
+                // Edit comment
+                // Call for prompt to fill in other details
+                // Check selectionindex
+                // Call right administration function to fullfill desires, based on index
+                Administration.EditComment(lbPostComments.SelectedIndex, Prompt.ShowDialog("Pas de comment aan naar de volgende text:", "Edit comment"));
+                // LOADED IN COMMENTS ARE BASED ON THE SAME INDEX
 
-            //Refresh list
+                //Refresh list
+                Refresh();
+            }
         }
 
         private void btnDeleteComment_Click(object sender, EventArgs e)
         {
-            //TODO
             //Check if anything is selected
-            // Delete comment
-            // Call right administration to delete right comment, based on index
-            // LOADED IN COMMENTS ARE BASED ON THE SAME INDEX
+            if (lbPostComments.SelectedIndex != -1)
+            {
+                // Delete comment
+                // Call right administration to delete right comment, based on index
+                Administration.DeleteComment(lbPostComments.SelectedIndex);
+                // LOADED IN COMMENTS ARE BASED ON THE SAME INDEX
 
-            //Refresh list
+                //Refresh list
+                Refresh();
+            }
+        }
+
+        private void Refresh()
+        {
+            lbTables.SelectedIndex = 0;
+            lbTables.SelectedIndex = 1;
         }
     }
 }

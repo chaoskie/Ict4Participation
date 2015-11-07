@@ -71,6 +71,11 @@ namespace Class_Layer
             return String.Format("{0}-sterren review geplaatst!", rating);
         }
 
+        public static void Update(int postID, int rating, string title, string desc)
+        {
+            //TODO
+        }
+
         /// <summary>
         /// Yields all the reviews from the database, matching the user ID
         /// </summary>

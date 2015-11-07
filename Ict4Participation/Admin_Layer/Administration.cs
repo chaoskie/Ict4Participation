@@ -355,6 +355,24 @@ namespace Admin_Layer
             return true;
         }
 
+        public bool ChangeReviewRating(int index, string edit, out string error)
+        {
+            error = "Niets ingevuld!";
+            return false;
+        }
+
+        public bool ChangeReviewTitle(int index, string edit, out string error)
+        {
+            error = "Niets ingevuld!";
+            return false;
+        }
+
+        public bool ChangeReviewDescription(int index, string edit, out string error)
+        {
+            error = "Niets ingevuld!";
+            return false;
+        }
+
         /// <summary>
         /// Returns all the account reviews of either the poster, or the posted, specified by a bool and ID
         /// </summary>
