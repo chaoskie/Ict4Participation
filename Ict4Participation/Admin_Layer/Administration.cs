@@ -1084,6 +1084,25 @@ namespace Admin_Layer
             rt.Add(a.Email);
             return rt;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="password">given password of the user</param>
+        /// <param name="ID">id number of the current user</param>
+        /// <returns>a boolean that confirms if the password provided is correct with the original</returns>
+        public bool CheckPass(string password, int ID)
+        {
+            string hash = Class_Layer.Account.GetPasswordHash(ID);
+            if ((hash == string.Empty) || (hash == "0"))
+            {
+                return false;
+            }
+            else
+            {
+                bool correct = Class_Layer.PasswordHashing.ValidatePassword(password, hash);
+                return correct;
+            }
+        }
         #endregion
 
         #region Testing Methods

@@ -167,6 +167,19 @@ namespace Class_Layer
             return accs;
         }
 
+        public static string GetPasswordHash(int ID)
+        {
+            string salt = string.Empty;
+            string hash = string.Empty;
+            DataTable dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc\" WHERE \"ID\" = " + ID);
+            foreach (DataRow row in dt.Rows)
+            {
+              hash = row["PassHash"].ToString();
+               salt = row["Salt"].ToString();
+            }
+            return (salt + hash);
+        }
+
         //TODO
         public static Account Update(int ID, Accounttype acctype, string name, Location loc, string sex, string password, string avatarPath, string email)
         {
