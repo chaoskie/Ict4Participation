@@ -188,8 +188,14 @@ namespace Class_Layer
             {
                 locID = Location.InsertLocation(loc);
             }
-            string hashed = Class_Layer.PasswordHashing.CreateHash(password);
-            Database_Layer.Database.UpdateUser(ID, name, locID, sex, hashed, avatarPath, email);
+
+            string passTotal = PasswordHashing.CreateHash(password);
+            string[] passArray = passTotal.Split(':');
+
+            // Third string in the array is the hash
+            string passHash = passArray[1] + ":" + passArray[2];
+
+            Database_Layer.Database.UpdateUser(ID, name, locID, sex, passHash, avatarPath, email);
             Account acc = null;
             Account.CreateMainAccount(ID.ToString(), password, out acc);
             return acc;

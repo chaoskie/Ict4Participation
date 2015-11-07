@@ -443,7 +443,7 @@ namespace Database_Layer
             }
         }
 
-        public static void UpdateUser(int ID, string name, int loc, string sex, string password, string avatarPath, string email)
+        public static void UpdateUser(int ID, string name, int loc, string sex, string hash, string avatarPath, string email)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
