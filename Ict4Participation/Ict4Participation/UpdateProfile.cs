@@ -33,14 +33,21 @@ namespace Ict4Participation
             if (tbPassword1.Text == tbPassword2.Text)
             {
                 //Ask for right password through a prompt
-                if (administration.EditAccount(tbName.Text, tbAdress.Text, cbSex.Text, tbPassword1.Text, tbPhotoPath.Text, tbEmail.Text, out errorMessage))
+                if (administration.CheckPass(PassPrompt.ShowDialog("Vul uw huidige wachtwoord in:", "Bevestig veranderingen")))
                 {
-                    MessageBox.Show("Account successvol aangepast! \nDe veranderingen zullen de volgende keer worden weergegeven");
-                    this.Close();
+                    if (administration.EditAccount(tbName.Text, tbAdress.Text, cbSex.Text, tbPassword1.Text, tbPhotoPath.Text, tbEmail.Text, out errorMessage))
+                    {
+                        MessageBox.Show("Account successvol aangepast! \nDe veranderingen zullen de volgende keer worden weergegeven");
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show(errorMessage);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show(errorMessage);
+                    MessageBox.Show("Uw wachtwoord is onjuist! Probeer opnieuw.");
                 }
             }
             else
