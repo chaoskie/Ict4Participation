@@ -195,7 +195,7 @@ namespace Ict4Participation
         private void btnPlaats_Click(object sender, EventArgs e)
         {
             //place comment
-            Administration.PlaceQuestionComment(tbChat.Text, currentSelection);
+            Administration.PostQuestionComment(tbChat.Text, currentSelection);
             //clear text
             tbChat.Clear();
             //reload comments

@@ -103,11 +103,12 @@ namespace Admin_Layer
         /// </summary>
         /// <param name="title">The comment</param>
         /// <param name="index">The index of the selected question</param>
-        public void PlaceQuestionComment(string title, int index)
+        public void PostQuestionComment(string title, int index)
         {
             Comment.PlaceComment(MainUser.AccountID, LoadedQuestions[index].PostID, title);
         }
 
+        #region Question Editing
         /// <summary>
         /// Changes the question original poster
         /// </summary>
@@ -181,6 +182,93 @@ namespace Admin_Layer
             error = "Oeps! Geen naam of ID ingevuld!";
             return false;
         }
+
+        /// <summary>
+        /// Changes the question help wanted time
+        /// </summary>
+        /// <param name="index">Index of the question as selected in the list</param>
+        /// <param name="time">String of time to be parsed</param>
+        /// <param name="error">Error message</param>
+        /// <returns>Whether it succeeded or not</returns>
+        public bool ChangeQuestionTime(int index, string time, out string error)
+        {
+            error = string.Empty;
+            DateTime dt;
+            if (DateTime.TryParse(time, out dt))
+            {
+                //Change the time
+                Question.UpdateQuestion(
+                    LoadedQuestions[index].PostID,
+                    LoadedQuestions[index].Title,
+                    dt,
+                    LoadedQuestions[index].Description,
+                    LoadedQuestions[index].QuestionLocation,
+                    LoadedQuestions[index].Skills,
+                    LoadedQuestions[index].UserID
+                    );
+                return true;
+            }
+            else
+            {
+                error += "Oeps, tijd is niet correct!";
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Changes the question help wanted time
+        /// </summary>
+        /// <param name="index">Index of the question as selected in the list</param>
+        /// <param name="description">Description to update to</param>
+        /// <param name="error">Error message</param>
+        /// <returns>Whether it succeeded or not</returns>
+        /// <returns></returns>
+        public bool ChangeQuestionDescription(int index, string description, out string error)
+        {
+            error = string.Empty;
+            Question.UpdateQuestion(
+                    LoadedQuestions[index].PostID,
+                    LoadedQuestions[index].Title,
+                    LoadedQuestions[index].Schedule,
+                    description,
+                    LoadedQuestions[index].QuestionLocation,
+                    LoadedQuestions[index].Skills,
+                    LoadedQuestions[index].UserID
+                    );
+            return true;
+        }
+
+        /// <summary>
+        /// Changes the question help wanted time
+        /// </summary>
+        /// <param name="index">Index of the question as selected in the list</param>
+        /// <param name="location">Location to parse</param>
+        /// <param name="error">Error message</param>
+        /// <returns>Whether it succeeded or not</returns>
+        /// <returns></returns>
+        public bool ChangeQuestionLocation(int index, string location, out string error)
+        {
+            error = string.Empty;
+            Location loc = new Location(location);
+            int locID = 0;
+            //If location does not exist
+            if (!Location.ValidateLocation(loc, out locID))
+            {
+                Location.InsertLocation(loc);
+            }
+            Question.UpdateQuestion(
+                    LoadedQuestions[index].PostID,
+                    LoadedQuestions[index].Title,
+                    LoadedQuestions[index].Schedule,
+                    LoadedQuestions[index].Description,
+                    loc,
+                    LoadedQuestions[index].Skills,
+                    LoadedQuestions[index].UserID
+                    );
+            return true;
+        }
+
+        #endregion
 
         /// <summary>
         /// Retrieves a list of all the question titles

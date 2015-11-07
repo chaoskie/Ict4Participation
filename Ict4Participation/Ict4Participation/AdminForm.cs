@@ -142,6 +142,7 @@ namespace Ict4Participation
                         if (Administration.ChangeQuestionPoster(lbPostDetails.SelectedIndex, newUser, out error))
                         {
                             MessageBox.Show("Hulpvraag aangepast!");
+                            //Refresh
                         }
                         else
                         {
@@ -156,15 +157,16 @@ namespace Ict4Participation
                     {
                         string newTime = Prompt.ShowDialog("Pas de tijd aan in het volgende format (24-Feb-2015 12:36:20): ", "Aanpassen");
                         //Validate time (to check if in right format)
-                        DateTime dt;
-                        if (DateTime.TryParse(newTime,out dt))
+                        string error;
+                        //Validate username (to check if it exists)
+                        if (Administration.ChangeQuestionTime(lbPostDetails.SelectedIndex, newTime, out error))
                         {
-                            //TODO
-                            //Change the time
+                            MessageBox.Show("Hulpvraag aangepast!");
+                            //Refresh
                         }
                         else
                         {
-                            MessageBox.Show("Foute tijd! Text gekopieerd, probeer opnieuw!");
+                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
                             Clipboard.SetText(newTime);
                             btnEditPost_Click(sender, e);
                         }
@@ -173,17 +175,39 @@ namespace Ict4Participation
                     ///If the description is selected
                     if (lbPostDetails.SelectedIndex == 2)
                     {
-                        //TODO
                         string newDesc = Prompt.ShowDialog("Pas de beschrijving aan naar het volgende: ", "Aanpassen");
                         //Change description
+                        string error;
+                        if (Administration.ChangeQuestionDescription(lbPostDetails.SelectedIndex, newDesc, out error))
+                        {
+                            MessageBox.Show("Hulpvraag aangepast!");
+                            //Refresh
+                        }
+                        else
+                        {
+                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
+                            Clipboard.SetText(newDesc);
+                            btnEditPost_Click(sender, e);
+                        }
                     }
 
                     ///If the location is selected
                     if (lbPostDetails.SelectedIndex == 3)
                     {
-                        //TODO
                         string newLoc = Prompt.ShowDialog("Pas de locatie aan naar het volgende: ", "Aanpassen");
                         //Change location
+                        string error;
+                        if (Administration.ChangeQuestionLocation(lbPostDetails.SelectedIndex, newLoc, out error))
+                        {
+                            MessageBox.Show("Hulpvraag aangepast!");
+                            //Refresh
+                        }
+                        else
+                        {
+                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
+                            Clipboard.SetText(newLoc);
+                            btnEditPost_Click(sender, e);
+                        }
                     }
                 }
                 #endregion
@@ -202,7 +226,6 @@ namespace Ict4Participation
                 }
                 #endregion
             }
-            //Refresh list
         }
 
         private void btnDeletePost_Click(object sender, EventArgs e)
