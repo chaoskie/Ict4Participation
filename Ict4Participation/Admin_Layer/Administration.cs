@@ -759,7 +759,7 @@ namespace Admin_Layer
             }
             if (rightFormat)
             {
-                MainUser = Account.Update(MainUser.AccountID, MainUser.Role, name, new Location(String.Format("{0}", address)), sex, password, avatarPath, email);
+                MainUser = Account.Update(MainUser.AccountID, name, new Location(address), sex, password, avatarPath, email);
             }
 
             return rightFormat;
