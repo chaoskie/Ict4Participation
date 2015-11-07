@@ -25,8 +25,8 @@ namespace Database_Layer
         /// HOST USERNAME
         private static string username = "PLUMBUM";
         /// HOST PASSWORD
-        private static string password = "root";
-        private static string connectionstring = "User Id=" + username + ";Password=" + password + ";Data Source= //" + host + ":1521/XE;";
+        private static string dbpassword = "root";
+        private static string connectionstring = "User Id=" + username + ";Password=" + dbpassword + ";Data Source= //" + host + ":1521/XE;";
 
         /// <summary>
         /// Selects and retrieves values from the database 
