@@ -181,7 +181,7 @@ namespace Class_Layer
         }
 
         //TODO
-        public static Account Update(int ID, Accounttype acctype, string name, Location loc, string sex, string password, string avatarPath, string email)
+        public static Account Update(int ID, string name, Location loc, string sex, string password, string avatarPath, string email)
         {
             //TODO
             //Update the account through a database update query

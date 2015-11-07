@@ -1089,9 +1089,9 @@ namespace Admin_Layer
         /// <param name="password">given password of the user</param>
         /// <param name="ID">id number of the current user</param>
         /// <returns>a boolean that confirms if the password provided is correct with the original</returns>
-        public bool CheckPass(string password, int ID)
+        public bool CheckPass(string password)
         {
-            string hash = Class_Layer.Account.GetPasswordHash(ID);
+            string hash = Class_Layer.Account.GetPasswordHash(MainUser.AccountID);
             if ((hash == string.Empty) || (hash == "0"))
             {
                 return false;
