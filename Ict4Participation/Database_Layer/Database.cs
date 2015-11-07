@@ -407,7 +407,7 @@ namespace Database_Layer
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("INSERT INTO \"Acc_Skill\" (\"SKILL_NAME\",\"QUESTION_ID\") VALUES (:A, :B)");
+                OracleCommand cmd = new OracleCommand("INSERT INTO \"Acc_Skill\" (\"SKILL_NAME\",\"ACC_ID\") VALUES (:A, :B)");
                 cmd.Parameters.Add(new OracleParameter("A", skill));
                 cmd.Parameters.Add(new OracleParameter("B", aID));
                 cmd.Connection = c;
