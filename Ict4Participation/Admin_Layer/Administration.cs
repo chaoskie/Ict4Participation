@@ -376,7 +376,7 @@ namespace Admin_Layer
                 {
                     Review.Update(
                         LoadedReviews[index].PostID,
-                        edit,
+                        rating,
                         LoadedReviews[index].Title,
                         LoadedReviews[index].Description
                         );
