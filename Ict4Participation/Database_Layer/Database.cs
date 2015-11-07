@@ -449,13 +449,13 @@ namespace Database_Layer
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand("UPDATE \"Acc\" SET \"Name\" = :B , \"LOCATION_ID\" = :C, \"PassHash\" = :E, \"Avatar\" = :F, \"Sex\"= :D, \"Email\"= :G WHERE \"ID\" = :A");
-                cmd.Parameters.Add(new OracleParameter("A", ID));
                 cmd.Parameters.Add(new OracleParameter("B", name));
                 cmd.Parameters.Add(new OracleParameter("C", loc));
-                cmd.Parameters.Add(new OracleParameter("D", sex));
                 cmd.Parameters.Add(new OracleParameter("E", password));
                 cmd.Parameters.Add(new OracleParameter("F", avatarPath));
+                cmd.Parameters.Add(new OracleParameter("D", sex));
                 cmd.Parameters.Add(new OracleParameter("G", email));
+                cmd.Parameters.Add(new OracleParameter("A", ID));
                 cmd.Connection = c;
                 try
                 {
