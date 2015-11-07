@@ -355,22 +355,95 @@ namespace Admin_Layer
             return true;
         }
 
+        /// <summary>
+        /// Changes the review rating
+        /// </summary>
+        /// <param name="index">Index as loaded</param>
+        /// <param name="edit">Rating to edit to</param>
+        /// <param name="error">The error message</param>
+        /// <returns>Whether it succeeded or not</returns>
         public bool ChangeReviewRating(int index, string edit, out string error)
         {
             error = "Niets ingevuld!";
+            if (String.IsNullOrWhiteSpace(edit))
+            {
+                return false;
+            }
+            int rating;
+            if (Int32.TryParse(edit, out rating))
+            {
+                if (rating > 0 && rating < 6)
+                {
+                    Review.Update(
+                        LoadedReviews[index].PostID,
+                        edit,
+                        LoadedReviews[index].Title,
+                        LoadedReviews[index].Description
+                        );
+                    return true;
+                }
+                else
+                {
+                    error = "Aantal sterren ligt niet tussen 0 en 6! (1-5 geaccepteerd)";
+                }
+            }
+            else
+            {
+                error = "Geen geldig nummer ingevoerd!";
+            }
             return false;
         }
 
+        /// <summary>
+        /// Changes the review title
+        /// </summary>
+        /// <param name="index">Index as loaded</param>
+        /// <param name="edit">Title to edit to</param>
+        /// <param name="error">The error message</param>
+        /// <returns>Whether it succeeded or not</returns>
         public bool ChangeReviewTitle(int index, string edit, out string error)
         {
             error = "Niets ingevuld!";
-            return false;
+            if (String.IsNullOrWhiteSpace(edit))
+            {
+                return false;
+            }
+            else
+            {
+                Review.Update(
+                        LoadedReviews[index].PostID,
+                        LoadedReviews[index].Rating,
+                        edit,
+                        LoadedReviews[index].Description
+                        );
+                return true;
+            }
         }
 
+        /// <summary>
+        /// Changes the review description
+        /// </summary>
+        /// <param name="index">Index as loaded</param>
+        /// <param name="edit">Description to edit to</param>
+        /// <param name="error">The error message</param>
+        /// <returns>Whether it succeeded or not</returns>
         public bool ChangeReviewDescription(int index, string edit, out string error)
         {
             error = "Niets ingevuld!";
-            return false;
+            if (String.IsNullOrWhiteSpace(edit))
+            {
+                return false;
+            }
+            else
+            {
+                Review.Update(
+                        LoadedReviews[index].PostID,
+                        LoadedReviews[index].Rating,
+                        LoadedReviews[index].Title,
+                        edit
+                        );
+                return true;
+            }
         }
 
         /// <summary>

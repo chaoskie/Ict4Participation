@@ -382,7 +382,7 @@ namespace Ict4Participation
             //If question is selected
             if (lbTables.SelectedIndex == 0)
             {
-
+                
             }
             //If user is selected
             if (lbTables.SelectedIndex == 1)
