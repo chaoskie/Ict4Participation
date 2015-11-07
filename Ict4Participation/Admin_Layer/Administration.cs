@@ -720,14 +720,13 @@ namespace Admin_Layer
         /// </summary>
         /// <param name="name">The name to update to</param>
         /// <param name="address">The address to update to</param>
-        /// <param name="city">The city to update to</param>
         /// <param name="sex">The sex to update to</param>
         /// <param name="password">The password to update to</param>
         /// <param name="avatarPath">The avatarpath to update to</param>
         /// <param name="email">The email to update to (mail will be sent to both old and new email)</param>
         /// <param name="error">The error in case anything went wrong</param>
         /// <returns>Whether it was a success or not</returns>
-        public bool EditAccount(string name, string address, string city, string sex, string password, string avatarPath, string email, out string error)
+        public bool EditAccount(string name, string address, string sex, string password, string avatarPath, string email, out string error)
         {
             bool rightFormat = true;
             error = string.Empty;
@@ -760,7 +759,7 @@ namespace Admin_Layer
             }
             if (rightFormat)
             {
-                MainUser = Account.Update(MainUser.AccountID, MainUser.Role, name, new Location(String.Format("{0}, {1}", address, city)), sex, password, avatarPath, email);
+                MainUser = Account.Update(MainUser.AccountID, MainUser.Role, name, new Location(String.Format("{0}", address)), sex, password, avatarPath, email);
             }
 
             return rightFormat;
