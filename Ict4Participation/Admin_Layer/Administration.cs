@@ -701,6 +701,12 @@ namespace Admin_Layer
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
+            string cID = createdID.ToString();
+            while (cID.Length < 3)
+            {
+                cID = 0 + cID;
+            }
+
             mail.From = new MailAddress("s21mplumbum@gmail.com");
             mail.To.Add(emailTEMP);
             mail.Subject = "Account credentials for ICT4Participation";
