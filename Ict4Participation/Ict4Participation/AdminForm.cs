@@ -385,7 +385,7 @@ namespace Ict4Participation
             //If user is selected
             if (lbTables.SelectedIndex == 1)
             {
-
+                MessageBox.Show(Administration.SetInactiveAccount(lbPost.SelectedIndex));
             }
             //If review is selected
             if (lbTables.SelectedIndex == 2)
