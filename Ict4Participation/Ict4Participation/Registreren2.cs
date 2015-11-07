@@ -48,6 +48,7 @@ namespace Ict4Participation
             string message = string.Empty;
             if (Administration.CreateAccountHPart(tbVOGPath.Text, "", lbSkills.Items.Cast<string>().ToList(), out message))
             {
+                Administration.RegisterAccount();
                 Form form = new HoofdForm(Administration);
                 form.Show();
                 this.Close();
