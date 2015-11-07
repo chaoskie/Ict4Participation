@@ -274,14 +274,20 @@ namespace Database_Layer
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("DELETE FROM \"Question_Skill\" WHERE \"QUESTION_ID\" = :A" +
-                    " DELETE FROM \"Comment\" WHERE \"QUESTION_ID\" = :A" +
-                " DELETE FROM \"Question\" WHERE \"ID\" = :A");
+                OracleCommand cmd = new OracleCommand("DELETE FROM \"Question_Skill\" WHERE \"QUESTION_ID\" = :A");
+                OracleCommand cmd2 = new OracleCommand(" DELETE FROM \"Comment\" WHERE \"QUESTION_ID\" = :A");
+                OracleCommand cmd3 = new OracleCommand(" DELETE FROM \"Question\" WHERE \"ID\" = :A");
                 cmd.Parameters.Add(new OracleParameter("A", qID));
                 cmd.Connection = c;
+                cmd2.Parameters.Add(new OracleParameter("A", qID));
+                cmd2.Connection = c;
+                cmd3.Parameters.Add(new OracleParameter("A", qID));
+                cmd3.Connection = c;
                 try
                 {
                     cmd.ExecuteNonQuery();
+                    cmd2.ExecuteNonQuery();
+                    cmd3.ExecuteNonQuery();
                 }
                 catch (OracleException)
                 {
