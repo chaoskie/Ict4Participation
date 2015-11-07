@@ -22,7 +22,7 @@ namespace Ict4Participation
     {
         private Form previous;
         private Administration Administration;
-        
+
         public AdminForm(Form p, Administration a)
         {
             this.InitializeComponent();
@@ -81,6 +81,10 @@ namespace Ict4Participation
                     foreach (string s in str)
                     {
                         lbPostDetails.Items.Add(s);
+                        //Poster
+                        //Time
+                        //Description
+                        //Location
                     }
 
                     List<string> comments = Administration.GetQuestionComments(index);
@@ -93,19 +97,26 @@ namespace Ict4Participation
                 if (lbTables.SelectedIndex == 1)
                 {
                     #region Users
-                    lbPostDetails.Items.Add(Administration.AccountData(index,1));
-                    lbPostDetails.Items.Add(Administration.AccountData(index,2));
-                    lbPostDetails.Items.Add(Administration.AccountData(index,3));
-                    lbPostDetails.Items.Add(Administration.AccountData(index,4));
-                    lbPostDetails.Items.Add(Administration.AccountData(index,5));
-                    lbPostDetails.Items.Add(Administration.AccountData(index,6));
-                    lbPostDetails.Items.Add(Administration.AccountData(index,7));
-                    lbPostDetails.Items.Add(Administration.AccountData(index,8));
+                    lbPostDetails.Items.Add(Administration.AccountData(index, 1)); //ID
+                    lbPostDetails.Items.Add(Administration.AccountData(index, 2)); //Name
+                    lbPostDetails.Items.Add(Administration.AccountData(index, 3)); //Location
+                    lbPostDetails.Items.Add(Administration.AccountData(index, 4)); //AvatarPath
+                    lbPostDetails.Items.Add(Administration.AccountData(index, 5)); //Description / Information
+                    lbPostDetails.Items.Add(Administration.AccountData(index, 6)); //Role
+                    lbPostDetails.Items.Add(Administration.AccountData(index, 7)); //Sex
+                    lbPostDetails.Items.Add(Administration.AccountData(index, 8)); //Email
                     #endregion
                 }
                 if (lbTables.SelectedIndex == 2)
                 {
                     #region Reviews
+                    string str = this.Administration.GetAccountReviews()[index];
+                    ///x-Sterren: titel
+                    ///Beschrijving
+                    string[] lines = str.Split('\n');
+                    lbPostDetails.Items.Add(lines[0].Substring(0, 9)); //Rating
+                    lbPostDetails.Items.Add(lines[0].Substring(11)); //Title
+                    lbPostDetails.Items.Add(lines[1]); //Description
                     #endregion
                 }
             }
@@ -113,10 +124,84 @@ namespace Ict4Participation
 
         private void btnEditPost_Click(object sender, EventArgs e)
         {
-            //TODO
-            // Call for right administration function to edit the desired class
-            // As wel as update it into the database
+            if (lbPost.SelectedIndex != -1)
+            {
 
+                // Call for right administration function to edit the desired class
+                // As well as update it into the database
+
+                #region Question editing
+                if (lbTables.SelectedIndex == 0)
+                {
+                    ///If the poster is selected
+                    if (lbPostDetails.SelectedIndex == 0)
+                    {
+                        string newUser = Prompt.ShowDialog("Pas de gebruiker aan naar het volgende: ", "Aanpassen");
+                        string error;
+                        //Validate username (to check if it exists)
+                        if (Administration.ChangeQuestionPoster(lbPostDetails.SelectedIndex, newUser, out error))
+                        {
+                            MessageBox.Show("Hulpvraag aangepast!");
+                        }
+                        else
+                        {
+                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
+                            Clipboard.SetText(newUser);
+                            btnEditPost_Click(sender, e);
+                        }
+                    }
+
+                    ///If the time is selected
+                    if (lbPostDetails.SelectedIndex == 1)
+                    {
+                        string newTime = Prompt.ShowDialog("Pas de tijd aan in het volgende format (24-Feb-2015 12:36:20): ", "Aanpassen");
+                        //Validate time (to check if in right format)
+                        DateTime dt;
+                        if (DateTime.TryParse(newTime,out dt))
+                        {
+                            //TODO
+                            //Change the time
+                        }
+                        else
+                        {
+                            MessageBox.Show("Foute tijd! Text gekopieerd, probeer opnieuw!");
+                            Clipboard.SetText(newTime);
+                            btnEditPost_Click(sender, e);
+                        }
+                    }
+
+                    ///If the description is selected
+                    if (lbPostDetails.SelectedIndex == 2)
+                    {
+                        //TODO
+                        string newDesc = Prompt.ShowDialog("Pas de beschrijving aan naar het volgende: ", "Aanpassen");
+                        //Change description
+                    }
+
+                    ///If the location is selected
+                    if (lbPostDetails.SelectedIndex == 3)
+                    {
+                        //TODO
+                        string newLoc = Prompt.ShowDialog("Pas de locatie aan naar het volgende: ", "Aanpassen");
+                        //Change location
+                    }
+                }
+                #endregion
+
+                #region User editing
+                if (lbTables.SelectedIndex == 1)
+                {
+
+                }
+                #endregion
+
+                #region Review editing
+                if (lbTables.SelectedIndex == 2)
+                {
+
+                }
+                #endregion
+            }
             //Refresh list
         }
 

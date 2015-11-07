@@ -69,6 +69,11 @@ namespace Admin_Layer
             Comment.DeleteComment(LoadedComments[index].PostID, isAdmin);
         }
 
+        /// <summary>
+        /// Gets the ID of the user who posted a comment
+        /// </summary>
+        /// <param name="index">Index of the comment in the loaded comments</param>
+        /// <returns>a string of the ID</returns>
         public string GetCommentPosterID(int index)
         {
             return LoadedComments[index].PosterID.ToString();
@@ -91,6 +96,90 @@ namespace Admin_Layer
             }
             else
                 return "Er ging iets fout! Raadpleeg de administrator indien deze fout blijft voordoen.";
+        }
+
+        /// <summary>
+        /// Places a new comment for said question
+        /// </summary>
+        /// <param name="title">The comment</param>
+        /// <param name="index">The index of the selected question</param>
+        public void PlaceQuestionComment(string title, int index)
+        {
+            Comment.PlaceComment(MainUser.AccountID, LoadedQuestions[index].PostID, title);
+        }
+
+        /// <summary>
+        /// Changes the question original poster
+        /// </summary>
+        /// <param name="index">Index of the question as selected in the list</param>
+        /// <param name="name">Name or ID of the user</param>
+        /// <param name="error">Error message given upon... error.</param>
+        /// <returns>Whether it succeeded or not</returns>
+        public bool ChangeQuestionPoster(int index, string name, out string error)
+        {
+            error = string.Empty;
+            if (!String.IsNullOrWhiteSpace(name))
+            {
+                //Create a list containing all the 'hulpbehoevenden' (the ones with the rights to post these questions) matching the name
+                List<string> accs = GetAccounts("Hulpbehoevende", true, name);
+                //Create a list containing all the 'hulpbehoevenden' matching the ID
+                List<Account> accsWithID = LoadedAccounts.FindAll(a => a.AccountID.ToString() == name && a.Role == Accounttype.Hulpbehoevende);
+                //If no correct ID or name is filled in
+                if (accs.Count == 0 && accsWithID.Count == 0)
+                {
+                    error = "Oeps! Hulpbehoevende met deze naam / ID bestaat niet";
+                    return false;
+                }
+                //If a correct name is filled in, but matches more accounts
+                if (accs.Count > 1 && accsWithID.Count == 0)
+                {
+                    error = "Oeps! Er bestaan meerdere gebruikers met deze naam:";
+                    foreach (Account a in LoadedAccounts.FindAll(ac => ac.Naam == name))
+                    {
+                        error += a.AccountID + " " + a.Naam + Environment.NewLine;
+                    }
+                    error += "Geef het juiste ID op in plaats van de naam";
+                    return false;
+                }
+                //If a correct name is filled in, and matches only a single account
+                if (accs.Count == 1)
+                {
+                    //Get IDs
+                    int userID = LoadedAccounts.Find(a => a.Naam.ToString() == name && a.Role == Accounttype.Hulpbehoevende).AccountID;
+                    int questionID = LoadedQuestions[index].PostID;
+                    //Change the question poster
+                    Question.UpdateQuestion(
+                        LoadedQuestions[index].PostID,
+                        LoadedQuestions[index].Title,
+                        LoadedQuestions[index].Schedule,
+                        LoadedQuestions[index].Description,
+                        LoadedQuestions[index].QuestionLocation,
+                        LoadedQuestions[index].Skills,
+                        userID
+                        );
+                    return true;
+                }
+                //If a correct ID is filled in (always matches 1 account)
+                if (accsWithID.Count == 1)
+                {
+                    //Get IDs
+                    int userID = accsWithID[0].AccountID;
+                    int questionID = LoadedQuestions[index].PostID;
+                    //Change the question poster
+                    Question.UpdateQuestion(
+                        LoadedQuestions[index].PostID,
+                        LoadedQuestions[index].Title,
+                        LoadedQuestions[index].Schedule,
+                        LoadedQuestions[index].Description,
+                        LoadedQuestions[index].QuestionLocation,
+                        LoadedQuestions[index].Skills,
+                        userID
+                        );
+                    return true;
+                }
+            }
+            error = "Oeps! Geen naam of ID ingevuld!";
+            return false;
         }
 
         /// <summary>
@@ -122,6 +211,12 @@ namespace Admin_Layer
             return LoadedQuestions[index].GetDescription(LoadedQuestions[index].PostID, out lastloadedOPID);
         }
 
+        /// <summary>
+        /// Retrieves all the skills matching to a question
+        /// </summary>
+        /// <param name="index">The index of the selected title</param>
+        /// <param name="all">Whether its the own questions, or all the questions</param>
+        /// <returns>A list of skills</returns>
         public List<string> GetQuestionSkills(int index, bool all = true)
         {
             return LoadedQuestions[index].Skills;
@@ -135,16 +230,6 @@ namespace Admin_Layer
         public List<string> GetQuestionComments(int index)
         {
             return Comment.GetQuestionComments(LoadedQuestions[index].PostID, out LoadedComments);
-        }
-
-        /// <summary>
-        /// Places a new comment for said question
-        /// </summary>
-        /// <param name="title">The comment</param>
-        /// <param name="index">The index of the selected question</param>
-        public void PlaceQuestionComment(string title, int index)
-        {
-            Comment.PlaceComment(MainUser.AccountID, LoadedQuestions[index].PostID, title);
         }
 
         #endregion

@@ -35,7 +35,15 @@ namespace Class_Layer
         /// </summary>
         public Location QuestionLocation { get; private set; }
 
+        /// <summary>
+        /// Gets the skills of a question
+        /// </summary>
         public List<string> Skills { get; private set; }
+
+        /// <summary>
+        /// Gets the userID of a question
+        /// </summary>
+        public int UserID { get; private set; }
 
         /// <summary>
         /// Posts a question
@@ -83,7 +91,7 @@ namespace Class_Layer
                     Database_Layer.Database.SkillInsert(skill, qID);
                 }
 
-                q = new Question(qID, title, dateSchedule, description, questionLocation, skills);
+                q = new Question(qID, title, dateSchedule, description, questionLocation, skills, accountid);
                 creationSuccess = true;
             }
             catch (Exception e)
@@ -135,7 +143,8 @@ namespace Class_Layer
                     Convert.ToDateTime(row["TimeTable"]),
                     row["Description"].ToString(),
                     loc,
-                    skills
+                    skills,
+                    Convert.ToInt32(row["PosterACC_ID"])
                     ));
             }
             return q;
@@ -160,6 +169,11 @@ namespace Class_Layer
             return name;
         }
 
+        public static void UpdateQuestion(int postID, string title, DateTime schedule, string description, Location location, List<string> skills, int userID)
+        {
+            //TODO
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Question"/> class.
         /// </summary>
@@ -168,7 +182,7 @@ namespace Class_Layer
         /// <param name="schedule">The scheduled time of the question</param>
         /// <param name="description">The description of the question</param>
         /// <param name="questionLocation">The location of the question</param>
-        private Question(int postID, string title, DateTime schedule, string description, Location questionLocation, List<string> skills)
+        private Question(int postID, string title, DateTime schedule, string description, Location questionLocation, List<string> skills, int userid)
             : base(postID, title)
         {
             this.Schedule = schedule;
