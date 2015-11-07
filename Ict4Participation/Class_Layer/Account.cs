@@ -177,6 +177,12 @@ namespace Class_Layer
             return acc;
         }
 
+        public static void UpdateAdmin(int ID, Accounttype acctype, string name, Location loc, string sex, string avatarPath, string email)
+        {
+            //TODO
+            //Update the account through a database update query
+        }
+
         /// <summary>
         /// Finds account credentials and fills in account information
         /// </summary>

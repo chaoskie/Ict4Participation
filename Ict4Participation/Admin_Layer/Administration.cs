@@ -149,7 +149,7 @@ namespace Admin_Layer
                     int userID = LoadedAccounts.Find(a => a.Naam.ToString() == name && a.Role == Accounttype.Hulpbehoevende).AccountID;
                     int questionID = LoadedQuestions[index].PostID;
                     //Change the question poster
-                    Question.UpdateQuestion(
+                    Question.Update(
                         LoadedQuestions[index].PostID,
                         LoadedQuestions[index].Title,
                         LoadedQuestions[index].Schedule,
@@ -167,7 +167,7 @@ namespace Admin_Layer
                     int userID = accsWithID[0].AccountID;
                     int questionID = LoadedQuestions[index].PostID;
                     //Change the question poster
-                    Question.UpdateQuestion(
+                    Question.Update(
                         LoadedQuestions[index].PostID,
                         LoadedQuestions[index].Title,
                         LoadedQuestions[index].Schedule,
@@ -197,7 +197,7 @@ namespace Admin_Layer
             if (DateTime.TryParse(time, out dt))
             {
                 //Change the time
-                Question.UpdateQuestion(
+                Question.Update(
                     LoadedQuestions[index].PostID,
                     LoadedQuestions[index].Title,
                     dt,
@@ -226,7 +226,7 @@ namespace Admin_Layer
         public bool ChangeQuestionDescription(int index, string description, out string error)
         {
             error = string.Empty;
-            Question.UpdateQuestion(
+            Question.Update(
                     LoadedQuestions[index].PostID,
                     LoadedQuestions[index].Title,
                     LoadedQuestions[index].Schedule,
@@ -256,7 +256,7 @@ namespace Admin_Layer
             {
                 Location.InsertLocation(loc);
             }
-            Question.UpdateQuestion(
+            Question.Update(
                     LoadedQuestions[index].PostID,
                     LoadedQuestions[index].Title,
                     LoadedQuestions[index].Schedule,
@@ -635,6 +635,35 @@ namespace Admin_Layer
             }
 
             return rightFormat;
+        }
+
+        /// <summary>
+        /// Changes the user's name
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="edit"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public bool ChangeAccountName(int index, string edit, out string error)
+        {
+            error = string.Empty;
+            if (!string.IsNullOrWhiteSpace(edit))
+            {
+                if (Regex.IsMatch(edit, @"^[A-Z][A-Za-z\.]*(?:\s[A-Za-z][a-z]+)+$"))
+                {
+                    Account.UpdateAdmin(
+                        LoadedAccounts[index].AccountID,
+                        LoadedAccounts[index].Role,
+                        edit,
+                        LoadedAccounts[index].Loc,
+                        LoadedAccounts[index].Sex,
+                        LoadedAccounts[index].AvatarPath,
+                        LoadedAccounts[index].Email
+                        );
+                }
+            }
+            error += "Naam is niet correct!";
+            return false;
         }
 
         /// <summary>

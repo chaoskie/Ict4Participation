@@ -169,9 +169,20 @@ namespace Class_Layer
             return name;
         }
 
-        public static void UpdateQuestion(int postID, string title, DateTime schedule, string description, Location location, List<string> skills, int userID)
+        /// <summary>
+        /// Updates the question
+        /// </summary>
+        /// <param name="postID">The ID of the question</param>
+        /// <param name="title">The title of the question</param>
+        /// <param name="schedule">The time of help for the question</param>
+        /// <param name="description">The description for the question</param>
+        /// <param name="location">The location of the question</param>
+        /// <param name="skills">The skills needed for the question</param>
+        /// <param name="userID">The ID of the user who posted the question</param>
+        public static void Update(int postID, string title, DateTime schedule, string description, Location location, List<string> skills, int userID)
         {
             //TODO
+            //Call database update query
         }
 
         /// <summary>

@@ -97,10 +97,8 @@ namespace Ict4Participation
                 if (lbTables.SelectedIndex == 1)
                 {
                     #region Users
-                    lbPostDetails.Items.Add(Administration.AccountData(index, 1)); //ID
                     lbPostDetails.Items.Add(Administration.AccountData(index, 2)); //Name
                     lbPostDetails.Items.Add(Administration.AccountData(index, 3)); //Location
-                    lbPostDetails.Items.Add(Administration.AccountData(index, 4)); //AvatarPath
                     lbPostDetails.Items.Add(Administration.AccountData(index, 5)); //Description / Information
                     lbPostDetails.Items.Add(Administration.AccountData(index, 6)); //Role
                     lbPostDetails.Items.Add(Administration.AccountData(index, 7)); //Sex
@@ -215,7 +213,54 @@ namespace Ict4Participation
                 #region User editing
                 if (lbTables.SelectedIndex == 1)
                 {
+                    //Edit Name
+                    if (lbPostDetails.SelectedIndex == 0)
+                    {
+                        //TODO
+                        string edit = Prompt.ShowDialog("Pas de locatie aan naar het volgende: ", "Aanpassen");
+                        string error;
+                        if (Administration.ChangeAccountName(lbPostDetails.SelectedIndex, edit, out error))
+                        {
+                            MessageBox.Show("Gebruiker aangepast!");
+                            //Refresh
+                        }
+                        else
+                        {
+                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
+                            Clipboard.SetText(edit);
+                            btnEditPost_Click(sender, e);
+                        }
+                    }
+                    //Edit Location
+                    if (lbPostDetails.SelectedIndex == 1)
+                    {
+                        //TODO
 
+                    }
+                    //Edit Description
+                    if (lbPostDetails.SelectedIndex == 3)
+                    {
+                        //TODO
+
+                    }
+                    //Edit Role
+                    if (lbPostDetails.SelectedIndex == 4)
+                    {
+                        //TODO
+
+                    }
+                    //Edit Sex
+                    if (lbPostDetails.SelectedIndex == 5)
+                    {
+                        //TODO
+
+                    }
+                    //Edit Email
+                    if (lbPostDetails.SelectedIndex == 6)
+                    {
+                        //TODO
+
+                    }
                 }
                 #endregion
 
@@ -227,6 +272,33 @@ namespace Ict4Participation
                 #endregion
             }
         }
+
+
+        /*
+        public delegate TV EditFunc<in T, in T2, TU, out TV>(T input, T2 input, out TU output);
+
+        static bool Handler(int index, string edit, out string Error);
+
+        EditFunc<int, string, string, bool> func = Handler;
+
+
+        private void Handle(///CORRECT ADMINISTRATION METHOD///, object sender, EventArgs e)
+        {
+            string edit = Prompt.ShowDialog("Pas de gebruiker aan naar het volgende: ", "Aanpassen");
+                        string error;
+                        //Validate username (to check if it exists)
+                        if (///THAT METHOD/// == true)
+                        {
+                            MessageBox.Show("Hulpvraag aangepast!");
+                            //Refresh
+                        }
+                        else
+                        {
+                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
+                            Clipboard.SetText(edit);
+                            btnEditPost_Click(sender, e);
+                        }
+        }*/
 
         private void btnDeletePost_Click(object sender, EventArgs e)
         {
