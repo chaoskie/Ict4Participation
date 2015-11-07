@@ -216,8 +216,7 @@ namespace Ict4Participation
                     //Edit Name
                     if (lbPostDetails.SelectedIndex == 0)
                     {
-                        //TODO
-                        string edit = Prompt.ShowDialog("Pas de locatie aan naar het volgende: ", "Aanpassen");
+                        string edit = Prompt.ShowDialog("Pas de naam aan naar het volgende: ", "Aanpassen");
                         string error;
                         if (Administration.ChangeAccountName(lbPostDetails.SelectedIndex, edit, out error))
                         {
@@ -234,32 +233,89 @@ namespace Ict4Participation
                     //Edit Location
                     if (lbPostDetails.SelectedIndex == 1)
                     {
-                        //TODO
-
+                        string edit = Prompt.ShowDialog("Pas de locatie aan naar het volgende: ", "Aanpassen");
+                        string error;
+                        if (Administration.ChangeAccountLocation(lbPostDetails.SelectedIndex, edit, out error))
+                        {
+                            MessageBox.Show("Gebruiker aangepast!");
+                            //Refresh
+                        }
+                        else
+                        {
+                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
+                            Clipboard.SetText(edit);
+                            btnEditPost_Click(sender, e);
+                        }
                     }
                     //Edit Description
                     if (lbPostDetails.SelectedIndex == 3)
                     {
-                        //TODO
-
+                        string edit = Prompt.ShowDialog("Pas de beschrijving aan naar het volgende: ", "Aanpassen");
+                        string error;
+                        if (Administration.ChangeAccountDescription(lbPostDetails.SelectedIndex, edit, out error))
+                        {
+                            MessageBox.Show("Gebruiker aangepast!");
+                            //Refresh
+                        }
+                        else
+                        {
+                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
+                            Clipboard.SetText(edit);
+                            btnEditPost_Click(sender, e);
+                        }
                     }
                     //Edit Role
                     if (lbPostDetails.SelectedIndex == 4)
                     {
-                        //TODO
+                        string edit = Prompt.ShowDialog("Pas de rol aan naar het volgende (Hulpverlener / Hulpbehoevende): ", "Aanpassen");
+                        string error;
+                        if (Administration.ChangeAccountRole(lbPostDetails.SelectedIndex, edit, out error))
+                        {
+                            MessageBox.Show("Gebruiker aangepast!");
+                            //Refresh
+                        }
+                        else
+                        {
+                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
+                            Clipboard.SetText(edit);
+                            btnEditPost_Click(sender, e);
+                        }
 
                     }
                     //Edit Sex
                     if (lbPostDetails.SelectedIndex == 5)
                     {
-                        //TODO
-
+                        string edit = Prompt.ShowDialog("Pas het geslacht aan naar het volgende (M / F): ", "Aanpassen");
+                        string error;
+                        if (Administration.ChangeAccountSex(lbPostDetails.SelectedIndex, edit, out error))
+                        {
+                            MessageBox.Show("Gebruiker aangepast!");
+                            //Refresh
+                        }
+                        else
+                        {
+                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
+                            Clipboard.SetText(edit);
+                            btnEditPost_Click(sender, e);
+                        }
                     }
                     //Edit Email
                     if (lbPostDetails.SelectedIndex == 6)
                     {
                         //TODO
-
+                        string edit = Prompt.ShowDialog("Pas het geslacht aan naar het volgende (M / F): ", "Aanpassen");
+                        string error;
+                        if (Administration.ChangeAccountEmail(lbPostDetails.SelectedIndex, edit, out error))
+                        {
+                            MessageBox.Show("Gebruiker aangepast!");
+                            //Refresh
+                        }
+                        else
+                        {
+                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
+                            Clipboard.SetText(edit);
+                            btnEditPost_Click(sender, e);
+                        }
                     }
                 }
                 #endregion

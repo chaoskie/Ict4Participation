@@ -118,7 +118,11 @@ namespace Admin_Layer
         /// <returns>Whether it succeeded or not</returns>
         public bool ChangeQuestionPoster(int index, string name, out string error)
         {
-            error = string.Empty;
+            error = "Niets ingevuld!";
+            if (String.IsNullOrWhiteSpace(name))
+            {
+                return false;
+            }
             if (!String.IsNullOrWhiteSpace(name))
             {
                 //Create a list containing all the 'hulpbehoevenden' (the ones with the rights to post these questions) matching the name
@@ -192,7 +196,11 @@ namespace Admin_Layer
         /// <returns>Whether it succeeded or not</returns>
         public bool ChangeQuestionTime(int index, string time, out string error)
         {
-            error = string.Empty;
+            error = "Niets ingevuld!";
+            if (String.IsNullOrWhiteSpace(time))
+            {
+                return false;
+            }
             DateTime dt;
             if (DateTime.TryParse(time, out dt))
             {
@@ -225,7 +233,11 @@ namespace Admin_Layer
         /// <returns></returns>
         public bool ChangeQuestionDescription(int index, string description, out string error)
         {
-            error = string.Empty;
+            error = "Niets ingevuld!";
+            if (String.IsNullOrWhiteSpace(description))
+            {
+                return false;
+            }
             Question.Update(
                     LoadedQuestions[index].PostID,
                     LoadedQuestions[index].Title,
@@ -248,7 +260,11 @@ namespace Admin_Layer
         /// <returns></returns>
         public bool ChangeQuestionLocation(int index, string location, out string error)
         {
-            error = string.Empty;
+            error = "Niets ingevuld!";
+            if (String.IsNullOrWhiteSpace(location))
+            {
+                return false;
+            }
             Location loc = new Location(location);
             int locID = 0;
             //If location does not exist
@@ -640,13 +656,13 @@ namespace Admin_Layer
         /// <summary>
         /// Changes the user's name
         /// </summary>
-        /// <param name="index"></param>
-        /// <param name="edit"></param>
-        /// <param name="error"></param>
-        /// <returns></returns>
+        /// <param name="index">Index of the user as loaded</param>
+        /// <param name="edit">The edit of the name</param>
+        /// <param name="error">The error message</param>
+        /// <returns>Whether it succeeded or not</returns>
         public bool ChangeAccountName(int index, string edit, out string error)
         {
-            error = string.Empty;
+            error = "Niets ingevuld!";
             if (!string.IsNullOrWhiteSpace(edit))
             {
                 if (Regex.IsMatch(edit, @"^[A-Z][A-Za-z\.]*(?:\s[A-Za-z][a-z]+)+$"))
@@ -654,15 +670,168 @@ namespace Admin_Layer
                     Account.UpdateAdmin(
                         LoadedAccounts[index].AccountID,
                         LoadedAccounts[index].Role,
+                        LoadedAccounts[index].Information,
                         edit,
                         LoadedAccounts[index].Loc,
                         LoadedAccounts[index].Sex,
                         LoadedAccounts[index].AvatarPath,
                         LoadedAccounts[index].Email
                         );
+                    return true;
+                }
+                else
+                    error = "Naam is niet correct!";
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Changes the user's location
+        /// </summary>
+        /// <param name="index">Index of the user as loaded</param>
+        /// <param name="edit">The edit of the location</param>
+        /// <param name="error">The error message</param>
+        /// <returns></returns>
+        public bool ChangeAccountLocation(int index, string edit, out string error)
+        {
+            error = "Niets ingevuld!";
+            if (String.IsNullOrWhiteSpace(edit))
+            {
+                return false;
+            }
+            Location loc = new Location(edit);
+            int locID = 0;
+            //If location does not exist
+            if (!Location.ValidateLocation(loc, out locID))
+            {
+                Location.InsertLocation(loc);
+            }
+            Account.UpdateAdmin(
+                        LoadedAccounts[index].AccountID,
+                        LoadedAccounts[index].Role,
+                        LoadedAccounts[index].Naam,
+                        LoadedAccounts[index].Information,
+                        loc,
+                        LoadedAccounts[index].Sex,
+                        LoadedAccounts[index].AvatarPath,
+                        LoadedAccounts[index].Email
+                        );
+
+            return true;
+        }
+
+        /// <summary>
+        /// Changes the user's description
+        /// </summary>
+        /// <param name="index">Index of the user as loaded</param>
+        /// <param name="edit">The edit of the description</param>
+        /// <param name="error">The error message</param>
+        public bool ChangeAccountDescription(int index, string edit, out string error)
+        {
+            error = "Niets ingevuld!";
+            if (!string.IsNullOrWhiteSpace(edit))
+            {
+                Account.UpdateAdmin(
+                    LoadedAccounts[index].AccountID,
+                    LoadedAccounts[index].Role,
+                    LoadedAccounts[index].Naam,
+                    edit,
+                    LoadedAccounts[index].Loc,
+                    LoadedAccounts[index].Sex,
+                    LoadedAccounts[index].AvatarPath,
+                    LoadedAccounts[index].Email
+                    );
+                return true;
+            }
+            error = "Beschrijving is niet correct!";
+            return false;
+        }
+
+        /// <summary>
+        /// Changes the user's role
+        /// </summary>
+        /// <param name="index">Index of the user as loaded</param>
+        /// <param name="edit">The edit of the role</param>
+        /// <param name="error">The error message</param>
+        public bool ChangeAccountRole(int index, string edit, out string error)
+        {
+            error = "Niets ingevuld!";
+            if (!string.IsNullOrWhiteSpace(edit))
+            {
+                Accounttype act;
+                if (Enum.TryParse(edit, out act))
+                {
+                    Account.UpdateAdmin(
+                        LoadedAccounts[index].AccountID,
+                        act,
+                        LoadedAccounts[index].Naam,
+                        LoadedAccounts[index].Information,
+                        LoadedAccounts[index].Loc,
+                        LoadedAccounts[index].Sex,
+                        LoadedAccounts[index].AvatarPath,
+                        LoadedAccounts[index].Email
+                        );
+                    return true;
                 }
             }
-            error += "Naam is niet correct!";
+            error = "Rol is niet correct!";
+            return false;
+        }
+
+        /// <summary>
+        /// Changes the user's sex
+        /// </summary>
+        /// <param name="index">Index of the user as loaded</param>
+        /// <param name="edit">The edit of the sex</param>
+        /// <param name="error">The error message</param>
+        public bool ChangeAccountSex(int index, string edit, out string error)
+        {
+            error = "Niets ingevuld!";
+            if (!string.IsNullOrWhiteSpace(edit))
+            {
+                if (edit == "M" || edit == "F")
+                {
+                    Account.UpdateAdmin(
+                        LoadedAccounts[index].AccountID,
+                        LoadedAccounts[index].Role,
+                        LoadedAccounts[index].Naam,
+                        LoadedAccounts[index].Information,
+                        LoadedAccounts[index].Loc,
+                        edit,
+                        LoadedAccounts[index].AvatarPath,
+                        LoadedAccounts[index].Email
+                        );
+                    return true;
+                }
+            }
+            error = "Geslacht is niet correct!";
+            return false;
+        }
+
+        /// <summary>
+        /// Changes the user's email
+        /// </summary>
+        /// <param name="index">Index of the user as loaded</param>
+        /// <param name="edit">The edit of the email</param>
+        /// <param name="error">The error message</param>
+        public bool ChangeAccountEmail(int index, string edit, out string error)
+        {
+            error = "Niets ingevuld!";
+            if (!string.IsNullOrWhiteSpace(edit))
+            {
+                Account.UpdateAdmin(
+                    LoadedAccounts[index].AccountID,
+                    LoadedAccounts[index].Role,
+                    LoadedAccounts[index].Naam,
+                    LoadedAccounts[index].Information,
+                    LoadedAccounts[index].Loc,
+                    LoadedAccounts[index].Sex,
+                    LoadedAccounts[index].AvatarPath,
+                    edit
+                    );
+                return true;
+            }
+            error = "email is niet correct!";
             return false;
         }
 

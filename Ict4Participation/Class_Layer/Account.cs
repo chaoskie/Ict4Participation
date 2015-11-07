@@ -177,7 +177,7 @@ namespace Class_Layer
             return acc;
         }
 
-        public static void UpdateAdmin(int ID, Accounttype acctype, string name, Location loc, string sex, string avatarPath, string email)
+        public static void UpdateAdmin(int ID, Accounttype acctype, string name, string desc, Location loc, string sex, string avatarPath, string email)
         {
             //TODO
             //Update the account through a database update query
