@@ -29,7 +29,7 @@ namespace Ict4Participation
              if (!Administration.testDatabase())
                  MessageBox.Show("Oeps! Er is iets misgegaan tijdens het verbinden. \n Probeer opnieuw of raadpleeg een administrator!");
 
-             //Clipboard.SetText(Administration.giveTestHash());
+             Clipboard.SetText(Administration.giveTestHash());
 
             //if admin, continue to other screen with details
             if (true)
