@@ -101,6 +101,11 @@ namespace Class_Layer
             return creationSuccess;
         }
 
+        public static void Delete(int ID)
+        {
+            Database_Layer.Database.DeleteQuestion(ID);
+        }
+
         /// <summary>
         /// Retrieves questions from the database
         /// </summary>

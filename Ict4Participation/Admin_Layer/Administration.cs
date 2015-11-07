@@ -336,6 +336,17 @@ namespace Admin_Layer
             return Comment.GetQuestionComments(LoadedQuestions[index].PostID, out LoadedComments);
         }
 
+        /// <summary>
+        /// Deletes the specified question
+        /// </summary>
+        /// <param name="index">The index of the question in the list</param>
+        /// <returns>A string regarding the message of deletion</returns>
+        public string DeleteQuestion(int index)
+        {
+            Question.Delete(LoadedQuestions[index].PostID);
+            return "Vraag succesvol verwijderd";
+        }
+
         #endregion
 
         #region Review handling
@@ -353,6 +364,17 @@ namespace Admin_Layer
         {
             Message = Review.PlaceReview(rating, title, userID, MainUser.AccountID, description);
             return true;
+        }
+
+        /// <summary>
+        /// Deletes the specified review
+        /// </summary>
+        /// <param name="index">The index as in loaded reviews</param>
+        /// <returns>A string regarding the deletion</returns>
+        public string DeleteReview(int index)
+        {
+            Review.Delete(LoadedComments[index].PostID);
+            return "Review succesvol verwijderd!";
         }
 
         /// <summary>
@@ -742,6 +764,17 @@ namespace Admin_Layer
             }
 
             return rightFormat;
+        }
+
+        /// <summary>
+        /// Sets an account to inactive, leaving their posts unharmed, but disallowing log in
+        /// </summary>
+        /// <param name="index">The index as specified in loaded users</param>
+        /// <returns>A message regarding the inactivation</returns>
+        public string SetInactiveAccount(int index)
+        {
+            Account.SetInactive(LoadedAccounts[index].AccountID);
+            return "Gebruiker succesvol inactief gezet!";
         }
 
         /// <summary>

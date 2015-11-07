@@ -71,9 +71,16 @@ namespace Class_Layer
             return String.Format("{0}-sterren review geplaatst!", rating);
         }
 
+        public static void Delete(int ID)
+        {
+            //TODO
+            //Call database to delete
+        }
+
         public static void Update(int postID, int rating, string title, string desc)
         {
             //TODO
+            //Call database to update
         }
 
         /// <summary>

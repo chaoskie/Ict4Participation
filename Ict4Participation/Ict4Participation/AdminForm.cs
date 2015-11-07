@@ -382,7 +382,7 @@ namespace Ict4Participation
             //If question is selected
             if (lbTables.SelectedIndex == 0)
             {
-                
+                MessageBox.Show(Administration.DeleteQuestion(lbPost.SelectedIndex));
             }
             //If user is selected
             if (lbTables.SelectedIndex == 1)
@@ -392,7 +392,7 @@ namespace Ict4Participation
             //If review is selected
             if (lbTables.SelectedIndex == 2)
             {
-
+                MessageBox.Show(Administration.DeleteReview(lbPost.SelectedIndex));
             }
 
             //Refresh list

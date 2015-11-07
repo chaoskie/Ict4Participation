@@ -184,6 +184,15 @@ namespace Class_Layer
         }
 
         /// <summary>
+        /// Sets an user to the inactive state
+        /// </summary>
+        /// <param name="ID">The ID of the user</param>
+        public static void SetInactive(int ID)
+        {
+            Database_Layer.Database.DeleteUser(ID);
+        }
+
+        /// <summary>
         /// Finds account credentials and fills in account information
         /// </summary>
         /// <param name="row">the datarow to process</param>
