@@ -472,16 +472,20 @@ namespace Database_Layer
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
+                //Ding dat je wilt aanpassen = (statement) ? (waarde als true) : (waarde als false)
+                //Werkt niet als je methodes wilt uitvoeren
+                acctype = acctype == "Hulpverlener" ? "V" : "H";
+
                 c.Open();
                 OracleCommand cmd = new OracleCommand("UPDATE \"Acc\" SET \"Name\" = :B , \"LOCATION_ID\" = :C, \"Avatar\" = :F, \"Description\" = :I, \"Role\" = :H, \"Sex\"= :D, \"Email\"= :G WHERE \"ID\" = :A");
-                cmd.Parameters.Add(new OracleParameter("A", ID));
                 cmd.Parameters.Add(new OracleParameter("B", name));
                 cmd.Parameters.Add(new OracleParameter("C", loc));
-                cmd.Parameters.Add(new OracleParameter("D", sex));
                 cmd.Parameters.Add(new OracleParameter("F", avatarPath));
-                cmd.Parameters.Add(new OracleParameter("G", email));
-                cmd.Parameters.Add(new OracleParameter("H", acctype));
                 cmd.Parameters.Add(new OracleParameter("I", desc));
+                cmd.Parameters.Add(new OracleParameter("H", acctype));
+                cmd.Parameters.Add(new OracleParameter("D", sex));
+                cmd.Parameters.Add(new OracleParameter("G", email));
+                cmd.Parameters.Add(new OracleParameter("A", ID));
                 cmd.Connection = c;
                 try
                 {

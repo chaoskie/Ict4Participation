@@ -134,7 +134,7 @@ namespace Ict4Participation
                         string newUser = Prompt.ShowDialog("Pas de gebruiker aan naar het volgende: ", "Aanpassen");
                         string error;
                         //Validate username (to check if it exists)
-                        if (Administration.ChangeQuestionPoster(lbPostDetails.SelectedIndex, newUser, out error))
+                        if (Administration.ChangeQuestionPoster(lbPost.SelectedIndex, newUser, out error))
                         {
                             MessageBox.Show("Hulpvraag aangepast!");
                             //Refresh
@@ -154,7 +154,7 @@ namespace Ict4Participation
                         //Validate time (to check if in right format)
                         string error;
                         //Validate username (to check if it exists)
-                        if (Administration.ChangeQuestionTime(lbPostDetails.SelectedIndex, newTime, out error))
+                        if (Administration.ChangeQuestionTime(lbPost.SelectedIndex, newTime, out error))
                         {
                             MessageBox.Show("Hulpvraag aangepast!");
                             //Refresh
@@ -173,7 +173,7 @@ namespace Ict4Participation
                         string newDesc = Prompt.ShowDialog("Pas de beschrijving aan naar het volgende: ", "Aanpassen");
                         //Change description
                         string error;
-                        if (Administration.ChangeQuestionDescription(lbPostDetails.SelectedIndex, newDesc, out error))
+                        if (Administration.ChangeQuestionDescription(lbPost.SelectedIndex, newDesc, out error))
                         {
                             MessageBox.Show("Hulpvraag aangepast!");
                             //Refresh
@@ -192,7 +192,7 @@ namespace Ict4Participation
                         string newLoc = Prompt.ShowDialog("Pas de locatie aan naar het volgende: ", "Aanpassen");
                         //Change location
                         string error;
-                        if (Administration.ChangeQuestionLocation(lbPostDetails.SelectedIndex, newLoc, out error))
+                        if (Administration.ChangeQuestionLocation(lbPost.SelectedIndex, newLoc, out error))
                         {
                             MessageBox.Show("Hulpvraag aangepast!");
                             //Refresh
@@ -215,7 +215,7 @@ namespace Ict4Participation
                     {
                         string edit = Prompt.ShowDialog("Pas de naam aan naar het volgende: ", "Aanpassen");
                         string error;
-                        if (Administration.ChangeAccountName(lbPostDetails.SelectedIndex, edit, out error))
+                        if (Administration.ChangeAccountName(lbPost.SelectedIndex, edit, out error))
                         {
                             MessageBox.Show("Gebruiker aangepast!");
                             //Refresh
@@ -232,7 +232,7 @@ namespace Ict4Participation
                     {
                         string edit = Prompt.ShowDialog("Pas de locatie aan naar het volgende: ", "Aanpassen");
                         string error;
-                        if (Administration.ChangeAccountLocation(lbPostDetails.SelectedIndex, edit, out error))
+                        if (Administration.ChangeAccountLocation(lbPost.SelectedIndex, edit, out error))
                         {
                             MessageBox.Show("Gebruiker aangepast!");
                             //Refresh
@@ -249,7 +249,7 @@ namespace Ict4Participation
                     {
                         string edit = Prompt.ShowDialog("Pas de beschrijving aan naar het volgende: ", "Aanpassen");
                         string error;
-                        if (Administration.ChangeAccountDescription(lbPostDetails.SelectedIndex, edit, out error))
+                        if (Administration.ChangeAccountDescription(lbPost.SelectedIndex, edit, out error))
                         {
                             MessageBox.Show("Gebruiker aangepast!");
                             //Refresh
@@ -266,7 +266,7 @@ namespace Ict4Participation
                     {
                         string edit = Prompt.ShowDialog("Pas de rol aan naar het volgende (Hulpverlener / Hulpbehoevende): ", "Aanpassen");
                         string error;
-                        if (Administration.ChangeAccountRole(lbPostDetails.SelectedIndex, edit, out error))
+                        if (Administration.ChangeAccountRole(lbPost.SelectedIndex, edit, out error))
                         {
                             MessageBox.Show("Gebruiker aangepast!");
                             //Refresh
@@ -284,7 +284,7 @@ namespace Ict4Participation
                     {
                         string edit = Prompt.ShowDialog("Pas het geslacht aan naar het volgende (M / F): ", "Aanpassen");
                         string error;
-                        if (Administration.ChangeAccountSex(lbPostDetails.SelectedIndex, edit, out error))
+                        if (Administration.ChangeAccountSex(lbPost.SelectedIndex, edit, out error))
                         {
                             MessageBox.Show("Gebruiker aangepast!");
                             //Refresh
@@ -301,7 +301,7 @@ namespace Ict4Participation
                     {
                         string edit = Prompt.ShowDialog("Pas de email aan naar het volgende", "Aanpassen");
                         string error;
-                        if (Administration.ChangeAccountEmail(lbPostDetails.SelectedIndex, edit, out error))
+                        if (Administration.ChangeAccountEmail(lbPost.SelectedIndex, edit, out error))
                         {
                             MessageBox.Show("Gebruiker aangepast!");
                             //Refresh
@@ -324,7 +324,7 @@ namespace Ict4Participation
                     {
                         string edit = Prompt.ShowDialog("Pas de rating aan naar het volgende: ", "Aanpassen");
                         string error;
-                        if (Administration.ChangeReviewRating(lbPostDetails.SelectedIndex, edit, out error))
+                        if (Administration.ChangeReviewRating(lbPost.SelectedIndex, edit, out error))
                         {
                             MessageBox.Show("Review aangepast!");
                             //Refresh
@@ -341,7 +341,7 @@ namespace Ict4Participation
                     {
                         string edit = Prompt.ShowDialog("Pas de titel aan naar het volgende: ", "Aanpassen");
                         string error;
-                        if (Administration.ChangeReviewTitle(lbPostDetails.SelectedIndex, edit, out error))
+                        if (Administration.ChangeReviewTitle(lbPost.SelectedIndex, edit, out error))
                         {
                             MessageBox.Show("Review aangepast!");
                             //Refresh
@@ -358,7 +358,7 @@ namespace Ict4Participation
                     {
                         string edit = Prompt.ShowDialog("Pas de beschrijving aan naar het volgende: ", "Aanpassen");
                         string error;
-                        if (Administration.ChangeReviewDescription(lbPostDetails.SelectedIndex, edit, out error))
+                        if (Administration.ChangeReviewDescription(lbPost.SelectedIndex, edit, out error))
                         {
                             MessageBox.Show("Review aangepast!");
                             //Refresh
