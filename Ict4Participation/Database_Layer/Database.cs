@@ -290,6 +290,51 @@ namespace Database_Layer
                 c.Close();
             }
         }
+
+        public static void UpdateQuestion(int qID, string title, string timetable, string desc, int locID)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("UPDATE \"Question\" SET \"Title\" = :A, \"Timetable\" = :B, \"Description\" = :C, \"LOCATION_ID\" = :D WHERE \"ID\" = :E ");
+                cmd.Parameters.Add(new OracleParameter("A", title));
+                cmd.Parameters.Add(new OracleParameter("B", timetable));
+                cmd.Parameters.Add(new OracleParameter("C", desc));
+                cmd.Parameters.Add(new OracleParameter("D", locID));
+                cmd.Parameters.Add(new OracleParameter("E", qID));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException)
+                {
+                    throw;
+                }
+                c.Close();
+            }
+        }
+
+        public static void DelSkillQuestion(int qID)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("DELETE FROM \"Question_Skill\" WHERE \"QUESTION_ID\" = :A;");
+                cmd.Parameters.Add(new OracleParameter("A", qID));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException)
+                {
+                    throw;
+                }
+                c.Close();
+            }
+        }
+        
         #endregion
 
         #region account

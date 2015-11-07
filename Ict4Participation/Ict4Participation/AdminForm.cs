@@ -299,8 +299,7 @@ namespace Ict4Participation
                     //Edit Email
                     if (lbPostDetails.SelectedIndex == 6)
                     {
-                        //TODO
-                        string edit = Prompt.ShowDialog("Pas het geslacht aan naar het volgende (M / F): ", "Aanpassen");
+                        string edit = Prompt.ShowDialog("Pas de email aan naar het volgende", "Aanpassen");
                         string error;
                         if (Administration.ChangeAccountEmail(lbPostDetails.SelectedIndex, edit, out error))
                         {
@@ -378,7 +377,6 @@ namespace Ict4Participation
 
         private void btnDeletePost_Click(object sender, EventArgs e)
         {
-            //TODO
             //If question is selected
             if (lbTables.SelectedIndex == 0)
             {

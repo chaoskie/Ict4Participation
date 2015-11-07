@@ -52,6 +52,7 @@ namespace Ict4Participation
         private void btnChat_Click(object sender, EventArgs e)
         {
             //TODO
+            throw new NotImplementedException("Nog even geduld! De chat functie is momenteel in ontwikkeling en wordt later toegevoegd.");
         }
 
         private void afspraakMakenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -63,6 +64,7 @@ namespace Ict4Participation
         private void detailsWeergevenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //TODO
+            throw new NotImplementedException("Nog even geduld! De detail functie is momenteel in ontwikkeling en wordt later toegevoegd.");
         }
 
         #region reviews

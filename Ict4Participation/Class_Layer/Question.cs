@@ -184,10 +184,20 @@ namespace Class_Layer
         /// <param name="location">The location of the question</param>
         /// <param name="skills">The skills needed for the question</param>
         /// <param name="userID">The ID of the user who posted the question</param>
-        public static void Update(int postID, string title, DateTime schedule, string description, Location location, List<string> skills, int userID)
+        public static void Update(int postID, string title, DateTime schedule, string description, Location loc, List<string> skills, int userID)
         {
-            //TODO
-            //Call database update query
+            int locID = 0;
+            //If location does not exist
+            if (!Location.ValidateLocation(loc, out locID))
+            {
+                locID = Location.InsertLocation(loc);
+            }
+            Database_Layer.Database.UpdateQuestion(postID, title, schedule.ToString(), description, locID);
+            Database_Layer.Database.DelSkillQuestion(postID);
+            foreach (string s in skills)
+            {
+                Database_Layer.Database.SkillInsert(s, postID);
+            }
         }
 
         /// <summary>
