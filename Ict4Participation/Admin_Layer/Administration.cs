@@ -270,7 +270,7 @@ namespace Admin_Layer
             //If location does not exist
             if (!Location.ValidateLocation(loc, out locID))
             {
-                Location.InsertLocation(loc);
+                locID = Location.InsertLocation(loc);
             }
             Question.Update(
                     LoadedQuestions[index].PostID,
@@ -759,7 +759,7 @@ namespace Admin_Layer
             }
             if (rightFormat)
             {
-                MainUser = Account.Update(MainUser.AccountID, MainUser.Role, name, new Location(String.Format("{0}", address)), sex, password, avatarPath, email);
+                MainUser = Account.Update(MainUser.AccountID, name, new Location(address), sex, password, avatarPath, email);
             }
 
             return rightFormat;
@@ -827,7 +827,7 @@ namespace Admin_Layer
             //If location does not exist
             if (!Location.ValidateLocation(loc, out locID))
             {
-                Location.InsertLocation(loc);
+                locID = Location.InsertLocation(loc);
             }
             Account.UpdateAdmin(
                         LoadedAccounts[index].AccountID,
