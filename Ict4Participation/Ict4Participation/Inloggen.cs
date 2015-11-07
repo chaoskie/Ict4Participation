@@ -57,16 +57,23 @@ namespace Ict4Participation
         {
             if (tbUsername.TextLength >= 3)
             {
-                if (Administration.LogIn(tbUsername.Text, tbPassword.Text))
+                try
                 {
-                    Form form = new HoofdForm(Administration);
-                    form.Show();
-                    this.Hide();
+                    if (Administration.LogIn(tbUsername.Text, tbPassword.Text))
+                    {
+                        Form form = new HoofdForm(Administration);
+                        form.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        tbPassword.Text = string.Empty;
+                        MessageBox.Show("De combinatie van gebruikersnaam en wachtwoord bestaat niet!", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    tbPassword.Text = string.Empty;
-                    MessageBox.Show("De combinatie van gebruikersnaam en wachtwoord bestaat niet!", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Uw account is op non-actief gezet!");
                 }
             }
             else
