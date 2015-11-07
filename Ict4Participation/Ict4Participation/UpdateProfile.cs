@@ -20,19 +20,32 @@ namespace Ict4Participation
         {
             InitializeComponent();
             this.administration = a;
+            tbAdress.Text = administration.MainAccountData(3);
+            tbEmail.Text = administration.MainAccountData(8);
+            tbName.Text = administration.MainAccountData(2);
+            tbPhotoPath.Text = administration.MainAccountData(4);
+            cbSex.SelectedItem = administration.MainAccountData(7);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             string errorMessage = string.Empty;
-            if (administration.EditAccount(tbName.Text, tbAdress.Text, tbCity.Text, cbSex.Text, tbPassword1.Text, tbPhotoPath.Text, tbEmail.Text, out errorMessage))
+            if (tbPassword1.Text == tbPassword2.Text)
             {
-                MessageBox.Show("Account successvol aangepast! \nDe veranderingen zullen de volgende keer worden weergegeven");
-                this.Close();
+                //Ask for right password through a prompt
+                if (administration.EditAccount(tbName.Text, tbAdress.Text, cbSex.Text, tbPassword1.Text, tbPhotoPath.Text, tbEmail.Text, out errorMessage))
+                {
+                    MessageBox.Show("Account successvol aangepast! \nDe veranderingen zullen de volgende keer worden weergegeven");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(errorMessage);
+                }
             }
             else
             {
-                MessageBox.Show(errorMessage);
+                MessageBox.Show("Wachtwoorden komen niet overeen!");
             }
         }
 
