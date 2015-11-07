@@ -391,6 +391,58 @@ namespace Database_Layer
                 c.Close();
             }
         }
+
+        public static void UpdateUser(int ID, string name, int loc, string sex, string password, string avatarPath, string email)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("UPDATE \"Acc\" SET \"Name\" = :B , \"LOCATION_ID\" = :C, \"PassHash\" = :E, \"Avatar\" = :F, \"Sex\"= :D, \"Email\"= :G WHERE \"ID\" = :A");
+                cmd.Parameters.Add(new OracleParameter("A", ID));
+                cmd.Parameters.Add(new OracleParameter("B", name));
+                cmd.Parameters.Add(new OracleParameter("C", loc));
+                cmd.Parameters.Add(new OracleParameter("D", sex));
+                cmd.Parameters.Add(new OracleParameter("E", password));
+                cmd.Parameters.Add(new OracleParameter("F", avatarPath));
+                cmd.Parameters.Add(new OracleParameter("G", email));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException)
+                {
+                    throw;
+                }
+                c.Close();
+            }
+        }
+        public static void UpdateUser(int ID, string acctype, string name, int loc, string sex, string avatarPath, string email, string desc)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("UPDATE \"Acc\" SET \"Name\" = :B , \"LOCATION_ID\" = :C, \"Avatar\" = :F, \"Description\" = :I, \"Role\" = :H, \"Sex\"= :D, \"Email\"= :G WHERE \"ID\" = :A");
+                cmd.Parameters.Add(new OracleParameter("A", ID));
+                cmd.Parameters.Add(new OracleParameter("B", name));
+                cmd.Parameters.Add(new OracleParameter("C", loc));
+                cmd.Parameters.Add(new OracleParameter("D", sex));
+                cmd.Parameters.Add(new OracleParameter("F", avatarPath));
+                cmd.Parameters.Add(new OracleParameter("G", email));
+                cmd.Parameters.Add(new OracleParameter("H", acctype));
+                cmd.Parameters.Add(new OracleParameter("I", desc));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException)
+                {
+                    throw;
+                }
+                c.Close();
+            }
+        }
         #endregion
 
         #region review

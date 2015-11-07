@@ -180,20 +180,40 @@ namespace Class_Layer
             return (salt + hash);
         }
 
-        //TODO
         public static Account Update(int ID, string name, Location loc, string sex, string password, string avatarPath, string email)
         {
-            //TODO
-            //Update the account through a database update query
+            int locID = 0;
+            //If location does not exist
+            if (!Location.ValidateLocation(loc, out locID))
+            {
+                locID = Location.InsertLocation(loc);
+            }
+            string hashed = Class_Layer.PasswordHashing.CreateHash(password);
+            Database_Layer.Database.UpdateUser(ID, name, locID, sex, hashed, avatarPath, email);
             Account acc = null;
             Account.CreateMainAccount(ID.ToString(), password, out acc);
             return acc;
         }
-
+        /// <summary>
+        /// update query if the user profile is update by an admin
+        /// </summary>
+        /// <param name="ID">user id</param>
+        /// <param name="acctype">accounttype of the user</param>
+        /// <param name="name">username</param>
+        /// <param name="desc"></param>
+        /// <param name="loc"></param>
+        /// <param name="sex"></param>
+        /// <param name="avatarPath"></param>
+        /// <param name="email"></param>
         public static void UpdateAdmin(int ID, Accounttype acctype, string name, string desc, Location loc, string sex, string avatarPath, string email)
         {
-            //TODO
-            //Update the account through a database update query
+            int locID = 0;
+            //If location does not exist
+            if (!Location.ValidateLocation(loc, out locID))
+            {
+                locID = Location.InsertLocation(loc);
+            }
+            Database_Layer.Database.UpdateUser(ID, acctype.ToString(), name, locID, sex, avatarPath, email, desc);
         }
 
         /// <summary>
