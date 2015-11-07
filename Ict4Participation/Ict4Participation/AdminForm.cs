@@ -142,7 +142,7 @@ namespace Ict4Participation
                         else
                         {
                             MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            Clipboard.SetText(newUser);
+                            //Clipboard.SetText(newUser);
                             btnEditPost_Click(sender, e);
                         }
                     }
@@ -162,7 +162,7 @@ namespace Ict4Participation
                         else
                         {
                             MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            Clipboard.SetText(newTime);
+                            //Clipboard.SetText(newTime);
                             btnEditPost_Click(sender, e);
                         }
                     }
@@ -181,7 +181,7 @@ namespace Ict4Participation
                         else
                         {
                             MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            Clipboard.SetText(newDesc);
+                            //Clipboard.SetText(newDesc);
                             btnEditPost_Click(sender, e);
                         }
                     }
@@ -200,7 +200,7 @@ namespace Ict4Participation
                         else
                         {
                             MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            Clipboard.SetText(newLoc);
+                            //Clipboard.SetText(newLoc);
                             btnEditPost_Click(sender, e);
                         }
                     }
@@ -223,7 +223,7 @@ namespace Ict4Participation
                         else
                         {
                             MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            Clipboard.SetText(edit);
+                            //Clipboard.SetText(edit);
                             btnEditPost_Click(sender, e);
                         }
                     }
@@ -240,12 +240,12 @@ namespace Ict4Participation
                         else
                         {
                             MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            Clipboard.SetText(edit);
+                            //Clipboard.SetText(edit);
                             btnEditPost_Click(sender, e);
                         }
                     }
                     //Edit Description
-                    if (lbPostDetails.SelectedIndex == 3)
+                    if (lbPostDetails.SelectedIndex == 2)
                     {
                         string edit = Prompt.ShowDialog("Pas de beschrijving aan naar het volgende: ", "Aanpassen");
                         string error;
@@ -257,12 +257,12 @@ namespace Ict4Participation
                         else
                         {
                             MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            Clipboard.SetText(edit);
+                            //Clipboard.SetText(edit);
                             btnEditPost_Click(sender, e);
                         }
                     }
                     //Edit Role
-                    if (lbPostDetails.SelectedIndex == 4)
+                    if (lbPostDetails.SelectedIndex == 3)
                     {
                         string edit = Prompt.ShowDialog("Pas de rol aan naar het volgende (Hulpverlener / Hulpbehoevende): ", "Aanpassen");
                         string error;
@@ -274,13 +274,13 @@ namespace Ict4Participation
                         else
                         {
                             MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            Clipboard.SetText(edit);
+                            //Clipboard.SetText(edit);
                             btnEditPost_Click(sender, e);
                         }
 
                     }
                     //Edit Sex
-                    if (lbPostDetails.SelectedIndex == 5)
+                    if (lbPostDetails.SelectedIndex == 4)
                     {
                         string edit = Prompt.ShowDialog("Pas het geslacht aan naar het volgende (M / F): ", "Aanpassen");
                         string error;
@@ -292,12 +292,12 @@ namespace Ict4Participation
                         else
                         {
                             MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            Clipboard.SetText(edit);
+                            //Clipboard.SetText(edit);
                             btnEditPost_Click(sender, e);
                         }
                     }
                     //Edit Email
-                    if (lbPostDetails.SelectedIndex == 6)
+                    if (lbPostDetails.SelectedIndex == 5)
                     {
                         string edit = Prompt.ShowDialog("Pas de email aan naar het volgende", "Aanpassen");
                         string error;
@@ -309,7 +309,7 @@ namespace Ict4Participation
                         else
                         {
                             MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            Clipboard.SetText(edit);
+                            //Clipboard.SetText(edit);
                             btnEditPost_Click(sender, e);
                         }
                     }
@@ -332,7 +332,7 @@ namespace Ict4Participation
                         else
                         {
                             MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            Clipboard.SetText(edit);
+                            //Clipboard.SetText(edit);
                             btnEditPost_Click(sender, e);
                         }
                     }
@@ -349,12 +349,12 @@ namespace Ict4Participation
                         else
                         {
                             MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            Clipboard.SetText(edit);
+                            //Clipboard.SetText(edit);
                             btnEditPost_Click(sender, e);
                         }
                     }
                     //Edit description
-                    if (lbPostDetails.SelectedIndex == 3)
+                    if (lbPostDetails.SelectedIndex == 2)
                     {
                         string edit = Prompt.ShowDialog("Pas de beschrijving aan naar het volgende: ", "Aanpassen");
                         string error;
@@ -366,7 +366,7 @@ namespace Ict4Participation
                         else
                         {
                             MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            Clipboard.SetText(edit);
+                            //Clipboard.SetText(edit);
                             btnEditPost_Click(sender, e);
                         }
                     }
