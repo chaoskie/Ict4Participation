@@ -70,17 +70,18 @@ namespace Class_Layer
             Database_Layer.Database.InsertReview(rating, title, postedtoID, posterID, description);
             return String.Format("{0}-sterren review geplaatst!", rating);
         }
-
+        /// <summary>
+        /// deletes the given review entry
+        /// </summary>
+        /// <param name="ID">id of the given review</param>
         public static void Delete(int ID)
         {
-            //TODO
-            //Call database to delete
+            Database_Layer.Database.DeleteReview(ID);
         }
 
         public static void Update(int postID, int rating, string title, string desc)
         {
-            //TODO
-            //Call database to update
+            Database_Layer.Database.UpdateReview(postID, rating, title, desc);
         }
 
         /// <summary>

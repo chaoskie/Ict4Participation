@@ -515,7 +515,47 @@ namespace Database_Layer
                 c.Close();
             }
         }
-
+        public static void DeleteReview(int ID)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("DELETE FROM \"Review\" WHERE \"ID\" = :A;");
+                cmd.Parameters.Add(new OracleParameter("A", ID));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException)
+                {
+                    throw;
+                }
+                c.Close();
+            }
+        }
+        public static void UpdateReview(int ID, int rating, string title, string desc)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("UPDATE \"Review\" SET \"Rating\" = :a, \"Title\" = :b, \"Description\" = :c WHERE \"ID\" = :d ");
+                cmd.Parameters.Add(new OracleParameter("a", rating));
+                cmd.Parameters.Add(new OracleParameter("b", title));
+                cmd.Parameters.Add(new OracleParameter("c", desc));
+                cmd.Parameters.Add(new OracleParameter("d", ID));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException)
+                {
+                    throw;
+                }
+                c.Close();
+            }
+        }
         #endregion
 
         #region location
