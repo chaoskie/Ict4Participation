@@ -793,8 +793,8 @@ namespace Admin_Layer
                     Account.UpdateAdmin(
                         LoadedAccounts[index].AccountID,
                         LoadedAccounts[index].Role,
-                        LoadedAccounts[index].Information,
                         edit,
+                        LoadedAccounts[index].Information,
                         LoadedAccounts[index].Loc,
                         LoadedAccounts[index].Sex,
                         LoadedAccounts[index].AvatarPath,
