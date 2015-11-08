@@ -29,7 +29,10 @@ namespace Ict4Participation
             this.InitializeComponent();
             this.Administration = a;
             //Start chat client
-            //Process.Start("", Administration.MainAccountData(1));
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = Application.StartupPath + "\\Profchat\\Proftaak_Chat_DB\\bin\\Debug\\Proftaak_Chat_DB.exe";
+            startInfo.Arguments = Administration.MainAccountData(1);
+            Process.Start(startInfo);
 
             //Check if the user is a 'hulpverlener', which in that case, they should not be allowed to do as much as usual.
             if (this.Administration.MainAccountData(6) == "Hulpverlener")
