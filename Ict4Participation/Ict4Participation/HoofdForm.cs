@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,8 @@ namespace Ict4Participation
         {
             this.InitializeComponent();
             this.Administration = a;
+            //Start chat client
+            //Process.Start("", Administration.MainAccountData(1));
 
             //Check if the user is a 'hulpverlener', which in that case, they should not be allowed to do as much as usual.
             if (this.Administration.MainAccountData(6) == "Hulpverlener")
