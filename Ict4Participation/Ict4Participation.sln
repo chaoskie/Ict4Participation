@@ -17,6 +17,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICT4P_HASPDetection", "ICT4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Profchat", "Profchat", "{4881594C-E83C-4B23-B4F1-0B34E818B135}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proftaak_Chat_DB", "Profchat\Proftaak_Chat_DB\Proftaak_Chat_DB.csproj", "{1144AAFF-0428-4CE4-8B56-3092E94644E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database_Layer", "Profchat\Database_Layer\Database_Layer.csproj", "{B6148E9D-BE59-4FFD-A628-76252BC1FA5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class_Layer", "Profchat\Class_Layer\Class_Layer.csproj", "{656AB4AA-351E-4098-AF5A-067A07A5D4A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Administrator_Layer", "Profchat\Administrator_Layer\Administrator_Layer.csproj", "{A47C706C-6969-4D30-A68A-936F5CF0D2F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,8 +55,30 @@ Global
 		{679C5854-71C4-4ACB-BCDC-5B59BEC92C5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{679C5854-71C4-4ACB-BCDC-5B59BEC92C5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{679C5854-71C4-4ACB-BCDC-5B59BEC92C5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1144AAFF-0428-4CE4-8B56-3092E94644E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1144AAFF-0428-4CE4-8B56-3092E94644E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1144AAFF-0428-4CE4-8B56-3092E94644E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1144AAFF-0428-4CE4-8B56-3092E94644E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6148E9D-BE59-4FFD-A628-76252BC1FA5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6148E9D-BE59-4FFD-A628-76252BC1FA5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6148E9D-BE59-4FFD-A628-76252BC1FA5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6148E9D-BE59-4FFD-A628-76252BC1FA5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{656AB4AA-351E-4098-AF5A-067A07A5D4A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{656AB4AA-351E-4098-AF5A-067A07A5D4A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{656AB4AA-351E-4098-AF5A-067A07A5D4A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{656AB4AA-351E-4098-AF5A-067A07A5D4A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A47C706C-6969-4D30-A68A-936F5CF0D2F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A47C706C-6969-4D30-A68A-936F5CF0D2F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A47C706C-6969-4D30-A68A-936F5CF0D2F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A47C706C-6969-4D30-A68A-936F5CF0D2F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1144AAFF-0428-4CE4-8B56-3092E94644E1} = {4881594C-E83C-4B23-B4F1-0B34E818B135}
+		{B6148E9D-BE59-4FFD-A628-76252BC1FA5A} = {4881594C-E83C-4B23-B4F1-0B34E818B135}
+		{656AB4AA-351E-4098-AF5A-067A07A5D4A9} = {4881594C-E83C-4B23-B4F1-0B34E818B135}
+		{A47C706C-6969-4D30-A68A-936F5CF0D2F9} = {4881594C-E83C-4B23-B4F1-0B34E818B135}
 	EndGlobalSection
 EndGlobal
