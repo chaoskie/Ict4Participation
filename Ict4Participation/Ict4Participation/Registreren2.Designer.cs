@@ -103,14 +103,8 @@
             // 
             // cbSkills
             // 
+            this.cbSkills.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSkills.FormattingEnabled = true;
-            this.cbSkills.Items.AddRange(new object[] {
-            "Auto",
-            "Rijbewijs",
-            "Getraind",
-            "Goede conditie",
-            "Technisch",
-            "Spraakzaam"});
             this.cbSkills.Location = new System.Drawing.Point(60, 27);
             this.cbSkills.Name = "cbSkills";
             this.cbSkills.Size = new System.Drawing.Size(136, 28);
