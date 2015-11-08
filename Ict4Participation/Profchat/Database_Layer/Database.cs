@@ -22,6 +22,7 @@ namespace Database_Layer
         /// <summary>
         /// The connection string of the chat server
         /// </summary>
+        //private static string connectionstring = "User Id=proftaak;Password=proftaak;Data Source=localhost:1521/XE;";
         private static string connectionstring = "User Id=test;Password=test;Data Source= //192.168.20.27:1521/XE;";
 
         /// <summary>

@@ -511,7 +511,25 @@ namespace Admin_Layer
             {
                 locID = Location.InsertLocation(loc);
             }
-            return Meeting.CreateMeeting(MainUser.AccountID, otheruserID, time, locID);
+
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+            
+            string retu = Meeting.CreateMeeting(MainUser.AccountID, otheruserID, time, locID);
+
+            mail.From = new MailAddress("s21mplumbum@gmail.com");
+            mail.To.Add(emailTEMP);
+            mail.Subject = "U bent uitgenodigd voor een ontmoeting!";
+            mail.Body = String.Format("Hallo! \nEr is een ontmoeting ingepland voor u met {0} \nTijd: {1}, \nLocatie: {2}", 
+                AllAccounts.First(c=>c.AccountID == otheruserID).Naam, time.ToString(), location);
+
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("s21mplumbum@gmail.com", "Em72@Gmai111");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+
+            return retu;
         }
 
         /// <summary>
@@ -709,8 +727,8 @@ namespace Admin_Layer
 
             mail.From = new MailAddress("s21mplumbum@gmail.com");
             mail.To.Add(emailTEMP);
-            mail.Subject = "Account credentials for ICT4Participation";
-            mail.Body = "Hello and thank you for registering an account at ICT4Participation \n Use the following credentials to log in: \n User ID: " + createdID;
+            mail.Subject = "ICT4Participation inlog gegevens";
+            mail.Body = "Hallo en bedankt voor het registreren van een ICT4Participation account! \nGebruik het volgende ID om in te loggen: \nUser ID:" + createdID;
 
             SmtpServer.Port = 587;
             SmtpServer.Credentials = new System.Net.NetworkCredential("s21mplumbum@gmail.com", "Em72@Gmai111");

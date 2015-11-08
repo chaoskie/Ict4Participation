@@ -26,11 +26,11 @@ namespace Proftaak_Chat_DB
         {
             string[] arguments = Environment.GetCommandLineArgs();
 
-            int id = 1;
+            int id = 0;
 
             foreach (string a in arguments)
             {
-                Int32.TryParse(a, out id);
+                int.TryParse(a, out id);
             }
 
             Application.EnableVisualStyles();
