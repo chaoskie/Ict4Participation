@@ -518,10 +518,10 @@ namespace Admin_Layer
             string retu = Meeting.CreateMeeting(MainUser.AccountID, otheruserID, time, locID);
 
             mail.From = new MailAddress("s21mplumbum@gmail.com");
-            mail.To.Add(emailTEMP);
+            mail.To.Add(LoadedAccounts.First(c => c.AccountID == otheruserID).Email);
             mail.Subject = "U bent uitgenodigd voor een ontmoeting!";
-            mail.Body = String.Format("Hallo! \nEr is een ontmoeting ingepland voor u met {0} \nTijd: {1}, \nLocatie: {2}", 
-                AllAccounts.First(c=>c.AccountID == otheruserID).Naam, time.ToString(), location);
+            mail.Body = String.Format("Hallo! \nEr is een ontmoeting ingepland voor u met {0} \nTijd: {1}, \nLocatie: {2}",
+                MainUser.Naam, time.ToString(), location);
 
             SmtpServer.Port = 587;
             SmtpServer.Credentials = new System.Net.NetworkCredential("s21mplumbum@gmail.com", "Em72@Gmai111");
