@@ -201,6 +201,10 @@
       <Project>{5d4d65c5-92d8-4d4a-874d-bb0cad13e7ce}</Project>
       <Name>Admin_Layer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Profchat\Proftaak_Chat_DB\Proftaak_Chat_DB.csproj">
+      <Project>{1144aaff-0428-4ce4-8b56-3092e94644e1}</Project>
+      <Name>Proftaak_Chat_DB</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\star.png" />
