@@ -27,9 +27,9 @@ namespace Ict4Participation
         {
             this.InitializeComponent();
             this.previous = p;
-            this.cbSkills.SelectedIndex = 0;
             this.Administration = a;
             cbSkills.DataSource = a.AllSkillTypes();
+            this.cbSkills.SelectedIndex = 0;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
