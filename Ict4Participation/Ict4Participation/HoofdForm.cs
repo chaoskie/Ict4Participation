@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,8 +30,12 @@ namespace Ict4Participation
             this.InitializeComponent();
             this.Administration = a;
             //Start chat client
+            string path = Application.StartupPath;
+            string newPath = Path.GetFullPath(Path.Combine(path, @"..\..\..\"));
+            string correctpath = newPath + "Profchat\\Proftaak_Chat_DB\\bin\\Debug\\Proftaak_Chat_DB.exe";
+
             ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = Application.StartupPath + "\\Profchat\\Proftaak_Chat_DB\\bin\\Debug\\Proftaak_Chat_DB.exe";
+            startInfo.FileName = correctpath;
             startInfo.Arguments = Administration.MainAccountData(1);
             Process.Start(startInfo);
 
