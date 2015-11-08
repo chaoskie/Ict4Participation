@@ -4,17 +4,17 @@
 // </copyright>
 // <author>ICT4Participation</author>
 //-----------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Database_Layer;
 
 namespace Class_Layer
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Drawing;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Database_Layer;
 
     /// <summary>
     /// Account class which represents a user
@@ -57,6 +57,7 @@ namespace Class_Layer
         /// </summary>
         public string Email { get; private set; }
 
+        /// <summary>
         /// Gets information about the user
         /// </summary>
         public string Information { get; private set; }
@@ -67,6 +68,20 @@ namespace Class_Layer
         public string Sex { get; private set; }
         #endregion
 
+        /// <summary>
+        /// Register an account
+        /// </summary>
+        /// <param name="name">The name of the new user</param>
+        /// <param name="loc">The location of the new user</param>
+        /// <param name="password">The password of the new user</param>
+        /// <param name="avatarPath">The path of the avatar</param>
+        /// <param name="VOG">The path of the VOG document</param>
+        /// <param name="description">A description about the user</param>
+        /// <param name="role">The role of the new user</param>
+        /// <param name="sex">The gender of the new user</param>
+        /// <param name="email">The email of the new user</param>
+        /// <param name="id">The ID of the new user</param>
+        /// <returns>Returns the new user as an account class</returns>
         public static Account Register(string name, Location loc, string password, string avatarPath, string VOG, string description, Accounttype role, string sex, string email, out int id)
         {
             //Returns: Account to set as MainUser in the admin class
@@ -77,11 +92,12 @@ namespace Class_Layer
             string passTotal = PasswordHashing.CreateHash(password);
             string[] passArray = passTotal.Split(':');
 
-            // Second string in array is the salt
+            //// Second string in array is the salt
             string passSalt = passArray[0] + ":";
-            // Third string in the array is the hash
+            //// Third string in the array is the hash
             string passHash = passArray[1] + ":" + passArray[2];
             int locID = 0;
+            
             if (Location.ValidateLocation(loc, out locID) == false)
             {
                 locID = Location.InsertLocation(loc);
@@ -118,7 +134,7 @@ namespace Class_Layer
         /// <param name="username">the username / id of the account</param>
         /// <param name="password">the password of the matching account</param>
         /// <param name="acc">the account with all the details</param>
-        /// <returns>whether acc is null or not</returns>
+        /// <returns>Returns whether account is null or not</returns>
         public static bool CreateMainAccount(string username, string password, out Account acc)
         {
             //By default, there is no user found, and no user will be given
@@ -145,7 +161,8 @@ namespace Class_Layer
         /// <summary>
         /// Inserts skills for specified account
         /// </summary>
-        /// <param name="skills"></param>
+        /// <param name="skill">The skill to insert</param>
+        /// <param name="userid">The ID of the account</param>
         public static void CreateAccountSkills(string skill, int userid)
         {
             Database_Layer.Database.SkillInsertAcc(skill, userid);
@@ -154,7 +171,7 @@ namespace Class_Layer
         /// <summary>
         /// Retrieves all the accounts from the database
         /// </summary>
-        /// <returns>All the accounts made on this point</returns>
+        /// <returns>Returns all the accounts made on this point</returns>
         public static List<Account> FetchAllAccounts()
         {
             List<Account> accs = new List<Account>();
@@ -167,6 +184,11 @@ namespace Class_Layer
             return accs;
         }
 
+        /// <summary>
+        /// Get the password hash associated with an account ID
+        /// </summary>
+        /// <param name="ID">The ID of the account</param>
+        /// <returns>Returns the password hash</returns>
         public static string GetPasswordHash(int ID)
         {
             string salt = string.Empty;
@@ -180,10 +202,21 @@ namespace Class_Layer
             return (salt + hash);
         }
 
+        /// <summary>
+        /// Update the information of an account
+        /// </summary>
+        /// <param name="ID">The ID of the account</param>
+        /// <param name="name">The new name of the account</param>
+        /// <param name="loc">The new location of the account</param>
+        /// <param name="sex">The new gender of the account</param>
+        /// <param name="password">The new password of the account</param>
+        /// <param name="avatarPath">The path of the new avatar</param>
+        /// <param name="email">The new email of the account</param>
+        /// <returns>Returns the updated account</returns>
         public static Account Update(int ID, string name, Location loc, string sex, string password, string avatarPath, string email)
         {
             int locID = 0;
-            //If location does not exist
+            ////If location does not exist
             if (!Location.ValidateLocation(loc, out locID))
             {
                 locID = Location.InsertLocation(loc);
@@ -192,7 +225,7 @@ namespace Class_Layer
             string passTotal = PasswordHashing.CreateHash(password);
             string[] passArray = passTotal.Split(':');
 
-            // Third string in the array is the hash
+            //// Third string in the array is the hash
             string passHash = passArray[1] + ":" + passArray[2];
 
             Database_Layer.Database.UpdateUser(ID, name, locID, sex, passHash, avatarPath, email);
@@ -201,16 +234,16 @@ namespace Class_Layer
             return acc;
         }
         /// <summary>
-        /// update query if the user profile is update by an admin
+        /// Update query if the user profile is update by an admin
         /// </summary>
-        /// <param name="ID">user id</param>
-        /// <param name="acctype">accounttype of the user</param>
-        /// <param name="name">username</param>
-        /// <param name="desc"></param>
-        /// <param name="loc"></param>
-        /// <param name="sex"></param>
-        /// <param name="avatarPath"></param>
-        /// <param name="email"></param>
+        /// <param name="ID">The ID of the user</param>
+        /// <param name="acctype">The new account type of the user</param>
+        /// <param name="name">The new name of the user</param>
+        /// <param name="desc">The new description of the user</param>
+        /// <param name="loc">The new location of the user</param>
+        /// <param name="sex">The new gender of the user</param>
+        /// <param name="avatarPath">The path of the new avatar</param>
+        /// <param name="email">The new email of the user</param>
         public static void UpdateAdmin(int ID, Accounttype acctype, string name, string desc, Location loc, string sex, string avatarPath, string email)
         {
             int locID = 0;
@@ -234,8 +267,8 @@ namespace Class_Layer
         /// <summary>
         /// Finds account credentials and fills in account information
         /// </summary>
-        /// <param name="row">the datarow to process</param>
-        /// <returns>an account</returns>
+        /// <param name="row">The DataRow to process</param>
+        /// <returns>Returns an account</returns>
         private static Account CreateAccount(DataRow row)
         {
             Account acc = null;
@@ -282,6 +315,7 @@ namespace Class_Layer
         /// <param name="avatarPath">The path of the avatar of the user</param>
         /// <param name="information">Information about the user</param>
         /// <param name="sex">The sex (male/female) of the user</param>
+        /// <param name="email">The email of the user</param>
         /// <param name="vogPath">The path of the VOG document</param>
         private Account(int accountID, string name, Location loc, Accounttype role, string avatarPath, string information, string sex, string email, string vogPath = "")
         {
@@ -300,7 +334,10 @@ namespace Class_Layer
             }
         }
 
-        //testmethode voor database
+        /// <summary>
+        /// A test method for the database
+        /// </summary>
+        /// <returns>Returns a bool, indicating whether or not the database is functioning properly</returns>
         static public bool testdatabase()
         {
             if (Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc\"") == null)

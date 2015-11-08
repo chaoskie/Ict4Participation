@@ -24,13 +24,44 @@ namespace Admin_Layer
     /// </summary>
     public class Administration
     {
+        /// <summary>
+        /// The main user's account
+        /// </summary>
         public Account MainUser;
+
+        /// <summary>
+        /// A list of loaded accounts
+        /// </summary>
         private List<Account> LoadedAccounts;
+
+        /// <summary>
+        /// A list of all accounts
+        /// </summary>
         private List<Account> AllAccounts;
+
+        /// <summary>
+        /// A list of loaded questions
+        /// </summary>
         private List<Question> LoadedQuestions;
+
+        /// <summary>
+        /// A list of loaded comments
+        /// </summary>
         private List<Comment> LoadedComments;
+
+        /// <summary>
+        /// A list of loaded reviews
+        /// </summary>
         private List<Review> LoadedReviews;
+
+        /// <summary>
+        /// The last loaded ID
+        /// </summary>
         private int lastloadedOPID;
+
+        /// <summary>
+        /// Tempotary properties to hold the information about a user
+        /// </summary>
         string emailTEMP; string nameTEMP; Location locTEMP; string passwordTEMP; string avatarPathTEMP;
         Accounttype roleTEMP; string sexTEMP; string VOGTEMP; string descriptionTEMP; List<string> skillsTEMP;
 
@@ -63,7 +94,8 @@ namespace Admin_Layer
         /// <summary>
         /// Removes the specified comment
         /// </summary>
-        /// <param name="index">index as the same as in the loaded comment list</param>
+        /// <param name="index">Index as the same as in the loaded comment list</param>
+        /// <param name="isAdmin">A boolean indicating whether the user is an admin</param>
         public void DeleteComment(int index, bool isAdmin = false)
         {
             Comment.DeleteComment(LoadedComments[index].PostID, isAdmin);
@@ -95,7 +127,9 @@ namespace Admin_Layer
                 return String.Format("De volgende vraag is succesvol gepost: \n {0}", q.Title);
             }
             else
+            {
                 return "Er ging iets fout! Raadpleeg de administrator indien deze fout blijft voordoen.";
+            }
         }
 
         /// <summary>
@@ -220,6 +254,7 @@ namespace Admin_Layer
             {
                 error += "Oeps, tijd is niet correct!";
             }
+
             return false;
         }
 
@@ -247,6 +282,7 @@ namespace Admin_Layer
                     LoadedQuestions[index].Skills,
                     LoadedQuestions[index].UserID
                     );
+
             return true;
         }
 
@@ -281,6 +317,7 @@ namespace Admin_Layer
                     LoadedQuestions[index].Skills,
                     LoadedQuestions[index].UserID
                     );
+
             return true;
         }
 
@@ -301,6 +338,7 @@ namespace Admin_Layer
             {
                 LoadedQuestions = Question.FindQuestions(all);
             }
+
             return LoadedQuestions.Cast<Question>().Select(x => x.Title).ToList();
         }
 
