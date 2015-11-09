@@ -26,16 +26,30 @@ namespace Proftaak_Chat_DB
         {
             string[] arguments = Environment.GetCommandLineArgs();
 
-            int id = 0;
+            int id = 1;
 
             foreach (string a in arguments)
             {
-                int.TryParse(a, out id);
+                if (IsDigitsOnly(a))
+                {
+                    int.TryParse(a, out id);
+                }
             }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new HoofdForm(id));
+        }
+
+        static bool IsDigitsOnly(string str)
+        {
+            foreach (char c in str)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+
+            return true;
         }
     }
 }

@@ -25,6 +25,11 @@ namespace Proftaak_Chat_DB
     public partial class HoofdForm : Form
     {
         /// <summary>
+        /// Gets or sets a reference of the user ID
+        /// </summary>
+        private int gebrID { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="HoofdForm"/> class
         /// </summary>
         /// <param name="gebruikerID">The ID of the user</param>
@@ -73,10 +78,6 @@ namespace Proftaak_Chat_DB
         /// </summary>
         private Administrator admin { get; set; }
 
-        /// <summary>
-        /// Gets or sets a reference of the user ID
-        /// </summary>
-        private int gebrID { get; set; }
 
         /// <summary>
         /// Gets or sets a reference of the user object
