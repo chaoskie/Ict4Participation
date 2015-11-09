@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A47C706C-6969-4D30-A68A-936F5CF0D2F9}</ProjectGuid>
+    <ProjectGuid>{6521294B-920C-4F67-BC42-36D0A212BDDD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Administrator_Layer</RootNamespace>
-    <AssemblyName>Administrator_Layer</AssemblyName>
+    <RootNamespace>Class_Layer</RootNamespace>
+    <AssemblyName>Class_Layer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,7 +20,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Administrator_Layer.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -40,13 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administrator.cs" />
+    <Compile Include="Account.cs" />
+    <Compile Include="Chatroom.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Class_Layer\Class_Layer.csproj">
-      <Project>{656ab4aa-351e-4098-af5a-067a07a5d4a9}</Project>
-      <Name>Class_Layer</Name>
+    <ProjectReference Include="..\Database_Layer\Database_Layer.csproj">
+      <Project>{2fdd5d0f-8518-4d97-b85b-cc37563a48a7}</Project>
+      <Name>Database_Layer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,21 +1,15 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="AssemblyInfo.cs" company="ICT4Participation">
-//     Copyright (c) ICT4Participation. All rights reserved.
-// </copyright>
-// <author>ICT4Participation</author>
-//-----------------------------------------------------------------------
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Class_Layer")]
+[assembly: AssemblyTitle("Database_Layer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Class_Layer")]
+[assembly: AssemblyProduct("Database_Layer")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -26,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("91246fde-b7b3-4657-98c3-a5b8b159866c")]
+[assembly: Guid("f3bd1bf2-056a-4528-b1a8-8dd6b0684b85")]
 
 // Version information for an assembly consists of the following four values:
 //

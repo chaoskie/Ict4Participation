@@ -1,21 +1,15 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="AssemblyInfo.cs" company="ICT4Participation">
-//     Copyright (c) ICT4Participation. All rights reserved.
-// </copyright>
-// <author>ICT4Participation</author>
-//-----------------------------------------------------------------------
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Proftaak_Chat_DB")]
+[assembly: AssemblyTitle("Profchat27")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Proftaak_Chat_DB")]
+[assembly: AssemblyProduct("Profchat27")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -26,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1a1311b3-aa6d-49cb-884b-9321d5f4f328")]
+[assembly: Guid("69ed8a82-e63b-4df5-926e-62b3fe1f1018")]
 
 // Version information for an assembly consists of the following four values:
 //

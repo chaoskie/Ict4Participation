@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1144AAFF-0428-4CE4-8B56-3092E94644E1}</ProjectGuid>
+    <ProjectGuid>{C17FC298-D383-442D-A33B-085258F654E8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Proftaak_Chat_DB</RootNamespace>
-    <AssemblyName>Proftaak_Chat_DB</AssemblyName>
+    <RootNamespace>Profchat27</RootNamespace>
+    <AssemblyName>Profchat27</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Proftaak_Chat_DB.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,19 +50,19 @@
     <Compile Include="Chat.Designer.cs">
       <DependentUpon>Chat.cs</DependentUpon>
     </Compile>
-    <Compile Include="HoofdForm.cs">
+    <Compile Include="Chatscreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HoofdForm.Designer.cs">
-      <DependentUpon>HoofdForm.cs</DependentUpon>
+    <Compile Include="Chatscreen.Designer.cs">
+      <DependentUpon>Chatscreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Chat.resx">
       <DependentUpon>Chat.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HoofdForm.resx">
-      <DependentUpon>HoofdForm.cs</DependentUpon>
+    <EmbeddedResource Include="Chatscreen.resx">
+      <DependentUpon>Chatscreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -88,9 +87,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Administrator_Layer\Administrator_Layer.csproj">
-      <Project>{a47c706c-6969-4d30-a68a-936f5cf0d2f9}</Project>
-      <Name>Administrator_Layer</Name>
+    <ProjectReference Include="..\Administration\Administration.csproj">
+      <Project>{98cd216a-ff88-4f3e-9d75-0860d6ced4cc}</Project>
+      <Name>Administration</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

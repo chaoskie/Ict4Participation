@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Proftaak_Chat_DB.Properties
+namespace Profchat27.Properties
 {
 
 
