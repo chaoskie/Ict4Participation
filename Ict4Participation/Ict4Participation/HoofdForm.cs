@@ -32,7 +32,12 @@ namespace Ict4Participation
             //Start chat client
             string path = Application.StartupPath;
             string newPath = Path.GetFullPath(Path.Combine(path, @"..\..\..\"));
-            string correctpath = newPath + "Profchat\\Proftaak_Chat_DB\\bin\\Debug\\Proftaak_Chat_DB.exe";
+            string correctpath = newPath + "Profchat27\\Profchat27\\bin\\Debug\\Profchat27.exe";
+
+            /*
+            string path = Application.StartupPath;
+            string correctpath = path + "\\Profchat27.exe";
+            */
 
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = correctpath;
