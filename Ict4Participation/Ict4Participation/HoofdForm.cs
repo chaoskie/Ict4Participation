@@ -29,20 +29,6 @@ namespace Ict4Participation
         {
             this.InitializeComponent();
             this.Administration = a;
-            //Start chat client
-            string path = Application.StartupPath;
-            string newPath = Path.GetFullPath(Path.Combine(path, @"..\..\..\"));
-            string correctpath = newPath + "Profchat27\\Profchat27\\bin\\Debug\\Profchat27.exe";
-
-            /*
-            string path = Application.StartupPath;
-            string correctpath = path + "\\Profchat27.exe";
-            */
-
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = correctpath;
-            startInfo.Arguments = Administration.MainAccountData(1);
-            Process.Start(startInfo);
 
             //Check if the user is a 'hulpverlener', which in that case, they should not be allowed to do as much as usual.
             if (this.Administration.MainAccountData(6) == "Hulpverlener")

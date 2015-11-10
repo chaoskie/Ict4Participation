@@ -7,8 +7,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
@@ -66,14 +70,20 @@ namespace Admin_Layer
         Accounttype roleTEMP; string sexTEMP; string VOGTEMP; string descriptionTEMP; List<string> skillsTEMP;
 
         /// <summary>
+        /// Path to the application
+        /// </summary>
+        private string AppPath;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Administration"/> class.
         /// </summary>
-        public Administration()
+        public Administration(string appPath)
         {
             AllAccounts = new List<Account>();
             LoadedAccounts = new List<Account>();
             LoadedQuestions = new List<Question>();
             LoadedComments = new List<Comment>();
+            this.AppPath = appPath;
         }
 
         #region Comment handling
@@ -743,7 +753,7 @@ namespace Admin_Layer
         {
             //Create account through
             int createdID = 0;
-            MainUser = Account.Register(nameTEMP, locTEMP, passwordTEMP, avatarPathTEMP, VOGTEMP, descriptionTEMP, roleTEMP, sexTEMP, emailTEMP, out createdID);
+            Account.Register(nameTEMP, locTEMP, passwordTEMP, avatarPathTEMP, VOGTEMP, descriptionTEMP, roleTEMP, sexTEMP, emailTEMP, out createdID);
             //Create skill references if 'hulpverlener'
             if (roleTEMP == Accounttype.Hulpverlener)
             {
@@ -773,6 +783,8 @@ namespace Admin_Layer
             SmtpServer.EnableSsl = true;
 
             SmtpServer.Send(mail);
+
+            LogIn(cID, passwordTEMP);
 
             return true;
         }
@@ -1028,6 +1040,20 @@ namespace Admin_Layer
         /// <returns>Whether this user exists / success of creation</returns>
         public bool LogIn(string gebruikersnaam, string password)
         {
+            //Start chat client
+            string newPath = Path.GetFullPath(Path.Combine(AppPath, @"..\..\..\"));
+            string correctpath = newPath + "Profchat27\\Profchat27\\bin\\Debug\\Profchat27.exe";
+
+            /*
+            string path = Application.StartupPath;
+            string correctpath = path + "\\Profchat27.exe";
+            */
+
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = correctpath;
+            startInfo.Arguments = MainUser.AccountID.ToString();
+            Process.Start(startInfo);
+
             return Account.CreateMainAccount(gebruikersnaam, password, out MainUser);
         }
 

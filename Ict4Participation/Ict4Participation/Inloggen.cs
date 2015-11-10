@@ -24,7 +24,7 @@ namespace Ict4Participation
         public Inloggen(bool usbAdmin)
         {
             this.InitializeComponent();
-            this.Administration = new Administration();
+            this.Administration = new Administration(Application.StartupPath);
 
              if (!Administration.testDatabase())
                  MessageBox.Show("Oeps! Er is iets misgegaan tijdens het verbinden. \n Probeer opnieuw of raadpleeg een administrator!");
