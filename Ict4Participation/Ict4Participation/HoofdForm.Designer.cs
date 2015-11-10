@@ -199,9 +199,10 @@
             // pbAvatar
             // 
             this.pbAvatar.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.pbAvatar.Location = new System.Drawing.Point(18, 28);
+            this.pbAvatar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbAvatar.Location = new System.Drawing.Point(18, 30);
             this.pbAvatar.Name = "pbAvatar";
-            this.pbAvatar.Size = new System.Drawing.Size(100, 96);
+            this.pbAvatar.Size = new System.Drawing.Size(100, 100);
             this.pbAvatar.TabIndex = 4;
             this.pbAvatar.TabStop = false;
             // 

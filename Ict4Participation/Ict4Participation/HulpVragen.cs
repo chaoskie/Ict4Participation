@@ -218,6 +218,14 @@ namespace Ict4Participation
                 form.Show();
             }
         }
+
+        private void tbChat_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!String.IsNullOrWhiteSpace(tbChat.Text) && e.KeyCode == Keys.Enter)
+            {
+                btnPlaats.PerformClick();
+            }
+        }
     }
 
     public static class Prompt

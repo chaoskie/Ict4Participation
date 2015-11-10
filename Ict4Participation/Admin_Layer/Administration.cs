@@ -1040,21 +1040,26 @@ namespace Admin_Layer
         /// <returns>Whether this user exists / success of creation</returns>
         public bool LogIn(string gebruikersnaam, string password)
         {
-            //Start chat client
-            string newPath = Path.GetFullPath(Path.Combine(AppPath, @"..\..\..\"));
-            string correctpath = newPath + "Profchat27\\Profchat27\\bin\\Debug\\Profchat27.exe";
+            bool ob = Account.CreateMainAccount(gebruikersnaam, password, out MainUser);
 
-            /*
-            string path = Application.StartupPath;
-            string correctpath = path + "\\Profchat27.exe";
-            */
+            if (ob)
+            {
+                //Start chat client
+                string newPath = Path.GetFullPath(Path.Combine(AppPath, @"..\..\..\"));
+                string correctpath = newPath + "Profchat27\\Profchat27\\bin\\Debug\\Profchat27.exe";
 
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = correctpath;
-            startInfo.Arguments = MainUser.AccountID.ToString();
-            Process.Start(startInfo);
+                /*
+                string path = Application.StartupPath;
+                string correctpath = path + "\\Profchat27.exe";
+                */
 
-            return Account.CreateMainAccount(gebruikersnaam, password, out MainUser);
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = correctpath;
+                startInfo.Arguments = MainUser.AccountID.ToString();
+                Process.Start(startInfo);
+            }
+
+            return ob;
         }
 
         /// <summary>

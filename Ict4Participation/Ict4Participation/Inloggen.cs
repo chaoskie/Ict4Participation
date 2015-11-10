@@ -26,10 +26,10 @@ namespace Ict4Participation
             this.InitializeComponent();
             this.Administration = new Administration(Application.StartupPath);
 
-             if (!Administration.testDatabase())
-                 MessageBox.Show("Oeps! Er is iets misgegaan tijdens het verbinden. \n Probeer opnieuw of raadpleeg een administrator!");
+            if (!Administration.testDatabase())
+                MessageBox.Show("Oeps! Er is iets misgegaan tijdens het verbinden. \n Probeer opnieuw of raadpleeg een administrator!");
 
-             Clipboard.SetText(Administration.giveTestHash());
+            Clipboard.SetText(Administration.giveTestHash());
 
             //if admin, continue to other screen with details
             if (usbAdmin)
@@ -57,23 +57,16 @@ namespace Ict4Participation
         {
             if (tbUsername.TextLength >= 3)
             {
-                try
+                if (Administration.LogIn(tbUsername.Text, tbPassword.Text))
                 {
-                    if (Administration.LogIn(tbUsername.Text, tbPassword.Text))
-                    {
-                        Form form = new HoofdForm(Administration);
-                        form.Show();
-                        this.Hide();
-                    }
-                    else
-                    {
-                        tbPassword.Text = string.Empty;
-                        MessageBox.Show("De combinatie van gebruikersnaam en wachtwoord bestaat niet!", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    Form form = new HoofdForm(Administration);
+                    form.Show();
+                    this.Hide();
                 }
-                catch (Exception)
+                else
                 {
-                    MessageBox.Show("Uw account is op non-actief gezet!");
+                    tbPassword.Text = string.Empty;
+                    MessageBox.Show("De combinatie van gebruikersnaam en wachtwoord bestaat niet!", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else

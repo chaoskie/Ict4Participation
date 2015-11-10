@@ -104,6 +104,7 @@
             this.tbChat.Name = "tbChat";
             this.tbChat.Size = new System.Drawing.Size(350, 65);
             this.tbChat.TabIndex = 4;
+            this.tbChat.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbChat_KeyDown);
             // 
             // btnPlaats
             // 
