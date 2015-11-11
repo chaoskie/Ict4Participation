@@ -58,7 +58,10 @@ namespace Ict4Participation
             if (administration.GetAccounts().Exists(c => c == cbHulpverlener.Text))
             {
                 //Post review
-                administration.PostReview(userID, tbTitle.Text, tbDescription.Text, Convert.ToInt32(nudStar.Value), out message);
+                if (!administration.PostReview(userID, tbTitle.Text, tbDescription.Text, Convert.ToInt32(nudStar.Value), out message))
+                {
+                    MessageBox.Show(message);
+                }
                 MessageBox.Show(message);
                 this.previous.Show();
                 this.Close();

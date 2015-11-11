@@ -410,8 +410,24 @@ namespace Admin_Layer
         /// <returns>Whether it was a success or not</returns>
         public bool PostReview(int userID, string title, string description, int rating, out string Message)
         {
-            Message = Review.PlaceReview(rating, title, userID, MainUser.AccountID, description);
-            return true;
+            if (userID != MainUser.AccountID)
+            {
+                if (LoadedAccounts.Find(a => a.AccountID == userID).Role != Accounttype.Hulpbehoevende)
+                {
+                    Message = Review.PlaceReview(rating, title, userID, MainUser.AccountID, description);
+                    return true;
+                }
+                else
+                {
+                    Message = "Je kan geen review plaatsen op een andere hulpverlener!";
+                    return false;
+                }
+            }
+            else
+            {
+                Message = "Je kan geen review plaatsen op jezelf!";
+                return false;
+            }
         }
 
         /// <summary>
@@ -553,31 +569,38 @@ namespace Admin_Layer
         /// <returns>Returns the result of the action</returns>
         public string CreateMeeting(int otheruserID, DateTime time, string location)
         {
-            int locID = 0;
-            Location loc = new Location(location);
-            if (!Location.ValidateLocation(loc, out locID))
+            if (MainUser.AccountID != otheruserID)
             {
-                locID = Location.InsertLocation(loc);
+                int locID = 0;
+                Location loc = new Location(location);
+                if (!Location.ValidateLocation(loc, out locID))
+                {
+                    locID = Location.InsertLocation(loc);
+                }
+
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+                string retu = Meeting.CreateMeeting(MainUser.AccountID, otheruserID, time, locID);
+
+                mail.From = new MailAddress("s21mplumbum@gmail.com");
+                mail.To.Add(LoadedAccounts.First(c => c.AccountID == otheruserID).Email);
+                mail.Subject = "U bent uitgenodigd voor een ontmoeting!";
+                mail.Body = String.Format("Hallo! \nEr is een ontmoeting ingepland voor u met {0} \nTijd: {1}, \nLocatie: {2}",
+                    MainUser.Naam, time.ToString(), location);
+
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("s21mplumbum@gmail.com", "Em72@Gmai111");
+                SmtpServer.EnableSsl = true;
+
+                SmtpServer.Send(mail);
+
+                return retu;
             }
-
-            MailMessage mail = new MailMessage();
-            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-            
-            string retu = Meeting.CreateMeeting(MainUser.AccountID, otheruserID, time, locID);
-
-            mail.From = new MailAddress("s21mplumbum@gmail.com");
-            mail.To.Add(LoadedAccounts.First(c => c.AccountID == otheruserID).Email);
-            mail.Subject = "U bent uitgenodigd voor een ontmoeting!";
-            mail.Body = String.Format("Hallo! \nEr is een ontmoeting ingepland voor u met {0} \nTijd: {1}, \nLocatie: {2}",
-                MainUser.Naam, time.ToString(), location);
-
-            SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("s21mplumbum@gmail.com", "Em72@Gmai111");
-            SmtpServer.EnableSsl = true;
-
-            SmtpServer.Send(mail);
-
-            return retu;
+            else
+            {
+                return "Je kan geen meeting inplannen met jezelf!";
+            }
         }
 
         /// <summary>
@@ -614,93 +637,104 @@ namespace Admin_Layer
         /// <returns>Whether it is a full success, or there is at least 1 invalid parameter</returns>
         public bool CreateAccount(string name, string address, string city, string password, string avatarPath, string role, string sex, string email, out string Message)
         {
-            bool filledIn = true;
-            bool rightFormat = false;
-            string error = string.Empty;
-            name = name.Trim();
+            Account find = Account.FetchAllAccounts().FirstOrDefault(a => a.Email == email);
 
-            //Check if everything is filled in
-            if (String.IsNullOrWhiteSpace(name))
+            if (find == null)
             {
-                error += "De naam is niet ingevuld!\n"; filledIn = false;
-            }
-            if (String.IsNullOrWhiteSpace(address))
-            {
-                error += "Het adres is niet ingevuld!\n"; filledIn = false;
-            }
-            if (String.IsNullOrWhiteSpace(city))
-            {
-                error += "De woonplaats is niet ingevuld!\n"; filledIn = false;
-            }
-            if (String.IsNullOrWhiteSpace(sex))
-            {
-                error += "Het geslacht is niet ingevuld!\n"; filledIn = false;
-            }
-            if (String.IsNullOrWhiteSpace(role))
-            {
-                error += "De rol is niet ingevuld!\n"; filledIn = false;
-            }
-            if (String.IsNullOrWhiteSpace(email))
-            {
-                error += "Het email is niet ingevuld!\n"; filledIn = false;
-            }
-            if (String.IsNullOrWhiteSpace(avatarPath))
-            {
-                error += "Er is geen profielfoto gekozen!\n"; filledIn = false;
-            }
-            if (String.IsNullOrWhiteSpace(password))
-            {
-                error += "Er is is geen wachtwoord ingevuld!\n"; filledIn = false;
-            }
 
-            //If so, check if everything is in the right format
-            if (filledIn)
-            {
-                rightFormat = true;
-                if (Regex.IsMatch(name, @"^[A-Z][A-Za-z\.]*(?:\s[A-Za-z][a-z]+)+$") == false)
+                bool filledIn = true;
+                bool rightFormat = false;
+                string error = string.Empty;
+                name = name.Trim();
+
+                //Check if everything is filled in
+                if (String.IsNullOrWhiteSpace(name))
                 {
-                    rightFormat = false;
-                    error += "Naam is niet correct!\n";
+                    error += "De naam is niet ingevuld!\n"; filledIn = false;
                 }
-                //if (!Regex.IsMatch(adress, @"^[A-Z]\D{1,}\s?\d{1,}$"))
-                //{
-                //    allOK = false;
-                //    error += "Addres is niet correct!\n";
-                //}
-                //if (!Regex.IsMatch(city, @"^[A-Z']\D{1,}$"))
-                //{
-                //    allOK = false;
-                //    error += "Woonplaats is niet correct!\n";
-                //}
-                if (!Regex.IsMatch(sex, @"^[MF]$"))
+                if (String.IsNullOrWhiteSpace(address))
                 {
-                    rightFormat = false;
-                    error += "Geslacht is niet correct!\n";
+                    error += "Het adres is niet ingevuld!\n"; filledIn = false;
                 }
-                if (avatarPath == string.Empty)
+                if (String.IsNullOrWhiteSpace(city))
                 {
-                    rightFormat = false;
-                    error += "Geen foto geselecteerd!\n";
+                    error += "De woonplaats is niet ingevuld!\n"; filledIn = false;
                 }
-                if (!Regex.IsMatch(password, @"^(?=.*[^a-zA-Z])(?=.*[a-z])(?=.*[A-Z])\S{8,}$"))
+                if (String.IsNullOrWhiteSpace(sex))
                 {
-                    rightFormat = false;
-                    error += "Het wachtwoord is niet sterk genoeg! Minimaal 1 hoofdletter, 1 kleine letter en 1 nummer/speciaal karakter.";
+                    error += "Het geslacht is niet ingevuld!\n"; filledIn = false;
                 }
-                //If everything is in the right format, set the temporaries for the next screen
-                if (rightFormat)
+                if (String.IsNullOrWhiteSpace(role))
                 {
-                    this.nameTEMP = name;
-                    this.locTEMP = new Location(String.Format("{0}, {1}", address, city));
-                    this.passwordTEMP = password;
-                    this.avatarPathTEMP = avatarPath;
-                    Enum.TryParse(role, out roleTEMP);
-                    this.sexTEMP = sex;
-                    this.emailTEMP = email;
+                    error += "De rol is niet ingevuld!\n"; filledIn = false;
                 }
+                if (String.IsNullOrWhiteSpace(email))
+                {
+                    error += "Het email is niet ingevuld!\n"; filledIn = false;
+                }
+                if (String.IsNullOrWhiteSpace(avatarPath))
+                {
+                    error += "Er is geen profielfoto gekozen!\n"; filledIn = false;
+                }
+                if (String.IsNullOrWhiteSpace(password))
+                {
+                    error += "Er is is geen wachtwoord ingevuld!\n"; filledIn = false;
+                }
+
+                //If so, check if everything is in the right format
+                if (filledIn)
+                {
+                    rightFormat = true;
+                    if (Regex.IsMatch(name, @"^[A-Z][A-Za-z\.]*(?:\s[A-Za-z][a-z]+)+$") == false)
+                    {
+                        rightFormat = false;
+                        error += "Naam is niet correct!\n";
+                    }
+                    //if (!Regex.IsMatch(adress, @"^[A-Z]\D{1,}\s?\d{1,}$"))
+                    //{
+                    //    allOK = false;
+                    //    error += "Addres is niet correct!\n";
+                    //}
+                    //if (!Regex.IsMatch(city, @"^[A-Z']\D{1,}$"))
+                    //{
+                    //    allOK = false;
+                    //    error += "Woonplaats is niet correct!\n";
+                    //}
+                    if (!Regex.IsMatch(sex, @"^[MF]$"))
+                    {
+                        rightFormat = false;
+                        error += "Geslacht is niet correct!\n";
+                    }
+                    if (avatarPath == string.Empty)
+                    {
+                        rightFormat = false;
+                        error += "Geen foto geselecteerd!\n";
+                    }
+                    if (!Regex.IsMatch(password, @"^(?=.*[^a-zA-Z])(?=.*[a-z])(?=.*[A-Z])\S{8,}$"))
+                    {
+                        rightFormat = false;
+                        error += "Het wachtwoord is niet sterk genoeg! Minimaal 1 hoofdletter, 1 kleine letter en 1 nummer/speciaal karakter.";
+                    }
+                    //If everything is in the right format, set the temporaries for the next screen
+                    if (rightFormat)
+                    {
+                        this.nameTEMP = name;
+                        this.locTEMP = new Location(String.Format("{0}, {1}", address, city));
+                        this.passwordTEMP = password;
+                        this.avatarPathTEMP = avatarPath;
+                        Enum.TryParse(role, out roleTEMP);
+                        this.sexTEMP = sex;
+                        this.emailTEMP = email;
+                    }
+                }
+                Message = error;
+                return rightFormat;
             }
-            Message = error;
-            return rightFormat;
+            else
+            {
+                Message = "Deze email is al in gebruik! Probeer een andere email.";
+                return false;
+            }
         }
 
         /// <summary>
