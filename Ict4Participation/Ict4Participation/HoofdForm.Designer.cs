@@ -203,6 +203,7 @@
             this.pbAvatar.Location = new System.Drawing.Point(18, 30);
             this.pbAvatar.Name = "pbAvatar";
             this.pbAvatar.Size = new System.Drawing.Size(100, 100);
+            this.pbAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbAvatar.TabIndex = 4;
             this.pbAvatar.TabStop = false;
             // 
@@ -249,6 +250,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(550, 39);
             this.Name = "HoofdForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hoofdmenu";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.HoofdForm_FormClosed);
             this.toolStrip1.ResumeLayout(false);

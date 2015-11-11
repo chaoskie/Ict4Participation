@@ -168,6 +168,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Registreren2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registreren";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Registreren_FormClosed);
             this.groupBox1.ResumeLayout(false);

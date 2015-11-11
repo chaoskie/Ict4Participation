@@ -202,6 +202,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PlaatsHulpvraag";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Plaats Hulpvraag";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PlaatsHulpvraag_FormClosed);
             this.ResumeLayout(false);

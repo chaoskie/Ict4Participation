@@ -140,6 +140,7 @@
             this.Controls.Add(this.lbPost);
             this.Controls.Add(this.lbTables);
             this.Name = "AdminForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdminForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AdminForm_FormClosed);
             this.ResumeLayout(false);

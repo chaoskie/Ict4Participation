@@ -244,6 +244,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PlaatsReview";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Plaats Review";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PlaatsReview_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.nudStar)).EndInit();

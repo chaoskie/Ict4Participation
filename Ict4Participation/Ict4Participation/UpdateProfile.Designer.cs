@@ -39,13 +39,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tbPassword2 = new System.Windows.Forms.TextBox();
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.tbPassword1 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.tbPassword2 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -165,6 +165,14 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Accountgegevens";
             // 
+            // tbPassword2
+            // 
+            this.tbPassword2.Location = new System.Drawing.Point(73, 111);
+            this.tbPassword2.Name = "tbPassword2";
+            this.tbPassword2.Size = new System.Drawing.Size(233, 26);
+            this.tbPassword2.TabIndex = 5;
+            this.tbPassword2.UseSystemPasswordChar = true;
+            // 
             // tbEmail
             // 
             this.tbEmail.Location = new System.Drawing.Point(73, 25);
@@ -220,14 +228,6 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // tbPassword2
-            // 
-            this.tbPassword2.Location = new System.Drawing.Point(73, 111);
-            this.tbPassword2.Name = "tbPassword2";
-            this.tbPassword2.Size = new System.Drawing.Size(233, 26);
-            this.tbPassword2.TabIndex = 5;
-            this.tbPassword2.UseSystemPasswordChar = true;
-            // 
             // UpdateProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -238,6 +238,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Name = "UpdateProfile";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "UpdateProfile";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

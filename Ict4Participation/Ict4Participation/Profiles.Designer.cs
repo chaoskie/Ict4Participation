@@ -155,6 +155,7 @@
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.menuStrip2);
             this.Name = "Profiles";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Profiles";
             ((System.ComponentModel.ISupportInitialize)(this.pbAvatar)).EndInit();
             this.menuStrip2.ResumeLayout(false);
