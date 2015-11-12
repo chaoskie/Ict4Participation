@@ -437,7 +437,7 @@ namespace Admin_Layer
         /// <returns>A string regarding the deletion</returns>
         public string DeleteReview(int index)
         {
-            Review.Delete(LoadedComments[index].PostID);
+            Review.Delete(LoadedReviews[index].PostID);
             return "Review succesvol verwijderd!";
         }
 

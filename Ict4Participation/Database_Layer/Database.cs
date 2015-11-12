@@ -664,8 +664,9 @@ namespace Database_Layer
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch (OracleException)
+                catch (OracleException e)
                 {
+                    Console.WriteLine(e.Message);
                     throw;
                 }
 

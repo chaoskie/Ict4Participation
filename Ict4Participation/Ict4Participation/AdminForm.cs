@@ -22,6 +22,7 @@ namespace Ict4Participation
     {
         private Form previous;
         private Administration Administration;
+        private bool Refresh;
 
         public AdminForm(Form p, Administration a)
         {
@@ -122,9 +123,9 @@ namespace Ict4Participation
 
         private void btnEditPost_Click(object sender, EventArgs e)
         {
-
             if (lbPost.SelectedIndex != -1)
             {
+                Refresh = true;
                 #region Question editing
                 if (lbTables.SelectedIndex == 0)
                 {
@@ -141,9 +142,7 @@ namespace Ict4Participation
                         }
                         else
                         {
-                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            //Clipboard.SetText(newUser);
-                            btnEditPost_Click(sender, e);
+                            Return(newUser, error);
                         }
                     }
 
@@ -161,9 +160,7 @@ namespace Ict4Participation
                         }
                         else
                         {
-                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            //Clipboard.SetText(newTime);
-                            btnEditPost_Click(sender, e);
+                            Return(newTime, error);
                         }
                     }
 
@@ -180,9 +177,7 @@ namespace Ict4Participation
                         }
                         else
                         {
-                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            //Clipboard.SetText(newDesc);
-                            btnEditPost_Click(sender, e);
+                            Return(newDesc, error);
                         }
                     }
 
@@ -199,9 +194,7 @@ namespace Ict4Participation
                         }
                         else
                         {
-                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            //Clipboard.SetText(newLoc);
-                            btnEditPost_Click(sender, e);
+                            Return(newLoc, error);
                         }
                     }
                 }
@@ -222,9 +215,7 @@ namespace Ict4Participation
                         }
                         else
                         {
-                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            //Clipboard.SetText(edit);
-                            btnEditPost_Click(sender, e);
+                            Return(edit, error);
                         }
                     }
                     //Edit Location
@@ -239,9 +230,7 @@ namespace Ict4Participation
                         }
                         else
                         {
-                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            //Clipboard.SetText(edit);
-                            btnEditPost_Click(sender, e);
+                            Return(edit, error);
                         }
                     }
                     //Edit Description
@@ -256,9 +245,7 @@ namespace Ict4Participation
                         }
                         else
                         {
-                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            //Clipboard.SetText(edit);
-                            btnEditPost_Click(sender, e);
+                            Return(edit, error);
                         }
                     }
                     //Edit Role
@@ -273,9 +260,7 @@ namespace Ict4Participation
                         }
                         else
                         {
-                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            //Clipboard.SetText(edit);
-                            btnEditPost_Click(sender, e);
+                            Return(edit, error);
                         }
 
                     }
@@ -291,9 +276,7 @@ namespace Ict4Participation
                         }
                         else
                         {
-                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            //Clipboard.SetText(edit);
-                            btnEditPost_Click(sender, e);
+                            Return(edit, error);
                         }
                     }
                     //Edit Email
@@ -308,9 +291,7 @@ namespace Ict4Participation
                         }
                         else
                         {
-                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            //Clipboard.SetText(edit);
-                            btnEditPost_Click(sender, e);
+                            Return(edit, error);
                         }
                     }
                 }
@@ -331,9 +312,7 @@ namespace Ict4Participation
                         }
                         else
                         {
-                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            //Clipboard.SetText(edit);
-                            btnEditPost_Click(sender, e);
+                            Return(edit, error);
                         }
                     }
                     //Edit title
@@ -348,9 +327,7 @@ namespace Ict4Participation
                         }
                         else
                         {
-                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            //Clipboard.SetText(edit);
-                            btnEditPost_Click(sender, e);
+                            Return(edit, error);
                         }
                     }
                     //Edit description
@@ -365,13 +342,24 @@ namespace Ict4Participation
                         }
                         else
                         {
-                            MessageBox.Show(error + " Text gekopieerd, probeer opnieuw!");
-                            //Clipboard.SetText(edit);
-                            btnEditPost_Click(sender, e);
+                            Return(edit, error);
                         }
                     }
                 }
                 #endregion
+
+                RefreshList(Refresh);
+            }
+        }
+
+        private void Return(string edit, string error)
+        {
+            if (!String.IsNullOrWhiteSpace(edit))
+            {
+                Refresh = false;
+                MessageBox.Show(error + ". Probeer opnieuw!");
+                //Clipboard.SetText(edit);
+                btnEditPost.PerformClick();
             }
         }
 
@@ -394,7 +382,7 @@ namespace Ict4Participation
             }
 
             //Refresh list
-            Refresh();
+            RefreshList();
         }
 
         private void btnEditComment_Click(object sender, EventArgs e)
@@ -410,7 +398,7 @@ namespace Ict4Participation
                 // LOADED IN COMMENTS ARE BASED ON THE SAME INDEX
 
                 //Refresh list
-                Refresh();
+                RefreshList();
             }
         }
 
@@ -425,14 +413,17 @@ namespace Ict4Participation
                 // LOADED IN COMMENTS ARE BASED ON THE SAME INDEX
 
                 //Refresh list
-                Refresh();
+                RefreshList();
             }
         }
 
-        private void Refresh()
+        private void RefreshList(bool dorefresh = true)
         {
-            lbTables.SelectedIndex = 0;
-            lbTables.SelectedIndex = 1;
+            if (dorefresh)
+            {
+                lbTables.SelectedIndex = 1;
+                lbTables.SelectedIndex = 0;
+            }
         }
     }
 }
