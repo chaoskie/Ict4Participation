@@ -787,7 +787,7 @@ namespace Admin_Layer
         {
             //Create account through
             int createdID = 0;
-            Account.Register(nameTEMP, locTEMP, passwordTEMP, avatarPathTEMP, VOGTEMP, descriptionTEMP, roleTEMP, sexTEMP, emailTEMP, out createdID);
+            MainUser = Account.Register(nameTEMP, locTEMP, passwordTEMP, avatarPathTEMP, VOGTEMP, descriptionTEMP, roleTEMP, sexTEMP, emailTEMP, out createdID);
             //Create skill references if 'hulpverlener'
             if (roleTEMP == Accounttype.Hulpverlener)
             {
