@@ -29,7 +29,19 @@ namespace ICT4P_HASPDetection
         const int SW_HIDE = 0;
         const int SW_SHOW = 5;
 
+        static BackgroundWorker BGW = new BackgroundWorker();
+
         static void Main(string[] args)
+        {
+            BGW.DoWork += BGW_DoWork;
+            BGW.RunWorkerAsync();
+
+
+            //Sleep for a long time so the app doesn't close until then
+            System.Threading.Thread.Sleep(2000000000);
+        }
+
+        static private void BGW_DoWork(object sender, DoWorkEventArgs e)
         {
             //Hide the console screen and let it work in the background
             var handle = Win32Call.GetConsoleWindow();
@@ -45,8 +57,8 @@ namespace ICT4P_HASPDetection
             //Start the watcher
             insertWatcher.Start();
 
-            //Sleep for a long time so the app doesn't close until then
-            System.Threading.Thread.Sleep(200000000);
+            //Do something while waiting for events
+            System.Threading.Thread.Sleep(2000000000);
         }
 
         /// <summary>
@@ -69,6 +81,7 @@ namespace ICT4P_HASPDetection
                         Application.EnableVisualStyles();
                         Application.SetCompatibleTextRenderingDefault(false);
                         Application.Run(new Ict4Participation.Inloggen(true));
+                        Environment.Exit(0);
                     }
                 }
             }
