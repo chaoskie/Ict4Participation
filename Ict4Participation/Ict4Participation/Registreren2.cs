@@ -52,8 +52,7 @@ namespace Ict4Participation
                 Administration.RegisterAccount();
                 Form form = new HoofdForm(Administration);
                 form.Show();
-                previous.Close();
-                this.Close();
+                this.Hide();
             }
             else
             {
