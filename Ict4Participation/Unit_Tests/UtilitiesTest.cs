@@ -35,7 +35,9 @@ namespace Unit_Tests
             {
                 Assert.Fail("Could not parse status");
             }
-            if (s.ToString() != Status.Aangenomen.ToString())
+            string status = s.ToString();
+
+            if (status != Status.Aangenomen.ToString())
             {
                 Assert.Fail("Status has wrong name / failed to compare names");
             }
