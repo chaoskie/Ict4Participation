@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI_Layer", "Ict4Participation\GUI_Layer.csproj", "{1566DEA7-15A0-4177-AAC4-17EC48DA2EAB}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit_Tests", "Unit_Tests\Unit_Tests.csproj", "{6B08CC08-DB0E-4824-BAD7-884C5F36B2D0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICT4P_HASPDetection", "ICT4P_HASPDetection\ICT4P_HASPDetection.csproj", "{679C5854-71C4-4ACB-BCDC-5B59BEC92C5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_GUI_Layer", "Web_GUI_Layer\Web_GUI_Layer.csproj", "{69D426F3-452E-479D-B3BF-1FC0B5FEE8BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{679C5854-71C4-4ACB-BCDC-5B59BEC92C5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{679C5854-71C4-4ACB-BCDC-5B59BEC92C5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{679C5854-71C4-4ACB-BCDC-5B59BEC92C5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69D426F3-452E-479D-B3BF-1FC0B5FEE8BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69D426F3-452E-479D-B3BF-1FC0B5FEE8BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69D426F3-452E-479D-B3BF-1FC0B5FEE8BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69D426F3-452E-479D-B3BF-1FC0B5FEE8BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
