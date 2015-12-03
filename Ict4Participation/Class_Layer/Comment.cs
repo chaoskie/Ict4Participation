@@ -22,8 +22,14 @@ namespace Class_Layer
         /// Gets the accountID of the author
         /// </summary>
         public int PostedToID { get; private set; }
-
-        public int PosterID { get; private set; }
+        /// <summary>
+        /// Gets the description of this comment
+        /// </summary>
+        public string Description { get; private set; }
+        /// <summary>
+        /// Gets the posted date of this comment
+        /// </summary>
+        public DateTime PostDate { get; private set; }
 
         /// <summary>
         /// Creates a new comment to be inserted into the database
@@ -84,7 +90,8 @@ namespace Class_Layer
                    Convert.ToInt32(row["CID"]),
                    row["Post"].ToString(),
                    Convert.ToInt32(row["PosterID"]),
-                   Convert.ToInt32(row["QID"])
+                   Convert.ToInt32(row["QID"]),
+                   Convert.ToDateTime(row["timet"])
                    ));
             }
             return commentstr;
@@ -93,11 +100,11 @@ namespace Class_Layer
         /// <summary>
         /// Initializes a new instance of the <see cref="Comment"/> class.
         /// </summary>
-        private Comment(int postID, string title, int posterID, int postedToID)
-            : base(postID, title)
+        private Comment(int postID, string title, int posterID, int postedToID, DateTime postDate)
+            : base(postID, posterID)
         {
-            this.PosterID = posterID;
             this.PostedToID = postedToID;
+            this.PostDate = postDate;
             //nothing much
         }
     }
