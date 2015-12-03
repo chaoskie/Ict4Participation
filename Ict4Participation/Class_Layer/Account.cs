@@ -51,6 +51,7 @@ namespace Class_Layer
         /// Gets the phonenumber of the user
         /// </summary>
         public string Phonenumber { get; private set; }
+        private Accounttype role;
         /// <summary>
         /// Gets the role of the user
         /// </summary>
@@ -60,7 +61,7 @@ namespace Class_Layer
             {
                 return String.IsNullOrWhiteSpace(VOGPath) ? Accounttype.Hulpbehoevende : Accounttype.Hulpverlener;
             }
-            private set;
+            private set { role = value; }
         }
         /// <summary>
         /// Gets the bool regarding whether the user has a license or not
@@ -160,7 +161,7 @@ namespace Class_Layer
         }
 
         //TODO
-        public void LogOut(Account acc)
+        public static void LogOut(Account acc)
         {
             //Log the given user out
         }

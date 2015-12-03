@@ -149,7 +149,7 @@ namespace Class_Layer
         /// <param name="amnt">The maximum amount of volunteers</param>
         /// <param name="skills">The skills needed for the question</param>
         public static void Update(int postID, int posterID, string title, Nullable<DateTime> startDate, Nullable<DateTime> endDate,
-            string description, bool urgency, string location, int amnt, List<string> skills)
+            string description, bool urgency, string location, int amnt, List<string> skills, int userID)
         {
             //TODO
             //Call database to update question

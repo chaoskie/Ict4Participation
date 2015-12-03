@@ -26,9 +26,6 @@ namespace Ict4Participation
             this.InitializeComponent();
             this.Administration = new Administration(Application.StartupPath);
 
-            if (!Administration.testDatabase())
-                MessageBox.Show("Oeps! Er is iets misgegaan tijdens het verbinden. \n Probeer opnieuw of raadpleeg een administrator!");
-
             //Clipboard.SetText(Administration.giveTestHash());
 
             //if admin, continue to other screen with details

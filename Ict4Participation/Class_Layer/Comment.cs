@@ -78,7 +78,7 @@ namespace Class_Layer
             //Fetch comments
             DataTable dt = Database_Layer.Database.RetrieveQuery(
             "SELECT * FROM "
-            + "(SELECT c.\"ID\" as CID, c.\"QUESTION_ID\" as QID, c.\"Description\" as Post, a.\"Name\" as Poster, c.\"POSTDATE\" as timet, \"PosterACC_ID\" as PosterID FROM \"Comment\" c "
+            + "(SELECT c.\"ID\" as CID, c.\"QUESTION_ID\" as QID, c.\"Description\" as Post, a.\"Name\" as Poster, c.\"PostDate\" as timet, \"PosterACC_ID\" as PosterID FROM \"Comment\" c "
             + "JOIN \"Acc\" a "
             + "ON a.\"ID\"=c.\"PosterACC_ID\") "
             + "WHERE QID = " + postID + "ORDER BY timet");

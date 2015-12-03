@@ -78,8 +78,9 @@ namespace Class_Layer
         /// <param name="time">the time of the meeting</param>
         /// <param name="locID">the locationID of the location</param>
         /// <returns></returns>
-        public static string Create(int userIDmaker, int userIDrequester, DateTime startTime, DateTime endTime, string location)
+        public static string Create(int userIDmaker, int userIDrequester, DateTime startTime, DateTime endTime, string location, out Meeting m)
         {
+            m = null;
             string st = Utility_Classes.ConvertTo.OracleDateTime(startTime);
             string et = Utility_Classes.ConvertTo.OracleDateTime(endTime);
             //TODO
