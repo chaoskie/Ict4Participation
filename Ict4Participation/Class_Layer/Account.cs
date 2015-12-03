@@ -15,6 +15,7 @@ namespace Class_Layer
     using System.Text;
     using System.Threading.Tasks;
     using Database_Layer;
+    using Enums;
 
     /// <summary>
     /// Account class which represents a user

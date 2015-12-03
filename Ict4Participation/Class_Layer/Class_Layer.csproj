@@ -41,9 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
-    <Compile Include="Accounttype.cs" />
+    <Compile Include="Enums\Accounttype.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="Core.cs" />
+    <Compile Include="Enums\Status.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Meeting.cs" />
     <Compile Include="PasswordHashing.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Question.cs" />
     <Compile Include="Review.cs" />
     <Compile Include="Tags.cs" />
+    <Compile Include="Utility Classes\OracleDateTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Database_Layer\Database_Layer.csproj">

@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Hash_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UtilitiesTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Class_Layer\Class_Layer.csproj">

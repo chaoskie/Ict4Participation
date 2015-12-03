@@ -11,20 +11,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Class_Layer
+namespace Class_Layer.Enums
 {
     /// <summary>
-    /// Different kinds of account types
+    /// Different kinds of status types
     /// </summary>
-    public enum Accounttype
-    {   /*
-        [Description("Administrator, this user has the most rights")]
-        Administrator,*/
-        [Description("Hulpbehoevende, this user may post posts and reviews")]
-        Hulpbehoevende,
-        [Description("Hulpverlener, this user may view posts and reviews")]
-        Hulpverlener,
-        [Description("Administrator, this user may unleash hell upon all the users")]
-        Administrator
+    public enum Status
+    {  
+        Open = 0,
+        Aangenomen = 1,
+        Voltooid = 2,
+        Vervallen = 3
     }
 }

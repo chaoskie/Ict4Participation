@@ -19,6 +19,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Class_Layer;
+using Class_Layer.Enums;
 
 namespace Admin_Layer
 {
