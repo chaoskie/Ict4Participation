@@ -250,26 +250,37 @@ namespace Database_Layer
 
         #region Question
         /// <summary>
-        /// Inserts a new question in the database
+        /// creates a new question entry in the database
         /// </summary>
-        /// <param name="title">The title of the message</param>
-        /// <param name="accountid">The ID of of the user's account</param>
-        /// <param name="schedule">The scheduled time</param>
-        /// <param name="description">A description of the question</param>
-        /// <param name="locID">The location ID</param>
-        public static void NewQuestion(string title, int accountid, string schedule, string description, int locID)
+        /// <param name="title">Title of the question</param>
+        /// <param name="accountid">account id from the person that places the request</param>
+        /// <param name="startDate">starting date of the help</param>
+        /// <param name="endDate">ending time of the help</param>
+        /// <param name="description">description containing, method of travel, time to travel and further information</param>
+        /// <param name="urgent">urgence of the question</param>
+        /// <param name="location">location of the question</param>
+        /// <param name="maxHulpverlener">maximum amount of people needed to solve the problem</param>
+        /// <param name="status">status of the question range in 0,1,2,3</param>
+        public static void NewQuestion(string title, int accountid, string startDate, string endDate,
+                              string description, bool urgent, string location, int maxHulpverlener, int status)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
+                int Urgent = urgent ? 1 : 0;
                 c.Open();
                 OracleCommand cmd = new OracleCommand(
-                    "INSERT INTO \"Question\" (\"Title\", \"PosterACC_ID\", \"Timetable\", \"Description\", \"LOCATION_ID\") " +
-                    "VALUES (:A, :B, TO_DATE(:C, 'dd-mon-yyyy HH24:mi:ss'), :D, :E)");
+                    "INSERT INTO \"Question\" (\"Title\", \"PosterACC_ID\", \"StartDate\"," +
+                    " \"EndDate\", \"Description\", \"Urgent\", \"Location\", \"AmountACCs\", \"Status\",) " +
+                    "VALUES (:A, :B, TO_DATE(:C), TO_DATE(:D), :E, :F, :G, :H, :I)");
                 cmd.Parameters.Add(new OracleParameter("A", title));
                 cmd.Parameters.Add(new OracleParameter("B", accountid));
-                cmd.Parameters.Add(new OracleParameter("C", schedule));
-                cmd.Parameters.Add(new OracleParameter("D", description));
-                cmd.Parameters.Add(new OracleParameter("E", locID));
+                cmd.Parameters.Add(new OracleParameter("C", startDate));
+                cmd.Parameters.Add(new OracleParameter("D", endDate));
+                cmd.Parameters.Add(new OracleParameter("E", description));
+                cmd.Parameters.Add(new OracleParameter("F", Urgent));
+                cmd.Parameters.Add(new OracleParameter("G", location));
+                cmd.Parameters.Add(new OracleParameter("H", maxHulpverlener));
+                cmd.Parameters.Add(new OracleParameter("I", status));
                 cmd.Connection = c;
                 try
                 {
@@ -279,7 +290,6 @@ namespace Database_Layer
                 {
                     throw;
                 }
-
                 c.Close();
             }
         }
@@ -321,19 +331,23 @@ namespace Database_Layer
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand("DELETE FROM \"Question_Skill\" WHERE \"QUESTION_ID\" = :A");
-                OracleCommand cmd2 = new OracleCommand(" DELETE FROM \"Comment\" WHERE \"QUESTION_ID\" = :A");
-                OracleCommand cmd3 = new OracleCommand(" DELETE FROM \"Question\" WHERE \"ID\" = :A");
+                OracleCommand cmd2 = new OracleCommand("DELETE FROM \"Question_Acc\" WHERE \"QUESTION_ID\" = :A");
+                OracleCommand cmd3 = new OracleCommand(" DELETE FROM \"Comment\" WHERE \"QUESTION_ID\" = :A");
+                OracleCommand cmd4 = new OracleCommand(" DELETE FROM \"Question\" WHERE \"ID\" = :A");
                 cmd.Parameters.Add(new OracleParameter("A", qID));
                 cmd.Connection = c;
                 cmd2.Parameters.Add(new OracleParameter("A", qID));
                 cmd2.Connection = c;
                 cmd3.Parameters.Add(new OracleParameter("A", qID));
                 cmd3.Connection = c;
+                cmd4.Parameters.Add(new OracleParameter("A", qID));
+                cmd4.Connection = c;
                 try
                 {
                     cmd.ExecuteNonQuery();
                     cmd2.ExecuteNonQuery();
                     cmd3.ExecuteNonQuery();
+                    cmd4.ExecuteNonQuery();
                 }
                 catch (OracleException)
                 {
@@ -345,24 +359,36 @@ namespace Database_Layer
         }
 
         /// <summary>
-        /// Update a question from the database
+        /// A method to update a question entry, users and admins can change different parts of their question.
         /// </summary>
-        /// <param name="qID">The ID of the question</param>
-        /// <param name="title">The new title</param>
-        /// <param name="timetable">The new scheduled time</param>
-        /// <param name="desc">The new description</param>
-        /// <param name="locID">The new location ID</param>
-        public static void UpdateQuestion(int qID, string title, string timetable, string desc, int locID)
+        /// <param name="qID">ID of the question that needs to be changed</param>
+        /// <param name="title">Title of the question</param>
+        /// <param name="accountid">account id from the person that places the request</param>
+        /// <param name="startDate">starting date of the help</param>
+        /// <param name="endDate">ending time of the help</param>
+        /// <param name="description">description containing, method of travel, time to travel and further information</param>
+        /// <param name="urgent">urgence of the question</param>
+        /// <param name="location">location of the question</param>
+        /// <param name="maxHulpverlener">maximum amount of people needed to solve the problem</param>
+        /// <param name="status">status of the question range in 0,1,2,3</param>
+        public static void UpdateQuestion(int qID, string title, int accountid, string startDate, string endDate,
+                              string description, bool urgent, string location, int maxHulpverlener, int status)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
+                int Urgent = urgent ? 1 : 0;
                 c.Open();
-                OracleCommand cmd = new OracleCommand("UPDATE \"Question\" SET \"Title\" = :A, \"Timetable\" = :B, \"Description\" = :C, \"LOCATION_ID\" = :D WHERE \"ID\" = :E ");
+                OracleCommand cmd = new OracleCommand(
+                 "UPDATE \"Question\" SET \"Title\" = :A, \"StartDate\" = :B, \"EndDate\" = :C, \"Description\" = :D, \"Urgent\" = :E , \"Location\" = :F, \"AmountACCs\" = :G, \"Status\" = :H WHERE \"ID\" = :I ");
                 cmd.Parameters.Add(new OracleParameter("A", title));
-                cmd.Parameters.Add(new OracleParameter("B", timetable));
-                cmd.Parameters.Add(new OracleParameter("C", desc));
-                cmd.Parameters.Add(new OracleParameter("D", locID));
-                cmd.Parameters.Add(new OracleParameter("E", qID));
+                cmd.Parameters.Add(new OracleParameter("B", startDate));
+                cmd.Parameters.Add(new OracleParameter("C", endDate));
+                cmd.Parameters.Add(new OracleParameter("D", description));
+                cmd.Parameters.Add(new OracleParameter("E", Urgent));
+                cmd.Parameters.Add(new OracleParameter("F", location));
+                cmd.Parameters.Add(new OracleParameter("G", maxHulpverlener));
+                cmd.Parameters.Add(new OracleParameter("H", status));
+                cmd.Parameters.Add(new OracleParameter("I", qID));
                 cmd.Connection = c;
                 try
                 {
@@ -372,7 +398,6 @@ namespace Database_Layer
                 {
                     throw;
                 }
-
                 c.Close();
             }
         }
@@ -397,44 +422,23 @@ namespace Database_Layer
                 {
                     throw;
                 }
-
                 c.Close();
             }
         }
-        
+
         #endregion
 
         #region account
-        /// <summary>
-        /// Add a user to the database
-        /// </summary>
-        /// <param name="name">The name of the user</param>
-        /// <param name="locID">The location of the user</param>
-        /// <param name="passHash">The password hash of the user</param>
-        /// <param name="salt">The salt associated with the password hash</param>
-        /// <param name="avatar">A path to the avatar picture of the user</param>
-        /// <param name="vog">A path to the VOG-document of the user</param>
-        /// <param name="description">A description of the user</param>
-        /// <param name="roleText">The role of the user</param>
-        /// <param name="sex">The gender of the user</param>
-        /// <param name="email">The email of the user</param>
-        public static void NewUser(string name, int locID, string passHash, string salt, string avatar, string vog, string description, string roleText, string sex, string email)
-        {
+
+        public static void NewUser()
+        {/*
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand("INSERT INTO \"Acc\" (\"Name\", \"LOCATION_ID\", \"PassHash\", \"Salt\", \"Avatar\", \"VOG\", \"Description\", \"Role\", \"Sex\", \"Email\") " +
                    "VALUES( :x, :y, :z, :a, :b, :c, :d, :e, :f, :g)");
                 cmd.Parameters.Add(new OracleParameter("x", name));
-                cmd.Parameters.Add(new OracleParameter("y", locID));
-                cmd.Parameters.Add(new OracleParameter("z", passHash));
-                cmd.Parameters.Add(new OracleParameter("a", salt));
-                cmd.Parameters.Add(new OracleParameter("b", avatar));
-                cmd.Parameters.Add(new OracleParameter("c", vog));
-                cmd.Parameters.Add(new OracleParameter("d", description));
-                cmd.Parameters.Add(new OracleParameter("e", roleText));
-                cmd.Parameters.Add(new OracleParameter("f", sex));
-                cmd.Parameters.Add(new OracleParameter("g", email));
+              
                 cmd.Connection = c;
                 try
                 {
@@ -444,9 +448,9 @@ namespace Database_Layer
                 {
                     throw;
                 }
-
                 c.Close();
-            }
+            }*/
+            //TODO
         }
 
         /// <summary>
@@ -527,34 +531,18 @@ namespace Database_Layer
                 {
                     throw;
                 }
-
                 c.Close();
             }
         }
 
-        /// <summary>
-        /// Update the information of a user
-        /// </summary>
-        /// <param name="id">The ID of the user</param>
-        /// <param name="name">The new name of the user</param>
-        /// <param name="loc">The new location of the user</param>
-        /// <param name="sex">The new gender of the user</param>
-        /// <param name="hash">The new password hash of the user</param>
-        /// <param name="avatarPath">The new avatar path of the user</param>
-        /// <param name="email">The new email of the user</param>
-        public static void UpdateUser(int id, string name, int loc, string sex, string hash, string avatarPath, string email)
-        {
+        public static void UpdateUser()//USER
+        {/*
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand("UPDATE \"Acc\" SET \"Name\" = :B , \"LOCATION_ID\" = :C, \"PassHash\" = :E, \"Avatar\" = :F, \"Sex\"= :D, \"Email\"= :G WHERE \"ID\" = :A");
                 cmd.Parameters.Add(new OracleParameter("B", name));
-                cmd.Parameters.Add(new OracleParameter("C", loc));
-                cmd.Parameters.Add(new OracleParameter("E", hash));
-                cmd.Parameters.Add(new OracleParameter("F", avatarPath));
-                cmd.Parameters.Add(new OracleParameter("D", sex));
-                cmd.Parameters.Add(new OracleParameter("G", email));
-                cmd.Parameters.Add(new OracleParameter("A", id));
+              
                 cmd.Connection = c;
                 try
                 {
@@ -564,26 +552,16 @@ namespace Database_Layer
                 {
                     throw;
                 }
-
                 c.Close();
-            }
+            }*/
+            //TODO
         }
 
-        /// <summary>
-        /// Update the information of a user
-        /// </summary>
-        /// <param name="id">The ID of the user</param>
-        /// <param name="acctype">The account type of the user</param>
-        /// <param name="name">The new name of the user</param>
-        /// <param name="loc">The new location of the user</param>
-        /// <param name="sex">The new gender of the user</param>
-        /// <param name="avatarPath">The new avatar path of the user</param>
-        /// <param name="email">The new email of the user</param>
-        /// <param name="desc">The new description of the user</param>
-        public static void UpdateUser(int id, string acctype, string name, int loc, string sex, string avatarPath, string email, string desc)
-        {
+        public static void UpdateUser()//ADMIN
+        {/*
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
+                
                 //// Ding dat je wilt aanpassen = (statement) ? (waarde als true) : (waarde als false)
                 //// Werkt niet als je methodes wilt uitvoeren
                 acctype = acctype == "Hulpverlener" ? "V" : "H";
@@ -591,13 +569,7 @@ namespace Database_Layer
                 c.Open();
                 OracleCommand cmd = new OracleCommand("UPDATE \"Acc\" SET \"Name\" = :B , \"LOCATION_ID\" = :C, \"Avatar\" = :F, \"Description\" = :I, \"Role\" = :H, \"Sex\"= :D, \"Email\"= :G WHERE \"ID\" = :A");
                 cmd.Parameters.Add(new OracleParameter("B", name));
-                cmd.Parameters.Add(new OracleParameter("C", loc));
-                cmd.Parameters.Add(new OracleParameter("F", avatarPath));
-                cmd.Parameters.Add(new OracleParameter("I", desc));
-                cmd.Parameters.Add(new OracleParameter("H", acctype));
-                cmd.Parameters.Add(new OracleParameter("D", sex));
-                cmd.Parameters.Add(new OracleParameter("G", email));
-                cmd.Parameters.Add(new OracleParameter("A", id));
+       
                 cmd.Connection = c;
                 try
                 {
@@ -607,9 +579,9 @@ namespace Database_Layer
                 {
                     throw;
                 }
-
                 c.Close();
-            }
+            }*/
+            //TODO
         }
         #endregion
 
@@ -618,22 +590,20 @@ namespace Database_Layer
         /// Insert a new review in the database
         /// </summary>
         /// <param name="rating">The rating of the review</param>
-        /// <param name="title">The title of the review</param>
         /// <param name="postedToID">The ID of the account associated with the review</param>
         /// <param name="posterID">The ID of the sender of the review</param>
         /// <param name="desc">The description of the review</param>
-        public static void InsertReview(int rating, string title, int postedToID, int posterID, string desc)
+        public static void InsertReview(int rating, int postedToID, int posterID, string desc)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("INSERT INTO \"Review\" (\"Rating\", \"Title\", \"PostedACC_ID\", \"PosterACC_ID\", \"Description\") " +
-                    "VALUES (:a, :b, :c, :d, :e)");
+                OracleCommand cmd = new OracleCommand("INSERT INTO \"Review\" (\"Rating\", \"PostedACC_ID\", \"PosterACC_ID\", \"Description\") " +
+                    "VALUES (:a, :b, :c, :d)");
                 cmd.Parameters.Add(new OracleParameter("a", rating));
-                cmd.Parameters.Add(new OracleParameter("b", title));
-                cmd.Parameters.Add(new OracleParameter("c", postedToID));
-                cmd.Parameters.Add(new OracleParameter("d", posterID));
-                cmd.Parameters.Add(new OracleParameter("e", desc));
+                cmd.Parameters.Add(new OracleParameter("b", postedToID));
+                cmd.Parameters.Add(new OracleParameter("c", posterID));
+                cmd.Parameters.Add(new OracleParameter("d", desc));
                 cmd.Connection = c;
                 try
                 {
@@ -643,7 +613,6 @@ namespace Database_Layer
                 {
                     throw;
                 }
-
                 c.Close();
             }
         }
@@ -669,7 +638,6 @@ namespace Database_Layer
                     Console.WriteLine(e.Message);
                     throw;
                 }
-
                 c.Close();
             }
         }
@@ -679,18 +647,16 @@ namespace Database_Layer
         /// </summary>
         /// <param name="id">The ID of the review</param>
         /// <param name="rating">The new rating of the review</param>
-        /// <param name="title">The new title of the review</param>
         /// <param name="desc">The new description of the review</param>
-        public static void UpdateReview(int id, int rating, string title, string desc)
+        public static void UpdateReview(int id, int rating, string desc)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("UPDATE \"Review\" SET \"Rating\" = :a, \"Title\" = :b, \"Description\" = :c WHERE \"ID\" = :d ");
-                cmd.Parameters.Add(new OracleParameter("a", rating));
-                cmd.Parameters.Add(new OracleParameter("b", title));
-                cmd.Parameters.Add(new OracleParameter("c", desc));
-                cmd.Parameters.Add(new OracleParameter("d", id));
+                OracleCommand cmd = new OracleCommand("UPDATE \"Review\" SET \"Rating\" = :a, \"Description\" = :b WHERE \"ID\" = :c ");
+                cmd.Parameters.Add(new OracleParameter("a", rating));                
+                cmd.Parameters.Add(new OracleParameter("b", desc));
+                cmd.Parameters.Add(new OracleParameter("c", id));
                 cmd.Connection = c;
                 try
                 {
@@ -700,97 +666,25 @@ namespace Database_Layer
                 {
                     throw;
                 }
-
                 c.Close();
             }
         }
         #endregion
 
-        #region location
-        /// <summary>
-        /// Insert a location in the database
-        /// </summary>
-        /// <param name="longitude">The location's longitude</param>
-        /// <param name="latitude">The location's latitude</param>
-        /// <param name="describedLocation">A description of the location</param>
-        public static void InsertLocation(string longitude, string latitude, string describedLocation)
-        {
-            using (OracleConnection c = new OracleConnection(@connectionstring))
-            {
-                //// String.Format("INSERT INTO \"Location\" (\"Longitude\", \"Latitude\", \"Description\") VALUES ('{0}', '{1}', '{2}')",
-                c.Open();
-                OracleCommand cmd = new OracleCommand("INSERT INTO \"Location\" (\"Longitude\", \"Latitude\", \"Description\") " +
-                    "VALUES (:a, :b, :c)");
-                cmd.Parameters.Add(new OracleParameter("a", longitude));
-                cmd.Parameters.Add(new OracleParameter("b", latitude));
-                cmd.Parameters.Add(new OracleParameter("c", describedLocation));
-                cmd.Connection = c;
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (OracleException)
-                {
-                    throw;
-                }
-
-                c.Close();
-            }
-        }
-
-        /// <summary>
-        /// Get the ID of a location from the database
-        /// </summary>
-        /// <param name="longitude">The location's longitude</param>
-        /// <param name="latitude">The location's latitude</param>
-        /// <param name="describedLocation">A description of the location</param>
-        /// <returns>Returns the ID of the location</returns>
-        public static DataTable GetLocation(string longitude, string latitude, string describedLocation)
-        {
-            using (OracleConnection c = new OracleConnection(@connectionstring))
-            {
-                c.Open();
-                OracleCommand cmd = new OracleCommand("SELECT ID FROM \"Location\" WHERE \"Longitude\" = :a AND \"Latitude\" = :b AND \"Description\" = :c");
-                cmd.Parameters.Add(new OracleParameter("a", longitude));
-                cmd.Parameters.Add(new OracleParameter("b", latitude));
-                cmd.Parameters.Add(new OracleParameter("c", describedLocation));
-                cmd.Connection = c;
-                try
-                {
-                    OracleDataReader r = cmd.ExecuteReader();
-                    DataTable result = new DataTable();
-                    result.Load(r);
-                    c.Close();
-                    return result;
-                }
-                catch (Exception e)
-                {
-                    string debug = e.Message;
-                    c.Close();
-                    throw;
-                }
-            }
-        }
+        #region availability
+                //TODO
         #endregion
 
         #region meeting
-        /// <summary>
-        /// Insert a new meeting in the database
-        /// </summary>
-        /// <param name="originID">The ID of the sender of the meeting</param>
-        /// <param name="requestID">The ID of the receiver of the meeting</param>
-        /// <param name="date">The date of the meeting</param>
-        /// <param name="locID">The ID of the meeting's location</param>
-        public static void InsertMeetingA(int originID, int requestID, string date, int locID)
-        {
+       
+       
+        public static void InsertMeeting()
+        {/*
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand("INSERT INTO \"Meeting\" (\"RequesterACC_ID\", \"RequestedACC_ID\", \"Timetable\", \"LOCATION_ID\") " +
-                "VALUES (:a, :b,  TO_DATE(:c, 'dd-mon-yyyy HH24:mi:ss'), :d)");
-                cmd.Parameters.Add(new OracleParameter("a", originID));
-                cmd.Parameters.Add(new OracleParameter("b", requestID));
-                cmd.Parameters.Add(new OracleParameter("c", date));
+                "VALUES (:a, :b,  TO_DATE(:c), :d)");
                 cmd.Parameters.Add(new OracleParameter("d", locID));
                 cmd.Connection = c;
                 try
@@ -801,9 +695,9 @@ namespace Database_Layer
                 {
                     throw;
                 }
-
                 c.Close();
-            }
+            }*/
+            //TODO
         }
 
         /// <summary>
@@ -811,7 +705,7 @@ namespace Database_Layer
         /// </summary>
         /// <param name="originID">The ID of the sender of the meeting</param>
         /// <param name="requestID">The ID of the receiver of the meeting</param>
-        public static void InsertMeetingA(int originID, int requestID)
+        public static void InsertMeeting(int originID, int requestID)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
@@ -834,22 +728,15 @@ namespace Database_Layer
             }
         }
 
-        /// <summary>
-        /// Insert a new meeting in the database
-        /// </summary>
-        /// <param name="originID">The ID of the sender of the meeting</param>
-        /// <param name="requestID">The ID of the receiver of the meeting</param>
-        /// <param name="date">The date of the meeting</param>
-        public static void InsertMeetingA(int originID, int requestID, string date)
-        {
+        public static void InsertMeeting()//enkel date
+        {/*
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand("INSERT INTO \"Meeting\" (\"RequesterACC_ID\", \"RequestedACC_ID\", \"Timetable\") " +
                 "VALUES (:a, :b, TO_DATE(:c, 'dd-mon-yyyy HH24:mi:ss'))");
                 cmd.Parameters.Add(new OracleParameter("a", originID));
-                cmd.Parameters.Add(new OracleParameter("b", requestID));
-                cmd.Parameters.Add(new OracleParameter("c", date));
+           
                 cmd.Connection = c;
                 try
                 {
@@ -859,27 +746,21 @@ namespace Database_Layer
                 {
                     throw;
                 }
-
                 c.Close();
-            }
+            }*/
+            //TODO
         }
 
-        /// <summary>
-        /// Insert a meeting in the database
-        /// </summary>
-        /// <param name="originID">The ID of the sender of the meeting</param>
-        /// <param name="requestID">The ID of the receiver of the meeting</param>
-        /// <param name="locID">The ID of the meeting's location</param>
-        public static void InsertMeetingA(int originID, int requestID, int locID)
-        {
+        
+        public static void InsertMeeting()//no date just location
+        {/*
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand("INSERT INTO \"Meeting\" (\"RequesterACC_ID\", \"RequestedACC_ID\", \"LOCATION_ID\") " +
                 "VALUES (:a, :b, :d)");
                 cmd.Parameters.Add(new OracleParameter("a", originID));
-                cmd.Parameters.Add(new OracleParameter("b", requestID));
-                cmd.Parameters.Add(new OracleParameter("d", locID));
+          
                 cmd.Connection = c;
                 try
                 {
@@ -889,10 +770,13 @@ namespace Database_Layer
                 {
                     throw;
                 }
-
                 c.Close();
-            }
+            }*/
+            //TODO
         }
+
+        //TODO Update Meeting
+
         #endregion
     }
 }
