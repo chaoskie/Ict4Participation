@@ -22,21 +22,21 @@ namespace Class_Layer
         /// Gets the ID of the post
         /// </summary>
         public int PostID { get; private set; }
-
         /// <summary>
-        /// Gets the title of the post
+        /// 
+        /// Gets the accountID of the author
         /// </summary>
-        public string Title { get; private set; }
+        public int PosterID { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Post"/> class.
         /// </summary>
-        /// <param name="postID">The ID opf the post</param>
+        /// <param name="postID">The ID of the post</param>
         /// <param name="title">The title of the post</param>
-        public Post(int postID, string title)
+        public Post(int postID, int posterID)
         {
             this.PostID = postID;
-            this.Title = title;
+            this.PosterID = posterID;
         }
     }
 }

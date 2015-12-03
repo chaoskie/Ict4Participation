@@ -43,9 +43,7 @@
     <Compile Include="Account.cs" />
     <Compile Include="Enums\Accounttype.cs" />
     <Compile Include="Comment.cs" />
-    <Compile Include="Core.cs" />
     <Compile Include="Enums\Status.cs" />
-    <Compile Include="Location.cs" />
     <Compile Include="Meeting.cs" />
     <Compile Include="PasswordHashing.cs" />
     <Compile Include="Post.cs" />

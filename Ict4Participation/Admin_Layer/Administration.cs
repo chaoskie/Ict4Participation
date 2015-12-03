@@ -65,12 +65,6 @@ namespace Admin_Layer
         private int lastloadedOPID;
 
         /// <summary>
-        /// Tempotary properties to hold the information about a user
-        /// </summary>
-        string emailTEMP; string nameTEMP; Location locTEMP; string passwordTEMP; string avatarPathTEMP;
-        Accounttype roleTEMP; string sexTEMP; string VOGTEMP; string descriptionTEMP; List<string> skillsTEMP;
-
-        /// <summary>
         /// Path to the application
         /// </summary>
         private string AppPath;
@@ -130,10 +124,12 @@ namespace Admin_Layer
         /// Post a question
         /// </summary>
         /// <returns>Returns the result of the action</returns>
-        public string PostQuestion(string title, DateTime schedule, string description, List<string> skills)
+        public string PostQuestion(string title, string startTime, string endTime, string description, bool urgency, string location, int amount, List<string> skills)
         {
+            DateTime start = Convert.ToDateTime(startTime);
+            DateTime end = Convert.ToDateTime(endTime);
             Question q = null;
-            if (Question.CreateQuestion(MainUser.AccountID, title, schedule, description, MainUser.Loc, skills, out q))
+            if (Question.CreateQuestion(MainUser.ID, title, start, end, description, urgency, location, amount, skills, out q))
             {
                 return String.Format("De volgende vraag is succesvol gepost: \n {0}", q.Title);
             }
@@ -150,7 +146,7 @@ namespace Admin_Layer
         /// <param name="index">The index of the selected question</param>
         public void PostQuestionComment(string title, int index)
         {
-            Comment.PlaceComment(MainUser.AccountID, LoadedQuestions[index].PostID, title);
+            Comment.PlaceComment(MainUser.ID, LoadedQuestions[index].PostID, title);
         }
 
         #region Question Editing
@@ -173,7 +169,7 @@ namespace Admin_Layer
                 //Create a list containing all the 'hulpbehoevenden' (the ones with the rights to post these questions) matching the name
                 List<string> accs = GetAccounts("Hulpbehoevende", true, name);
                 //Create a list containing all the 'hulpbehoevenden' matching the ID
-                List<Account> accsWithID = LoadedAccounts.FindAll(a => a.AccountID.ToString() == name && a.Role == Accounttype.Hulpbehoevende);
+                List<Account> accsWithID = LoadedAccounts.FindAll(a => a.ID.ToString() == name && a.Role == Accounttype.Hulpbehoevende);
                 //If no correct ID or name is filled in
                 if (accs.Count == 0 && accsWithID.Count == 0)
                 {
@@ -184,9 +180,9 @@ namespace Admin_Layer
                 if (accs.Count > 1 && accsWithID.Count == 0)
                 {
                     error = "Oeps! Er bestaan meerdere gebruikers met deze naam:";
-                    foreach (Account a in LoadedAccounts.FindAll(ac => ac.Naam == name))
+                    foreach (Account a in LoadedAccounts.FindAll(ac => ac.Name == name))
                     {
-                        error += a.AccountID + " " + a.Naam + Environment.NewLine;
+                        error += a.ID + " " + a.Name + Environment.NewLine;
                     }
                     error += "Geef het juiste ID op in plaats van de naam";
                     return false;
@@ -195,15 +191,19 @@ namespace Admin_Layer
                 if (accs.Count == 1)
                 {
                     //Get IDs
-                    int userID = LoadedAccounts.Find(a => a.Naam.ToString() == name && a.Role == Accounttype.Hulpbehoevende).AccountID;
+                    int userID = LoadedAccounts.Find(a => a.Name.ToString() == name && a.Role == Accounttype.Hulpbehoevende).ID;
                     int questionID = LoadedQuestions[index].PostID;
                     //Change the question poster
                     Question.Update(
                         LoadedQuestions[index].PostID,
+                        LoadedQuestions[index].PosterID,
                         LoadedQuestions[index].Title,
-                        LoadedQuestions[index].Schedule,
+                        LoadedQuestions[index].StartDate,
+                        LoadedQuestions[index].EndDate,
                         LoadedQuestions[index].Description,
-                        LoadedQuestions[index].QuestionLocation,
+                        LoadedQuestions[index].Urgent,
+                        LoadedQuestions[index].Location,
+                        LoadedQuestions[index].AmountAccs,
                         LoadedQuestions[index].Skills,
                         userID
                         );
@@ -213,15 +213,19 @@ namespace Admin_Layer
                 if (accsWithID.Count == 1)
                 {
                     //Get IDs
-                    int userID = accsWithID[0].AccountID;
+                    int userID = accsWithID[0].ID;
                     int questionID = LoadedQuestions[index].PostID;
                     //Change the question poster
                     Question.Update(
                         LoadedQuestions[index].PostID,
+                        LoadedQuestions[index].PosterID,
                         LoadedQuestions[index].Title,
-                        LoadedQuestions[index].Schedule,
+                        LoadedQuestions[index].StartDate,
+                        LoadedQuestions[index].EndDate,
                         LoadedQuestions[index].Description,
-                        LoadedQuestions[index].QuestionLocation,
+                        LoadedQuestions[index].Urgent,
+                        LoadedQuestions[index].Location,
+                        LoadedQuestions[index].AmountAccs,
                         LoadedQuestions[index].Skills,
                         userID
                         );
@@ -239,7 +243,7 @@ namespace Admin_Layer
         /// <param name="time">String of time to be parsed</param>
         /// <param name="error">Error message</param>
         /// <returns>Whether it succeeded or not</returns>
-        public bool ChangeQuestionTime(int index, string time, out string error)
+        public bool ChangeQuestionTime(int index, string time, bool isStartTime, out string error)
         {
             error = "Niets ingevuld!";
             if (String.IsNullOrWhiteSpace(time))
@@ -250,15 +254,38 @@ namespace Admin_Layer
             if (DateTime.TryParse(time, out dt))
             {
                 //Change the time
-                Question.Update(
-                    LoadedQuestions[index].PostID,
-                    LoadedQuestions[index].Title,
-                    dt,
-                    LoadedQuestions[index].Description,
-                    LoadedQuestions[index].QuestionLocation,
-                    LoadedQuestions[index].Skills,
-                    LoadedQuestions[index].UserID
-                    );
+                if (isStartTime)
+                {
+                    Question.Update(
+                            LoadedQuestions[index].PostID,
+                            LoadedQuestions[index].PosterID,
+                            LoadedQuestions[index].Title,
+                            dt,
+                            LoadedQuestions[index].EndDate,
+                            LoadedQuestions[index].Description,
+                            LoadedQuestions[index].Urgent,
+                            LoadedQuestions[index].Location,
+                            LoadedQuestions[index].AmountAccs,
+                            LoadedQuestions[index].Skills,
+                        LoadedQuestions[index].PosterID
+                        );
+                }
+                else
+                {
+                    Question.Update(
+                               LoadedQuestions[index].PostID,
+                               LoadedQuestions[index].PosterID,
+                               LoadedQuestions[index].Title,
+                               LoadedQuestions[index].StartDate,
+                               dt,
+                               LoadedQuestions[index].Description,
+                               LoadedQuestions[index].Urgent,
+                               LoadedQuestions[index].Location,
+                               LoadedQuestions[index].AmountAccs,
+                               LoadedQuestions[index].Skills,
+                           LoadedQuestions[index].PosterID
+                           );
+                }
                 return true;
             }
             else
@@ -285,15 +312,18 @@ namespace Admin_Layer
                 return false;
             }
             Question.Update(
-                    LoadedQuestions[index].PostID,
-                    LoadedQuestions[index].Title,
-                    LoadedQuestions[index].Schedule,
-                    description,
-                    LoadedQuestions[index].QuestionLocation,
-                    LoadedQuestions[index].Skills,
-                    LoadedQuestions[index].UserID
-                    );
-
+                            LoadedQuestions[index].PostID,
+                            LoadedQuestions[index].PosterID,
+                            LoadedQuestions[index].Title,
+                            LoadedQuestions[index].StartDate,
+                            LoadedQuestions[index].EndDate,
+                            description,
+                            LoadedQuestions[index].Urgent,
+                            LoadedQuestions[index].Location,
+                            LoadedQuestions[index].AmountAccs,
+                            LoadedQuestions[index].Skills,
+                        LoadedQuestions[index].PosterID
+                        );
             return true;
         }
 
@@ -312,21 +342,18 @@ namespace Admin_Layer
             {
                 return false;
             }
-            Location loc = new Location(location);
-            int locID = 0;
-            //If location does not exist
-            if (!Location.ValidateLocation(loc, out locID))
-            {
-                locID = Location.InsertLocation(loc);
-            }
             Question.Update(
                     LoadedQuestions[index].PostID,
-                    LoadedQuestions[index].Title,
-                    LoadedQuestions[index].Schedule,
-                    LoadedQuestions[index].Description,
-                    loc,
-                    LoadedQuestions[index].Skills,
-                    LoadedQuestions[index].UserID
+                            LoadedQuestions[index].PosterID,
+                            LoadedQuestions[index].Title,
+                            LoadedQuestions[index].StartDate,
+                            LoadedQuestions[index].EndDate,
+                            LoadedQuestions[index].Description,
+                            LoadedQuestions[index].Urgent,
+                            location,
+                            LoadedQuestions[index].AmountAccs,
+                            LoadedQuestions[index].Skills,
+                        LoadedQuestions[index].PosterID
                     );
 
             return true;
@@ -343,7 +370,7 @@ namespace Admin_Layer
         {
             if (!all)
             {
-                LoadedQuestions = Question.FindQuestions(all, MainUser.AccountID);
+                LoadedQuestions = Question.FindQuestions(all, MainUser.ID);
             }
             else
             {
@@ -411,11 +438,11 @@ namespace Admin_Layer
         /// <returns>Whether it was a success or not</returns>
         public bool PostReview(int userID, string title, string description, int rating, out string Message)
         {
-            if (userID != MainUser.AccountID)
+            if (userID != MainUser.ID)
             {
-                if (LoadedAccounts.Find(a => a.AccountID == userID).Role != Accounttype.Hulpbehoevende)
+                if (LoadedAccounts.Find(a => a.ID == userID).Role != Accounttype.Hulpbehoevende)
                 {
-                    Message = Review.PlaceReview(rating, title, userID, MainUser.AccountID, description);
+                    Message = Review.Place(rating, userID, MainUser.ID, description);
                     return true;
                 }
                 else
@@ -464,7 +491,6 @@ namespace Admin_Layer
                     Review.Update(
                         LoadedReviews[index].PostID,
                         rating,
-                        LoadedReviews[index].Title,
                         LoadedReviews[index].Description
                         );
                     return true;
@@ -479,32 +505,6 @@ namespace Admin_Layer
                 error = "Geen geldig nummer ingevoerd!";
             }
             return false;
-        }
-
-        /// <summary>
-        /// Changes the review title
-        /// </summary>
-        /// <param name="index">Index as loaded</param>
-        /// <param name="edit">Title to edit to</param>
-        /// <param name="error">The error message</param>
-        /// <returns>Whether it succeeded or not</returns>
-        public bool ChangeReviewTitle(int index, string edit, out string error)
-        {
-            error = "Niets ingevuld!";
-            if (String.IsNullOrWhiteSpace(edit))
-            {
-                return false;
-            }
-            else
-            {
-                Review.Update(
-                        LoadedReviews[index].PostID,
-                        LoadedReviews[index].Rating,
-                        edit,
-                        LoadedReviews[index].Description
-                        );
-                return true;
-            }
         }
 
         /// <summary>
@@ -526,7 +526,6 @@ namespace Admin_Layer
                 Review.Update(
                         LoadedReviews[index].PostID,
                         LoadedReviews[index].Rating,
-                        LoadedReviews[index].Title,
                         edit
                         );
                 return true;
@@ -559,7 +558,7 @@ namespace Admin_Layer
         /// <returns>A list with all the details of the reviews</returns>
         public List<string> GetAccountReviews(bool isPoster = false)
         {
-            return Review.GetUserReviews(MainUser.AccountID, out LoadedReviews, isPoster);
+            return Review.GetUserReviews(MainUser.ID, out LoadedReviews, isPoster);
         }
         #endregion
 
@@ -568,27 +567,21 @@ namespace Admin_Layer
         /// Arrange a meeting
         /// </summary>
         /// <returns>Returns the result of the action</returns>
-        public string CreateMeeting(int otheruserID, DateTime time, string location)
+        public string CreateMeeting(int otheruserID, string startTime, string endTime, string location)
         {
-            if (MainUser.AccountID != otheruserID)
+            if (MainUser.ID != otheruserID)
             {
-                int locID = 0;
-                Location loc = new Location(location);
-                if (!Location.ValidateLocation(loc, out locID))
-                {
-                    locID = Location.InsertLocation(loc);
-                }
+                Meeting m = null;
 
                 MailMessage mail = new MailMessage();
                 SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-
-                string retu = Meeting.CreateMeeting(MainUser.AccountID, otheruserID, time, locID);
+                
+                string retu = Meeting.Create(MainUser.ID, otheruserID, Convert.ToDateTime(startTime), Convert.ToDateTime(endTime) , location, out m);
 
                 mail.From = new MailAddress("s21mplumbum@gmail.com");
-                mail.To.Add(LoadedAccounts.First(c => c.AccountID == otheruserID).Email);
+                mail.To.Add(LoadedAccounts.First(c => c.ID == otheruserID).Email);
                 mail.Subject = "U bent uitgenodigd voor een ontmoeting!";
-                mail.Body = String.Format("Hallo! \nEr is een ontmoeting ingepland voor u met {0} \nTijd: {1}, \nLocatie: {2}",
-                    MainUser.Naam, time.ToString(), location);
+                mail.Body = m.Details;
 
                 SmtpServer.Port = 587;
                 SmtpServer.Credentials = new System.Net.NetworkCredential("s21mplumbum@gmail.com", "Em72@Gmai111");
@@ -619,123 +612,31 @@ namespace Admin_Layer
         /// <returns>Yields a list of the tostrings</returns>
         public List<string> GetMainAccountMeetings()
         {
-            return Meeting.GetAllMeetings(MainUser.AccountID).Select(meeting => meeting.Details).ToList();
+            return Meeting.GetAllMeetings(MainUser.ID).Select(meeting => meeting.Details).ToList();
         }
         #endregion
 
         #region Account handling
 
-        /// <summary>
-        /// Validates the first half of the account (for the first form / screen)
-        /// </summary>
-        /// <param name="name">Name to validate</param>
-        /// <param name="loc">Location to validate</param>
-        /// <param name="password">Password to validate</param>
-        /// <param name="avatarPath">AvatarPath to validate</param>
-        /// <param name="role">Role to validate</param>
-        /// <param name="sex">Sex to validate</param>
-        /// <param name="Message">Error message given upon invalid parameters</param>
-        /// <returns>Whether it is a full success, or there is at least 1 invalid parameter</returns>
+        //TODO
         public bool CreateAccount(string name, string address, string city, string password, string avatarPath, string role, string sex, string email, out string Message)
         {
-            Account find = Account.FetchAllAccounts().FirstOrDefault(a => a.Email == email);
+            //Check of het email in gebruik is
+            Account find = Account.GetAll().FirstOrDefault(a => a.Email == email);
 
             if (find == null)
             {
-
-                bool filledIn = true;
-                bool rightFormat = false;
-                string error = string.Empty;
-                name = name.Trim();
-
-                //Check if everything is filled in
-                if (String.IsNullOrWhiteSpace(name))
-                {
-                    error += "De naam is niet ingevuld!\n"; filledIn = false;
-                }
-                if (String.IsNullOrWhiteSpace(address))
-                {
-                    error += "Het adres is niet ingevuld!\n"; filledIn = false;
-                }
-                if (String.IsNullOrWhiteSpace(city))
-                {
-                    error += "De woonplaats is niet ingevuld!\n"; filledIn = false;
-                }
-                if (String.IsNullOrWhiteSpace(sex))
-                {
-                    error += "Het geslacht is niet ingevuld!\n"; filledIn = false;
-                }
-                if (String.IsNullOrWhiteSpace(role))
-                {
-                    error += "De rol is niet ingevuld!\n"; filledIn = false;
-                }
-                if (String.IsNullOrWhiteSpace(email))
-                {
-                    error += "Het email is niet ingevuld!\n"; filledIn = false;
-                }
-                if (String.IsNullOrWhiteSpace(avatarPath))
-                {
-                    error += "Er is geen profielfoto gekozen!\n"; filledIn = false;
-                }
-                if (String.IsNullOrWhiteSpace(password))
-                {
-                    error += "Er is is geen wachtwoord ingevuld!\n"; filledIn = false;
-                }
-
-                //If so, check if everything is in the right format
-                if (filledIn)
-                {
-                    rightFormat = true;
-                    if (Regex.IsMatch(name, @"^[A-Z][A-Za-z\.]*(?:\s[A-Za-z][a-z]+)+$") == false)
-                    {
-                        rightFormat = false;
-                        error += "Naam is niet correct!\n";
-                    }
-                    //if (!Regex.IsMatch(adress, @"^[A-Z]\D{1,}\s?\d{1,}$"))
-                    //{
-                    //    allOK = false;
-                    //    error += "Addres is niet correct!\n";
-                    //}
-                    //if (!Regex.IsMatch(city, @"^[A-Z']\D{1,}$"))
-                    //{
-                    //    allOK = false;
-                    //    error += "Woonplaats is niet correct!\n";
-                    //}
-                    if (!Regex.IsMatch(sex, @"^[MF]$"))
-                    {
-                        rightFormat = false;
-                        error += "Geslacht is niet correct!\n";
-                    }
-                    if (avatarPath == string.Empty)
-                    {
-                        rightFormat = false;
-                        error += "Geen foto geselecteerd!\n";
-                    }
-                    if (!Regex.IsMatch(password, @"^(?=.*[^a-zA-Z])(?=.*[a-z])(?=.*[A-Z])\S{8,}$"))
-                    {
-                        rightFormat = false;
-                        error += "Het wachtwoord is niet sterk genoeg! Minimaal 1 hoofdletter, 1 kleine letter en 1 nummer/speciaal karakter.";
-                    }
-                    //If everything is in the right format, set the temporaries for the next screen
-                    if (rightFormat)
-                    {
-                        this.nameTEMP = name;
-                        this.locTEMP = new Location(String.Format("{0}, {1}", address, city));
-                        this.passwordTEMP = password;
-                        this.avatarPathTEMP = avatarPath;
-                        Enum.TryParse(role, out roleTEMP);
-                        this.sexTEMP = sex;
-                        this.emailTEMP = email;
-                    }
-                }
-                Message = error;
-                return rightFormat;
+                //TODO
+                //Validate data
+                //Save data temporarily
             }
             else
             {
                 Message = "Deze email is al in gebruik! Probeer een andere email.";
                 return false;
             }
+            Message = "";
+            return false;
         }
 
         /// <summary>
@@ -746,7 +647,7 @@ namespace Admin_Layer
         /// <param name="email">The email to validate</param>
         /// <param name="Message">The error message given upon invalid parameters</param>
         /// <returns></returns>
-        public bool CreateAccountHPart(string VOG, string description, List<string> skills, out string Message)
+        public bool CreateAccountHPart(string VOG, List<string> skills, out string Message)
         {
             //Out error message
             bool filledIn = true;
@@ -771,9 +672,8 @@ namespace Admin_Layer
 
                 if (rightformat)
                 {
-                    this.VOGTEMP = VOG;
-                    this.descriptionTEMP = description;
-                    this.skillsTEMP = skills;
+                    //TODO
+                    //Save data temporarily
                 }
             }
             Message = error;
@@ -786,20 +686,21 @@ namespace Admin_Layer
         /// <returns>If it succeeded or not</returns>
         public bool RegisterAccount()
         {
-            //Create account through
-            int createdID = 0;
-            MainUser = Account.Register(nameTEMP, locTEMP, passwordTEMP, avatarPathTEMP, VOGTEMP, descriptionTEMP, roleTEMP, sexTEMP, emailTEMP, out createdID);
+            //TODO
+            //Register account through "Account.Register"
+            //  int createdID = 0;
+            //  MainUser = Account.Register(nameTEMP, locTEMP, passwordTEMP, avatarPathTEMP, VOGTEMP, descriptionTEMP, roleTEMP, sexTEMP, emailTEMP, out createdID);
             //Create skill references if 'hulpverlener'
-            if (roleTEMP == Accounttype.Hulpverlener)
-            {
-                foreach (string skill in skillsTEMP)
-                {
-                    Account.CreateAccountSkills(skill, MainUser.AccountID);
-                }
-            }
+            //  if (roleTEMP == Accounttype.Hulpverlener)
+            //  {
+            //      foreach (string skill in skillsTEMP)
+            //      {
+            //        Account.AddSkill(skill, MainUser.ID);
+            //      }
+            //  }
 
             //Send email with credentials
-            MailMessage mail = new MailMessage();
+            /* MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
             string cID = createdID.ToString();
@@ -809,9 +710,9 @@ namespace Admin_Layer
             }
 
             mail.From = new MailAddress("s21mplumbum@gmail.com");
-            mail.To.Add(emailTEMP);
+            mail.To.Add(>><<<emailTEMP>><<);
             mail.Subject = "ICT4Participation inlog gegevens";
-            mail.Body = "Hallo en bedankt voor het registreren van een ICT4Participation account! \nGebruik het volgende ID om in te loggen: \nUser ID:" + createdID;
+            mail.Body = "Hallo en bedankt voor het registreren van een ICT4Participation account! \nGebruik het volgende ID om in te loggen: \nUser ID:" + >><<createdID>><<;
 
             SmtpServer.Port = 587;
             SmtpServer.Credentials = new System.Net.NetworkCredential("s21mplumbum@gmail.com", "Em72@Gmai111");
@@ -821,7 +722,8 @@ namespace Admin_Layer
 
             LogIn(cID, passwordTEMP);
 
-            return true;
+            return true; */
+            return false;
         }
 
         /// <summary>
@@ -868,7 +770,10 @@ namespace Admin_Layer
             }
             if (rightFormat)
             {
-                MainUser = Account.Update(MainUser.AccountID, name, new Location(address), sex, password, avatarPath, email);
+                //TODO
+                //Update account
+                //Set main account
+                MainUser = null;
             }
 
             return rightFormat;
@@ -881,7 +786,7 @@ namespace Admin_Layer
         /// <returns>A message regarding the inactivation</returns>
         public string SetInactiveAccount(int index)
         {
-            Account.SetInactive(LoadedAccounts[index].AccountID);
+            Account.SetInactive(LoadedAccounts[index].ID);
             return "Gebruiker succesvol inactief gezet!";
         }
 
@@ -899,16 +804,8 @@ namespace Admin_Layer
             {
                 if (Regex.IsMatch(edit, @"^[A-Z][A-Za-z\.]*(?:\s[A-Za-z][a-z]+)+$"))
                 {
-                    Account.UpdateAdmin(
-                        LoadedAccounts[index].AccountID,
-                        LoadedAccounts[index].Role,
-                        edit,
-                        LoadedAccounts[index].Information,
-                        LoadedAccounts[index].Loc,
-                        LoadedAccounts[index].Sex,
-                        LoadedAccounts[index].AvatarPath,
-                        LoadedAccounts[index].Email
-                        );
+                    //TODO
+                    //Update account
                     return true;
                 }
                 else
@@ -931,23 +828,8 @@ namespace Admin_Layer
             {
                 return false;
             }
-            Location loc = new Location(edit);
-            int locID = 0;
-            //If location does not exist
-            if (!Location.ValidateLocation(loc, out locID))
-            {
-                locID = Location.InsertLocation(loc);
-            }
-            Account.UpdateAdmin(
-                        LoadedAccounts[index].AccountID,
-                        LoadedAccounts[index].Role,
-                        LoadedAccounts[index].Naam,
-                        LoadedAccounts[index].Information,
-                        loc,
-                        LoadedAccounts[index].Sex,
-                        LoadedAccounts[index].AvatarPath,
-                        LoadedAccounts[index].Email
-                        );
+            //TODO
+            //Update account
 
             return true;
         }
@@ -963,16 +845,8 @@ namespace Admin_Layer
             error = "Niets ingevuld!";
             if (!string.IsNullOrWhiteSpace(edit))
             {
-                Account.UpdateAdmin(
-                    LoadedAccounts[index].AccountID,
-                    LoadedAccounts[index].Role,
-                    LoadedAccounts[index].Naam,
-                    edit,
-                    LoadedAccounts[index].Loc,
-                    LoadedAccounts[index].Sex,
-                    LoadedAccounts[index].AvatarPath,
-                    LoadedAccounts[index].Email
-                    );
+                //TODO
+                //Update account
                 return true;
             }
             error = "Beschrijving is niet correct!";
@@ -993,16 +867,8 @@ namespace Admin_Layer
                 Accounttype act;
                 if (Enum.TryParse(edit, out act))
                 {
-                    Account.UpdateAdmin(
-                        LoadedAccounts[index].AccountID,
-                        act,
-                        LoadedAccounts[index].Naam,
-                        LoadedAccounts[index].Information,
-                        LoadedAccounts[index].Loc,
-                        LoadedAccounts[index].Sex,
-                        LoadedAccounts[index].AvatarPath,
-                        LoadedAccounts[index].Email
-                        );
+                    //TODO
+                    //Update account
                     return true;
                 }
             }
@@ -1023,16 +889,8 @@ namespace Admin_Layer
             {
                 if (edit == "M" || edit == "F")
                 {
-                    Account.UpdateAdmin(
-                        LoadedAccounts[index].AccountID,
-                        LoadedAccounts[index].Role,
-                        LoadedAccounts[index].Naam,
-                        LoadedAccounts[index].Information,
-                        LoadedAccounts[index].Loc,
-                        edit,
-                        LoadedAccounts[index].AvatarPath,
-                        LoadedAccounts[index].Email
-                        );
+                    //TODO
+                    //Update account
                     return true;
                 }
             }
@@ -1051,16 +909,8 @@ namespace Admin_Layer
             error = "Niets ingevuld!";
             if (!string.IsNullOrWhiteSpace(edit))
             {
-                Account.UpdateAdmin(
-                    LoadedAccounts[index].AccountID,
-                    LoadedAccounts[index].Role,
-                    LoadedAccounts[index].Naam,
-                    LoadedAccounts[index].Information,
-                    LoadedAccounts[index].Loc,
-                    LoadedAccounts[index].Sex,
-                    LoadedAccounts[index].AvatarPath,
-                    edit
-                    );
+                //TODO
+                //Update account
                 return true;
             }
             error = "email is niet correct!";
@@ -1075,26 +925,7 @@ namespace Admin_Layer
         /// <returns>Whether this user exists / success of creation</returns>
         public bool LogIn(string gebruikersnaam, string password)
         {
-            bool ob = Account.CreateMainAccount(gebruikersnaam, password, out MainUser);
-
-            if (ob)
-            {
-                //Start chat client
-                string newPath = Path.GetFullPath(Path.Combine(AppPath, @"..\..\..\"));
-                string correctpath = newPath + "Profchat27\\Profchat27\\bin\\Debug\\Profchat27.exe";
-
-                /*
-                string path = Application.StartupPath;
-                string correctpath = path + "\\Profchat27.exe";
-                */
-
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = correctpath;
-                startInfo.Arguments = MainUser.AccountID.ToString();
-                Process.Start(startInfo);
-            }
-
-            return ob;
+            return Account.LogIn(gebruikersnaam, password, out MainUser);
         }
 
         /// <summary>
@@ -1103,6 +934,7 @@ namespace Admin_Layer
         /// <returns>if succeeded (always)</returns>
         public bool LogOut()
         {
+            Account.LogOut(MainUser);
             MainUser = null;
             return true;
         }
@@ -1118,19 +950,19 @@ namespace Admin_Layer
             {
                 if (bsearch)
                 {
-                    LoadedAccounts = Account.FetchAllAccounts().FindAll(item => (item.Role.ToString() == accType) && (item.Naam.ToLower()).Contains(search.ToLower()));
-                    return LoadedAccounts.Select(s => s.Naam).ToList();
+                    LoadedAccounts = Account.GetAll().FindAll(item => (item.Role.ToString() == accType) && (item.Name.ToLower()).Contains(search.ToLower()));
+                    return LoadedAccounts.Select(s => s.Name).ToList();
                 }
                 else
                 {
-                    LoadedAccounts = Account.FetchAllAccounts().FindAll(item => (item.Role.ToString() == accType));
-                    return LoadedAccounts.Select(s => s.Naam).ToList();
+                    LoadedAccounts = Account.GetAll().FindAll(item => (item.Role.ToString() == accType));
+                    return LoadedAccounts.Select(s => s.Name).ToList();
                 }
             }
             else
             {
-                LoadedAccounts = Account.FetchAllAccounts();
-                return LoadedAccounts.Select(s => s.Naam).ToList();
+                LoadedAccounts = Account.GetAll();
+                return LoadedAccounts.Select(s => s.Name).ToList();
             }
         }
 
@@ -1172,15 +1004,20 @@ namespace Admin_Layer
 
         /// <summary>
         /// Contains the following account data:
-        /// <para>1 ID</para> 
-        /// <para>2 Name </para>
-        /// <para>3 Location </para>
-        /// <para>4 AvatarPath </para>
-        /// <para>5 Information </para>
-        /// <para>6 Role </para>
-        /// <para>7 Sex </para>
-        /// <para>8 Email </para>
-        /// </summary>
+        /// <para> ID </para>
+        /// <para> username </para>
+        /// <para> password </para>
+        /// <para> email </para>
+        /// <para> name </para>
+        /// <para> address </para>
+        /// <para> city </para>
+        /// <para> phonenumber </para>
+        /// <para> hasLicense </para>
+        /// <para> hasVehicle </para>
+        /// <para> OVPossible </para>
+        /// <para> birthdate </para>
+        /// <para> avatarPath </para>
+        /// <para> VOG </para>
         /// <param name="index">The index of the one you want to select (ID = 1, Name = 2, etc)</param>
         /// <returns>The selected value of the index</returns>
         public string AccountData(int index, int userinfoindex)
@@ -1201,14 +1038,18 @@ namespace Admin_Layer
         private List<string> AllAccountData(Account a)
         {
             List<string> rt = new List<string>();
-            rt.Add(a.AccountID.ToString());
-            rt.Add(a.Naam);
-            rt.Add(a.Loc.ToString());
-            rt.Add(a.AvatarPath);
-            rt.Add(a.Information);
-            rt.Add(a.Role.ToString());
-            rt.Add(a.Sex);
-            rt.Add(a.Email);
+            rt.Add(a.Username.ToString());
+            rt.Add(a.Email.ToString());
+            rt.Add(a.Name.ToString());
+            rt.Add(a.Address.ToString());
+            rt.Add(a.City.ToString());
+            rt.Add(a.Phonenumber.ToString());
+            rt.Add(a.hasDriverLicense.ToString());
+            rt.Add(a.hasVehicle.ToString());
+            rt.Add(a.OVPossible.ToString());
+            rt.Add(a.Birthdate.ToString());
+            rt.Add(a.AvatarPath.ToString());
+            rt.Add(a.VOGPath.ToString());
             return rt;
         }
         /// <summary>
@@ -1219,7 +1060,7 @@ namespace Admin_Layer
         /// <returns>a boolean that confirms if the password provided is correct with the original</returns>
         public bool CheckPass(string password)
         {
-            string hash = Class_Layer.Account.GetPasswordHash(MainUser.AccountID);
+            string hash = Class_Layer.Account.FindHash(MainUser.ID);
             if ((hash == string.Empty) || (hash == "0"))
             {
                 return false;
@@ -1233,11 +1074,6 @@ namespace Admin_Layer
         #endregion
 
         #region Testing Methods
-        //testmethod voor database
-        static public bool testDatabase()
-        {
-            return Account.testdatabase();
-        }
         static public string giveTestHash()
         {
             return PasswordHashing.CreateHash("default");

@@ -21,86 +21,81 @@ namespace Class_Layer
     public class Question : Post
     {
         /// <summary>
-        /// Gets the scheduled time of the question
+        /// Gets the ID of the question
         /// </summary>
-        public DateTime Schedule { get; private set; }
-
+        public int ID { get; private set; }
         /// <summary>
-        /// Gets the description of the question
+        /// Gets the title of the question
+        /// </summary>
+        public string Title { get; private set; }
+        /// <summary>
+        /// Gets the start date of help for this question
+        /// </summary>
+        public Nullable<DateTime> StartDate { get; private set; }
+        /// <summary>
+        /// Gets the end date of help for this question
+        /// </summary>
+        public Nullable<DateTime> EndDate { get; private set; }
+        /// <summary>
+        /// Gets the post date for this question
+        /// </summary>
+        public DateTime PostDate { get; private set; }
+        /// <summary>
+        /// Gets the description of this question
         /// </summary>
         public string Description { get; private set; }
-
         /// <summary>
-        /// Gets the location of the question
+        /// Gets the urgency of this question
         /// </summary>
-        public Location QuestionLocation { get; private set; }
-
+        public bool Urgent { get; private set; }
+        /// <summary>
+        /// Gets the location of this question
+        /// </summary>
+        public string Location { get; private set; }
+        /// <summary>
+        /// Gets the maximum amount of volunteers on this question
+        /// </summary>
+        public int AmountAccs { get; private set; }
+        /// <summary>
+        /// Gets the status of this question
+        /// </summary>
+        public Enums.Status Status { get; private set; }
         /// <summary>
         /// Gets the skills of a question
         /// </summary>
         public List<string> Skills { get; private set; }
 
-        /// <summary>
-        /// Gets the userID of a question
-        /// </summary>
-        public int UserID { get; private set; }
+        //TODO:
+        //List accounts somehow
 
         /// <summary>
         /// Posts a question
-        /// </summary>
-        /// <param name="accountid">ID of the poster</param>
-        /// <param name="title">title of the question</param>
-        /// <param name="schedule">date of the question to be resolved</param>
-        /// <param name="description">the description of the question</param>
-        /// <param name="questionLocation">the location of the question</param>
-        /// <param name="q">a returned question</param>
-        /// <returns>Whether the question was able to be posted</returns>
-        public static bool CreateQuestion(int accountid, string title, DateTime dateSchedule, string description, Location questionLocation, List<string> skills, out Question q)
+        /// <param name="posterID">The ID of the user who posts the question</param>
+        /// <param name="title">The title of the question</param>
+        /// <param name="startDate">The start date of when help is sought</param>
+        /// <param name="endDate">The end date of when help is sought</param>
+        /// <param name="description">The description of the question</param>
+        /// <param name="urgency">Whether the question is urgent or not</param>
+        /// <param name="location">The location of the question</param>
+        /// <param name="amnt">The maximum amount of volunteers</param>
+        /// <param name="skills">The skills that are required for this question</param>
+        /// <param name="q">The newly made question</param>
+        /// <returns>Whether it succeeded or not</returns>
+        public static bool CreateQuestion(int posterID, string title, Nullable<DateTime> startDate, Nullable<DateTime> endDate, 
+            string description, bool urgency, string location, int amnt, List<string> skills, out Question q)
         {
-            bool creationSuccess = false;
-            bool doInsertLocation = false;
+            //TODO
+            //Call database to insert question
+            //Database returns the ID of last inserted object
+            //Insert skills to database
             q = null;
-            string schedule = dateSchedule.ToString("dd-MMM-yyyy HH:mm:s");
-
-            try
-            {
-                int locID = 0;
-
-                //Check if exists, if not: insert instead
-                doInsertLocation = Location.ValidateLocation(questionLocation, out locID) == true ? false : true;
-
-                //If it exists, don't insert a new location, else do
-                if (doInsertLocation)
-                { locID = Location.InsertLocation(questionLocation); }
-
-                //Insert question 
-                Database_Layer.Database.NewQuestion(title, accountid, schedule, description, locID);
-                //Retrieve question ID / post ID
-                DataTable dtQuestion = Database_Layer.Database.RetrieveQuery(
-                    String.Format("SELECT max(ID) FROM \"Question\" WHERE \"PosterACC_ID\" = '{0}'",
-                    accountid));
-                int qID = 0;
-                //Set questionID
-                foreach (DataRow row in dtQuestion.Rows)
-                {
-                    qID = Convert.ToInt32(row["max(ID)"]);
-                }
-                //Insert matching skills to database
-                foreach (string skill in skills)
-                {
-                    Database_Layer.Database.SkillInsert(skill, qID);
-                }
-
-                q = new Question(qID, title, dateSchedule, description, questionLocation, skills, accountid);
-                creationSuccess = true;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            return creationSuccess;
+            return false;
         }
 
+        /// <summary>
+        /// Deletes the question with specified ID
+        /// </summary>
+        /// <param name="ID"></param>
         public static void Delete(int ID)
         {
             Database_Layer.Database.DeleteQuestion(ID);
@@ -114,45 +109,11 @@ namespace Class_Layer
         /// <returns></returns>
         public static List<Question> FindQuestions(bool all = true, int accountid = 0)
         {
-            List<Question> q = new List<Question>();
-            DataTable dtQuestion;
-            //If all posts are meant to be retrieved
-            if (all)
-            {
-                dtQuestion = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Question\"");
-            }
-            //else retrieve all the user's posts
-            else
-            {
-                dtQuestion = Database_Layer.Database.RetrieveQuery(
-                    String.Format("SELECT * FROM \"Question\" WHERE \"PosterACC_ID\" = '{0}'",
-                    accountid));
-            }
-
-            foreach (DataRow row in dtQuestion.Rows)
-            {
-                //Create a new instance of the matching location
-                Location loc = new Location(Convert.ToInt32(row["LOCATION_ID"]));
-
-                //Find and add skills
-                DataTable dtSkills = Database_Layer.Database.RetrieveQuery(String.Format("SELECT * FROM \"Question_Skill\" WHERE \"QUESTION_ID\" = {0}", row["ID"].ToString()));
-                List<string> skills = new List<string>();
-                foreach (DataRow skill in dtSkills.Rows)
-                {
-                    skills.Add(skill["SKILL_NAME"].ToString());
-                }
-
-                //Add question to list
-                q.Add(new Question(Convert.ToInt32(row["ID"]),
-                    row["Title"].ToString(),
-                    Convert.ToDateTime(row["TimeTable"]),
-                    row["Description"].ToString(),
-                    loc,
-                    skills,
-                    Convert.ToInt32(row["PosterACC_ID"])
-                    ));
-            }
-            return q;
+            //TODO
+            //Check whether all questions should be retrieved or only from specified account
+            //Call database with query
+            //Return list
+            return null;
         }
 
         /// <summary>
@@ -165,7 +126,7 @@ namespace Class_Layer
         {
             string name = String.Empty;
             ID = 0;
-            DataTable dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc\" WHERE \"ID\" = (SELECT \"PosterACC_ID\" FROM \"Question\" WHERE \"ID\" = " + postid + ")");
+            DataTable dt = Database_Layer.Database.RetrieveQuery("SELECT Name, ID FROM \"Acc\" WHERE \"ID\" = (SELECT \"PosterACC_ID\" FROM \"Question\" WHERE \"ID\" = " + postid + ")");
             foreach (DataRow row in dt.Rows)
             {
                 ID = Convert.ToInt32(row["ID"]);
@@ -175,29 +136,24 @@ namespace Class_Layer
         }
 
         /// <summary>
-        /// Updates the question
+        /// 
         /// </summary>
         /// <param name="postID">The ID of the question</param>
+        /// <param name="posterID">The poster ID of the question</param>
         /// <param name="title">The title of the question</param>
-        /// <param name="schedule">The time of help for the question</param>
+        /// <param name="startDate">The start date of the question help</param>
+        /// <param name="endDate">The end date of the question help</param>
         /// <param name="description">The description for the question</param>
+        /// <param name="urgency">Whether the question is urgent or not</param>
         /// <param name="location">The location of the question</param>
+        /// <param name="amnt">The maximum amount of volunteers</param>
         /// <param name="skills">The skills needed for the question</param>
-        /// <param name="userID">The ID of the user who posted the question</param>
-        public static void Update(int postID, string title, DateTime schedule, string description, Location loc, List<string> skills, int userID)
+        public static void Update(int postID, int posterID, string title, Nullable<DateTime> startDate, Nullable<DateTime> endDate,
+            string description, bool urgency, string location, int amnt, List<string> skills, int userID)
         {
-            int locID = 0;
-            //If location does not exist
-            if (!Location.ValidateLocation(loc, out locID))
-            {
-                locID = Location.InsertLocation(loc);
-            }
-            Database_Layer.Database.UpdateQuestion(postID, title, schedule.ToString(), description, locID);
-            Database_Layer.Database.DelSkillQuestion(postID);
-            foreach (string s in skills)
-            {
-                Database_Layer.Database.SkillInsert(s, postID);
-            }
+            //TODO
+            //Call database to update question
+            //Update question skills
         }
 
         /// <summary>
@@ -208,22 +164,27 @@ namespace Class_Layer
         /// <param name="schedule">The scheduled time of the question</param>
         /// <param name="description">The description of the question</param>
         /// <param name="questionLocation">The location of the question</param>
-        private Question(int postID, string title, DateTime schedule, string description, Location questionLocation, List<string> skills, int userid)
-            : base(postID, title)
+        private Question(int postID, int posterID, string title, Nullable<DateTime> startDate, Nullable<DateTime> endDate,
+            string description, bool urgency, string location, int amnt, List<string> skills)
+            : base(postID, posterID)
         {
-            this.Schedule = schedule;
+            this.Title = title;
+            this.StartDate = startDate;
+            this.EndDate = endDate;
             this.Description = description;
-            this.Schedule = schedule;
-            this.QuestionLocation = questionLocation;
+            this.Urgent = urgency;
+            this.Location = location;
+            this.AmountAccs = amnt;
             this.Skills = skills;
         }
 
         //Returns a full description
         public string GetDescription(int postid, out int ID)
         {
-            return string.Format(
-                "Door: {0} \nHulp gewenst op: {1} \nBeschrijving: {2} \nLocatie: {3}",
-                GetOP(postid, out ID), Schedule.ToString(), Description, QuestionLocation.ToString());
+            //TODO
+            //Make a nice ToString method from this, using the GetOP method as well
+            ID = 0;
+            return "";
         }
     }
 }

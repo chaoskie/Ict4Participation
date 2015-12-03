@@ -19,20 +19,36 @@ namespace Class_Layer
     public class Meeting
     {
         /// <summary>
-        /// The ID of the meeting, as given by the database
+        /// Gets the ID of the meeting
         /// </summary>
         public int ID { get; private set; }
-
         /// <summary>
-        /// Gets the begin time of the meeting
+        /// Gets the ID of the user who requested this meeting
         /// </summary>
-        public string BeginTime { get; private set; }
-
+        public int RequesterID { get; private set; }
+        /// <summary>
+        /// Gets the ID of the user who was requested to be at this meeting
+        /// </summary>
+        public int RequestedID { get; private set; }
+        /// <summary>
+        /// Gets the start time of the meeting
+        /// </summary>
+        public Nullable<DateTime> StartDate { get; private set; }
+        /// <summary>
+        /// Gets the end time of the meeting
+        /// </summary>
+        public Nullable<DateTime> EndDate { get; private set; }
+        /// <summary>
+        /// Gets the creation date of the meeting
+        /// </summary>
+        public DateTime CreationDate { get; private set; }
         /// <summary>
         /// Gets the location of the meeting
         /// </summary>
-        public Location Loc { get; private set; }
-
+        public string Location { get; private set; }
+        /// <summary>
+        /// Gets the details of the meeting
+        /// </summary>
         public string Details { get; private set; }
 
         /// <summary>
@@ -41,22 +57,15 @@ namespace Class_Layer
         /// <param name="id">the ID of the meeting</param>
         /// <param name="beginTime">The begin time of the meeting</param>
         /// <param name="loc">The location of the meeting</param>
-        private Meeting(int id, string beginTime, Location loc, string username1, string username2)
+        private Meeting(string beginTime, string locatie, string username1, string username2)
         {
-            string locinfo = loc.ToString();
-            if (string.IsNullOrWhiteSpace(beginTime))
-            {
-                beginTime = "nog niet aangegeven";
-            }
-
-            if (loc.ToString() == " op 0 , 0")
-            {
-                locinfo = "nog niet aangegeven";
-            }
-            this.BeginTime = beginTime;
-            this.Loc = loc;
-            this.ID = id;
-            this.Details = String.Format("Tijdstip: {0}Locatie: {1}Uitgenodigden: {2} met {3}", BeginTime + Environment.NewLine, locinfo + Environment.NewLine, username1, username2);
+            //TODO
+            //Fetch usernames
+            //Set details to the following:
+            //Op xxxxx is de volgende meeting ingepland:
+            //Tijdstip: van xxxxxx tot xxxxxx
+            //Locatie: xxxxxx
+            //Uitgenodigden: xxxxxx met xxxxxx
         }
 
         #region Create meeting, database mostly
@@ -69,52 +78,15 @@ namespace Class_Layer
         /// <param name="time">the time of the meeting</param>
         /// <param name="locID">the locationID of the location</param>
         /// <returns></returns>
-        public static string CreateMeeting(int userIDmaker, int userIDrequester, DateTime time, int locID)
+        public static string Create(int userIDmaker, int userIDrequester, DateTime startTime, DateTime endTime, string location, out Meeting m)
         {
-            string timetable = time.ToString("dd-MMM-yyyy HH:mm:s");
-            Database_Layer.Database.InsertMeetingA(userIDmaker, userIDrequester, timetable, locID);
-            return "Afspraak met tijd en locatie aangemaakt!";
+            m = null;
+            string st = Utility_Classes.ConvertTo.OracleDateTime(startTime);
+            string et = Utility_Classes.ConvertTo.OracleDateTime(endTime);
+            //TODO
+            //Call database to insert new meeting
+            return "";
         }
-
-        /// <summary>
-        /// Creates a meeting, where only the datetime is given
-        /// </summary>
-        /// <param name="userIDmaker">the ID of the user who makes the meeting</param>
-        /// <param name="userIDrequester">the ID of the user who joins the meeting</param>
-        /// <param name="time">the time of the meeting</param>
-        /// <returns></returns>
-        public static string CreateMeeting(int userIDmaker, int userIDrequester, DateTime time)
-        {
-            string timetable = time.ToString("dd-MMM-yyyy HH:mm:s");
-            Database_Layer.Database.InsertMeetingA(userIDmaker, userIDrequester, timetable);
-            return "Afspraak met tijd alleen aangemaakt!";
-        }
-
-        /// <summary>
-        /// Creates a meeting, where only the locationID is given
-        /// </summary>
-        /// <param name="userIDmaker">the ID of the user who makes the meeting</param>
-        /// <param name="userIDrequester">the ID of the user who joins the meeting</param>
-        /// <param name="locID">the locationID of the location</param>
-        /// <returns></returns>
-        public static string CreateMeeting(int userIDmaker, int userIDrequester, int locID)
-        {
-            Database_Layer.Database.InsertMeetingA(userIDmaker, userIDrequester, locID);
-            return "Afspraak met locatie alleen aangemaakt!";
-        }
-
-        /// <summary>
-        /// Creates an empty meeting
-        /// </summary>
-        /// <param name="userIDmaker">the ID of the user who makes the meeting</param>
-        /// <param name="userIDrequester">the ID of the user who joins the meeting</param>
-        /// <returns></returns>
-        public static string CreateMeeting(int userIDmaker, int userIDrequester)
-        {
-            Database_Layer.Database.InsertMeetingA(userIDmaker, userIDrequester);
-            return "Afspraak aangemaakt!";
-        }
-
         #endregion
 
         /// <summary>
@@ -124,38 +96,12 @@ namespace Class_Layer
         /// <returns>Yields a list of said meetings</returns>
         public static List<Meeting> GetAllMeetings(Nullable<int> userid = null)
         {
-            string query = 
-                "SELECT RequesterName, RequestedName, Timet, LocationID, MID FROM"
-                + "(SELECT RequesterName, \"Name\" as RequestedName, rr, rd, Timet, LocationID, MID FROM ( "
-                + "SELECT \"Name\" as RequesterName, ac.\"ID\", me.\"RequestedACC_ID\" as rd, me.\"RequesterACC_ID\" as rr, me.\"Timetable\" as Timet, me.location_id as LocationID, me.\"ID\" as MID FROM \"Acc\" ac "
-                + "JOIN \"Meeting\" me "
-                + "ON me.\"RequesterACC_ID\"=ac.\"ID\" "
-                + ") tt "
-                + "JOIN \"Acc\" ac "
-                + "ON tt.rd=ac.\"ID\" "
-                + ") ";
-            if (userid != null)
-            {
-                query += "WHERE rr = " + userid + " OR rd = " + userid + " ";
-            }
-            List<Meeting> foundmeetings = new List<Meeting>();
-            DataTable dt = Database_Layer.Database.RetrieveQuery(query);
-            foreach (DataRow row in dt.Rows)
-            {
-                var outputParam = row["LocationID"];
-                int locID = 0;
-                if(!(outputParam is DBNull))
-                {locID = Convert.ToInt32(row["LocationID"]);}
-
-                foundmeetings.Add(new Meeting(
-                    Convert.ToInt32(row["MID"]),
-                    row["Timet"].ToString(),
-                    new Location(Convert.ToInt32(locID)),
-                    row["RequesterName"].ToString(),
-                    row["RequestedName"].ToString()
-                    ));
-            }
-            return foundmeetings;
+            //TODO
+            //Find all meetings if userID is null
+            //Find user-specific meetings
+            //Possibly make another constructor
+            //Return a list with all the found meetings
+            return null;
         }
 
         public override string ToString()

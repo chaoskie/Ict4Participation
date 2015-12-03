@@ -27,11 +27,6 @@ namespace Class_Layer
         /// <summary>
         /// Gets the accountID of the author
         /// </summary>
-        public int PosterID { get; private set; }
-
-        /// <summary>
-        /// Gets the accountID of the author
-        /// </summary>
         public int PostedToID { get; private set; }
 
         /// <summary>
@@ -40,18 +35,17 @@ namespace Class_Layer
         public string Description { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Review"/> class.
+        /// Initialises a new instance of the Review class
         /// </summary>
-        /// <param name="postID">The ID of the review</param>
-        /// <param name="title">The title of the review</param>
-        /// <param name="rating">The rating of the review</param>
-        /// <param name="accountID">The accountID of the author</param>
-        /// <param name="description">The description of the review</param>
-        private Review(int postID, string title, int rating, int posterID, int postedtoID, string description)
-            : base(postID, title)
+        /// <param name="postID"></param>
+        /// <param name="rating"></param>
+        /// <param name="posterID"></param>
+        /// <param name="postedtoID"></param>
+        /// <param name="description"></param>
+        private Review(int postID, int rating, int posterID, int postedtoID, string description)
+            : base(postID, posterID)
         {
             this.Rating = rating;
-            this.PosterID = posterID;
             this.PostedToID = postedtoID;
             this.Description = description;
         }
@@ -65,9 +59,11 @@ namespace Class_Layer
         /// <param name="posterID">The ID of the reviewer</param>
         /// <param name="description">The description of the review</param>
         /// <returns>String containing information about the review placement</returns>
-        public static string PlaceReview(int rating, string title, int postedtoID, int posterID, string description)
+        public static string Place(int rating, int postedtoID, int posterID, string description)
         {
-            Database_Layer.Database.InsertReview(rating, title, postedtoID, posterID, description);
+            //TODO
+            //Call database to post a new review
+            //  Database_Layer.Database.InsertReview(rating, postedtoID, posterID, description);
             return String.Format("{0}-sterren review geplaatst!", rating);
         }
         /// <summary>
@@ -79,9 +75,17 @@ namespace Class_Layer
             Database_Layer.Database.DeleteReview(ID);
         }
 
-        public static void Update(int postID, int rating, string title, string desc)
+        /// <summary>
+        /// Updates the desired review
+        /// </summary>
+        /// <param name="postID">The ID of the review</param>
+        /// <param name="rating">The new rating of the review</param>
+        /// <param name="desc">The new description of the review</param>
+        public static void Update(int postID, int rating, string desc)
         {
-            Database_Layer.Database.UpdateReview(postID, rating, title, desc);
+            //TODO
+            //Call database to update the review
+            //  Database_Layer.Database.UpdateReview(postID, rating, desc);
         }
 
         /// <summary>
@@ -98,14 +102,7 @@ namespace Class_Layer
             DataTable dtReview = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Review\" WHERE \"" + who + "\" = " + accountID);
             foreach (DataRow row in dtReview.Rows)
             {
-                reviews.Add(new Review(
-                    Convert.ToInt32(row["ID"]),
-                    row["Title"].ToString(),
-                    Convert.ToInt32(row["Rating"]),
-                    Convert.ToInt32(row["PosterACC_ID"]),
-                    Convert.ToInt32(row["PostedACC_ID"]),
-                    row["Description"].ToString()
-                    ));
+                reviews.Add(Create(row));
             }
             return GetDetails(reviews);
         }
@@ -121,16 +118,25 @@ namespace Class_Layer
             DataTable dtReview = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Review\"");
             foreach (DataRow row in dtReview.Rows)
             {
-                reviews.Add(new Review(
+                reviews.Add(Create(row));
+            }
+            return GetDetails(reviews);
+        }
+
+        /// <summary>
+        /// Creates a review from the data of a datarow
+        /// </summary>
+        /// <param name="row">The datarow to process</param>
+        /// <returns>The review filled with information in the datarow</returns>
+        private static Review Create(DataRow row)
+        {
+            return new Review(
                     Convert.ToInt32(row["ID"]),
-                    row["Title"].ToString(),
                     Convert.ToInt32(row["Rating"]),
                     Convert.ToInt32(row["PosterACC_ID"]),
                     Convert.ToInt32(row["PostedACC_ID"]),
                     row["Description"].ToString()
-                    ));
-            }
-            return GetDetails(reviews);
+                );
         }
 
         /// <summary>
@@ -143,7 +149,7 @@ namespace Class_Layer
             List<string> reviewdetails = new List<string>();
             foreach (Review r in reviews)
             {
-                reviewdetails.Add(String.Format("{0}-Sterren: {1} \n{2}",r.Rating, r.Title, r.Description));
+                reviewdetails.Add(String.Format("{0}-Sterren: {1} \n{2}", r.Rating, r.Description));
             }
             return reviewdetails;
         }
