@@ -31,5 +31,22 @@ namespace Class_Layer
             //Call database to remove this skill
             return false;
         }
+
+        public static List<Skill> GetAll(Nullable<int> userID = null)
+        {
+            //get all if no ID is specified
+            if (userID == null)
+            {
+                //TODO
+                //Load in distinct skills from everyone
+            }
+            //Get user-specific if ID is specified
+            else
+            {
+                //TODO
+                //Load in distinct skills from user
+            }
+            return null;
+        }
     }
 }

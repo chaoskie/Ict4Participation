@@ -33,5 +33,13 @@ namespace Class_Layer
             //Call database to remove this availability
             return false;
         }
+
+        public static List<Availability> GetAll(int userID)
+        {
+            //TODO
+            //Load in distinct skills from user
+
+            return null;
+        }
     }
 }
