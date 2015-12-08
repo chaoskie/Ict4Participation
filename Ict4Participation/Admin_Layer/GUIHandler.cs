@@ -59,9 +59,9 @@ namespace Admin_Layer
         private List<Review> LoadedReviews;
 
         /// <summary>
-        /// The last loaded ID
+        /// A list of loaded meetings
         /// </summary>
-        private int lastloadedOPID;
+        private List<Meeting> LoadedMeetings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Administration"/> class.
@@ -76,26 +76,92 @@ namespace Admin_Layer
 
         #region Account Handling
 
+        /// <summary>
+        /// Logs the user in with given credentials
+        /// </summary>
+        /// <param name="username">The username</param>
+        /// <param name="password">The given password</param>
+        /// <param name="message">The error message</param>
+        /// <returns>Yields a true if the user could be logged in</returns>
         public bool LogIn(string username, string password, out string message)
         {
-            //TODO
+            message = String.Empty;
             //Fetch matching account
-            message = "Not implemented";
-            return false;
+            if (!Account.LogIn(username, password, out MainUser))
+            {
+                message = "Gebruikersnaam en wachtwoord komen niet overeen!";
+                return false;
+            }
+            return true;
         }
 
+        /// <summary>
+        /// Logs the last user out
+        /// </summary>
         public void LogOut()
         {
-            //TODO
             //Log user out
+            Account.LogOut(MainUser);
+            MainUser = null;
         }
 
+        /// <summary>
+        /// Registers a new account
+        /// </summary>
+        /// <param name="acc">The account details</param>
+        /// <param name="message">The error message</param>
+        /// <returns>Yields a true if the user could be created</returns>
         public bool Register(Accountdetails acc, out string message)
         {
+            message = String.Empty;
             //TODO
             //Validate details
+            if (!Check.Birthday(acc.Birthdate))
+            {
+                message = "Verjaardag is fout ingegeven.";
+                return false;
+            }
+            if (!Check.Name(acc.Name))
+            {
+                message = "Naam is fout ingegeven. \r\nDeze mag geen nummers of speciale tekens bevatten!";
+                return false;
+            }
+            if (!Check.LiteralUsername(acc.Username))
+            {
+                message = "Gebruikersnaam is fout ingegeven. \r\nUw gebruikersnaam mag geen speciale tekens bevatten!";
+                return false;
+            }
+            if (!Check.Phonenumber(acc.Phonenumber))
+            {
+                message = "Telefoonnummer is fout ingegeven. \r\nUw telefoon voldoet niet aan ons format: \r\nProbeer: XXX-XXX-XXXX";
+                return false;
+            }
+            if (acc.VOGPath != null)
+            {
+                if (!Check.isOfFileExt(acc.VOGPath, ".pdf"))
+                {
+                    message = "Uw VOG is geen pdf.";
+                    return false;
+                }
+            }
+            if (!Check.isImage(acc.AvatarPath))
+            {
+                message = "Uw avatar is geen afbeelding.";
+                return false;
+            }
+            if (!Check.isLocation(acc.City, acc.Address))
+            {
+                message = "Uw locatie kon niet gevonden worden.";
+                return false;
+            }
+            if (!Check.isEmail(acc.Email))
+            {
+                message = "Uw email kon niet gevonden worden.";
+                return false;
+            }
+
             //Register account
-            message = "Not implemented";
+            //Account.Register();
             return false;
         }
 
@@ -141,13 +207,14 @@ namespace Admin_Layer
         {
             //TODO
             //Update account
+            //Account updatedAccount = new Account(MainUser ID... acc stuff)
             message = "Not implemented";
             return false;
         }
         #endregion
 
         #region Comment Handling
-        public Nullable<Commentdetails> GetInfo(int commentID)
+        public Nullable<Commentdetails> GetCommentInfo(int commentID)
         {
             //TODO
             //Fetch comment details from commentID
@@ -156,33 +223,34 @@ namespace Admin_Layer
 
         public bool Place(Commentdetails comment, out string message)
         {
-            //TODO
             //Place comment
-            message = "Not implemented";
-            return false;
+            Comment c = new Comment(0, comment.Description, MainUser.ID, comment.PostedToID, comment.PostDate);
+            c.Create();
+            message = "Comment placed";
+            return true;
         }
 
-        public bool Edit(Commentdetails comment, out string message)
+        public bool Edit(Commentdetails comment, int index, out string message)
         {
-            //TODO
             //Edit comment
-            message = "Not implemented";
-            return false;
+            message = "Comment edited";
+            Comment c = new Comment(LoadedComments[index].PostID, comment.Description, MainUser.ID, comment.PostedToID, comment.PostDate);
+            return true;
         }
 
         public bool Remove(int commentIndex, out string message)
         {
-            //TODO
             //Remove comment
-            message = "Not implemented";
-            return false;
+            LoadedComments[commentIndex].Delete();
+            message = "Comment removed";
+            return true;
         }
 
         public List<Commentdetails> GetAll(int questionID)
         {
-            //TODO
             //Fetch all the comments matching for this question
-            return null;
+            LoadedComments = Comment.GetAll(questionID);
+            return LoadedComments.Select(com => Creation.getDetailsObject(com)).Cast<Commentdetails>().ToList();
         }
         #endregion
 
@@ -216,26 +284,28 @@ namespace Admin_Layer
 
         public bool Place(Questiondetails question, out string message)
         {
-            //TODO
             //Place question
-            message = "Not implemented";
-            return false;
+            Question q = new Question(0, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills);
+            q.Create();
+            message = "Question placed";
+            return true;
         }
 
-        public bool Edit(Questiondetails question, out string message)
+        public bool Edit(Questiondetails question, int questionIndex, out string message)
         {
-            //TODO
             //Edit question
-            message = "Not implemented";
-            return false;
+            Question q = new Question(LoadedQuestions[questionIndex].PostID, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills);
+            q.Update();
+            message = "Question updated";
+            return true;
         }
 
         public bool RemoveQuestion(int questionIndex, out string message)
         {
-            //TODO
             //Remove question
-            message = "Not implemented";
-            return false;
+            LoadedQuestions[questionIndex].Delete();
+            message = "Question deleted";
+            return true;
         }
         #endregion
 
@@ -248,7 +318,7 @@ namespace Admin_Layer
         /// <returns>A list regarding all the details of the reviews</returns>
         public List<Reviewdetails> GetAllReviews(int userid, bool isPoster = false)
         {
-            LoadedReviews = Review.GetAll(userid,isPoster);
+            LoadedReviews = Review.GetAll(userid, isPoster);
             return LoadedReviews.Select(r => Creation.getDetailsObject(r)).Cast<Reviewdetails>().ToList();
         }
 
@@ -261,26 +331,28 @@ namespace Admin_Layer
 
         public bool Place(Reviewdetails review, out string message)
         {
-            //TODO
             //Place review
-            message = "Not implemented";
-            return false;
+            Review r = new Review(0, review.Rating, MainUser.ID, review.PostedToID, review.Description);
+            r.Create();
+            message = "Review placed";
+            return true;
         }
 
-        public bool Edit(Reviewdetails review, out string message)
+        public bool Edit(Reviewdetails review, int reviewIndex, out string message)
         {
-            //TODO
             //Edit review
-            message = "Not implemented";
-            return false;
+            Review r = new Review(LoadedReviews[reviewIndex].PostID, review.Rating, MainUser.ID, review.PostedToID, review.Description);
+            r.Update();
+            message = "Review updated";
+            return true;
         }
 
         public bool RemoveReview(int reviewIndex, out string message)
         {
-            //TODO
             //Remove review
-            message = "Not implemented";
-            return false;
+            LoadedReviews[reviewIndex].Delete();
+            message = "Review removed";
+            return true;
         }
         #endregion
 
@@ -291,7 +363,8 @@ namespace Admin_Layer
         /// <returns>All details regarding these meetings</returns>
         public List<Meetingdetails> GetAllMeetings()
         {
-            return Meeting.GetAll(MainUser.ID).Select(meeting => Creation.getDetailsObject(meeting)).Cast<Meetingdetails>().ToList();
+            LoadedMeetings = Meeting.GetAll(MainUser.ID);
+            return LoadedMeetings.Select(meeting => Creation.getDetailsObject(meeting)).Cast<Meetingdetails>().ToList();
         }
 
         public Nullable<Meetingdetails> GetMeetingInfo(int meetingindex)
@@ -301,28 +374,30 @@ namespace Admin_Layer
             return null;
         }
 
-        public bool Edit(Meetingdetails meeting, out string message)
+        public bool Edit(Meetingdetails meeting, int meetingIndex, out string message)
         {
-            //TODO
             //Edit meeting
-            message = "Not implemented";
-            return false;
+            Meeting m = new Meeting(LoadedMeetings[meetingIndex].PostID, meeting.RequestedID, meeting.RequesterID, meeting.StartDate, meeting.EndDate, meeting.Location);
+            m.Update();
+            message = "Meeting updated";
+            return true;
         }
 
         public bool Create(Meetingdetails meeting, out string message)
         {
-            //TODO
             //Create meeting
-            message = "Not implemented";
-            return false;
+            Meeting m = new Meeting(0, meeting.RequestedID, meeting.RequesterID, meeting.StartDate, meeting.EndDate, meeting.Location);
+            m.Create();
+            message = "Meeting created";
+            return true;
         }
 
         public bool RemoveMeeting(int meetingIndex, out string message)
         {
-            //TODO
             //Remove meeting
-            message = "Not implemented";
-            return false;
+            LoadedMeetings[meetingIndex].Delete();
+            message = "Meeting removed";
+            return true;
         }
         #endregion
 
@@ -340,7 +415,7 @@ namespace Admin_Layer
         //TODO
         //Add Availability class
         //Use this class to load in all the availability of specified account
-        
+
         //GETALL
         //ADD (details)
         //REMOVE (details)

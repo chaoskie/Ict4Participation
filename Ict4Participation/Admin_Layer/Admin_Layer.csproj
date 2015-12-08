@@ -44,6 +44,7 @@
     <Compile Include="Details.cs" />
     <Compile Include="GUIHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Check.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Class_Layer\Class_Layer.csproj">
