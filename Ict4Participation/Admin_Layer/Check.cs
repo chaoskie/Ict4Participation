@@ -9,17 +9,6 @@ namespace Admin_Layer
 {
     public abstract class Check
     {
-        /*
-        acc.Email;
-        acc.Address;
-        acc.City;
-        acc.Birthdate;
-        acc.AvatarPath;
-        acc.VOGPath;
-        acc.AvailabilityList;
-        acc.SkillList;
-        */
-
         /// <summary>
         /// Checks if the phonenumber is one of the following:
         /// <para>0402001888</para>
@@ -77,6 +66,12 @@ namespace Admin_Layer
             return Regex.IsMatch(s, "[a-zA-Z0-9]{6,}");
         }
 
+        /// <summary>
+        /// Checks if the string ends with a specified extension
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="ext"></param>
+        /// <returns></returns>
         public static bool isOfFileExt(string s, string ext)
         {
             return Regex.IsMatch(s, "(" + ext + ")$");
