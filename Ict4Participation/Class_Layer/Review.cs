@@ -42,7 +42,7 @@ namespace Class_Layer
         /// <param name="posterID"></param>
         /// <param name="postedtoID"></param>
         /// <param name="description"></param>
-        private Review(int postID, int rating, int posterID, int postedtoID, string description)
+        public Review(int postID, int rating, int posterID, int postedtoID, string description)
             : base(postID, posterID)
         {
             this.Rating = rating;

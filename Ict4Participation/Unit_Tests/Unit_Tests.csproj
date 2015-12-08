@@ -56,6 +56,10 @@
     <Compile Include="UtilitiesTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Admin_Layer\Admin_Layer.csproj">
+      <Project>{5d4d65c5-92d8-4d4a-874d-bb0cad13e7ce}</Project>
+      <Name>Admin_Layer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Class_Layer\Class_Layer.csproj">
       <Project>{cf800b4a-a399-40c8-9eaf-5f284f5306e6}</Project>
       <Name>Class_Layer</Name>

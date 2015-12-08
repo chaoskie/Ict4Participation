@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Admin_Layer;
+using Class_Layer;
 using Class_Layer.Utility_Classes;
 using Class_Layer.Enums;
 
@@ -40,6 +42,25 @@ namespace Unit_Tests
             if (status != Status.Aangenomen.ToString())
             {
                 Assert.Fail("Status has wrong name / failed to compare names");
+            }
+        }
+
+        [TestMethod]
+        public void GetDetails()
+        {
+            Review r = new Review(0, 3, 1, 2, "Ayyy lmao");
+            Reviewdetails rd = (Reviewdetails)Creation.getDetailsObject(r);
+            if (r.Description != rd.Description)
+            {
+                Assert.Fail("Failed to write Description properly");
+            }
+            if (r.PostedToID != rd.PostedToID)
+            {
+                Assert.Fail("Failed to write PostedToID properly");
+            }
+            if (r.Rating != rd.Rating)
+            {
+                Assert.Fail("Failed to write Rating properly");
             }
         }
     }
