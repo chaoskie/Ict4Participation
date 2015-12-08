@@ -8,10 +8,6 @@ using Class_Layer;
 
 namespace Admin_Layer
 {
-    //Naam
-    //Naam + details
-    //Properties hebben dezelfde naam
-
     public abstract class Creation
     {
         public static Object getDetailsObject(Object o)
@@ -79,13 +75,14 @@ namespace Admin_Layer
         public DateTime Birthdate { get; set; }
         public string AvatarPath { get; set; }
         public string VOGPath { get; set; }
-        public List<Availabilitydetails> Availability { get; set; }
+        public List<Availabilitydetails> AvailabilityList { get; set; }
+        public List<Skilldetails> SkillList { get; set; }
     }
 
     public struct Availabilitydetails
     {
-        public string daytime { get; set; }
-        public string day { get; set; }
+        public string Daytime { get; set; }
+        public string Day { get; set; }
     }
 
     public struct Commentdetails
@@ -93,5 +90,10 @@ namespace Admin_Layer
         public int PostedToID { get; set; }
         public string Description { get; set; }
         public DateTime PostDate { get; set; }
+    }
+
+    public struct Skilldetails
+    {
+        //TODO
     }
 }

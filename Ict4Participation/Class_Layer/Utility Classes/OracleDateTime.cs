@@ -8,9 +8,16 @@ namespace Class_Layer.Utility_Classes
 {
     public class ConvertTo
     {
-        public static string OracleDateTime(DateTime dt)
+        public static string OracleDateTime(Nullable<DateTime> dt)
         {
-            return dt.ToString("d-MMM-yyyy HH:mm:ss");
+            if (dt != null)
+            {
+                return ((DateTime)dt).ToString("d-MMM-yyyy HH:mm:ss");
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

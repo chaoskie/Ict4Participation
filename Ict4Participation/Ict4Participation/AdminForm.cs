@@ -147,7 +147,7 @@ namespace Ict4Participation
                     }
 
                     ///If the time is selected
-                    if (lbPostDetails.SelectedIndex == 1)
+                    /*if (lbPostDetails.SelectedIndex == 1)
                     {
                         string newTime = Prompt.ShowDialog("Pas de tijd aan in het volgende format (24-Feb-2015 12:36:20): ", "Aanpassen");
                         //Validate time (to check if in right format)
@@ -162,7 +162,7 @@ namespace Ict4Participation
                         {
                             Return(newTime, error);
                         }
-                    }
+                    }*/
 
                     ///If the description is selected
                     if (lbPostDetails.SelectedIndex == 2)
@@ -316,6 +316,7 @@ namespace Ict4Participation
                         }
                     }
                     //Edit title
+                    /*
                     if (lbPostDetails.SelectedIndex == 1)
                     {
                         string edit = Prompt.ShowDialog("Pas de titel aan naar het volgende: ", "Aanpassen");
@@ -329,7 +330,7 @@ namespace Ict4Participation
                         {
                             Return(edit, error);
                         }
-                    }
+                    }*/
                     //Edit description
                     if (lbPostDetails.SelectedIndex == 2)
                     {

@@ -40,17 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IAccInfo.cs" />
     <Compile Include="Account.cs" />
+    <Compile Include="Availability.cs" />
     <Compile Include="Enums\Accounttype.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="Enums\Status.cs" />
+    <Compile Include="Interfaces\IPost.cs" />
     <Compile Include="Meeting.cs" />
-    <Compile Include="PasswordHashing.cs" />
+    <Compile Include="Utility Classes\PasswordHashing.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs" />
     <Compile Include="Review.cs" />
-    <Compile Include="Tags.cs" />
+    <Compile Include="Skill.cs" />
     <Compile Include="Utility Classes\OracleDateTime.cs" />
   </ItemGroup>
   <ItemGroup>

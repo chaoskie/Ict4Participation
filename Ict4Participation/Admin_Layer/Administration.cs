@@ -20,6 +20,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Class_Layer;
 using Class_Layer.Enums;
+using Class_Layer.Utility_Classes;
 
 namespace Admin_Layer
 {
@@ -92,7 +93,7 @@ namespace Admin_Layer
         {
             if (!string.IsNullOrWhiteSpace(text))
             {
-                Comment.EditComment(LoadedComments[index].PostID, text);
+                //Comment.EditComment(LoadedComments[index].PostID, text);
             }
         }
 
@@ -103,7 +104,7 @@ namespace Admin_Layer
         /// <param name="isAdmin">A boolean indicating whether the user is an admin</param>
         public void DeleteComment(int index, bool isAdmin = false)
         {
-            Comment.DeleteComment(LoadedComments[index].PostID, isAdmin);
+            //Comment.DeleteComment(LoadedComments[index].PostID, isAdmin);
         }
 
         /// <summary>
@@ -126,6 +127,8 @@ namespace Admin_Layer
         /// <returns>Returns the result of the action</returns>
         public string PostQuestion(string title, string startTime, string endTime, string description, bool urgency, string location, int amount, List<string> skills)
         {
+            return "";
+            /*
             DateTime start = Convert.ToDateTime(startTime);
             DateTime end = Convert.ToDateTime(endTime);
             Question q = null;
@@ -136,7 +139,7 @@ namespace Admin_Layer
             else
             {
                 return "Er ging iets fout! Raadpleeg de administrator indien deze fout blijft voordoen.";
-            }
+            } */
         }
 
         /// <summary>
@@ -146,7 +149,7 @@ namespace Admin_Layer
         /// <param name="index">The index of the selected question</param>
         public void PostQuestionComment(string title, int index)
         {
-            Comment.PlaceComment(MainUser.ID, LoadedQuestions[index].PostID, title);
+            //Comment.PlaceComment(MainUser.ID, LoadedQuestions[index].PostID, title);
         }
 
         #region Question Editing
@@ -194,7 +197,7 @@ namespace Admin_Layer
                     int userID = LoadedAccounts.Find(a => a.Name.ToString() == name && a.Role == Accounttype.Hulpbehoevende).ID;
                     int questionID = LoadedQuestions[index].PostID;
                     //Change the question poster
-                    Question.Update(
+                    /*Question.Update(
                         LoadedQuestions[index].PostID,
                         LoadedQuestions[index].PosterID,
                         LoadedQuestions[index].Title,
@@ -206,7 +209,7 @@ namespace Admin_Layer
                         LoadedQuestions[index].AmountAccs,
                         LoadedQuestions[index].Skills,
                         userID
-                        );
+                        );*/
                     return true;
                 }
                 //If a correct ID is filled in (always matches 1 account)
@@ -216,7 +219,7 @@ namespace Admin_Layer
                     int userID = accsWithID[0].ID;
                     int questionID = LoadedQuestions[index].PostID;
                     //Change the question poster
-                    Question.Update(
+                    /*Question.Update(
                         LoadedQuestions[index].PostID,
                         LoadedQuestions[index].PosterID,
                         LoadedQuestions[index].Title,
@@ -228,7 +231,7 @@ namespace Admin_Layer
                         LoadedQuestions[index].AmountAccs,
                         LoadedQuestions[index].Skills,
                         userID
-                        );
+                        );*/
                     return true;
                 }
             }
@@ -254,7 +257,7 @@ namespace Admin_Layer
             if (DateTime.TryParse(time, out dt))
             {
                 //Change the time
-                if (isStartTime)
+                /*if (isStartTime)
                 {
                     Question.Update(
                             LoadedQuestions[index].PostID,
@@ -285,7 +288,7 @@ namespace Admin_Layer
                                LoadedQuestions[index].Skills,
                            LoadedQuestions[index].PosterID
                            );
-                }
+                }*/
                 return true;
             }
             else
@@ -311,7 +314,7 @@ namespace Admin_Layer
             {
                 return false;
             }
-            Question.Update(
+            /*Question.Update(
                             LoadedQuestions[index].PostID,
                             LoadedQuestions[index].PosterID,
                             LoadedQuestions[index].Title,
@@ -323,7 +326,7 @@ namespace Admin_Layer
                             LoadedQuestions[index].AmountAccs,
                             LoadedQuestions[index].Skills,
                         LoadedQuestions[index].PosterID
-                        );
+                        );*/
             return true;
         }
 
@@ -342,7 +345,7 @@ namespace Admin_Layer
             {
                 return false;
             }
-            Question.Update(
+            /*Question.Update(
                     LoadedQuestions[index].PostID,
                             LoadedQuestions[index].PosterID,
                             LoadedQuestions[index].Title,
@@ -355,7 +358,7 @@ namespace Admin_Layer
                             LoadedQuestions[index].Skills,
                         LoadedQuestions[index].PosterID
                     );
-
+            */
             return true;
         }
 
@@ -370,11 +373,11 @@ namespace Admin_Layer
         {
             if (!all)
             {
-                LoadedQuestions = Question.FindQuestions(all, MainUser.ID);
+                //LoadedQuestions = Question.FindQuestions(all, MainUser.ID);
             }
             else
             {
-                LoadedQuestions = Question.FindQuestions(all);
+                //LoadedQuestions = Question.FindQuestions(all);
             }
 
             return LoadedQuestions.Cast<Question>().Select(x => x.Title).ToList();
@@ -419,7 +422,7 @@ namespace Admin_Layer
         /// <returns>A string regarding the message of deletion</returns>
         public string DeleteQuestion(int index)
         {
-            Question.Delete(LoadedQuestions[index].PostID);
+            //Question.Delete(LoadedQuestions[index].PostID);
             return "Vraag succesvol verwijderd";
         }
 
@@ -442,7 +445,8 @@ namespace Admin_Layer
             {
                 if (LoadedAccounts.Find(a => a.ID == userID).Role != Accounttype.Hulpbehoevende)
                 {
-                    Message = Review.Place(rating, userID, MainUser.ID, description);
+                    //Message = Review.Place(rating, userID, MainUser.ID, description);
+                    Message = "??";
                     return true;
                 }
                 else
@@ -465,7 +469,7 @@ namespace Admin_Layer
         /// <returns>A string regarding the deletion</returns>
         public string DeleteReview(int index)
         {
-            Review.Delete(LoadedReviews[index].PostID);
+            //Review.Delete(LoadedReviews[index].PostID);
             return "Review succesvol verwijderd!";
         }
 
@@ -488,11 +492,11 @@ namespace Admin_Layer
             {
                 if (rating > 0 && rating < 6)
                 {
-                    Review.Update(
-                        LoadedReviews[index].PostID,
-                        rating,
-                        LoadedReviews[index].Description
-                        );
+                    //Review.Update(
+                    //    LoadedReviews[index].PostID,
+                    //    rating,
+                    //    LoadedReviews[index].Description
+                    //    );
                     return true;
                 }
                 else
@@ -523,11 +527,11 @@ namespace Admin_Layer
             }
             else
             {
-                Review.Update(
-                        LoadedReviews[index].PostID,
-                        LoadedReviews[index].Rating,
-                        edit
-                        );
+                //Review.Update(
+                //        LoadedReviews[index].PostID,
+                //        LoadedReviews[index].Rating,
+                //        edit
+                //        );
                 return true;
             }
         }
@@ -540,7 +544,8 @@ namespace Admin_Layer
         /// <returns>A list with all the details of the reviews</returns>
         public List<string> GetAccountReviews(int userid, bool isPoster = false)
         {
-            return Review.GetUserReviews(userid, out LoadedReviews, isPoster);
+            return null;
+            //return Review.GetUserReviews(userid, out LoadedReviews, isPoster);
         }
 
         /// <summary>
@@ -549,7 +554,8 @@ namespace Admin_Layer
         /// <returns>A list with all the details of the reviews</returns>
         public List<string> GetAccountReviews()
         {
-            return Review.GetAllUserReviews(out LoadedReviews);
+            return null;
+            //return Review.GetAllUserReviews(out LoadedReviews);
         }
 
         /// <summary>
@@ -558,7 +564,8 @@ namespace Admin_Layer
         /// <returns>A list with all the details of the reviews</returns>
         public List<string> GetAccountReviews(bool isPoster = false)
         {
-            return Review.GetUserReviews(MainUser.ID, out LoadedReviews, isPoster);
+            return null;
+            //return Review.GetUserReviews(MainUser.ID, out LoadedReviews, isPoster);
         }
         #endregion
 
@@ -576,7 +583,7 @@ namespace Admin_Layer
                 MailMessage mail = new MailMessage();
                 SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
                 
-                string retu = Meeting.Create(MainUser.ID, otheruserID, Convert.ToDateTime(startTime), Convert.ToDateTime(endTime) , location, out m);
+                //string retu = Meeting.Create(MainUser.ID, otheruserID, Convert.ToDateTime(startTime), Convert.ToDateTime(endTime) , location, out m);
 
                 mail.From = new MailAddress("s21mplumbum@gmail.com");
                 mail.To.Add(LoadedAccounts.First(c => c.ID == otheruserID).Email);
@@ -589,7 +596,7 @@ namespace Admin_Layer
 
                 SmtpServer.Send(mail);
 
-                return retu;
+                return null;
             }
             else
             {
@@ -603,7 +610,8 @@ namespace Admin_Layer
         /// <returns>Yields a list of the tostrings</returns>
         public List<string> GetAllAccountMeetings()
         {
-            return Meeting.GetAllMeetings().Select(meeting => meeting.Details).ToList();
+            return null;
+            //return Meeting.GetAllMeetings().Select(meeting => meeting.Details).ToList();
         }
 
         /// <summary>
@@ -612,7 +620,8 @@ namespace Admin_Layer
         /// <returns>Yields a list of the tostrings</returns>
         public List<string> GetMainAccountMeetings()
         {
-            return Meeting.GetAllMeetings(MainUser.ID).Select(meeting => meeting.Details).ToList();
+            return null;
+            //return Meeting.GetAllMeetings(MainUser.ID).Select(meeting => meeting.Details).ToList();
         }
         #endregion
 
@@ -1027,7 +1036,8 @@ namespace Admin_Layer
 
         public List<string> AllSkillTypes()
         {
-            return Enum.GetValues(typeof(Tags)).Cast<Tags>().Select(x => x.ToString()).ToList();
+            return null;
+            //return Enum.GetValues(typeof(Tags)).Cast<Tags>().Select(x => x.ToString()).ToList();
         }
 
         public List<string> AllAccountTypes()
@@ -1067,7 +1077,7 @@ namespace Admin_Layer
             }
             else
             {
-                bool correct = Class_Layer.PasswordHashing.ValidatePassword(password, hash);
+                bool correct = PasswordHashing.ValidatePassword(password, hash);
                 return correct;
             }
         }

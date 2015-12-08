@@ -16,20 +16,12 @@ namespace Class_Layer
     /// <summary>
     /// Manages information about a meeting
     /// </summary>
-    public class Meeting
+    public class Meeting : Post
     {
-        /// <summary>
-        /// Gets the ID of the meeting
-        /// </summary>
-        public int ID { get; private set; }
         /// <summary>
         /// Gets the ID of the user who requested this meeting
         /// </summary>
         public int RequesterID { get; private set; }
-        /// <summary>
-        /// Gets the ID of the user who was requested to be at this meeting
-        /// </summary>
-        public int RequestedID { get; private set; }
         /// <summary>
         /// Gets the start time of the meeting
         /// </summary>
@@ -51,14 +43,14 @@ namespace Class_Layer
         /// </summary>
         public string Details { get; private set; }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Meeting"/> class.
-        /// </summary>
-        /// <param name="id">the ID of the meeting</param>
-        /// <param name="beginTime">The begin time of the meeting</param>
-        /// <param name="loc">The location of the meeting</param>
-        private Meeting(string beginTime, string locatie, string username1, string username2)
+        public Meeting(int ID, int requestedTo, int requester, Nullable<DateTime> start, Nullable<DateTime> end, string location)
+            : base(ID, requestedTo)
         {
+            this.RequesterID = requester;
+            this.StartDate = start;
+            this.EndDate = end;
+            this.Location = location;
+
             //TODO
             //Fetch usernames
             //Set details to the following:
@@ -68,33 +60,48 @@ namespace Class_Layer
             //Uitgenodigden: xxxxxx met xxxxxx
         }
 
-        #region Create meeting, database mostly
 
         /// <summary>
-        /// Creates a meeting, where the datetime and locationID are given
+        /// Creates this database entry
         /// </summary>
-        /// <param name="userIDmaker">the ID of the user who makes the meeting</param>
-        /// <param name="userIDrequester">the ID of the user who joins the meeting</param>
-        /// <param name="time">the time of the meeting</param>
-        /// <param name="locID">the locationID of the location</param>
-        /// <returns></returns>
-        public static string Create(int userIDmaker, int userIDrequester, DateTime startTime, DateTime endTime, string location, out Meeting m)
+        /// <returns>Success</returns>
+        public override bool Create()
         {
-            m = null;
-            string st = Utility_Classes.ConvertTo.OracleDateTime(startTime);
-            string et = Utility_Classes.ConvertTo.OracleDateTime(endTime);
             //TODO
-            //Call database to insert new meeting
-            return "";
+            //insert into database
+            string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
+            string et = Utility_Classes.ConvertTo.OracleDateTime(this.EndDate);
+            return true;
         }
-        #endregion
+
+        /// <summary>
+        /// Deletes this database entry
+        /// </summary>
+        /// <returns>Success</returns>
+        public override bool Delete()
+        {
+            //TODO
+            //Call database for delete query
+            return true;
+        }
+
+        /// <summary>
+        /// Updates this database entry
+        /// </summary>
+        /// <returns>Success</returns>
+        public override bool Update()
+        {
+            //TODO
+            //Call database for update query
+            return true;
+        }
 
         /// <summary>
         /// Retrieves all the meetings belonging to a specific user from the database. Or unspecified
         /// </summary>
         /// <param name="userid">the userID of the specific user</param>
         /// <returns>Yields a list of said meetings</returns>
-        public static List<Meeting> GetAllMeetings(Nullable<int> userid = null)
+        public static List<Meeting> GetAll(Nullable<int> userid = null)
         {
             //TODO
             //Find all meetings if userID is null

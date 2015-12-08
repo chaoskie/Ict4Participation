@@ -13,6 +13,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Class_Layer.Utility_Classes;
 
 namespace ICT4P_HASPDetection
 {
@@ -108,7 +109,7 @@ namespace ICT4P_HASPDetection
                 return false;
             }
             //Check if file matches credentials
-            return Class_Layer.PasswordHashing.ValidatePassword(Credmatch, AuthCode);
+            return PasswordHashing.ValidatePassword(Credmatch, AuthCode);
         }
 
         //Code to generate a new authentication file
@@ -118,7 +119,7 @@ namespace ICT4P_HASPDetection
             {
                 using (BinaryWriter writer = new BinaryWriter(stream))
                 {
-                    writer.Write(Class_Layer.PasswordHashing.CreateHash(Credmatch));
+                    writer.Write(PasswordHashing.CreateHash(Credmatch));
                     writer.Close();
                 }
             }

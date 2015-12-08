@@ -197,17 +197,17 @@ namespace Admin_Layer
             //Load in questions
             if (!all)
             {
-                LoadedQuestions = Question.FindQuestions(all, MainUser.ID);
+                LoadedQuestions = Question.GetAll(MainUser.ID);
             }
             else
             {
-                LoadedQuestions = Question.FindQuestions(all);
+                LoadedQuestions = Question.GetAll(null);
             }
             //Return all questions
             return LoadedQuestions.Cast<Question>().Select(x => Creation.getDetailsObject(x)).Cast<Questiondetails>().ToList();
         }
 
-        public Nullable<Questiondetails> GetInfo(int questionIndex)
+        public Nullable<Questiondetails> GetQuestionInfo(int questionIndex)
         {
             //TODO
             //Return information from a question that is loaded
@@ -230,7 +230,7 @@ namespace Admin_Layer
             return false;
         }
 
-        public bool Remove(int questionIndex, out string message)
+        public bool RemoveQuestion(int questionIndex, out string message)
         {
             //TODO
             //Remove question
@@ -246,13 +246,13 @@ namespace Admin_Layer
         /// <param name="userid">The userID of the user</param>
         /// <param name="isPoster">Whether the user has posted the reviews, or received them</param>
         /// <returns>A list regarding all the details of the reviews</returns>
-        public List<Reviewdetails> GetAll(int userid, bool isPoster = false)
+        public List<Reviewdetails> GetAllReviews(int userid, bool isPoster = false)
         {
-            Review.GetUserReviews(userid, out LoadedReviews, isPoster);
+            LoadedReviews = Review.GetAll(userid,isPoster);
             return LoadedReviews.Select(r => Creation.getDetailsObject(r)).Cast<Reviewdetails>().ToList();
         }
 
-        public Nullable<Reviewdetails> GetInfo(int reviewIndex)
+        public Nullable<Reviewdetails> GetReviewInfo(int reviewIndex)
         {
             //TODO
             //Return all the details about specified review
@@ -275,7 +275,7 @@ namespace Admin_Layer
             return false;
         }
 
-        public bool Remove(int reviewIndex, out string message)
+        public bool RemoveReview(int reviewIndex, out string message)
         {
             //TODO
             //Remove review
@@ -289,12 +289,12 @@ namespace Admin_Layer
         /// Get all meetings planned in for the main user
         /// </summary>
         /// <returns>All details regarding these meetings</returns>
-        public List<Meetingdetails> GetAll()
+        public List<Meetingdetails> GetAllMeetings()
         {
-            return Meeting.GetAllMeetings(MainUser.ID).Select(meeting => Creation.getDetailsObject(meeting)).Cast<Meetingdetails>().ToList();
+            return Meeting.GetAll(MainUser.ID).Select(meeting => Creation.getDetailsObject(meeting)).Cast<Meetingdetails>().ToList();
         }
 
-        public Nullable<Meetingdetails> GetInfo(int meetingindex)
+        public Nullable<Meetingdetails> GetMeetingInfo(int meetingindex)
         {
             //TODO
             //Return the details of a meeting
@@ -317,7 +317,7 @@ namespace Admin_Layer
             return false;
         }
 
-        public bool Remove(int meetingIndex, out string message)
+        public bool RemoveMeeting(int meetingIndex, out string message)
         {
             //TODO
             //Remove meeting

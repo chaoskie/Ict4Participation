@@ -37,7 +37,7 @@ namespace Ict4Participation
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(administration.CreateMeeting(userID, dtpTime.Value, tbLoc.Text));
+            //MessageBox.Show(administration.CreateMeeting(userID, dtpTime.Value, tbLoc.Text));
             this.Close();
         }
     }

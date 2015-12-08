@@ -4,19 +4,19 @@
 // </copyright>
 // <author>ICT4Participation</author>
 //-----------------------------------------------------------------------
-
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Database_Layer;
+using Class_Layer.Enums;
+using Class_Layer.Utility_Classes;
+    
 namespace Class_Layer
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Drawing;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Database_Layer;
-    using Enums;
-
     /// <summary>
     /// Account class which represents a user
     /// </summary>
@@ -92,44 +92,52 @@ namespace Class_Layer
         /// </summary>
         public string VOGPath { get; private set; }
 
-        //TODO:
-        //List availability somehow
+        /// <summary>
+        /// Gets the list of availability of the user
+        /// </summary>
+        public List<Availability> Availability { get; private set; }
+        /// <summary>
+        /// Gets the list of skills of this user
+        /// </summary>
+        public List<Skill> Skills { get; private set; }
 
         #endregion
 
+        #region DataCollection
         /// <summary>
-        /// Registers a new account
+        /// Retrieves all the accounts from the database
         /// </summary>
-        /// <param name="username">The desired username</param>
-        /// <param name="password">The desired password</param>
-        /// <param name="email">The desired email</param>
-        /// <param name="name">The full name</param>
-        /// <param name="address">The full address</param>
-        /// <param name="city">The city</param>
-        /// <param name="phonenumber">The phonenumber (where +31 and such are allowed)</param>
-        /// <param name="hasLicense">The desired license status</param>
-        /// <param name="hasVehicle">The desired vehicle status</param>
-        /// <param name="OVPossible">The desired OV status</param>
-        /// <param name="birthdate">The birthdate of the user</param>
-        /// <param name="avatarPath">The avatarpath of the user</param>
-        /// <param name="VOG">The VOG of the user</param>
-        /// <param name="id">The returned ID</param>
-        /// <returns>The newly created account</returns>
-        public static Account Register(string username, string password, string email, string name, string address, string city, string phonenumber,
-            bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG, out int id)
+        /// <returns>Returns all the accounts made on this point</returns>
+        public static List<Account> GetAll()
         {
-            string passTotal = PasswordHashing.CreateHash(password);
+            List<Account> accs = new List<Account>();
 
-            id = 0;
-            //TODO
-            //Create new user through database
-            //Make this method return an ID
-            //   Database_Layer.Database.NewUser(name, locID, passHash, passSalt, avatarPath, VOG, description, roleText, sex, email);
-            //   return new Account(id, name, loc, role, avatarPath, description, sex, email, VOG);
-            //Create and account
-            return null;
+            DataTable dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc\"");
+            foreach (DataRow row in dt.Rows)
+            {
+                accs.Add(CreateAccount(row));
+            }
+            return accs;
         }
 
+        /// <summary>
+        /// Retrieves a matching account from the database
+        /// </summary>
+        /// <param name="ID">The ID to match to</param>
+        /// <returns>Returns the account matching this ID</returns>
+        public static Account GetUser(int ID)
+        {
+            Account acc = null;
+            DataTable dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc\" WHERE \"ID\" = " + ID);
+            foreach (DataRow row in dt.Rows)
+            {
+                acc = CreateAccount(row);
+            }
+            return acc;
+        }
+        #endregion
+
+        #region Logging in and out
         /// <summary>
         /// Logs a user in
         /// </summary>
@@ -165,6 +173,41 @@ namespace Class_Layer
         {
             //Log the given user out
         }
+        #endregion
+
+        #region Account altering
+        /// <summary>
+        /// Registers a new account
+        /// </summary>
+        /// <param name="username">The desired username</param>
+        /// <param name="password">The desired password</param>
+        /// <param name="email">The desired email</param>
+        /// <param name="name">The full name</param>
+        /// <param name="address">The full address</param>
+        /// <param name="city">The city</param>
+        /// <param name="phonenumber">The phonenumber (where +31 and such are allowed)</param>
+        /// <param name="hasLicense">The desired license status</param>
+        /// <param name="hasVehicle">The desired vehicle status</param>
+        /// <param name="OVPossible">The desired OV status</param>
+        /// <param name="birthdate">The birthdate of the user</param>
+        /// <param name="avatarPath">The avatarpath of the user</param>
+        /// <param name="VOG">The VOG of the user</param>
+        /// <param name="id">The returned ID</param>
+        /// <returns>The newly created account</returns>
+        public static Account Register(string username, string password, string email, string name, string address, string city, string phonenumber,
+            bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG, out int id)
+        {
+            string passTotal = PasswordHashing.CreateHash(password);
+
+            id = 0;
+            //TODO
+            //Create new user through database
+            //Make this method return an ID
+            //   Database_Layer.Database.NewUser(name, locID, passHash, passSalt, avatarPath, VOG, description, roleText, sex, email);
+            //   return new Account(id, name, loc, role, avatarPath, description, sex, email, VOG);
+            //Create and account
+            return null;
+        }
 
         /// <summary>
         /// Inserts skills for specified account
@@ -173,39 +216,27 @@ namespace Class_Layer
         /// <param name="userid">The ID of the account</param>
         public static void AddSkill(string skill, int userid)
         {
+            //TODO:
+            //Move to Skill class
             Database_Layer.Database.SkillInsertAcc(skill, userid);
         }
 
-        /// <summary>
-        /// Retrieves all the accounts from the database
-        /// </summary>
-        /// <returns>Returns all the accounts made on this point</returns>
-        public static List<Account> GetAll()
+        public static void RemoveSkill(string skill, int userid)
         {
-            List<Account> accs = new List<Account>();
-
-            DataTable dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc\"");
-            foreach (DataRow row in dt.Rows)
-            {
-                accs.Add(CreateAccount(row));
-            }
-            return accs;
+            //TODO
+            //Call Skill class to remove
         }
 
-        /// <summary>
-        /// Get the password hash associated with an account ID
-        /// </summary>
-        /// <param name="ID">The ID of the account</param>
-        /// <returns>Returns the password hash</returns>
-        public static string FindHash(int ID)
+        public static void AddAvailability(string day, string daytime, int userid)
         {
-            string passwordHash = string.Empty;
-            DataTable dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc\" WHERE \"ID\" = " + ID);
-            foreach (DataRow row in dt.Rows)
-            {
-                passwordHash = row["Wachtwoord"].ToString();
-            }
-            return passwordHash;
+            //TODO
+            //Call Availability class to add
+        }
+
+        public static void RemoveAvailability(string day, string daytime, int userid)
+        {
+            //TODO
+            //Call Availability class to remove
         }
 
         //TODO
@@ -228,6 +259,26 @@ namespace Class_Layer
         {
             Database_Layer.Database.DeleteUser(ID);
         }
+        #endregion
+
+        #region Validation
+        /// <summary>
+        /// Get the password hash associated with an account ID
+        /// </summary>
+        /// <param name="ID">The ID of the account</param>
+        /// <returns>Returns the password hash</returns>
+        public static string FindHash(int ID)
+        {
+            string passwordHash = string.Empty;
+            DataTable dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc\" WHERE \"ID\" = " + ID);
+            foreach (DataRow row in dt.Rows)
+            {
+                passwordHash = row["Wachtwoord"].ToString();
+            }
+            return passwordHash;
+        }
+
+        #endregion
 
         /// <summary>
         /// Finds account credentials and fills in account information
@@ -292,8 +343,5 @@ namespace Class_Layer
             this.AvatarPath = avatarPath;
             this.VOGPath = VOG;
         }
-
-        //TODO
-        //Create method to retrieve account name from ID
     }
 }

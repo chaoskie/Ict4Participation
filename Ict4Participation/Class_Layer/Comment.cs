@@ -32,36 +32,47 @@ namespace Class_Layer
         public DateTime PostDate { get; private set; }
 
         /// <summary>
-        /// Creates a new comment to be inserted into the database
+        /// Creates this database entry
         /// </summary>
-        /// <param name="accountID">The OP</param>
-        /// <param name="questionID">The Question ID</param>
-        /// <param name="title">The comment</param>
-        public static void PlaceComment(int accountID, int questionID, string Desc)
+        /// <returns>Success</returns>
+        public override bool Create()
         {
             //insert into database
-            Database_Layer.Database.PlaceComment(accountID, questionID, Desc);
+            Database_Layer.Database.PlaceComment(this.PosterID, this.PostedToID, this.Description);
+            return true;
         }
 
         /// <summary>
-        /// Deletes the comment with the specified ID
+        /// Deletes this database entry
         /// </summary>
-        /// <param name="id">The ID of the comment</param>
-        public static void DeleteComment(int id, bool isAdmin)
+        /// <returns>Success</returns>
+        public override bool Delete()
         {
             //Call database for delete query
-            Database_Layer.Database.RemoveComment(id, isAdmin);
+            Database_Layer.Database.RemoveComment(this.PostID, true);
+            return true;
         }
 
         /// <summary>
-        /// Updates the comment with the specified ID to the specified string
+        /// Updates this database entry
         /// </summary>
-        /// <param name="id">The ID of the comment</param>
-        /// <param name="text">The soon to be text of the comment</param>
-        public static void EditComment(int id, string text)
+        /// <returns>Success</returns>
+        public override bool Update()
         {
             //Call database for update query
-            Database_Layer.Database.UpdateComment(id, text);
+            Database_Layer.Database.UpdateComment(this.PostID, this.Description);
+            return true;
+        }
+
+        /// <summary>
+        /// Gets all the comments belonging to a question
+        /// </summary>
+        /// <param name="questionID"></param>
+        /// <returns>A list of the comments to this questionID</returns>
+        public static List<Comment> GetAll(int questionID)
+        {
+            //TODO
+            return null;
         }
 
         /// <summary>
@@ -100,11 +111,12 @@ namespace Class_Layer
         /// <summary>
         /// Initializes a new instance of the <see cref="Comment"/> class.
         /// </summary>
-        private Comment(int postID, string title, int posterID, int postedToID, DateTime postDate)
+        public Comment(int postID, string desc, int posterID, int postedToID, DateTime postDate)
             : base(postID, posterID)
         {
             this.PostedToID = postedToID;
             this.PostDate = postDate;
+            this.Description = desc;
             //nothing much
         }
     }

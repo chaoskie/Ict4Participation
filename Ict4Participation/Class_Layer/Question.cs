@@ -64,96 +64,50 @@ namespace Class_Layer
         /// Gets the skills of a question
         /// </summary>
         public List<string> Skills { get; private set; }
-
-        //TODO:
-        //List accounts somehow
+        /// <summary>
+        /// Gets the IDs of all volunteers
+        /// </summary>
+        public List<int> Volunteers { get; private set; }
 
         /// <summary>
-        /// Posts a question
-        /// <param name="posterID">The ID of the user who posts the question</param>
-        /// <param name="title">The title of the question</param>
-        /// <param name="startDate">The start date of when help is sought</param>
-        /// <param name="endDate">The end date of when help is sought</param>
-        /// <param name="description">The description of the question</param>
-        /// <param name="urgency">Whether the question is urgent or not</param>
-        /// <param name="location">The location of the question</param>
-        /// <param name="amnt">The maximum amount of volunteers</param>
-        /// <param name="skills">The skills that are required for this question</param>
-        /// <param name="q">The newly made question</param>
-        /// <returns>Whether it succeeded or not</returns>
-        public static bool CreateQuestion(int posterID, string title, Nullable<DateTime> startDate, Nullable<DateTime> endDate, 
-            string description, bool urgency, string location, int amnt, List<string> skills, out Question q)
+        /// Creates this database entry
+        /// </summary>
+        /// <returns>Success</returns>
+        public override bool Create()
         {
             //TODO
-            //Call database to insert question
-            //Database returns the ID of last inserted object
-            //Insert skills to database
-            q = null;
-            return false;
+            //insert into database
+            return true;
         }
 
         /// <summary>
-        /// Deletes the question with specified ID
+        /// Deletes this database entry
         /// </summary>
-        /// <param name="ID"></param>
-        public static void Delete(int ID)
+        /// <returns>Success</returns>
+        public override bool Delete()
         {
-            Database_Layer.Database.DeleteQuestion(ID);
+            //Call database for delete query
+            Database_Layer.Database.DeleteQuestion(this.PostID);
+            return true;
         }
 
         /// <summary>
-        /// Retrieves questions from the database
+        /// Updates this database entry
         /// </summary>
-        /// <param name="all">Whether they have to be all the questions, or just the op</param>
-        /// <param name="accountid">the ID of the op, if all is not true</param>
-        /// <returns></returns>
-        public static List<Question> FindQuestions(bool all = true, int accountid = 0)
+        /// <returns>Success</returns>
+        public override bool Update()
         {
             //TODO
-            //Check whether all questions should be retrieved or only from specified account
-            //Call database with query
-            //Return list
+            //Call database for update query
+            return true;
+        }
+
+        public static List<Question> GetAll(Nullable<int> accountid)
+        {
+            //TODO
+            //Call database, return list of questions matching the account
+            //If accountID is null, get all questions of all users
             return null;
-        }
-
-        /// <summary>
-        /// Retrieves the name and ID of the original poster
-        /// </summary>
-        /// <param name="postid">ID of the post</param>
-        /// <param name="ID">ID of the user</param>
-        /// <returns>the name of the original poster</returns>
-        public static string GetOP(int postid, out int ID)
-        {
-            string name = String.Empty;
-            ID = 0;
-            DataTable dt = Database_Layer.Database.RetrieveQuery("SELECT Name, ID FROM \"Acc\" WHERE \"ID\" = (SELECT \"PosterACC_ID\" FROM \"Question\" WHERE \"ID\" = " + postid + ")");
-            foreach (DataRow row in dt.Rows)
-            {
-                ID = Convert.ToInt32(row["ID"]);
-                name = row["Name"].ToString();
-            }
-            return name;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="postID">The ID of the question</param>
-        /// <param name="posterID">The poster ID of the question</param>
-        /// <param name="title">The title of the question</param>
-        /// <param name="startDate">The start date of the question help</param>
-        /// <param name="endDate">The end date of the question help</param>
-        /// <param name="description">The description for the question</param>
-        /// <param name="urgency">Whether the question is urgent or not</param>
-        /// <param name="location">The location of the question</param>
-        /// <param name="amnt">The maximum amount of volunteers</param>
-        /// <param name="skills">The skills needed for the question</param>
-        public static void Update(int postID, int posterID, string title, Nullable<DateTime> startDate, Nullable<DateTime> endDate,
-            string description, bool urgency, string location, int amnt, List<string> skills, int userID)
-        {
-            //TODO
-            //Call database to update question
-            //Update question skills
         }
 
         /// <summary>
@@ -164,7 +118,7 @@ namespace Class_Layer
         /// <param name="schedule">The scheduled time of the question</param>
         /// <param name="description">The description of the question</param>
         /// <param name="questionLocation">The location of the question</param>
-        private Question(int postID, int posterID, string title, Nullable<DateTime> startDate, Nullable<DateTime> endDate,
+        public Question(int postID, int posterID, string title, Nullable<DateTime> startDate, Nullable<DateTime> endDate,
             string description, bool urgency, string location, int amnt, List<string> skills)
             : base(postID, posterID)
         {

@@ -47,7 +47,7 @@ namespace Ict4Participation
         {
             //Registreer
             string message = string.Empty;
-            if (Administration.CreateAccountHPart(tbVOGPath.Text, "", lbSkills.Items.Cast<string>().ToList(), out message))
+            /*if (Administration.CreateAccountHPart(tbVOGPath.Text, "", lbSkills.Items.Cast<string>().ToList(), out message))
             {
                 Administration.RegisterAccount();
                 this.Hide();
@@ -55,7 +55,7 @@ namespace Ict4Participation
             else
             {
                 MessageBox.Show(message);
-            }
+            }*/
         }
 
         private void btnAddSkill_Click(object sender, EventArgs e)

@@ -51,52 +51,48 @@ namespace Class_Layer
         }
 
         /// <summary>
-        /// Adds a new review about a specified user to the database
+        /// Creates this database entry
         /// </summary>
-        /// <param name="rating">The rating of the review</param>
-        /// <param name="title">The title of the review</param>
-        /// <param name="postedtoID">The ID of the reviewed</param>
-        /// <param name="posterID">The ID of the reviewer</param>
-        /// <param name="description">The description of the review</param>
-        /// <returns>String containing information about the review placement</returns>
-        public static string Place(int rating, int postedtoID, int posterID, string description)
+        /// <returns>Success</returns>
+        public override bool Create()
         {
             //TODO
-            //Call database to post a new review
-            //  Database_Layer.Database.InsertReview(rating, postedtoID, posterID, description);
-            return String.Format("{0}-sterren review geplaatst!", rating);
-        }
-        /// <summary>
-        /// deletes the given review entry
-        /// </summary>
-        /// <param name="ID">id of the given review</param>
-        public static void Delete(int ID)
-        {
-            Database_Layer.Database.DeleteReview(ID);
+            //insert into database
+            return true;
         }
 
         /// <summary>
-        /// Updates the desired review
+        /// Deletes this database entry
         /// </summary>
-        /// <param name="postID">The ID of the review</param>
-        /// <param name="rating">The new rating of the review</param>
-        /// <param name="desc">The new description of the review</param>
-        public static void Update(int postID, int rating, string desc)
+        /// <returns>Success</returns>
+        public override bool Delete()
         {
-            //TODO
-            //Call database to update the review
-            //  Database_Layer.Database.UpdateReview(postID, rating, desc);
+            //Call database for delete query
+            Database_Layer.Database.DeleteReview(this.PostID);
+            return true;
         }
 
         /// <summary>
-        /// Yields all the reviews from the database, matching the user ID
+        /// Updates this database entry
         /// </summary>
-        /// <param name="accountID">The ID of the user as stated in the database</param>
-        /// <param name="reviews">The reviews about this user</param>
-        /// <returns>A list containing the description of all these reviews</returns>
-        public static List<string> GetUserReviews(int accountID, out List<Review> reviews, bool isPoster = false)
+        /// <returns>Success</returns>
+        public override bool Update()
         {
-            reviews = new List<Review>();
+            //TODO
+            //Call database for update query
+            return true;
+        }
+
+        /// <summary>
+        /// Gets all reviews posted by or on a specified user
+        /// </summary>
+        /// <param name="accountID">the ID of the user</param>
+        /// <param name="isPoster">Whether the user has posted, or received these reviews</param>
+        /// <returns>A list of the reviews</returns>
+        public static List<Review> GetAll(int accountID, bool isPoster = false)
+        {
+            //Call database for a list of reviews about specified person
+            List<Review> reviews = new List<Review>();
             string who = string.Empty;
             who = isPoster ? "PosterACC_ID" : "PostedACC_ID";
             DataTable dtReview = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Review\" WHERE \"" + who + "\" = " + accountID);
@@ -104,23 +100,7 @@ namespace Class_Layer
             {
                 reviews.Add(Create(row));
             }
-            return GetDetails(reviews);
-        }
-
-        /// <summary>
-        /// Yields all the reviews from the database
-        /// </summary>
-        /// <param name="reviews">All of them!</param>
-        /// <returns>ALL THE REVIEWS</returns>
-        public static List<string> GetAllUserReviews(out List<Review> reviews)
-        {
-            reviews = new List<Review>();
-            DataTable dtReview = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Review\"");
-            foreach (DataRow row in dtReview.Rows)
-            {
-                reviews.Add(Create(row));
-            }
-            return GetDetails(reviews);
+            return reviews;
         }
 
         /// <summary>
@@ -137,21 +117,6 @@ namespace Class_Layer
                     Convert.ToInt32(row["PostedACC_ID"]),
                     row["Description"].ToString()
                 );
-        }
-
-        /// <summary>
-        /// Gets the details of a list of reviews
-        /// </summary>
-        /// <param name="reviews">the reviews</param>
-        /// <returns>Yields the detailed information</returns>
-        private static List<string> GetDetails(List<Review> reviews)
-        {
-            List<string> reviewdetails = new List<string>();
-            foreach (Review r in reviews)
-            {
-                reviewdetails.Add(String.Format("{0}-Sterren: {1} \n{2}", r.Rating, r.Description));
-            }
-            return reviewdetails;
         }
     }
 }
