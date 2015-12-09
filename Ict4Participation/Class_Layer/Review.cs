@@ -56,9 +56,8 @@ namespace Class_Layer
         /// <returns>Success</returns>
         public override bool Create()
         {
-            //TODO
             //insert into database
-            return true;
+            return Database_Layer.Database.InsertReview(this.Rating, this.PostedToID, this.PosterID, this.Description);
         }
 
         /// <summary>
@@ -68,8 +67,7 @@ namespace Class_Layer
         public override bool Delete()
         {
             //Call database for delete query
-            Database_Layer.Database.DeleteReview(this.PostID);
-            return true;
+            return Database_Layer.Database.DeleteReview(this.PostID);
         }
 
         /// <summary>
@@ -78,9 +76,8 @@ namespace Class_Layer
         /// <returns>Success</returns>
         public override bool Update()
         {
-            //TODO
             //Call database for update query
-            return true;
+            return Database_Layer.Database.UpdateReview(this.PostID, this.Rating, this.Description);
         }
 
         /// <summary>
@@ -98,25 +95,15 @@ namespace Class_Layer
             DataTable dtReview = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Review\" WHERE \"" + who + "\" = " + accountID);
             foreach (DataRow row in dtReview.Rows)
             {
-                reviews.Add(Create(row));
-            }
-            return reviews;
-        }
-
-        /// <summary>
-        /// Creates a review from the data of a datarow
-        /// </summary>
-        /// <param name="row">The datarow to process</param>
-        /// <returns>The review filled with information in the datarow</returns>
-        private static Review Create(DataRow row)
-        {
-            return new Review(
+                reviews.Add(new Review(
                     Convert.ToInt32(row["ID"]),
                     Convert.ToInt32(row["Rating"]),
                     Convert.ToInt32(row["PosterACC_ID"]),
                     Convert.ToInt32(row["PostedACC_ID"]),
                     row["Description"].ToString()
-                );
+                ));
+            }
+            return reviews;
         }
     }
 }

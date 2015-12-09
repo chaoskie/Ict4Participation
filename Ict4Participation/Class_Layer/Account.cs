@@ -216,13 +216,13 @@ namespace Class_Layer
         /// <param name="userid">The ID of the account</param>
         public static void AddSkill(string skill, int userid)
         {
+            //Call Skill class to add
             Skill s = new Skill(userid, skill);
             s.Add();
         }
 
         public static void RemoveSkill(string skill, int userid)
         {
-            //TODO
             //Call Skill class to remove
             Skill s = new Skill(userid, skill);
             s.Remove();
@@ -230,24 +230,25 @@ namespace Class_Layer
 
         public static void AddAvailability(string day, string daytime, int userid)
         {
-            //TODO
             //Call Availability class to add
+            Availability av = new Availability(userid, day, daytime);
+            av.Add();
         }
 
         public static void RemoveAvailability(string day, string daytime, int userid)
         {
-            //TODO
             //Call Availability class to remove
+            Availability av = new Availability(userid, day, daytime);
+            av.Remove();
         }
 
-        //TODO
         public static Account Update(int ID, string username, string password, string email, string name, string address, string city,
             string phonenumber, bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG)
         {
-            //Call database to update account with ID
-
-            //Retrieve updated account
             Account acc = null;
+            //TODO
+            //Call database to update account with ID
+            //Retrieve updated account
             Account.LogIn(ID.ToString(), password, out acc);
             return acc;
         }

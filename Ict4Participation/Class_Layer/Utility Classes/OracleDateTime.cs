@@ -10,14 +10,7 @@ namespace Class_Layer.Utility_Classes
     {
         public static string OracleDateTime(Nullable<DateTime> dt)
         {
-            if (dt != null)
-            {
-                return ((DateTime)dt).ToString("d-MMM-yyyy HH:mm:ss");
-            }
-            else
-            {
-                return null;
-            }
+            return dt != null ? ((DateTime)dt).ToString("d-MMM-yyyy HH:mm:ss") : null;
         }
     }
 }

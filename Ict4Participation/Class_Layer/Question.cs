@@ -75,9 +75,10 @@ namespace Class_Layer
         /// <returns>Success</returns>
         public override bool Create()
         {
-            //TODO
+            string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
+            string et = Utility_Classes.ConvertTo.OracleDateTime(this.EndDate);
             //insert into database
-            return true;
+            return Database_Layer.Database.InsertQuestion(this.Title, st, et, this.Description, this.Urgent, this.Location, this.AmountAccs, this.Status, this.Skills, this.Volunteers);
         }
 
         /// <summary>
@@ -87,8 +88,7 @@ namespace Class_Layer
         public override bool Delete()
         {
             //Call database for delete query
-            Database_Layer.Database.DeleteQuestion(this.PostID);
-            return true;
+            return Database_Layer.Database.DeleteQuestion(this.PostID);
         }
 
         /// <summary>
@@ -97,17 +97,54 @@ namespace Class_Layer
         /// <returns>Success</returns>
         public override bool Update()
         {
-            //TODO
+            string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
+            string et = Utility_Classes.ConvertTo.OracleDateTime(this.EndDate);
             //Call database for update query
-            return true;
+            return Database_Layer.Database.UpdateQuestion(this.PostID, this.Title, st, et, this.Description, this.Urgent, this.Location, this.AmountAccs, this.Status, this.Skills, this.Volunteers);
         }
 
-        public static List<Question> GetAll(Nullable<int> accountid)
+        public static List<Question> GetAll(Nullable<int> userID)
         {
-            //TODO
-            //Call database, return list of questions matching the account
-            //If accountID is null, get all questions of all users
-            return null;
+            List<Question> questions = new List<Question>();
+            string addquery = String.Empty;
+
+            if (userID != null)
+            //If accountID is not null, get all questions of specified users, else run the default query to get all questions
+            {
+                addquery = " WHERE \"PosterACC_ID\"=" + userID;
+            }
+
+            DataTable Dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Question\"" + addquery);
+            foreach (DataRow row in Dt.Rows)
+            {
+                //Create a list of volunteers, by default: none
+                List<int> volunteers = new List<int>();
+                //Fill the list of volunteers with the actual volunteers if there are any
+                DataTable VolDt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Question_Acc\" WHERE \"QUESTION_ID\"=" + row["ID"].ToString());
+                foreach (DataRow VolunteersRow in VolDt.Rows)
+                {
+                    volunteers.Add(Convert.ToInt32(row["ACC_ID"]));
+                }
+                //Check urgency
+                bool urg = row["Urgency"].ToString() == "1" ? true : false;
+
+                //Add the new question
+                questions.Add(new Question(
+                    Convert.ToInt32(row["ID"]),
+                    Convert.ToInt32(row["PosterACC_ID"]),
+                    row["Title"].ToString(),
+                    Convert.ToDateTime(row["StartDate"]),
+                    Convert.ToDateTime(row["EndDate"]),
+                    row["Description"].ToString(),
+                    urg,
+                    row["Location"].ToString(),
+                    Convert.ToInt32(row["AmountACCs"]),
+                    Skill.GetAll(Convert.ToInt32(row["ID"])).Select(s => s.ToString()).ToList(),
+                    volunteers
+                    ));
+            }
+            //Return the question list
+            return questions;
         }
 
         /// <summary>
@@ -119,7 +156,7 @@ namespace Class_Layer
         /// <param name="description">The description of the question</param>
         /// <param name="questionLocation">The location of the question</param>
         public Question(int postID, int posterID, string title, Nullable<DateTime> startDate, Nullable<DateTime> endDate,
-            string description, bool urgency, string location, int amnt, List<string> skills)
+            string description, bool urgency, string location, int amnt, List<string> skills, List<int> volunteers)
             : base(postID, posterID)
         {
             this.Title = title;
@@ -130,6 +167,7 @@ namespace Class_Layer
             this.Location = location;
             this.AmountAccs = amnt;
             this.Skills = skills;
+            this.Volunteers = volunteers;
         }
 
         //Returns a full description

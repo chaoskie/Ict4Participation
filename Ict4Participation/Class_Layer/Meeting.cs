@@ -67,11 +67,11 @@ namespace Class_Layer
         /// <returns>Success</returns>
         public override bool Create()
         {
-            //TODO
             //insert into database
             string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
             string et = Utility_Classes.ConvertTo.OracleDateTime(this.EndDate);
-            return true;
+            ///Read PosterID as the requester, and RequesterID as the ID of the participant who was requested to join
+            return Database_Layer.Database.InsertMeeting(this.PosterID, this.RequesterID, st, et, this.Location);
         }
 
         /// <summary>
@@ -80,9 +80,8 @@ namespace Class_Layer
         /// <returns>Success</returns>
         public override bool Delete()
         {
-            //TODO
             //Call database for delete query
-            return true;
+            return Database_Layer.Database.DeleteMeeting(this.PostID);
         }
 
         /// <summary>
@@ -91,9 +90,10 @@ namespace Class_Layer
         /// <returns>Success</returns>
         public override bool Update()
         {
-            //TODO
+            string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
+            string et = Utility_Classes.ConvertTo.OracleDateTime(this.EndDate);
             //Call database for update query
-            return true;
+            return Database_Layer.Database.UpdateMeeting(this.PostID, st, et, this.Location);
         }
 
         /// <summary>
@@ -103,12 +103,30 @@ namespace Class_Layer
         /// <returns>Yields a list of said meetings</returns>
         public static List<Meeting> GetAll(Nullable<int> userid = null)
         {
-            //TODO
-            //Find all meetings if userID is null
-            //Find user-specific meetings
-            //Possibly make another constructor
+
+            List<Meeting> meetings = new List<Meeting>();
+            string addquery = String.Empty;
+            if (userid != null)//get all the user skills of specified user
+            {
+                addquery =  "WHERE \"RequesterAcc_ID\"=" + userid + " OR \"RequestedAccID\"=" + userid;
+                //else get all meetings if no ID is specified
+            }
+
+            DataTable Dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Meeting\"" + addquery);
+            foreach (DataRow row in Dt.Rows)
+            {
+                meetings.Add(
+                    new Meeting(
+                        Convert.ToInt32(row["ID"]),
+                        Convert.ToInt32(row["RequestedAcc_ID"]),
+                        Convert.ToInt32(row["RequesterAcc_ID"]),
+                        Convert.ToDateTime(row["StartDate"]),
+                        Convert.ToDateTime(row["EndDate"]),
+                        row["Location"].ToString()
+                        ));
+            }
             //Return a list with all the found meetings
-            return null;
+            return meetings;
         }
 
         public override string ToString()

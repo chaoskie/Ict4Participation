@@ -35,7 +35,7 @@ namespace Class_Layer
             
             if (userID != null)//get all the user skills of specified user
             {
-                DataTable Dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc_Skill\" WHERE \"ACC_ID\"="+userID);
+                DataTable Dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc_Skill\" WHERE \"ACC_ID\"=" + userID);
                 foreach (DataRow row in Dt.Rows)
                 {
                     skills.Add(

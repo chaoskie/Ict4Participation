@@ -71,41 +71,21 @@ namespace Class_Layer
         /// <returns>A list of the comments to this questionID</returns>
         public static List<Comment> GetAll(int questionID)
         {
-            //TODO
-            return null;
-        }
-
-        /// <summary>
-        /// Finds the user(name) of the posted comment
-        /// </summary>
-        /// <param name="postid">THe comment post id</param>
-        /// <returns>The name of the user</returns>
-        public static List<string> GetQuestionComments(int postID, out List<Comment> Comments)
-        {
-            //Create comment objects
-            Comments = new List<Comment>();
-            //Create comment details
-            List<string> commentstr = new List<string>();
-            //Fetch comments
-            DataTable dt = Database_Layer.Database.RetrieveQuery(
-            "SELECT * FROM "
-            + "(SELECT c.\"ID\" as CID, c.\"QUESTION_ID\" as QID, c.\"Description\" as Post, a.\"Name\" as Poster, c.\"PostDate\" as timet, \"PosterACC_ID\" as PosterID FROM \"Comment\" c "
-            + "JOIN \"Acc\" a "
-            + "ON a.\"ID\"=c.\"PosterACC_ID\") "
-            + "WHERE QID = " + postID + "ORDER BY timet");
-            foreach (DataRow row in dt.Rows)
+            List<Comment> comments = new List<Comment>();
+            //Load in comment from questions
+            DataTable Dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Comment\" WHERE \"QUESTION_ID\" = " + questionID);
+            foreach (DataRow row in Dt.Rows)
             {
-                //Create comments
-                commentstr.Add(String.Format("{0}: {1}", row["Poster"].ToString(), row["Post"].ToString()));
-                Comments.Add(new Comment(
-                   Convert.ToInt32(row["CID"]),
-                   row["Post"].ToString(),
-                   Convert.ToInt32(row["PosterID"]),
-                   Convert.ToInt32(row["QID"]),
-                   Convert.ToDateTime(row["timet"])
-                   ));
+                comments.Add(
+                    new Comment(
+                        Convert.ToInt32(row["ID"]),
+                        row["Description"].ToString(),
+                        Convert.ToInt32(row["PosterAcc_ID"]),
+                        questionID,
+                        Convert.ToDateTime(row["PostDate"])
+                        ));
             }
-            return commentstr;
+            return null;
         }
 
         /// <summary>

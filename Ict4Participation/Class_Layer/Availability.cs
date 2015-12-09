@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,24 +23,31 @@ namespace Class_Layer
 
         public bool Add()
         {
-            //TODO
             //Call database to add this availability
-            return false;
+            return Database_Layer.Database.InsertAvailability(this.UserID, this.Day, this.Daytime);
         }
 
         public bool Remove()
         {
-            //TODO
             //Call database to remove this availability
-            return false;
+            return Database_Layer.Database.RemoveAvailability(this.UserID, this.Day, this.Daytime);
         }
 
         public static List<Availability> GetAll(int userID)
         {
-            //TODO
-            //Load in distinct skills from user
-
-            return null;
+            List<Availability> avails = new List<Availability>();
+            //Load in availability from user
+            DataTable Dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Availability\" WHERE \"AVAILABILITY_ID\"= (SELECT \"ID\" FROM \"Availability_Acc\" WHERE \"ACC_ID\" = " + userID);
+            foreach (DataRow row in Dt.Rows)
+            {
+                avails.Add(
+                    new Availability(
+                        userID,
+                        row["Day"].ToString(),
+                        row["Period"].ToString()
+                        ));
+            }
+            return avails;
         }
     }
 }
