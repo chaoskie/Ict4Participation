@@ -59,10 +59,6 @@
       <Project>{cf800b4a-a399-40c8-9eaf-5f284f5306e6}</Project>
       <Name>Class_Layer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ict4Participation\GUI_Layer.csproj">
-      <Project>{1566dea7-15a0-4177-aac4-17ec48da2eab}</Project>
-      <Name>GUI_Layer</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

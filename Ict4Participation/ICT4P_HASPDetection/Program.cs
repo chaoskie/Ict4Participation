@@ -81,7 +81,7 @@ namespace ICT4P_HASPDetection
                     {
                         Application.EnableVisualStyles();
                         Application.SetCompatibleTextRenderingDefault(false);
-                        Application.Run(new Ict4Participation.Inloggen(true));
+                        //Application.Run(new Ict4Participation.Inloggen(true));
                         Environment.Exit(0);
                     }
                 }

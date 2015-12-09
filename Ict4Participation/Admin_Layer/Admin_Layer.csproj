@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administration.cs" />
     <Compile Include="Details.cs" />
     <Compile Include="GUIHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
