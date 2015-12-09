@@ -216,15 +216,16 @@ namespace Class_Layer
         /// <param name="userid">The ID of the account</param>
         public static void AddSkill(string skill, int userid)
         {
-            //TODO:
-            //Move to Skill class
-            Database_Layer.Database.SkillInsertAcc(skill, userid);
+            Skill s = new Skill(userid, skill);
+            s.Add();
         }
 
         public static void RemoveSkill(string skill, int userid)
         {
             //TODO
             //Call Skill class to remove
+            Skill s = new Skill(userid, skill);
+            s.Remove();
         }
 
         public static void AddAvailability(string day, string daytime, int userid)

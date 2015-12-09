@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,34 +20,44 @@ namespace Class_Layer
         }
 
         public bool Add()
-        {
-            //TODO
-            //Call database to add this skill
-            return false;
+        {         
+            return Database_Layer.Database.SkillInsert(this.Name, this.UserID);            
         }
 
         public bool Remove()
         {
-            //TODO
-            //Call database to remove this skill
-            return false;
+            return Database_Layer.Database.SkillDelete(this.Name, this.UserID);
         }
 
         public static List<Skill> GetAll(Nullable<int> userID = null)
         {
-            //get all if no ID is specified
-            if (userID == null)
+            List<Skill> skills= new List<Skill>();
+            
+            if (userID != null)//get all the user skills of specified user
             {
-                //TODO
-                //Load in distinct skills from everyone
+                DataTable Dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc_Skill\" WHERE \"ACC_ID\"="+userID);
+                foreach (DataRow row in Dt.Rows)
+                {
+                    skills.Add(
+                        new Skill(
+                            Convert.ToInt32(userID),
+                            row["SKILL_NAME"].ToString()
+                            ));
+                }
             }
-            //Get user-specific if ID is specified
-            else
+            else//get all skills if no ID is specified
             {
-                //TODO
-                //Load in distinct skills from user
+                DataTable Dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Skill\"");
+                foreach (DataRow row in Dt.Rows)
+                {
+                    skills.Add(
+                        new Skill(
+                            0,
+                            row["UName"].ToString()
+                            ));
+                }
             }
-            return null;
+            return skills;
         }
     }
 }
