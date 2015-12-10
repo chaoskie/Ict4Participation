@@ -21,12 +21,12 @@ namespace Class_Layer
 
         public bool Add()
         {         
-            return Database_Layer.Database.SkillInsert(this.Name, this.UserID);            
+            return Database_Layer.Database.SkillAccount(this.Name, this.UserID);            
         }
 
         public bool Remove()
         {
-            return Database_Layer.Database.SkillDelete(this.Name, this.UserID);
+            return Database_Layer.Database.DelSkillAccount(this.Name, this.UserID);
         }
 
         public static List<Skill> GetAll(Nullable<int> userID = null)
