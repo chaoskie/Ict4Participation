@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Admin_Layer;
@@ -78,12 +79,12 @@ namespace Unit_Tests
             List<Skill> skills = new List<Skill>()
             {
                 new Skill(1, "Programming"),
-                new Skill(2, "Logical thinking"),
-                new Skill(3, "Working"),
-                new Skill(4, "Driver experience")
+                new Skill(1, "Logical thinking"),
+                new Skill(1, "Working"),
+                new Skill(1, "Driver experience")
             };
             Account a = new Account(
-                0,
+                1,
                 "Biepbot",
                 "Biepbot@gmail.com",
                 "Rowan Dings",
@@ -100,10 +101,28 @@ namespace Unit_Tests
                 skills,
                 availability);      
             Accountdetails ad = (Accountdetails)Creation.getDetailsObject(a);
-            if (a.Availability[0].Day != ad.Availability[0].Day)
+            ad.AvailabilityDetailList = availability.Select(ava => Creation.getDetailsObject(ava)).Cast<Availabilitydetails>().ToList();
+            ad.SkillsDetailList = skills.Select(ski => Creation.getDetailsObject(ski)).Cast<Skilldetails>().ToList();
+            for (int i = 0; i < a.Availability.Count; i++ )
             {
-                Assert.Fail("Failed to write Rating properly");
+                if (a.Availability[i].Day != ad.AvailabilityDetailList[i].Day)
+                {
+                    Assert.Fail("Failed to write Rating properly");
+                }
+                if (a.Availability[i].Daytime != ad.AvailabilityDetailList[i].Daytime)
+                {
+                    Assert.Fail("Failed to write Rating properly");
+                }
+                if (a.Skills[i].Name != ad.SkillsDetailList[i].Name)
+                {
+                    Assert.Fail("Failed to write Rating properly");
+                }
+                if (a.Skills[i].UserID != ad.SkillsDetailList[i].UserID)
+                {
+                    Assert.Fail("Failed to write Rating properly");
+                }
             }
+                
         }
     }
 }

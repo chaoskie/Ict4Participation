@@ -193,8 +193,8 @@ namespace Admin_Layer
         public List<Accountdetails> GetAll()
         {
             //Get all the accounts and convert these to account-details objects. Then create a list out of these.
-            AllAccounts = Account.GetAll();
-            return AllAccounts.Select(acc => Creation.getDetailsObject(acc)).Cast<Accountdetails>().ToList();
+            LoadedAccounts = Account.GetAll();
+            return LoadedAccounts.Select(acc => Creation.getDetailsObject(acc)).Cast<Accountdetails>().ToList();
         }
 
         /// <summary>
@@ -224,8 +224,8 @@ namespace Admin_Layer
                     acc.Birthdate,
                     acc.AvatarPath,
                     acc.VOGPath,
-                    acc.Skills.Select(s => new Skill(MainUser.ID, s.Name)).Cast<Skill>().ToList(),
-                    acc.Availability.Select(a => new Availability(MainUser.ID, a.Day, a.Daytime)).Cast<Availability>().ToList(),
+                    acc.SkillsDetailList.Select(s => new Skill(MainUser.ID, s.Name)).Cast<Skill>().ToList(),
+                    acc.AvailabilityDetailList.Select(a => new Availability(MainUser.ID, a.Day, a.Daytime)).Cast<Availability>().ToList(),
                     MainUser.Skills,
                     MainUser.Availability
                     );
