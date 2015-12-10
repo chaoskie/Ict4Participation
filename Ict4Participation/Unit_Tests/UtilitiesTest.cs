@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Admin_Layer;
@@ -46,7 +47,7 @@ namespace Unit_Tests
         }
 
         [TestMethod]
-        public void GetDetails()
+        public void GetReviewDetails()
         {
             Review r = new Review(0, 3, 1, 2, "Ayyy lmao");
             Reviewdetails rd = (Reviewdetails)Creation.getDetailsObject(r);
@@ -59,6 +60,47 @@ namespace Unit_Tests
                 Assert.Fail("Failed to write PostedToID properly");
             }
             if (r.Rating != rd.Rating)
+            {
+                Assert.Fail("Failed to write Rating properly");
+            }
+        }
+
+        [TestMethod]
+        public void GetAccountDetails()
+        {
+            List<Availability> availability = new List<Availability>()
+            {
+                new Availability(1, "Mo", "Ochtend"),
+                new Availability(2, "Mo", "Avond"),
+                new Availability(3, "Tu", "Avond")
+            };
+
+            List<Skill> skills = new List<Skill>()
+            {
+                new Skill(1, "Programming"),
+                new Skill(2, "Logical thinking"),
+                new Skill(3, "Working"),
+                new Skill(4, "Driver experience")
+            };
+            Account a = new Account(
+                0,
+                "Biepbot",
+                "Biepbot@gmail.com",
+                "Rowan Dings",
+                "Turfveldenstraat 12",
+                "Eindhoven",
+                "+31 0402920180",
+                "0",
+                "1",
+                DateTime.Now,
+                "1",
+                DateTime.Now,
+                "Avatar.png",
+                "VOG.pdf",
+                skills,
+                availability);      
+            Accountdetails ad = (Accountdetails)Creation.getDetailsObject(a);
+            if (a.Availability[0].Day != ad.Availability[0].Day)
             {
                 Assert.Fail("Failed to write Rating properly");
             }

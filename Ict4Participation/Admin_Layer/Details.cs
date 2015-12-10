@@ -75,8 +75,30 @@ namespace Admin_Layer
         public DateTime Birthdate { get; set; }
         public string AvatarPath { get; set; }
         public string VOGPath { get; set; }
-        public List<Availabilitydetails> AvailabilityList { get; set; }
-        public List<Skilldetails> SkillList { get; set; }
+        private List<Availabilitydetails> availability;
+        public List<Availabilitydetails> Availability
+        {
+            get { return availability; }
+            set
+            {
+                if (value is List<Availability>)
+                {
+                    availability = value.Select(av => Creation.getDetailsObject(av)).Cast<Availabilitydetails>().ToList();
+                }
+            }
+        }
+        private List<Skilldetails> skills;
+        public List<Skilldetails> Skills
+        {
+            get { return skills; }
+            set
+            {
+                if (value is List<Skill>)
+                {
+                    skills = value.Select(av => Creation.getDetailsObject(av)).Cast<Skilldetails>().ToList();
+                }
+            }
+        }
     }
 
     public struct Availabilitydetails

@@ -111,66 +111,41 @@ namespace Admin_Layer
         /// <param name="acc">The account details</param>
         /// <param name="message">The error message</param>
         /// <returns>Yields a true if the user could be created</returns>
-        public bool Register(Accountdetails acc, out string message)
+        public bool Register(Accountdetails acc, string password1, string password2, out string message)
         {
             message = String.Empty;
-            //TODO
             //Validate details
-            if (!Check.Birthday(acc.Birthdate))
+            if (Check.CheckAccount(acc, out message))
             {
-                message = "Verjaardag is fout ingegeven.";
                 return false;
             }
-            if (!Check.Name(acc.Name))
+            if (password1 != password2)
             {
-                message = "Naam is fout ingegeven. \r\nDeze mag geen nummers of speciale tekens bevatten!";
+                message = "Wachtwoorden komen niet overeen!";
                 return false;
             }
-            if (!Check.LiteralUsername(acc.Username))
-            {
-                message = "Gebruikersnaam is fout ingegeven. \r\nUw gebruikersnaam mag geen speciale tekens bevatten!";
-                return false;
-            }
-            if (!Check.Phonenumber(acc.Phonenumber))
-            {
-                message = "Telefoonnummer is fout ingegeven. \r\nUw telefoon voldoet niet aan ons format: \r\nProbeer: XXX-XXX-XXXX";
-                return false;
-            }
-            if (acc.VOGPath != null)
-            {
-                if (!Check.isOfFileExt(acc.VOGPath, ".pdf"))
-                {
-                    message = "Uw VOG is geen pdf.";
-                    return false;
-                }
-            }
-            if (!Check.isImage(acc.AvatarPath))
-            {
-                message = "Uw avatar is geen afbeelding.";
-                return false;
-            }
-            if (!Check.isLocation(acc.City, acc.Address))
-            {
-                message = "Uw locatie kon niet gevonden worden.";
-                return false;
-            }
-            if (!Check.isEmail(acc.Email))
-            {
-                message = "Uw email kon niet gevonden worden.";
-                return false;
-            }
-
             //Register account
-            //Account.Register();
-            return false;
+            MainUser = Account.Register(acc.Username, password1, acc.Email, acc.Name, acc.Address, acc.City, acc.Phonenumber, acc.hasDriverLicense, acc.hasVehicle, acc.OVPossible, acc.Birthdate, acc.AvatarPath, acc.VOGPath);
+            //TODO
+            //Send email
+            return true;
         }
 
         public bool Validate(string password, string username, out string message)
         {
-            //TODO
+            message = String.Empty;
             //Return whether the username and password is a match
-            message = "Not implemented";
-            return false;
+            Account no;
+            bool validation = Account.LogIn(username, password, out no);
+            if (validation == true)
+            {
+                message = "Account and password match";
+            }
+            else
+            {
+                message = "Account and password do not match";
+            }
+            return validation;
         }
 
         /// <summary>
@@ -194,7 +169,7 @@ namespace Admin_Layer
         public List<Accountdetails> Search(bool all, Accountdetails search)
         {
             //TODO
-            //Search through all the accounts where the accountdetails match
+            //Search through all the accounts where the account-details match
             return null;
         }
 
@@ -204,7 +179,7 @@ namespace Admin_Layer
         /// <returns>A list of the accounts with the details required</returns>
         public List<Accountdetails> GetAll()
         {
-            //Get all the accounts and convert these to accountdetails objects. Then create a list out of these.
+            //Get all the accounts and convert these to account-details objects. Then create a list out of these.
             AllAccounts = Account.GetAll();
             return AllAccounts.Select(acc => Creation.getDetailsObject(acc)).Cast<Accountdetails>().ToList();
         }
