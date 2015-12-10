@@ -10,7 +10,7 @@ namespace Admin_Layer
     public abstract class Check
     {
         /// <summary>
-        /// Checks if the phonenumber is one of the following:
+        /// Checks if the phone-number is one of the following:
         /// <para>0402001888</para>
         /// <para>040.200.1888</para>
         /// <para>040-200-1888</para>
@@ -63,7 +63,7 @@ namespace Admin_Layer
         /// <returns></returns>
         public static bool LiteralUsername(string s)
         {
-            return Regex.IsMatch(s, "[a-zA-Z0-9]{6,}");
+            return Regex.IsMatch(s, "[a-zA-Z0-9]{6,255}");
         }
 
         /// <summary>
