@@ -574,7 +574,7 @@ namespace Admin_Layer
         /// <summary>
         /// If the GUI is unloaded, log the user out
         /// </summary>
-        public ~GUIHandler() 
+        ~GUIHandler() 
         {
             Console.WriteLine("User log out state entered. Check if true!");
             //LogOut();
