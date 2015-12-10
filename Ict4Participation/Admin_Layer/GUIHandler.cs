@@ -570,5 +570,14 @@ namespace Admin_Layer
             return true;
         }
         #endregion
+
+        /// <summary>
+        /// If the GUI is unloaded, log the user out
+        /// </summary>
+        public ~GUIHandler() 
+        {
+            Console.WriteLine("User log out state entered. Check if true!");
+            //LogOut();
+        }
     }
 }
