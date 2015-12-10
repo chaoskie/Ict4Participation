@@ -266,15 +266,16 @@ namespace Database_Layer
         /// <param name="status">status of the question range in 0,1,2,3| 0=not accepted, 1=inprogress, 2=done, 3=canceled</param>
         /// <returns>succes boolean</returns>
         public static bool NewQuestion(string title, int accountid, string startDate, string endDate,
-                              string description, bool urgent, string location, int maxHulpverlener, int status)
+                              string description, bool urgent, string location, int maxHulpverlener, int status, out Nullable<int> qID)
         {
+            qID = null;
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 int Urgent = urgent ? 1 : 0;
                 c.Open();
                 OracleCommand cmd = new OracleCommand(
                     "INSERT INTO \"Question\" (\"Title\", \"PosterACC_ID\", \"StartDate\"," +
-                    " \"EndDate\", \"Description\", \"Urgent\", \"Location\", \"AmountACCs\", \"Status\",) " +
+                    " \"EndDate\", \"Description\", \"Urgent\", \"Location\", \"AmountACCs\", \"Status\") " +
                     "VALUES (:A, :B, TO_DATE(:C), TO_DATE(:D), :E, :F, :G, :H, :I)");
                 cmd.Parameters.Add(new OracleParameter("A", title));
                 cmd.Parameters.Add(new OracleParameter("B", accountid));
@@ -286,6 +287,25 @@ namespace Database_Layer
                 cmd.Parameters.Add(new OracleParameter("H", maxHulpverlener));
                 cmd.Parameters.Add(new OracleParameter("I", status));
                 cmd.Connection = c;
+
+                OracleCommand cmd1 = new OracleCommand(
+                 "SELECT \"ID\" FROM \"Question\" WHERE \"Title\" = :A AND \"PosterACC_ID\" = :X AND \"StartDate\" = :B AND \"EndDate\" = :C AND \"Description\" = :D AND \"Urgent\" = :E AND \"Location\" = :F AND \"AmountACCs\" = :G AND \"Status\" = :H");
+                cmd1.Parameters.Add(new OracleParameter("A", title));
+                cmd1.Parameters.Add(new OracleParameter("X", accountid));
+                cmd1.Parameters.Add(new OracleParameter("B", startDate));
+                cmd1.Parameters.Add(new OracleParameter("C", endDate));
+                cmd1.Parameters.Add(new OracleParameter("D", description));
+                cmd1.Parameters.Add(new OracleParameter("E", Urgent));
+                cmd1.Parameters.Add(new OracleParameter("F", location));
+                cmd1.Parameters.Add(new OracleParameter("G", maxHulpverlener));
+                cmd1.Parameters.Add(new OracleParameter("H", status));
+                OracleDataReader r = cmd.ExecuteReader();
+                DataTable result = new DataTable();
+                result.Load(r);
+                foreach (DataRow row in result.Rows)
+                {
+                    qID = Convert.ToInt32(row["ID"]);
+                }
                 try
                 {
                     cmd.ExecuteNonQuery();
