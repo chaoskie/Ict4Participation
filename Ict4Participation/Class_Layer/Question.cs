@@ -73,12 +73,32 @@ namespace Class_Layer
         /// Creates this database entry
         /// </summary>
         /// <returns>Success</returns>
-        public override bool Create()
+        public override bool Create(out string message)
         {
+            Nullable<int> qID = null;
+            message = String.Empty;
             string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
             string et = Utility_Classes.ConvertTo.OracleDateTime(this.EndDate);
             //insert into database
-            return Database_Layer.Database.InsertQuestion(this.Title, st, et, this.Description, this.Urgent, this.Location, this.AmountAccs, this.Status, this.Skills, this.Volunteers);
+            if (!Database_Layer.Database.NewQuestion(this.Title, this.PosterID, st, et, this.Description, this.Urgent, this.Location, this.AmountAccs, this.Status, out qID))
+            {
+                message = "Couldn't create new question";
+                return false;
+            }
+            if (qID == null)
+            {
+                message = "Couldn't retrieve newly made question";
+                return false;
+            }
+            foreach (string s in this.Skills)
+            {
+                if (!Database_Layer.Database.SkillQuestionAdd(s, Convert.ToInt32(qID)))
+                {
+                    message = "Couldn't add the following skill reference: " + s;
+                    return false;
+                }
+            }
+
         }
 
         /// <summary>
@@ -139,7 +159,7 @@ namespace Class_Layer
                     urg,
                     row["Location"].ToString(),
                     Convert.ToInt32(row["AmountACCs"]),
-                    Skill.GetAll(Convert.ToInt32(row["ID"])).Select(s => s.ToString()).ToList(),
+                    Skill.GetAll(Convert.ToInt32(row["ID"])).Select(s => s.Name).ToList(),
                     volunteers
                     ));
             }
