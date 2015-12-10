@@ -146,7 +146,7 @@ namespace Database_Layer
         /// <param name="questionID">question that receives new response</param>
         /// <param name="desc">user input text</param>
         /// <returns>succes boolean</returns>
-        public static bool PlaceComment(int accountID, int questionID, string desc)
+        public static bool InsertComment(int accountID, int questionID, string desc)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
@@ -176,7 +176,7 @@ namespace Database_Layer
         /// <param name="commentID">The ID of the comment</param>
         /// <param name="adminDel">Whether or not the admin or user has deleted the message</param>
         /// <returns>succes boolean</returns>
-        public static bool RemoveComment(int commentID, bool adminDel)
+        public static bool DeleteComment(int commentID, bool adminDel)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
@@ -265,7 +265,7 @@ namespace Database_Layer
         /// <param name="maxHulpverlener">maximum amount of people needed to solve the problem</param>
         /// <param name="status">status of the question range in 0,1,2,3| 0=not accepted, 1=inprogress, 2=done, 3=canceled</param>
         /// <returns>succes boolean</returns>
-        public static bool NewQuestion(string title, int accountid, string startDate, string endDate,
+        public static bool InsertQuestion(string title, int accountid, string startDate, string endDate,
                               string description, bool urgent, string location, int maxHulpverlener, int status, out Nullable<int> qID)
         {
             qID = null;
@@ -326,7 +326,7 @@ namespace Database_Layer
         /// <param name="skill">The skill to add</param>
         /// <param name="qID">The ID of the question</param>
         /// <returns>succes boolean</returns>
-        public static bool SkillQuestionAdd(string skill, int qID)
+        public static bool InsertSkillQuestion(string skill, int qID)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
@@ -440,7 +440,7 @@ namespace Database_Layer
         /// <param name="qID">question to delete from</param>
         /// <param name="name">skill to delete</param>
         /// <returns>succes boolean</returns>
-        public static bool DelSkillQuestion(int qID, string name)
+        public static bool DeleteSkillQuestion(int qID, string name)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
@@ -484,7 +484,7 @@ namespace Database_Layer
         /// <param name="sex">sex</param>
         /// <param name="VOG">vog path</param>
         /// <returns>succes boolean</returns>
-        public static bool NewUser(string Username, string PassHash, string Email, string Name, string Location, string Village, string phone,
+        public static bool InsertUser(string Username, string PassHash, string Email, string Name, string Location, string Village, string phone,
             bool driverLicense, bool HasCar, bool ov, string Bday, string Picture, string Sex, string VOG)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
@@ -594,7 +594,7 @@ namespace Database_Layer
         /// <param name="skill">The name of the skill</param>
         /// <param name="aID">The account ID</param>
         /// <returns>Succes boolean</returns>
-        public static bool SkillAccount(string skill, int aID)
+        public static bool InsertSkillAccount(string skill, int aID)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
@@ -622,7 +622,7 @@ namespace Database_Layer
         /// <param name="skill">skill to delete</param>
         /// <param name="aID">User Id</param>
         /// <returns>succes boolean</returns>
-        public static bool DelSkillAccount(string skill, int aID)
+        public static bool DeleteSkillAccount(string skill, int aID)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
@@ -830,7 +830,7 @@ namespace Database_Layer
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("DELETE \"Availability_Acc\" WHERE \"ACC_ID\" = :a AND \"AVAILABILITY_ID\" = "+foundID);
+                OracleCommand cmd = new OracleCommand("DELETE \"Availability_Acc\" WHERE \"ACC_ID\" = :a AND \"AVAILABILITY_ID\" = " + foundID);
                 cmd.Parameters.Add(new OracleParameter("a", userId));
                 cmd.Connection = c;
                 try
@@ -845,111 +845,122 @@ namespace Database_Layer
                 c.Close();
                 return true;
             }
-            
+
         }
         #endregion
 
         #region meeting
 
-
-        public static void InsertMeeting()
-        {/*
+        /// <summary>
+        /// Query to make meeting only if they are known
+        /// </summary>
+        /// <param name="requesterID">inviting perty</param>
+        /// <param name="regeustedID">invited party(ies)</param>
+        /// <param name="startDate">start date/time of the meeting</param>
+        /// <param name="endDate">end date/time of the meeting</param>
+        /// <param name="location">adress</param>
+        /// <returns>succes boolean</returns>
+        public static bool InsertMeeting(int requesterID, int regeustedID, string startDate, string endDate, string location)
+        {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
+                string commando = "INSERT INTO \"Meeting\" (\"RequesterACC_ID\", \"RequestedACC_ID\"";
+                if (!String.IsNullOrWhiteSpace(startDate)) { commando += ", \"StartDate\""; }
+                if (!String.IsNullOrWhiteSpace(endDate)) { commando += ", \"EndDate\""; }
+                if (!String.IsNullOrWhiteSpace(location)) { commando += ", \"Location\""; }
+                commando += ") VALUES (:a, :b";
+
+                if (!String.IsNullOrWhiteSpace(startDate)) { commando += ", TO_DATE(:c)"; }
+                if (!String.IsNullOrWhiteSpace(endDate)) { commando += ", TO_DATE(:d)"; }
+                if (!String.IsNullOrWhiteSpace(location)) { commando += ", :e"; }
+                commando += ")";
                 c.Open();
-                OracleCommand cmd = new OracleCommand("INSERT INTO \"Meeting\" (\"RequesterACC_ID\", \"RequestedACC_ID\", \"Timetable\", \"LOCATION_ID\") " +
-                "VALUES (:a, :b,  TO_DATE(:c), :d)");
-                cmd.Parameters.Add(new OracleParameter("d", locID));
+
+                OracleCommand cmd = new OracleCommand(commando);
+                cmd.Parameters.Add(new OracleParameter("a", requesterID));
+                cmd.Parameters.Add(new OracleParameter("b", regeustedID));
+                if (!String.IsNullOrWhiteSpace(startDate)) { cmd.Parameters.Add(new OracleParameter("c", startDate)); }
+                if (!String.IsNullOrWhiteSpace(endDate)) { cmd.Parameters.Add(new OracleParameter("d", endDate)); }
+                if (!String.IsNullOrWhiteSpace(location)) { cmd.Parameters.Add(new OracleParameter("e", location)); }
                 cmd.Connection = c;
                 try
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch (OracleException)
+                catch (OracleException e)
                 {
-                    throw;
+                    Console.Write(e.Message);
+                    return false;
                 }
                 c.Close();
-            }*/
-            //TODO
+                return true;
+            }
         }
-
         /// <summary>
-        /// Insert a new meeting in the database
+        /// delete the meeting
         /// </summary>
-        /// <param name="originID">The ID of the sender of the meeting</param>
-        /// <param name="requestID">The ID of the receiver of the meeting</param>
-        public static void InsertMeeting(int originID, int requestID)
+        /// <param name="mID">id of the meeting that needs to </param>
+        /// <returns>succes boolean</returns>
+        public static bool DeleteMeeting(int mID)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("INSERT INTO \"Meeting\" (\"RequesterACC_ID\", \"RequestedACC_ID\") " +
-                "VALUES (:a, :b)");
-                cmd.Parameters.Add(new OracleParameter("a", originID));
-                cmd.Parameters.Add(new OracleParameter("b", requestID));
+                OracleCommand cmd = new OracleCommand("DELETE \"Meeting\" WHERE \"ID\" = :a");
+                cmd.Parameters.Add(new OracleParameter("a", mID));
                 cmd.Connection = c;
                 try
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch (OracleException)
+                catch (OracleException e)
                 {
-                    throw;
+                    Console.Write(e.Message);
+                    return false;
                 }
-
                 c.Close();
+                return true;
             }
         }
-
-        public static void InsertMeeting()//enkel date
-        {/*
+        /// <summary>
+        /// update a meeting
+        /// </summary>
+        /// <param name="mID"id of the meeting that is updated</param>
+        /// <param name="startDate">start of a meeting</param>
+        /// <param name="endDate">end of a meeting</param>
+        /// <param name="location">location where a meeting is taking place</param>
+        /// <returns></returns>
+        public static bool UpdateMeeting(int mID, string startDate, string endDate, string location)
+        {
+            if ((String.IsNullOrWhiteSpace(startDate)) && (String.IsNullOrWhiteSpace(endDate)) && (String.IsNullOrWhiteSpace(location))) { return false; }
+            string commando = "UPDATE \"Meeting\" SET ";
+            if (!String.IsNullOrWhiteSpace(startDate)) { commando += "\"StartDate\" = :a,"; }
+            if (!String.IsNullOrWhiteSpace(endDate)) { commando += "\"EndDate\" = :b,"; }
+            if (!String.IsNullOrWhiteSpace(location)) { commando += "\"Location\" = :c,"; }
+            commando = commando.Substring(0, commando.Length - 1);
+            commando += "WHERE \"ID\" = :d";
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("INSERT INTO \"Meeting\" (\"RequesterACC_ID\", \"RequestedACC_ID\", \"Timetable\") " +
-                "VALUES (:a, :b, TO_DATE(:c, 'dd-mon-yyyy HH24:mi:ss'))");
-                cmd.Parameters.Add(new OracleParameter("a", originID));
-           
+                OracleCommand cmd = new OracleCommand(commando);
+                if (!String.IsNullOrWhiteSpace(startDate)) { cmd.Parameters.Add(new OracleParameter("a", startDate)); }
+                if (!String.IsNullOrWhiteSpace(endDate)) { cmd.Parameters.Add(new OracleParameter("b", endDate)); }
+                if (!String.IsNullOrWhiteSpace(location)) { cmd.Parameters.Add(new OracleParameter("c", location)); }
+                cmd.Parameters.Add(new OracleParameter("d", mID));
                 cmd.Connection = c;
                 try
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch (OracleException)
+                catch (OracleException e)
                 {
-                    throw;
+                    Console.Write(e.Message);
+                    return false;
                 }
                 c.Close();
-            }*/
-            //TODO
+                return true;
+            }
         }
-
-
-        public static void InsertMeeting()//no date just location
-        {/*
-            using (OracleConnection c = new OracleConnection(@connectionstring))
-            {
-                c.Open();
-                OracleCommand cmd = new OracleCommand("INSERT INTO \"Meeting\" (\"RequesterACC_ID\", \"RequestedACC_ID\", \"LOCATION_ID\") " +
-                "VALUES (:a, :b, :d)");
-                cmd.Parameters.Add(new OracleParameter("a", originID));
-          
-                cmd.Connection = c;
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (OracleException)
-                {
-                    throw;
-                }
-                c.Close();
-            }*/
-            //TODO
-        }
-
-        //TODO Update Meeting
 
         #endregion
     }
