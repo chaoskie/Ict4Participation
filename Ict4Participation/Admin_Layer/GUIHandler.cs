@@ -168,9 +168,19 @@ namespace Admin_Layer
         /// <returns>The accounts that match</returns>
         public List<Accountdetails> Search(bool all, Accountdetails search)
         {
-            //TODO
             //Search through all the accounts where the account-details match
-            return null;
+            return LoadedAccounts.Where(
+                av => av.Address.Contains(search.Address) &&
+                av.Username.Contains(search.Username) &&
+                av.Name.Contains(search.Name) &&
+                av.Email.Contains(search.Email) &&
+                av.City.Contains(search.City) &&
+                av.Phonenumber.Contains(search.Phonenumber) &&
+                (search.hasDriverLicense != null ? av.hasDriverLicense == search.hasDriverLicense : av.hasDriverLicense != search.hasDriverLicense) && //If null, return both true and false
+                (search.hasVehicle != null ? av.hasVehicle == search.hasVehicle : av.hasVehicle != search.hasVehicle) && //If null, return both true and false
+                (search.OVPossible != null ? av.OVPossible == search.OVPossible : av.OVPossible != search.OVPossible) //If null, return both true and false
+                ).Select(av => Creation.getDetailsObject(av))
+                .Cast<Accountdetails>().ToList();
         }
 
         /// <summary>

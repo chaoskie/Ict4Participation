@@ -68,10 +68,10 @@ namespace Admin_Layer
         public string Address { get; set; }
         public string City { get; set; }
         public string Phonenumber { get; set; }
-        public bool hasDriverLicense { get; set; }
-        public bool hasVehicle { get; set; }
+        public Nullable<bool> hasDriverLicense { get; set; }
+        public Nullable<bool> hasVehicle { get; set; }
         public DateTime Lastlogin { get; set; }
-        public bool OVPossible { get; set; }
+        public Nullable<bool> OVPossible { get; set; }
         public DateTime Birthdate { get; set; }
         public string AvatarPath { get; set; }
         public string VOGPath { get; set; }
