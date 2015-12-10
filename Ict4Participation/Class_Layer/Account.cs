@@ -195,17 +195,13 @@ namespace Class_Layer
         /// <param name="id">The returned ID</param>
         /// <returns>The newly created account</returns>
         public static Account Register(string username, string password, string email, string name, string address, string city, string phonenumber,
-            bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG, out int id)
+            bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG)
         {
             string passTotal = PasswordHashing.CreateHash(password);
-
-            id = 0;
             //TODO
             //Create new user through database
-            //Make this method return an ID
             //   Database_Layer.Database.NewUser(name, locID, passHash, passSalt, avatarPath, VOG, description, roleText, sex, email);
             //   return new Account(id, name, loc, role, avatarPath, description, sex, email, VOG);
-            //Create and account
             return null;
         }
 
@@ -243,11 +239,15 @@ namespace Class_Layer
         }
 
         public static Account Update(int ID, string username, string password, string email, string name, string address, string city,
-            string phonenumber, bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG)
+            string phonenumber, bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG, 
+            List<Skill> skills, List<Availability> availability, List<Skill> oldSkills, List<Availability> oldAvailability)
         {
             Account acc = null;
             //TODO
             //Call database to update account with ID
+            //Check for different skill names: 
+            //      remove ones that are no longer there
+            //      add ones that are new
             //Retrieve updated account
             Account.LogIn(ID.ToString(), password, out acc);
             return acc;
@@ -289,6 +289,8 @@ namespace Class_Layer
         /// <returns>Returns an account</returns>
         private static Account CreateAccount(DataRow row)
         {
+            //TODO
+            //Get availability and skills
             Account acc = null;
             //Create account
             acc = new Account(
@@ -305,7 +307,9 @@ namespace Class_Layer
                 row["OVMogelijk"].ToString(),
                 Convert.ToDateTime(row["Geboortedatum"]),
                 row["Foto"].ToString(),
-                row["VOG"].ToString()
+                row["VOG"].ToString(),
+                null,
+                null
                 );
             return acc;
         }
@@ -327,8 +331,11 @@ namespace Class_Layer
         /// <param name="birthdate"></param>
         /// <param name="avatarPath"></param>
         /// <param name="VOG"></param>
-        private Account(int ID, string username, string email, string name, string address, string city, string phonenumber,
-            string hasLicense, string hasVehicle, DateTime lastLogin, string OVPossible, DateTime birthdate, string avatarPath, string VOG)
+        /// <param name="skills"></param>
+        /// <param name="availability"></param>
+        public Account(int ID, string username, string email, string name, string address, string city, string phonenumber,
+            string hasLicense, string hasVehicle, DateTime lastLogin, string OVPossible, DateTime birthdate, string avatarPath, string VOG, 
+            List<Skill> skills, List<Availability> availability)
         {
             this.ID = ID;
             this.Username = username;
@@ -344,6 +351,8 @@ namespace Class_Layer
             this.Birthdate = birthdate;
             this.AvatarPath = avatarPath;
             this.VOGPath = VOG;
+            this.Skills = skills;
+            this.Availability = availability;
         }
     }
 }

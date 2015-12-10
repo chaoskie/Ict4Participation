@@ -13,9 +13,9 @@ namespace Class_Layer
         public int UserID { get; private set; }
         public string Name { get; private set; }
 
-        public Skill(int id, string name)
+        public Skill(int userid, string name)
         {
-            this.UserID = id;
+            this.UserID = userid;
             this.Name = name;
         }
 
@@ -31,7 +31,7 @@ namespace Class_Layer
 
         public static List<Skill> GetAll(Nullable<int> userID = null)
         {
-            List<Skill> skills= new List<Skill>();
+            List<Skill> skills = new List<Skill>();
             
             if (userID != null)//get all the user skills of specified user
             {

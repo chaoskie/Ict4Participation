@@ -9,6 +9,55 @@ namespace Admin_Layer
 {
     public abstract class Check
     {
+        public static bool CheckAccount(Accountdetails acc, out string message)
+        {
+            message = String.Empty;
+            if (!Check.Birthday(acc.Birthdate))
+            {
+                message = "Verjaardag is fout ingegeven.";
+                return false;
+            }
+            if (!Check.Name(acc.Name))
+            {
+                message = "Naam is fout ingegeven. \r\nDeze mag geen nummers of speciale tekens bevatten!";
+                return false;
+            }
+            if (!Check.LiteralUsername(acc.Username))
+            {
+                message = "Gebruikersnaam is fout ingegeven. \r\nUw gebruikersnaam mag geen speciale tekens bevatten!";
+                return false;
+            }
+            if (!Check.Phonenumber(acc.Phonenumber))
+            {
+                message = "Telefoonnummer is fout ingegeven. \r\nUw telefoon voldoet niet aan ons format: \r\nProbeer: XXX-XXX-XXXX";
+                return false;
+            }
+            if (acc.VOGPath != null)
+            {
+                if (!Check.isOfFileExt(acc.VOGPath, ".pdf"))
+                {
+                    message = "Uw VOG is geen pdf.";
+                    return false;
+                }
+            }
+            if (!Check.isImage(acc.AvatarPath))
+            {
+                message = "Uw avatar is geen afbeelding.";
+                return false;
+            }
+            if (!Check.isLocation(acc.City, acc.Address))
+            {
+                message = "Uw locatie kon niet gevonden worden.";
+                return false;
+            }
+            if (!Check.isEmail(acc.Email))
+            {
+                message = "Uw email kon niet gevonden worden.";
+                return false;
+            }
+            return true;
+        }
+
         /// <summary>
         /// Checks if the phone-number is one of the following:
         /// <para>0402001888</para>

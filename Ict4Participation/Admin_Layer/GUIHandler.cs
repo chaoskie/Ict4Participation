@@ -111,66 +111,44 @@ namespace Admin_Layer
         /// <param name="acc">The account details</param>
         /// <param name="message">The error message</param>
         /// <returns>Yields a true if the user could be created</returns>
-        public bool Register(Accountdetails acc, out string message)
+        public bool Register(Accountdetails acc, string password1, string password2, out string message)
         {
             message = String.Empty;
-            //TODO
             //Validate details
-            if (!Check.Birthday(acc.Birthdate))
+            if (Check.CheckAccount(acc, out message))
             {
-                message = "Verjaardag is fout ingegeven.";
                 return false;
             }
-            if (!Check.Name(acc.Name))
+            if (password1 != password2)
             {
-                message = "Naam is fout ingegeven. \r\nDeze mag geen nummers of speciale tekens bevatten!";
+                message = "Wachtwoorden komen niet overeen!";
                 return false;
             }
-            if (!Check.LiteralUsername(acc.Username))
-            {
-                message = "Gebruikersnaam is fout ingegeven. \r\nUw gebruikersnaam mag geen speciale tekens bevatten!";
-                return false;
-            }
-            if (!Check.Phonenumber(acc.Phonenumber))
-            {
-                message = "Telefoonnummer is fout ingegeven. \r\nUw telefoon voldoet niet aan ons format: \r\nProbeer: XXX-XXX-XXXX";
-                return false;
-            }
-            if (acc.VOGPath != null)
-            {
-                if (!Check.isOfFileExt(acc.VOGPath, ".pdf"))
-                {
-                    message = "Uw VOG is geen pdf.";
-                    return false;
-                }
-            }
-            if (!Check.isImage(acc.AvatarPath))
-            {
-                message = "Uw avatar is geen afbeelding.";
-                return false;
-            }
-            if (!Check.isLocation(acc.City, acc.Address))
-            {
-                message = "Uw locatie kon niet gevonden worden.";
-                return false;
-            }
-            if (!Check.isEmail(acc.Email))
-            {
-                message = "Uw email kon niet gevonden worden.";
-                return false;
-            }
-
             //Register account
-            //Account.Register();
-            return false;
+            MainUser = Account.Register(acc.Username, password1, acc.Email, acc.Name, acc.Address, acc.City, acc.Phonenumber, 
+                Convert.ToBoolean(acc.hasDriverLicense), 
+                Convert.ToBoolean(acc.hasVehicle), 
+                Convert.ToBoolean(acc.OVPossible), acc.Birthdate, acc.AvatarPath, acc.VOGPath);
+            //TODO
+            //Send email
+            return true;
         }
 
         public bool Validate(string password, string username, out string message)
         {
-            //TODO
+            message = String.Empty;
             //Return whether the username and password is a match
-            message = "Not implemented";
-            return false;
+            Account no;
+            bool validation = Account.LogIn(username, password, out no);
+            if (validation == true)
+            {
+                message = "Account and password match";
+            }
+            else
+            {
+                message = "Account and password do not match";
+            }
+            return validation;
         }
 
         /// <summary>
@@ -193,9 +171,19 @@ namespace Admin_Layer
         /// <returns>The accounts that match</returns>
         public List<Accountdetails> Search(bool all, Accountdetails search)
         {
-            //TODO
-            //Search through all the accounts where the accountdetails match
-            return null;
+            //Search through all the accounts where the account-details match
+            return LoadedAccounts.Where(
+                av => av.Address.Contains(search.Address) &&
+                av.Username.Contains(search.Username) &&
+                av.Name.Contains(search.Name) &&
+                av.Email.Contains(search.Email) &&
+                av.City.Contains(search.City) &&
+                av.Phonenumber.Contains(search.Phonenumber) &&
+                (search.hasDriverLicense != null ? av.hasDriverLicense == search.hasDriverLicense : av.hasDriverLicense != search.hasDriverLicense) && //If null, return both true and false
+                (search.hasVehicle != null ? av.hasVehicle == search.hasVehicle : av.hasVehicle != search.hasVehicle) && //If null, return both true and false
+                (search.OVPossible != null ? av.OVPossible == search.OVPossible : av.OVPossible != search.OVPossible) //If null, return both true and false
+                ).Select(av => Creation.getDetailsObject(av))
+                .Cast<Accountdetails>().ToList();
         }
 
         /// <summary>
@@ -204,7 +192,7 @@ namespace Admin_Layer
         /// <returns>A list of the accounts with the details required</returns>
         public List<Accountdetails> GetAll()
         {
-            //Get all the accounts and convert these to accountdetails objects. Then create a list out of these.
+            //Get all the accounts and convert these to account-details objects. Then create a list out of these.
             AllAccounts = Account.GetAll();
             return AllAccounts.Select(acc => Creation.getDetailsObject(acc)).Cast<Accountdetails>().ToList();
         }
@@ -215,14 +203,40 @@ namespace Admin_Layer
         /// <param name="acc">The account details</param>
         /// <param name="message">The message of the error</param>
         /// <returns>Success</returns>
-        public bool Edit(Accountdetails acc, out string message)
+        public bool Edit(Accountdetails acc, string password1, string password2, out string message)
         {
             //TODO
             //Validate details
             //Update account
-            //Account updatedAccount = new Account(MainUser ID... acc stuff)
-            message = "Not implemented";
-            return false;
+            if (password1 == password2)
+            {
+                Account.Update(MainUser.ID,
+                    acc.Username,
+                    password1,
+                    acc.Email,
+                    acc.Name,
+                    acc.Address,
+                    acc.City,
+                    acc.Phonenumber,
+                    Convert.ToBoolean(acc.hasDriverLicense),
+                    Convert.ToBoolean(acc.hasVehicle),
+                    Convert.ToBoolean(acc.OVPossible),
+                    acc.Birthdate,
+                    acc.AvatarPath,
+                    acc.VOGPath,
+                    acc.Skills.Select(s => new Skill(MainUser.ID, s.Name)).Cast<Skill>().ToList(),
+                    acc.Availability.Select(a => new Availability(MainUser.ID, a.Day, a.Daytime)).Cast<Availability>().ToList(),
+                    MainUser.Skills,
+                    MainUser.Availability
+                    );
+                message = "Account edited";
+                return true;
+            }
+            else
+            {
+                message = "Wachtwoorden komen niet overeen!";
+                return false;
+            }
         }
         #endregion
 
@@ -315,7 +329,7 @@ namespace Admin_Layer
         {
             //TODO: Validate details, check for rights
             //Place question
-            Question q = new Question(0, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills);
+            Question q = new Question(0, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, new List<int>());
             q.Create();
             message = "Question placed";
             return true;
@@ -332,7 +346,7 @@ namespace Admin_Layer
         {
             //TODO: Validate details, check for rights
             //Edit question
-            Question q = new Question(LoadedQuestions[questionIndex].PostID, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills);
+            Question q = new Question(LoadedQuestions[questionIndex].PostID, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, LoadedQuestions[questionIndex].Volunteers);
             q.Update();
             message = "Question updated";
             return true;
@@ -556,5 +570,14 @@ namespace Admin_Layer
             return true;
         }
         #endregion
+
+        /// <summary>
+        /// If the GUI is unloaded, log the user out
+        /// </summary>
+        public ~GUIHandler() 
+        {
+            Console.WriteLine("User log out state entered. Check if true!");
+            //LogOut();
+        }
     }
 }
