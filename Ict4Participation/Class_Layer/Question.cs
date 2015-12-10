@@ -73,15 +73,6 @@ namespace Class_Layer
         /// OBSOLETE!
         /// </summary>
         /// <returns></returns>
-        public override bool Create()
-        {
-            return false;
-        }
-
-        /// <summary>
-        /// OBSOLETE!
-        /// </summary>
-        /// <returns></returns>
         public override bool Update()
         {
             return false;
@@ -91,32 +82,32 @@ namespace Class_Layer
         /// Creates this database entry
         /// </summary>
         /// <returns>Success</returns>
-        public bool Create(out string message)
+        public override bool Create()
         {
+            bool flawless = true;
             Nullable<int> qID = null;
-            message = String.Empty;
             string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
             string et = Utility_Classes.ConvertTo.OracleDateTime(this.EndDate);
             //insert into database
             if (!Database_Layer.Database.InsertQuestion(this.Title, this.PosterID, st, et, this.Description, this.Urgent, this.Location, this.AmountAccs, (int)this.Status, out qID))
             {
-                message = "Couldn't create new question";
-                return false;
+                Console.WriteLine("Couldn't create new question");
+                flawless = false;
             }
             if (qID == null)
             {
-                message = "Couldn't retrieve newly made question";
-                return false;
+                Console.WriteLine("Couldn't retrieve newly made question");
+                flawless = false;
             }
             foreach (string s in this.Skills)
             {
                 if (!Database_Layer.Database.InsertSkillQuestion(s, Convert.ToInt32(qID)))
                 {
-                    message = "Couldn't add the following skill reference: " + s;
-                    return false;
+                    Console.WriteLine("Couldn't add the following skill reference: " + s);
+                    flawless = false;
                 }
             }
-            return true;
+            return flawless;
 
         }
 
@@ -134,17 +125,16 @@ namespace Class_Layer
         /// Updates this database entry
         /// </summary>
         /// <returns>Success</returns>
-        public bool Update(List<string> oldskills, List<int> oldvolunteers, out string message)
+        public bool Update(List<string> oldskills, List<int> oldvolunteers)
         {
-            message = string.Empty;
+            bool flawless = true;
             string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
             string et = Utility_Classes.ConvertTo.OracleDateTime(this.EndDate);
             //Call database for update query
             if (!Database_Layer.Database.UpdateQuestion(this.PostID, this.Title, this.PosterID, st, et, this.Description, this.Urgent, this.Location, this.AmountAccs, (int)this.Status))
             {
-                message = "Couldn't update question";
+                Console.WriteLine("Couldn't update question");
                 return false;
-                //, this.Skills, this.Volunteers
             }
             #region Update skills
             foreach (string s in this.Skills)
@@ -154,8 +144,8 @@ namespace Class_Layer
                 {
                     if (!Database_Layer.Database.InsertSkillQuestion(s, this.PostID))
                     {
-                        message = "Couldn't add the following skill reference: " + s;
-                        return false;
+                        Console.WriteLine("Couldn't add the following skill reference: " + s);
+                        flawless = false;
                     }
                 }
             }
@@ -166,8 +156,8 @@ namespace Class_Layer
                 {
                     if (!Database_Layer.Database.DeleteSkillQuestion(this.PostID, s))
                     {
-                        message = "Couldn't remove the following skill reference: " + s;
-                        return false;
+                        Console.WriteLine("Couldn't remove the following skill reference: " + s);
+                        flawless = false;
                     }
                 }
             } 
@@ -180,10 +170,10 @@ namespace Class_Layer
                 //If old volunteer list does not have this volunteer, add it
                 if (!oldvolunteers.Contains(v))
                 {
-                    if (!Database_Layer.Database.InsertVolunteer(this.PostID, v))
+                    if (!Database_Layer.Database.InsertQuestionAccount(this.PostID, v))
                     {
-                        message = "Couldn't add the volunteer with ID" + v;
-                        return false;
+                        Console.WriteLine("Couldn't add the volunteer with ID: " + v);
+                        flawless = false;
                     }
                 }
             }
@@ -192,10 +182,10 @@ namespace Class_Layer
                 //If new skills does not have this skill, remove it
                 if (!this.Volunteers.Contains(v))
                 {
-                    if (!Database_Layer.Database.DeleteVolunteer(this.PostID, v))
+                    if (!Database_Layer.Database.DeleteQuestionAccount(this.PostID, v))
                     {
-                        message = "Couldn't remove the volunteer with ID" + v;
-                        return false;
+                        Console.WriteLine("Couldn't remove the volunteer with ID: " + v);
+                        flawless = false;
                     }
                 }
             } 
