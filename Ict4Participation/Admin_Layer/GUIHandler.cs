@@ -125,7 +125,10 @@ namespace Admin_Layer
                 return false;
             }
             //Register account
-            MainUser = Account.Register(acc.Username, password1, acc.Email, acc.Name, acc.Address, acc.City, acc.Phonenumber, acc.hasDriverLicense, acc.hasVehicle, acc.OVPossible, acc.Birthdate, acc.AvatarPath, acc.VOGPath);
+            MainUser = Account.Register(acc.Username, password1, acc.Email, acc.Name, acc.Address, acc.City, acc.Phonenumber, 
+                Convert.ToBoolean(acc.hasDriverLicense), 
+                Convert.ToBoolean(acc.hasVehicle), 
+                Convert.ToBoolean(acc.OVPossible), acc.Birthdate, acc.AvatarPath, acc.VOGPath);
             //TODO
             //Send email
             return true;
@@ -326,7 +329,7 @@ namespace Admin_Layer
         {
             //TODO: Validate details, check for rights
             //Place question
-            Question q = new Question(0, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills);
+            Question q = new Question(0, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, new List<int>());
             q.Create();
             message = "Question placed";
             return true;
@@ -343,7 +346,7 @@ namespace Admin_Layer
         {
             //TODO: Validate details, check for rights
             //Edit question
-            Question q = new Question(LoadedQuestions[questionIndex].PostID, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills);
+            Question q = new Question(LoadedQuestions[questionIndex].PostID, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, LoadedQuestions[questionIndex].Volunteers);
             q.Update();
             message = "Question updated";
             return true;
