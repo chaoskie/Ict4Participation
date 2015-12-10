@@ -239,11 +239,15 @@ namespace Class_Layer
         }
 
         public static Account Update(int ID, string username, string password, string email, string name, string address, string city,
-            string phonenumber, bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG, List<Skill> skills, List<Availability> availability)
+            string phonenumber, bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG, 
+            List<Skill> skills, List<Availability> availability, List<Skill> oldSkills, List<Availability> oldAvailability)
         {
             Account acc = null;
             //TODO
             //Call database to update account with ID
+            //Check for different skill names: 
+            //      remove ones that are no longer there
+            //      add ones that are new
             //Retrieve updated account
             Account.LogIn(ID.ToString(), password, out acc);
             return acc;

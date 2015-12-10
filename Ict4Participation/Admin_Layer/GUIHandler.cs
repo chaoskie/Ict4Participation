@@ -200,14 +200,40 @@ namespace Admin_Layer
         /// <param name="acc">The account details</param>
         /// <param name="message">The message of the error</param>
         /// <returns>Success</returns>
-        public bool Edit(Accountdetails acc, out string message)
+        public bool Edit(Accountdetails acc, string password1, string password2, out string message)
         {
             //TODO
             //Validate details
             //Update account
-            //Account updatedAccount = new Account(MainUser ID... acc stuff)
-            message = "Not implemented";
-            return false;
+            if (password1 == password2)
+            {
+                Account.Update(MainUser.ID,
+                    acc.Username,
+                    password1,
+                    acc.Email,
+                    acc.Name,
+                    acc.Address,
+                    acc.City,
+                    acc.Phonenumber,
+                    Convert.ToBoolean(acc.hasDriverLicense),
+                    Convert.ToBoolean(acc.hasVehicle),
+                    Convert.ToBoolean(acc.OVPossible),
+                    acc.Birthdate,
+                    acc.AvatarPath,
+                    acc.VOGPath,
+                    acc.Skills.Select(s => new Skill(MainUser.ID, s.Name)).Cast<Skill>().ToList(),
+                    acc.Availability.Select(a => new Availability(MainUser.ID, a.Day, a.Daytime)).Cast<Availability>().ToList(),
+                    MainUser.Skills,
+                    MainUser.Availability
+                    );
+                message = "Account edited";
+                return true;
+            }
+            else
+            {
+                message = "Wachtwoorden komen niet overeen!";
+                return false;
+            }
         }
         #endregion
 
