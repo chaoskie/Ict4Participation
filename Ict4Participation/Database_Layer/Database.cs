@@ -462,6 +462,62 @@ namespace Database_Layer
                 return true;
             }
         }
+        /// <summary>
+        /// insert a volunteer on a question he accepted
+        /// </summary>
+        /// <param name="qID">question id</param>
+        /// <param name="uID">volunteer id</param>
+        /// <returns>succes boolean</returns>
+        public static bool InsertQuestionAccount(int qID, int uID)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("INSERT INTO \"Question_Acc\" (\"ACC_ID\", \"QUESTION_ID\") VALUES (:A, :B)");
+                cmd.Parameters.Add(new OracleParameter("A", uID));
+                cmd.Parameters.Add(new OracleParameter("B", qID));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return false;
+                }
+                c.Close();
+                return true;
+            }
+        }
+        /// <summary>
+        /// delete a volunteers response on a question
+        /// </summary>
+        /// <param name="qID">question id</param>
+        /// <param name="uID">volunteer id</param>
+        /// <returns>succes boolean</returns>
+        public static bool DeleteQuestionAccount(int qID, int uID)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("DELETE \"Question_Acc\" WHERE \"ACC_ID\" = :A AND \"QUESTION_ID\" = :B)");
+                cmd.Parameters.Add(new OracleParameter("A", uID));
+                cmd.Parameters.Add(new OracleParameter("B", qID));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return false;
+                }
+                c.Close();
+                return true;
+            }
+        }
 
         #endregion
 
