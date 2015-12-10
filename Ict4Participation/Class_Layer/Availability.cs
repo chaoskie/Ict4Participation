@@ -30,7 +30,7 @@ namespace Class_Layer
         public bool Remove()
         {
             //Call database to remove this availability
-            return Database_Layer.Database.RemoveAvailability(this.UserID, this.Day, this.Daytime);
+            return Database_Layer.Database.DeleteAvailability(this.UserID, this.Day, this.Daytime);
         }
 
         public static List<Availability> GetAll(int userID)
