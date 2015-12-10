@@ -70,17 +70,35 @@ namespace Class_Layer
         public List<int> Volunteers { get; private set; }
 
         /// <summary>
+        /// OBSOLETE!
+        /// </summary>
+        /// <returns></returns>
+        public override bool Create()
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// OBSOLETE!
+        /// </summary>
+        /// <returns></returns>
+        public override bool Update()
+        {
+            return false;
+        }
+
+        /// <summary>
         /// Creates this database entry
         /// </summary>
         /// <returns>Success</returns>
-        public override bool Create(out string message)
+        public bool Create(out string message)
         {
             Nullable<int> qID = null;
             message = String.Empty;
             string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
             string et = Utility_Classes.ConvertTo.OracleDateTime(this.EndDate);
             //insert into database
-            if (!Database_Layer.Database.UpdateQuestion(this.Title, this.PosterID, st, et, this.Description, this.Urgent, this.Location, this.AmountAccs, (int)this.Status, out qID))
+            if (!Database_Layer.Database.InsertQuestion(this.Title, this.PosterID, st, et, this.Description, this.Urgent, this.Location, this.AmountAccs, (int)this.Status, out qID))
             {
                 message = "Couldn't create new question";
                 return false;
@@ -116,7 +134,7 @@ namespace Class_Layer
         /// Updates this database entry
         /// </summary>
         /// <returns>Success</returns>
-        public override bool Update(List<string> oldskills, List<int> oldvolunteers, out string message)
+        public bool Update(List<string> oldskills, List<int> oldvolunteers, out string message)
         {
             message = string.Empty;
             string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
