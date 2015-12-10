@@ -38,7 +38,7 @@ namespace Class_Layer
         public override bool Create()
         {
             //insert into database
-            Database_Layer.Database.PlaceComment(this.PosterID, this.PostedToID, this.Description);
+            Database_Layer.Database.InsertComment(this.PosterID, this.PostedToID, this.Description);
             return true;
         }
 
@@ -49,7 +49,7 @@ namespace Class_Layer
         public override bool Delete()
         {
             //Call database for delete query
-            Database_Layer.Database.RemoveComment(this.PostID, true);
+            Database_Layer.Database.DeleteComment(this.PostID, true);
             return true;
         }
 

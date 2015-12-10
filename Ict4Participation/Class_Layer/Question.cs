@@ -80,7 +80,7 @@ namespace Class_Layer
             string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
             string et = Utility_Classes.ConvertTo.OracleDateTime(this.EndDate);
             //insert into database
-            if (!Database_Layer.Database.NewQuestion(this.Title, this.PosterID, st, et, this.Description, this.Urgent, this.Location, this.AmountAccs, this.Status, out qID))
+            if (!Database_Layer.Database.UpdateQuestion(this.Title, this.PosterID, st, et, this.Description, this.Urgent, this.Location, this.AmountAccs, (int)this.Status, out qID))
             {
                 message = "Couldn't create new question";
                 return false;
@@ -92,12 +92,13 @@ namespace Class_Layer
             }
             foreach (string s in this.Skills)
             {
-                if (!Database_Layer.Database.SkillQuestionAdd(s, Convert.ToInt32(qID)))
+                if (!Database_Layer.Database.InsertSkillQuestion(s, Convert.ToInt32(qID)))
                 {
                     message = "Couldn't add the following skill reference: " + s;
                     return false;
                 }
             }
+            return true;
 
         }
 
@@ -115,12 +116,74 @@ namespace Class_Layer
         /// Updates this database entry
         /// </summary>
         /// <returns>Success</returns>
-        public override bool Update()
+        public override bool Update(List<string> oldskills, List<int> oldvolunteers, out string message)
         {
+            message = string.Empty;
             string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
             string et = Utility_Classes.ConvertTo.OracleDateTime(this.EndDate);
             //Call database for update query
-            return Database_Layer.Database.UpdateQuestion(this.PostID, this.Title, st, et, this.Description, this.Urgent, this.Location, this.AmountAccs, this.Status, this.Skills, this.Volunteers);
+            if (!Database_Layer.Database.UpdateQuestion(this.PostID, this.Title, this.PosterID, st, et, this.Description, this.Urgent, this.Location, this.AmountAccs, (int)this.Status))
+            {
+                message = "Couldn't update question";
+                return false;
+                //, this.Skills, this.Volunteers
+            }
+            #region Update skills
+            foreach (string s in this.Skills)
+            {
+                //If old skills does not have this skill, add it
+                if (!oldskills.Contains(s))
+                {
+                    if (!Database_Layer.Database.InsertSkillQuestion(s, this.PostID))
+                    {
+                        message = "Couldn't add the following skill reference: " + s;
+                        return false;
+                    }
+                }
+            }
+            foreach (string s in oldskills)
+            {
+                //If new skills does not have this skill, remove it
+                if (!this.Skills.Contains(s))
+                {
+                    if (!Database_Layer.Database.DeleteSkillQuestion(this.PostID, s))
+                    {
+                        message = "Couldn't remove the following skill reference: " + s;
+                        return false;
+                    }
+                }
+            } 
+            #endregion
+
+
+            #region Update volunteers
+            foreach (int v in this.Volunteers)
+            {
+                //If old volunteer list does not have this volunteer, add it
+                if (!oldvolunteers.Contains(v))
+                {
+                    if (!Database_Layer.Database.InsertVolunteer(this.PostID, v))
+                    {
+                        message = "Couldn't add the volunteer with ID" + v;
+                        return false;
+                    }
+                }
+            }
+            foreach (int v in oldvolunteers)
+            {
+                //If new skills does not have this skill, remove it
+                if (!this.Volunteers.Contains(v))
+                {
+                    if (!Database_Layer.Database.DeleteVolunteer(this.PostID, v))
+                    {
+                        message = "Couldn't remove the volunteer with ID" + v;
+                        return false;
+                    }
+                }
+            } 
+            #endregion
+
+            return true;
         }
 
         public static List<Question> GetAll(Nullable<int> userID)
