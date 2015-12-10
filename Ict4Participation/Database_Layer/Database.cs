@@ -145,7 +145,8 @@ namespace Database_Layer
         /// <param name="accountID">user that places response</param>
         /// <param name="questionID">question that receives new response</param>
         /// <param name="desc">user input text</param>
-        public static void PlaceComment(int accountID, int questionID, string desc)
+        /// <returns>succes boolean</returns>
+        public static bool PlaceComment(int accountID, int questionID, string desc)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
@@ -162,10 +163,10 @@ namespace Database_Layer
                 catch (OracleException e)
                 {
                     Console.WriteLine(e.Message);
-                    throw;
+                    return false;
                 }
-
                 c.Close();
+                return true;
             }
         }
 
@@ -174,7 +175,8 @@ namespace Database_Layer
         /// </summary>
         /// <param name="commentID">The ID of the comment</param>
         /// <param name="adminDel">Whether or not the admin or user has deleted the message</param>
-        public static void RemoveComment(int commentID, bool adminDel)
+        /// <returns>succes boolean</returns>
+        public static bool RemoveComment(int commentID, bool adminDel)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
@@ -192,10 +194,10 @@ namespace Database_Layer
                     catch (OracleException e)
                     {
                         Console.WriteLine(e.Message);
-                        throw;
+                        return false;
                     }
-
                     c.Close();
+                    return true;
                 }
                 else
                 {
@@ -210,10 +212,10 @@ namespace Database_Layer
                     catch (OracleException e)
                     {
                         Console.WriteLine(e.Message);
-                        throw;
+                        return false;
                     }
-
                     c.Close();
+                    return true;
                 }
             }
         }
@@ -223,7 +225,8 @@ namespace Database_Layer
         /// </summary>
         /// <param name="commentID">The ID of the comment</param>
         /// <param name="commentText">The new text of the comment</param>
-        public static void UpdateComment(int commentID, string commentText)
+        /// <returns>succes boolean</returns>
+        public static bool UpdateComment(int commentID, string commentText)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
@@ -239,10 +242,10 @@ namespace Database_Layer
                 catch (OracleException e)
                 {
                     Console.WriteLine(e.Message);
-                    throw;
+                    return false;
                 }
-
                 c.Close();
+                return true;
             }
         }
 
@@ -260,8 +263,9 @@ namespace Database_Layer
         /// <param name="urgent">urgence of the question</param>
         /// <param name="location">location of the question</param>
         /// <param name="maxHulpverlener">maximum amount of people needed to solve the problem</param>
-        /// <param name="status">status of the question range in 0,1,2,3</param>
-        public static void NewQuestion(string title, int accountid, string startDate, string endDate,
+        /// <param name="status">status of the question range in 0,1,2,3| 0=not accepted, 1=inprogress, 2=done, 3=canceled</param>
+        /// <returns>succes boolean</returns>
+        public static bool NewQuestion(string title, int accountid, string startDate, string endDate,
                               string description, bool urgent, string location, int maxHulpverlener, int status)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
@@ -286,11 +290,13 @@ namespace Database_Layer
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch (OracleException)
+                catch (OracleException e)
                 {
-                    throw;
+                    Console.WriteLine(e.Message);
+                    return false;
                 }
                 c.Close();
+                return true;
             }
         }
 
@@ -299,7 +305,8 @@ namespace Database_Layer
         /// </summary>
         /// <param name="skill">The skill to add</param>
         /// <param name="qID">The ID of the question</param>
-        public static void SkillInsert(string skill, int qID)
+        /// <returns>succes boolean</returns>
+        public static bool SkillQuestionAdd(string skill, int qID)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
@@ -312,12 +319,13 @@ namespace Database_Layer
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch (OracleException)
+                catch (OracleException e)
                 {
-                    throw;
+                    Console.WriteLine(e.Message);
+                    return false;
                 }
-
                 c.Close();
+                return true;
             }
         }
 
@@ -325,7 +333,8 @@ namespace Database_Layer
         /// Delete a question from the database
         /// </summary>
         /// <param name="qID">The ID of the question</param>
-        public static void DeleteQuestion(int qID)
+        /// <returns>succes boolean</returns>
+        public static bool DeleteQuestion(int qID)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
@@ -349,12 +358,13 @@ namespace Database_Layer
                     cmd3.ExecuteNonQuery();
                     cmd4.ExecuteNonQuery();
                 }
-                catch (OracleException)
+                catch (OracleException e)
                 {
-                    throw;
+                    Console.WriteLine(e.Message);
+                    return false;
                 }
-
                 c.Close();
+                return true;
             }
         }
 
@@ -371,7 +381,8 @@ namespace Database_Layer
         /// <param name="location">location of the question</param>
         /// <param name="maxHulpverlener">maximum amount of people needed to solve the problem</param>
         /// <param name="status">status of the question range in 0,1,2,3</param>
-        public static void UpdateQuestion(int qID, string title, int accountid, string startDate, string endDate,
+        /// <returns>succes boolean</returns>
+        public static bool UpdateQuestion(int qID, string title, int accountid, string startDate, string endDate,
                               string description, bool urgent, string location, int maxHulpverlener, int status)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
@@ -394,93 +405,166 @@ namespace Database_Layer
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch (OracleException)
+                catch (OracleException e)
                 {
-                    throw;
+                    Console.WriteLine(e.Message);
+                    return false;
                 }
                 c.Close();
+                return true;
             }
         }
-
         /// <summary>
-        /// Delete an associated skill from a question
+        /// Delete skill question entry
         /// </summary>
-        /// <param name="qID">The ID of the question</param>
-        public static void DelSkillQuestion(int qID)
+        /// <param name="qID">question to delete from</param>
+        /// <param name="name">skill to delete</param>
+        /// <returns>succes boolean</returns>
+        public static bool DelSkillQuestion(int qID, string name)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("DELETE FROM \"Question_Skill\" WHERE \"QUESTION_ID\" = :A");
+                OracleCommand cmd = new OracleCommand("DELETE FROM \"Question_Skill\" WHERE \"QUESTION_ID\" = :A AND \"SKILL_NAME\" = :B");
                 cmd.Parameters.Add(new OracleParameter("A", qID));
+                cmd.Parameters.Add(new OracleParameter("B", name));
                 cmd.Connection = c;
                 try
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch (OracleException)
+                catch (OracleException e)
                 {
-                    throw;
+                    Console.WriteLine(e.Message);
+                    return false;
                 }
                 c.Close();
+                return true;
             }
         }
 
         #endregion
 
         #region account
-
-        public static void NewUser()
-        {/*
+        /// <summary>
+        /// Inserting a new account into the database
+        /// </summary>
+        /// <param name="Username">account username</param>
+        /// <param name="PassHash">hashed password</param>
+        /// <param name="Email">email-adress</param>
+        /// <param name="Name">name of the user</param>
+        /// <param name="Location">adress of the user</param>
+        /// <param name="Village">hometown of the user</param>
+        /// <param name="phone">phonenumber</param>
+        /// <param name="driverLicense">has a driverlicense</param>
+        /// <param name="HasCar">has a car</param>
+        /// <param name="ov">has OV-card</param>
+        /// <param name="Bday">birthday</param>
+        /// <param name="Picture">path to picture</param>
+        /// <param name="sex">sex</param>
+        /// <param name="VOG">vog path</param>
+        /// <returns>succes boolean</returns>
+        public static bool NewUser(string Username, string PassHash, string Email, string Name, string Location, string Village, string phone,
+            bool driverLicense, bool HasCar, bool ov, string Bday, string Picture, string Sex, string VOG)
+        {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
+                int DriverLicense = driverLicense ? 1 : 0;
+                int hasCar = HasCar ? 1 : 0;
+                int OV = ov ? 1 : 0;
+
                 c.Open();
-                OracleCommand cmd = new OracleCommand("INSERT INTO \"Acc\" (\"Name\", \"LOCATION_ID\", \"PassHash\", \"Salt\", \"Avatar\", \"VOG\", \"Description\", \"Role\", \"Sex\", \"Email\") " +
-                   "VALUES( :x, :y, :z, :a, :b, :c, :d, :e, :f, :g)");
-                cmd.Parameters.Add(new OracleParameter("x", name));
-              
+                OracleCommand cmd = new OracleCommand("INSERT INTO \"Acc\" (\"Gebruikersnaam\" ,\"Wachtwoord\" ,\"Email\" ,\"Naam\" ,\"Adres\" ," +
+                    "\"Woonplaats\" ,\"Telefoonnummer\" ,\"HeeftRijbewijs\" ,\"HeeftAuto\" ,\"OVMogelijk\" ,\"Geboortedatum\" ," +
+                    "\"Foto\" ,\"Geslacht\" ,\"VOG\") " +
+                   "VALUES(:un, :ph, :em, :na, :loc, :vil, :phon, :dl, :car, :ov, TO_DATE(:bd), :pic, :sex, :vog)");
+                cmd.Parameters.Add(new OracleParameter("un", Username));
+                cmd.Parameters.Add(new OracleParameter("ph", PassHash));
+                cmd.Parameters.Add(new OracleParameter("em", Email));
+                cmd.Parameters.Add(new OracleParameter("na", Name));
+                cmd.Parameters.Add(new OracleParameter("loc", Location));
+                cmd.Parameters.Add(new OracleParameter("vil", Village));
+                cmd.Parameters.Add(new OracleParameter("phon", phone));
+                cmd.Parameters.Add(new OracleParameter("dl", DriverLicense));
+                cmd.Parameters.Add(new OracleParameter("car", hasCar));
+                cmd.Parameters.Add(new OracleParameter("ov", OV));
+                cmd.Parameters.Add(new OracleParameter("bd", Bday));
+                cmd.Parameters.Add(new OracleParameter("pic", Picture));
+                cmd.Parameters.Add(new OracleParameter("sex", Sex));
+                cmd.Parameters.Add(new OracleParameter("vog", VOG));
                 cmd.Connection = c;
                 try
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch (OracleException)
+                catch (OracleException e)
                 {
-                    throw;
+                    Console.WriteLine(e.Message);
+                    return false;
                 }
                 c.Close();
-            }*/
-            //TODO
+                return true;
+            }
         }
-
         /// <summary>
-        /// Get the ID of a user
+        /// Updating an excisting user
         /// </summary>
-        /// <param name="passHash">The password hash to compare with</param>
-        /// <returns>Returns the ID of the user associated with the password hash</returns>
-        public static DataTable GetUserID(string passHash)
+        /// <param name="uID">Uswer that needs to be updated</param>
+        /// <param name="Username">account username</param>
+        /// <param name="PassHash">hashed password</param>
+        /// <param name="Email">email-adress</param>
+        /// <param name="Name">name of the user</param>
+        /// <param name="Location">adress of the user</param>
+        /// <param name="Village">hometown of the user</param>
+        /// <param name="phone">phonenumber</param>
+        /// <param name="driverLicense">has a driverlicense</param>
+        /// <param name="HasCar">has a car</param>
+        /// <param name="ov">has OV-card</param>
+        /// <param name="Bday">birthday</param>
+        /// <param name="Picture">path to picture</param>
+        /// <param name="sex">sex</param>
+        /// <param name="VOG">vog path</param>
+        /// <returns>Succes boolean</returns>
+        public static bool UpdateUser(int uID, string Username, string PassHash, string Email, string Name, string Location, string Village, string phone,
+           bool driverLicense, bool HasCar, bool ov, string Bday, string Picture, string Sex, string VOG)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
+                int DriverLicense = driverLicense ? 1 : 0;
+                int hasCar = HasCar ? 1 : 0;
+                int OV = ov ? 1 : 0;
+
                 c.Open();
-                OracleCommand cmd = new OracleCommand(
-                    "SELECT \"ID\" FROM \"Acc\" WHERE \"PassHash\"=:z");
-                cmd.Parameters.Add(new OracleParameter("z", passHash));
+                OracleCommand cmd = new OracleCommand("UPDATE \"Acc\" SET \"Gebruikersnaam\" = :un \"Wachtwoord\" = :ph \"Email\" = :em \"Naam\" = :na \"Adres\" = :loc " +
+                    "\"Woonplaats\" = :vil \"Telefoonnummer\" = :phon \"HeeftRijbewijs\" = :dl \"HeeftAuto\" = :car \"OVMogelijk\" = :ov " +
+                    "\"Geboortedatum\" = TO_DATE(:bd) \"Foto\" = :pic \"Geslacht\" = :sex \"VOG\" = :vog WHERE \"ID\" = :id");
+                cmd.Parameters.Add(new OracleParameter("un", Username));
+                cmd.Parameters.Add(new OracleParameter("ph", PassHash));
+                cmd.Parameters.Add(new OracleParameter("em", Email));
+                cmd.Parameters.Add(new OracleParameter("na", Name));
+                cmd.Parameters.Add(new OracleParameter("loc", Location));
+                cmd.Parameters.Add(new OracleParameter("vil", Village));
+                cmd.Parameters.Add(new OracleParameter("phon", phone));
+                cmd.Parameters.Add(new OracleParameter("dl", DriverLicense));
+                cmd.Parameters.Add(new OracleParameter("car", hasCar));
+                cmd.Parameters.Add(new OracleParameter("ov", OV));
+                cmd.Parameters.Add(new OracleParameter("bd", Bday));
+                cmd.Parameters.Add(new OracleParameter("pic", Picture));
+                cmd.Parameters.Add(new OracleParameter("sex", Sex));
+                cmd.Parameters.Add(new OracleParameter("vog", VOG));
+                cmd.Parameters.Add(new OracleParameter("id", uID));
                 cmd.Connection = c;
                 try
                 {
-                    OracleDataReader r = cmd.ExecuteReader();
-                    DataTable result = new DataTable();
-                    result.Load(r);
-                    c.Close();
-                    return result;
+                    cmd.ExecuteNonQuery();
                 }
-                catch (Exception e)
+                catch (OracleException e)
                 {
-                    string debug = e.Message;
-                    c.Close();
-                    throw;
+                    Console.WriteLine(e.Message);
+                    return false;
                 }
+                c.Close();
+                return true;
             }
         }
 
@@ -489,7 +573,8 @@ namespace Database_Layer
         /// </summary>
         /// <param name="skill">The name of the skill</param>
         /// <param name="aID">The account ID</param>
-        public static void SkillInsertAcc(string skill, int aID)
+        /// <returns>Succes boolean</returns>
+        public static bool SkillAccount(string skill, int aID)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
@@ -502,20 +587,50 @@ namespace Database_Layer
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch (OracleException)
+                catch (OracleException e)
                 {
-                    throw;
+                    Console.WriteLine(e.Message);
+                    return false;
                 }
-
                 c.Close();
+                return true;
+            }
+        }
+        /// <summary>
+        /// Delete a skill from a user
+        /// </summary>
+        /// <param name="skill">skill to delete</param>
+        /// <param name="aID">User Id</param>
+        /// <returns>succes boolean</returns>
+        public static bool DelSkillAccount(string skill, int aID)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("DELETE \"Acc_Skill\" WHERE \"SKILL_NAME\" = :A AND \"ACC_ID\" = :B");
+                cmd.Parameters.Add(new OracleParameter("A", skill));
+                cmd.Parameters.Add(new OracleParameter("B", aID));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return false;
+                }
+                c.Close();
+                return true;
             }
         }
 
         /// <summary>
-        /// Delete a user from the database
+        /// delete a user from the database
         /// </summary>
-        /// <param name="userID">The ID of the user</param>
-        public static void DeleteUser(int userID)
+        /// <param name="userID">user to remove</param>
+        /// <returns>succes boolean</returns>
+        public static bool DeleteUser(int userID)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
@@ -527,61 +642,14 @@ namespace Database_Layer
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch (OracleException)
+                catch (OracleException e)
                 {
-                    throw;
+                    Console.WriteLine(e.Message);
+                    return false;
                 }
                 c.Close();
+                return true;
             }
-        }
-
-        public static void UpdateUser()//USER
-        {/*
-            using (OracleConnection c = new OracleConnection(@connectionstring))
-            {
-                c.Open();
-                OracleCommand cmd = new OracleCommand("UPDATE \"Acc\" SET \"Name\" = :B , \"LOCATION_ID\" = :C, \"PassHash\" = :E, \"Avatar\" = :F, \"Sex\"= :D, \"Email\"= :G WHERE \"ID\" = :A");
-                cmd.Parameters.Add(new OracleParameter("B", name));
-              
-                cmd.Connection = c;
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (OracleException)
-                {
-                    throw;
-                }
-                c.Close();
-            }*/
-            //TODO
-        }
-
-        public static void UpdateUser()//ADMIN
-        {/*
-            using (OracleConnection c = new OracleConnection(@connectionstring))
-            {
-                
-                //// Ding dat je wilt aanpassen = (statement) ? (waarde als true) : (waarde als false)
-                //// Werkt niet als je methodes wilt uitvoeren
-                acctype = acctype == "Hulpverlener" ? "V" : "H";
-
-                c.Open();
-                OracleCommand cmd = new OracleCommand("UPDATE \"Acc\" SET \"Name\" = :B , \"LOCATION_ID\" = :C, \"Avatar\" = :F, \"Description\" = :I, \"Role\" = :H, \"Sex\"= :D, \"Email\"= :G WHERE \"ID\" = :A");
-                cmd.Parameters.Add(new OracleParameter("B", name));
-       
-                cmd.Connection = c;
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (OracleException)
-                {
-                    throw;
-                }
-                c.Close();
-            }*/
-            //TODO
         }
         #endregion
 
@@ -593,7 +661,8 @@ namespace Database_Layer
         /// <param name="postedToID">The ID of the account associated with the review</param>
         /// <param name="posterID">The ID of the sender of the review</param>
         /// <param name="desc">The description of the review</param>
-        public static void InsertReview(int rating, int postedToID, int posterID, string desc)
+        /// <returns>Succes boolean</returns>
+        public static bool InsertReview(int rating, int postedToID, int posterID, string desc)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
@@ -609,11 +678,13 @@ namespace Database_Layer
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch (OracleException)
+                catch (OracleException e)
                 {
-                    throw;
+                    Console.WriteLine(e.Message);
+                    return false;
                 }
                 c.Close();
+                return true;
             }
         }
 
@@ -621,7 +692,8 @@ namespace Database_Layer
         /// Delete a review from the database
         /// </summary>
         /// <param name="id">The ID of the review</param>
-        public static void DeleteReview(int id)
+        /// <returns>Succes boolean</returns>
+        public static bool DeleteReview(int id)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
@@ -636,9 +708,10 @@ namespace Database_Layer
                 catch (OracleException e)
                 {
                     Console.WriteLine(e.Message);
-                    throw;
+                    return false;
                 }
                 c.Close();
+                return true;
             }
         }
 
@@ -648,13 +721,14 @@ namespace Database_Layer
         /// <param name="id">The ID of the review</param>
         /// <param name="rating">The new rating of the review</param>
         /// <param name="desc">The new description of the review</param>
-        public static void UpdateReview(int id, int rating, string desc)
+        /// <returns>Succes boolean</returns>
+        public static bool UpdateReview(int id, int rating, string desc)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
                 OracleCommand cmd = new OracleCommand("UPDATE \"Review\" SET \"Rating\" = :a, \"Description\" = :b WHERE \"ID\" = :c ");
-                cmd.Parameters.Add(new OracleParameter("a", rating));                
+                cmd.Parameters.Add(new OracleParameter("a", rating));
                 cmd.Parameters.Add(new OracleParameter("b", desc));
                 cmd.Parameters.Add(new OracleParameter("c", id));
                 cmd.Connection = c;
@@ -662,22 +736,102 @@ namespace Database_Layer
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch (OracleException)
+                catch (OracleException e)
                 {
-                    throw;
+                    Console.WriteLine(e.Message);
+                    return false;
                 }
                 c.Close();
+                return true;
             }
         }
         #endregion
 
         #region availability
-                //TODO
+        /// <summary>
+        /// searches if the availability entry is already made, if not then it will be added, otherwise select and create reference to the user.
+        /// </summary>
+        /// <param name="uID">user id</param>
+        /// <param name="day">day of the week</param>
+        /// <param name="period">stance of the sun</param>
+        /// <returns>succes boolean</returns>
+        public static bool InsertAvailability(int uID, string day, string period)
+        {
+            Nullable<int> foundID = null;//zoek naar bestaan van entry
+            DataTable tdb = RetrieveQuery("SELECT \"ID\" FROM \"Availability\" WHERE \"Day\" = " + day + ", \"Period\" = " + period);
+            foreach (DataRow r in tdb.Rows)
+            {
+                foundID = Convert.ToInt32(r["ID"]);//haal id van bestaande entry op, zo niet dan null
+            }
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                if (foundID == null)
+                {//als entry niet bestaat, dan creëer
+                    OracleCommand cmd = new OracleCommand("INSERT INTO \"Availability\" (\"Day\", \"Period\") VALUES (:a, :b)");
+                    cmd.Parameters.Add(new OracleParameter("a", day));
+                    cmd.Parameters.Add(new OracleParameter("b", period));
+
+                    cmd.ExecuteNonQuery();
+                    //haal id opnieuw op
+                    DataTable tdb2 = RetrieveQuery("SELECT \"ID\" FROM \"Availability\" WHERE \"Day\" = " + day + ", \"Period\" = " + period);
+                    foreach (DataRow r in tdb2.Rows)
+                    {
+                        foundID = Convert.ToInt32(r["ID"]);
+                    }
+                }
+                //maak referentie tussen user en entry
+                OracleCommand cmd1 = new OracleCommand("INSERT INTO \"Availability_Acc\" (\"ACC_ID\", \"AVAILABILITY_ID\") VALUES (:a, :b)");
+                cmd1.Parameters.Add(new OracleParameter("a", uID));
+                cmd1.Parameters.Add(new OracleParameter("b", foundID));
+                try
+                {
+                    cmd1.ExecuteNonQuery();
+                }
+                catch (OracleException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return false;
+                }
+                c.Close();
+                return true;
+            }
+        }
+        public static bool DeleteAvailability(int userId, string day, string period)
+        {
+            Nullable<int> foundID = null;//zoek naar bestaan van entry
+            DataTable tdb = RetrieveQuery("SELECT \"ID\" FROM \"Availability\" WHERE \"Day\" = " + day + ", \"Period\" = " + period);
+            foreach (DataRow r in tdb.Rows)
+            {
+                foundID = Convert.ToInt32(r["ID"]);//haal id van bestaande entry op, zo niet dan null
+            }
+            if (foundID == null) return false;
+
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("DELETE \"Availability_Acc\" WHERE \"ACC_ID\" = :a AND \"AVAILABILITY_ID\" = "+foundID);
+                cmd.Parameters.Add(new OracleParameter("a", userId));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return false;
+                }
+                c.Close();
+                return true;
+            }
+            
+        }
         #endregion
 
         #region meeting
-       
-       
+
+
         public static void InsertMeeting()
         {/*
             using (OracleConnection c = new OracleConnection(@connectionstring))
@@ -751,7 +905,7 @@ namespace Database_Layer
             //TODO
         }
 
-        
+
         public static void InsertMeeting()//no date just location
         {/*
             using (OracleConnection c = new OracleConnection(@connectionstring))
