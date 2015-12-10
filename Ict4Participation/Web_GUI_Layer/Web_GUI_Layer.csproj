@@ -66,7 +66,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="hoofdmenu.aspx" />
+    <Content Include="inloggen.aspx" />
     <Content Include="packages.config" />
+    <Content Include="zoeken.aspx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -75,10 +78,55 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="post.aspx" />
+    <Content Include="profiel.aspx" />
+    <Content Include="registreren.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="hoofdmenu.aspx.cs">
+      <DependentUpon>hoofdmenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="hoofdmenu.aspx.designer.cs">
+      <DependentUpon>hoofdmenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="inloggen.aspx.cs">
+      <DependentUpon>inloggen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="inloggen.aspx.designer.cs">
+      <DependentUpon>inloggen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="post.aspx.cs">
+      <DependentUpon>post.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="post.aspx.designer.cs">
+      <DependentUpon>post.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="profiel.aspx.cs">
+      <DependentUpon>profiel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="profiel.aspx.designer.cs">
+      <DependentUpon>profiel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="registreren.aspx.cs">
+      <DependentUpon>registreren.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="registreren.aspx.designer.cs">
+      <DependentUpon>registreren.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="zoeken.aspx.cs">
+      <DependentUpon>zoeken.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="zoeken.aspx.designer.cs">
+      <DependentUpon>zoeken.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\CSS\" />
