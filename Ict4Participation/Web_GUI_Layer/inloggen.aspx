@@ -25,10 +25,10 @@
 							<p>Registreren</p>
 						</button><!--
 						REMOVE ONCLICK
-					 --><button onclick="window.location.href = 'hoofdmenu.html';">
+						<button onclick="window.location.href = 'hoofdmenu.html';">
 					 		<i class="fa fa-sign-in"></i>
 					 		<p>Inloggen</p>
-					 	</button>
+					 	</button>-->
 					</div>
 				</div>
 			</div>
@@ -39,17 +39,19 @@
 			<div class="container">
 				<div class="form-signin">
 					<h2 class="form-signin-heading">Log In</h2>
-					<label for="inputEmail" class="sr-only">Email address</label>
-					<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required />
-					<label for="inputPassword" class="sr-only">Password</label>
-					<input type="password" id="inputPassword" class="form-control" placeholder="Password" required />
+					<label for="inputEmail" class="sr-only">Email</label>
+					<input type="email" id="inputEmail" class="form-control" placeholder="Email" required />
+					<label for="inputPassword" class="sr-only">Wachtwoord</label>
+					<input type="password" id="inputPassword" class="form-control" placeholder="Wachtwoord" required />
 					<div class="checkbox">
 						<label>
 							<input type="checkbox" value="remember-me">
 							<span></span>
-							<span>Remember me</span>
+							<span>Onthoud mij</span>
 						</label>
 					</div>
+					<br />
+					<button class="btn btn-custom btn-block" onclick="window.location.href = 'hoofdmenu.html';">Login</button>
 				</div>
 			</div>
 		</main>

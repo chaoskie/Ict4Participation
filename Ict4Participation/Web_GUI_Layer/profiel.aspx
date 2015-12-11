@@ -24,11 +24,11 @@
 							<i class="fa fa-chevron-left"></i>
 							<p>Terug</p>
 						</button><!--
-					 --><button>
+					 --><button onclick="window.location.href = 'plaatsvraag.html';">
 					 		<i class="fa fa-question"></i>
 					 		<p>Plaats Vraag</p>
 					 	</button><!--
-					 --><button>
+					 --><button onclick="window.location.href = 'gebruikers.html';">
 					 		<i class="fa fa-user"></i>
 					 		<p>Gebruikers</p>
 					 	</button><!--
@@ -44,7 +44,8 @@
 		<!-- MAIN -->
 		<main id="main">
 			<div class="container">
-
+				<h2>Eigen profiel</h2>
+				
 				<!-- PROFIEL -->
 				<div id="profiel_section" class="row">
 					<div class="col-xs-6 col-xs-offset-3 col-sm-3 col-sm-offset-0">
@@ -78,7 +79,7 @@
 								</li>
 								<li>
 									<a href="#">Dit is een andere melding</a>
-									<a href="#" data-id="2">Harry JeMoeder</a>
+									<a href="#" data-id="2">Harry Nogwat</a>
 								</li>
 							</ul>
 						</div>
@@ -104,7 +105,7 @@
 								</li>
 								<li>
 									<a href="#">Dit is een andere review</a>
-									<a href="#" data-id="2">Harry JeMoeder</a>
+									<a href="#" data-id="2">Harry Nogwat</a>
 								</li>
 							</ul>
 						</div>

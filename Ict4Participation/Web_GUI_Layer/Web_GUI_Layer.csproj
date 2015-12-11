@@ -66,9 +66,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="gebruikers.aspx" />
     <Content Include="hoofdmenu.aspx" />
     <Content Include="inloggen.aspx" />
     <Content Include="packages.config" />
+    <Content Include="plaatsvraag.aspx" />
     <Content Include="zoeken.aspx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -84,6 +86,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="gebruikers.aspx.cs">
+      <DependentUpon>gebruikers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="gebruikers.aspx.designer.cs">
+      <DependentUpon>gebruikers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="hoofdmenu.aspx.cs">
       <DependentUpon>hoofdmenu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -97,6 +106,13 @@
     </Compile>
     <Compile Include="inloggen.aspx.designer.cs">
       <DependentUpon>inloggen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="plaatsvraag.aspx.cs">
+      <DependentUpon>plaatsvraag.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="plaatsvraag.aspx.designer.cs">
+      <DependentUpon>plaatsvraag.aspx</DependentUpon>
     </Compile>
     <Compile Include="post.aspx.cs">
       <DependentUpon>post.aspx</DependentUpon>

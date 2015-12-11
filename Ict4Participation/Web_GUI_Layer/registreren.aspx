@@ -21,7 +21,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<!-- REMOVE ONCLICK -->
-						<button>
+						<button onclick="window.location.href = 'inloggen.html';">
 							<i class="fa fa-times-circle"></i>
 							<p>Annuleren</p>
 						</button>
@@ -35,89 +35,123 @@
 			<div class="container">
 				<!-- Algemene gegevens -->
 				<div class="form-group">
-					<h2>Algemene gegevens</h2>
+					<h2>Registreren</h2>
 					<div class="row">
-						<div class="col-tn-12 col-xs-8">
-							<label for="inputVoornaam" class="sr-only">Voornaam</label>
-							<input type="text" id="inputVoornaam" class="form-control" placeholder="Voornaam" required />
-						</div>
-						<div class="col-tn-12 col-xs-4">
-							<label for="inputTussenvoegsel" class="sr-only">Tussenvoegsel</label>
-							<input type="text" id="inputTussenvoegsel" class="form-control" placeholder="Tussenvoegsel" required />
+						<div class="col-xs-12">
+							<ul class="nav nav-tabs">
+								<li class="active"><a data-toggle="tab" href="#tab_form1">Algemene gegevens</a></li>
+								<li><a data-toggle="tab" href="#tab_form2">Accountgegevens</a></li>
+								<li><a data-toggle="tab" href="#tab_form3">Profielfoto</a></li>
+							</ul>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-xs-12">
-							<label for="inputAchternaam" class="sr-only">Achternaam</label>
-							<input type="text" id="inputAchternaam" class="form-control" placeholder="Achternaam" required />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-tn-12 col-xs-8">
-							<label for="inputStraatnaam" class="sr-only">Straatnaam</label>
-							<input type="text" id="inputStraatnaam" class="form-control" placeholder="Straatnaam" required />
-						</div>
-						<div class="col-tn-12 col-xs-4">
-							<label for="inputHuisnummer" class="sr-only">Huisnummer</label>
-							<input type="text" id="inputHuisnummer" class="form-control" placeholder="Huisnr" required />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-12">
-							<label for="inputWoonplaats" class="sr-only">Woonplaats</label>
-							<input type="text" id="inputWoonplaats" class="form-control" placeholder="Woonplaats" required />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-12">
-							<label for="inputTelefoonnummer" class="sr-only">Telefoonnummer</label>
-							<input type="text" id="inputTelefoonnummer" class="form-control" placeholder="Telefoonnummer" required />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-tn-12 col-xs-3 col-sm-2">
-							<h4 id="lbl_geslacht">Geslacht:</h4>
-						</div>
-						<div class="col-tn-12 col-xs-9 col-sm-10">
-							<div class="form-group">
-								<label for="input_geslacht" class="sr-only">Geslacht</label>
-								<select id="input_geslacht" class="form-control">
-									<option>Man</option>
-									<option>Vrouw</option>
-								</select>
+							<div class="tab-content">
+								
+								<!-- Algemene gegevens -->
+								<div id="tab_form1" class="tab-pane fade in active">
+									<div class="form-group">
+										<h2>Algemene gegevens</h2>
+										<div class="row">
+											<div class="col-tn-12 col-xs-8">
+												<label for="inputVoornaam" class="sr-only">Voornaam</label>
+												<input type="text" id="inputVoornaam" class="form-control" placeholder="Voornaam" required />
+											</div>
+											<div class="col-tn-12 col-xs-4">
+												<label for="inputTussenvoegsel" class="sr-only">Tussenvoegsel</label>
+												<input type="text" id="inputTussenvoegsel" class="form-control" placeholder="Tussenvoegsel" required />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-12">
+												<label for="inputAchternaam" class="sr-only">Achternaam</label>
+												<input type="text" id="inputAchternaam" class="form-control" placeholder="Achternaam" required />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-tn-12 col-xs-8">
+												<label for="inputStraatnaam" class="sr-only">Straatnaam</label>
+												<input type="text" id="inputStraatnaam" class="form-control" placeholder="Straatnaam" required />
+											</div>
+											<div class="col-tn-12 col-xs-4">
+												<label for="inputHuisnummer" class="sr-only">Huisnummer</label>
+												<input type="text" id="inputHuisnummer" class="form-control" placeholder="Huisnr" required />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-12">
+												<label for="inputWoonplaats" class="sr-only">Woonplaats</label>
+												<input type="text" id="inputWoonplaats" class="form-control" placeholder="Woonplaats" required />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-12">
+												<label for="inputTelefoonnummer" class="sr-only">Telefoonnummer</label>
+												<input type="text" id="inputTelefoonnummer" class="form-control" placeholder="Telefoonnummer" required />
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-tn-12 col-xs-3 col-sm-2">
+												<h4 id="lbl_geslacht">Geslacht:</h4>
+											</div>
+											<div class="col-tn-12 col-xs-9 col-sm-10">
+												<div class="form-group">
+													<label for="input_geslacht" class="sr-only">Geslacht</label>
+													<select id="input_geslacht" class="form-control">
+														<option>Man</option>
+														<option>Vrouw</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- Account gegevens -->
+								<div id="tab_form2" class="tab-pane fade">
+									<div class="form-group">
+										<h2>Account gegevens</h2>
+										<div class="row">
+											<div class="col-xs-12">
+												<label for="inputEmail" class="sr-only">Email adres</label>
+												<input type="email" id="inputEmail" class="form-control" placeholder="Email adres" required />
+											</div>
+											<div class="col-xs-12">
+												<label for="inputGebruikersnaam" class="sr-only">Gebruikersnaam</label>
+												<input type="text" id="inputGebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required />
+											</div>
+											<div class="col-xs-12">
+												<label for="inputWachtwoord1" class="sr-only">Wachtwoord</label>
+												<input type="password" id="inputWachtwoord1" class="form-control" placeholder="Wachtwoord" required />
+											</div>
+											<div class="col-xs-12">
+												<label for="inputWachtwoord2" class="sr-only">Herhaal wachtwoord</label>
+												<input type="password" id="inputWachtwoord2" class="form-control" placeholder="Herhaal wachtwoord" required />
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<!-- Rol specifieke gegevens -->
+								<div id="tab_form3" class="tab-pane fade">
+									<div class="form-group">
+										<h2>Profielfoto</h2>
+										<div class="row">
+											<div class="col-xs-12">
+												<label for="inputProfielfoto" class="sr-only">Selecteer profielfoto</label>
+												<input id="inputProfielfoto" class="file" type="file" />
+											</div>
+										</div>
+									</div>
+								</div>
+
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<!-- Account gegevens -->
-				<div class="form-group">
-					<h2>Account gegevens</h2>
-					<div class="row">
-						<div class="col-xs-12">
-							<label for="inputEmail" class="sr-only">Email adres</label>
-							<input type="email" id="inputEmail" class="form-control" placeholder="Email adres" required />
-						</div>
-						<div class="col-xs-12">
-							<label for="inputGebruikersnaam" class="sr-only">Gebruikersnaam</label>
-							<input type="text" id="inputGebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required />
-						</div>
-						<div class="col-xs-12">
-							<label for="inputWachtwoord1" class="sr-only">Wachtwoord</label>
-							<input type="password" id="inputWachtwoord1" class="form-control" placeholder="Wachtwoord" required />
-						</div>
-						<div class="col-xs-12">
-							<label for="inputWachtwoord2" class="sr-only">Herhaal wachtwoord</label>
-							<input type="password" id="inputWachtwoord2" class="form-control" placeholder="Herhaal wachtwoord" required />
-						</div>
-						<div class="col-xs-12">
-							<h3>Profielfoto</h3>
-							<label for="inputProfielfoto" class="sr-only">Selecteer profielfoto</label>
-							<input id="inputProfielfoto" class="file" type="file" />
-						</div>
-					</div>
-				</div>
-
+				<!-- Rol specifieke gegevens -->
 				<div class="form-group">
 					<h2>Rol specifieke gegevens</h2>
 					<div class="row">
@@ -178,8 +212,8 @@
 										<div class="row">
 											<div class="col-xs-12">
 												<h3><abbr title="Verklaring Omtrend Gedrag">VOG</abbr></h3>
-												<label for="inputProfielfoto" class="sr-only">Selecteer profielfoto</label>
-												<input id="inputProfielfoto" class="file" type="file" />
+												<label for="inputVOG" class="sr-only">Selecteer profielfoto</label>
+												<input id="inputVOG" class="file" type="file" />
 											</div>
 										</div>
 										<br />
