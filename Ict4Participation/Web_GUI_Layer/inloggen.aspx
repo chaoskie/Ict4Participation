@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="inloggen.aspx.cs" Inherits="Web_GUI_Layer.inloggen" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <!-- Meta information -->
 	<meta charset="UTF-8" />
@@ -19,52 +19,52 @@
 </head>
 <body>
     <form runat="server">
-	<div id="wrapper">
-		<!-- NAVIGATION -->
-		<nav>
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-xs-12">
-						<button onserverclick="btnRegistreren_Click" runat="server">
-							<i class="fa fa-user-plus"></i>
-							<p>Registreren</p>
-						</button>
-					</div>
-				</div>
-			</div>
-		</nav>
+	    <div id="wrapper">
+
+		    <!-- NAVIGATION -->
+		    <nav>
+			    <div class="container-fluid">
+				    <div class="row">
+					    <div class="col-xs-12">
+						    <button onserverclick="btnRegistreren_Click" runat="server">
+							    <i class="fa fa-user-plus"></i>
+							    <p>Registreren</p>
+						    </button>
+					    </div>
+				    </div>
+			    </div>
+		    </nav>
 		
-		<!-- MAIN -->
-		<main id="main">
-			<div class="container">
-				<div class="form-signin">
-					<h2 class="form-signin-heading">Log In</h2>
+		    <!-- MAIN -->
+		    <main id="main">
+			    <div class="container">
+				    <div class="form-signin">
+					    <h2 class="form-signin-heading">Log In</h2>
 
-                    <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
+                        <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
-					<label for="inputEmail" class="sr-only">Email</label>
-					<input type="email" id="inputEmail" class="form-control" placeholder="Email" required="required" runat="server" />
-					<label for="inputPassword" class="sr-only">Wachtwoord</label>
-					<input type="password" id="inputPassword" class="form-control" placeholder="Wachtwoord" required="required" runat="server" />
-					<div class="checkbox">
-						<label>
-							<input type="checkbox" value="remember-me" />
-							<span></span>
-							<span>Onthoud mij</span>
-						</label>
-					</div>
-					<br />
-                    <asp:Button CssClass="btn btn-custom btn-block" OnClick="btnLogin_Click" Text="Login" runat="server" />
-				</div>
-			</div>
-		</main>
-	</div>
+					    <label for="inputEmail" class="sr-only">Email</label>
+					    <input type="email" id="inputEmail" class="form-control" placeholder="Email" required="required" runat="server" />
+					    <label for="inputPassword" class="sr-only">Wachtwoord</label>
+					    <input type="password" id="inputPassword" class="form-control" placeholder="Wachtwoord" required="required" runat="server" />
+					    <div class="checkbox">
+						    <label>
+							    <input type="checkbox" value="remember-me" />
+							    <span></span>
+							    <span>Onthoud mij</span>
+						    </label>
+					    </div>
+					    <br />
+                        <asp:Button CssClass="btn btn-custom btn-block" OnClick="btnLogin_Click" Text="Login" runat="server" />
+				    </div>
+			    </div>
+		    </main>
+	    </div>
     </form>
 	
     <!-- Scripts -->
     <script src="Content/JS/jquery-1.11.3.min.js"></script>
     <script src="Content/JS/bootstrap.min.js"></script>
-    <script src="Content/JS/inloggen.js""></script>
 	<script src="Content/JS/errormessage.js"></script>
 </body>
 </html>

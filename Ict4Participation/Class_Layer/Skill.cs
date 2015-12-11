@@ -53,7 +53,7 @@ namespace Class_Layer
                     skills.Add(
                         new Skill(
                             0,
-                            row["UName"].ToString()
+                            row["Name"].ToString() //row["UName"].ToString()
                             ));
                 }
             }

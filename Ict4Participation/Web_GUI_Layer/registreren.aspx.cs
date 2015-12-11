@@ -15,6 +15,13 @@ namespace Web_GUI_Layer
         protected void Page_Load(object sender, EventArgs e)
         {
             GUIHandler = new GUIHandler();
+
+            // Zet alle mogelijke skills in #select_skills
+            List<Skilldetails> skills = GUIHandler.GetAllSkills();
+            foreach (Skilldetails skill in skills)
+            {
+                select_skills.Items.Add(skill.Name);
+            }
         }
 
         protected void btnAnnuleren_Click(object sender, EventArgs e)
