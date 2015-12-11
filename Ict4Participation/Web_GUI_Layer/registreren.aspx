@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="css/input.css" />
 </head>
 <body>
+    <form runat="server">
 	<div id="wrapper">
 		<!-- NAVIGATION -->
 		<nav>
@@ -21,7 +22,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<!-- REMOVE ONCLICK -->
-						<button onclick="window.location.href = 'inloggen.html';">
+						<button onserverclick="btnAnnuleren_Click" runat="server">
 							<i class="fa fa-times-circle"></i>
 							<p>Annuleren</p>
 						</button>
@@ -36,8 +37,10 @@
 				<!-- Algemene gegevens -->
 				<div class="form-group">
 					<h2>Registreren</h2>
-					<div id="error_message" class="error error-red error-hidden">Gebruikersnaam of wachtwoord is verkeerd!</div>
-					<div class="row">
+
+					<asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
+
+                    <div class="row">
 						<div class="col-xs-12">
 							<ul class="nav nav-tabs">
 								<li class="active"><a data-toggle="tab" href="#tab_form1">Algemene gegevens</a></li>
@@ -57,39 +60,39 @@
 										<div class="row">
 											<div class="col-tn-12 col-xs-8">
 												<label for="inputVoornaam" class="sr-only">Voornaam</label>
-												<input type="text" id="inputVoornaam" class="form-control" placeholder="Voornaam" required />
+												<input type="text" id="inputVoornaam" class="form-control" placeholder="Voornaam" required="required" runat="server" />
 											</div>
 											<div class="col-tn-12 col-xs-4">
 												<label for="inputTussenvoegsel" class="sr-only">Tussenvoegsel</label>
-												<input type="text" id="inputTussenvoegsel" class="form-control" placeholder="Tussenvoegsel" required />
+												<input type="text" id="inputTussenvoegsel" class="form-control" placeholder="Tussenvoegsel" runat="server" />
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-xs-12">
 												<label for="inputAchternaam" class="sr-only">Achternaam</label>
-												<input type="text" id="inputAchternaam" class="form-control" placeholder="Achternaam" required />
+												<input type="text" id="inputAchternaam" class="form-control" placeholder="Achternaam" required="required" runat="server" />
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-tn-12 col-xs-8">
 												<label for="inputStraatnaam" class="sr-only">Straatnaam</label>
-												<input type="text" id="inputStraatnaam" class="form-control" placeholder="Straatnaam" required />
+												<input type="text" id="inputStraatnaam" class="form-control" placeholder="Straatnaam" required="required" runat="server" />
 											</div>
 											<div class="col-tn-12 col-xs-4">
 												<label for="inputHuisnummer" class="sr-only">Huisnummer</label>
-												<input type="text" id="inputHuisnummer" class="form-control" placeholder="Huisnr" required />
+												<input type="text" id="inputHuisnummer" class="form-control" placeholder="Huisnr" required="required" runat="server" />
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-xs-12">
 												<label for="inputWoonplaats" class="sr-only">Woonplaats</label>
-												<input type="text" id="inputWoonplaats" class="form-control" placeholder="Woonplaats" required />
+												<input type="text" id="inputWoonplaats" class="form-control" placeholder="Woonplaats" required="required" runat="server" />
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-xs-12">
 												<label for="inputTelefoonnummer" class="sr-only">Telefoonnummer</label>
-												<input type="text" id="inputTelefoonnummer" class="form-control" placeholder="Telefoonnummer" required />
+												<input type="text" id="inputTelefoonnummer" class="form-control" placeholder="Telefoonnummer" required="required" runat="server" />
 											</div>
 										</div>
 										<div class="row">
@@ -99,7 +102,7 @@
 											<div class="col-tn-12 col-xs-9 col-sm-10">
 												<div class="form-group">
 													<label for="input_geslacht" class="sr-only">Geslacht</label>
-													<select id="input_geslacht" class="form-control">
+													<select id="input_geslacht" class="form-control" runat="server" required="required">
 														<option>Man</option>
 														<option>Vrouw</option>
 													</select>
@@ -116,19 +119,19 @@
 										<div class="row">
 											<div class="col-xs-12">
 												<label for="inputEmail" class="sr-only">Email adres</label>
-												<input type="email" id="inputEmail" class="form-control" placeholder="Email adres" required />
+												<input type="email" id="inputEmail" class="form-control" placeholder="Email adres" required="required" runat="server" />
 											</div>
 											<div class="col-xs-12">
 												<label for="inputGebruikersnaam" class="sr-only">Gebruikersnaam</label>
-												<input type="text" id="inputGebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required />
+												<input type="text" id="inputGebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required="required" runat="server" />
 											</div>
 											<div class="col-xs-12">
 												<label for="inputWachtwoord1" class="sr-only">Wachtwoord</label>
-												<input type="password" id="inputWachtwoord1" class="form-control" placeholder="Wachtwoord" required />
+												<input type="password" id="inputWachtwoord1" class="form-control" placeholder="Wachtwoord" required="required" runat="server" />
 											</div>
 											<div class="col-xs-12">
 												<label for="inputWachtwoord2" class="sr-only">Herhaal wachtwoord</label>
-												<input type="password" id="inputWachtwoord2" class="form-control" placeholder="Herhaal wachtwoord" required />
+												<input type="password" id="inputWachtwoord2" class="form-control" placeholder="Herhaal wachtwoord" required="required" runat="server" />
 											</div>
 										</div>
 									</div>
@@ -141,7 +144,7 @@
 										<div class="row">
 											<div class="col-xs-12">
 												<label for="inputProfielfoto" class="sr-only">Selecteer profielfoto</label>
-												<input id="inputProfielfoto" class="file" type="file" />
+												<input id="inputProfielfoto" class="file" type="file" required="required" runat="server" />
 											</div>
 										</div>
 									</div>
@@ -170,7 +173,7 @@
 									<div class="form-group">
 										<div class="row">
 											<div class="col-xs-12">
-												<button class="btn btn-custom btn-block btn-registreer">Registreer als hulpbehoevende</button>
+												<button onserverclick="btnRegistreerHulpBehoevende_Click" class="btn btn-custom btn-block btn-registreer" runat="server">Registreer als hulpbehoevende</button>
 											</div>
 										</div>
 									</div>
@@ -182,7 +185,7 @@
 												<h2>Skills</h2>
 												<div class="form-group">
 													<label for="select_skills" class="sr-only">Skills</label>
-													<select id="select_skills" class="form-control">
+													<select id="select_skills" class="form-control" runat="server">
 														<option>Auto</option>
 													</select>
 												</div>
@@ -190,18 +193,17 @@
 										</div>
 										<div class="row">
 											<div class="col-tn-12 col-xs-6">
-												<button class="btn btn-custom2 btn-block">Voeg Toe</button>
+												<button id="btnSkillVoegToe" class="btn btn-custom2 btn-block" runat="server">Voeg Toe</button>
 											</div>
 											<div class="col-tn-12 col-xs-6">
-												<button class="btn btn-custom2 btn-block">Verwijder</button>
+												<button id="btnSkillVerwijder" class="btn btn-custom2 btn-block" runat="server">Verwijder</button>
 											</div>
 										</div>
 										<div class="row">
 											<div class="form-group">
 												<div class="col-xs-12">
 													<h3>Toegevoegde skills:</h3>
-													<select size="5" id="select_skills_output" class="form-control">
-														
+													<select size="5" id="select_skills_output" class="form-control" runat="server">
 														<option>Auto</option>
 														<option>Auto</option>
 														<option>Auto</option>
@@ -214,13 +216,13 @@
 											<div class="col-xs-12">
 												<h3><abbr title="Verklaring Omtrend Gedrag">VOG</abbr></h3>
 												<label for="inputVOG" class="sr-only">Selecteer profielfoto</label>
-												<input id="inputVOG" class="file" type="file" />
+												<input id="inputVOG" class="file" type="file" runat="server" />
 											</div>
 										</div>
 										<br />
 										<div class="row">
 											<div class="col-xs-12">
-												<button class="btn btn-custom btn-block btn-registreer">Registreer als vrijwilliger</button>
+												<button onserverclick="btnRegistreerVrijwilliger_Click" class="btn btn-custom btn-block btn-registreer" runat="server">Registreer als vrijwilliger</button>
 											</div>
 										</div>
 									</div>
@@ -232,6 +234,7 @@
 			</div>
 		</main>
 	</div>
+    </form>
 	
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

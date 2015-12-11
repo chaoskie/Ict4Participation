@@ -26,7 +26,7 @@ namespace Admin_Layer
     /// <summary>
     /// Communicates between the GUI and classes
     /// </summary>
-    class GUIHandler
+    public class GUIHandler
     {
         /// <summary>
         /// The main user's account
@@ -85,11 +85,21 @@ namespace Admin_Layer
         /// <returns>Yields a true if the user could be logged in</returns>
         public bool LogIn(string username, string password, out string message)
         {
-            message = String.Empty;
+            message = string.Empty;
             //Fetch matching account
-            if (!Account.LogIn(username, password, out MainUser))
+            if (string.IsNullOrEmpty(username))
             {
-                message = "Gebruikersnaam en wachtwoord komen niet overeen!";
+                message = "Email is niet ingevuld!";
+                return false;
+            }
+            else if (string.IsNullOrEmpty(password))
+            {
+                message = "Wachtwoord is niet ingevuld!";
+                return false;
+            }
+            else if (!Account.LogIn(username, password, out MainUser))
+            {
+                message = "De combinatie van email en wachtwoord bestaat niet!";
                 return false;
             }
             return true;
@@ -113,7 +123,7 @@ namespace Admin_Layer
         /// <returns>Yields a true if the user could be created</returns>
         public bool Register(Accountdetails acc, string password1, string password2, out string message)
         {
-            message = String.Empty;
+            message = string.Empty;
             //Validate details
             if (Check.CheckAccount(acc, out message))
             {
