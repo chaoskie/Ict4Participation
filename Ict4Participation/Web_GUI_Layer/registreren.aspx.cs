@@ -16,6 +16,9 @@ namespace Web_GUI_Layer
         {
             GUIHandler = new GUIHandler();
 
+            // Maak #select_skills leeg
+            select_skills.Items.Clear();
+
             // Zet alle mogelijke skills in #select_skills
             List<Skilldetails> skills = GUIHandler.GetAllSkills();
             foreach (Skilldetails skill in skills)
