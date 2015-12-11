@@ -36,6 +36,7 @@
 				<!-- Algemene gegevens -->
 				<div class="form-group">
 					<h2>Registreren</h2>
+					<div id="error_message" class="error error-red error-hidden">Gebruikersnaam of wachtwoord is verkeerd!</div>
 					<div class="row">
 						<div class="col-xs-12">
 							<ul class="nav nav-tabs">
@@ -236,5 +237,6 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/fileinput.min.js"></script>
 	<script src="js/inloggen.js"></script>
+	<script src="js/errormessage.js"></script>
 </body>
 </html>

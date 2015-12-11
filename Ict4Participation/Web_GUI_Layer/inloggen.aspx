@@ -23,12 +23,7 @@
 						<button onclick="window.location.href = 'registreren.html';">
 							<i class="fa fa-user-plus"></i>
 							<p>Registreren</p>
-						</button><!--
-						REMOVE ONCLICK
-						<button onclick="window.location.href = 'hoofdmenu.html';">
-					 		<i class="fa fa-sign-in"></i>
-					 		<p>Inloggen</p>
-					 	</button>-->
+						</button>
 					</div>
 				</div>
 			</div>
@@ -39,6 +34,9 @@
 			<div class="container">
 				<div class="form-signin">
 					<h2 class="form-signin-heading">Log In</h2>
+
+					<div id="error_message" class="error error-red error-hidden">Gebruikersnaam of wachtwoord is verkeerd!</div>
+
 					<label for="inputEmail" class="sr-only">Email</label>
 					<input type="email" id="inputEmail" class="form-control" placeholder="Email" required />
 					<label for="inputPassword" class="sr-only">Wachtwoord</label>
@@ -59,5 +57,6 @@
 	
 	<script src="js/jquery-1.11.3.min.js"></script>
 	<script src="js/inloggen.js"></script>
+	<script src="js/errormessage.js"></script>
 </body>
 </html>
