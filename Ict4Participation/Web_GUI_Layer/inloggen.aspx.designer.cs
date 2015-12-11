@@ -22,21 +22,21 @@ namespace Web_GUI_Layer {
         protected global::System.Web.UI.WebControls.Label error_message;
         
         /// <summary>
-        /// inputEmail control.
+        /// inputGebruikersnaam control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl inputEmail;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl inputGebruikersnaam;
         
         /// <summary>
-        /// inputPassword control.
+        /// inputWachtwoord control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword inputPassword;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword inputWachtwoord;
     }
 }

@@ -19,8 +19,8 @@ namespace Web_GUI_Layer
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            string username = inputEmail.Value;
-            string password = inputPassword.Value;
+            string username = inputGebruikersnaam.Value;
+            string password = inputWachtwoord.Value;
             string message = string.Empty;
 
             if (GUIHandler.LogIn(username, password, out message))

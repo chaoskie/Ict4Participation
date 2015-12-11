@@ -34,14 +34,76 @@ namespace Web_GUI_Layer
 
         protected void btnRegistreerHulpBehoevende_Click(object sender, EventArgs e)
         {
+            string message = string.Empty;
+
             // maak hulpbehoevende aan
-            // regex controle moet in de guihandler_class / class_layer staan, niet in de GUI!
-            // GUIHandler.Register();
+            Accountdetails acc = new Accountdetails();
+            if (string.IsNullOrEmpty(inputTussenvoegsel.Value))
+            {
+                acc.Name = string.Format("{0} {1}", inputVoornaam.Value, inputAchternaam.Value);
+            }
+            else
+            {
+                acc.Name = string.Format("{0} {1} {2}", inputVoornaam.Value, inputTussenvoegsel.Value, inputAchternaam.Value);
+            }
+            acc.Address = string.Format("{0} {1}", inputStraatnaam.Value, inputHuisnummer.Value);
+            acc.City = inputWoonplaats.Value;
+            acc.Phonenumber = inputTelefoonnummer.Value;
+            // TODO: account geslacht mist nog
+            acc.Email = inputEmail.Value;
+            acc.Username = inputGebruikersnaam.Value;
+            // TODO: acc.AvatarPath = ...
+
+            if (!GUIHandler.Register(acc, inputWachtwoord1.Value, inputWachtwoord2.Value, out message))
+            {
+                error_message.Text = message;
+                error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+                error_message.CssClass = error_message.CssClass.Replace("error-green", "error-red");
+            }
+            else
+            {
+                error_message.Text = "Het registreren van uw account is gelukt!";
+                error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+                error_message.CssClass = error_message.CssClass.Replace("error-red", "error-green");
+            }
         }
 
         protected void btnRegistreerVrijwilliger_Click(object sender, EventArgs e)
         {
-            // check gegevens met regex
+            string message = string.Empty;
+
+            // maak hulpbehoevende aan
+            Accountdetails acc = new Accountdetails();
+            if (string.IsNullOrEmpty(inputTussenvoegsel.Value))
+            {
+                acc.Name = string.Format("{0} {1}", inputVoornaam.Value, inputAchternaam.Value);
+            }
+            else
+            {
+                acc.Name = string.Format("{0} {1} {2}", inputVoornaam.Value, inputTussenvoegsel.Value, inputAchternaam.Value);
+            }
+            acc.Address = string.Format("{0} {1}", inputStraatnaam.Value, inputHuisnummer.Value);
+            acc.City = inputWoonplaats.Value;
+            acc.Phonenumber = inputTelefoonnummer.Value;
+            // TODO: account geslacht mist nog
+            acc.Email = inputEmail.Value;
+            acc.Username = inputGebruikersnaam.Value;
+            // TODO: acc.AvatarPath = ...
+            // TODO: voeg elke toegevoegde skill toe aan acc.SkillsDetailList
+            // TODO: acc.VOGPath = ...
+
+            if (!GUIHandler.Register(acc, inputWachtwoord1.Value, inputWachtwoord2.Value, out message))
+            {
+                error_message.Text = message;
+                error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+                error_message.CssClass = error_message.CssClass.Replace("error-green", "error-red");
+            }
+            else
+            {
+                error_message.Text = "Het registreren van uw account is gelukt!";
+                error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+                error_message.CssClass = error_message.CssClass.Replace("error-red", "error-green");
+            }
         }
     }
 }

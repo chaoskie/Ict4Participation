@@ -43,10 +43,10 @@
 
                         <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
-					    <label for="inputEmail" class="sr-only">Email</label>
-					    <input type="email" id="inputEmail" class="form-control" placeholder="Email" required="required" runat="server" />
-					    <label for="inputPassword" class="sr-only">Wachtwoord</label>
-					    <input type="password" id="inputPassword" class="form-control" placeholder="Wachtwoord" required="required" runat="server" />
+					    <label for="inputGebruikersnaam" class="sr-only">Gebruikersnaam</label>
+					    <input type="email" id="inputGebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required="required" runat="server" />
+					    <label for="inputWachtwoord" class="sr-only">Wachtwoord</label>
+					    <input type="password" id="inputWachtwoord" class="form-control" placeholder="Wachtwoord" required="required" runat="server" />
 					    <div class="checkbox">
 						    <label>
 							    <input type="checkbox" value="remember-me" />
