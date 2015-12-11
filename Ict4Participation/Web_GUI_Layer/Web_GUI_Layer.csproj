@@ -67,12 +67,45 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\CSS\bootstrap.min.css" />
+    <Content Include="Content\CSS\dropdown.css" />
+    <Content Include="Content\CSS\fileinput.min.css" />
+    <Content Include="Content\CSS\font-awesome.min.css" />
+    <Content Include="Content\CSS\gebruikers.css" />
+    <Content Include="Content\CSS\hoofdmenu.css" />
+    <Content Include="Content\CSS\inloggen.css" />
+    <Content Include="Content\CSS\input.css" />
+    <Content Include="Content\CSS\main.css" />
+    <Content Include="Content\CSS\plaatsvraag.css" />
+    <Content Include="Content\CSS\profiel.css" />
+    <Content Include="Content\CSS\registreren.css" />
+    <Content Include="Content\CSS\zoeken.css" />
+    <Content Include="Content\Fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\JS\bootstrap.min.js" />
+    <Content Include="Content\JS\dropdown.js" />
+    <Content Include="Content\JS\error.js" />
+    <Content Include="Content\JS\errormessage.js" />
+    <Content Include="Content\JS\fileinput.min.js" />
+    <Content Include="Content\JS\hoofdmenu.js" />
+    <Content Include="Content\JS\inloggen.js" />
+    <Content Include="Content\JS\jquery-1.11.3.min.js" />
+    <Content Include="Content\JS\zoekprofiel.js" />
     <Content Include="gebruikers.aspx" />
     <Content Include="hoofdmenu.aspx" />
     <Content Include="inloggen.aspx" />
     <Content Include="packages.config" />
     <Content Include="plaatsvraag.aspx" />
     <Content Include="zoeken.aspx" />
+    <Content Include="Content\Fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\Fonts\FontAwesome.otf" />
+    <Content Include="Content\Fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\Fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\Fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -146,10 +179,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\CSS\" />
-    <Folder Include="Content\Fonts\" />
     <Folder Include="Content\Images\" />
-    <Folder Include="Content\JS\" />
     <Folder Include="Entities\" />
   </ItemGroup>
   <ItemGroup>

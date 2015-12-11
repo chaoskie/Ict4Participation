@@ -1,0 +1,18 @@
+nav button {
+	width: 100%;
+}
+#select_skills {
+	padding: 12px;
+	font-size: 24px;
+	height: 60px;
+	border-radius: 0;
+}
+#select_skills_output {
+	padding: 0;
+	font-size: 24px;
+	border-radius: 0;
+}
+#select_skills_output option {
+	padding-left: 1.5rem;
+	color: #222;
+}

@@ -1,0 +1,85 @@
+input:not([type="checkbox"]) {
+	border-radius: 0 !important;
+	border: none !important;
+	box-shadow: none !important;
+	margin-bottom: .5rem;
+	padding: 3rem !important;
+	position: relative;
+	font-size: 2rem !important;
+}
+textarea {
+	border-radius: 0 !important;
+	border: none !important;
+	box-shadow: none !important;
+	margin-bottom: .5rem;
+	padding: 1rem 3rem !important;
+	position: relative;
+	font-size: 2rem !important;
+	resize: none;
+	width: 100%;
+}
+.checkbox label {
+	padding: 0 !important;
+	height: 24px;
+	font-size: 24px;
+}
+/* fileinput.js specific styles */
+.file-input {
+	margin-bottom: 0.5rem;
+}
+.file-input .file-caption,
+.file-input .input-group-btn .btn {
+	border-radius: 0;
+	padding: 18px;
+	min-height: 60px;
+}
+.file-input .btn-file,
+.file-input .btn-file:active {
+	background-color: #ed1e12;
+}
+.file-input .btn-file:hover {
+	background-color: #d51b10;
+}
+/* Custom button */
+.btn.btn-custom,
+.btn.btn-custom2,
+.btn.btn-custom:focus,
+.btn.btn-custom2:focus {
+	background-color: #ed1e12;
+	border-radius: 0;
+	color: #fff;
+	margin-bottom: 0.5rem;
+	outline: none;
+	padding: 12px;
+	overflow: hidden;
+}
+.btn.btn-custom:hover,
+.btn.btn-custom2:hover {
+	background-color: #d51b10;
+}
+.btn.btn-custom {
+	font-size: 24px;
+}
+.btn.btn-custom2 {
+	font-size: 16px;
+}
+
+input[type='checkbox'] {
+	display: none;
+}
+input[type='checkbox'] + span {
+	width: 30px;
+	height: 30px;
+	background-color: #fff;
+	display: inline-block;
+	position: absolute;
+	top: 2px;
+	border: 1px solid #000;
+}
+input[type='checkbox']:checked + span {
+	background-color: #ed1e12;
+	border-color: #ed1e12;
+}
+.checkbox span:nth-child(3) {
+	margin-left: 4rem;
+}

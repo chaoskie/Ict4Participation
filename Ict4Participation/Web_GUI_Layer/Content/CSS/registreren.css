@@ -1,0 +1,58 @@
+.tab-content {
+	border-top: 2px solid #fff;
+	padding: 10px 25px 0 25px;
+}
+.nav.nav-tabs li a {
+	background-color: #f26259;
+	border-radius: 0;
+	color: #fff;
+}
+.nav.nav-tabs li.active a {
+	background-color: #fff;
+	color: #000;
+}
+.nav.nav-tabs li:not(.active) a:hover {
+	background-color: #f04c42;
+	border-color: #f04c42;
+}
+#select_skills,
+#input_geslacht {
+	padding: 12px;
+	font-size: 24px;
+	height: 60px;
+	border-radius: 0;
+}
+#select_skills_output {
+	padding: 0;
+	font-size: 24px;
+	border-radius: 0;
+}
+#select_skills_output option {
+	padding-left: 1.5rem;
+	color: #222;
+}
+#lbl_geslacht {
+	line-height: 4rem;
+}
+body {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+nav button {
+	width: 100%;
+}
+
+/* Media queries voor registreren-knoppen */
+@media screen and (max-width: 460px) {
+	.btn.btn-registreer {
+		font-size: 16px !important;
+	}
+}
+@media screen and (max-width: 345px) {
+	.btn.btn-registreer {
+		font-size: 12px !important;
+	}
+}

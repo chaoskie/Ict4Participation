@@ -1,0 +1,74 @@
+/*
+ * PROFIEL_SECTION
+ * * * * * * * * * * */
+#profiel_section {
+	margin-top: 3rem;
+	margin-bottom: 3rem;
+}
+#profiel_section h2:nth-child(1) {
+	margin-top: 0;
+}
+#profiel_section #img_wrapper {
+	border: 3px solid #ed1e12;
+}
+#profiel_section *[contenteditable] {
+	display: inline-block;
+}
+#profiel_section *[contenteditable]:focus {
+	background-color: white;
+	padding: 10px;
+	color: #000;
+}
+#profiel_section #img_wrapper::after {
+	transition: background-color 0.3s;
+}
+#profiel_section #img_wrapper:hover {
+	transform: scale(1.05);
+}
+#profiel_section #img_wrapper:hover::after {
+	background-color: rgba(0,0,0,0.5);
+	content: 'Wijzig';
+	display: block;
+	position: absolute;
+	padding-top: calc(50% - 16px);
+	width: 100%;
+	height: 100%;
+	top: 0;
+	font-size: 16px;
+	color: #fff;
+	text-align: center;
+	cursor: pointer;
+	left: 0;
+}
+
+#zoek_profiel_overlay {
+	background-color: white;
+	display: none;
+	position: absolute;
+	padding: 10px;
+	width: 300px;
+	z-index: 100;
+	box-shadow: 0 0 4px 0 rgba(0,0,0,0.25);
+}
+#zoek_profiel_overlay.actief {
+	display: block;
+}
+#zoek_profiel_overlay .zoek-profiel-left {
+	display: inline-block;
+	float: left;
+	width: 100px;
+}
+#zoek_profiel_overlay .zoek-profiel-right {
+	display: inline-block;
+	float: left;
+	padding-left: 10px;
+	width: calc(100% - 100px);
+}
+#zoek_profiel_overlay .zoek-profiel-foto {
+	width: 100px;
+	height: 100px;
+	display: block;
+}
+#zoek_profiel_overlay .zoek-profiel-foto {
+	border: 1px solid red;
+}

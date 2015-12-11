@@ -3,14 +3,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta information -->
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
+    <meta name="author" content="ICT4Participation" />
+    <meta name="description" content="Log in om verder te gaan" />
+    <meta name="keywords" content="Inloggen,ICT4Participation,Hulp,Hulpbehoevende,Vrijwilliger,Eindhoven" />
 	<title>Inloggen</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css" />
-	<link rel="stylesheet" href="css/font-awesome.min.css" />
-	<link rel="stylesheet" href="css/main.css" />
-	<link rel="stylesheet" href="css/inloggen.css" />
-	<link rel="stylesheet" href="css/input.css" />
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="Content/CSS/bootstrap.min.css" />
+	<link rel="stylesheet" href="Content/CSS/font-awesome.min.css" />
+	<link rel="stylesheet" href="Content/CSS/main.css" />
+	<link rel="stylesheet" href="Content/CSS/inloggen.css" />
+	<link rel="stylesheet" href="Content/CSS/input.css" />
 </head>
 <body>
     <form runat="server">
@@ -56,8 +61,10 @@
 	</div>
     </form>
 	
-	<script src="js/jquery-1.11.3.min.js"></script>
-	<script src="js/inloggen.js"></script>
-	<script src="js/errormessage.js"></script>
+    <!-- Scripts -->
+    <script src="Content/JS/jquery-1.11.3.min.js"></script>
+    <script src="Content/JS/bootstrap.min.js"></script>
+    <script src="Content/JS/inloggen.js""></script>
+	<script src="Content/JS/errormessage.js"></script>
 </body>
 </html>

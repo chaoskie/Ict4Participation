@@ -1,0 +1,57 @@
+/*
+ * DROP DOWN
+ * * * * * * * * * * */
+.dropdown {
+	margin-bottom: 1rem;
+}
+.dropdown-title {
+	background-color: #ed1e12;
+	color: white;
+	cursor: pointer;
+	font-size: 3rem;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin: 0;
+}
+.dropdown-title::after {
+	clear: both;
+}
+.dropdown-title.dropdown-dynamic:hover {
+	background-color: #d51b10;
+}
+.dropdown-content {
+	overflow: hidden;
+}
+.dropdown-content>ul {
+	max-height: 1000px;
+	transition: max-height 0.5s ease-in;
+}
+.dropdown-content>ul.is-hiding {
+	max-height: 0px;
+	transition: max-height 0.5s ease-out;
+}
+.dropdown-content>ul li {
+	padding: 0.5rem;
+	background-color: white;
+	overflow: auto;
+}
+.dropdown-content>ul li:nth-child(even) {
+	background-color: #f6f6f6;
+}
+.dropdown-content>ul li a {
+	font-size: 2rem;
+	text-decoration: none;
+}
+.dropdown-content>ul li a:nth-child(1) {
+	float: left;
+	width: 60%;
+}
+.dropdown-content>ul li a:nth-child(2) {
+	float: right;
+	width: 40%;
+	padding-left: 1rem;
+	text-align: right;
+}
