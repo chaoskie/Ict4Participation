@@ -9,12 +9,12 @@
 	color: white;
 	cursor: pointer;
 	font-size: 3rem;
+    margin: 0;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    margin: 0;
 }
 .dropdown-title::after {
 	clear: both;
@@ -26,6 +26,8 @@
 	overflow: hidden;
 }
 .dropdown-content>ul {
+    /* Gebruik van max-height zodat de hoogte geanimeerd kan worden */
+    /* Zet naar een value hoger dan het element ooit zal worden */
 	max-height: 1000px;
 	transition: max-height 0.5s ease-in;
 }
@@ -34,9 +36,9 @@
 	transition: max-height 0.5s ease-out;
 }
 .dropdown-content>ul li {
-	padding: 0.5rem;
-	background-color: white;
+	background-color: #fff;
 	overflow: auto;
+	padding: 0.5rem;
 }
 .dropdown-content>ul li:nth-child(even) {
 	background-color: #f6f6f6;
@@ -51,7 +53,7 @@
 }
 .dropdown-content>ul li a:nth-child(2) {
 	float: right;
-	width: 40%;
 	padding-left: 1rem;
 	text-align: right;
+	width: 40%;
 }

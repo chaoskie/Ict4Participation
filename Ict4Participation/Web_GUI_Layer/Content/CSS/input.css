@@ -1,37 +1,38 @@
-input:not([type="checkbox"]) {
-	border-radius: 0 !important;
-	border: none !important;
-	box-shadow: none !important;
-	margin-bottom: .5rem;
-	padding: 3rem !important;
-	position: relative;
-	font-size: 2rem !important;
-}
+/*
+ * INPUT STYLES
+ * * * * * * * * * * */
+/* Bijna alles is !important */
+/* Dit is omdat de selector heel generiek is, en de bootstrap styles override moeten worden */
+input:not([type="checkbox"]),
 textarea {
 	border-radius: 0 !important;
 	border: none !important;
 	box-shadow: none !important;
-	margin-bottom: .5rem;
-	padding: 1rem 3rem !important;
-	position: relative;
 	font-size: 2rem !important;
+	margin-bottom: 0.5rem;
+	padding: 3rem !important;
+	position: relative;
+}
+textarea {
+	padding: 1rem 3rem !important;
 	resize: none;
 	width: 100%;
 }
-.checkbox label {
-	padding: 0 !important;
-	height: 24px;
-	font-size: 24px;
+input[type="text"] {
+	text-overflow: ellipsis;
 }
-/* fileinput.js specific styles */
+
+/*
+ * FILEINPUT.JS STYLES
+ * * * * * * * * * * */
 .file-input {
 	margin-bottom: 0.5rem;
 }
 .file-input .file-caption,
 .file-input .input-group-btn .btn {
 	border-radius: 0;
-	padding: 18px;
 	min-height: 60px;
+	padding: 18px;
 }
 .file-input .btn-file,
 .file-input .btn-file:active {
@@ -40,7 +41,10 @@ textarea {
 .file-input .btn-file:hover {
 	background-color: #d51b10;
 }
-/* Custom button */
+
+/*
+ * CUSTOM BUTTON STYLES
+ * * * * * * * * * * */
 .btn.btn-custom,
 .btn.btn-custom2,
 .btn.btn-custom:focus,
@@ -64,17 +68,20 @@ textarea {
 	font-size: 16px;
 }
 
+/*
+ * CHECKBOX STYLES
+ * * * * * * * * * * */
 input[type='checkbox'] {
 	display: none;
 }
 input[type='checkbox'] + span {
-	width: 30px;
-	height: 30px;
 	background-color: #fff;
+	border: 1px solid #000;
 	display: inline-block;
+	height: 30px;
 	position: absolute;
 	top: 2px;
-	border: 1px solid #000;
+	width: 30px;
 }
 input[type='checkbox']:checked + span {
 	background-color: #ed1e12;
@@ -82,4 +89,9 @@ input[type='checkbox']:checked + span {
 }
 .checkbox span:nth-child(3) {
 	margin-left: 4rem;
+}
+.checkbox label {
+	font-size: 24px;
+	height: 24px;
+	padding: 0 !important;
 }

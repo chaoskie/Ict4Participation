@@ -1,21 +1,25 @@
 /*
  * MAIN STYLES
  * * * * * * * * * * */
+/* Import Google Fonts font, 'Open Sans' */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+/* Selector voor alles */
+/* box-sizing: border-box is belangrijk voor de positionering. Outline moet overal 0 zijn. Alles moet geanimeerd worden over 0.3 seconde */
 * {
 	box-sizing: border-box;
-	transition: all .3s;
 	outline: 0;
+	transition: all 0.3s;
 }
 ul {
 	list-style-type: none;
-	padding: 0;
 	margin: 0;
+	padding: 0;
 }
 body {
+	background-color: #fafafa;
+    /* Genoeg fallback fonts als er een font ontbreekt op de client */
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 	padding-top: 150px;
-	background-color: #fafafa;
 }
 html {
 	height: 100%;
@@ -29,17 +33,17 @@ body {
  * NAVIGATION
  * * * * * * * * * * */
 nav {
+    background-color: #ed1e12;
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.25);
+    position: fixed;
+    top: 0;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    position: fixed;
     width: 100%;
-    top: 0;
     z-index: 10;
-    background-color: #ed1e12;
-    box-shadow: 0 0 8px 0 rgba(0,0,0,0.25);
 }
 nav .container,
 nav .container-fluid {
@@ -48,13 +52,13 @@ nav .container-fluid {
 nav button {
 	background-color: #ed1e12;
 	border: none;
-	color: white;
+	color: #fff;
 	height: 150px;
 	margin: 0 !important;
 	outline: none;
 	position: relative;
-	width: 25%;
 	transition: width 0s !important;
+	width: 25%;
 }
 nav button:hover {
 	background-color: #d51b10;
@@ -72,6 +76,8 @@ nav button p {
 	font-size: 2rem;
 	margin-top: 20px;
 }
+/* Media query op 550px */
+/* Maak de button hoogte kleiner, maak het icoon groter en haal de tekst weg */
 @media screen and (max-width: 550px) {
 	body {
 		padding-top: 100px;
@@ -91,17 +97,23 @@ nav button p {
 /*
  * CONTAINER
  * * * * * * * * * * */
+/* Styles voor het ::before element van .container */
+/* Deze styles zorgen ervoor dat de achtergrond van .container over de hele grootte van de pagina zichtbaar is.
+   Om bugs tegen te gaan is de hoogte 200%, dit heeft geen effect op de scrollhoogte van de pagina, omdat het element fixed is.
+*/
 .container::before {
-	content: '';
-	position: fixed;
 	background-color: #ddd;
+	content: '';
 	height: 200%;
-	width: 100%;
 	margin-left: -15px;
+	position: fixed;
 	top: 0;
-	z-index: -1;
 	transition: width 0s;
+	width: 100%;
+	z-index: -1;
 }
+/* Enkele media queries voor .container */
+/* Deze zijn nodig om de breedte van het ::before element van .container te matchen met de parent .container */
 @media (min-width: 750px) {
 	.container::before {
 		width: 750px;
@@ -117,45 +129,51 @@ nav button p {
 		width: 1170px;
 	}
 }
+
+/*
+ * BOOTSTRAP ADDITIONAL COLUMN
+ * * * * * * * * * * */
 @media screen and (max-width: 550px) {
 	.col-tn-1  { width:  8.333333%; }
 	.col-tn-2  { width: 16.666667%; }
-	.col-tn-3  { width: 25%; }
+	.col-tn-3  { width: 25%;        }
 	.col-tn-4  { width: 33.333333%; }
 	.col-tn-5  { width: 41.666667%; }
-	.col-tn-6  { width: 50%; }
+	.col-tn-6  { width: 50%;        }
 	.col-tn-7  { width: 58.333333%; }
 	.col-tn-8  { width: 66.666667%; }
-	.col-tn-9  { width: 75%; }
+	.col-tn-9  { width: 75%;        }
 	.col-tn-10 { width: 83.333333%; }
 	.col-tn-11 { width: 91.666667%; }
-	.col-tn-12 { width: 100%; }
-}
-input[type="text"] {
-	text-overflow: ellipsis;
+	.col-tn-12 { width: 100%;       }
 }
 
+/*
+ * ERROR STYLES
+ * * * * * * * * * * */
 .error {
-	width: 100%;
-	padding: 2.5rem 2rem;
-	margin-bottom: 2rem;
-    display: block;
-	position: relative;
-	font-size: 20px;
-	overflow: hidden;
 	box-shadow: 0 0 8px 0 rgba(0,0,0,0.25);
+    display: block;
+	font-size: 20px;
+	margin-bottom: 2rem;
+	overflow: hidden;
+	padding: 2.5rem 2rem;
+	position: relative;
+	width: 100%;
 }
+/* ::after element van .error */
+/* Deze styles zorgen voor het kruisje rechtboven in een .error element */
 .error::after {
 	content: 'X';
-	width: 30px;
-	height: 30px;
-	display: block;
-	position: absolute;
 	cursor: pointer;
-	right: 0;
-	top: 0;
+	display: block;
 	font-family: monospace;
 	font-size: 30px;
+	height: 30px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 30px;
 }
 .error.error-red {
 	background-color: #ed1e12;
@@ -165,6 +183,6 @@ input[type="text"] {
 }
 .error.error-hidden {
 	height: 0;
-	padding-top: 0;
 	padding-bottom: 0;
+	padding-top: 0;
 }

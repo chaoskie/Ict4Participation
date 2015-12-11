@@ -1,7 +1,10 @@
-$(function() {
+// Script met de functionaliteit voor error berichten
+$(function () {
 
-	$('.error').on('click', function() {
-		$(this).addClass('error-hidden');
+    $('.error').on('click', function () {
+
+        $(this).addClass('error-hidden');
+
 	});
 
 });

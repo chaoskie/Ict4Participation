@@ -1,3 +1,6 @@
+/*
+ * REGISTREREN STYLES
+ * * * * * * * * * * */
 .tab-content {
 	border-top: 2px solid #fff;
 	padding: 10px 25px 0 25px;
@@ -17,19 +20,19 @@
 }
 #select_skills,
 #input_geslacht {
-	padding: 12px;
+	border-radius: 0;
 	font-size: 24px;
 	height: 60px;
-	border-radius: 0;
+	padding: 12px;
 }
 #select_skills_output {
-	padding: 0;
-	font-size: 24px;
 	border-radius: 0;
+	font-size: 24px;
+	padding: 0;
 }
 #select_skills_output option {
-	padding-left: 1.5rem;
 	color: #222;
+	padding-left: 1.5rem;
 }
 #lbl_geslacht {
 	line-height: 4rem;
@@ -44,8 +47,8 @@ body {
 nav button {
 	width: 100%;
 }
-
-/* Media queries voor registreren-knoppen */
+/* Media queries op 460px en 345px */
+/* Voor de registreren knoppen */
 @media screen and (max-width: 460px) {
 	.btn.btn-registreer {
 		font-size: 16px !important;

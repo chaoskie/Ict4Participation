@@ -1,6 +1,11 @@
+/*
+ * HOOFDMENU STYLES
+ * * * * * * * * * * */
 #profiel_section {
-	margin-top: 3rem;
+    /* Aparte margin bottom en top */
+    /* Dit is zodat margin left en right worden behouden */
 	margin-bottom: 3rem;
+	margin-top: 3rem;
 }
 #profiel_section h2:nth-child(1) {
 	margin-top: 0;
@@ -9,19 +14,19 @@
 	border: 3px solid #ed1e12;
 }
 #planning {
+	box-shadow: 0 0 4px 0 rgba(0,0,0,0.25);
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 	width: 100%;
-	box-shadow: 0 0 4px 0 rgba(0,0,0,0.25);
 }
 #planning th,
 #planning td {
-	width: 20%;
-	padding: 1rem;
 	color: #f6f6f6;
+	padding: 1rem;
+	width: 20%;
 }
 #planning th {
 	background-color: #f26259;
@@ -41,6 +46,8 @@
 	background-color: #ed1e12;
 	text-align: center;
 }
+/* Media query op 410px */
+/* De tabel kan niet meer kleiner. Daarom wordt de week afgekort, en wordt de fontgrootte kleiner */
 @media screen and (max-width: 410px) {
 	#planning tr>th:nth-child(1) span {
 		display: none;

@@ -84,7 +84,6 @@
     <Content Include="Content\Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\JS\bootstrap.min.js" />
     <Content Include="Content\JS\dropdown.js" />
-    <Content Include="Content\JS\error.js" />
     <Content Include="Content\JS\errormessage.js" />
     <Content Include="Content\JS\fileinput.min.js" />
     <Content Include="Content\JS\hoofdmenu.js" />
