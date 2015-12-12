@@ -146,7 +146,8 @@ namespace Admin_Layer
         {
             //TODO
             //Check if valid email
-            return Regex.IsMatch(s, @"^[-a - z0 - 9~!$%^ &*_ = +}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$", RegexOptions.IgnoreCase);
+            return true;
+            //return Regex.IsMatch(s, @"^[-a - z0 - 9~!$%^ &*_ = +}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$", RegexOptions.IgnoreCase);
         }
 
         public static bool isLocation(string city, string address)

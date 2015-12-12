@@ -202,6 +202,10 @@ namespace Class_Layer
             //Create new user through database
             //   Database_Layer.Database.NewUser(name, locID, passHash, passSalt, avatarPath, VOG, description, roleText, sex, email);
             //   return new Account(id, name, loc, role, avatarPath, description, sex, email, VOG);
+
+            birthdate = DateTime.Now;
+            // Gender wordt nog niet opgeslagen in account!
+            Database.InsertUser(username, password, email, name, address, city, phonenumber, hasLicense, hasVehicle, OVPossible, birthdate.ToString("dd-mm-yyyy"), avatarPath, "M", VOG);
             return null;
         }
 

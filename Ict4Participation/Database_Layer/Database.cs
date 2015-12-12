@@ -550,10 +550,29 @@ namespace Database_Layer
                 int OV = ov ? 1 : 0;
 
                 c.Open();
+                //OracleCommand cmd = new OracleCommand("INSERT INTO \"Acc\" (\"Gebruikersnaam\" ,\"Wachtwoord\" ,\"Email\" ,\"Naam\" ,\"Adres\" ," +
+                //    "\"Woonplaats\" ,\"Telefoonnummer\" ,\"HeeftRijbewijs\" ,\"HeeftAuto\" ,\"OVMogelijk\" ,\"Geboortedatum\" ," +
+                //    "\"Foto\" ,\"Geslacht\" ,\"VOG\") " +
+                //   "VALUES(:un, :ph, :em, :na, :loc, :vil, :phon, :dl, :car, :ov, TO_DATE(:bd), :pic, :sex, :vog)");
+                //cmd.Parameters.Add(new OracleParameter("un", Username));
+                //cmd.Parameters.Add(new OracleParameter("ph", PassHash));
+                //cmd.Parameters.Add(new OracleParameter("em", Email));
+                //cmd.Parameters.Add(new OracleParameter("na", Name));
+                //cmd.Parameters.Add(new OracleParameter("loc", Location));
+                //cmd.Parameters.Add(new OracleParameter("vil", Village));
+                //cmd.Parameters.Add(new OracleParameter("phon", phone));
+                //cmd.Parameters.Add(new OracleParameter("dl", DriverLicense));
+                //cmd.Parameters.Add(new OracleParameter("car", hasCar));
+                //cmd.Parameters.Add(new OracleParameter("ov", OV));
+                //cmd.Parameters.Add(new OracleParameter("bd", Bday));
+                //cmd.Parameters.Add(new OracleParameter("pic", Picture));
+                //cmd.Parameters.Add(new OracleParameter("sex", Sex));
+                //cmd.Parameters.Add(new OracleParameter("vog", VOG));
+
                 OracleCommand cmd = new OracleCommand("INSERT INTO \"Acc\" (\"Gebruikersnaam\" ,\"Wachtwoord\" ,\"Email\" ,\"Naam\" ,\"Adres\" ," +
                     "\"Woonplaats\" ,\"Telefoonnummer\" ,\"HeeftRijbewijs\" ,\"HeeftAuto\" ,\"OVMogelijk\" ,\"Geboortedatum\" ," +
-                    "\"Foto\" ,\"Geslacht\" ,\"VOG\") " +
-                   "VALUES(:un, :ph, :em, :na, :loc, :vil, :phon, :dl, :car, :ov, TO_DATE(:bd), :pic, :sex, :vog)");
+                    "\"Foto\" ,\"VOG\") " +
+                   "VALUES(:un, :ph, :em, :na, :loc, :vil, :phon, :dl, :car, :ov, TO_DATE(:bd, dd-mm-yyyy), :pic, :vog)");
                 cmd.Parameters.Add(new OracleParameter("un", Username));
                 cmd.Parameters.Add(new OracleParameter("ph", PassHash));
                 cmd.Parameters.Add(new OracleParameter("em", Email));
@@ -566,8 +585,8 @@ namespace Database_Layer
                 cmd.Parameters.Add(new OracleParameter("ov", OV));
                 cmd.Parameters.Add(new OracleParameter("bd", Bday));
                 cmd.Parameters.Add(new OracleParameter("pic", Picture));
-                cmd.Parameters.Add(new OracleParameter("sex", Sex));
                 cmd.Parameters.Add(new OracleParameter("vog", VOG));
+
                 cmd.Connection = c;
                 try
                 {

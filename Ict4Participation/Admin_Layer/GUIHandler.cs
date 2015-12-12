@@ -125,7 +125,7 @@ namespace Admin_Layer
         {
             message = string.Empty;
             //Validate details
-            if (Check.CheckAccount(acc, out message))
+            if (!Check.CheckAccount(acc, out message))
             {
                 return false;
             }
