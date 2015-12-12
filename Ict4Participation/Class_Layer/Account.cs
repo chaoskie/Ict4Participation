@@ -151,7 +151,7 @@ namespace Class_Layer
             bool matchingaccount = false;
             acc = null;
             //Find username in database
-            DataTable dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc\" WHERE \"Gebruikersnaam\" = " + username);
+            DataTable dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc\" WHERE \"Gebruikersnaam\" = '" + username + "'");
 
             //Check if there's a username with this password
             foreach (DataRow row in dt.Rows)

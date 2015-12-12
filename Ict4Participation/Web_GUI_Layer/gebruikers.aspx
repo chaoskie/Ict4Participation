@@ -27,8 +27,7 @@
 			    <div class="container-fluid">
 				    <div class="row">
 					    <div class="col-xs-12">
-						    <!-- REMOVE ONCLICK -->
-						    <button onclick="window.location.href= 'profiel.html';">
+						    <button onserverclick="btnTerug_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
 							    <i class="fa fa-chevron-left"></i>
 							    <p>Terug</p>
 						    </button>

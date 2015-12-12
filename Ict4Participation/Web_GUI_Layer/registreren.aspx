@@ -28,7 +28,7 @@
 				    <div class="row">
 					    <div class="col-xs-12">
 						    <!-- REMOVE ONCLICK -->
-						    <button onserverclick="btnAnnuleren_Click" runat="server">
+						    <button onserverclick="btnAnnuleren_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
 							    <i class="fa fa-times-circle"></i>
 							    <p>Annuleren</p>
 						    </button>
@@ -143,7 +143,7 @@
 									    </div>
 								    </div>
 								
-								    <!-- Rol specifieke gegevens -->
+								    <!-- Profielfoto -->
 								    <div id="tab_form3" class="tab-pane fade">
 									    <div class="form-group">
 										    <h2>Profielfoto</h2>
@@ -179,7 +179,7 @@
 									    <div class="form-group">
 										    <div class="row">
 											    <div class="col-xs-12">
-												    <button onserverclick="btnRegistreerHulpBehoevende_Click" class="btn btn-custom btn-block btn-registreer" runat="server">Registreer als hulpbehoevende</button>
+												    <button id="btn_registreerhulpbehoevende" onserverclick="btnRegistreerHulpBehoevende_Click" class="btn btn-custom btn-block btn-registreer" runat="server">Registreer als hulpbehoevende</button>
 											    </div>
 										    </div>
 									    </div>
@@ -197,10 +197,10 @@
 										    </div>
 										    <div class="row">
 											    <div class="col-tn-12 col-xs-6">
-												    <button id="btnSkillVoegToe" class="btn btn-custom2 btn-block">Voeg Toe</button>
+												    <button id="btnSkillVoegToe" class="btn btn-custom2 btn-block" formnovalidate="formnovalidate" onclick="return false;">Voeg Toe</button>
 											    </div>
 											    <div class="col-tn-12 col-xs-6">
-												    <button id="btnSkillVerwijder" class="btn btn-custom2 btn-block">Verwijder</button>
+												    <button id="btnSkillVerwijder" class="btn btn-custom2 btn-block" formnovalidate="formnovalidate" onclick="return false;">Verwijder</button>
 											    </div>
 										    </div>
 										    <div class="row">
@@ -221,7 +221,7 @@
 										    <br />
 										    <div class="row">
 											    <div class="col-xs-12">
-												    <button onserverclick="btnRegistreerVrijwilliger_Click" class="btn btn-custom btn-block btn-registreer" runat="server">Registreer als vrijwilliger</button>
+												    <button id="btn_registreervrijwilliger" onserverclick="btnRegistreerVrijwilliger_Click" class="btn btn-custom btn-block btn-registreer" runat="server">Registreer als vrijwilliger</button>
 											    </div>
 										    </div>
 									    </div>

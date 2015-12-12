@@ -26,16 +26,15 @@
 			    <div class="container-fluid">
 				    <div class="row">
 					    <div class="col-xs-12">
-						    <!-- REMOVE ONCLICK -->
-						    <button onclick="window.location.href = 'hoofdmenu.html';">
+						    <button onserverclick="btnTerug_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
 							    <i class="fa fa-chevron-left"></i>
 							    <p>Terug</p>
 						    </button><!--
-					     --><button onclick="window.location.href = 'plaatsvraag.html';">
+					     --><button onserverclick="btnPlaatsVraag_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
 					 		    <i class="fa fa-question"></i>
 					 		    <p>Plaats Vraag</p>
 					 	    </button><!--
-					     --><button onclick="window.location.href = 'gebruikers.html';">
+					     --><button onserverclick="btnGebruikers_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
 					 		    <i class="fa fa-user"></i>
 					 		    <p>Gebruikers</p>
 					 	    </button><!--

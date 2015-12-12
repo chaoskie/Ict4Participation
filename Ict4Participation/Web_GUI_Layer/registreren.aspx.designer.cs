@@ -139,6 +139,15 @@ namespace Web_GUI_Layer {
         protected global::System.Web.UI.HtmlControls.HtmlInputFile inputProfielfoto;
         
         /// <summary>
+        /// btn_registreerhulpbehoevende control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_registreerhulpbehoevende;
+        
+        /// <summary>
         /// select_skills control.
         /// </summary>
         /// <remarks>
@@ -164,5 +173,14 @@ namespace Web_GUI_Layer {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputFile inputVOG;
+        
+        /// <summary>
+        /// btn_registreervrijwilliger control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btn_registreervrijwilliger;
     }
 }

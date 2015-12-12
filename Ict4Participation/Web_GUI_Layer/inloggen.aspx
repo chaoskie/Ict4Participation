@@ -26,7 +26,7 @@
 			    <div class="container-fluid">
 				    <div class="row">
 					    <div class="col-xs-12">
-						    <button onserverclick="btnRegistreren_Click" runat="server">
+						    <button onserverclick="btnRegistreren_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
 							    <i class="fa fa-user-plus"></i>
 							    <p>Registreren</p>
 						    </button>
@@ -44,7 +44,7 @@
                         <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
 					    <label for="inputGebruikersnaam" class="sr-only">Gebruikersnaam</label>
-					    <input type="email" id="inputGebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required="required" runat="server" />
+					    <input type="text" id="inputGebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required="required" runat="server" />
 					    <label for="inputWachtwoord" class="sr-only">Wachtwoord</label>
 					    <input type="password" id="inputWachtwoord" class="form-control" placeholder="Wachtwoord" required="required" runat="server" />
 					    <div class="checkbox">

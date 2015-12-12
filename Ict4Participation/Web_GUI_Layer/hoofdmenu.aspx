@@ -26,21 +26,19 @@
 			    <div class="container-fluid">
 				    <div class="row">
 					    <div class="col-xs-12">
-						    <!-- REMOVE ONCLICK -->
-						    <button onclick="window.location.href= 'inloggen.html';">
+						    <button onserverclick="btnAfmelden_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
 							    <i class="fa fa-sign-out fa-rotate-180"></i>
 							    <p>Afmelden</p>
 						    </button><!--
-					     --><button>
+					     --><button onserverclick="btnVragen_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
 					 		    <i class="fa fa-question"></i>
 					 		    <p>Vragen</p>
 					 	    </button><!--
-					     --><button onclick="window.location.href='zoeken.html'">
+					     --><button onserverclick="btnZoeken_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
 					 		    <i class="fa fa-search"></i>
 					 		    <p>Zoeken</p>
 					 	    </button><!--
-					 	    REMOVE ONCLICK
-					     --><button onclick="window.location.href = 'profiel.html';">
+					     --><button onserverclick="btnProfiel_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
 					 		    <i class="fa fa-user"></i>
 					 		    <p>Profiel</p>
 					 	    </button>
