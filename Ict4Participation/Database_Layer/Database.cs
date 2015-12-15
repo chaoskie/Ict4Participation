@@ -541,7 +541,7 @@ namespace Database_Layer
         /// <param name="VOG">vog path</param>
         /// <returns>succes boolean</returns>
         public static bool InsertUser(string Username, string PassHash, string Email, string Name, string Location, string Village, string phone,
-            bool driverLicense, bool HasCar, bool ov, string Bday, string Picture, string Sex, string VOG)
+            bool driverLicense, bool HasCar, string uitschrijvingsdatum, bool ov, string Bday, string Picture, string Sex, string VOG)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
@@ -570,9 +570,9 @@ namespace Database_Layer
                 //cmd.Parameters.Add(new OracleParameter("vog", VOG));
 
                 OracleCommand cmd = new OracleCommand("INSERT INTO \"Acc\" (\"Gebruikersnaam\" ,\"Wachtwoord\" ,\"Email\" ,\"Naam\" ,\"Adres\" ," +
-                    "\"Woonplaats\" ,\"Telefoonnummer\" ,\"HeeftRijbewijs\" ,\"HeeftAuto\" ,\"OVMogelijk\" ,\"Geboortedatum\" ," +
+                    "\"Woonplaats\" ,\"Telefoonnummer\" ,\"HeeftRijbewijs\" ,\"HeeftAuto\" , \"Uitschrijvingsdatum\", \"OVMogelijk\" ,\"Geboortedatum\" ," +
                     "\"Foto\" ,\"VOG\") " +
-                   "VALUES(:un, :ph, :em, :na, :loc, :vil, :phon, :dl, :car, :ov, TO_DATE(:bd, dd-mm-yyyy), :pic, :vog)");
+                   "VALUES(:un, :ph, :em, :na, :loc, :vil, :phon, :dl, :car, TO_DATE(:ud, 'dd-mm-yyyy'), :ov, TO_DATE(:bd, 'dd-mm-yyyy'), :pic, :vog)");
                 cmd.Parameters.Add(new OracleParameter("un", Username));
                 cmd.Parameters.Add(new OracleParameter("ph", PassHash));
                 cmd.Parameters.Add(new OracleParameter("em", Email));
@@ -582,6 +582,7 @@ namespace Database_Layer
                 cmd.Parameters.Add(new OracleParameter("phon", phone));
                 cmd.Parameters.Add(new OracleParameter("dl", DriverLicense));
                 cmd.Parameters.Add(new OracleParameter("car", hasCar));
+                cmd.Parameters.Add(new OracleParameter("ud", uitschrijvingsdatum));
                 cmd.Parameters.Add(new OracleParameter("ov", OV));
                 cmd.Parameters.Add(new OracleParameter("bd", Bday));
                 cmd.Parameters.Add(new OracleParameter("pic", Picture));

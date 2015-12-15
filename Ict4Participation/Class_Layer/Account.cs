@@ -91,6 +91,10 @@ namespace Class_Layer
         /// Gets the path of the VOG document
         /// </summary>
         public string VOGPath { get; private set; }
+        /// <summary>
+        /// Gets the gender of the user
+        /// </summary>
+        public string Gender { get; private set; }
 
         /// <summary>
         /// Gets the list of availability of the user
@@ -192,20 +196,18 @@ namespace Class_Layer
         /// <param name="birthdate">The birthdate of the user</param>
         /// <param name="avatarPath">The avatarpath of the user</param>
         /// <param name="VOG">The VOG of the user</param>
-        /// <param name="id">The returned ID</param>
+        /// <param name="gender">The gender of the user</param>
         /// <returns>The newly created account</returns>
         public static Account Register(string username, string password, string email, string name, string address, string city, string phonenumber,
-            bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG)
+            bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG, string gender)
         {
             string passTotal = PasswordHashing.CreateHash(password);
             //TODO
             //Create new user through database
             //   Database_Layer.Database.NewUser(name, locID, passHash, passSalt, avatarPath, VOG, description, roleText, sex, email);
             //   return new Account(id, name, loc, role, avatarPath, description, sex, email, VOG);
-
-            birthdate = DateTime.Now;
-            // Gender wordt nog niet opgeslagen in account!
-            Database.InsertUser(username, password, email, name, address, city, phonenumber, hasLicense, hasVehicle, OVPossible, birthdate.ToString("dd-mm-yyyy"), avatarPath, "M", VOG);
+            
+            Database.InsertUser(username, passTotal, email, name, address, city, phonenumber, hasLicense, hasVehicle, DateTime.Now.ToString("dd-MM-yyyy"), OVPossible, birthdate.ToString("dd-MM-yyyy"), avatarPath, gender, VOG);
             return null;
         }
 
@@ -357,6 +359,8 @@ namespace Class_Layer
             this.VOGPath = VOG;
             this.Skills = skills;
             this.Availability = availability;
+            this.Skills = new List<Skill>();
+            this.Availability= new List<Availability>();
         }
     }
 }

@@ -57,8 +57,8 @@
 						    <img src="http://i.imgur.com/BZUZBOr.jpg" alt="Profielfoto" style="width: 100%;" />
 					    </div>
 					    <div class="col-tn-12 col-xs-8">
-						    <h2>Barry Batsbak</h2>
-						    <h3>Hulpbehoevende</h3>
+						    <h2 id="user_naam" runat="server">Barry Batsbak</h2>
+						    <h3 id="user_rol" runat="server">Hulpbehoevende</h3>
 					    </div>
 				    </div>
 

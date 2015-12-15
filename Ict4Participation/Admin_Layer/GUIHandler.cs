@@ -138,7 +138,7 @@ namespace Admin_Layer
             MainUser = Account.Register(acc.Username, password1, acc.Email, acc.Name, acc.Address, acc.City, acc.Phonenumber, 
                 Convert.ToBoolean(acc.hasDriverLicense), 
                 Convert.ToBoolean(acc.hasVehicle), 
-                Convert.ToBoolean(acc.OVPossible), acc.Birthdate, acc.AvatarPath, acc.VOGPath);
+                Convert.ToBoolean(acc.OVPossible), acc.Birthdate, acc.AvatarPath, acc.VOGPath, acc.Gender);
             //TODO
             //Send email
             return true;
@@ -588,6 +588,46 @@ namespace Admin_Layer
         {
             Console.WriteLine("User log out state entered. Check if true!");
             //LogOut();
+        }
+
+
+
+
+
+
+
+        // Extra methodes
+
+
+        /// <summary>
+        /// Check if the user is logged in
+        /// </summary>
+        /// <returns>Returns true if a mainuser has been found, and false if mainuser is null</returns>
+        public bool UserIsLoggedIn()
+        {
+            if (MainUser == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public Accountdetails GetMainuserInfo()
+        {
+            Accountdetails acc = (Accountdetails)Creation.getDetailsObject(MainUser);
+
+            foreach (Skill s in MainUser.Skills)
+            {
+                acc.SkillsDetailList.Add((Skilldetails)Creation.getDetailsObject(s));
+            }
+
+            foreach (Availability a in MainUser.Availability)
+            {
+                acc.AvailabilityDetailList.Add((Availabilitydetails)Creation.getDetailsObject(a));
+            }
+
+            return acc;
         }
     }
 }

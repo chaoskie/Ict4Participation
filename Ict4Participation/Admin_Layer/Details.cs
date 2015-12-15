@@ -76,6 +76,7 @@ namespace Admin_Layer
         public DateTime Birthdate { get; set; }
         public string AvatarPath { get; set; }
         public string VOGPath { get; set; }
+        public string Gender { get; set; }
         public List<Availabilitydetails> AvailabilityDetailList { get; set; }
         public List<Skilldetails> SkillsDetailList { get; set; }
     }

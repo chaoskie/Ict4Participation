@@ -25,7 +25,8 @@ namespace Web_GUI_Layer
 
             if (GUIHandler.LogIn(username, password, out message))
             {
-                Response.Redirect("hoofdmenu.aspx");
+                Session["GUIHandler_obj"] = GUIHandler;
+                Response.Redirect("hoofdmenu.aspx", false);
             }
             else
             {
@@ -36,7 +37,7 @@ namespace Web_GUI_Layer
 
         protected void btnRegistreren_Click(object sender, EventArgs e)
         {
-            Response.Redirect("registreren.aspx");
+            Response.Redirect("registreren.aspx", false);
         }
     }
 }

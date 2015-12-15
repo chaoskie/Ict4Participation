@@ -11,5 +11,23 @@ namespace Web_GUI_Layer {
     
     
     public partial class hoofdmenu {
+        
+        /// <summary>
+        /// user_naam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl user_naam;
+        
+        /// <summary>
+        /// user_rol control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl user_rol;
     }
 }

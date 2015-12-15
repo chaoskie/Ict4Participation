@@ -29,7 +29,7 @@ namespace Web_GUI_Layer
 
         protected void btnAnnuleren_Click(object sender, EventArgs e)
         {
-            Response.Redirect("inloggen.aspx");
+            Response.Redirect("inloggen.aspx", false);
         }
 
         protected void btnRegistreerHulpBehoevende_Click(object sender, EventArgs e)
@@ -49,10 +49,13 @@ namespace Web_GUI_Layer
             acc.Address = string.Format("{0} {1}", inputStraatnaam.Value, inputHuisnummer.Value);
             acc.City = inputWoonplaats.Value;
             acc.Phonenumber = inputTelefoonnummer.Value;
-            // TODO: account geslacht mist nog
+            acc.Gender = input_geslacht.Value.ToLower() == "Man" ? "M" : "V";
             acc.Email = inputEmail.Value;
             acc.Username = inputGebruikersnaam.Value;
+
             // TODO: acc.AvatarPath = ...
+            // =======================
+            acc.AvatarPath = "TEST/AVATAR/PATH.png";
 
             if (!GUIHandler.Register(acc, inputWachtwoord1.Value, inputWachtwoord2.Value, out message))
             {

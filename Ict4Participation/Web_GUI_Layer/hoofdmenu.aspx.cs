@@ -14,13 +14,30 @@ namespace Web_GUI_Layer
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            GUIHandler = new GUIHandler();
+            // Check if GUIHandler exists
+            if (Session["GUIHandler_obj"] == null)
+            {
+                // Go back if no GUIhandler can be found
+                Response.Redirect("inloggen.aspx", false);
+                return;
+            }
+
+            // Retrieve GUIHandler object from session
+            GUIHandler = (GUIHandler)Session["GUIHandler_obj"];
+
+            // Get all user info
+            Accountdetails accDetails = GUIHandler.GetMainuserInfo();
+
+            // Insert user name and role
+            user_naam.InnerHtml = accDetails.Name;
         }
 
         protected void btnAfmelden_Click(object sender, EventArgs e)
         {
-            // TODO: meld gebruiker af
-            Response.Redirect("inloggen.aspx");
+            // Remove GUIHandler
+            Session["GUIHandler_obj"] = null;
+
+            Response.Redirect("inloggen.aspx", false);
         }
 
         protected void btnVragen_Click(object sender, EventArgs e)
@@ -30,12 +47,12 @@ namespace Web_GUI_Layer
         
         protected void btnZoeken_Click(object sender, EventArgs e)
         {
-            Response.Redirect("zoeken.aspx");
+            Response.Redirect("zoeken.aspx", false);
         }
 
         protected void btnProfiel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("profiel.aspx");
+            Response.Redirect("profiel.aspx", false);
         }
     }
 }
