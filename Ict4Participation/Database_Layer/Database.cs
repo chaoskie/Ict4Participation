@@ -5,16 +5,16 @@
 // <author>ICT4Participation</author>
 //-----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Oracle.DataAccess.Client;
+
 namespace Database_Layer
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Oracle.DataAccess.Client;
-
     /// <summary>
     /// The database class to communicate between the application and the database
     /// </summary>
