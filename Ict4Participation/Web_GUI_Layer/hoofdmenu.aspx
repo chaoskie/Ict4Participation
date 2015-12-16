@@ -53,7 +53,7 @@
 				    <h2>Hoofdmenu</h2>
 				    <!-- Profiel info -->
 				    <div id="profiel_section" class="row">
-					    <div class="col-xs-6 col-xs-offset-3 col-sm-3 col-sm-offset-0">
+					    <div class="col-tn-6 col-tn-offset-3 col-xs-3 col-xs-offset-0">
 						    <img src="http://i.imgur.com/BZUZBOr.jpg" alt="Profielfoto" style="width: 100%;" />
 					    </div>
 					    <div class="col-tn-12 col-xs-8">

@@ -55,7 +55,7 @@
 						    </label>
 					    </div>
 					    <br />
-                        <asp:Button CssClass="btn btn-custom btn-block" OnClick="btnLogin_Click" Text="Login" runat="server" />
+                        <asp:Button ID="btnInloggen" ClientIDMode="Static" CssClass="btn btn-custom btn-block" OnClick="btnLogin_Click" Text="Login" runat="server" />
 				    </div>
 			    </div>
 		    </main>

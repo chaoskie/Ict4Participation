@@ -94,6 +94,33 @@ namespace Web_GUI_Layer {
         protected global::System.Web.UI.HtmlControls.HtmlSelect input_geslacht;
         
         /// <summary>
+        /// input_birthdate_1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect input_birthdate_1;
+        
+        /// <summary>
+        /// input_birthdate_2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect input_birthdate_2;
+        
+        /// <summary>
+        /// input_birthdate_3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect input_birthdate_3;
+        
+        /// <summary>
         /// inputEmail control.
         /// </summary>
         /// <remarks>

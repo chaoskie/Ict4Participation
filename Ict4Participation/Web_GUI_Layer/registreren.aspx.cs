@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Admin_Layer;
+using System.IO;
+using Web_GUI_Layer.Entities;
 
 namespace Web_GUI_Layer
 {
@@ -52,6 +54,13 @@ namespace Web_GUI_Layer
             acc.Gender = input_geslacht.Value.ToLower() == "Man" ? "M" : "V";
             acc.Email = inputEmail.Value;
             acc.Username = inputGebruikersnaam.Value;
+
+            int addedSkills = select_skills_output.Controls.Count;
+
+            // acc.Birthdate = ...
+            // acc.hasDriverLicense = ...
+            // acc.hasVehicle = ...
+            // acc.OVPossible = ...
 
             // TODO: acc.AvatarPath = ...
             // =======================
@@ -107,6 +116,69 @@ namespace Web_GUI_Layer
                 error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
                 error_message.CssClass = error_message.CssClass.Replace("error-red", "error-green");
             }
+        }
+
+        [System.Web.Services.WebMethod]
+        public static int IsCity(string str)
+        {
+            // If str is a city, return 1
+
+            // else return 0
+            return 0;
+        }
+
+        [System.Web.Services.WebMethod]
+        public static string GetCities(string str)
+        {
+            //Set the amount of found results to none
+            int found = 0;
+
+            string result = string.Empty;
+
+            List<string> foundCities = new List<string>();
+
+            string fileloc = HttpContext.Current.Server.MapPath(@"~\Content\Files\Woonplaatsen_Nederland.txt");
+
+            //If the search isn't empty, then search
+            if (!String.IsNullOrWhiteSpace(str))
+            {
+                //Read the file
+                foreach (var line in File.ReadAllLines(fileloc))
+                {
+                    //Check if the compare function won't crash
+                    if (line.Length >= str.Length)
+                    {
+                        //Check if the line contains the search
+                        if (line.ToLower().Contains(str))
+                        {
+                            foundCities.Add(line.ToString());
+                            found++;
+                        }
+                    }
+                }
+
+                List<CityStruct> tempCities = new List<CityStruct>();
+
+                // Loop through foundCities
+                foreach(string city in foundCities)
+                {
+                    decimal bullshit = (decimal)str.Length / (decimal)city.Length;
+                    tempCities.Add(new CityStruct(city, bullshit));
+                }
+
+                tempCities = tempCities.OrderByDescending(c => c.Percentage).ToList();
+
+                if (tempCities.Count > 0)
+                {
+                    if (tempCities.Count > 5)
+                    {
+                        tempCities.RemoveRange(5, tempCities.Count - 5);
+                    }
+                    return tempCities.Select(c => c.Name).Aggregate((x, y) => x + "|" + y);
+                }
+            }
+
+            return "Niks gevonden";
         }
     }
 }
