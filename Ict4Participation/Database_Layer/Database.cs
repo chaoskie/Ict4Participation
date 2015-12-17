@@ -578,8 +578,8 @@ namespace Database_Layer
 
                 OracleCommand cmd = new OracleCommand("INSERT INTO \"Acc\" (\"Gebruikersnaam\" ,\"Wachtwoord\" ,\"Email\" ,\"Naam\" ,\"Adres\" ," +
                     "\"Woonplaats\" ,\"Telefoonnummer\" ,\"HeeftRijbewijs\" ,\"HeeftAuto\" , \"Uitschrijvingsdatum\", \"OVMogelijk\" ,\"Geboortedatum\" ," +
-                    "\"Foto\" ,\"VOG\") " +
-                   "VALUES(:un, :ph, :em, :na, :loc, :vil, :phon, :dl, :car, TO_DATE(:ud, 'dd-mm-yyyy'), :ov, TO_DATE(:bd, 'dd-mm-yyyy'), :pic, :vog)");
+                    "\"Foto\" ,\"VOG\", \"Geslacht\") " +
+                   "VALUES(:un, :ph, :em, :na, :loc, :vil, :phon, :dl, :car, TO_DATE(:ud, 'dd-mm-yyyy'), :ov, TO_DATE(:bd, 'dd-mm-yyyy'), :pic, :vog, :ges)");
                 cmd.Parameters.Add(new OracleParameter("un", Username));
                 cmd.Parameters.Add(new OracleParameter("ph", PassHash));
                 cmd.Parameters.Add(new OracleParameter("em", Email));
@@ -594,6 +594,7 @@ namespace Database_Layer
                 cmd.Parameters.Add(new OracleParameter("bd", Bday));
                 cmd.Parameters.Add(new OracleParameter("pic", Picture));
                 cmd.Parameters.Add(new OracleParameter("vog", VOG));
+                cmd.Parameters.Add(new OracleParameter("ges", Sex));
 
                 cmd.Connection = c;
                 try
