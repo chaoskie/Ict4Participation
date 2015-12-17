@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -9,6 +10,8 @@ namespace Admin_Layer
 {
     public abstract class Check
     {
+        static bool invalidMail = false;
+ 
         public static bool CheckAccount(Accountdetails acc, out string message)
         {
             message = String.Empty;
@@ -143,11 +146,53 @@ namespace Admin_Layer
         }
 
         public static bool isEmail(string s)
+        {            
+            invalidMail = false;
+            if (String.IsNullOrEmpty(s))
+                return false;
+
+            // use IdnMapping class to convert Unicode domain names.
+            try
+            {
+                s = Regex.Replace(s, @"(@)(.+)$", DomainMapper,
+                                      RegexOptions.None, TimeSpan.FromMilliseconds(200));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
+            }
+
+            if (invalidMail)
+                return false;
+
+            // Return true als parameter 's' in valid e-mail format is.
+            try
+            {
+                return Regex.IsMatch(s,
+                      @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                      @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
+                      RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
+            }
+        }
+        private static string DomainMapper(Match match)
         {
-            //TODO
-            //Check if valid email
-            return true;
-            //return Regex.IsMatch(s, @"^[-a - z0 - 9~!$%^ &*_ = +}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$", RegexOptions.IgnoreCase);
+            // IdnMapping class met default property values.
+            IdnMapping idn = new IdnMapping();
+
+            string domainName = match.Groups[2].Value;
+            try
+            {
+                domainName = idn.GetAscii(domainName);
+            }
+            catch (ArgumentException)
+            {
+                invalidMail = true;
+            }
+            return match.Groups[1].Value + domainName;
         }
 
         public static bool isLocation(string city, string address)
