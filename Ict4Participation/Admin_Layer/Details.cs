@@ -96,7 +96,7 @@ namespace Admin_Layer
 
     public struct Skilldetails
     {
-        public int UserID { get; private set; }
-        public string Name { get; private set; }
+        public int UserID { get; set; }
+        public string Name { get; set; }
     }
 }

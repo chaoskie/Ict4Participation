@@ -44,13 +44,13 @@
 					    <div class="row">
 						    <div class="col-xs-12">
 							    <label for="inputTitel" class="sr-only">Titel</label>
-							    <input type="text" id="inputTitel" class="form-control" placeholder="Titel" required />
+							    <input type="text" id="inputTitel" class="form-control" placeholder="Titel" required="required" runat="server" />
 						    </div>
 					    </div>
 					    <div class="row">
 						    <div class="col-xs-12">
 							    <label for="inputBeschrijving" class="sr-only">Beschrijving</label>
-							    <textarea id="inputBeschrijving" rows="6" placeholder="Beschrijving"></textarea>
+							    <textarea id="inputBeschrijving" rows="6" placeholder="Beschrijving" runat="server" required="required"></textarea>
 						    </div>
 					    </div>
 					
@@ -62,18 +62,21 @@
 									    <h3>Skills</h3>
 									    <div class="form-group">
 										    <label for="select_skills" class="sr-only">Skills</label>
-										    <select id="select_skills" class="form-control">
+										    <%--<select id="select_skills" class="form-control" runat="server">
 											    <option>Auto</option>
-										    </select>
+										    </select>--%>
+                                            <asp:DropDownList ID="select_skills" ClientIDMode="Static" CssClass="form-control" runat="server">
+                                                <asp:ListItem Value="auto" Text="Auto" Selected="True"></asp:ListItem>
+                                            </asp:DropDownList>
 									    </div>
 								    </div>
 							    </div>
 							    <div class="row">
 								    <div class="col-tn-12 col-xs-6">
-									    <button class="btn btn-custom2 btn-block">Voeg Toe</button>
+									    <button id="btnVoegToe" class="btn btn-custom2 btn-block">Voeg Toe</button>
 								    </div>
 								    <div class="col-tn-12 col-xs-6">
-									    <button class="btn btn-custom2 btn-block">Verwijder</button>
+									    <button id="btnVerwijder" class="btn btn-custom2 btn-block">Verwijder</button>
 								    </div>
 							    </div>
 						    </div>
@@ -84,13 +87,15 @@
 								    <div class="form-group">
 									    <div class="col-xs-12">
 										    <h3>Toegevoegde skills</h3>
-										    <select size="5" id="select_skills_output" class="form-control">
-											
+										    <%--<select size="5" id="select_skills_output" class="form-control" runat="server">
 											    <option>Auto</option>
 											    <option>Auto</option>
 											    <option>Auto</option>
 											    <option>Auto</option>
-										    </select>
+										    </select>--%>
+                                            <asp:DropDownList ID="select_skills_output" ClientIDMode="Static" CssClass="form-control" runat="server">
+                                                <asp:ListItem Value="rijbewijs" Text="Rijbewijs"></asp:ListItem>
+                                            </asp:DropDownList>
 									    </div>
 								    </div>
 							    </div>
@@ -103,7 +108,7 @@
 
 					    <div class="row">
 						    <div class="col-xs-12">
-							    <button class="btn btn-custom btn-block">Plaats hulpvraag</button>
+							    <button class="btn btn-custom btn-block" runat="server" onserverclick="btnPlaatsHulpvraag_Click">Plaats hulpvraag</button>
 						    </div>
 					    </div>
 				    </div>
