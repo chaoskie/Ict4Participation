@@ -314,6 +314,7 @@ namespace Class_Layer
                 Convert.ToDateTime(row["Geboortedatum"]),
                 row["Foto"].ToString(),
                 row["VOG"].ToString(),
+                row["Geslacht"].ToString(),
                 null,
                 null
                 );
@@ -340,7 +341,7 @@ namespace Class_Layer
         /// <param name="skills"></param>
         /// <param name="availability"></param>
         public Account(int ID, string username, string email, string name, string address, string city, string phonenumber,
-            string hasLicense, string hasVehicle, DateTime lastLogin, string OVPossible, DateTime birthdate, string avatarPath, string VOG, 
+            string hasLicense, string hasVehicle, DateTime lastLogin, string OVPossible, DateTime birthdate, string avatarPath, string VOG, string gender,
             List<Skill> skills, List<Availability> availability)
         {
             this.ID = ID;

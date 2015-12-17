@@ -98,6 +98,7 @@ namespace Unit_Tests
                 DateTime.Now,
                 "Avatar.png",
                 "VOG.pdf",
+                "Man",
                 skills,
                 availability);      
             Accountdetails ad = (Accountdetails)Creation.getDetailsObject(a);
