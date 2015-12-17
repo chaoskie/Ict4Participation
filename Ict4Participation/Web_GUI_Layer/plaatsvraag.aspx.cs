@@ -30,5 +30,24 @@ namespace Web_GUI_Layer
         {
             Response.Redirect("profiel.aspx", false);
         }
+
+        protected void btnPlaatsHulpvraag_Click(object sender, EventArgs e)
+        {
+            string title = inputTitel.Value;
+            string desc = inputBeschrijving.Value;
+            List<Skilldetails> skills = new List<Skilldetails>();
+            foreach (ListItem item in select_skills_output.Items)
+            {
+                Skilldetails sk = new Skilldetails();
+                sk.Name = item.Value;
+                skills.Add(sk);
+            }
+
+            Questiondetails qd = new Questiondetails();
+            string message = String.Empty;
+            
+
+            //GUIHandler.Place(qd, out message);
+        }
     }
 }
