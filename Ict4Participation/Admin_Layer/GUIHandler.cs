@@ -135,9 +135,9 @@ namespace Admin_Layer
                 return false;
             }
             //Register account
-            MainUser = Account.Register(acc.Username, password1, acc.Email, acc.Name, acc.Address, acc.City, acc.Phonenumber, 
-                Convert.ToBoolean(acc.hasDriverLicense), 
-                Convert.ToBoolean(acc.hasVehicle), 
+            MainUser = Account.Register(acc.Username, password1, acc.Email, acc.Name, acc.Address, acc.City, acc.Phonenumber,
+                Convert.ToBoolean(acc.hasDriverLicense),
+                Convert.ToBoolean(acc.hasVehicle),
                 Convert.ToBoolean(acc.OVPossible), acc.Birthdate, acc.AvatarPath, acc.VOGPath, acc.Gender);
             //Send email
             MailMessage mail = new MailMessage();
@@ -151,7 +151,7 @@ namespace Admin_Layer
                 + "\n" + acc.Username
                 + "\nVoor vragen en contact kunt u het volgende emailadres mailen: s21mplumbum@gmail.com"
                 + "\n"
-                +" \nMet vriendelijke groet,"
+                + " \nMet vriendelijke groet,"
                 + "\nHet ICT4Participation-Team";
 
             SmtpServer.Port = 587;
@@ -234,8 +234,12 @@ namespace Admin_Layer
         /// <returns>Success</returns>
         public bool Edit(Accountdetails acc, string password1, string password2, out string message)
         {
-            //TODO
+            message = string.Empty;
             //Validate details
+            if (!Check.CheckAccount(acc, out message))
+            {
+                return false;
+            }
             //Update account
             if (password1 == password2)
             {
@@ -292,12 +296,20 @@ namespace Admin_Layer
         /// <param name="index">The index of the comment as loaded from the list</param>
         /// <param name="message">The message of the error</param>
         /// <returns>Success</returns>
-        public bool Edit(Commentdetails comment, int index, out string message)
+        public bool Edit(Commentdetails comment, int commentIndex, out string message)
         {
-            //Edit comment
-            message = "Comment edited";
-            Comment c = new Comment(LoadedComments[index].PostID, comment.Description, MainUser.ID, comment.PostedToID, comment.PostDate);
-            return true;
+            if (LoadedComments[commentIndex].PosterID == MainUser.ID)
+            {
+                //Edit comment
+                message = "Comment aangepast";
+                Comment c = new Comment(LoadedComments[commentIndex].PostID, comment.Description, MainUser.ID, comment.PostedToID, comment.PostDate);
+                return true;
+            }
+            else
+            {
+                message = "U hebt geen rechten om deze comment aan te passen";
+                return false;
+            }
         }
 
         /// <summary>
@@ -308,10 +320,18 @@ namespace Admin_Layer
         /// <returns>Success</returns>
         public bool Remove(int commentIndex, out string message)
         {
-            //Remove comment
-            LoadedComments[commentIndex].Delete();
-            message = "Comment removed";
-            return true;
+            if (LoadedComments[commentIndex].PosterID == MainUser.ID)
+            {
+                //Remove comment
+                LoadedComments[commentIndex].Delete();
+                message = "Comment verwijderd!";
+                return true;
+            }
+            else
+            {
+                message = "U hebt geen rechten om deze comment te verwijderen";
+                return false;
+            }
         }
 
         /// <summary>
@@ -356,12 +376,21 @@ namespace Admin_Layer
         /// <returns>Success</returns>
         public bool Place(Questiondetails question, out string message)
         {
-            //TODO: Validate details, check for rights
-            //Place question
-            Question q = new Question(0, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, new List<int>());
-            q.Create();
-            message = "Question placed";
-            return true;
+            //Check for rights
+            if (MainUser.Role != Accounttype.Hulpbehoevende)
+            {
+                //TODO: Validate details
+                //Place question
+                Question q = new Question(0, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, new List<int>());
+                q.Create();
+                message = "Vraag gepost!";
+                return true;
+            }
+            else
+            {
+                message = "U hebt niet de rechten om een vraag te plaatsen";
+                return false;
+            }
         }
 
         /// <summary>
@@ -373,12 +402,21 @@ namespace Admin_Layer
         /// <returns>Success</returns>
         public bool Edit(Questiondetails question, int questionIndex, out string message)
         {
-            //TODO: Validate details, check for rights
-            //Edit question
-            Question q = new Question(LoadedQuestions[questionIndex].PostID, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, LoadedQuestions[questionIndex].Volunteers);
-            q.Update();
-            message = "Question updated";
-            return true;
+            //Check for rights
+            if (LoadedQuestions[questionIndex].PosterID == MainUser.ID)
+            {
+                //TODO: Validate details
+                //Edit question
+                Question q = new Question(LoadedQuestions[questionIndex].PostID, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, LoadedQuestions[questionIndex].Volunteers);
+                q.Update();
+                message = "Vraag succesvol aangepast!";
+                return true;
+            }
+            else
+            {
+                message = "U hebt niet de rechten om deze vraag aan te passen";
+                return false;
+            }
         }
 
         /// <summary>
@@ -389,11 +427,19 @@ namespace Admin_Layer
         /// <returns>Success</returns>
         public bool RemoveQuestion(int questionIndex, out string message)
         {
-            //TODO: check for rights
-            //Remove question
-            LoadedQuestions[questionIndex].Delete();
-            message = "Question deleted";
-            return true;
+            //Check for rights
+            if (LoadedQuestions[questionIndex].PosterID == MainUser.ID)
+            {
+                //Remove question
+                LoadedQuestions[questionIndex].Delete();
+                message = "Question deleted";
+                return true;
+            }
+            else
+            {
+                message = "U hebt niet de rechten om deze vraag aan te passen";
+                return false;
+            }
         }
         #endregion
 
@@ -418,12 +464,19 @@ namespace Admin_Layer
         /// <returns>Success</returns>
         public bool Place(Reviewdetails review, out string message)
         {
-            //TODO: Check user
-            //Place review
-            Review r = new Review(0, review.Rating, MainUser.ID, review.PostedToID, review.Description);
-            r.Create();
-            message = "Review placed";
-            return true;
+            if (MainUser.ID != review.PostedToID)
+            {
+                //Place review
+                Review r = new Review(0, review.Rating, MainUser.ID, review.PostedToID, review.Description);
+                r.Create();
+                message = "Review succesvol geplaatst";
+                return true;
+            }
+            else
+            {
+                message = "Het is niet mogelijk om een review te plaatsen op uzelf!";
+                return false;
+            }
         }
 
         /// <summary>
@@ -435,12 +488,20 @@ namespace Admin_Layer
         /// <returns>Success</returns>
         public bool Edit(Reviewdetails review, int reviewIndex, out string message)
         {
-            //TODO: check for rights
-            //Edit review
-            Review r = new Review(LoadedReviews[reviewIndex].PostID, review.Rating, MainUser.ID, review.PostedToID, review.Description);
-            r.Update();
-            message = "Review updated";
-            return true;
+            if (LoadedReviews[reviewIndex].PosterID == MainUser.ID)
+            {
+                //TODO: validate details
+                //Edit review
+                Review r = new Review(LoadedReviews[reviewIndex].PostID, review.Rating, MainUser.ID, review.PostedToID, review.Description);
+                r.Update();
+                message = "Review aangepast!";
+                return true;
+            }
+            else
+            {
+                message = "U hebt niet de rechten om deze review aan te passen";
+                return false;
+            }
         }
 
         /// <summary>
@@ -451,11 +512,18 @@ namespace Admin_Layer
         /// <returns>Success</returns>
         public bool RemoveReview(int reviewIndex, out string message)
         {
-            //TODO: check for rights
-            //Remove review
-            LoadedReviews[reviewIndex].Delete();
-            message = "Review removed";
-            return true;
+            if (LoadedReviews[reviewIndex].PosterID == MainUser.ID)
+            {
+                //Remove review
+                LoadedReviews[reviewIndex].Delete();
+                message = "Review verwijderd";
+                return true;
+            }
+            else
+            {
+                message = "U hebt niet de rechten om deze review aan te passen";
+                return false;
+            }
         }
         #endregion
 
@@ -479,12 +547,20 @@ namespace Admin_Layer
         /// <returns>Success</returns>
         public bool Edit(Meetingdetails meeting, int meetingIndex, out string message)
         {
-            //TODO: check for rights
-            //Edit meeting
-            Meeting m = new Meeting(LoadedMeetings[meetingIndex].PostID, meeting.RequestedID, meeting.RequesterID, meeting.StartDate, meeting.EndDate, meeting.Location);
-            m.Update();
-            message = "Meeting updated";
-            return true;
+            //Check for rights
+            if (meeting.RequestedID != MainUser.ID)
+            {
+                //Edit meeting
+                Meeting m = new Meeting(LoadedMeetings[meetingIndex].PostID, meeting.RequestedID, meeting.RequesterID, meeting.StartDate, meeting.EndDate, meeting.Location);
+                m.Update();
+                message = "Meeting aangepast";
+                return true;
+            }
+            else
+            {
+                message = "U kunt geen meeting aanmaken met uzelf";
+                return false;
+            }
         }
 
         /// <summary>
@@ -495,12 +571,20 @@ namespace Admin_Layer
         /// <returns>Success</returns>
         public bool Create(Meetingdetails meeting, out string message)
         {
-            //TODO: check user
-            //Create meeting
-            Meeting m = new Meeting(0, meeting.RequestedID, meeting.RequesterID, meeting.StartDate, meeting.EndDate, meeting.Location);
-            m.Create();
-            message = "Meeting created";
-            return true;
+            //Check user
+            if (meeting.RequestedID != MainUser.ID)
+            {
+                //Create meeting
+                Meeting m = new Meeting(0, meeting.RequestedID, meeting.RequesterID, meeting.StartDate, meeting.EndDate, meeting.Location);
+                m.Create();
+                message = "Meeting aangemaakt!";
+                return true;
+            }
+            else
+            {
+                message = "U kunt geen meeting aanmaken met uzelf";
+                return false;
+            }
         }
 
         /// <summary>
@@ -511,10 +595,18 @@ namespace Admin_Layer
         /// <returns>Success</returns>
         public bool RemoveMeeting(int meetingIndex, out string message)
         {
-            //Remove meeting
-            LoadedMeetings[meetingIndex].Delete();
-            message = "Meeting removed";
-            return true;
+            if (LoadedMeetings[meetingIndex].PosterID == MainUser.ID && LoadedMeetings[meetingIndex].RequesterID == MainUser.ID)
+            {
+                //Remove meeting
+                LoadedMeetings[meetingIndex].Delete();
+                message = "Meeting verwijderd";
+                return true;
+            }
+            else
+            {
+                message = "U hebt geen rechten om deze meeting te verwijderen";
+                return false;
+            }
         }
         #endregion
 
@@ -603,7 +695,7 @@ namespace Admin_Layer
         /// <summary>
         /// If the GUI is unloaded, log the user out
         /// </summary>
-        ~GUIHandler() 
+        ~GUIHandler()
         {
             Console.WriteLine("User log out state entered. Check if true!");
             //LogOut();
@@ -632,6 +724,10 @@ namespace Admin_Layer
             return true;
         }
 
+        /// <summary>
+        /// Gets the main user information, including skills and availability
+        /// </summary>
+        /// <returns>the main user information</returns>
         public Accountdetails GetMainuserInfo()
         {
             Accountdetails acc = (Accountdetails)Creation.getDetailsObject(MainUser);
