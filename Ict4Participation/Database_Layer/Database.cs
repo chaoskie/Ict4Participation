@@ -12,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Oracle.DataAccess.Client;
+using System.Text.RegularExpressions;
+using Database_Layer.Exceptions;
 
 namespace Database_Layer
 {
@@ -47,6 +49,11 @@ namespace Database_Layer
         /// <returns>A DataTable with the retrieved values></returns>
         public static DataTable RetrieveQuery(string query)
         {
+            if (Regex.IsMatch(query, @"-{2,}"))
+            {
+                throw new SQLInjectionException("Retrieve query: SQLInjection detected!");
+            }
+
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 try

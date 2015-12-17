@@ -47,6 +47,52 @@ $(function () {
         // Valideer fields
         valideerFields();
 
+        $('#select_skills_output').val($('#select_skills_output option:first').val());
+
+    });
+
+    // Als inputWoonplaats nog niet success is maar wel tekst bevat,
+    // stuur een async request om te controlleren of de woonplaats bestaat
+    $('#inputWoonplaats').on('keyup click change', function () {
+        var val = $(this).val();
+
+        if (val.length > 0) {
+            // Haal de value op van inputWoonplaats
+
+            // stuur async request
+            $.ajax({
+                type: 'POST',
+                url: 'registreren.aspx/IsCity',
+                data: '{str: "' + val + '"}',
+                contentType: 'application/json;charset=utf-8',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.d == 1) {
+                        $('#inputWoonplaats').removeClass('form-fail').addClass('form-success');
+                    }
+                }
+            });
+        }
+
+        // Haal woonplaatsen op
+        $.ajax({
+            type: 'POST',
+            url: 'registreren.aspx/GetCities',
+            data: '{str: "' + val + '"}',
+            contentType: 'application/json;charset=utf-8',
+            dataType: 'json',
+            success: function (result) {
+                var res = result.d.split('|');
+
+                // Maak #woonplaats_result_wrapper leeg
+                $('#woonplaats_results_wrapper').html("");
+
+                var r_i, r_length = res.length;
+                for (r_i = 0; r_i < r_length; r_i++) {
+                    $('#woonplaats_results_wrapper').append('<p class="city_gen">' + res[r_i] + '</p>');
+                }
+            }
+        })
     });
 
     // Functie om de zichtbare fields te valideren
@@ -64,7 +110,7 @@ $(function () {
             allesgoed = true;
 
             // Valideer voornaam
-            if ((/^\D{2,}$/).test($('#inputVoornaam').val())) {
+            if ((/^([\u00C0-\u017Fa-zA-Z']){1,}$/).test($('#inputVoornaam').val())) {
                 $('#inputVoornaam').removeClass('form-fail').addClass('form-success');
             } else {
                 $('#inputVoornaam').removeClass('form-success').addClass('form-fail');
@@ -73,7 +119,7 @@ $(function () {
 
             // Valideer tussenvoegsel als het is ingevuld
             if ($('#inputTussenvoegsel').val().length > 0) {
-                if ((/^\D+$/).test($('#inputTussenvoegsel').val())) {
+                if ((/^([\u00C0-\u017Fa-zA-Z']){1,}$/).test($('#inputTussenvoegsel').val())) {
                     $('#inputTussenvoegsel').removeClass('form-fail').addClass('form-success');
                 } else {
                     $('#inputTussenvoegsel').removeClass('form-success').addClass('form-fail');
@@ -84,7 +130,7 @@ $(function () {
             }
 
             // Valideer achternaam
-            if ((/^\D{2,}$/).test($('#inputAchternaam').val())) {
+            if ((/^([\u00C0-\u017Fa-zA-Z']){1,}$/).test($('#inputAchternaam').val())) {
                 $('#inputAchternaam').removeClass('form-fail').addClass('form-success');
             } else {
                 $('#inputAchternaam').removeClass('form-success').addClass('form-fail');
@@ -108,12 +154,12 @@ $(function () {
             }
 
             // Valideer woonplaats
-            if ((/^\D{2,}$/).test($('#inputWoonplaats').val())) {
-                $('#inputWoonplaats').removeClass('form-fail').addClass('form-success');
-            } else {
-                $('#inputWoonplaats').removeClass('form-success').addClass('form-fail');
-                allesgoed = false;
-            }
+            //if ((/^\D{2,}$/).test($('#inputWoonplaats').val())) {
+            //    $('#inputWoonplaats').removeClass('form-fail').addClass('form-success');
+            //} else {
+            //    $('#inputWoonplaats').removeClass('form-success').addClass('form-fail');
+            //    allesgoed = false;
+            //}
 
             // Valideer telefoonnummer
             //if ((/(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)/).test($('#inputTelefoonnummer').val())) {
@@ -131,6 +177,62 @@ $(function () {
                 $('#input_geslacht').removeClass('form-success').addClass('form-fail');
                 allesgoed = false;
             }
+
+            // Valideer birthdate dag
+            if ((/^(:?[1-9]|[1-2][0-9]|3[0-1])$/).test($('#input_birthdate_1').val())) {
+                $('#input_birthdate_1').removeClass('form-fail').addClass('form-success');
+            } else {
+                $('#input_birthdate_1').removeClass('form-success').addClass('form-fail');
+                allesgoed = false;
+            }
+
+            // Valideer birthdate maand
+            if ((/^[1-9][1-2]?$/).test($('#input_birthdate_2').val())) {
+                $('#input_birthdate_2').removeClass('form-fail').addClass('form-success');
+            } else {
+                $('#input_birthdate_2').removeClass('form-success').addClass('form-fail');
+                allesgoed = false;
+            }
+
+            // Valideer birthdate jaar
+            if ((/^19[1-9][0-9]$/).test($('#input_birthdate_3').val())) {
+                $('#input_birthdate_3').removeClass('form-fail').addClass('form-success');
+            } else {
+                $('#input_birthdate_3').removeClass('form-success').addClass('form-fail');
+                allesgoed = false;
+            }
+
+            function fouteDagIngevoerd() {
+                $('#input_birthdate_1, #input_birthdate_2, #input_birthdate_3').removeClass('form-success').addClass('form-fail');
+                allesgoed = false;
+            }
+
+            // Check illegale data
+            var bd_dag = $('#input_birthdate_1').val();
+            var bd_maand = $('#input_birthdate_2').val();
+            var bd_jaar = $('#input_birthdate_3').val();
+
+            // Disable dag 31 bij enkele maanden
+            if ((/2|4|6|9|11/).test(bd_maand)) {
+                if (bd_dag == '31') {
+                    fouteDagIngevoerd();
+                }
+            }
+            // Test februari
+            if (bd_maand == '2') {
+                // Disable dag 30
+                if (bd_dag == '30') {
+                    fouteDagIngevoerd();
+                }
+                // Disable 29 bij schrikkeljaar
+                if (bd_dag == '29' &&
+                    bd_jaar%4 != 0)
+                {
+                    fouteDagIngevoerd();
+                }
+            }
+
+
 
             // Verander data-formcomplete gebaseert op allesgoed
             if (allesgoed) {
@@ -208,10 +310,18 @@ $(function () {
 
         }
 
+        // Valideer vervoer
+        if ($id == '#tab_form4') {
+            $('#tab_form4').data('formbekeken', true);
+        }
+
+
+
         // Enable/Disable 'registreer als hulpbehoevende'-knop als alle forms goed zijn
         if ($('#tab_form1').data('formcomplete') &&
             $('#tab_form2').data('formcomplete') &&
-            $('#tab_form3').data('formcomplete'))
+            $('#tab_form3').data('formcomplete') &&
+            $('#tab_form4').data('formbekeken'))
         {
             $('#btn_registreerhulpbehoevende').prop('disabled', false);
         } else {
@@ -252,6 +362,7 @@ $(function () {
         if ($('#tab_form1').data('formcomplete') &&
             $('#tab_form2').data('formcomplete') &&
             $('#tab_form3').data('formcomplete') &&
+            $('#tab_form4').data('formbekeken') &&
             $('#tab_vrijwilliger').data('formcomplete'))
         {
             $('#btn_registreervrijwilliger').prop('disabled', false);
@@ -261,4 +372,33 @@ $(function () {
 
     };
 
+});
+
+// Functie om woonplaats uit suggesties te halen en in tekstbox te zetten
+$('body').on('click', '#woonplaats_results_wrapper > p', function () {
+    $('#inputWoonplaats').val($(this).text());
+
+    // stuur async request
+    $.ajax({
+        type: 'POST',
+        url: 'registreren.aspx/IsCity',
+        data: '{str: "' + $('#inputWoonplaats').val() + '"}',
+        contentType: 'application/json;charset=utf-8',
+        dataType: 'json',
+        success: function (result) {
+            if (result.d == 1) {
+                $('#inputWoonplaats').removeClass('form-fail').addClass('form-success');
+            }
+        }
+    });
+
+});
+
+$('#inputWoonplaats').focus('focus', function () {
+    $('#woonplaats_results_wrapper').css({ 'display': 'block' });
+});
+$('#inputWoonplaats').focusout(function () {
+    setTimeout(function () {
+        $('#woonplaats_results_wrapper').css({ 'display': 'none' });
+    }, 200);
 });

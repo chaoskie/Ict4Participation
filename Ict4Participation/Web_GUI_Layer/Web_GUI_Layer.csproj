@@ -80,6 +80,7 @@
     <Content Include="Content\CSS\profiel.css" />
     <Content Include="Content\CSS\registreren.css" />
     <Content Include="Content\CSS\zoeken.css" />
+    <Content Include="Content\Files\Woonplaatsen_Nederland.txt" />
     <Content Include="Content\Fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\JS\bootstrap.min.js" />
@@ -119,6 +120,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\CityStruct.cs" />
     <Compile Include="gebruikers.aspx.cs">
       <DependentUpon>gebruikers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -179,7 +181,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\" />
-    <Folder Include="Entities\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Admin_Layer\Admin_Layer.csproj">

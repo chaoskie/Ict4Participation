@@ -14,12 +14,21 @@ namespace Web_GUI_Layer
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            GUIHandler = new GUIHandler();
+            // Check if GUIHandler exists
+            if (Session["GUIHandler_obj"] == null)
+            {
+                // Go back if no GUIhandler can be found
+                Response.Redirect("inloggen.aspx", false);
+                return;
+            }
+
+            // Retrieve GUIHandler object from session
+            GUIHandler = (GUIHandler)Session["GUIHandler_obj"];
         }
 
         protected void btnTerug_Click(object sender, EventArgs e)
         {
-            Response.Redirect("hoofdmenu.aspx");
+            Response.Redirect("hoofdmenu.aspx", false);
         }
     }
 }

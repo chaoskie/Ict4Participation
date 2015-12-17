@@ -19,7 +19,7 @@ namespace Web_GUI_Layer
 
         protected void btnTerug_Click(object sender, EventArgs e)
         {
-            Response.Redirect("profiel.aspx");
+            Response.Redirect("profiel.aspx", false);
         }
     }
 }
