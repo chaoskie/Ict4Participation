@@ -200,6 +200,7 @@ namespace Admin_Layer
         /// <returns>The accounts that match</returns>
         public List<Accountdetails> Search(bool all, Accountdetails search)
         {
+            //TODO: write own function here to return a list of account details /with/ skills and availability (currently missing)
             //Search through all the accounts where the account-details match
             return LoadedAccounts.Where(
                 av => av.Address.Contains(search.Address) &&
