@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using Database_Layer;
 using Class_Layer.Enums;
 using Class_Layer.Utility_Classes;
-    
+
 namespace Class_Layer
 {
     /// <summary>
@@ -202,12 +202,10 @@ namespace Class_Layer
             bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG, string gender)
         {
             string passTotal = PasswordHashing.CreateHash(password);
-            //TODO
-            //Create new user through database
-            //   Database_Layer.Database.NewUser(name, locID, passHash, passSalt, avatarPath, VOG, description, roleText, sex, email);
-            //   return new Account(id, name, loc, role, avatarPath, description, sex, email, VOG);
-            
-            Database.InsertUser(username, passTotal, email, name, address, city, phonenumber, hasLicense, hasVehicle, DateTime.Now.ToString("dd-MM-yyyy"), OVPossible, birthdate.ToString("dd-MM-yyyy"), avatarPath, gender, VOG);
+            string now = ConvertTo.OracleDateTime(DateTime.Now);
+            string bday = ConvertTo.OracleDateTime(birthdate);
+
+            Database.InsertUser(username, passTotal, email, name, address, city, phonenumber, hasLicense, hasVehicle, now, OVPossible, bday, avatarPath, gender, VOG);
             return null;
         }
 
@@ -245,7 +243,7 @@ namespace Class_Layer
         }
 
         public static Account Update(int ID, string username, string password, string email, string name, string address, string city,
-            string phonenumber, bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG, 
+            string phonenumber, bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG,
             List<Skill> skills, List<Availability> availability, List<Skill> oldSkills, List<Availability> oldAvailability)
         {
             Account acc = null;
@@ -295,12 +293,12 @@ namespace Class_Layer
         /// <returns>Returns an account</returns>
         private static Account CreateAccount(DataRow row)
         {
-            //TODO
+            int userid = Convert.ToInt32(row["ID"]);
             //Get availability and skills
             Account acc = null;
             //Create account
             acc = new Account(
-                Convert.ToInt32(row["ID"]),
+                userid,
                 row["Gebruikersnaam"].ToString(),
                 row["Email"].ToString(),
                 row["Naam"].ToString(),
@@ -315,8 +313,8 @@ namespace Class_Layer
                 row["Foto"].ToString(),
                 row["VOG"].ToString(),
                 row["Geslacht"].ToString(),
-                null,
-                null
+                Skill.GetAll(userid),
+                Class_Layer.Availability.GetAll(userid)
                 );
             return acc;
         }
@@ -360,8 +358,6 @@ namespace Class_Layer
             this.VOGPath = VOG;
             this.Skills = skills;
             this.Availability = availability;
-            this.Skills = new List<Skill>();
-            this.Availability= new List<Availability>();
         }
     }
 }
