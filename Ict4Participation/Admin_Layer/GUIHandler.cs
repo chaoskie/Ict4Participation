@@ -139,8 +139,21 @@ namespace Admin_Layer
                 Convert.ToBoolean(acc.hasDriverLicense), 
                 Convert.ToBoolean(acc.hasVehicle), 
                 Convert.ToBoolean(acc.OVPossible), acc.Birthdate, acc.AvatarPath, acc.VOGPath, acc.Gender);
-            //TODO
             //Send email
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("no-reply@plumbum.com");
+            mail.To.Add(acc.Email);
+            mail.Subject = "U hebt een account geregistreerd voor ICT4Participation";
+            mail.Body = "Hallo! \nU kunt nu registreren door middel van uw account:" + acc.Username + "\n\nMet vriendelijke groet,\nHet ICT4Participation-Team";
+
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("s21mplumbum@gmail.com", "Em72@Gmai111");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+
             return true;
         }
 
