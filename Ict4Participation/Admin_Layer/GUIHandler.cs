@@ -146,7 +146,13 @@ namespace Admin_Layer
             mail.From = new MailAddress("no-reply@plumbum.com");
             mail.To.Add(acc.Email);
             mail.Subject = "U hebt een account geregistreerd voor ICT4Participation";
-            mail.Body = "Hallo! \nU kunt nu registreren door middel van uw account:" + acc.Username + "\n\nMet vriendelijke groet,\nHet ICT4Participation-Team";
+            mail.Body = "Hallo!"
+                + "\nU kunt nu registreren door middel van uw account:"
+                + "\n" + acc.Username
+                + "\nVoor vragen en contact kunt u het volgende emailadres mailen: s21mplumbum@gmail.com"
+                + "\n"
+                +" \nMet vriendelijke groet,"
+                + "\nHet ICT4Participation-Team";
 
             SmtpServer.Port = 587;
             SmtpServer.Credentials = new System.Net.NetworkCredential("s21mplumbum@gmail.com", "Em72@Gmai111");
