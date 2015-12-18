@@ -40,5 +40,19 @@ namespace Web_GUI_Layer
         {
             Response.Redirect("gebruikers.aspx", false);
         }
+
+        [System.Web.Services.WebMethod]
+        public static string ChangeUserName(string str)
+        {
+            // update username
+            return "Nieuwe username";
+        }
+
+        [System.Web.Services.WebMethod]
+        public static string ChangeUserDescription(string str)
+        {
+            // update username
+            return "Nieuwe description";
+        }
     }
 }

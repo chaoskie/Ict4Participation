@@ -96,6 +96,7 @@
     <Content Include="Content\JS\fileinput.min.js" />
     <Content Include="Content\JS\hoofdmenu.js" />
     <Content Include="Content\JS\jquery-1.11.3.min.js" />
+    <Content Include="Content\JS\profiel.js" />
     <Content Include="Content\JS\registreren.js" />
     <Content Include="Content\JS\zoekprofiel.js" />
     <Content Include="gebruikers.aspx" />

@@ -60,9 +60,9 @@
 						    </div>
 					    </div>
 					    <div class="col-tn-12 col-xs-8">
-						    <h2 title="Klik om te wijzigen" contenteditable>Barry Batsbak</h2>
+						    <h2 id="username" title="Klik om te wijzigen" contenteditable="true" runat="server">Barry Batsbak</h2>
 						    <h3 title="Klik om te wijzigen">Hulpbehoevende</h3>
-						    <h3 class="text-muted" title="Klik om te wijzigen" contenteditable>"Lorem ipsum dolor sit amet."</h3>
+						    <h3 id="userdescription" class="text-muted" title="Klik om te wijzigen" contenteditable="true" runat="server">Lorem ipsum dolor sit amet.</h3>
 					    </div>
 				    </div>
 
@@ -140,5 +140,6 @@
     <script src="Content/JS/bootstrap.min.js"></script>
 	<script src="Content/JS/dropdown.js"></script>
 	<script src="Content/JS/zoekprofiel.js"></script>
+    <script src="Content/JS/profiel.js"></script>
 </body>
 </html>
