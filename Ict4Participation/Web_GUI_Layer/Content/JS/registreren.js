@@ -187,7 +187,7 @@ $(function () {
             }
 
             // Valideer birthdate maand
-            if ((/^[1-9][1-2]?$/).test($('#input_birthdate_2').val())) {
+            if ((/^([1-9]|1[0-2])$/).test($('#input_birthdate_2').val())) {
                 $('#input_birthdate_2').removeClass('form-fail').addClass('form-success');
             } else {
                 $('#input_birthdate_2').removeClass('form-success').addClass('form-fail');

@@ -57,7 +57,15 @@ namespace Admin_Layer
         public string Location { get; set; }
         public int AmountAccs { get; set; }
         public string Status { get; set; }
+
+
+
+        // Waarom een List<string> ipv List<Skilldetails>??
         public List<string> Skills { get; set; }
+        //public List<Skilldetails> Skills { get; set; }
+
+
+
     }
 
     public struct Accountdetails

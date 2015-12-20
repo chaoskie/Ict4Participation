@@ -24,6 +24,8 @@ namespace Web_GUI_Layer
 
             // Retrieve GUIHandler object from session
             GUIHandler = (GUIHandler)Session["GUIHandler_obj"];
+
+            // TODO: 
         }
 
         protected void btnTerug_Click(object sender, EventArgs e)

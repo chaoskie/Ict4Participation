@@ -14,16 +14,29 @@ namespace Web_GUI_Layer
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Check if GUIHandler exists
-            if (Session["GUIHandler_obj"] == null)
+            if (!IsPostBack)
             {
-                // Go back if no GUIhandler can be found
-                Response.Redirect("inloggen.aspx", false);
-                return;
-            }
+                // Check if GUIHandler exists
+                if (Session["GUIHandler_obj"] == null)
+                {
+                    // Go back if no GUIhandler can be found
+                    Response.Redirect("inloggen.aspx", false);
+                    return;
+                }
 
-            // Retrieve GUIHandler object from session
-            GUIHandler = (GUIHandler)Session["GUIHandler_obj"];
+                // Retrieve GUIHandler object from session
+                GUIHandler = (GUIHandler)Session["GUIHandler_obj"];
+
+                // Empty select_skills
+                select_skills.Items.Clear();
+
+                // Add all skills in select_skills
+                List<Skilldetails> skills = GUIHandler.GetAllSkills();
+                foreach (Skilldetails skill in skills)
+                {
+                    select_skills.Items.Add(skill.Name);
+                }
+            }
         }
 
         protected void btnTerug_Click(object sender, EventArgs e)
@@ -31,10 +44,20 @@ namespace Web_GUI_Layer
             Response.Redirect("profiel.aspx", false);
         }
 
+        private void ShowErrorMessage(string message)
+        {
+            error_message.Text = message;
+            error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+        }
+
         protected void btnPlaatsHulpvraag_Click(object sender, EventArgs e)
         {
+            string message = string.Empty;
+
+            // Get values of page
             string title = inputTitel.Value;
             string desc = inputBeschrijving.Value;
+            string location = inputLocatie.Value;
             List<Skilldetails> skills = new List<Skilldetails>();
             foreach (ListItem item in select_skills_output.Items)
             {
@@ -42,12 +65,78 @@ namespace Web_GUI_Layer
                 sk.Name = item.Value;
                 skills.Add(sk);
             }
+            DateTime startDate = new DateTime(Convert.ToInt32(input_startdate_3.Value), Convert.ToInt32(input_startdate_2.Value), Convert.ToInt32(input_startdate_1.Value), Convert.ToInt32(input_startdate_4.Value), Convert.ToInt32(input_startdate_5.Value), 0);
+            DateTime endDate = new DateTime(Convert.ToInt32(input_einddate_3.Value), Convert.ToInt32(input_einddate_2.Value), Convert.ToInt32(input_einddate_1.Value), Convert.ToInt32(input_einddate_4.Value), Convert.ToInt32(input_einddate_5.Value), 0);
 
+            // Check if values are correct
+            if (string.IsNullOrEmpty(title))
+            {
+                message = "Titel is niet ingevuld!";
+                ShowErrorMessage(message);
+                return;
+            }
+            if (string.IsNullOrEmpty(desc))
+            {
+                message = "Beschrijving is niet ingevuld!";
+                ShowErrorMessage(message);
+                return;
+            }
+            if (string.IsNullOrEmpty(location))
+            {
+                message = "Locatie is niet ingevuld!";
+                ShowErrorMessage(message);
+                return;
+            }
+            if (skills.Count == 0)
+            {
+                message = "Geen skills toegevoegd!";
+                ShowErrorMessage(message);
+                return;
+            }
+            if (DateTime.Compare(startDate, DateTime.Now) > 0)
+            {
+                message = "De begintijd is al geweest!";
+                ShowErrorMessage(message);
+                return;
+            }
+            if (DateTime.Compare(endDate, DateTime.Now) > 0)
+            {
+                message = "De eindtijd is al geweest!";
+                ShowErrorMessage(message);
+                return;
+            }
+            if (DateTime.Compare(startDate, endDate) <= 0)
+            {
+                message = "De einddatum mag niet eerder zijn dan de startdatum!";
+                ShowErrorMessage(message);
+                return;
+            }
+
+            // Create new question details and fill properties
             Questiondetails qd = new Questiondetails();
-            string message = String.Empty;
+            qd.Title = title;
+            qd.Description = desc;
+            qd.PostDate = DateTime.Now;
+            qd.Skills = skills.Select(i => i.Name).ToList();
+            qd.Location = location;
+            qd.StartDate = startDate;
+            qd.EndDate = endDate;
+            qd.Urgent = inputUrgentie.Checked;
             
-
-            //GUIHandler.Place(qd, out message);
+            // TODO:
+            //qd.Status = ...;
+            
+            // Place question
+            if (!GUIHandler.Place(qd, out message))
+            {
+                ShowErrorMessage(message);
+                return;
+            }
+            else
+            {
+                // Redirect to profiel.aspx if question was placed successfully
+                Response.Redirect("profiel.aspx", false);
+            }
         }
     }
 }
