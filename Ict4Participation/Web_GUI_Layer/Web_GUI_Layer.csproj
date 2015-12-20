@@ -94,6 +94,7 @@
     <Content Include="Content\JS\dropdown.js" />
     <Content Include="Content\JS\errormessage.js" />
     <Content Include="Content\JS\fileinput.min.js" />
+    <Content Include="Content\JS\gebruikers.js" />
     <Content Include="Content\JS\hoofdmenu.js" />
     <Content Include="Content\JS\jquery-1.11.3.min.js" />
     <Content Include="Content\JS\plaatsvraag.js" />

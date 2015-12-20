@@ -21,5 +21,29 @@ namespace Web_GUI_Layer
         {
             Response.Redirect("profiel.aspx", false);
         }
+
+        [System.Web.Services.WebMethod]
+        public static string SearchUsers(string str)
+        {
+            string result = string.Empty;
+            GUIHandler tempGUIHandler = new GUIHandler();
+
+            List<Accountdetails> users = tempGUIHandler.GetAll();
+
+            foreach (Accountdetails user in users)
+            {
+                if (user.Name.ToLower().Contains(str.ToLower()))
+                {
+                    result += user.Name + "," + user.ID + ":";
+                }
+            }
+
+            if (result.Length > 0)
+            {
+                result = result.Substring(0, result.Length - 1);
+            }
+
+            return result;
+        }
     }
 }

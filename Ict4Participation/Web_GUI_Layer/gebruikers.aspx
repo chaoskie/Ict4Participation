@@ -60,7 +60,7 @@
 							    </div>
 						    </div>
 						    <div class="row dropdown-content">
-							    <ul class="col-xs-12">
+							    <ul id="gebruikers_lijst" class="col-xs-12">
 								    <li><a href="#" data-id="1">Barry Batsbak</a></li>
 								    <li><a href="#" data-id="1">Harry Nogwat</a></li>
 								    <li><a href="#" data-id="1">Barry Batsbak</a></li>
@@ -82,5 +82,6 @@
     <script src="Content/JS/bootstrap.min.js"></script>
 	<script src="Content/JS/dropdown.js"></script>
 	<script src="Content/JS/zoekprofiel.js"></script>
+    <script src="Content/JS/gebruikers.js"></script>
 </body>
 </html>
