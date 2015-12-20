@@ -78,15 +78,15 @@
 							    </div>
 						    </div>
 						    <div class="row dropdown-content">
-							    <ul class="col-xs-12">
-								    <li>
+							    <ul id="vragen_list" class="col-xs-12" runat="server">
+								    <%--<li>
 									    <a href="#">Dit is een melding</a>
 									    <a href="#" data-id="1">Barry Batsbak</a>
 								    </li>
 								    <li>
 									    <a href="#">Dit is een andere melding</a>
 									    <a href="#" data-id="2">Harry Nogwat</a>
-								    </li>
+								    </li>--%>
 							    </ul>
 						    </div>
 					    </div>
@@ -104,15 +104,15 @@
 							    </div>
 						    </div>
 						    <div class="row dropdown-content">
-							    <ul class="col-xs-12">
-								    <li>
+							    <ul id="reviews_list" class="col-xs-12" runat="server">
+								    <%--<li>
 									    <a href="#">Dit is een review</a>
 									    <a href="#" data-id="1">Barry Batsbak</a>
 								    </li>
 								    <li>
 									    <a href="#">Dit is een andere review</a>
 									    <a href="#" data-id="2">Harry Nogwat</a>
-								    </li>
+								    </li>--%>
 							    </ul>
 						    </div>
 					    </div>
@@ -132,6 +132,7 @@
 				    <p class="zoek-profiel-quote">Nog niets...</p>
 			    </div>
 		    </div>
+
 	    </div>
     </form>
 	

@@ -60,16 +60,7 @@
 							    </div>
 						    </div>
 						    <div class="row dropdown-content">
-							    <ul id="gebruikers_lijst" class="col-xs-12">
-								    <li><a href="#" data-id="1">Barry Batsbak</a></li>
-								    <li><a href="#" data-id="1">Harry Nogwat</a></li>
-								    <li><a href="#" data-id="1">Barry Batsbak</a></li>
-								    <li><a href="#" data-id="1">Harry Nogwat</a></li>
-								    <li><a href="#" data-id="1">Barry Batsbak</a></li>
-								    <li><a href="#" data-id="1">Harry Nogwat</a></li>
-								    <li><a href="#" data-id="1">Barry Batsbak</a></li>
-								    <li><a href="#" data-id="1">Harry Nogwat</a></li>
-							    </ul>
+							    <ul id="gebruikers_lijst" class="col-xs-12"></ul>
 						    </div>
 					    </div>
 				    </div>
