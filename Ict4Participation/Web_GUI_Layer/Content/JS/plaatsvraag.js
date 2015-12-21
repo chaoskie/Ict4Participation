@@ -31,6 +31,26 @@ $('#btnVerwijder').on('click', function () {
 
 $(function () {
 
+    // Zet de datum naar de huidige datum
+    var d = new Date();
+    var d_day = d.getDate();
+    var d_month = d.getMonth() + 1;
+    var d_year = d.getFullYear();
+    var d_hour = d.getHours();
+    var d_min = d.getMinutes() + (5 - (d.getMinutes() % 5));
+
+    $('#input_startdate_1 option[value="' + d_day + '"]').prop('selected', true);
+    $('#input_startdate_2 option[value="' + d_month + '"]').prop('selected', true);
+    $('#input_startdate_3 option[value="' + d_year + '"]').prop('selected', true);
+    $('#input_startdate_4 option[value="' + d_hour + '"]').prop('selected', true);
+    $('#input_startdate_5 option[value="' + d_min + '"]').prop('selected', true);
+
+    $('#input_einddate_1 option[value="' + d_day + '"]').prop('selected', true);
+    $('#input_einddate_2 option[value="' + d_month + '"]').prop('selected', true);
+    $('#input_einddate_3 option[value="' + d_year + '"]').prop('selected', true);
+    $('#input_einddate_4 option[value="' + (d_hour + 1) + '"]').prop('selected', true);
+    $('#input_einddate_5 option[value="' + d_min + '"]').prop('selected', true);
+
     // Valideer fields als de DOM geladen is
     valideerFields();
 
