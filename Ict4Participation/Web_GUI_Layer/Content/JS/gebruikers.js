@@ -16,11 +16,19 @@
 
             // Loop door de gebruikers array
             for (var i = 0; i < gebruikers.length; i++) {
-                // Split de gebruiker om de naam en het id van de gebruiker te scheiden
-                gebruikers[i] = gebruikers[i].split(',');
+                // Check of er een gebruiker is op plek i
+                if (gebruikers[i] != "") {
+                    // Split de gebruiker om de naam en het id van de gebruiker te scheiden
+                    gebruikers[i] = gebruikers[i].split(',');
 
-                // append nieuwe gebruiker in lijst
-                $('#gebruikers_lijst').append('<li><a href="#" data-id="' + gebruikers[i][1] + '">' + gebruikers[i][0] + '</li>');
+                    // Append nieuwe gebruiker in lijst
+                    $('#gebruikers_lijst').append('<li><a href="#" data-id="' + gebruikers[i][1] + '">' + gebruikers[i][0] + '</a></li>');
+                }
+            }
+
+            // Append bericht als er geen gebruikers gevonden zijn
+            if (gebruikers.length == 1 && gebruikers[0] == "") {
+                $('#gebruikers_lijst').append('<li><a href="#">Geen gebruikers gevonden</a></li>');
             }
         }
     });
