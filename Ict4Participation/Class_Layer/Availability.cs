@@ -37,7 +37,7 @@ namespace Class_Layer
         {
             List<Availability> avails = new List<Availability>();
             //Load in availability from user
-            DataTable Dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Availability\" WHERE \"AVAILABILITY_ID\"= (SELECT \"ID\" FROM \"Availability_Acc\" WHERE \"ACC_ID\" = " + userID);
+            DataTable Dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Availability\" WHERE \"AVAILABILITY_ID\"= (SELECT \"ID\" FROM \"Availability_Acc\" WHERE \"ACC_ID\" = " + userID + ")");
             foreach (DataRow row in Dt.Rows)
             {
                 avails.Add(
