@@ -45,5 +45,11 @@ namespace Web_GUI_Layer
 
             return result;
         }
+        
+        [System.Web.Services.WebMethod]
+        public static string GetUserInfo(string id)
+        {
+            return "Testnaam|Hulpverlener-test|TestDescription|test/profiel/foto.png";
+        }
     }
 }

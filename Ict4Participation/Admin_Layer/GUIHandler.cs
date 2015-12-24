@@ -378,7 +378,7 @@ namespace Admin_Layer
         public bool Place(Questiondetails question, out string message)
         {
             //Check for rights
-            if (MainUser.Role != Accounttype.Hulpbehoevende)
+            if (MainUser.Role == Accounttype.Hulpbehoevende)
             {
                 //TODO: Validate details
                 //Place question

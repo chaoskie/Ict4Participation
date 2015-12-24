@@ -15,8 +15,8 @@ namespace Web_GUI_Layer
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
+            //if (!IsPostBack)
+            //{
                 // Check if GUIHandler exists
                 if (Session["GUIHandler_obj"] == null)
                 {
@@ -86,7 +86,7 @@ namespace Web_GUI_Layer
 
                     li.Controls.Add(a);
                 }
-            }
+            //}
         }
 
         protected void btnTerug_Click(object sender, EventArgs e)

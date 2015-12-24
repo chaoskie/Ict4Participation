@@ -1,0 +1,34 @@
+﻿/*
+ * ZOEK_PROFIEL_OVERLAY STYLES
+ * * * * * * * * * * */
+#zoek_profiel_overlay {
+	background-color: #fff;
+	box-shadow: 0 0 4px 0 rgba(0,0,0,0.25);
+	display: none;
+	padding: 10px;
+	position: absolute;
+	width: 300px;
+	z-index: 100;
+}
+#zoek_profiel_overlay.actief {
+	display: block;
+}
+#zoek_profiel_overlay .zoek-profiel-left {
+	display: inline-block;
+	float: left;
+	width: 100px;
+}
+#zoek_profiel_overlay .zoek-profiel-right {
+	display: inline-block;
+	float: left;
+	padding-left: 10px;
+	width: calc(100% - 100px);
+}
+#zoek_profiel_overlay .zoek-profiel-foto {
+	display: block;
+	height: 100px;
+	width: 100px;
+}
+#zoek_profiel_overlay .zoek-profiel-foto {
+	border: 1px solid #ed1e12;
+}

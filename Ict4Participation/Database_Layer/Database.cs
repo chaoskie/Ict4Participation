@@ -306,7 +306,8 @@ namespace Database_Layer
                 cmd1.Parameters.Add(new OracleParameter("F", location));
                 cmd1.Parameters.Add(new OracleParameter("G", maxHulpverlener));
                 cmd1.Parameters.Add(new OracleParameter("H", status));
-                OracleDataReader r = cmd.ExecuteReader();
+                cmd1.Connection = c;
+                OracleDataReader r = cmd1.ExecuteReader();
                 DataTable result = new DataTable();
                 result.Load(r);
                 foreach (DataRow row in result.Rows)

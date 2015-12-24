@@ -56,25 +56,25 @@ $(function () {
 
                 console.log(result.d);
 
-                //// Zet de data naar het element
-                //$(hoofdelement).find('.zoek-profiel-foto').attr('src', profiel_foto);
-                //$(hoofdelement).find('.zoek-profiel-naam').text(profiel_naam);
-                //$(hoofdelement).find('.zoek-profiel-type').text(profiel_type);
-                //$(hoofdelement).find('.zoek-profiel-quote').text(profiel_quote);
+                // Zet de data naar het element
+                $(hoofdelement).find('.zoek-profiel-foto').attr('src', profiel_foto);
+                $(hoofdelement).find('.zoek-profiel-naam').text(profiel_naam);
+                $(hoofdelement).find('.zoek-profiel-type').text(profiel_type);
+                $(hoofdelement).find('.zoek-profiel-quote').text(profiel_quote);
 
-                //// Zet het element naar 'actief' om het zichtbaar te maken
-                //$(hoofdelement).addClass('actief');
+                // Zet het element naar 'actief' om het zichtbaar te maken
+                $(hoofdelement).addClass('actief');
 
-                //// Zet de positie van de overlay naar 50px onder de muispositie
-                //var posX = event.pageX;
-                //if ((posX + $(hoofdelement).width()) > (window.innerWidth)) {
+                // Zet de positie van de overlay naar 50px onder de muispositie
+                var posX = event.pageX;
+                if ((posX + $(hoofdelement).width()) > (window.innerWidth)) {
 
-                //    posX = window.innerWidth - $(hoofdelement).width() - 50;
+                    posX = window.innerWidth - $(hoofdelement).width() - 50;
 
-                //}
+                }
 
-                //// Zet het element naar de positie
-                //$(hoofdelement).css({ left: posX, top: event.pageY + 10 });
+                // Zet het element naar de positie
+                $(hoofdelement).css({ left: posX, top: event.pageY + 10 });
             }
         });
 

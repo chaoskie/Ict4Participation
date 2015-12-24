@@ -78,6 +78,7 @@
     <Content Include="Content\CSS\dropdown.css" />
     <Content Include="Content\CSS\fileinput.min.css" />
     <Content Include="Content\CSS\font-awesome.min.css" />
+    <Content Include="Content\CSS\gebruiker-zoeken.css" />
     <Content Include="Content\CSS\gebruikers.css" />
     <Content Include="Content\CSS\hoofdmenu.css" />
     <Content Include="Content\CSS\inloggen.css" />

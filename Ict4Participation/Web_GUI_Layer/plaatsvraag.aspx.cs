@@ -10,7 +10,9 @@ namespace Web_GUI_Layer
 {
     public partial class plaatsvraag : System.Web.UI.Page
     {
-        private GUIHandler GUIHandler;
+        private static GUIHandler GUIHandler;
+
+        private static List<Skilldetails> selected_skills;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,6 +38,8 @@ namespace Web_GUI_Layer
                 {
                     select_skills.Items.Add(skill.Name);
                 }
+
+                selected_skills = new List<Skilldetails>();
             }
         }
 
@@ -58,13 +62,13 @@ namespace Web_GUI_Layer
             string title = inputTitel.Value;
             string desc = inputBeschrijving.Value;
             string location = inputLocatie.Value;
-            List<Skilldetails> skills = new List<Skilldetails>();
-            foreach (ListItem item in select_skills_output.Items)
-            {
-                Skilldetails sk = new Skilldetails();
-                sk.Name = item.Value;
-                skills.Add(sk);
-            }
+            //List<Skilldetails> skills = new List<Skilldetails>();
+            //foreach (ListItem item in select_skills_output.Items)
+            //{
+            //    Skilldetails sk = new Skilldetails();
+            //    sk.Name = item.Value;
+            //    skills.Add(sk);
+            //}
             DateTime startDate = new DateTime(Convert.ToInt32(input_startdate_3.Value), Convert.ToInt32(input_startdate_2.Value), Convert.ToInt32(input_startdate_1.Value), Convert.ToInt32(input_startdate_4.Value), Convert.ToInt32(input_startdate_5.Value), 0);
             DateTime endDate = new DateTime(Convert.ToInt32(input_einddate_3.Value), Convert.ToInt32(input_einddate_2.Value), Convert.ToInt32(input_einddate_1.Value), Convert.ToInt32(input_einddate_4.Value), Convert.ToInt32(input_einddate_5.Value), 0);
 
@@ -87,27 +91,27 @@ namespace Web_GUI_Layer
                 ShowErrorMessage(message);
                 return;
             }
-            if (skills.Count == 0)
+            if (selected_skills.Count == 0)
             {
                 message = "Geen skills toegevoegd!";
                 ShowErrorMessage(message);
                 return;
             }
-            if (DateTime.Compare(startDate, DateTime.Now) > 0)
+            if (DateTime.Compare(startDate, DateTime.Now) < 0)
             {
                 message = "De begintijd is al geweest!";
                 ShowErrorMessage(message);
                 return;
             }
-            if (DateTime.Compare(endDate, DateTime.Now) > 0)
+            if (DateTime.Compare(endDate, DateTime.Now) < 0)
             {
                 message = "De eindtijd is al geweest!";
                 ShowErrorMessage(message);
                 return;
             }
-            if (DateTime.Compare(startDate, endDate) <= 0)
+            if (DateTime.Compare(startDate, endDate) > 0)
             {
-                message = "De einddatum mag niet eerder zijn dan de startdatum!";
+                message = "De einddatum mag niet eerder zijn dan/gelijk zijn aan de startdatum!";
                 ShowErrorMessage(message);
                 return;
             }
@@ -117,7 +121,7 @@ namespace Web_GUI_Layer
             qd.Title = title;
             qd.Description = desc;
             qd.PostDate = DateTime.Now;
-            qd.Skills = skills.Select(i => i.Name).ToList();
+            qd.Skills = selected_skills.Select(i => i.Name).ToList();
             qd.Location = location;
             qd.StartDate = startDate;
             qd.EndDate = endDate;
@@ -137,6 +141,25 @@ namespace Web_GUI_Layer
                 // Redirect to profiel.aspx if question was placed successfully
                 Response.Redirect("profiel.aspx", false);
             }
+        }
+
+        [System.Web.Services.WebMethod]
+        public static string UpdateSkills(string skills)
+        {
+            // split skills in List<string>
+            List<string> skillList = skills.Split('|').ToList();
+
+            selected_skills = new List<Skilldetails>();
+
+            foreach (string skill in skillList)
+            {
+                Skilldetails sd = new Skilldetails();
+                sd.Name = skill.ToLower();
+                sd.UserID = GUIHandler.GetMainuserInfo().ID;
+                selected_skills.Add(sd);
+            }
+
+            return string.Empty;
         }
     }
 }
