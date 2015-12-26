@@ -203,9 +203,6 @@ namespace Admin_Layer
             return true;
         }
 
-        /*
-         * TODO: PURE AIDS
-         * 
         /// <summary>
         /// check the question details for correct input
         /// </summary>
@@ -234,21 +231,38 @@ namespace Admin_Layer
                 message = "Geen skills toegevoegd!";
                 return false;
             }
-            if (DateTime.Subtract(qd.StartDate, DateTime.Now) < 0)
+
+
+            bool isStartDateNull = true;
+            bool isEndDateNull = true;
+            if (qd.StartDate != null)
             {
+                if ( ((DateTime)qd.StartDate).Subtract(DateTime.Now) < TimeSpan.Zero)
+                {
                 message = "De begintijd is al geweest!";
                 return false;
+                }
+                isStartDateNull = false;
             }
-            if (DateTime.Compare(endDate, DateTime.Now) < 0)
+            if (qd.StartDate != null)
             {
+                if ( ((DateTime)qd.EndDate).Subtract(DateTime.Now) < TimeSpan.Zero)
+                {
                 message = "De eindtijd is al geweest!";
-                return;
+                return false;
+                }
+                isEndDateNull = false;
             }
-            if (DateTime.Compare(startDate, endDate) > 0)
+            if (!isEndDateNull && !isStartDateNull)
             {
-                message = "De einddatum mag niet eerder zijn dan/gelijk zijn aan de startdatum!";
-                return;
-            }                        
+                if ((DateTime)qd.StartDate < (DateTime)qd.EndDate)
+                {
+                    message = "De einddatum mag niet eerder zijn dan/gelijk zijn aan de startdatum!";
+                    return false;
+                }
+            }
+            message = "Vraag succesvol aangemaakt";
+            return true;
         }
         /// <summary>
         /// check if the string is null or empty
@@ -268,7 +282,5 @@ namespace Admin_Layer
         {
             return Content ==0;
         }
-
-        }*/
     }
 }
