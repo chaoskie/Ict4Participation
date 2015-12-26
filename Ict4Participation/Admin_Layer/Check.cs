@@ -202,5 +202,73 @@ namespace Admin_Layer
             //http://www.postcodedata.nl/ check voor relevante info
             return true;
         }
+
+        /*
+         * TODO: PURE AIDS
+         * 
+        /// <summary>
+        /// check the question details for correct input
+        /// </summary>
+        /// <param name="qd">question details object</param>
+        /// <param name="message">error output message</param>
+        /// <returns>succes boolean</returns>
+        public static bool QuestionDetails(Questiondetails qd, out string message)
+        {
+            if (!Check.checkIfFilledIn(qd.Title))
+            {
+                message = "Titel is niet ingevuld!";
+                return false;
+            }
+            if (!Check.checkIfFilledIn(qd.Description))
+            {
+                message = "Beschrijving is niet ingevuld!";
+                return false;
+            }
+            if (!Check.checkIfFilledIn(qd.Location))
+            {
+                message = "Locatie is niet ingevuld!";
+                return false;
+            }
+            if (checkSkillCountIsEmpty(qd.Skills.Count)) //if 0 then true
+            {
+                message = "Geen skills toegevoegd!";
+                return false;
+            }
+            if (DateTime.Subtract(qd.StartDate, DateTime.Now) < 0)
+            {
+                message = "De begintijd is al geweest!";
+                return false;
+            }
+            if (DateTime.Compare(endDate, DateTime.Now) < 0)
+            {
+                message = "De eindtijd is al geweest!";
+                return;
+            }
+            if (DateTime.Compare(startDate, endDate) > 0)
+            {
+                message = "De einddatum mag niet eerder zijn dan/gelijk zijn aan de startdatum!";
+                return;
+            }                        
+        }
+        /// <summary>
+        /// check if the string is null or empty
+        /// </summary>
+        /// <param name="Content">parameter to check</param>
+        /// <returns></returns>
+        public static bool checkIfFilledIn(string Content)
+        {
+            return string.IsNullOrEmpty(Content);
+        }
+        /// <summary>
+        /// returns true if list of skills is 0
+        /// </summary>
+        /// <param name="Content">skills to count or other object to compare to zero</param>
+        /// <returns></returns>
+        public static bool checkSkillCountIsEmpty(int Content)
+        {
+            return Content ==0;
+        }
+
+        }*/
     }
 }

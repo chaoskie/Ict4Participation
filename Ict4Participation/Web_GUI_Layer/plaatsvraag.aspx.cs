@@ -76,49 +76,8 @@ namespace Web_GUI_Layer
                 Convert.ToInt32(input_einddate_2.Value), Convert.ToInt32(input_einddate_1.Value), 
                 Convert.ToInt32(input_einddate_4.Value), Convert.ToInt32(input_einddate_5.Value), 0);
 
-            // Check if values are correct
-            if (string.IsNullOrEmpty(title))
-            {
-                message = "Titel is niet ingevuld!";
-                ShowErrorMessage(message);
-                return;
-            }
-            if (string.IsNullOrEmpty(desc))
-            {
-                message = "Beschrijving is niet ingevuld!";
-                ShowErrorMessage(message);
-                return;
-            }
-            if (string.IsNullOrEmpty(location))
-            {
-                message = "Locatie is niet ingevuld!";
-                ShowErrorMessage(message);
-                return;
-            }
-            if (selected_skills.Count == 0)
-            {
-                message = "Geen skills toegevoegd!";
-                ShowErrorMessage(message);
-                return;
-            }
-            if (DateTime.Compare(startDate, DateTime.Now) < 0)
-            {
-                message = "De begintijd is al geweest!";
-                ShowErrorMessage(message);
-                return;
-            }
-            if (DateTime.Compare(endDate, DateTime.Now) < 0)
-            {
-                message = "De eindtijd is al geweest!";
-                ShowErrorMessage(message);
-                return;
-            }
-            if (DateTime.Compare(startDate, endDate) > 0)
-            {
-                message = "De einddatum mag niet eerder zijn dan/gelijk zijn aan de startdatum!";
-                ShowErrorMessage(message);
-                return;
-            }
+            //TODO  bool checkSucces = Admin_Layer.Check.QuestionDetails(qd, string errorMessage );
+
 
             // Create new question details and fill properties
             Questiondetails qd = new Questiondetails();
@@ -130,10 +89,9 @@ namespace Web_GUI_Layer
             qd.StartDate = startDate;
             qd.EndDate = endDate;
             qd.Urgent = inputUrgentie.Checked;
+            qd.Status = "Open";
                     
-            // TODO:
-            //qd.Status = ...;
-            
+        
             // Place question
             if (!GUIHandler.Place(qd, out message))
             {
