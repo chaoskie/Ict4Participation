@@ -121,9 +121,9 @@ namespace Admin_Layer
         /// <summary>
         /// Checks if the string ends with a specified extension
         /// </summary>
-        /// <param name="s"></param>
-        /// <param name="ext"></param>
-        /// <returns></returns>
+        /// <param name="s">string to check</param>
+        /// <param name="ext">extension to match</param>
+        /// <returns>succes bool</returns>
         public static bool isOfFileExt(string s, string ext)
         {
             return Regex.IsMatch(s, "(" + ext + ")$");
@@ -199,6 +199,7 @@ namespace Admin_Layer
         {
             //TODO
             //Check if valid address
+            //http://www.postcodedata.nl/ check voor relevante info
             return true;
         }
     }

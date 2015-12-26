@@ -69,8 +69,12 @@ namespace Web_GUI_Layer
             //    sk.Name = item.Value;
             //    skills.Add(sk);
             //}
-            DateTime startDate = new DateTime(Convert.ToInt32(input_startdate_3.Value), Convert.ToInt32(input_startdate_2.Value), Convert.ToInt32(input_startdate_1.Value), Convert.ToInt32(input_startdate_4.Value), Convert.ToInt32(input_startdate_5.Value), 0);
-            DateTime endDate = new DateTime(Convert.ToInt32(input_einddate_3.Value), Convert.ToInt32(input_einddate_2.Value), Convert.ToInt32(input_einddate_1.Value), Convert.ToInt32(input_einddate_4.Value), Convert.ToInt32(input_einddate_5.Value), 0);
+            DateTime startDate = new DateTime(Convert.ToInt32(input_startdate_3.Value), 
+                Convert.ToInt32(input_startdate_2.Value), Convert.ToInt32(input_startdate_1.Value), 
+                Convert.ToInt32(input_startdate_4.Value), Convert.ToInt32(input_startdate_5.Value), 0);
+            DateTime endDate = new DateTime(Convert.ToInt32(input_einddate_3.Value), 
+                Convert.ToInt32(input_einddate_2.Value), Convert.ToInt32(input_einddate_1.Value), 
+                Convert.ToInt32(input_einddate_4.Value), Convert.ToInt32(input_einddate_5.Value), 0);
 
             // Check if values are correct
             if (string.IsNullOrEmpty(title))
@@ -126,7 +130,7 @@ namespace Web_GUI_Layer
             qd.StartDate = startDate;
             qd.EndDate = endDate;
             qd.Urgent = inputUrgentie.Checked;
-            
+                    
             // TODO:
             //qd.Status = ...;
             
