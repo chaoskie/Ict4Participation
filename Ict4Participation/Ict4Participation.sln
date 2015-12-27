@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICT4P_HASPDetection", "ICT4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_GUI_Layer", "Web_GUI_Layer\Web_GUI_Layer.csproj", "{69D426F3-452E-479D-B3BF-1FC0B5FEE8BE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProfileVOGs_Unvalidated", "ProfileVOGs_Unvalidated", "{964654A4-27C0-4DFE-8562-6F4D98F983CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProfileAvatars", "ProfileAvatars", "{686B645E-586C-40FD-8386-E0709D7B47A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -712,6 +712,46 @@ namespace Admin_Layer
         }
         #endregion
 
+        #region Download Handling
+
+        public bool Download(System.Web.UI.WebControls.FileUpload File1, out string message)
+        {
+            //TODO:
+            //Test this
+            string
+                SaveLocation,
+                fn = System.IO.Path.GetFileName(File1.PostedFile.FileName),
+                loc,
+                file = File1.ToString();
+
+            //If it's a PDF, upload to the folder called "ProfileVOG_Unvalidated"
+            if (file.ToLower().EndsWith(".pdf"))
+            {
+                loc = "ProfileVOGs_Unvalidated";
+            }
+            //Else it's an image, so upload to the folder called "ProfileAvatars"
+            else
+            {
+                loc = "ProfileAvatars";
+            }
+            SaveLocation = System.Web.Hosting.HostingEnvironment.MapPath(loc) + "\\" + fn;
+            try
+            {
+                File1.PostedFile.SaveAs(SaveLocation);
+                message = "The file has been uploaded.";
+                return true;
+            }
+            catch (Exception ex)
+            {
+                message = "Error: " + ex.Message;
+                return false;
+            }
+
+            throw new NotSupportedException();
+        }
+
+        #endregion
+
         /// <summary>
         /// If the GUI is unloaded, log the user out
         /// </summary>
