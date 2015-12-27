@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Admin_Layer
 {
-    public abstract class Check
+    private abstract class Check
     {
         static bool invalidMail = false;
  

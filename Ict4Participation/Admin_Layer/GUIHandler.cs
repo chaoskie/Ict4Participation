@@ -198,22 +198,10 @@ namespace Admin_Layer
         /// <param name="all">Specifies whether there is a search going through a smaller list or the full list</param>
         /// <param name="search">The account details to search by</param>
         /// <returns>The accounts that match</returns>
-        public List<Accountdetails> Search(bool all, Accountdetails search)
+        public List<Accountdetails> Search(Accountdetails search, bool all = true)
         {
-            //TODO: write own function here to return a list of account details /with/ skills and availability (currently missing)
             //Search through all the accounts where the account-details match
-            return LoadedAccounts.Where(
-                av => av.Address.Contains(search.Address) &&
-                av.Username.Contains(search.Username) &&
-                av.Name.Contains(search.Name) &&
-                av.Email.Contains(search.Email) &&
-                av.City.Contains(search.City) &&
-                av.Phonenumber.Contains(search.Phonenumber) &&
-                (search.hasDriverLicense != null ? av.hasDriverLicense == search.hasDriverLicense : av.hasDriverLicense != search.hasDriverLicense) && //If null, return both true and false
-                (search.hasVehicle != null ? av.hasVehicle == search.hasVehicle : av.hasVehicle != search.hasVehicle) && //If null, return both true and false
-                (search.OVPossible != null ? av.OVPossible == search.OVPossible : av.OVPossible != search.OVPossible) //If null, return both true and false
-                ).Select(av => Creation.getDetailsObject(av))
-                .Cast<Accountdetails>().ToList();
+            return Searcher.Detailed(LoadedAccounts, search);
         }
 
         /// <summary>
@@ -224,7 +212,33 @@ namespace Admin_Layer
         {
             //Get all the accounts and convert these to account-details objects. Then create a list out of these.
             LoadedAccounts = Account.GetAll();
-            return LoadedAccounts.Select(acc => Creation.getDetailsObject(acc)).Cast<Accountdetails>().ToList();
+            List<Accountdetails> returnable = LoadedAccounts.Select(acc => Creation.getDetailsObject(acc)).Cast<Accountdetails>().ToList();
+            //Add skill list for every account
+            //Add availability list for every account
+            foreach (Accountdetails accd in returnable)
+            {
+                foreach (Account acc in LoadedAccounts)
+                {
+                    //Only if the ID's match
+                    if (accd.ID == acc.ID)
+                    {
+                        //Add skills
+                        foreach (Skill s in acc.Skills)
+                        {
+                            //As skilldetails
+                            accd.SkillsDetailList.Add((Skilldetails)Creation.getDetailsObject(s));
+                        }
+                        //Add availability
+                        foreach (Availability a in acc.Availability)
+                        {
+                            //As availabilitydetails
+                            accd.AvailabilityDetailList.Add((Availabilitydetails)Creation.getDetailsObject(a));
+                        }
+                        break;
+                    }
+                }
+            }
+            return returnable;
         }
 
         /// <summary>
@@ -357,16 +371,21 @@ namespace Admin_Layer
         public List<Questiondetails> GetAll(bool all)
         {
             //Load in questions
-            if (!all)
-            {
-                LoadedQuestions = Question.GetAll(MainUser.ID);
-            }
-            else
-            {
-                LoadedQuestions = Question.GetAll(null);
-            }
+            LoadedQuestions = all ? Question.GetAll(null) : Question.GetAll(MainUser.ID);
             //Return all questions
             return LoadedQuestions.Cast<Question>().Select(x => Creation.getDetailsObject(x)).Cast<Questiondetails>().ToList();
+        }
+
+        /// <summary>
+        /// Searches through the list of questions
+        /// </summary>
+        /// <param name="all">Specifies whether there is a search going through a smaller list or the full list</param>
+        /// <param name="search">The question details to search by</param>
+        /// <returns>The questions that match</returns>
+        public List<Questiondetails> Search(Questiondetails search, bool all = true)
+        {
+            //Search through the questions
+            return Searcher.Detailed(LoadedQuestions, search);
         }
 
         /// <summary>
