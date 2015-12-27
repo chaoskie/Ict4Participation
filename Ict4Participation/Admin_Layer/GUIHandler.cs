@@ -399,7 +399,49 @@ namespace Admin_Layer
             //Check for rights
             if (MainUser.Role == Accounttype.Hulpbehoevende)
             {
-                //TODO: Validate details
+                // Validate details
+                if (string.IsNullOrEmpty(question.Title))
+                {
+                    message = "Voer een geldige titel in!";
+                    return false;
+                }
+                if (string.IsNullOrEmpty(question.Description))
+                {
+                    message = "Voer een geldige beschrijving in!";
+                    return false;
+                }
+                if (question.Skills.Count == 0)
+                {
+                    message = "Geen skills toegevoegd!";
+                    return false;
+                }
+                if (string.IsNullOrEmpty(question.Location))
+                {
+                    message = "Voer een geldige locatie in!";
+                    return false;
+                }
+                DateTime? Now = DateTime.Now;
+                if (question.StartDate < Now)
+                {
+                    message = "De startdatum is al geweest!";
+                    return false;
+                }
+                if (question.EndDate < Now)
+                {
+                    message = "De einddatum is al geweest!";
+                    return false;
+                }
+                if (question.AmountAccs < 0)
+                {
+                    message = "Het maximaal aantal hulpverleners is te laag!";
+                    return false;
+                }
+                if (question.AmountAccs > 8)
+                {
+                    message = "Het maximaal aantal hulpverleners is te hoog!";
+                    return false;
+                }
+
                 //Place question
                 Question q = new Question(0, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, new List<int>());
                 q.Create();

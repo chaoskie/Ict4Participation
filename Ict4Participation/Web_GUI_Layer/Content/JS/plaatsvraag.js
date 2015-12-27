@@ -250,6 +250,16 @@ function valideerFields() {
             fouteEinddateIngevoerd();
         }
     }
+
+    // Valideer aantal hulpverleners
+    if ($('#input_max_accs').val() >= 1 ||
+        $('#input_max_accs').val() <= 8)
+    {
+        $('#input_max_accs').removeClass('form-fail').addClass('form-success');
+    } else {
+        $('#input_max_accs').removeClass('form-success').addClass('form-fail');
+        allesgoed = false;
+    }
 };
 
 function fouteStartdateIngevoerd() {

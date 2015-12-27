@@ -157,6 +157,15 @@ namespace Web_GUI_Layer {
         protected global::System.Web.UI.HtmlControls.HtmlSelect input_einddate_5;
         
         /// <summary>
+        /// input_max_accs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect input_max_accs;
+        
+        /// <summary>
         /// inputUrgentie control.
         /// </summary>
         /// <remarks>
