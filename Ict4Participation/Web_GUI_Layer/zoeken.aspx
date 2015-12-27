@@ -43,12 +43,9 @@
 				    <div class="form-group">
 					    <h2>Zoeken</h2>
 					    <div class="row">
-						    <div class="col-tn-12 col-xs-8">
+						    <div class="col-xs-12">
 							    <label for="inputZoeken" class="sr-only">Zoeken</label>
 							    <input type="text" id="inputZoeken" class="form-control" placeholder="Zoek op naam etc." />
-						    </div>
-						    <div class="col-tn-12 col-xs-4">
-							    <button class="btn btn-custom btn-block"><i class="fa fa-search"></i>&nbsp;&nbsp;Zoek</button>
 						    </div>
 					    </div>
 				    </div>

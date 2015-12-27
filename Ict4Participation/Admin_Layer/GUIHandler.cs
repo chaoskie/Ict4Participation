@@ -198,22 +198,10 @@ namespace Admin_Layer
         /// <param name="all">Specifies whether there is a search going through a smaller list or the full list</param>
         /// <param name="search">The account details to search by</param>
         /// <returns>The accounts that match</returns>
-        public List<Accountdetails> Search(bool all, Accountdetails search)
+        public List<Accountdetails> Search(Accountdetails search, bool all = true)
         {
-            //TODO: write own function here to return a list of account details /with/ skills and availability (currently missing)
             //Search through all the accounts where the account-details match
-            return LoadedAccounts.Where(
-                av => av.Address.Contains(search.Address) &&
-                av.Username.Contains(search.Username) &&
-                av.Name.Contains(search.Name) &&
-                av.Email.Contains(search.Email) &&
-                av.City.Contains(search.City) &&
-                av.Phonenumber.Contains(search.Phonenumber) &&
-                (search.hasDriverLicense != null ? av.hasDriverLicense == search.hasDriverLicense : av.hasDriverLicense != search.hasDriverLicense) && //If null, return both true and false
-                (search.hasVehicle != null ? av.hasVehicle == search.hasVehicle : av.hasVehicle != search.hasVehicle) && //If null, return both true and false
-                (search.OVPossible != null ? av.OVPossible == search.OVPossible : av.OVPossible != search.OVPossible) //If null, return both true and false
-                ).Select(av => Creation.getDetailsObject(av))
-                .Cast<Accountdetails>().ToList();
+            return Searcher.Detailed(LoadedAccounts, search);
         }
 
         /// <summary>
@@ -224,7 +212,33 @@ namespace Admin_Layer
         {
             //Get all the accounts and convert these to account-details objects. Then create a list out of these.
             LoadedAccounts = Account.GetAll();
-            return LoadedAccounts.Select(acc => Creation.getDetailsObject(acc)).Cast<Accountdetails>().ToList();
+            List<Accountdetails> returnable = LoadedAccounts.Select(acc => Creation.getDetailsObject(acc)).Cast<Accountdetails>().ToList();
+            //Add skill list for every account
+            //Add availability list for every account
+            foreach (Accountdetails accd in returnable)
+            {
+                foreach (Account acc in LoadedAccounts)
+                {
+                    //Only if the ID's match
+                    if (accd.ID == acc.ID)
+                    {
+                        //Add skills
+                        foreach (Skill s in acc.Skills)
+                        {
+                            //As skilldetails
+                            accd.SkillsDetailList.Add((Skilldetails)Creation.getDetailsObject(s));
+                        }
+                        //Add availability
+                        foreach (Availability a in acc.Availability)
+                        {
+                            //As availabilitydetails
+                            accd.AvailabilityDetailList.Add((Availabilitydetails)Creation.getDetailsObject(a));
+                        }
+                        break;
+                    }
+                }
+            }
+            return returnable;
         }
 
         /// <summary>
@@ -357,16 +371,21 @@ namespace Admin_Layer
         public List<Questiondetails> GetAll(bool all)
         {
             //Load in questions
-            if (!all)
-            {
-                LoadedQuestions = Question.GetAll(MainUser.ID);
-            }
-            else
-            {
-                LoadedQuestions = Question.GetAll(null);
-            }
+            LoadedQuestions = all ? Question.GetAll(null) : Question.GetAll(MainUser.ID);
             //Return all questions
             return LoadedQuestions.Cast<Question>().Select(x => Creation.getDetailsObject(x)).Cast<Questiondetails>().ToList();
+            }
+
+        /// <summary>
+        /// Searches through the list of questions
+        /// </summary>
+        /// <param name="all">Specifies whether there is a search going through a smaller list or the full list</param>
+        /// <param name="search">The question details to search by</param>
+        /// <returns>The questions that match</returns>
+        public List<Questiondetails> Search(Questiondetails search, bool all = true)
+            {
+            //Search through the questions
+            return Searcher.Detailed(LoadedQuestions, search);
         }
 
         /// <summary>
@@ -380,10 +399,49 @@ namespace Admin_Layer
             //Check for rights
             if (MainUser.Role == Accounttype.Hulpbehoevende)
             {
-                if (!Check.QuestionDetails(question, out message))
+                // Validate details
+                if (string.IsNullOrEmpty(question.Title))
                 {
+                    message = "Voer een geldige titel in!";
                     return false;
                 }
+                if (string.IsNullOrEmpty(question.Description))
+                {
+                    message = "Voer een geldige beschrijving in!";
+                    return false;
+                }
+                if (question.Skills.Count == 0)
+                {
+                    message = "Geen skills toegevoegd!";
+                    return false;
+                }
+                if (string.IsNullOrEmpty(question.Location))
+                {
+                    message = "Voer een geldige locatie in!";
+                    return false;
+                }
+                DateTime? Now = DateTime.Now;
+                if (question.StartDate < Now)
+                {
+                    message = "De startdatum is al geweest!";
+                    return false;
+                }
+                if (question.EndDate < Now)
+                {
+                    message = "De einddatum is al geweest!";
+                    return false;
+                }
+                if (question.AmountAccs < 0)
+                {
+                    message = "Het maximaal aantal hulpverleners is te laag!";
+                    return false;
+                }
+                if (question.AmountAccs > 8)
+                {
+                    message = "Het maximaal aantal hulpverleners is te hoog!";
+                    return false;
+                }
+
                 //Place question
                 Question q = new Question(0, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, new List<int>());
                 q.Create();
@@ -699,6 +757,46 @@ namespace Admin_Layer
             message = "Availability added";
             return true;
         }
+        #endregion
+
+        #region Download Handling
+
+        public bool Download(System.Web.UI.WebControls.FileUpload File1, out string message)
+        {
+            //TODO:
+            //Test this
+            string
+                SaveLocation,
+                fn = System.IO.Path.GetFileName(File1.PostedFile.FileName),
+                loc,
+                file = File1.ToString();
+
+            //If it's a PDF, upload to the folder called "ProfileVOG_Unvalidated"
+            if (file.ToLower().EndsWith(".pdf"))
+            {
+                loc = "ProfileVOGs_Unvalidated";
+            }
+            //Else it's an image, so upload to the folder called "ProfileAvatars"
+            else
+            {
+                loc = "ProfileAvatars";
+            }
+            SaveLocation = System.Web.Hosting.HostingEnvironment.MapPath(loc) + "\\" + fn;
+            try
+            {
+                File1.PostedFile.SaveAs(SaveLocation);
+                message = "The file has been uploaded.";
+                return true;
+        }
+            catch (Exception ex)
+            {
+                message = "Error: " + ex.Message;
+                return false;
+            }
+
+            throw new NotSupportedException();
+        }
+
         #endregion
 
         /// <summary>

@@ -364,6 +364,30 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h3>Maximaal aantal hulpverleners</h3>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="input_max_accs" class="sr-only">Maximaal aantal hulpverleners</label>
+                                    <select id="input_max_accs" class="form-control" runat="server" required="required">
+                                        <option value="1">1 Hulpverlener</option>
+                                        <option value="2">2 Hulpverleners</option>
+                                        <option value="3">3 Hulpverleners</option>
+                                        <option value="4">4 Hulpverleners</option>
+                                        <option value="5">5 Hulpverleners</option>
+                                        <option value="6">6 Hulpverleners</option>
+                                        <option value="7">7 Hulpverleners</option>
+                                        <option value="8">8 Hulpverleners</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                         <br />
 
                         <div class="row">

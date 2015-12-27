@@ -62,13 +62,6 @@ namespace Web_GUI_Layer
             string title = inputTitel.Value;
             string desc = inputBeschrijving.Value;
             string location = inputLocatie.Value;
-            //List<Skilldetails> skills = new List<Skilldetails>();
-            //foreach (ListItem item in select_skills_output.Items)
-            //{
-            //    Skilldetails sk = new Skilldetails();
-            //    sk.Name = item.Value;
-            //    skills.Add(sk);
-            //}
             DateTime startDate = new DateTime(Convert.ToInt32(input_startdate_3.Value), 
                 Convert.ToInt32(input_startdate_2.Value), Convert.ToInt32(input_startdate_1.Value), 
                 Convert.ToInt32(input_startdate_4.Value), Convert.ToInt32(input_startdate_5.Value), 0);
@@ -90,6 +83,7 @@ namespace Web_GUI_Layer
             qd.EndDate = endDate;
             qd.Urgent = inputUrgentie.Checked;
             qd.Status = "Open";
+            qd.AmountAccs = Convert.ToInt32(input_max_accs.Value);
                     
         
             // Place question

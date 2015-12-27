@@ -283,7 +283,7 @@ namespace Database_Layer
                 OracleCommand cmd = new OracleCommand(
                     "INSERT INTO \"Question\" (\"Title\", \"PosterACC_ID\", \"StartDate\"," +
                     " \"EndDate\", \"Description\", \"Urgent\", \"Location\", \"AmountACCs\", \"Status\") " +
-                    "VALUES (:A, :B, TO_DATE(:C), TO_DATE(:D), :E, :F, :G, :H, :I)");
+                    "VALUES (:A, :B, TO_DATE(:C, \"DD-MON-YYYY HH24:MI:SS\"), TO_DATE(:D, \"DD-MON-YYYY HH24:MI:SS\"), :E, :F, :G, :H, :I)");
                 cmd.Parameters.Add(new OracleParameter("A", title));
                 cmd.Parameters.Add(new OracleParameter("B", accountid));
                 cmd.Parameters.Add(new OracleParameter("C", startDate));
@@ -295,17 +295,19 @@ namespace Database_Layer
                 cmd.Parameters.Add(new OracleParameter("I", status));
                 cmd.Connection = c;
 
+                cmd.ExecuteNonQuery();
+
                 OracleCommand cmd1 = new OracleCommand(
-                 "SELECT \"ID\" FROM \"Question\" WHERE \"Title\" = :A AND \"PosterACC_ID\" = :X AND \"StartDate\" = :B AND \"EndDate\" = :C AND \"Description\" = :D AND \"Urgent\" = :E AND \"Location\" = :F AND \"AmountACCs\" = :G AND \"Status\" = :H");
+                 "SELECT \"ID\" FROM \"Question\" WHERE \"Title\" = :A AND \"PosterACC_ID\" = :B AND \"StartDate\" = :C AND \"EndDate\" = :D AND \"Description\" = :E AND \"Urgent\" = :F AND \"Location\" = :G AND \"AmountACCs\" = :H AND \"Status\" = :I");
                 cmd1.Parameters.Add(new OracleParameter("A", title));
-                cmd1.Parameters.Add(new OracleParameter("X", accountid));
-                cmd1.Parameters.Add(new OracleParameter("B", startDate));
-                cmd1.Parameters.Add(new OracleParameter("C", endDate));
-                cmd1.Parameters.Add(new OracleParameter("D", description));
-                cmd1.Parameters.Add(new OracleParameter("E", Urgent));
-                cmd1.Parameters.Add(new OracleParameter("F", location));
-                cmd1.Parameters.Add(new OracleParameter("G", maxHulpverlener));
-                cmd1.Parameters.Add(new OracleParameter("H", status));
+                cmd1.Parameters.Add(new OracleParameter("B", accountid));
+                cmd1.Parameters.Add(new OracleParameter("C", startDate));
+                cmd1.Parameters.Add(new OracleParameter("D", endDate));
+                cmd1.Parameters.Add(new OracleParameter("E", description));
+                cmd1.Parameters.Add(new OracleParameter("F", Urgent));
+                cmd1.Parameters.Add(new OracleParameter("G", location));
+                cmd1.Parameters.Add(new OracleParameter("H", maxHulpverlener));
+                cmd1.Parameters.Add(new OracleParameter("I", status));
                 cmd1.Connection = c;
                 OracleDataReader r = cmd1.ExecuteReader();
                 DataTable result = new DataTable();
