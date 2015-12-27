@@ -380,7 +380,10 @@ namespace Admin_Layer
             //Check for rights
             if (MainUser.Role == Accounttype.Hulpbehoevende)
             {
-                //TODO: Validate details
+                if (!Check.QuestionDetails(question, out message))
+                {
+                    return false;
+                }
                 //Place question
                 Question q = new Question(0, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, new List<int>());
                 q.Create();
@@ -406,12 +409,17 @@ namespace Admin_Layer
             //Check for rights
             if (LoadedQuestions[questionIndex].PosterID == MainUser.ID)
             {
-                //TODO: Validate details
+                if (!Check.QuestionDetails(question, out message))
+                {
+                    return false;
+                }
+
                 //Edit question
                 Question q = new Question(LoadedQuestions[questionIndex].PostID, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, LoadedQuestions[questionIndex].Volunteers);
                 q.Update();
                 message = "Vraag succesvol aangepast!";
                 return true;
+
             }
             else
             {

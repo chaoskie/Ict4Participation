@@ -136,6 +136,9 @@ namespace Admin_Layer
                 //TO DO
                 //Download
                 //Try creating an image out of it
+                //https://msdn.microsoft.com/en-us/library/ez801hhe(v=vs.110).aspx references that may help
+                //http://stackoverflow.com/questions/307688/how-to-download-a-file-from-a-url-in-c 
+
                 return true;
             }
             catch
@@ -232,7 +235,6 @@ namespace Admin_Layer
                 return false;
             }
 
-
             bool isStartDateNull = true;
             bool isEndDateNull = true;
             if (qd.StartDate != null)
@@ -273,6 +275,7 @@ namespace Admin_Layer
         {
             return string.IsNullOrEmpty(Content);
         }
+
         /// <summary>
         /// returns true if list of skills is 0
         /// </summary>
@@ -280,7 +283,7 @@ namespace Admin_Layer
         /// <returns></returns>
         public static bool checkSkillCountIsEmpty(int Content)
         {
-            return Content ==0;
+            return Content ==0; 
         }
     }
 }
