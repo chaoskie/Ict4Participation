@@ -7,7 +7,7 @@ using Class_Layer;
 
 namespace Admin_Layer
 {
-    private abstract class Searcher
+    abstract class Searcher
     {
         /// <summary>
         /// Iterates through a list of accounts to yield the matching accounts
