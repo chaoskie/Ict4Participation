@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Database_Layer;
@@ -378,10 +379,29 @@ namespace Class_Layer
             this.Lastlogin = lastLogin;
             this.OVPossible = OVPossible == "1" ? true : false;
             this.Birthdate = birthdate;
-            this.AvatarPath = avatarPath;
-            this.VOGPath = VOG;
+            this.AvatarPath = @"~\ProfileAvatars\" + this.ID;
             this.Skills = skills;
             this.Availability = availability;
+            
+            //Loop through the unvalidated folder
+            bool found = false;
+            string physicalPath = System.Web.HttpContext.Current.Request.MapPath("/");
+            string[] fileEntries = Directory.GetFiles(physicalPath + "ProfileVOGs_Unvalidated");
+            foreach (string fileName in fileEntries)
+            {
+                //If the VOG was found, show a reference to it
+                if (Path.GetFileName(fileName).ToLower() == ID + ".pdf")
+                {
+                    this.VOGPath = Path.GetFileName(fileName);
+                    found = true;
+                    break;
+                }
+            }
+            //If the VOG was not found in there, it was validated and looking at it is unnecessary
+            if (!found)
+            {
+                this.VOGPath = "De VOG van deze gebruiker is al gevalideerd!";
+            }
         }
     }
 }
