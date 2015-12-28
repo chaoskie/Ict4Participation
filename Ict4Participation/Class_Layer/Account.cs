@@ -379,10 +379,9 @@ namespace Class_Layer
             this.Lastlogin = lastLogin;
             this.OVPossible = OVPossible == "1" ? true : false;
             this.Birthdate = birthdate;
-            this.AvatarPath = @"~\ProfileAvatars\" + this.ID;
             this.Skills = skills;
             this.Availability = availability;
-            
+
             //Loop through the unvalidated folder
             bool found = false;
             string physicalPath = System.Web.HttpContext.Current.Request.MapPath("/");
@@ -392,7 +391,7 @@ namespace Class_Layer
                 //If the VOG was found, show a reference to it
                 if (Path.GetFileName(fileName).ToLower() == ID + ".pdf")
                 {
-                    this.VOGPath = Path.GetFileName(fileName);
+                    this.VOGPath = @"~\ProfileVOGs_Unvalidated\" + Path.GetFileName(fileName);
                     found = true;
                     break;
                 }
@@ -401,6 +400,40 @@ namespace Class_Layer
             if (!found)
             {
                 this.VOGPath = "De VOG van deze gebruiker is al gevalideerd!";
+            }
+
+
+            //Loop through the avatar folder
+            found = false;
+            physicalPath = System.Web.HttpContext.Current.Request.MapPath("/");
+            fileEntries = Directory.GetFiles(physicalPath + "ProfileAvatars");
+            foreach (string fileName in fileEntries)
+            {
+                //If the image was found, show a reference to it
+                if (Path.GetFileName(fileName).ToLower().Split('.').First() == ID.ToString())
+                {
+                    this.AvatarPath = @"~\ProfileAvatars\" + Path.GetFileName(fileName);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+            {
+                switch (this.ID % 4)
+                {
+                    case (0) :
+                this.AvatarPath = @"~\ProfileAvatars\emoe.jpg";
+                break;
+                    case (1) :
+                this.AvatarPath = @"~\ProfileAvatars\bear.jpg";
+                break;
+                    case (2):
+                this.AvatarPath = @"~\ProfileAvatars\panda.jpg";
+                break;
+                    case (3):
+                this.AvatarPath = @"~\ProfileAvatars\sloth.jpg";
+                break;
+                }
             }
         }
     }
