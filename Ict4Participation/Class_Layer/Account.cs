@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Database_Layer;
 using Class_Layer.Enums;
+using Class_Layer.Exceptions;
 using Class_Layer.Utility_Classes;
 
 namespace Class_Layer
@@ -182,6 +183,9 @@ namespace Class_Layer
         #region Account altering
         /// <summary>
         /// Registers a new account
+        /// <para>Exceptions:</para>
+        /// <para>:NoAccountFoundException</para>
+        /// <para>:NoAccountCreatedException</para>
         /// </summary>
         /// <param name="username">The desired username</param>
         /// <param name="password">The desired password</param>
@@ -205,8 +209,28 @@ namespace Class_Layer
             string now = ConvertTo.OracleDateTime(DateTime.Now);
             string bday = ConvertTo.OracleDateTime(birthdate);
 
-            Database.InsertUser(username, passTotal, email, name, address, city, phonenumber, hasLicense, hasVehicle, now, OVPossible, bday, avatarPath, gender, VOG);
-            return null;
+            if (Database.InsertUser(username, passTotal, email, name, address, city, phonenumber, hasLicense, hasVehicle, now, OVPossible, bday, avatarPath, gender, VOG))
+            {
+                //Find recently made account
+                DataRow dtRow = Database.RetrieveQuery("SELECT * FROM \"Acc\" WHERE "
+                    + "\"Gebruikersnaam\" = '" + username + "' AND "
+                    + "\"Wachtwoord\" = '" + passTotal + "' AND "
+                    + "\"Email\" = " + email + "'").Rows[0];
+                if (dtRow != null)
+                {
+                    Account acc;
+                    Account.LogIn(username, password, out acc);
+                    return acc;
+                }
+                else
+                {
+                    throw new NoAccountFoundException();
+                }
+            }
+            else
+            {
+                throw new NoAccountCreatedException();
+            }
         }
 
         /// <summary>
