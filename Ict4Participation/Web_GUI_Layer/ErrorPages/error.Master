@@ -1,0 +1,64 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="error.Master.cs" Inherits="Web_GUI_Layer.ErrorPages.Error1" %>
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <!-- Meta information -->
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
+	<meta name="author" content="ICT4Participation" />
+    <meta name="description" content="Er is een error opgetreden" />
+    <meta name="keywords" content="Inloggen,ICT4Participation,Hulp,Hulpbehoevende,Vrijwilliger,Eindhoven" />
+    <title><asp:ContentPlaceHolder ID="cpErrorType" runat="server"></asp:ContentPlaceHolder></title>
+    <!-- Stylesheets -->
+	<link rel="stylesheet" href="../Content/CSS/bootstrap.min.css" />
+	<link rel="stylesheet" href="../Content/CSS/font-awesome.min.css" />
+	<link rel="stylesheet" href="../Content/CSS/main.css" />
+    <link rel="stylesheet" href="../Content/CSS/error.css" />
+</head>
+<body>
+    <form runat="server">
+	    <div id="wrapper">
+		    <!-- NAVIGATION -->
+		    <nav>
+			    <div class="container-fluid">
+				    <div class="row">
+					    <div class="col-xs-12">
+						    <button onserverclick="btnTerug_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
+							    <i class="fa fa-chevron-left"></i>
+							    <p>Terug</p>
+						    </button>
+					    </div>
+				    </div>
+			    </div>
+		    </nav>
+		
+		    <!-- MAIN -->
+		    <main id="main">
+			    <div class="container">
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h1><asp:ContentPlaceHolder ID="cpErrorHead" runat="server"></asp:ContentPlaceHolder></h1>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h3 class="text-muted"><asp:ContentPlaceHolder ID="cpErrorBody" runat="server"></asp:ContentPlaceHolder></h3>
+                        </div>
+                    </div>
+
+			    </div>
+		    </main>
+	    </div>
+    </form>
+	
+    <!-- Scripts -->
+	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
+    <script src="../Content/JS/bootstrap.min.js"></script>
+</body>
+</html>

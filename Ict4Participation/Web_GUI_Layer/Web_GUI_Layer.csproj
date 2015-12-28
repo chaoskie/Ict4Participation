@@ -76,6 +76,7 @@
   <ItemGroup>
     <Content Include="Content\CSS\bootstrap.min.css" />
     <Content Include="Content\CSS\dropdown.css" />
+    <Content Include="Content\CSS\error.css" />
     <Content Include="Content\CSS\fileinput.min.css" />
     <Content Include="Content\CSS\font-awesome.min.css" />
     <Content Include="Content\CSS\gebruiker-zoeken.css" />
@@ -102,6 +103,10 @@
     <Content Include="Content\JS\profiel.js" />
     <Content Include="Content\JS\registreren.js" />
     <Content Include="Content\JS\zoekprofiel.js" />
+    <Content Include="ErrorPages\error.aspx" />
+    <Content Include="ErrorPages\error403.aspx" />
+    <Content Include="ErrorPages\error404.aspx" />
+    <Content Include="ErrorPages\error500.aspx" />
     <Content Include="gebruikers.aspx" />
     <Content Include="hoofdmenu.aspx" />
     <Content Include="inloggen.aspx" />
@@ -117,6 +122,7 @@
     <Content Include="Content\Fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="ErrorPages\error.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -132,6 +138,41 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\CityStruct.cs" />
+    <Compile Include="ErrorPages\error.aspx.cs">
+      <DependentUpon>error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\error.aspx.designer.cs">
+      <DependentUpon>error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPages\error.Master.cs">
+      <DependentUpon>error.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\error.Master.designer.cs">
+      <DependentUpon>error.Master</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPages\error403.aspx.cs">
+      <DependentUpon>error403.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\error403.aspx.designer.cs">
+      <DependentUpon>error403.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPages\error404.aspx.cs">
+      <DependentUpon>error404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\error404.aspx.designer.cs">
+      <DependentUpon>error404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPages\error500.aspx.cs">
+      <DependentUpon>error500.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\error500.aspx.designer.cs">
+      <DependentUpon>error500.aspx</DependentUpon>
+    </Compile>
     <Compile Include="gebruikers.aspx.cs">
       <DependentUpon>gebruikers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
