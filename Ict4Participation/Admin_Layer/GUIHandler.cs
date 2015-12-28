@@ -243,7 +243,6 @@ namespace Admin_Layer
             {
                 Account.Update(MainUser.ID,
                     acc.Username,
-                    password1,
                     acc.Email,
                     acc.Name,
                     acc.Address,
@@ -255,10 +254,12 @@ namespace Admin_Layer
                     acc.Birthdate,
                     acc.AvatarPath,
                     acc.VOGPath,
+                    acc.Gender,
                     acc.SkillsDetailList.Select(s => new Skill(MainUser.ID, s.Name)).Cast<Skill>().ToList(),
                     acc.AvailabilityDetailList.Select(a => new Availability(MainUser.ID, a.Day, a.Daytime)).Cast<Availability>().ToList(),
                     MainUser.Skills,
-                    MainUser.Availability
+                    MainUser.Availability,
+                    password1
                     );
                 message = "Account edited";
                 return true;

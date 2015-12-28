@@ -267,19 +267,28 @@ namespace Class_Layer
             av.Remove();
         }
 
-        public static Account Update(int ID, string username, string password, string email, string name, string address, string city,
-            string phonenumber, bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG,
-            List<Skill> skills, List<Availability> availability, List<Skill> oldSkills, List<Availability> oldAvailability)
+        public static Account Update(int ID, string username, string email, string name, string address, string city,
+            string phonenumber, bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG, string sex,
+            List<Skill> skills, List<Availability> availability, List<Skill> oldSkills, List<Availability> oldAvailability, string password = "")
         {
-            Account acc = null;
+            string passhash = PasswordHashing.CreateHash(password);
+            //If pass is blank, then don't update the password
+            if (password == "")
+            {
+                Database.UpdateUser(ID, username, email, name, address, city, phonenumber, hasLicense, hasVehicle, OVPossible, ConvertTo.OracleDateTime(birthdate), avatarPath, sex, VOG);
+            }
+            //Else, update the password as well
+            else
+            {
+                Database.UpdateUser(ID, username, passhash, email, name, address, city, phonenumber, hasLicense, hasVehicle, OVPossible, ConvertTo.OracleDateTime(birthdate), avatarPath, sex, VOG);
+            }
             //TODO
-            //Call database to update account with ID
             //Check for different skill names: 
             //      remove ones that are no longer there
             //      add ones that are new
+
             //Retrieve updated account
-            Account.LogIn(ID.ToString(), password, out acc);
-            return acc;
+            return Account.GetUser(ID);
         }
 
         /// <summary>
@@ -421,18 +430,18 @@ namespace Class_Layer
             {
                 switch (this.ID % 4)
                 {
-                    case (0) :
-                this.AvatarPath = @"~\ProfileAvatars\emoe.jpg";
-                break;
-                    case (1) :
-                this.AvatarPath = @"~\ProfileAvatars\bear.jpg";
-                break;
+                    case (0):
+                        this.AvatarPath = @"~\ProfileAvatars\emoe.jpg";
+                        break;
+                    case (1):
+                        this.AvatarPath = @"~\ProfileAvatars\bear.jpg";
+                        break;
                     case (2):
-                this.AvatarPath = @"~\ProfileAvatars\panda.jpg";
-                break;
+                        this.AvatarPath = @"~\ProfileAvatars\panda.jpg";
+                        break;
                     case (3):
-                this.AvatarPath = @"~\ProfileAvatars\sloth.jpg";
-                break;
+                        this.AvatarPath = @"~\ProfileAvatars\sloth.jpg";
+                        break;
                 }
             }
         }
