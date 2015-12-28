@@ -677,7 +677,65 @@ namespace Database_Layer
                 return true;
             }
         }
+        /// <summary>
+        /// Updating an excisting user without the password
+        /// </summary>
+        /// <param name="uID">Uswer that needs to be updated</param>
+        /// <param name="Username">account username</param>
+        /// <param name="Email">email-adress</param>
+        /// <param name="Name">name of the user</param>
+        /// <param name="Location">adress of the user</param>
+        /// <param name="Village">hometown of the user</param>
+        /// <param name="phone">phonenumber</param>
+        /// <param name="driverLicense">has a driverlicense</param>
+        /// <param name="HasCar">has a car</param>
+        /// <param name="ov">has OV-card</param>
+        /// <param name="Bday">birthday</param>
+        /// <param name="Picture">path to picture</param>
+        /// <param name="sex">sex</param>
+        /// <param name="VOG">vog path</param>
+        /// <returns>Succes boolean</returns>
+        public static bool UpdateUser(int uID, string Username, string Email, string Name, string Location, string Village, string phone,
+          bool driverLicense, bool HasCar, bool ov, string Bday, string Picture, string Sex, string VOG)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                int DriverLicense = driverLicense ? 1 : 0;
+                int hasCar = HasCar ? 1 : 0;
+                int OV = ov ? 1 : 0;
 
+                c.Open();
+                OracleCommand cmd = new OracleCommand("UPDATE \"Acc\" SET \"Gebruikersnaam\" = :un \"Email\" = :em \"Naam\" = :na \"Adres\" = :loc " +
+                    "\"Woonplaats\" = :vil \"Telefoonnummer\" = :phon \"HeeftRijbewijs\" = :dl \"HeeftAuto\" = :car \"OVMogelijk\" = :ov " +
+                    "\"Geboortedatum\" = TO_DATE(:bd) \"Foto\" = :pic \"Geslacht\" = :sex \"VOG\" = :vog WHERE \"ID\" = :id");
+                cmd.Parameters.Add(new OracleParameter("un", Username));
+                cmd.Parameters.Add(new OracleParameter("em", Email));
+                cmd.Parameters.Add(new OracleParameter("na", Name));
+                cmd.Parameters.Add(new OracleParameter("loc", Location));
+                cmd.Parameters.Add(new OracleParameter("vil", Village));
+                cmd.Parameters.Add(new OracleParameter("phon", phone));
+                cmd.Parameters.Add(new OracleParameter("dl", DriverLicense));
+                cmd.Parameters.Add(new OracleParameter("car", hasCar));
+                cmd.Parameters.Add(new OracleParameter("ov", OV));
+                cmd.Parameters.Add(new OracleParameter("bd", Bday));
+                cmd.Parameters.Add(new OracleParameter("pic", Picture));
+                cmd.Parameters.Add(new OracleParameter("sex", Sex));
+                cmd.Parameters.Add(new OracleParameter("vog", VOG));
+                cmd.Parameters.Add(new OracleParameter("id", uID));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return false;
+                }
+                c.Close();
+                return true;
+            }
+        }
         /// <summary>
         /// Insert a skill associated with an account
         /// </summary>
