@@ -310,7 +310,8 @@
 										    <div class="row">
 											    <div class="col-xs-12">
 												    <label for="inputProfielfoto" class="sr-only">Selecteer profielfoto</label>
-												    <input id="inputProfielfoto" class="file" type="file" required="required" runat="server" />
+												    <%--<input id="inputProfielfoto" class="file" type="file" required="required" runat="server" />--%>
+                                                    <asp:FileUpload ID="inputProfielfoto" ClientIDMode="Static" CssClass="file" required="required" runat="server" />
 											    </div>
 										    </div>
 									    </div>

@@ -57,13 +57,15 @@ namespace Web_GUI_Layer
 
             int addedSkills = select_skills_output.Controls.Count;
 
+
             // acc.Birthdate = ...
             // acc.hasDriverLicense = ...
             // acc.hasVehicle = ...
             // acc.OVPossible = ...
 
-            // TODO: acc.AvatarPath = ...
-            // =======================
+            // upload photo
+            GUIHandler.Download(inputProfielfoto, out message);
+
             acc.AvatarPath = "TEST/AVATAR/PATH.png";
 
             if (!GUIHandler.Register(acc, inputWachtwoord1.Value, inputWachtwoord2.Value, out message))

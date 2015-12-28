@@ -163,7 +163,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputFile inputProfielfoto;
+        protected global::System.Web.UI.WebControls.FileUpload inputProfielfoto;
         
         /// <summary>
         /// btn_registreerhulpbehoevende control.
