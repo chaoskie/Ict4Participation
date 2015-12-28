@@ -118,7 +118,7 @@ namespace Admin_Layer
                 //Else, remove it
                 else
                 {
-                    removables.Add(que.ID);
+                    removables.Add(que.PostID);
                 }
             }
 
@@ -126,7 +126,7 @@ namespace Admin_Layer
             List<Questiondetails> ReturnableList = new List<Questiondetails>();
             foreach (Questiondetails acc in NoSkillSearchList)
             {
-                ReturnableList.AddRange(NoSkillSearchList.Where(a => !removables.Contains(a.ID)));
+                ReturnableList.AddRange(NoSkillSearchList.Where(a => !removables.Contains(a.PostID)));
             }
 
             return ReturnableList;

@@ -47,7 +47,7 @@ namespace Admin_Layer
 
     public struct Questiondetails
     {
-        public int ID { get; set; }
+        public int PostID { get; set; }
         public string Title { get; set; }
         public Nullable<DateTime> StartDate { get; set; }
         public Nullable<DateTime> EndDate { get; set; }
@@ -57,15 +57,8 @@ namespace Admin_Layer
         public string Location { get; set; }
         public int AmountAccs { get; set; }
         public string Status { get; set; }
-
-
-
-        // Waarom een List<string> ipv List<Skilldetails>??
+        public int PosterID { get; set; }
         public List<string> Skills { get; set; }
-        //public List<Skilldetails> Skills { get; set; }
-
-
-
     }
 
     public struct Accountdetails

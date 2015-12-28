@@ -44,7 +44,7 @@ namespace Web_GUI_Layer
 
                     HtmlAnchor a1 = new HtmlAnchor();
                     a1.Attributes.Add("href", "#");
-                    a1.Attributes.Add("data-question-id", Convert.ToString(qd.ID));
+                    a1.Attributes.Add("data-question-id", Convert.ToString(qd.PostID));
                     a1.InnerText = qd.Title;
                     a1.ServerClick += A1_ServerClick;
                     li.Controls.Add(a1);
@@ -107,8 +107,9 @@ namespace Web_GUI_Layer
 
         private void A1_ServerClick(object sender, EventArgs e)
         {
-            // TODO: get question id from html5 data attribute
-            //Session["QuestionDetails_id"] = 
+            int q_id = Convert.ToInt32(((HtmlAnchor)sender).Attributes["data-question-id"].ToString());
+
+            Session["QuestionDetails_id"] = q_id;
 
             Response.Redirect("vraag.aspx", false);
         }
