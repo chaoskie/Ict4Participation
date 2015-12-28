@@ -763,16 +763,19 @@ namespace Admin_Layer
 
         public bool Download(System.Web.UI.WebControls.FileUpload File1, out string message)
         {
-            //TODO:
-            //Test this
+            //Data storage
             string
                 SaveLocation,
                 fn = System.IO.Path.GetFileName(File1.PostedFile.FileName),
                 loc,
+                //Filename
                 file = File1.PostedFile.FileName;
 
+            //Get extension
+            string ext = "." + file.Split('.').Last();
+
             //If it's a PDF, upload to the folder called "ProfileVOG_Unvalidated"
-            if (file.ToLower().EndsWith(".pdf"))
+            if (ext.ToLower() == ".pdf")
             {
                 loc = "ProfileVOGs_Unvalidated";
             }
@@ -783,7 +786,7 @@ namespace Admin_Layer
             }
             string appPath = System.Web.HttpContext.Current.Request.ApplicationPath;
             string physicalPath = System.Web.HttpContext.Current.Request.MapPath(appPath);
-            SaveLocation =  physicalPath + "\\" + loc + "\\" + fn;
+            SaveLocation =  physicalPath + loc + "\\" + MainUser.ID + ext;
             try
             {
                 File1.PostedFile.SaveAs(SaveLocation);
