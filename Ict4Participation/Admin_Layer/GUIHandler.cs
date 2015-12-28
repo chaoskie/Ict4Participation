@@ -226,11 +226,13 @@ namespace Admin_Layer
 
         /// <summary>
         /// Edits an account
+        /// <para>Make sure the Skills in the account details are filled in, and have a userID</para>
+        /// <para>Make sure the Availability in the account details are filled in, and have a userID</para>
         /// </summary>
         /// <param name="acc">The account details</param>
         /// <param name="message">The message of the error</param>
         /// <returns>Success</returns>
-        public bool Edit(Accountdetails acc, string password1, string password2, out string message)
+        public bool Edit(Accountdetails acc, out string message, string password1 = "", string password2 = "")
         {
             message = string.Empty;
             //Validate details

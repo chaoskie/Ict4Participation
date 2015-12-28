@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\NoAccountCreatedException.cs" />
     <Compile Include="Exceptions\NoAccountFoundException.cs" />
+    <Compile Include="Exceptions\NotBoundToUserException.cs" />
     <Compile Include="Interfaces\IAccInfo.cs" />
     <Compile Include="Account.cs" />
     <Compile Include="Availability.cs" />

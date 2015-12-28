@@ -291,7 +291,14 @@ namespace Class_Layer
                 //If the old skill list does not contain this new skill, add it
                 if (!oldSkills.Select(sk => sk.Name).Contains(s.Name))
                 {
-                    s.Add();
+                    if (s.UserID != 0)
+                    {
+                        s.Add();
+                    }
+                    else
+                    {
+                        throw new NotBoundToUserException();
+                    }
                 }
             }
             foreach (Skill s in oldSkills)
@@ -299,7 +306,14 @@ namespace Class_Layer
                 //If the new skill list does not contain this old skill, remove it
                 if (!skills.Select(sk => sk.Name).Contains(s.Name))
                 {
-                    s.Remove();
+                    if (s.UserID != 0)
+                    {
+                        s.Remove();
+                    }
+                    else
+                    {
+                        throw new NotBoundToUserException();
+                    }
                 }
             }
 
@@ -311,7 +325,14 @@ namespace Class_Layer
                 //If the old availability list does not contain this new availability, add it
                 if (!oldAvailability.Select(av => av.Day + av.Daytime).Contains(a.Day + a.Daytime))
                 {
-                    a.Add();
+                    if (a.UserID != 0)
+                    {
+                        a.Add();
+                    }
+                    else
+                    {
+                        throw new NotBoundToUserException();
+                    }
                 }
             }
             foreach (Availability a in oldAvailability)
@@ -319,7 +340,14 @@ namespace Class_Layer
                 //If the new availability list does not contain this old availability, remove it
                 if (!availability.Select(av => av.Day + av.Daytime).Contains(a.Day + a.Daytime))
                 {
-                    a.Remove();
+                    if (a.UserID != 0)
+                    {
+                        a.Remove();
+                    }
+                    else
+                    {
+                        throw new NotBoundToUserException();
+                    }
                 }
             }
 
