@@ -56,10 +56,24 @@ namespace Class_Layer
         /// Gets the maximum amount of volunteers on this question
         /// </summary>
         public int AmountAccs { get; private set; }
+
+        private Enums.Status status;
+        
         /// <summary>
         /// Gets the status of this question
         /// </summary>
-        public Enums.Status Status { get; private set; }
+        public string Status
+        {
+            get
+            {
+                return status.ToString();
+            }
+            private set
+            {
+                status = (Enums.Status) Enum.Parse(typeof(Enums.Status), value);
+            }
+        }
+
         /// <summary>
         /// Gets the skills of a question
         /// </summary>
@@ -89,7 +103,7 @@ namespace Class_Layer
             string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
             string et = Utility_Classes.ConvertTo.OracleDateTime(this.EndDate);
             //insert into database
-            if (!Database_Layer.Database.InsertQuestion(this.Title, this.PosterID, st, et, this.Description, this.Urgent, this.Location, this.AmountAccs, (int)this.Status, out qID))
+            if (!Database_Layer.Database.InsertQuestion(this.Title, this.PosterID, st, et, this.Description, this.Urgent, this.Location, this.AmountAccs, (int)this.status, out qID))
             {
                 Console.WriteLine("Couldn't create new question");
                 flawless = false;
@@ -131,7 +145,7 @@ namespace Class_Layer
             string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
             string et = Utility_Classes.ConvertTo.OracleDateTime(this.EndDate);
             //Call database for update query
-            if (!Database_Layer.Database.UpdateQuestion(this.PostID, this.Title, this.PosterID, st, et, this.Description, this.Urgent, this.Location, this.AmountAccs, (int)this.Status))
+            if (!Database_Layer.Database.UpdateQuestion(this.PostID, this.Title, this.PosterID, st, et, this.Description, this.Urgent, this.Location, this.AmountAccs, (int)this.status))
             {
                 Console.WriteLine("Couldn't update question");
                 return false;
