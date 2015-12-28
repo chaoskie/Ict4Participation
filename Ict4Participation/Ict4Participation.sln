@@ -19,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProfileVOGs_Unvalidated", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProfileAvatars", "ProfileAvatars", "{686B645E-586C-40FD-8386-E0709D7B47A3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AdminForm", "AdminForm", "{0A72E086-90E0-48BE-A46E-509E580C9E12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdministrationParticipation", "AdministrationParticipation\AdministrationParticipation.csproj", "{56AAA192-12E7-4DC0-850C-570F97FF2AB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,8 +53,15 @@ Global
 		{69D426F3-452E-479D-B3BF-1FC0B5FEE8BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69D426F3-452E-479D-B3BF-1FC0B5FEE8BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69D426F3-452E-479D-B3BF-1FC0B5FEE8BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56AAA192-12E7-4DC0-850C-570F97FF2AB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56AAA192-12E7-4DC0-850C-570F97FF2AB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56AAA192-12E7-4DC0-850C-570F97FF2AB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56AAA192-12E7-4DC0-850C-570F97FF2AB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{56AAA192-12E7-4DC0-850C-570F97FF2AB0} = {0A72E086-90E0-48BE-A46E-509E580C9E12}
 	EndGlobalSection
 EndGlobal

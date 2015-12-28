@@ -9,10 +9,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Database_Layer;
 using Class_Layer.Enums;
+using Class_Layer.Exceptions;
 using Class_Layer.Utility_Classes;
 
 namespace Class_Layer
@@ -182,6 +184,9 @@ namespace Class_Layer
         #region Account altering
         /// <summary>
         /// Registers a new account
+        /// <para>Exceptions:</para>
+        /// <para>:NoAccountFoundException</para>
+        /// <para>:NoAccountCreatedException</para>
         /// </summary>
         /// <param name="username">The desired username</param>
         /// <param name="password">The desired password</param>
@@ -205,8 +210,28 @@ namespace Class_Layer
             string now = ConvertTo.OracleDateTime(DateTime.Now);
             string bday = ConvertTo.OracleDateTime(birthdate);
 
-            Database.InsertUser(username, passTotal, email, name, address, city, phonenumber, hasLicense, hasVehicle, now, OVPossible, bday, avatarPath, gender, VOG);
-            return null;
+            if (Database.InsertUser(username, passTotal, email, name, address, city, phonenumber, hasLicense, hasVehicle, now, OVPossible, bday, avatarPath, gender, VOG))
+            {
+                //Find recently made account
+                DataRow dtRow = Database.RetrieveQuery("SELECT * FROM \"Acc\" WHERE "
+                    + "\"Gebruikersnaam\" = '" + username + "' AND "
+                    + "\"Wachtwoord\" = '" + passTotal + "' AND "
+                    + "\"Email\" = " + email + "'").Rows[0];
+                if (dtRow != null)
+                {
+                    Account acc;
+                    Account.LogIn(username, password, out acc);
+                    return acc;
+                }
+                else
+                {
+                    throw new NoAccountFoundException();
+                }
+            }
+            else
+            {
+                throw new NoAccountCreatedException();
+            }
         }
 
         /// <summary>
@@ -354,10 +379,62 @@ namespace Class_Layer
             this.Lastlogin = lastLogin;
             this.OVPossible = OVPossible == "1" ? true : false;
             this.Birthdate = birthdate;
-            this.AvatarPath = avatarPath;
-            this.VOGPath = VOG;
             this.Skills = skills;
             this.Availability = availability;
+
+            //Loop through the unvalidated folder
+            bool found = false;
+            string physicalPath = System.Web.HttpContext.Current.Request.MapPath("/");
+            string[] fileEntries = Directory.GetFiles(physicalPath + "ProfileVOGs_Unvalidated");
+            foreach (string fileName in fileEntries)
+            {
+                //If the VOG was found, show a reference to it
+                if (Path.GetFileName(fileName).ToLower() == ID + ".pdf")
+                {
+                    this.VOGPath = @"~\ProfileVOGs_Unvalidated\" + Path.GetFileName(fileName);
+                    found = true;
+                    break;
+                }
+            }
+            //If the VOG was not found in there, it was validated and looking at it is unnecessary
+            if (!found)
+            {
+                this.VOGPath = "De VOG van deze gebruiker is al gevalideerd!";
+            }
+
+
+            //Loop through the avatar folder
+            found = false;
+            physicalPath = System.Web.HttpContext.Current.Request.MapPath("/");
+            fileEntries = Directory.GetFiles(physicalPath + "ProfileAvatars");
+            foreach (string fileName in fileEntries)
+            {
+                //If the image was found, show a reference to it
+                if (Path.GetFileName(fileName).ToLower().Split('.').First() == ID.ToString())
+                {
+                    this.AvatarPath = @"~\ProfileAvatars\" + Path.GetFileName(fileName);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+            {
+                switch (this.ID % 4)
+                {
+                    case (0) :
+                this.AvatarPath = @"~\ProfileAvatars\emoe.jpg";
+                break;
+                    case (1) :
+                this.AvatarPath = @"~\ProfileAvatars\bear.jpg";
+                break;
+                    case (2):
+                this.AvatarPath = @"~\ProfileAvatars\panda.jpg";
+                break;
+                    case (3):
+                this.AvatarPath = @"~\ProfileAvatars\sloth.jpg";
+                break;
+                }
+            }
         }
     }
 }

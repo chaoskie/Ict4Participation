@@ -89,7 +89,7 @@ namespace Admin_Layer
             //Fetch matching account
             if (string.IsNullOrEmpty(username))
             {
-                message = "Email is niet ingevuld!";
+                message = "Gebruikersnaam is niet ingevuld!";
                 return false;
             }
             else if (string.IsNullOrEmpty(password))
@@ -161,23 +161,6 @@ namespace Admin_Layer
             SmtpServer.Send(mail);
 
             return true;
-        }
-
-        public bool Validate(string password, string username, out string message)
-        {
-            message = String.Empty;
-            //Return whether the username and password is a match
-            Account no;
-            bool validation = Account.LogIn(username, password, out no);
-            if (validation == true)
-            {
-                message = "Account and password match";
-            }
-            else
-            {
-                message = "Account and password do not match";
-            }
-            return validation;
         }
 
         /// <summary>
@@ -761,18 +744,27 @@ namespace Admin_Layer
 
         #region Download Handling
 
+        /// <summary>
+        /// Downloads the file to the server
+        /// </summary>
+        /// <param name="File1"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public bool Download(System.Web.UI.WebControls.FileUpload File1, out string message)
         {
-            //TODO:
-            //Test this
+            //Data storage
             string
                 SaveLocation,
                 fn = System.IO.Path.GetFileName(File1.PostedFile.FileName),
                 loc,
+                //Filename
                 file = File1.PostedFile.FileName;
 
+            //Get extension
+            string ext = "." + file.Split('.').Last();
+
             //If it's a PDF, upload to the folder called "ProfileVOG_Unvalidated"
-            if (file.ToLower().EndsWith(".pdf"))
+            if (ext.ToLower() == ".pdf")
             {
                 loc = "ProfileVOGs_Unvalidated";
             }
@@ -783,7 +775,7 @@ namespace Admin_Layer
             }
             string appPath = System.Web.HttpContext.Current.Request.ApplicationPath;
             string physicalPath = System.Web.HttpContext.Current.Request.MapPath(appPath);
-            SaveLocation =  physicalPath + "\\" + loc + "\\" + fn;
+            SaveLocation =  physicalPath + loc + "\\" + MainUser.ID + ext;
             try
             {
                 File1.PostedFile.SaveAs(SaveLocation);
@@ -809,15 +801,6 @@ namespace Admin_Layer
             Console.WriteLine("User log out state entered. Check if true!");
             //LogOut();
         }
-
-
-
-
-
-
-
-        // Extra methodes
-
 
         /// <summary>
         /// Check if the user is logged in

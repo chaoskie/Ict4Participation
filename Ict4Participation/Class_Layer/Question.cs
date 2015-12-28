@@ -279,7 +279,7 @@ namespace Class_Layer
         //Returns a full description
         public string GetDescription(int postid, out int ID)
         {
-            //TODO
+            //OBSOLETE?
             //Make a nice ToString method from this, using the GetOP method as well
             ID = 0;
             return "";
