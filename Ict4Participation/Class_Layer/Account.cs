@@ -282,10 +282,46 @@ namespace Class_Layer
             {
                 Database.UpdateUser(ID, username, passhash, email, name, address, city, phonenumber, hasLicense, hasVehicle, OVPossible, ConvertTo.OracleDateTime(birthdate), avatarPath, sex, VOG);
             }
-            //TODO
+
             //Check for different skill names: 
             //      remove ones that are no longer there
             //      add ones that are new
+            foreach (Skill s in skills)
+            {
+                //If the old skill list does not contain this new skill, add it
+                if (!oldSkills.Select(sk => sk.Name).Contains(s.Name))
+                {
+                    s.Add();
+                }
+            }
+            foreach (Skill s in oldSkills)
+            {
+                //If the new skill list does not contain this old skill, remove it
+                if (!skills.Select(sk => sk.Name).Contains(s.Name))
+                {
+                    s.Remove();
+                }
+            }
+
+            //Check for different availability: 
+            //      remove ones that are no longer there
+            //      add ones that are new
+            foreach (Availability a in availability)
+            {
+                //If the old availability list does not contain this new availability, add it
+                if (!oldAvailability.Select(av => av.Day + av.Daytime).Contains(a.Day + a.Daytime))
+                {
+                    a.Add();
+                }
+            }
+            foreach (Availability a in oldAvailability)
+            {
+                //If the new availability list does not contain this old availability, remove it
+                if (!availability.Select(av => av.Day + av.Daytime).Contains(a.Day + a.Daytime))
+                {
+                    a.Remove();
+                }
+            }
 
             //Retrieve updated account
             return Account.GetUser(ID);
