@@ -51,7 +51,7 @@ namespace Database_Layer
         {
             if (Regex.IsMatch(query, @"-{2,}"))
             {
-                throw new SQLInjectionException("Retrieve query: SQLInjection detected!");
+                throw new SQLInjectionException();
             }
 
             using (OracleConnection c = new OracleConnection(@connectionstring))
