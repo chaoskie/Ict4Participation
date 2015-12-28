@@ -279,55 +279,58 @@ namespace Database_Layer
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 int Urgent = urgent ? 1 : 0;
-                c.Open();
-                OracleCommand cmd = new OracleCommand(
-                    "INSERT INTO \"Question\" (\"Title\", \"PosterACC_ID\", \"StartDate\"," +
-                    " \"EndDate\", \"Description\", \"Urgent\", \"Location\", \"AmountACCs\", \"Status\") " +
-                    "VALUES (:A, :B, TO_DATE(:C, \"DD-MON-YYYY HH24:MI:SS\"), TO_DATE(:D, \"DD-MON-YYYY HH24:MI:SS\"), :E, :F, :G, :H, :I)");
-                cmd.Parameters.Add(new OracleParameter("A", title));
-                cmd.Parameters.Add(new OracleParameter("B", accountid));
-                cmd.Parameters.Add(new OracleParameter("C", startDate));
-                cmd.Parameters.Add(new OracleParameter("D", endDate));
-                cmd.Parameters.Add(new OracleParameter("E", description));
-                cmd.Parameters.Add(new OracleParameter("F", Urgent));
-                cmd.Parameters.Add(new OracleParameter("G", location));
-                cmd.Parameters.Add(new OracleParameter("H", maxHulpverlener));
-                cmd.Parameters.Add(new OracleParameter("I", status));
-                cmd.Connection = c;
 
-                cmd.ExecuteNonQuery();
+                try {
+                    c.Open();
+                    OracleCommand cmd = new OracleCommand(
+                        "INSERT INTO \"Question\" (\"Title\", \"PosterACC_ID\", \"StartDate\"," +
+                        " \"EndDate\", \"Description\", \"Urgent\", \"Location\", \"AmountACCs\", \"Status\") " +
+                        "VALUES (:A, :B, TO_DATE(:C, 'DD-MON-YYYY HH24:MI:SS'), TO_DATE(:D, 'DD-MON-YYYY HH24:MI:SS'), :E, :F, :G, :H, :I)");
+                    cmd.Parameters.Add(new OracleParameter("A", title));
+                    cmd.Parameters.Add(new OracleParameter("B", accountid));
+                    cmd.Parameters.Add(new OracleParameter("C", startDate));
+                    cmd.Parameters.Add(new OracleParameter("D", endDate));
+                    cmd.Parameters.Add(new OracleParameter("E", description));
+                    cmd.Parameters.Add(new OracleParameter("F", Urgent));
+                    cmd.Parameters.Add(new OracleParameter("G", location));
+                    cmd.Parameters.Add(new OracleParameter("H", maxHulpverlener));
+                    cmd.Parameters.Add(new OracleParameter("I", status));
+                    cmd.Connection = c;
 
-                OracleCommand cmd1 = new OracleCommand(
-                 "SELECT \"ID\" FROM \"Question\" WHERE \"Title\" = :A AND \"PosterACC_ID\" = :B AND \"StartDate\" = :C AND \"EndDate\" = :D AND \"Description\" = :E AND \"Urgent\" = :F AND \"Location\" = :G AND \"AmountACCs\" = :H AND \"Status\" = :I");
-                cmd1.Parameters.Add(new OracleParameter("A", title));
-                cmd1.Parameters.Add(new OracleParameter("B", accountid));
-                cmd1.Parameters.Add(new OracleParameter("C", startDate));
-                cmd1.Parameters.Add(new OracleParameter("D", endDate));
-                cmd1.Parameters.Add(new OracleParameter("E", description));
-                cmd1.Parameters.Add(new OracleParameter("F", Urgent));
-                cmd1.Parameters.Add(new OracleParameter("G", location));
-                cmd1.Parameters.Add(new OracleParameter("H", maxHulpverlener));
-                cmd1.Parameters.Add(new OracleParameter("I", status));
-                cmd1.Connection = c;
-                OracleDataReader r = cmd1.ExecuteReader();
-                DataTable result = new DataTable();
-                result.Load(r);
-                foreach (DataRow row in result.Rows)
-                {
-                    qID = Convert.ToInt32(row["ID"]);
-                }
-                try
-                {
                     cmd.ExecuteNonQuery();
+
+                    OracleCommand cmd1 = new OracleCommand(
+                     "SELECT \"ID\" FROM \"Question\" WHERE \"Title\" = :A AND \"PosterACC_ID\" = :B AND \"StartDate\" LIKE TO_DATE(:C, 'DD-MON-YYYY HH24:MI:SS') AND \"EndDate\" LIKE TO_DATE(:D, 'DD-MON-YYYY HH24:MI:SS') AND \"Description\" = :E AND \"Urgent\" = :F AND \"Location\" = :G AND \"AmountACCs\" = :H AND \"Status\" = :I");
+                    cmd1.Parameters.Add(new OracleParameter("A", title));
+                    cmd1.Parameters.Add(new OracleParameter("B", accountid));
+                    cmd1.Parameters.Add(new OracleParameter("C", startDate));
+                    cmd1.Parameters.Add(new OracleParameter("D", endDate));
+                    cmd1.Parameters.Add(new OracleParameter("E", description));
+                    cmd1.Parameters.Add(new OracleParameter("F", Urgent));
+                    cmd1.Parameters.Add(new OracleParameter("G", location));
+                    cmd1.Parameters.Add(new OracleParameter("H", maxHulpverlener));
+                    cmd1.Parameters.Add(new OracleParameter("I", status));
+                    cmd1.Connection = c;
+                    OracleDataReader r = cmd1.ExecuteReader();
+                    DataTable result = new DataTable();
+                    result.Load(r);
+                    foreach (DataRow row in result.Rows)
+                    {
+                        qID = Convert.ToInt32(row["ID"]);
+                    }
                 }
                 catch (OracleException e)
                 {
                     Console.WriteLine(e.Message);
                     return false;
                 }
-                c.Close();
-                return true;
+                finally
+                {
+                    c.Close();
+                }
             }
+
+            return true;
         }
 
         /// <summary>
@@ -371,8 +374,8 @@ namespace Database_Layer
                 c.Open();
                 OracleCommand cmd = new OracleCommand("DELETE FROM \"Question_Skill\" WHERE \"QUESTION_ID\" = :A");
                 OracleCommand cmd2 = new OracleCommand("DELETE FROM \"Question_Acc\" WHERE \"QUESTION_ID\" = :A");
-                OracleCommand cmd3 = new OracleCommand(" DELETE FROM \"Comment\" WHERE \"QUESTION_ID\" = :A");
-                OracleCommand cmd4 = new OracleCommand(" DELETE FROM \"Question\" WHERE \"ID\" = :A");
+                OracleCommand cmd3 = new OracleCommand("DELETE FROM \"Comment\" WHERE \"QUESTION_ID\" = :A");
+                OracleCommand cmd4 = new OracleCommand("DELETE FROM \"Question\" WHERE \"ID\" = :A");
                 cmd.Parameters.Add(new OracleParameter("A", qID));
                 cmd.Connection = c;
                 cmd2.Parameters.Add(new OracleParameter("A", qID));

@@ -217,7 +217,8 @@ namespace Class_Layer
                     volunteers.Add(Convert.ToInt32(row["ACC_ID"]));
                 }
                 //Check urgency
-                bool urg = row["Urgency"].ToString() == "1" ? true : false;
+                //bool urg = row["Urgency"].ToString() == "1" ? true : false;
+                bool urg = row["Urgent"].ToString() == "1" ? true : false;
 
                 //Add the new question
                 questions.Add(new Question(
