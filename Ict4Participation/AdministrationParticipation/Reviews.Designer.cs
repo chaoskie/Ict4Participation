@@ -109,6 +109,7 @@
             this.btnDeleteEntry.TabIndex = 21;
             this.btnDeleteEntry.Text = "Verwijder";
             this.btnDeleteEntry.UseVisualStyleBackColor = true;
+            this.btnDeleteEntry.Click += new System.EventHandler(this.btnDeleteEntry_Click);
             // 
             // btnCancel
             // 
@@ -118,6 +119,7 @@
             this.btnCancel.TabIndex = 20;
             this.btnCancel.Text = "Annuleer";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnAccept
             // 
@@ -127,6 +129,7 @@
             this.btnAccept.TabIndex = 19;
             this.btnAccept.Text = "Bevestig";
             this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // lblReviewScore
             // 

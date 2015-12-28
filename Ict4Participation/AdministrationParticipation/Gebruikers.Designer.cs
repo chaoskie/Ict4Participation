@@ -65,6 +65,7 @@
             this.btnAccept.TabIndex = 0;
             this.btnAccept.Text = "Bevestig";
             this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // btnCancel
             // 
@@ -74,6 +75,7 @@
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Annuleer";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnDeleteEntry
             // 
@@ -83,6 +85,7 @@
             this.btnDeleteEntry.TabIndex = 2;
             this.btnDeleteEntry.Text = "Verwijder";
             this.btnDeleteEntry.UseVisualStyleBackColor = true;
+            this.btnDeleteEntry.Click += new System.EventHandler(this.btnDeleteEntry_Click);
             // 
             // label1
             // 
@@ -113,7 +116,6 @@
             // 
             // tbMail
             // 
-            this.tbMail.Enabled = false;
             this.tbMail.Location = new System.Drawing.Point(104, 61);
             this.tbMail.Name = "tbMail";
             this.tbMail.Size = new System.Drawing.Size(160, 20);
@@ -200,10 +202,11 @@
             // 
             this.btnGenerateNewPass.Location = new System.Drawing.Point(104, 33);
             this.btnGenerateNewPass.Name = "btnGenerateNewPass";
-            this.btnGenerateNewPass.Size = new System.Drawing.Size(79, 23);
+            this.btnGenerateNewPass.Size = new System.Drawing.Size(160, 23);
             this.btnGenerateNewPass.TabIndex = 25;
-            this.btnGenerateNewPass.Text = "Maak nieuw";
+            this.btnGenerateNewPass.Text = "Genereer nieuw wachtwoord";
             this.btnGenerateNewPass.UseVisualStyleBackColor = true;
+            this.btnGenerateNewPass.Click += new System.EventHandler(this.btnGenerateNewPass_Click);
             // 
             // cbTypeAcc
             // 
@@ -241,6 +244,7 @@
             this.btnDelPicture.TabIndex = 29;
             this.btnDelPicture.Text = "Verwijder foto";
             this.btnDelPicture.UseVisualStyleBackColor = true;
+            this.btnDelPicture.Click += new System.EventHandler(this.btnDelPicture_Click);
             // 
             // btnDownloadVOG
             // 
@@ -250,6 +254,7 @@
             this.btnDownloadVOG.TabIndex = 30;
             this.btnDownloadVOG.Text = "Download VOG";
             this.btnDownloadVOG.UseVisualStyleBackColor = true;
+            this.btnDownloadVOG.Click += new System.EventHandler(this.btnDownloadVOG_Click);
             // 
             // label9
             // 
@@ -274,18 +279,18 @@
             this.lblAge.AutoSize = true;
             this.lblAge.Location = new System.Drawing.Point(68, 223);
             this.lblAge.Name = "lblAge";
-            this.lblAge.Size = new System.Drawing.Size(41, 13);
+            this.lblAge.Size = new System.Drawing.Size(47, 13);
             this.lblAge.TabIndex = 33;
-            this.lblAge.Text = "label11";
+            this.lblAge.Text = "<empty>";
             // 
             // lblLastSeen
             // 
             this.lblLastSeen.AutoSize = true;
             this.lblLastSeen.Location = new System.Drawing.Point(15, 254);
             this.lblLastSeen.Name = "lblLastSeen";
-            this.lblLastSeen.Size = new System.Drawing.Size(41, 13);
+            this.lblLastSeen.Size = new System.Drawing.Size(47, 13);
             this.lblLastSeen.TabIndex = 34;
-            this.lblLastSeen.Text = "label12";
+            this.lblLastSeen.Text = "<empty>";
             // 
             // Gebruikers
             // 

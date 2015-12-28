@@ -17,6 +17,26 @@ namespace AdministrationParticipation
             InitializeComponent();
         }
 
-       
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+            //TODO
+            //bevestig en update de nieuwe input
+            //Messagebox met succes
+            //sluit form
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            //TODO
+            //sluit form + verwerp aanpassingen
+        }
+
+        private void btnDeleteEntry_Click(object sender, EventArgs e)
+        {
+            //TODO
+            //verwijder de entry in de database
+            //Mail user van de aanpassing + reden opgeven
+            //sluit form
+        }
     }
 }

@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.cbSearchField = new System.Windows.Forms.ToolStripComboBox();
+            this.tbSearchThis = new System.Windows.Forms.ToolStripTextBox();
+            this.btnSearch = new System.Windows.Forms.ToolStripButton();
             this.btnOpenQuestion = new System.Windows.Forms.Button();
-            this.b = new System.Windows.Forms.Button();
+            this.btnUsers = new System.Windows.Forms.Button();
             this.btnOpenReaction = new System.Windows.Forms.Button();
             this.btnOpenReviews = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,25 +52,14 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
-            this.toolStripComboBox1,
-            this.toolStripTextBox1,
-            this.toolStripButton1});
+            this.cbSearchField,
+            this.tbSearchThis,
+            this.btnSearch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(814, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripComboBox1
-            // 
-            this.toolStripComboBox1.Items.AddRange(new object[] {
-            "Alles",
-            "Gebruikers",
-            "Vragen",
-            "Reacties"});
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 25);
-            this.toolStripComboBox1.Text = "Alles";
             // 
             // toolStripLabel1
             // 
@@ -78,19 +67,31 @@
             this.toolStripLabel1.Size = new System.Drawing.Size(49, 22);
             this.toolStripLabel1.Text = "Zoeken:";
             // 
-            // toolStripTextBox1
+            // cbSearchField
             // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 25);
+            this.cbSearchField.Items.AddRange(new object[] {
+            "Alles",
+            "Gebruikers",
+            "Vragen",
+            "Reacties"});
+            this.cbSearchField.Name = "cbSearchField";
+            this.cbSearchField.Size = new System.Drawing.Size(121, 25);
+            this.cbSearchField.Text = "Alles";
             // 
-            // toolStripButton1
+            // tbSearchThis
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::AdministrationParticipation.Properties.Resources.search;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
+            this.tbSearchThis.Name = "tbSearchThis";
+            this.tbSearchThis.Size = new System.Drawing.Size(100, 25);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSearch.Image = global::AdministrationParticipation.Properties.Resources.search;
+            this.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(23, 22);
+            this.btnSearch.Text = "toolStripButton1";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnOpenQuestion
             // 
@@ -100,15 +101,17 @@
             this.btnOpenQuestion.TabIndex = 1;
             this.btnOpenQuestion.Text = "Open Vragen";
             this.btnOpenQuestion.UseVisualStyleBackColor = true;
+            this.btnOpenQuestion.Click += new System.EventHandler(this.btnOpenQuestion_Click);
             // 
-            // b
+            // btnUsers
             // 
-            this.b.Location = new System.Drawing.Point(9, 80);
-            this.b.Name = "b";
-            this.b.Size = new System.Drawing.Size(126, 47);
-            this.b.TabIndex = 2;
-            this.b.Text = "Open Gebruikers";
-            this.b.UseVisualStyleBackColor = true;
+            this.btnUsers.Location = new System.Drawing.Point(9, 80);
+            this.btnUsers.Name = "btnUsers";
+            this.btnUsers.Size = new System.Drawing.Size(126, 47);
+            this.btnUsers.TabIndex = 2;
+            this.btnUsers.Text = "Open Gebruikers";
+            this.btnUsers.UseVisualStyleBackColor = true;
+            this.btnUsers.Click += new System.EventHandler(this.btnUsers_Click);
             // 
             // btnOpenReaction
             // 
@@ -118,6 +121,7 @@
             this.btnOpenReaction.TabIndex = 3;
             this.btnOpenReaction.Text = "Open Reacties";
             this.btnOpenReaction.UseVisualStyleBackColor = true;
+            this.btnOpenReaction.Click += new System.EventHandler(this.btnOpenReaction_Click);
             // 
             // btnOpenReviews
             // 
@@ -127,6 +131,7 @@
             this.btnOpenReviews.TabIndex = 4;
             this.btnOpenReviews.Text = "Open Reviews";
             this.btnOpenReviews.UseVisualStyleBackColor = true;
+            this.btnOpenReviews.Click += new System.EventHandler(this.btnOpenReviews_Click);
             // 
             // label1
             // 
@@ -159,7 +164,7 @@
             // 
             this.groupBox1.Controls.Add(this.btnOpenReaction);
             this.groupBox1.Controls.Add(this.btnOpenQuestion);
-            this.groupBox1.Controls.Add(this.b);
+            this.groupBox1.Controls.Add(this.btnUsers);
             this.groupBox1.Controls.Add(this.btnOpenReviews);
             this.groupBox1.Location = new System.Drawing.Point(15, 104);
             this.groupBox1.Name = "groupBox1";
@@ -175,6 +180,7 @@
             this.lbNewQuestions.Name = "lbNewQuestions";
             this.lbNewQuestions.Size = new System.Drawing.Size(272, 277);
             this.lbNewQuestions.TabIndex = 9;
+            this.lbNewQuestions.DoubleClick += new System.EventHandler(this.lbNewQuestions_DoubleClick);
             // 
             // lbNewReviews
             // 
@@ -183,6 +189,7 @@
             this.lbNewReviews.Name = "lbNewReviews";
             this.lbNewReviews.Size = new System.Drawing.Size(272, 277);
             this.lbNewReviews.TabIndex = 11;
+            this.lbNewReviews.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbNewReviews_MouseDoubleClick);
             // 
             // label3
             // 
@@ -222,11 +229,11 @@
 
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripComboBox cbSearchField;
+        private System.Windows.Forms.ToolStripTextBox tbSearchThis;
+        private System.Windows.Forms.ToolStripButton btnSearch;
         private System.Windows.Forms.Button btnOpenQuestion;
-        private System.Windows.Forms.Button b;
+        private System.Windows.Forms.Button btnUsers;
         private System.Windows.Forms.Button btnOpenReaction;
         private System.Windows.Forms.Button btnOpenReviews;
         private System.Windows.Forms.Label label1;

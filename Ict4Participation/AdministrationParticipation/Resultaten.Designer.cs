@@ -38,6 +38,7 @@
             this.lbResultaten.Name = "lbResultaten";
             this.lbResultaten.Size = new System.Drawing.Size(256, 355);
             this.lbResultaten.TabIndex = 0;
+            this.lbResultaten.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbResultaten_MouseDoubleClick);
             // 
             // Resultaten
             // 

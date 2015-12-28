@@ -16,5 +16,12 @@ namespace AdministrationParticipation
         {
             InitializeComponent();
         }
+
+        private void lbResultaten_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            //TODO
+            //Open form dat bij het resultaat hoort
+            // vb: hulpvraag objecten --> open Hulpvraag form
+        }
     }
 }
