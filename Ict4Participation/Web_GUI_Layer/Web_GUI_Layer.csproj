@@ -88,6 +88,7 @@
     <Content Include="Content\CSS\plaatsvraag.css" />
     <Content Include="Content\CSS\profiel.css" />
     <Content Include="Content\CSS\registreren.css" />
+    <Content Include="Content\CSS\vraag.css" />
     <Content Include="Content\CSS\zoeken.css" />
     <Content Include="Content\Files\Woonplaatsen_Nederland.txt" />
     <Content Include="Content\Fonts\fontawesome-webfont.svg" />
@@ -112,6 +113,7 @@
     <Content Include="inloggen.aspx" />
     <Content Include="packages.config" />
     <Content Include="plaatsvraag.aspx" />
+    <Content Include="vraag.aspx" />
     <Content Include="zoeken.aspx" />
     <Content Include="Content\Fonts\fontawesome-webfont.eot" />
     <Content Include="Content\Fonts\fontawesome-webfont.ttf" />
@@ -222,6 +224,13 @@
     </Compile>
     <Compile Include="registreren.aspx.designer.cs">
       <DependentUpon>registreren.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="vraag.aspx.cs">
+      <DependentUpon>vraag.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="vraag.aspx.designer.cs">
+      <DependentUpon>vraag.aspx</DependentUpon>
     </Compile>
     <Compile Include="zoeken.aspx.cs">
       <DependentUpon>zoeken.aspx</DependentUpon>

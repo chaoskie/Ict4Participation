@@ -42,10 +42,11 @@ namespace Web_GUI_Layer
                     HtmlGenericControl li = new HtmlGenericControl("li");
                     vragen_list.Controls.Add(li);
 
-                    HtmlGenericControl a1 = new HtmlGenericControl("a");
+                    HtmlAnchor a1 = new HtmlAnchor();
                     a1.Attributes.Add("href", "#");
+                    a1.Attributes.Add("data-question-id", Convert.ToString(qd.ID));
                     a1.InnerText = qd.Title;
-
+                    a1.ServerClick += A1_ServerClick;
                     li.Controls.Add(a1);
                 }
                 // Insert message if questions count == 0
@@ -102,6 +103,14 @@ namespace Web_GUI_Layer
         protected void btnGebruikers_Click(object sender, EventArgs e)
         {
             Response.Redirect("gebruikers.aspx", false);
+        }
+
+        private void A1_ServerClick(object sender, EventArgs e)
+        {
+            // TODO: get question id from html5 data attribute
+            //Session["QuestionDetails_id"] = 
+
+            Response.Redirect("vraag.aspx", false);
         }
 
         [System.Web.Services.WebMethod]
