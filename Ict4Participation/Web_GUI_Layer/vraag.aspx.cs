@@ -34,8 +34,9 @@ namespace Web_GUI_Layer
             Accountdetails ad = GUIHandler.GetAll().Where(account => account.ID == qd.PosterID).ToList()[0];
             vraag_naam.InnerText = ad.Name;
             vraag_titel.InnerText = qd.Title;
-            vraag_startdatum.InnerText = ((DateTime)qd.StartDate).ToShortDateString();
-            vraag_einddatum.InnerText = ((DateTime)qd.EndDate).ToShortDateString();
+            vraag_startdatum.InnerText = ((DateTime)qd.StartDate).ToString("dd-MM-yyyy HH:mm:ss");
+            vraag_einddatum.InnerText = ((DateTime)qd.EndDate).ToString("dd-MM-yyyy HH:mm:ss");
+            vraag_locatie.InnerText = qd.Location;
             
             if (qd.Urgent)
             {

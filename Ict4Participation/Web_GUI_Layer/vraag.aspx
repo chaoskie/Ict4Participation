@@ -61,11 +61,11 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-xs-12">Locatie: <span id="vraag_locatie"></span></div>
+                        <div class="col-xs-12">Locatie: <span id="vraag_locatie" runat="server"></span></div>
                     </div>
 
                     <div class="row">
-                        <div class="col-xs-12"><span id="vraag_urgentie" class="error-red" runat="server"></span></div>
+                        <div class="col-xs-12"><span id="vraag_urgentie" style="color: #f00" runat="server"></span></div>
                     </div>
 
 			    </div>

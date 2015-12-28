@@ -374,7 +374,7 @@ namespace Admin_Layer
             LoadedQuestions = all ? Question.GetAll(null) : Question.GetAll(MainUser.ID);
             //Return all questions
             return LoadedQuestions.Cast<Question>().Select(x => Creation.getDetailsObject(x)).Cast<Questiondetails>().ToList();
-            }
+        }
 
         /// <summary>
         /// Searches through the list of questions
@@ -383,7 +383,7 @@ namespace Admin_Layer
         /// <param name="search">The question details to search by</param>
         /// <returns>The questions that match</returns>
         public List<Questiondetails> Search(Questiondetails search, bool all = true)
-            {
+        {
             //Search through the questions
             return Searcher.Detailed(LoadedQuestions, search);
         }
@@ -763,16 +763,19 @@ namespace Admin_Layer
 
         public bool Download(System.Web.UI.WebControls.FileUpload File1, out string message)
         {
-            //TODO:
-            //Test this
+            //Data storage
             string
                 SaveLocation,
                 fn = System.IO.Path.GetFileName(File1.PostedFile.FileName),
                 loc,
-                file = File1.ToString();
+                //Filename
+                file = File1.PostedFile.FileName;
+
+            //Get extension
+            string ext = "." + file.Split('.').Last();
 
             //If it's a PDF, upload to the folder called "ProfileVOG_Unvalidated"
-            if (file.ToLower().EndsWith(".pdf"))
+            if (ext.ToLower() == ".pdf")
             {
                 loc = "ProfileVOGs_Unvalidated";
             }
@@ -781,13 +784,15 @@ namespace Admin_Layer
             {
                 loc = "ProfileAvatars";
             }
-            SaveLocation = System.Web.Hosting.HostingEnvironment.MapPath(loc) + "\\" + fn;
+            string appPath = System.Web.HttpContext.Current.Request.ApplicationPath;
+            string physicalPath = System.Web.HttpContext.Current.Request.MapPath(appPath);
+            SaveLocation =  physicalPath + loc + "\\" + MainUser.ID + ext;
             try
             {
                 File1.PostedFile.SaveAs(SaveLocation);
                 message = "The file has been uploaded.";
                 return true;
-        }
+            }
             catch (Exception ex)
             {
                 message = "Error: " + ex.Message;

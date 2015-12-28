@@ -49,6 +49,15 @@ namespace Web_GUI_Layer {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl vraag_einddatum;
         
         /// <summary>
+        /// vraag_locatie control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl vraag_locatie;
+        
+        /// <summary>
         /// vraag_urgentie control.
         /// </summary>
         /// <remarks>
