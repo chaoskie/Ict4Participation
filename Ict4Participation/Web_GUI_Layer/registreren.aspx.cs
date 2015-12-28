@@ -66,7 +66,7 @@ namespace Web_GUI_Layer
             // upload photo
             GUIHandler.Download(inputProfielfoto, out message);
 
-            acc.AvatarPath = "TEST/AVATAR/PATH.png";
+            acc.AvatarPath = "TEST/AVATAR/PATH.png";            
 
             if (!GUIHandler.Register(acc, inputWachtwoord1.Value, inputWachtwoord2.Value, out message))
             {
