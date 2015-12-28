@@ -8,7 +8,7 @@ namespace Class_Layer.Exceptions
 {
     public class NoAccountCreatedException : Exception
     {
-        public NoAccountCreatedException(string message = "No account created could be created in the database")
+        public NoAccountCreatedException(string message = "No account could be created in the database")
             : base(message)
         {
             Console.WriteLine("No account could be created in the database with these credentials. Make sure the insert was processed properly");
