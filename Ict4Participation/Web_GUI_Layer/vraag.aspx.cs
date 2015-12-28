@@ -26,7 +26,7 @@ namespace Web_GUI_Layer
             GUIHandler = (GUIHandler)Session["GUIHandler_obj"];
 
             // Retrieve questiondetails from session
-            //Questiondetails qd = GUIHandler.GetAll(true).Select(vraag => vraag.ID == Convert.ToInt32(Session["QuestionDetails_id"])).ToList()[0];
+            Questiondetails qd = GUIHandler.GetAll(true).Where(vraag => vraag.ID == Convert.ToInt32(Session["QuestionDetails_id"])).ToList()[0];
 
             // Fill in forms
             //vraag_naam = ...
