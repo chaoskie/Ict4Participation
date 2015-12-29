@@ -514,7 +514,7 @@ namespace Database_Layer
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("DELETE \"Question_Acc\" WHERE \"ACC_ID\" = :A AND \"QUESTION_ID\" = :B)");
+                OracleCommand cmd = new OracleCommand("DELETE FROM \"Question_Acc\" WHERE \"ACC_ID\" = :A AND \"QUESTION_ID\" = :B)");
                 cmd.Parameters.Add(new OracleParameter("A", uID));
                 cmd.Parameters.Add(new OracleParameter("B", qID));
                 cmd.Connection = c;
@@ -775,7 +775,7 @@ namespace Database_Layer
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("DELETE \"Acc_Skill\" WHERE \"SKILL_NAME\" = :A AND \"ACC_ID\" = :B");
+                OracleCommand cmd = new OracleCommand("DELETE FROM \"Acc_Skill\" WHERE \"SKILL_NAME\" = :A AND \"ACC_ID\" = :B");
                 cmd.Parameters.Add(new OracleParameter("A", skill));
                 cmd.Parameters.Add(new OracleParameter("B", aID));
                 cmd.Connection = c;
@@ -942,7 +942,7 @@ namespace Database_Layer
 
                     cmd.ExecuteNonQuery();
                     //haal id opnieuw op
-                    DataTable tdb2 = RetrieveQuery("SELECT \"ID\" FROM \"Availability\" WHERE \"Day\" = " + day + ", \"Period\" = " + period);
+                    DataTable tdb2 = RetrieveQuery("SELECT \"ID\" FROM \"Availability\" WHERE \"Day\" = '" + day + "' AND \"Period\" = '" + period + "'");
                     foreach (DataRow r in tdb2.Rows)
                     {
                         foundID = Convert.ToInt32(r["ID"]);
@@ -968,7 +968,7 @@ namespace Database_Layer
         public static bool DeleteAvailability(int userId, string day, string period)
         {
             Nullable<int> foundID = null;//zoek naar bestaan van entry
-            DataTable tdb = RetrieveQuery("SELECT \"ID\" FROM \"Availability\" WHERE \"Day\" = " + day + ", \"Period\" = " + period);
+            DataTable tdb = RetrieveQuery("SELECT \"ID\" FROM \"Availability\" WHERE \"Day\" = '" + day + "' AND \"Period\" = '" + period + "'");
             foreach (DataRow r in tdb.Rows)
             {
                 foundID = Convert.ToInt32(r["ID"]);//haal id van bestaande entry op, zo niet dan null
@@ -978,7 +978,7 @@ namespace Database_Layer
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("DELETE \"Availability_Acc\" WHERE \"ACC_ID\" = :a AND \"AVAILABILITY_ID\" = " + foundID);
+                OracleCommand cmd = new OracleCommand("DELETE FROM \"Availability_Acc\" WHERE \"ACC_ID\" = :a AND \"AVAILABILITY_ID\" = " + foundID);
                 cmd.Parameters.Add(new OracleParameter("a", userId));
                 cmd.Connection = c;
                 try
@@ -1054,6 +1054,7 @@ namespace Database_Layer
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
+                // FOUTE QUERY !!!
                 OracleCommand cmd = new OracleCommand("DELETE \"Meeting\" WHERE \"ID\" = :a");
                 cmd.Parameters.Add(new OracleParameter("a", mID));
                 cmd.Connection = c;
