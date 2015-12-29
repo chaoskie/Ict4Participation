@@ -55,7 +55,8 @@ namespace AdministrationParticipation
         private void btnDownloadVOG_Click(object sender, EventArgs e)
         {
             //TODO
-            //download de VOG van de gebruiker voor controle
+            //open de default browser met url naar de file
+            //application.run(url) oid.
         }
     }
 }
