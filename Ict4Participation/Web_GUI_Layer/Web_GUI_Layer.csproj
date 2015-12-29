@@ -74,6 +74,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Authorisation\credentials.aspx" />
     <Content Include="Content\CSS\bootstrap.min.css" />
     <Content Include="Content\CSS\dropdown.css" />
     <Content Include="Content\CSS\error.css" />
@@ -139,6 +140,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authorisation\credentials.aspx.cs">
+      <DependentUpon>credentials.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Authorisation\credentials.aspx.designer.cs">
+      <DependentUpon>credentials.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Entities\CityStruct.cs" />
     <Compile Include="ErrorPages\error.aspx.cs">
       <DependentUpon>error.aspx</DependentUpon>
