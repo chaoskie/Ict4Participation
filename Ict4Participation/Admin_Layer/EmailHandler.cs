@@ -5,12 +5,11 @@ using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Admin_Layer
 {
-    public static class EmailHandler
+    public class EmailHandler
     {
         /// <summary>
         /// Contains the basic information of a mail message header
@@ -22,7 +21,7 @@ namespace Admin_Layer
         /// <summary>
         /// Contains the basic information of the smtp which is used to send the mail from
         /// </summary>
-        private const SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com")
+        private static SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com")
         {
             Port = 587,
             Credentials = new System.Net.NetworkCredential("s21mplumbum@gmail.com", "Em72@Gmai111"),
