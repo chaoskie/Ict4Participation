@@ -45,7 +45,7 @@ namespace Admin_Layer
         public string Description { get; set; }
     }
 
-    public struct Questiondetails
+    public class Questiondetails
     {
         public int PostID { get; set; }
         public string Title { get; set; }
@@ -58,10 +58,19 @@ namespace Admin_Layer
         public int AmountAccs { get; set; }
         public string Status { get; set; }
         public int PosterID { get; set; }
-        public List<string> Skills { get; set; }
+        private List<string> skills;
+        public List<string> Skills
+        {
+            get { return skills; }
+            set { skills = value; }
+        }
+        public Questiondetails()
+        {
+            skills =  new List<string>();
+        }
     }
 
-    public struct Accountdetails
+    public class Accountdetails
     {
         public int ID { get; set; }
         public string Username { get; set; }
@@ -78,8 +87,23 @@ namespace Admin_Layer
         public string AvatarPath { get; set; }
         public string VOGPath { get; set; }
         public string Gender { get; set; }
-        public List<Availabilitydetails> AvailabilityDetailList { get; set; }
-        public List<Skilldetails> SkillsDetailList { get; set; }
+        private List<Availabilitydetails> availabilityDetailList;
+        public List<Availabilitydetails> AvailabilityDetailList
+        {
+            get { return availabilityDetailList; }
+            set { availabilityDetailList = value; }
+        }
+        private List<Skilldetails> skillsDetailList;
+        public List<Skilldetails> SkillsDetailList
+        {
+            get { return skillsDetailList; }
+            set { skillsDetailList = value; }
+        }
+        public Accountdetails()
+        {
+            availabilityDetailList = new List<Availabilitydetails>();
+            skillsDetailList = new List<Skilldetails>();
+        }
     }
 
     public struct Availabilitydetails

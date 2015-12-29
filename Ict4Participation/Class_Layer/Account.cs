@@ -497,7 +497,7 @@ namespace Class_Layer
                 //If the image was found, show a reference to it
                 if (Path.GetFileName(fileName).ToLower().Split('.').First() == ID.ToString())
                 {
-                    this.AvatarPath = @"~\ProfileAvatars\" + Path.GetFileName(fileName);
+                    this.AvatarPath = @"~\..\ProfileAvatars\" + Path.GetFileName(fileName);
                     found = true;
                     break;
                 }
@@ -507,16 +507,16 @@ namespace Class_Layer
                 switch (this.ID % 4)
                 {
                     case (0):
-                        this.AvatarPath = @"~\ProfileAvatars\emoe.jpg";
+                        this.AvatarPath = @"~\..\ProfileAvatars\emoe.jpg";
                         break;
                     case (1):
-                        this.AvatarPath = @"~\ProfileAvatars\bear.jpg";
+                        this.AvatarPath = @"~\..\ProfileAvatars\bear.jpg";
                         break;
                     case (2):
-                        this.AvatarPath = @"~\ProfileAvatars\panda.jpg";
+                        this.AvatarPath = @"~\..\ProfileAvatars\panda.jpg";
                         break;
                     case (3):
-                        this.AvatarPath = @"~\ProfileAvatars\sloth.jpg";
+                        this.AvatarPath = @"~\..\ProfileAvatars\sloth.jpg";
                         break;
                 }
             }
