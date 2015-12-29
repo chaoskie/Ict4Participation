@@ -9,7 +9,7 @@
 	<meta name="author" content="ICT4Participation" />
     <meta name="description" content="Log in om verder te gaan" />
     <meta name="keywords" content="Inloggen,ICT4Participation,Hulp,Hulpbehoevende,Vrijwilliger,Eindhoven" />
-    <title>Eigen profiel</title>
+    <title>Vraag</title>
     <!-- Stylesheets -->
 	<link rel="stylesheet" href="../Content/CSS/bootstrap.min.css" />
 	<link rel="stylesheet" href="../Content/CSS/font-awesome.min.css" />
@@ -90,10 +90,11 @@
                     
                     <!-- Comment section -->
                     <div id="comment_section" runat="server">
-                        <!-- Comment template -->
-                        <div class="row comment-main">
+
+                        <!-- Comment template niet-eigenaar -->
+                        <%--<div class="row comment-main">
                             <div class="col-xs-12">
-                                <div class="row">
+                                <div class="row" title="Comment geplaatst op 1 januari 2016 12:34:00"l>
 
                                     <div class="col-tn-6 col-tn-offset-3 col-xs-2">
                                         <img src="http://i.imgur.com/BZUZBOr.jpg" class="img-responsive" alt="Foto" />
@@ -114,7 +115,38 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
+
+
+                        <!-- Comment template eigenaar -->
+                        <%--<div class="row comment-main">
+                            <div class="col-xs-12">
+                                <div class="row" title="Comment geplaatst op 1 januari 2016 12:34:00">
+
+                                    <div class="col-tn-6 col-tn-offset-3 col-xs-2">
+                                        <img src="http://i.imgur.com/BZUZBOr.jpg" class="img-responsive" alt="Foto" />
+                                    </div>
+
+                                    <div class="col-xs-10">
+                                        <div class="row">
+                                            <div class="col-xs-8">
+                                                <h3 class="comment-author">Henk Nogwattes</h3>
+                                            </div>
+                                            <div class="col-xs-4 comment-buttons">
+                                                <button class="btn pull-right btn-custom2">Verwijder</button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <p class="comment-body" contenteditable="true">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit arcu a ante interdum lobortis.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>--%>
+
 
                     </div><!-- Einde Comment section -->
 

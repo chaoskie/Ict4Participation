@@ -95,6 +95,7 @@
     <Content Include="Content\Files\Woonplaatsen_Nederland.txt" />
     <Content Include="Content\Fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Images\edittext.png" />
     <Content Include="Content\JS\bootstrap.min.js" />
     <Content Include="Content\JS\dropdown.js" />
     <Content Include="Content\JS\errormessage.js" />
@@ -249,9 +250,7 @@
       <DependentUpon>zoeken.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\Images\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Admin_Layer\Admin_Layer.csproj">
       <Project>{5d4d65c5-92d8-4d4a-874d-bb0cad13e7ce}</Project>
