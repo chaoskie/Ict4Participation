@@ -158,8 +158,20 @@ namespace AdministrationParticipation
 
         private void btnOpenReviews_Click(object sender, EventArgs e)
         {
-            //TODO
             //open het resulaten form voor de review objecten
+
+            //Start initialising the set up for the reviews
+            List<int> ids = Program.AdminGUIHndlr.GetAll().Select(u => u.ID).Cast<int>().ToList();
+            List<Reviewdetails> reviews = new List<Reviewdetails>();
+
+            //Load reviews, order by newest
+            foreach (int id in ids)
+            {
+                reviews.AddRange(Program.AdminGUIHndlr.GetAllReviews(id));
+            }
+            reviews = reviews.OrderByDescending(r => r.PostID).OrderByDescending(r => r.PostID).ToList();
+            Form f = new Resultaten(reviews.Cast<Object>().ToList());
+            f.Show();
         }
 
     }

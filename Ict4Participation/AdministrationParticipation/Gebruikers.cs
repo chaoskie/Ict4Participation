@@ -7,22 +7,56 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Admin_Layer;
 
 namespace AdministrationParticipation
 {
     public partial class Gebruikers : Form
     {
-        public Gebruikers()
+        Accountdetails old;
+        string newpass = "";
+
+        public Gebruikers(Accountdetails ad)
         {
             InitializeComponent();
+
+            old = ad;
+            tbAddress.Text = ad.Address;
+            tbMail.Text = ad.Email;
+            tbName.Text = ad.Name;
+            tbUsername.Text = ad.Username;
+            tbPhone.Text = ad.Phonenumber;
+            cbGeslacht.SelectedIndex = ad.Gender.ToLower() == "m" ? 0 : 1;
+            cbTypeAcc.SelectedIndex = String.IsNullOrWhiteSpace(ad.VOGPath) ? 0 : 1;
+            //TODO IMP: on website deployment, change this path
+            pbProfielImage.ImageLocation = "http://localhost:9472/" + ad.AvatarPath.Substring(3);
         }
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            //TODO
+            Accountdetails accd = new Accountdetails();
+            //TODO Fill in the details
+            accd = old;
+            accd.Address = tbAddress.Text;
+            accd.Email = tbMail.Text;
+            accd.Name = tbName.Text;
+            accd.Username = tbUsername.Text;
+            accd.Phonenumber = tbPhone.Text;
+            accd.Gender = cbGeslacht.SelectedItem.ToString() == "Man" ? "M" : "V";            
+
+            string message = "";
             //bevestig en update de nieuwe input
-            //Messagebox met succes
-            //sluit form
+            if (Program.AdminGUIHndlr.Edit(accd, out message, accd.ID, newpass, newpass))
+            {
+                MessageBox.Show("Account succesvol aangepast!");
+                //sluit form
+                this.Close();
+            }
+            else
+            {
+                //it failed
+                MessageBox.Show(message);
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
