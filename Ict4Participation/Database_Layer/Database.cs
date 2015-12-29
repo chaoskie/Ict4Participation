@@ -153,15 +153,16 @@ namespace Database_Layer
         /// <param name="questionID">question that receives new response</param>
         /// <param name="desc">user input text</param>
         /// <returns>succes boolean</returns>
-        public static bool InsertComment(int accountID, int questionID, string desc)
+        public static bool InsertComment(int accountID, int questionID, string desc, bool isDeleted)
         {
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("INSERT INTO \"Comment\" (\"PosterACC_ID\", \"QUESTION_ID\", \"Description\") VALUES (:AI, :QI, :DC)");
+                OracleCommand cmd = new OracleCommand("INSERT INTO \"Comment\" (\"PosterACC_ID\", \"QUESTION_ID\", \"Description\", \"ISDELETED\") VALUES (:AI, :QI, :DC, :DE)");
                 cmd.Parameters.Add(new OracleParameter("AI", accountID));
                 cmd.Parameters.Add(new OracleParameter("QI", questionID));
                 cmd.Parameters.Add(new OracleParameter("DC", desc));
+                cmd.Parameters.Add(new OracleParameter("DE", isDeleted ? 1 : 0));
                 cmd.Connection = c;
                 try
                 {
@@ -191,7 +192,7 @@ namespace Database_Layer
                 //// when an admin deletes the comment
                 if (adminDel)
                 {
-                    OracleCommand cmd = new OracleCommand("UPDATE \"Comment\" SET \"Description\" = 'Administrator heeft reactie verwijderd.' WHERE \"ID\" = :A");
+                    OracleCommand cmd = new OracleCommand("UPDATE \"Comment\" SET \"Description\" = 'Administrator heeft reactie verwijderd.', \"ISDELETED\" = 1 WHERE \"ID\" = :A");
                     cmd.Parameters.Add(new OracleParameter("A", commentID));
                     cmd.Connection = c;
                     try
@@ -209,7 +210,7 @@ namespace Database_Layer
                 else
                 {
                     //// when a user deletes the comment
-                    OracleCommand cmd = new OracleCommand("UPDATE \"Comment\" SET \"Description\" = 'Gebruiker heeft reactie verwijderd.' WHERE \"ID\" = :A");
+                    OracleCommand cmd = new OracleCommand("UPDATE \"Comment\" SET \"Description\" = 'Gebruiker heeft reactie verwijderd.', \"ISDELETED\" = 1 WHERE \"ID\" = :A");
                     cmd.Parameters.Add(new OracleParameter("A", commentID));
                     cmd.Connection = c;
                     try

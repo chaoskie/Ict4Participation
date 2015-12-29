@@ -80,7 +80,7 @@ namespace Web_GUI_Layer
                                 comment_section.Controls.Add(new LiteralControl(comment_template));
 
                                 // Check if the poster is the owner of the question
-                                if (ad_poster.ID == qd.PosterID)
+                                if (ad_poster.ID == qd.PosterID && !cd.IsDeleted)
                                 {
                                     comment_template =
                                         @"<div class=""col-xs-8"">";
@@ -103,6 +103,7 @@ namespace Web_GUI_Layer
                                         btnVerwijder.Attributes.Add("class", "btn pull-right btn-custom2");
                                         btnVerwijder.InnerText = "Verwijder";
                                         btnVerwijder.ServerClick += new EventHandler(btnVerwijderVraag_Click);
+                                        btnVerwijder.Attributes.Add("data-comment-id", Convert.ToString(qd.PostID));
 
                                         comment_section.Controls.Add(btnVerwijder);
 
@@ -142,7 +143,7 @@ namespace Web_GUI_Layer
                                 commentBody.Attributes.Add("class", "comment-body");
                                 commentBody.InnerText = cd.Description;
 
-                                if (ad_poster.ID == qd.PosterID)
+                                if (ad_poster.ID == qd.PosterID && !cd.IsDeleted)
                                 {
                                     commentBody.Attributes.Add("contenteditable", "true");
                                 }
@@ -190,7 +191,15 @@ namespace Web_GUI_Layer
 
         protected void btnVerwijderVraag_Click(object sender, EventArgs e)
         {
-            // TODO: Delete question
+            string message = string.Empty;
+
+            // Get commentID from data attribute
+            int postID = Convert.ToInt32((sender as HtmlButton).Attributes["data-comment-id"].ToString());
+
+            if (!GUIHandler.Remove(postID, out message))
+            {
+                // TODO: Show error message
+            }
         }
     }
 }
