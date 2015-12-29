@@ -484,7 +484,7 @@ namespace Class_Layer
             //If the VOG was not found in there, it was validated and looking at it is unnecessary
             if (!found)
             {
-                this.VOGPath = "De VOG van deze gebruiker is al gevalideerd!";
+                this.VOGPath = VOG;
             }
 
 
