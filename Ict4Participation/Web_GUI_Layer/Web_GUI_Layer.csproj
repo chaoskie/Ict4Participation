@@ -109,13 +109,13 @@
     <Content Include="ErrorPages\error403.aspx" />
     <Content Include="ErrorPages\error404.aspx" />
     <Content Include="ErrorPages\error500.aspx" />
-    <Content Include="gebruikers.aspx" />
-    <Content Include="hoofdmenu.aspx" />
-    <Content Include="inloggen.aspx" />
+    <Content Include="Pages\gebruikers.aspx" />
+    <Content Include="Pages\hoofdmenu.aspx" />
+    <Content Include="Pages\inloggen.aspx" />
     <Content Include="packages.config" />
-    <Content Include="plaatsvraag.aspx" />
-    <Content Include="vraag.aspx" />
-    <Content Include="zoeken.aspx" />
+    <Content Include="Pages\plaatsvraag.aspx" />
+    <Content Include="Pages\vraag.aspx" />
+    <Content Include="Pages\zoeken.aspx" />
     <Content Include="Content\Fonts\fontawesome-webfont.eot" />
     <Content Include="Content\Fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\Fonts\fontawesome-webfont.woff" />
@@ -134,9 +134,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="post.aspx" />
-    <Content Include="profiel.aspx" />
-    <Content Include="registreren.aspx" />
+    <Content Include="Pages\post.aspx" />
+    <Content Include="Pages\profiel.aspx" />
+    <Content Include="Pages\registreren.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -183,68 +183,68 @@
     <Compile Include="ErrorPages\error500.aspx.designer.cs">
       <DependentUpon>error500.aspx</DependentUpon>
     </Compile>
-    <Compile Include="gebruikers.aspx.cs">
+    <Compile Include="Pages\gebruikers.aspx.cs">
       <DependentUpon>gebruikers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="gebruikers.aspx.designer.cs">
+    <Compile Include="Pages\gebruikers.aspx.designer.cs">
       <DependentUpon>gebruikers.aspx</DependentUpon>
     </Compile>
-    <Compile Include="hoofdmenu.aspx.cs">
+    <Compile Include="Pages\hoofdmenu.aspx.cs">
       <DependentUpon>hoofdmenu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="hoofdmenu.aspx.designer.cs">
+    <Compile Include="Pages\hoofdmenu.aspx.designer.cs">
       <DependentUpon>hoofdmenu.aspx</DependentUpon>
     </Compile>
-    <Compile Include="inloggen.aspx.cs">
+    <Compile Include="Pages\inloggen.aspx.cs">
       <DependentUpon>inloggen.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="inloggen.aspx.designer.cs">
+    <Compile Include="Pages\inloggen.aspx.designer.cs">
       <DependentUpon>inloggen.aspx</DependentUpon>
     </Compile>
-    <Compile Include="plaatsvraag.aspx.cs">
+    <Compile Include="Pages\plaatsvraag.aspx.cs">
       <DependentUpon>plaatsvraag.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="plaatsvraag.aspx.designer.cs">
+    <Compile Include="Pages\plaatsvraag.aspx.designer.cs">
       <DependentUpon>plaatsvraag.aspx</DependentUpon>
     </Compile>
-    <Compile Include="post.aspx.cs">
+    <Compile Include="Pages\post.aspx.cs">
       <DependentUpon>post.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="post.aspx.designer.cs">
+    <Compile Include="Pages\post.aspx.designer.cs">
       <DependentUpon>post.aspx</DependentUpon>
     </Compile>
-    <Compile Include="profiel.aspx.cs">
+    <Compile Include="Pages\profiel.aspx.cs">
       <DependentUpon>profiel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="profiel.aspx.designer.cs">
+    <Compile Include="Pages\profiel.aspx.designer.cs">
       <DependentUpon>profiel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="registreren.aspx.cs">
+    <Compile Include="Pages\registreren.aspx.cs">
       <DependentUpon>registreren.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="registreren.aspx.designer.cs">
+    <Compile Include="Pages\registreren.aspx.designer.cs">
       <DependentUpon>registreren.aspx</DependentUpon>
     </Compile>
-    <Compile Include="vraag.aspx.cs">
+    <Compile Include="Pages\vraag.aspx.cs">
       <DependentUpon>vraag.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="vraag.aspx.designer.cs">
+    <Compile Include="Pages\vraag.aspx.designer.cs">
       <DependentUpon>vraag.aspx</DependentUpon>
     </Compile>
-    <Compile Include="zoeken.aspx.cs">
+    <Compile Include="Pages\zoeken.aspx.cs">
       <DependentUpon>zoeken.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="zoeken.aspx.designer.cs">
+    <Compile Include="Pages\zoeken.aspx.designer.cs">
       <DependentUpon>zoeken.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
