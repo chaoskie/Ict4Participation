@@ -91,6 +91,21 @@ namespace Admin_Layer
         }
 
         /// <summary>
+        /// Sends a mail regarding an avatar that violates the terms of usage, as well as sends a mail to a webhost
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="username"></param>
+        public static void SendWrongComment(string email, string question, string reason)
+        {
+            mail.To.Add(email);
+            mail.Subject = "Uw reactie op de vraag " + question + " is verwijderd";
+            mail.Body = "Hallo!"
+                + "\nUw reactie op de vraag " + question + " is verwijderd door een webbeheerder met de volgende reden:"
+                + "\n" + reason + emailEnd;
+            FinalSend();
+        }
+
+        /// <summary>
         /// Sends a mail regarding a password change
         /// </summary>
         /// <param name="email"></param>

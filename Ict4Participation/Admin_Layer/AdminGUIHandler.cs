@@ -224,10 +224,11 @@ namespace Admin_Layer
         /// <param name="commentIndex">The index of the comment as loaded in the list</param>
         /// <param name="message">The message of the error</param>
         /// <returns>Success</returns>
-        public bool Remove(int commentID, out string message)
+        public bool Remove(int commentID, string email, string question, string reason, out string message)
         {
             //Remove comment
             LoadedComments.Where(c => c.PostID == commentID).First().Delete();
+            EmailHandler.SendWrongComment(email, question, reason);
             message = "Comment verwijderd!";
             return true;
         }
