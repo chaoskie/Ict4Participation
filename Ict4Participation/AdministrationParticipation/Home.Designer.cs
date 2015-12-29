@@ -73,7 +73,8 @@
             "Alles",
             "Gebruikers",
             "Vragen",
-            "Reacties"});
+            "Reacties",
+            "Reviews"});
             this.cbSearchField.Name = "cbSearchField";
             this.cbSearchField.Size = new System.Drawing.Size(121, 25);
             this.cbSearchField.Text = "Alles";

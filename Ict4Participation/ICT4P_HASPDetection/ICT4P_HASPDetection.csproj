@@ -55,6 +55,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AdministrationParticipation\AdministrationParticipation.csproj">
+      <Project>{56aaa192-12e7-4dc0-850c-570f97ff2ab0}</Project>
+      <Name>AdministrationParticipation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Class_Layer\Class_Layer.csproj">
       <Project>{cf800b4a-a399-40c8-9eaf-5f284f5306e6}</Project>
       <Name>Class_Layer</Name>

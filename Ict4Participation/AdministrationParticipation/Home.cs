@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Class_Layer;
+using Admin_Layer;
 
 namespace AdministrationParticipation
 {
@@ -15,8 +17,16 @@ namespace AdministrationParticipation
         public Home()
         {
             InitializeComponent();
-            // gebruiker start applicatie en moet inloggen
-            // gebruiker wordt gevraagd om  USB_Hasp in te voegen (of andere volgorde idk)
+            List<int> ids = Program.AdminGUIHndlr.GetAll().Select(u => u.ID).Cast<int>().ToList();
+            List<Reviewdetails> reviews = new List<Reviewdetails>();
+
+            //Load reviews, order by ...?
+            foreach (int id in ids)
+            {
+                reviews.AddRange(Program.AdminGUIHndlr.GetAllReviews(id));
+            }
+            //reviews.OrderByDescending(r => r.)
+            //Load questions, order by postdate
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -25,8 +35,28 @@ namespace AdministrationParticipation
             // kijk welke zoek term is geselecteerd in cbSearchField 
             // zoek op de ingegeven tekst in tbSearchThis
             // Open resultaten form met de zoek resultaten
+            if (cbSearchField.SelectedIndex == 0)
+            {
+                // Alles... hebben niets voor lmao
+            }
+            if (cbSearchField.SelectedIndex == 1)
+            {
+                //Users
+            }
+            if (cbSearchField.SelectedIndex == 2)
+            {
+                //Questions
+            }
+            if (cbSearchField.SelectedIndex == 3)
+            {
+                //Comments
+            }
+            if (cbSearchField.SelectedIndex == 4)
+            {
+                //Reviews
+            }
         }
-              
+
         private void lbNewQuestions_DoubleClick(object sender, EventArgs e)
         {
             //TODO
@@ -61,6 +91,6 @@ namespace AdministrationParticipation
             //TODO
             //open het resulaten form voor de review objecten
         }
-                      
+
     }
 }
