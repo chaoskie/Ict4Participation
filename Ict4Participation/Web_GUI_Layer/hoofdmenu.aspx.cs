@@ -82,19 +82,21 @@ namespace Web_GUI_Layer
             string message = string.Empty;
 
             Availabilitydetails ad = new Availabilitydetails();
-            ad.Day = (sender as HtmlTableCell).Attributes["data-day"].ToString();
-            ad.Daytime = (sender as HtmlTableCell).Attributes["data-daytime"].ToString();
+            ad.Day = (sender as Button).ID.Split('_')[1];
+            ad.Daytime = (sender as Button).ID.Split('_')[2];
+            //ad.Daytime = (sender as Button).Attributes["data-daytime"].ToString();
 
             // Check if sender has class "beschikbaar"
-            if ((sender as HtmlTableCell).Attributes["class"].ToString() == "beschikbaar")
+            //if ((sender as Button).Attributes["class"].ToString() == "beschikbaar")
+            if ((sender as Button).CssClass.Contains("beschikbaar"))
             {
                 // update availability in database
-                GUIHandler.AddAvailability(ad, out message);
+                GUIHandler.RemoveAvailability(ad, out message);
             }
             else
             {
                 // update availability in database
-                GUIHandler.RemoveAvailability(ad, out message);
+                GUIHandler.AddAvailability(ad, out message);
             }
 
             // Show error if message is not empty
@@ -111,39 +113,39 @@ namespace Web_GUI_Layer
         /// <param name="daytime"></param>
         /// <param name="beschikbaar"></param>
         /// <returns></returns>
-        [System.Web.Services.WebMethod]
-        public static string UpdateBeschikbaarheid(string day, string daytime, string beschikbaar)
-        {
-            string message = string.Empty;
+        //[System.Web.Services.WebMethod]
+        //public static string UpdateBeschikbaarheid(string day, string daytime, string beschikbaar)
+        //{
+        //    string message = string.Empty;
 
-            GUIHandler tempGUIHandler = new GUIHandler();
+        //    GUIHandler tempGUIHandler = new GUIHandler();
 
-            Availabilitydetails ad = new Availabilitydetails();
-            ad.Day = day;
-            ad.Daytime = daytime;
+        //    Availabilitydetails ad = new Availabilitydetails();
+        //    ad.Day = day;
+        //    ad.Daytime = daytime;
 
-            if (beschikbaar == "true")
-            {
-                if (!tempGUIHandler.AddAvailability(ad, out message))
-                {
-                    // TODO: Show message
+        //    if (beschikbaar == "true")
+        //    {
+        //        if (!tempGUIHandler.AddAvailability(ad, out message))
+        //        {
+        //            // TODO: Show message
 
-                    return "true";
-                }
-            }
-            else
-            {
-                if (!tempGUIHandler.RemoveAvailability(ad, out message))
-                {
-                    // TODO: Show message
+        //            return "true";
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (!tempGUIHandler.RemoveAvailability(ad, out message))
+        //        {
+        //            // TODO: Show message
 
-                    return "true";
-                }
-            }
+        //            return "true";
+        //        }
+        //    }
 
-            // update to database
+        //    // update to database
 
-            return string.Empty;
-        }
+        //    return string.Empty;
+        //}
     }
 }

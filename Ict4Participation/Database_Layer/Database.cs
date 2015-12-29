@@ -926,7 +926,7 @@ namespace Database_Layer
         public static bool InsertAvailability(int uID, string day, string period)
         {
             Nullable<int> foundID = null;//zoek naar bestaan van entry
-            DataTable tdb = RetrieveQuery("SELECT \"ID\" FROM \"Availability\" WHERE \"Day\" = " + day + ", \"Period\" = " + period);
+            DataTable tdb = RetrieveQuery("SELECT \"ID\" FROM \"Availability\" WHERE \"Day\" = '" + day + "' AND \"Period\" = '" + period + "'");
             foreach (DataRow r in tdb.Rows)
             {
                 foundID = Convert.ToInt32(r["ID"]);//haal id van bestaande entry op, zo niet dan null
