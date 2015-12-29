@@ -119,6 +119,11 @@ nav button p {
 		width: 750px;
 	}
 }
+@media (max-width: 767px) {
+    .container::before {
+        width: 766px;
+    }
+}
 @media (min-width: 992px) {
 	.container::before {
 		width: 970px;

@@ -725,8 +725,18 @@ namespace Admin_Layer
         public bool RemoveAvailability(Availabilitydetails av, out string message)
         {
             Availability a = new Availability(MainUser.ID, av.Day, av.Daytime);
-            a.Remove();
-            message = "Availability added";
+
+            // Remove availability in database
+            if (!a.Remove())
+            {
+                message = "Availability was not removed!";
+                return false;
+            }
+
+            // Remove availability locally
+            MainUser.RemoveAvailability(av.Day, av.Daytime);
+
+            message = string.Empty;
             return true;
         }
 
@@ -739,8 +749,18 @@ namespace Admin_Layer
         public bool AddAvailability(Availabilitydetails av, out string message)
         {
             Availability a = new Availability(MainUser.ID, av.Day, av.Daytime);
-            a.Add();
-            message = "Availability added";
+
+            // Add availability in database
+            if (!a.Add())
+            {
+                message = "Availability was not added!";
+                return false;
+            }
+
+            // Add availability locally
+            MainUser.AddAvailability(av.Day, av.Daytime);
+
+            message = string.Empty;
             return true;
         }
         #endregion
@@ -827,14 +847,25 @@ namespace Admin_Layer
         {
             Accountdetails acc = (Accountdetails)Creation.getDetailsObject(MainUser);
 
+            if (acc.SkillsDetailList == null)
+            {
+                acc.SkillsDetailList = new List<Skilldetails>();
+            }
+            if (acc.AvailabilityDetailList == null)
+            {
+                acc.AvailabilityDetailList = new List<Availabilitydetails>();
+            }
+
             foreach (Skill s in MainUser.Skills)
             {
-                acc.SkillsDetailList.Add((Skilldetails)Creation.getDetailsObject(s));
+                Skilldetails sd = (Skilldetails)Creation.getDetailsObject(s);
+                acc.SkillsDetailList.Add(sd);
             }
 
             foreach (Availability a in MainUser.Availability)
             {
-                acc.AvailabilityDetailList.Add((Availabilitydetails)Creation.getDetailsObject(a));
+                Availabilitydetails ad = (Availabilitydetails)Creation.getDetailsObject(a);
+                acc.AvailabilityDetailList.Add(ad);
             }
 
             return acc;

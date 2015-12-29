@@ -26,26 +26,29 @@ namespace Web_GUI_Layer
             // Retrieve GUIHandler object from session
             GUIHandler = (GUIHandler)Session["GUIHandler_obj"];
 
-            // Get all user info
-            Accountdetails accDetails = GUIHandler.GetMainuserInfo();
-
-            // Insert user name and role
-            user_naam.InnerHtml = accDetails.Name;
-
-            // Insert availability
-            List<Availabilitydetails> ad = accDetails.AvailabilityDetailList;
-            
-            // Set tablecell class to beschikbaar if user is available on that day
-            if (ad != null)
+            if (!IsPostBack)
             {
-                foreach (Availabilitydetails a in ad)
-                {
-                    HtmlTableCell tc = (HtmlTableCell)FindControl(string.Format("rooster_{0}_{1}", a.Day, a.Daytime));
-                    tc.Attributes.Add("class", "beschikbaar");
-                }
-            }
+                // Get all user info
+                Accountdetails accDetails = GUIHandler.GetMainuserInfo();
 
-            //rooster_ma_ochtend.DataBinding += delegate { rooster_change; };
+                // Insert user name and role
+                user_naam.InnerHtml = accDetails.Name;
+
+                // Insert availability
+                List<Availabilitydetails> ad = accDetails.AvailabilityDetailList;
+
+                // Set tablecell class to beschikbaar if user is available on that day
+                if (ad != null)
+                {
+                    foreach (Availabilitydetails a in ad)
+                    {
+                        Button btn = (Button)FindControl(string.Format("rooster_{0}_{1}", a.Day, a.Daytime));
+                        btn.CssClass += "beschikbaar";
+                    }
+                }
+
+                //rooster_ma_ochtend.DataBinding += delegate { rooster_change; };
+            }
         }
 
         protected void btnAfmelden_Click(object sender, EventArgs e)
@@ -82,19 +85,29 @@ namespace Web_GUI_Layer
             string message = string.Empty;
 
             Availabilitydetails ad = new Availabilitydetails();
-            ad.Day = (sender as HtmlTableCell).Attributes["data-day"].ToString();
-            ad.Daytime = (sender as HtmlTableCell).Attributes["data-daytime"].ToString();
+            ad.Day = (sender as Button).ID.Split('_')[1];
+            ad.Daytime = (sender as Button).ID.Split('_')[2];
+
+            //ad.Daytime = (sender as Button).Attributes["data-daytime"].ToString();
 
             // Check if sender has class "beschikbaar"
-            if ((sender as HtmlTableCell).Attributes["class"].ToString() == "beschikbaar")
+            //if ((sender as Button).Attributes["class"].ToString() == "beschikbaar")
+            if ((sender as Button).CssClass.Contains("beschikbaar"))
             {
                 // update availability in database
-                GUIHandler.AddAvailability(ad, out message);
+                if (GUIHandler.RemoveAvailability(ad, out message))
+                {
+                    // Update visual style on button
+                    (sender as Button).CssClass = (sender as Button).CssClass.Replace("beschikbaar", string.Empty).Trim();
+                }
             }
             else
             {
                 // update availability in database
-                GUIHandler.RemoveAvailability(ad, out message);
+                if (GUIHandler.AddAvailability(ad, out message))
+                {
+                    (sender as Button).CssClass += "beschikbaar";
+                }
             }
 
             // Show error if message is not empty
@@ -111,39 +124,39 @@ namespace Web_GUI_Layer
         /// <param name="daytime"></param>
         /// <param name="beschikbaar"></param>
         /// <returns></returns>
-        [System.Web.Services.WebMethod]
-        public static string UpdateBeschikbaarheid(string day, string daytime, string beschikbaar)
-        {
-            string message = string.Empty;
+        //[System.Web.Services.WebMethod]
+        //public static string UpdateBeschikbaarheid(string day, string daytime, string beschikbaar)
+        //{
+        //    string message = string.Empty;
 
-            GUIHandler tempGUIHandler = new GUIHandler();
+        //    GUIHandler tempGUIHandler = new GUIHandler();
 
-            Availabilitydetails ad = new Availabilitydetails();
-            ad.Day = day;
-            ad.Daytime = daytime;
+        //    Availabilitydetails ad = new Availabilitydetails();
+        //    ad.Day = day;
+        //    ad.Daytime = daytime;
 
-            if (beschikbaar == "true")
-            {
-                if (!tempGUIHandler.AddAvailability(ad, out message))
-                {
-                    // TODO: Show message
+        //    if (beschikbaar == "true")
+        //    {
+        //        if (!tempGUIHandler.AddAvailability(ad, out message))
+        //        {
+        //            // TODO: Show message
 
-                    return "true";
-                }
-            }
-            else
-            {
-                if (!tempGUIHandler.RemoveAvailability(ad, out message))
-                {
-                    // TODO: Show message
+        //            return "true";
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (!tempGUIHandler.RemoveAvailability(ad, out message))
+        //        {
+        //            // TODO: Show message
 
-                    return "true";
-                }
-            }
+        //            return "true";
+        //        }
+        //    }
 
-            // update to database
+        //    // update to database
 
-            return string.Empty;
-        }
+        //    return string.Empty;
+        //}
     }
 }

@@ -4,7 +4,7 @@
 #profiel_section {
     /* Aparte margin bottom en top */
     /* Dit is zodat margin left en right worden behouden */
-	margin-bottom: 3rem;
+    margin-bottom: 3rem;
 	margin-top: 3rem;
 }
 #profiel_section h2:nth-child(1) {
@@ -22,37 +22,49 @@
     user-select: none;
 	width: 100%;
 }
-#planning th,
-#planning td {
-	color: #f6f6f6;
-	padding: 1rem;
-	width: 20%;
+#planning .planning-row {
+    display: block;
+    height: 50px;
+    width: 100%;
 }
-#planning th {
-	background-color: #f26259;
+#planning .planning-row > div,
+#planning .planning-row > input {
+    display: inline-block;
+    height: 50px;
+    margin: 0;
+    position: relative;
+    width: 20%;
 }
-#planning td {
-	background-color: #fff;
-	border: 1px solid #ddd;
-	cursor: pointer;
+#planning .planning-row div {
+    background-color: #ed1e12;
+    padding-left: 2rem;
+    vertical-align: top;
 }
-#planning td.beschikbaar {
-	background-color: #9cf259;
+#planning .planning-row:nth-child(1) div {
+    padding-left: 0;
+    text-align: center;
 }
-#planning td:not(.beschikbaar):hover {
-	background-color: #e3fbd0;
+#planning .planning-row div p {
+    line-height: 50px;
+    color: #f6f6f6;
 }
-#planning tr:nth-child(1) th {
-	background-color: #ed1e12;
-	text-align: center;
+#planning .planning-row input {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    cursor: pointer;
 }
-/* Media query op 410px */
-/* De tabel kan niet meer kleiner. Daarom wordt de week afgekort, en wordt de fontgrootte kleiner */
+#planning .planning-row input.beschikbaar {
+    background-color: #9cf259;
+}
+#planning .planning-row input:not(.beschikbaar):hover {
+    background-color: #e3fbd0;
+}
+
 @media screen and (max-width: 410px) {
-	#planning tr>th:nth-child(1) span {
-		display: none;
-	}
-	#planning {
-		font-size: 80%;
-	}
+    #planning {
+        font-size: 80%;
+    }
+    #planning .planning-row div span {
+        display: none;
+    }
 }

@@ -31,22 +31,13 @@ namespace Web_GUI_Layer {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl user_rol;
         
         /// <summary>
-        /// planning control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table planning;
-        
-        /// <summary>
         /// rooster_ma_ochtend control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_ma_ochtend;
+        protected global::System.Web.UI.WebControls.Button rooster_ma_ochtend;
         
         /// <summary>
         /// rooster_ma_middag control.
@@ -55,7 +46,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_ma_middag;
+        protected global::System.Web.UI.WebControls.Button rooster_ma_middag;
         
         /// <summary>
         /// rooster_ma_avond control.
@@ -64,7 +55,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_ma_avond;
+        protected global::System.Web.UI.WebControls.Button rooster_ma_avond;
         
         /// <summary>
         /// rooster_ma_nacht control.
@@ -73,7 +64,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_ma_nacht;
+        protected global::System.Web.UI.WebControls.Button rooster_ma_nacht;
         
         /// <summary>
         /// rooster_di_ochtend control.
@@ -82,7 +73,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_di_ochtend;
+        protected global::System.Web.UI.WebControls.Button rooster_di_ochtend;
         
         /// <summary>
         /// rooster_di_middag control.
@@ -91,7 +82,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_di_middag;
+        protected global::System.Web.UI.WebControls.Button rooster_di_middag;
         
         /// <summary>
         /// rooster_di_avond control.
@@ -100,7 +91,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_di_avond;
+        protected global::System.Web.UI.WebControls.Button rooster_di_avond;
         
         /// <summary>
         /// rooster_di_nacht control.
@@ -109,7 +100,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_di_nacht;
+        protected global::System.Web.UI.WebControls.Button rooster_di_nacht;
         
         /// <summary>
         /// rooster_wo_ochtend control.
@@ -118,7 +109,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_wo_ochtend;
+        protected global::System.Web.UI.WebControls.Button rooster_wo_ochtend;
         
         /// <summary>
         /// rooster_wo_middag control.
@@ -127,7 +118,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_wo_middag;
+        protected global::System.Web.UI.WebControls.Button rooster_wo_middag;
         
         /// <summary>
         /// rooster_wo_avond control.
@@ -136,7 +127,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_wo_avond;
+        protected global::System.Web.UI.WebControls.Button rooster_wo_avond;
         
         /// <summary>
         /// rooster_wo_nacht control.
@@ -145,7 +136,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_wo_nacht;
+        protected global::System.Web.UI.WebControls.Button rooster_wo_nacht;
         
         /// <summary>
         /// rooster_do_ochtend control.
@@ -154,7 +145,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_do_ochtend;
+        protected global::System.Web.UI.WebControls.Button rooster_do_ochtend;
         
         /// <summary>
         /// rooster_do_middag control.
@@ -163,7 +154,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_do_middag;
+        protected global::System.Web.UI.WebControls.Button rooster_do_middag;
         
         /// <summary>
         /// rooster_do_avond control.
@@ -172,7 +163,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_do_avond;
+        protected global::System.Web.UI.WebControls.Button rooster_do_avond;
         
         /// <summary>
         /// rooster_do_nacht control.
@@ -181,7 +172,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_do_nacht;
+        protected global::System.Web.UI.WebControls.Button rooster_do_nacht;
         
         /// <summary>
         /// rooster_vr_ochtend control.
@@ -190,7 +181,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_vr_ochtend;
+        protected global::System.Web.UI.WebControls.Button rooster_vr_ochtend;
         
         /// <summary>
         /// rooster_vr_middag control.
@@ -199,7 +190,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_vr_middag;
+        protected global::System.Web.UI.WebControls.Button rooster_vr_middag;
         
         /// <summary>
         /// rooster_vr_avond control.
@@ -208,7 +199,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_vr_avond;
+        protected global::System.Web.UI.WebControls.Button rooster_vr_avond;
         
         /// <summary>
         /// rooster_vr_nacht control.
@@ -217,7 +208,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_vr_nacht;
+        protected global::System.Web.UI.WebControls.Button rooster_vr_nacht;
         
         /// <summary>
         /// rooster_za_ochtend control.
@@ -226,7 +217,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_za_ochtend;
+        protected global::System.Web.UI.WebControls.Button rooster_za_ochtend;
         
         /// <summary>
         /// rooster_za_middag control.
@@ -235,7 +226,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_za_middag;
+        protected global::System.Web.UI.WebControls.Button rooster_za_middag;
         
         /// <summary>
         /// rooster_za_avond control.
@@ -244,7 +235,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_za_avond;
+        protected global::System.Web.UI.WebControls.Button rooster_za_avond;
         
         /// <summary>
         /// rooster_za_nacht control.
@@ -253,7 +244,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_za_nacht;
+        protected global::System.Web.UI.WebControls.Button rooster_za_nacht;
         
         /// <summary>
         /// rooster_zo_ochtend control.
@@ -262,7 +253,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_zo_ochtend;
+        protected global::System.Web.UI.WebControls.Button rooster_zo_ochtend;
         
         /// <summary>
         /// rooster_zo_middag control.
@@ -271,7 +262,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_zo_middag;
+        protected global::System.Web.UI.WebControls.Button rooster_zo_middag;
         
         /// <summary>
         /// rooster_zo_avond control.
@@ -280,7 +271,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_zo_avond;
+        protected global::System.Web.UI.WebControls.Button rooster_zo_avond;
         
         /// <summary>
         /// rooster_zo_nacht control.
@@ -289,6 +280,6 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell rooster_zo_nacht;
+        protected global::System.Web.UI.WebControls.Button rooster_zo_nacht;
     }
 }
