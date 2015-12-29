@@ -108,6 +108,7 @@ select[id*="select"] {
 }
 .btn.btn-custom {
 	font-size: 24px;
+    text-overflow: ellipsis;
 }
 .btn.btn-custom2 {
 	font-size: 16px;

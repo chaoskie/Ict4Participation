@@ -1,3 +1,26 @@
 ﻿nav button {
     width: 100%;
 }
+#profiel_section {
+    /* Aparte margin bottom en top */
+    /* Dit is zodat margin left en right worden behouden */
+    margin-bottom: 3rem;
+	margin-top: 3rem;
+}
+#profiel_section h2:nth-child(1) {
+	margin-top: 0;
+}
+#profiel_section img {
+	border: 3px solid #ed1e12;
+}
+
+#vraag_data p {
+    font-size: 2rem;
+}
+
+.vraag-bold {
+    font-weight: bold;
+}
+#plaats_comment textarea {
+    height: 88px;
+}

@@ -85,7 +85,7 @@ namespace Class_Layer
                         Convert.ToDateTime(row["PostDate"])
                         ));
             }
-            return null;
+            return comments;
         }
 
         /// <summary>

@@ -117,6 +117,12 @@ namespace Admin_Layer
         public int PostedToID { get; set; }
         public string Description { get; set; }
         public DateTime PostDate { get; set; }
+        
+        
+        // Added posterID
+        public int PosterID { get; set; }
+
+
     }
 
     public struct Skilldetails

@@ -14,7 +14,8 @@
 	<link rel="stylesheet" href="../Content/CSS/bootstrap.min.css" />
 	<link rel="stylesheet" href="../Content/CSS/font-awesome.min.css" />
 	<link rel="stylesheet" href="../Content/CSS/main.css" />
-    <link rel="stylesheet" href="../Content/CSS/profiel.css" />
+    <link rel="stylesheet" href="../Content/CSS/input.css" />
+    <link rel="stylesheet" href="../Content/CSS/reacties.css" />
 	<link rel="stylesheet" href="../Content/CSS/vraag.css" />
 </head>
 <body>
@@ -44,44 +45,94 @@
 				    <div id="profiel_section" class="row">
 					    <div class="col-xs-6 col-xs-offset-3 col-sm-3 col-sm-offset-0">
 						    <div id="img_wrapper">
-							    <img src="http://i.imgur.com/BZUZBOr.jpg" alt="Profielfoto" style="width: 100%;" />
+							    <%--<img src="http://i.imgur.com/BZUZBOr.jpg" alt="Profielfoto" style="width: 100%;" />--%>
+                                <asp:Image ID="qProfilePhoto" AlternateText="Profielfoto" CssClass="img-responsive" ImageUrl="http://i.imgur.com/BZUZBOr.jpg" runat="server" />
 						    </div>
 					    </div>
 					    <div class="col-tn-12 col-xs-8">
-						    <h2 id="vraag_titel" runat="server">Dit is de vraag</h2>
-						    <h3 id="vraag_body">Dit is de beschrijving</h3>					    </div>
+						    <h2 id="vraag_titel" runat="server"></h2>
+						    <h3 id="vraag_body" runat="server"></h3>
+					    </div>
 				    </div>
 
-                    <div class="row">
-                        <div class="col-xs-12">Startdatum: <span id="vraag_startdatum" runat="server"></span></div>
+                    <div id="vraag_data">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p><span class="vraag-bold">Startdatum:</span> <span id="vraag_startdatum" runat="server"></span></p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p><span class="vraag-bold">Einddatum:</span> <span id="vraag_einddatum" runat="server"></span></p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p><span class="vraag-bold">Locatie:</span> <span id="vraag_locatie" runat="server"></span></p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p><span id="vraag_urgentie" style="color: #f00" runat="server"></span></p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-xs-12">Einddatum: <span id="vraag_einddatum" runat="server"></span></div>
-                    </div>
 
                     <div class="row">
-                        <div class="col-xs-12">Locatie: <span id="vraag_locatie" runat="server"></span></div>
+                        <div class="col-xs-12">
+                            <h3>Reacties</h3>
+                        </div>
                     </div>
+                    
+                    <!-- Comment section -->
+                    <div id="comment_section" runat="server">
+                        <!-- Comment template -->
+                        <div class="row comment-main">
+                            <div class="col-xs-12">
+                                <div class="row">
 
-                    <div class="row">
-                        <div class="col-xs-12"><span id="vraag_urgentie" style="color: #f00" runat="server"></span></div>
-                    </div>
+                                    <div class="col-tn-6 col-tn-offset-3 col-xs-2">
+                                        <img src="http://i.imgur.com/BZUZBOr.jpg" class="img-responsive" alt="Foto" />
+                                    </div>
+
+                                    <div class="col-xs-10">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <h3 class="comment-author">Henk Nogwattes</h3>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit arcu a ante interdum lobortis.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- Einde Comment section -->
+
+                    <!-- Plaats comment section -->
+                    <div id="plaats_comment">
+                        <div class="row">
+                            <div class="col-tn-12 col-xs-7 col-sm-8">
+                                <asp:TextBox ID="tb_vraag" TextMode="MultiLine" runat="server"></asp:TextBox>
+                            </div>
+                            <div class="col-tn-12 col-xs-5 col-sm-4">
+                                <asp:Button OnClick="btnPlaatsVraag_Click" CssClass="btn btn-custom btn-block btn-lg" Text="Plaats reactie" runat="server" />
+                            </div>
+                        </div>
+                    </div><!-- Einde Plaats comment section -->
 
 			    </div>
+
 		    </main>
-
-		    <!-- Zoek profiel overlay -->
-		    <div id="zoek_profiel_overlay">
-			    <div class="zoek-profiel-left">
-				    <img class="zoek-profiel-foto" src="" />
-			    </div>
-			    <div class="zoek-profiel-right">
-				    <p class="zoek-profiel-naam">Nog niets...</p>
-				    <p class="zoek-profiel-type">Nog niets...</p>
-				    <p class="zoek-profiel-quote">Nog niets...</p>
-			    </div>
-		    </div>
 
 	    </div>
     </form>

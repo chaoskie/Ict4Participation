@@ -1,0 +1,13 @@
+﻿#comment_section .comment-author {
+    margin-top: 0;
+}
+#comment_section .comment-body {
+    font-size: 2rem;
+}
+#comment_section .comment-main {
+    margin: 0.5rem 0;
+    padding: 0.5rem 0;
+}
+#comment_section img {
+    border: 3px solid #ed1e12;
+}
