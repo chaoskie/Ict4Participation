@@ -504,20 +504,39 @@ namespace Class_Layer
             }
             if (!found)
             {
-                switch (this.ID % 4)
+                switch (this.ID % 10)
                 {
                     case (0):
-                        this.AvatarPath = @"~\..\ProfileAvatars\emoe.jpg";
-                        break;
-                    case (1):
                         this.AvatarPath = @"~\..\ProfileAvatars\bear.jpg";
                         break;
+                    case (1):
+                        this.AvatarPath = @"~\..\ProfileAvatars\bunny.jpg";
+                        break;
                     case (2):
-                        this.AvatarPath = @"~\..\ProfileAvatars\panda.jpg";
+                        this.AvatarPath = @"~\..\ProfileAvatars\emoe.jpg";
                         break;
                     case (3):
+                        this.AvatarPath = @"~\..\ProfileAvatars\gekko.jpg";
+                        break;
+                    case (4):
+                        this.AvatarPath = @"~\..\ProfileAvatars\hedgehog.jpg";
+                        break;
+                    case (5):
+                        this.AvatarPath = @"~\..\ProfileAvatars\koala.jpg";
+                        break;
+                    case (6):
+                        this.AvatarPath = @"~\..\ProfileAvatars\llama.jpg";
+                        break;
+                    case (7):
+                        this.AvatarPath = @"~\..\ProfileAvatars\otter.jpg";
+                        break;
+                    case (8):
+                        this.AvatarPath = @"~\..\ProfileAvatars\redbear.jpg";
+                        break;
+                    case (9):
                         this.AvatarPath = @"~\..\ProfileAvatars\sloth.jpg";
                         break;
+
                 }
             }
         }
