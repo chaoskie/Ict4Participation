@@ -71,6 +71,7 @@
     <Compile Include="Reactie.Designer.cs">
       <DependentUpon>Reactie.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReasonPrompt.cs" />
     <Compile Include="Resultaten.cs">
       <SubType>Form</SubType>
     </Compile>

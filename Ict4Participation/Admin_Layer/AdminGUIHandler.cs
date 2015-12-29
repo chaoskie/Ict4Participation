@@ -174,6 +174,17 @@ namespace Admin_Layer
                 return false;
             }
         }
+
+        /// <summary>
+        /// Deactivated specified account
+        /// </summary>
+        /// <param name="ID">The ID of the account</param>
+        public void DeactivateAccount(int ID, string email, string username, string reason)
+        {
+            Account.SetInactive(ID);
+            EmailHandler.SendDeactivation(email, username, reason);
+        }
+
         #endregion
 
         #region Comment Handling
