@@ -952,6 +952,7 @@ namespace Database_Layer
                 OracleCommand cmd1 = new OracleCommand("INSERT INTO \"Availability_Acc\" (\"ACC_ID\", \"AVAILABILITY_ID\") VALUES (:a, :b)");
                 cmd1.Parameters.Add(new OracleParameter("a", uID));
                 cmd1.Parameters.Add(new OracleParameter("b", foundID));
+                cmd1.Connection = c;
                 try
                 {
                     cmd1.ExecuteNonQuery();

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="hoofdmenu.aspx.cs" Inherits="Web_GUI_Layer.hoofdmenu" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="hoofdmenu.aspx.cs" MaintainScrollPositionOnPostback="true" Inherits="Web_GUI_Layer.hoofdmenu" %>
 
 <!DOCTYPE html>
 <html lang="nl">

@@ -253,18 +253,30 @@ namespace Class_Layer
             s.Remove();
         }
 
-        public static void AddAvailability(string day, string daytime, int userid)
+        // These methods are obsolete as the availabilities are added and removed through the Availability class
+        //public static void AddAvailability(string day, string daytime, int userid)
+        //{
+        //    //Call Availability class to add
+        //    Availability av = new Availability(userid, day, daytime);
+        //    av.Add();
+        //}
+
+        //public static void RemoveAvailability(string day, string daytime, int userid)
+        //{
+        //    //Call Availability class to remove
+        //    Availability av = new Availability(userid, day, daytime);
+        //    av.Remove();
+        //}
+
+        public void AddAvailability(string day, string daytime)
         {
-            //Call Availability class to add
-            Availability av = new Availability(userid, day, daytime);
-            av.Add();
+            Availability av = new Availability(ID, day, daytime);
+            Availability.Add(av);
         }
 
-        public static void RemoveAvailability(string day, string daytime, int userid)
+        public void RemoveAvailability(string day, string daytime)
         {
-            //Call Availability class to remove
-            Availability av = new Availability(userid, day, daytime);
-            av.Remove();
+            Availability.Remove(Availability.Where(i => i.Day == day).Single(i => i.Daytime == daytime));
         }
 
         public static Account Update(int ID, string username, string email, string name, string address, string city,
