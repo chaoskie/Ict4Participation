@@ -11,3 +11,26 @@
 #comment_section img {
     border: 3px solid #ed1e12;
 }
+#comment_section .comment-body[contenteditable]:focus {
+    background-color: #fff;
+    color: #000;
+    position: relative;
+}
+#comment_section .comment-body[contenteditable]::after {
+    background-image: url('../Images/edittext.png');
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    bottom: 10px;
+    content: '';
+    height: 30px;
+    opacity: 0.5;
+    position: absolute;
+    right: 15px;
+    transition: opacity 0.256s;
+    width: 30px;
+}
+#comment_section .comment-body[contenteditable]:focus::after {
+    opacity: 0.8;
+    right: 0;
+    bottom: 0;
+}

@@ -169,10 +169,13 @@ namespace Admin_Layer
         /// <param name="all">Whether through a list of all the accounts should be searched</param>
         /// <param name="accountIndex">The index as specified in the list</param>
         /// <returns></returns>
-        public Accountdetails GetInfo(bool all, int accountIndex)
+        public Accountdetails GetInfo(bool all, int userID)
         {
-            return all ? (Accountdetails)Creation.getDetailsObject(AllAccounts[accountIndex])
-                : (Accountdetails)Creation.getDetailsObject(LoadedAccounts[accountIndex]);
+            //return all ? (Accountdetails)Creation.getDetailsObject(AllAccounts[accountIndex])
+            //    : (Accountdetails)Creation.getDetailsObject(LoadedAccounts[accountIndex]);
+
+            return all ? (Accountdetails)Creation.getDetailsObject(AllAccounts.Where(u => u.ID == userID).First())
+                : (Accountdetails)Creation.getDetailsObject(LoadedAccounts.Where(u => u.ID == userID).First());
         }
 
         /// <summary>
