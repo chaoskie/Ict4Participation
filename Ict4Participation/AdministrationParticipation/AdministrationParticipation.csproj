@@ -71,6 +71,7 @@
     <Compile Include="Reactie.Designer.cs">
       <DependentUpon>Reactie.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReasonPrompt.cs" />
     <Compile Include="Resultaten.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +84,7 @@
     <Compile Include="Reviews.Designer.cs">
       <DependentUpon>Reviews.cs</DependentUpon>
     </Compile>
+    <Compile Include="TypeOfEnum.cs" />
     <EmbeddedResource Include="Gebruikers.resx">
       <DependentUpon>Gebruikers.cs</DependentUpon>
     </EmbeddedResource>

@@ -38,7 +38,7 @@ namespace Admin_Layer
         /// <summary>
         /// A list of loaded questions
         /// </summary>
-        private List<Question> LoadedQuestions;
+        public List<Question> LoadedQuestions;
 
         /// <summary>
         /// A list of loaded comments
@@ -174,6 +174,17 @@ namespace Admin_Layer
                 return false;
             }
         }
+
+        /// <summary>
+        /// Deactivated specified account
+        /// </summary>
+        /// <param name="ID">The ID of the account</param>
+        public void DeactivateAccount(int ID, string email, string username, string reason)
+        {
+            Account.SetInactive(ID);
+            EmailHandler.SendDeactivation(email, username, reason);
+        }
+
         #endregion
 
         #region Comment Handling
@@ -213,10 +224,11 @@ namespace Admin_Layer
         /// <param name="commentIndex">The index of the comment as loaded in the list</param>
         /// <param name="message">The message of the error</param>
         /// <returns>Success</returns>
-        public bool Remove(int commentID, out string message)
+        public bool Remove(int commentID, string email, string question, string reason, out string message)
         {
             //Remove comment
             LoadedComments.Where(c => c.PostID == commentID).First().Delete();
+            EmailHandler.SendWrongComment(email, question, reason);
             message = "Comment verwijderd!";
             return true;
         }

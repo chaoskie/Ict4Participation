@@ -30,6 +30,8 @@ namespace Admin_Layer
 
     public struct Meetingdetails
     {
+        //
+        public int PostID { get; set; }
         public int RequesterID { get; set; }
         public int RequestedID { get; set; }
         public Nullable<DateTime> StartDate { get; set; }
@@ -40,9 +42,16 @@ namespace Admin_Layer
 
     public struct Reviewdetails
     {
+        //
+        public int PostID { get; set; }
         public int Rating { get; set; }
         public int PostedToID { get; set; }
         public string Description { get; set; }
+        //
+        public override string ToString()
+        {
+            return Rating + " " + Description;
+        }
     }
 
     public class Questiondetails
@@ -66,7 +75,12 @@ namespace Admin_Layer
         }
         public Questiondetails()
         {
-            skills =  new List<string>();
+            skills = new List<string>();
+        }
+        //
+        public override string ToString()
+        {
+            return Title;
         }
     }
 
@@ -114,15 +128,11 @@ namespace Admin_Layer
 
     public struct Commentdetails
     {
+        public int PostID { get; set; }
+        public int PosterID { get; set; }
         public int PostedToID { get; set; }
         public string Description { get; set; }
         public DateTime PostDate { get; set; }
-        
-        
-        // Added posterID
-        public int PosterID { get; set; }
-
-
     }
 
     public struct Skilldetails

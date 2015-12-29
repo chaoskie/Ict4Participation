@@ -40,7 +40,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.b = new System.Windows.Forms.TextBox();
+            this.tbPhone = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbAddress = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -164,13 +164,13 @@
             this.label6.TabIndex = 15;
             this.label6.Text = "Type";
             // 
-            // b
+            // tbPhone
             // 
-            this.b.Enabled = false;
-            this.b.Location = new System.Drawing.Point(104, 139);
-            this.b.Name = "b";
-            this.b.Size = new System.Drawing.Size(160, 20);
-            this.b.TabIndex = 14;
+            this.tbPhone.Enabled = false;
+            this.tbPhone.Location = new System.Drawing.Point(104, 139);
+            this.tbPhone.Name = "tbPhone";
+            this.tbPhone.Size = new System.Drawing.Size(160, 20);
+            this.tbPhone.TabIndex = 14;
             // 
             // label7
             // 
@@ -211,6 +211,9 @@
             // cbTypeAcc
             // 
             this.cbTypeAcc.FormattingEnabled = true;
+            this.cbTypeAcc.Items.AddRange(new object[] {
+            "Hulpbehoevende",
+            "Hulpverlener"});
             this.cbTypeAcc.Location = new System.Drawing.Point(104, 165);
             this.cbTypeAcc.Name = "cbTypeAcc";
             this.cbTypeAcc.Size = new System.Drawing.Size(160, 21);
@@ -309,7 +312,7 @@
             this.Controls.Add(this.btnGenerateNewPass);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.b);
+            this.Controls.Add(this.tbPhone);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.tbAddress);
             this.Controls.Add(this.label8);
@@ -346,7 +349,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox b;
+        private System.Windows.Forms.TextBox tbPhone;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbAddress;
         private System.Windows.Forms.Label label8;
