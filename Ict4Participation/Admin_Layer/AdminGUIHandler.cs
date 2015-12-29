@@ -38,7 +38,7 @@ namespace Admin_Layer
         /// <summary>
         /// A list of loaded questions
         /// </summary>
-        private List<Question> LoadedQuestions;
+        public List<Question> LoadedQuestions;
 
         /// <summary>
         /// A list of loaded comments

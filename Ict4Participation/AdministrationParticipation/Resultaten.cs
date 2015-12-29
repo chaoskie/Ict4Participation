@@ -12,9 +12,10 @@ namespace AdministrationParticipation
 {
     public partial class Resultaten : Form
     {
-        public Resultaten()
+        public Resultaten(List<Object> objects)
         {
             InitializeComponent();
+            lbResultaten.DataSource = objects;
         }
 
         private void lbResultaten_MouseDoubleClick(object sender, MouseEventArgs e)

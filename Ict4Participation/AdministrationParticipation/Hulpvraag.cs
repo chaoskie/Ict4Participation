@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Admin_Layer;
 
 namespace AdministrationParticipation
 {
     public partial class Hulpvraag : Form
     {
-        public Hulpvraag()
+        public Hulpvraag(Questiondetails qd)
         {
             InitializeComponent();
         }

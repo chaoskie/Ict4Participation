@@ -83,6 +83,7 @@
     <Compile Include="Reviews.Designer.cs">
       <DependentUpon>Reviews.cs</DependentUpon>
     </Compile>
+    <Compile Include="TypeOfEnum.cs" />
     <EmbeddedResource Include="Gebruikers.resx">
       <DependentUpon>Gebruikers.cs</DependentUpon>
     </EmbeddedResource>
