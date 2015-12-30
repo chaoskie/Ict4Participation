@@ -17,6 +17,7 @@ namespace AdministrationParticipation
         {
             InitializeComponent();
             lbResultaten.DataSource = objects;
+            lbResultaten.DisplayMember = "";
         }
 
         private void lbResultaten_MouseDoubleClick(object sender, MouseEventArgs e)

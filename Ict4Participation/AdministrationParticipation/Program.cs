@@ -21,13 +21,18 @@ namespace AdministrationParticipation
         [STAThread]
         static void Main(string[] args)
         {
+            args = new string[1] 
+            {
+                PasswordHashing.CreateHash(Credmatch)            
+            };
+
             //Check arguments
             bool isValid = false;
             foreach (string s in args)
             {
                 try
                 {
-                    isValid = PasswordHashing.ValidatePassword(s, Credmatch);
+                    isValid = PasswordHashing.ValidatePassword(Credmatch, s);
                     if (isValid)
                     {
                         break;
