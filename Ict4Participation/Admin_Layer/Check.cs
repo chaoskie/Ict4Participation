@@ -214,7 +214,7 @@ namespace Admin_Layer
         /// <returns>succes boolean</returns>
         public static bool QuestionDetails(Questiondetails qd, out string message)
         {
-            if (!Check.checkIfFilledIn(qd.Title))
+            if (Check.checkIfFilledIn(qd.Title))
             {
                 message = "Titel is niet ingevuld!";
                 return false;

@@ -19,7 +19,7 @@ namespace AdministrationParticipation
             Form prompt = new Form()
             {
                 Width = 500,
-                Height = 150,
+                Height = 250,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 Text = "Authorisatie vereist!",
                 StartPosition = FormStartPosition.CenterScreen
@@ -53,7 +53,7 @@ namespace AdministrationParticipation
                 Text = "Ok",
                 Left = 350,
                 Width = 100,
-                Top = 70,
+                Top = 150,
                 DialogResult = DialogResult.OK
             };
             confirmation.Click += (sender, e) =>
@@ -85,7 +85,7 @@ namespace AdministrationParticipation
                 }
 
             }
-            if (prompt.ShowDialog() == DialogResult.Cancel)
+            if (prompt.ShowDialog() != DialogResult.OK)
             {
                 Application.Exit();
             }

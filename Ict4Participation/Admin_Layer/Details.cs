@@ -44,13 +44,14 @@ namespace Admin_Layer
     {
         //
         public int PostID { get; set; }
+        public int PosterID { get; set; }
         public int Rating { get; set; }
         public int PostedToID { get; set; }
         public string Description { get; set; }
         //
         public override string ToString()
         {
-            return Rating + " " + Description;
+            return Rating + "-ster: " + Description;
         }
     }
 
@@ -118,6 +119,11 @@ namespace Admin_Layer
             availabilityDetailList = new List<Availabilitydetails>();
             skillsDetailList = new List<Skilldetails>();
         }
+
+        public override string ToString()
+        {
+            return Username + ">> " + Name;
+        }
     }
 
     public struct Availabilitydetails
@@ -136,6 +142,11 @@ namespace Admin_Layer
 
         // Added IsDeleted to see if comment has been deleted
         public bool IsDeleted { get; set; }
+
+        public override string ToString()
+        {
+            return PostID + ">> " + Description;
+        }
     }
 
     public struct Skilldetails

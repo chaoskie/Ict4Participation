@@ -152,10 +152,8 @@ namespace Admin_Layer
         /// <returns></returns>
         public Accountdetails GetInfo(bool all, int userID)
         {
-            //return all ? (Accountdetails)Creation.getDetailsObject(AllAccounts[accountIndex])
-            //    : (Accountdetails)Creation.getDetailsObject(LoadedAccounts[accountIndex]);
 
-            return all ? (Accountdetails)Creation.getDetailsObject(AllAccounts.Where(u => u.ID == userID).First())
+            return all ? (Accountdetails)Creation.getDetailsObject(LoadedAccounts.Where(u => u.ID == userID).First())
                 : (Accountdetails)Creation.getDetailsObject(LoadedAccounts.Where(u => u.ID == userID).First());
         }
 

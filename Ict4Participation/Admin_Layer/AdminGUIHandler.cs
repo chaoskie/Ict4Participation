@@ -357,10 +357,12 @@ namespace Admin_Layer
         /// <param name="questionIndex">The index of the question as loaded</param>
         /// <param name="message">The message of the error</param>
         /// <returns>Success</returns>
-        public bool RemoveQuestion(int questionID, out string message)
+        public bool RemoveQuestion(int questionID, string email, string question, string reason, out string message)
         {
             //Remove question
             LoadedQuestions.Where(q=>q.PostID == questionID).First().Delete();
+            //Send message
+            EmailHandler.SendWrongQuestion(email, question, reason);
             message = "Question deleted";
             return true;
         }
@@ -425,10 +427,12 @@ namespace Admin_Layer
         /// <param name="reviewIndex">The index of the review as loaded in the list</param>
         /// <param name="message">The message of the error</param>
         /// <returns>Success</returns>
-        public bool RemoveReview(int reviewID, out string message)
+        public bool RemoveReview(int reviewID, string email, string username, string reason, out string message)
         {
             //Remove review
             LoadedReviews.Where(r => r.PostID == reviewID).First().Delete();
+            //Email user
+            EmailHandler.SendWrongReview(email, username, reason);
             message = "Review verwijderd";
             return true;
         }

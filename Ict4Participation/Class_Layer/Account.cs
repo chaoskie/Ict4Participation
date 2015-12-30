@@ -467,77 +467,86 @@ namespace Class_Layer
             this.Skills = skills;
             this.Availability = availability;
 
-            //Loop through the unvalidated folder
-            bool found = false;
-            string physicalPath = System.Web.HttpContext.Current.Request.MapPath("/");
-            string[] fileEntries = Directory.GetFiles(physicalPath + "ProfileVOGs_Unvalidated");
-            foreach (string fileName in fileEntries)
+            //If accessed normally
+            if (System.Web.HttpContext.Current != null)
             {
-                //If the VOG was found, show a reference to it
-                if (Path.GetFileName(fileName).ToLower() == ID + ".pdf")
+                //Loop through the unvalidated folder
+                bool found = false;
+                string physicalPath = System.Web.HttpContext.Current.Request.MapPath("/");
+                string[] fileEntries = Directory.GetFiles(physicalPath + "ProfileVOGs_Unvalidated");
+                foreach (string fileName in fileEntries)
                 {
-                    this.VOGPath = @"~\ProfileVOGs_Unvalidated\" + Path.GetFileName(fileName);
-                    found = true;
-                    break;
+                    //If the VOG was found, show a reference to it
+                    if (Path.GetFileName(fileName).ToLower() == ID + ".pdf")
+                    {
+                        this.VOGPath = @"~\ProfileVOGs_Unvalidated\" + Path.GetFileName(fileName);
+                        found = true;
+                        break;
+                    }
+                }
+                //If the VOG was not found in there, it was validated and looking at it is unnecessary
+                if (!found)
+                {
+                    this.VOGPath = VOG;
+                }
+
+
+                //Loop through the avatar folder
+                found = false;
+                physicalPath = System.Web.HttpContext.Current.Request.MapPath("/");
+                fileEntries = Directory.GetFiles(physicalPath + "ProfileAvatars");
+                foreach (string fileName in fileEntries)
+                {
+                    //If the image was found, show a reference to it
+                    if (Path.GetFileName(fileName).ToLower().Split('.').First() == ID.ToString())
+                    {
+                        this.AvatarPath = @"..\ProfileAvatars\" + Path.GetFileName(fileName);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                {
+                    switch (this.ID % 10)
+                    {
+                        case (0):
+                            this.AvatarPath = @"..\ProfileAvatars\bear.jpg";
+                            break;
+                        case (1):
+                            this.AvatarPath = @"..\ProfileAvatars\bunny.jpg";
+                            break;
+                        case (2):
+                            this.AvatarPath = @"..\ProfileAvatars\emoe.jpg";
+                            break;
+                        case (3):
+                            this.AvatarPath = @"..\ProfileAvatars\gekko.jpg";
+                            break;
+                        case (4):
+                            this.AvatarPath = @"..\ProfileAvatars\hedgehog.jpg";
+                            break;
+                        case (5):
+                            this.AvatarPath = @"..\ProfileAvatars\koala.jpg";
+                            break;
+                        case (6):
+                            this.AvatarPath = @"..\ProfileAvatars\llama.jpg";
+                            break;
+                        case (7):
+                            this.AvatarPath = @"..\ProfileAvatars\otter.jpg";
+                            break;
+                        case (8):
+                            this.AvatarPath = @"..\ProfileAvatars\redbear.jpg";
+                            break;
+                        case (9):
+                            this.AvatarPath = @"..\ProfileAvatars\sloth.jpg";
+                            break;
+
+                    }
                 }
             }
-            //If the VOG was not found in there, it was validated and looking at it is unnecessary
-            if (!found)
+            else //If accessed through admin form
             {
                 this.VOGPath = VOG;
-            }
-
-
-            //Loop through the avatar folder
-            found = false;
-            physicalPath = System.Web.HttpContext.Current.Request.MapPath("/");
-            fileEntries = Directory.GetFiles(physicalPath + "ProfileAvatars");
-            foreach (string fileName in fileEntries)
-            {
-                //If the image was found, show a reference to it
-                if (Path.GetFileName(fileName).ToLower().Split('.').First() == ID.ToString())
-                {
-                    this.AvatarPath = @"..\ProfileAvatars\" + Path.GetFileName(fileName);
-                    found = true;
-                    break;
-                }
-            }
-            if (!found)
-            {
-                switch (this.ID % 10)
-                {
-                    case (0):
-                        this.AvatarPath = @"..\ProfileAvatars\bear.jpg";
-                        break;
-                    case (1):
-                        this.AvatarPath = @"..\ProfileAvatars\bunny.jpg";
-                        break;
-                    case (2):
-                        this.AvatarPath = @"..\ProfileAvatars\emoe.jpg";
-                        break;
-                    case (3):
-                        this.AvatarPath = @"..\ProfileAvatars\gekko.jpg";
-                        break;
-                    case (4):
-                        this.AvatarPath = @"..\ProfileAvatars\hedgehog.jpg";
-                        break;
-                    case (5):
-                        this.AvatarPath = @"..\ProfileAvatars\koala.jpg";
-                        break;
-                    case (6):
-                        this.AvatarPath = @"..\ProfileAvatars\llama.jpg";
-                        break;
-                    case (7):
-                        this.AvatarPath = @"..\ProfileAvatars\otter.jpg";
-                        break;
-                    case (8):
-                        this.AvatarPath = @"..\ProfileAvatars\redbear.jpg";
-                        break;
-                    case (9):
-                        this.AvatarPath = @"..\ProfileAvatars\sloth.jpg";
-                        break;
-
-                }
+                this.AvatarPath = ID.ToString();
             }
         }
     }
