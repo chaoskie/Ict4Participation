@@ -109,7 +109,7 @@ namespace Admin_Layer
         /// Sends a mail regarding a question that violates the terms of usage
         /// </summary>
         /// <param name="email"></param>
-        /// <param name="username"></param>
+        /// <param name="question"></param>
         /// <param name="reason"></param>
         public static void SendWrongQuestion(string email, string question, string reason)
         {
@@ -117,6 +117,22 @@ namespace Admin_Layer
             mail.Subject = "Uw vraag " + question + " is verwijderd";
             mail.Body = "Hallo!"
                 + "\nUw vraag " + question + " is verwijderd door een webbeheerder met de volgende reden:"
+                + "\n" + reason + emailEnd;
+            FinalSend();
+        }
+
+        /// <summary>
+        /// Sends a mail regarding a review that violates the terms of usage
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="review"></param>
+        /// <param name="reason"></param>
+        public static void SendWrongReview(string email, string username, string reason)
+        {
+            mail.To.Add(email);
+            mail.Subject = "Uw review op " + username + " is verwijderd";
+            mail.Body = "Hallo!"
+                + "\nUw review is verwijderd door een webbeheerder met de volgende reden:"
                 + "\n" + reason + emailEnd;
             FinalSend();
         }

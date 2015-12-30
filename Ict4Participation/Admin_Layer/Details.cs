@@ -44,6 +44,7 @@ namespace Admin_Layer
     {
         //
         public int PostID { get; set; }
+        public int PosterID { get; set; }
         public int Rating { get; set; }
         public int PostedToID { get; set; }
         public string Description { get; set; }

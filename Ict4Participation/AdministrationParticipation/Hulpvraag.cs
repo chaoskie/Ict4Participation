@@ -62,14 +62,14 @@ namespace AdministrationParticipation
             //Mail user van de aanpassing + reden opgeven
             //sluit form
 
-            string message = ReasonPrompt.ShowDialog("Geef de reden voor verwijdering op:", "Weet u zeker dat u deze comment wilt verwijderen?");
+            string message = ReasonPrompt.ShowDialog("Geef de reden voor verwijdering op:", "Weet u zeker dat u deze vraag wilt verwijderen?");
             if (String.IsNullOrWhiteSpace(message))
             {
                 MessageBox.Show("U heeft geen reden ingevuld, of u heeft de verwijdering geannuleerd.");
             }
             else
             {
-                //Remove the comment
+                //Remove the Question
                 string error = "";
                 if (Program.AdminGUIHndlr.RemoveQuestion(old.PostID, poster.Email, old.Title, message, out error))
                 {

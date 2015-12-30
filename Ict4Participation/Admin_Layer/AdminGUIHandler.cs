@@ -427,10 +427,12 @@ namespace Admin_Layer
         /// <param name="reviewIndex">The index of the review as loaded in the list</param>
         /// <param name="message">The message of the error</param>
         /// <returns>Success</returns>
-        public bool RemoveReview(int reviewID, out string message)
+        public bool RemoveReview(int reviewID, string email, string username, string reason, out string message)
         {
             //Remove review
             LoadedReviews.Where(r => r.PostID == reviewID).First().Delete();
+            //Email user
+            EmailHandler.SendWrongReview(email, username, reason);
             message = "Review verwijderd";
             return true;
         }
