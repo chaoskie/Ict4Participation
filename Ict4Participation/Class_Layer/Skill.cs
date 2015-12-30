@@ -29,18 +29,19 @@ namespace Class_Layer
             return Database_Layer.Database.DeleteSkillAccount(this.Name, this.UserID);
         }
 
-        public static List<Skill> GetAll(Nullable<int> userID = null)
+        public static List<Skill> GetAll(Nullable<int> fID = null, bool isUser = true)
         {
             List<Skill> skills = new List<Skill>();
+            string query = isUser ? "Acc" : "Question";
             
-            if (userID != null)//get all the user skills of specified user
+            if (fID != null)//get all the user skills of specified user
             {
-                DataTable Dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Acc_Skill\" WHERE \"ACC_ID\"=" + userID);
+                DataTable Dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"" + query + "_Skill\" WHERE \"" + query.ToUpper() + "_ID\"=" + fID);
                 foreach (DataRow row in Dt.Rows)
                 {
                     skills.Add(
                         new Skill(
-                            Convert.ToInt32(userID),
+                            Convert.ToInt32(fID),
                             row["SKILL_NAME"].ToString()
                             ));
                 }

@@ -339,7 +339,7 @@ namespace Admin_Layer
         /// <returns>Success</returns>
         public bool Edit(Questiondetails question, int questionID, int userID , out string message)
         {
-            if (!Check.QuestionDetails(question, out message))
+            if (!Check.QuestionDetails(question, out message, true))
             {
                 return false;
             }

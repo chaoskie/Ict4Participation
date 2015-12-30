@@ -89,7 +89,17 @@ namespace Class_Layer
         /// <returns></returns>
         public override bool Update()
         {
-            return false;
+            //Create a list of volunteers, by default: none
+            List<int> volunteers = new List<int>();
+            //Fill the list of volunteers with the actual volunteers if there are any
+            DataTable VolDt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Question_Acc\" WHERE \"QUESTION_ID\"=" + this.ID);
+            foreach (DataRow VolunteersRow in VolDt.Rows)
+            {
+                volunteers.Add(Convert.ToInt32(VolunteersRow["ACC_ID"]));
+            }
+            List<string> sks = Skill.GetAll(this.ID, false).Select(s => s.Name).ToList();
+
+            return Update(sks, volunteers);
         }
 
         /// <summary>
@@ -139,7 +149,7 @@ namespace Class_Layer
         /// Updates this database entry
         /// </summary>
         /// <returns>Success</returns>
-        public bool Update(List<string> oldskills, List<int> oldvolunteers)
+        private bool Update(List<string> oldskills, List<int> oldvolunteers)
         {
             bool flawless = true;
             string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
@@ -228,7 +238,7 @@ namespace Class_Layer
                 DataTable VolDt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Question_Acc\" WHERE \"QUESTION_ID\"=" + row["ID"].ToString());
                 foreach (DataRow VolunteersRow in VolDt.Rows)
                 {
-                    volunteers.Add(Convert.ToInt32(row["ACC_ID"]));
+                    volunteers.Add(Convert.ToInt32(VolunteersRow["ACC_ID"]));
                 }
                 //Check urgency
                 //bool urg = row["Urgency"].ToString() == "1" ? true : false;
@@ -245,7 +255,7 @@ namespace Class_Layer
                     urg,
                     row["Location"].ToString(),
                     Convert.ToInt32(row["AmountACCs"]),
-                    Skill.GetAll(Convert.ToInt32(row["ID"])).Select(s => s.Name).ToList(),
+                    Skill.GetAll(Convert.ToInt32(row["ID"]), false).Select(s => s.Name).ToList(),
                     volunteers
                     ));
             }

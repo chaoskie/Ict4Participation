@@ -424,7 +424,7 @@ namespace Database_Layer
                 int Urgent = urgent ? 1 : 0;
                 c.Open();
                 OracleCommand cmd = new OracleCommand(
-                 "UPDATE \"Question\" SET \"Title\" = :A, \"StartDate\" = :B, \"EndDate\" = :C, \"Description\" = :D, \"Urgent\" = :E , \"Location\" = :F, \"AmountACCs\" = :G, \"Status\" = :H WHERE \"ID\" = :I ");
+                 "UPDATE \"Question\" SET \"Title\" = :A, \"StartDate\" = TO_DATE(:B), \"EndDate\" = TO_DATE(:C), \"Description\" = :D, \"Urgent\" = :E , \"Location\" = :F, \"AmountACCs\" = :G, \"Status\" = :H WHERE \"ID\" = :I ");
                 cmd.Parameters.Add(new OracleParameter("A", title));
                 cmd.Parameters.Add(new OracleParameter("B", startDate));
                 cmd.Parameters.Add(new OracleParameter("C", endDate));

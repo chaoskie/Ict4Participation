@@ -212,9 +212,9 @@ namespace Admin_Layer
         /// <param name="qd">question details object</param>
         /// <param name="message">error output message</param>
         /// <returns>succes boolean</returns>
-        public static bool QuestionDetails(Questiondetails qd, out string message)
+        public static bool QuestionDetails(Questiondetails qd, out string message, bool isByAdmin = false)
         {
-            if (Check.checkIfFilledIn(qd.Title))
+            if (!Check.checkIfFilledIn(qd.Title))
             {
                 message = "Titel is niet ingevuld!";
                 return false;
@@ -234,33 +234,35 @@ namespace Admin_Layer
                 message = "Geen skills toegevoegd!";
                 return false;
             }
-
-            bool isStartDateNull = true;
-            bool isEndDateNull = true;
-            if (qd.StartDate != null)
+            if (!isByAdmin)
             {
-                if ( ((DateTime)qd.StartDate).Subtract(DateTime.Now) < TimeSpan.Zero)
+                bool isStartDateNull = true;
+                bool isEndDateNull = true;
+                if (qd.StartDate != null)
                 {
-                message = "De begintijd is al geweest!";
-                return false;
+                    if (((DateTime)qd.StartDate).Subtract(DateTime.Now) < TimeSpan.Zero)
+                    {
+                        message = "De begintijd is al geweest!";
+                        return false;
+                    }
+                    isStartDateNull = false;
                 }
-                isStartDateNull = false;
-            }
-            if (qd.StartDate != null)
-            {
-                if ( ((DateTime)qd.EndDate).Subtract(DateTime.Now) < TimeSpan.Zero)
+                if (qd.StartDate != null)
                 {
-                message = "De eindtijd is al geweest!";
-                return false;
+                    if (((DateTime)qd.EndDate).Subtract(DateTime.Now) < TimeSpan.Zero)
+                    {
+                        message = "De eindtijd is al geweest!";
+                        return false;
+                    }
+                    isEndDateNull = false;
                 }
-                isEndDateNull = false;
-            }
-            if (!isEndDateNull && !isStartDateNull)
-            {
-                if ((DateTime)qd.StartDate < (DateTime)qd.EndDate)
+                if (!isEndDateNull && !isStartDateNull)
                 {
-                    message = "De einddatum mag niet eerder zijn dan/gelijk zijn aan de startdatum!";
-                    return false;
+                    if ((DateTime)qd.StartDate < (DateTime)qd.EndDate)
+                    {
+                        message = "De einddatum mag niet eerder zijn dan/gelijk zijn aan de startdatum!";
+                        return false;
+                    }
                 }
             }
             message = "Vraag succesvol aangemaakt";
@@ -273,7 +275,7 @@ namespace Admin_Layer
         /// <returns></returns>
         public static bool checkIfFilledIn(string Content)
         {
-            return string.IsNullOrEmpty(Content);
+            return !string.IsNullOrEmpty(Content);
         }
 
         /// <summary>
