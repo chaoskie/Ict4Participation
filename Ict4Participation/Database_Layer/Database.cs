@@ -586,7 +586,7 @@ namespace Database_Layer
                 OracleCommand cmd = new OracleCommand("INSERT INTO \"Acc\" (\"Gebruikersnaam\" ,\"Wachtwoord\" ,\"Email\" ,\"Naam\" ,\"Adres\" ," +
                     "\"Woonplaats\" ,\"Telefoonnummer\" ,\"HeeftRijbewijs\" ,\"HeeftAuto\" , \"Uitschrijvingsdatum\", \"OVMogelijk\" ,\"Geboortedatum\" ," +
                     "\"Foto\" ,\"VOG\", \"Geslacht\") " +
-                   "VALUES(:un, :ph, :em, :na, :loc, :vil, :phon, :dl, :car, TO_DATE(:ud, 'dd-mm-yyyy'), :ov, TO_DATE(:bd, 'dd-mm-yyyy'), :pic, :vog, :ges)");
+                   "VALUES(:un, :ph, :em, :na, :loc, :vil, :phon, :dl, :car, TO_DATE(:ud, 'DD-MON-YYYY HH24:MI:SS'), :ov, TO_DATE(:bd, 'dd-mm-yyyy'), :pic, :vog, :ges)");
                 cmd.Parameters.Add(new OracleParameter("un", Username));
                 cmd.Parameters.Add(new OracleParameter("ph", PassHash));
                 cmd.Parameters.Add(new OracleParameter("em", Email));
@@ -648,7 +648,7 @@ namespace Database_Layer
                 c.Open();
                 OracleCommand cmd = new OracleCommand("UPDATE \"Acc\" SET \"Gebruikersnaam\" = :un, \"Wachtwoord\" = :ph, \"Email\" = :em, \"Naam\" = :na, \"Adres\" = :loc, " +
                     "\"Woonplaats\" = :vil, \"Telefoonnummer\" = :phon, \"HeeftRijbewijs\" = :dl, \"HeeftAuto\" = :car, \"OVMogelijk\" = :ov, " +
-                    "\"Geboortedatum\" = TO_DATE(:bd, 'dd-mm-yyyy'), \"Foto\" = :pic, \"Geslacht\" = :sex, \"VOG\" = :vog WHERE \"ID\" = :id");
+                    "\"Geboortedatum\" = TO_DATE(:bd, 'DD-MON-YYYY HH24:MI:SS'), \"Foto\" = :pic, \"Geslacht\" = :sex, \"VOG\" = :vog WHERE \"ID\" = :id");
                 cmd.Parameters.Add(new OracleParameter("un", Username));
                 cmd.Parameters.Add(new OracleParameter("ph", PassHash));
                 cmd.Parameters.Add(new OracleParameter("em", Email));
@@ -708,7 +708,7 @@ namespace Database_Layer
                 c.Open();
                 OracleCommand cmd = new OracleCommand("UPDATE \"Acc\" SET \"Gebruikersnaam\" = :un, \"Email\" = :em, \"Naam\" = :na, \"Adres\" = :loc, " +
                     "\"Woonplaats\" = :vil, \"Telefoonnummer\" = :phon, \"HeeftRijbewijs\" = :dl, \"HeeftAuto\" = :car, \"OVMogelijk\" = :ov, " +
-                    "\"Geboortedatum\" = TO_DATE(:bd, 'dd-mm-yyyy'), \"Foto\" = :pic, \"Geslacht\" = :sex, \"VOG\" = :vog WHERE \"ID\" = :id");
+                    "\"Geboortedatum\" = TO_DATE(:bd, 'DD-MON-YYYY HH24:MI:SS'), \"Foto\" = :pic, \"Geslacht\" = :sex, \"VOG\" = :vog WHERE \"ID\" = :id");
                 cmd.Parameters.Add(new OracleParameter("un", Username));
                 cmd.Parameters.Add(new OracleParameter("em", Email));
                 cmd.Parameters.Add(new OracleParameter("na", Name));
