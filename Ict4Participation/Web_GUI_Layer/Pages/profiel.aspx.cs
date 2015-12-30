@@ -15,79 +15,83 @@ namespace Web_GUI_Layer
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (!IsPostBack)
-            //{
-                // Check if GUIHandler exists
-                if (Session["GUIHandler_obj"] == null)
-                {
-                    // Go back if no GUIhandler can be found
-                    Response.Redirect("inloggen.aspx", false);
-                    return;
-                }
+            // Check if GUIHandler exists
+            if (Session["GUIHandler_obj"] == null)
+            {
+                // Go back if no GUIhandler can be found
+                Response.Redirect("inloggen.aspx", false);
+                return;
+            }
 
-                // Retrieve GUIHandler object from session
-                GUIHandler = (GUIHandler)Session["GUIHandler_obj"];
+            // Retrieve GUIHandler object from session
+            GUIHandler = (GUIHandler)Session["GUIHandler_obj"];
 
-                Accountdetails mainuser = GUIHandler.GetMainuserInfo();
+            Accountdetails mainuser = GUIHandler.GetMainuserInfo();
 
-                // Set username
-                username.InnerText = mainuser.Name;
+            // Set username
+            username.InnerText = mainuser.Name;
 
-                // TODO: add description to account and database
 
-                // Insert all questions
-                List<Questiondetails> questions = GUIHandler.GetAll(true);
-                foreach (Questiondetails qd in questions)
-                {
-                    HtmlGenericControl li = new HtmlGenericControl("li");
-                    vragen_list.Controls.Add(li);
 
-                    HtmlAnchor a1 = new HtmlAnchor();
-                    a1.Attributes.Add("href", "#");
-                    a1.Attributes.Add("data-question-id", Convert.ToString(qd.PostID));
-                    a1.InnerText = qd.Title;
-                    a1.ServerClick += A1_ServerClick;
-                    li.Controls.Add(a1);
-                }
-                // Insert message if questions count == 0
-                if (questions.Count == 0)
-                {
-                    HtmlGenericControl li = new HtmlGenericControl("li");
-                    vragen_list.Controls.Add(li);
+            // TODO: add description to account and database
 
-                    HtmlGenericControl a = new HtmlGenericControl("a");
-                    a.Attributes.Add("href", "#");
-                    a.InnerText = "Geen vragen geplaatst! Klik hier om een vraag te plaatsen";
 
-                    li.Controls.Add(a);
-                }
 
-                // Insert all reviews
-                List<Reviewdetails> reviews = GUIHandler.GetAllReviews(mainuser.ID, true);
-                foreach (Reviewdetails rd in reviews)
-                {
-                    HtmlGenericControl li = new HtmlGenericControl("li");
-                    reviews_list.Controls.Add(li);
+            // Insert all questions
+            List<Questiondetails> questions = GUIHandler.GetAll(true);
+            foreach (Questiondetails qd in questions)
+            {
+                HtmlGenericControl li = new HtmlGenericControl("li");
+                vragen_list.Controls.Add(li);
 
-                    HtmlGenericControl a1 = new HtmlGenericControl("a");
-                    a1.Attributes.Add("href", "#");
-                    a1.InnerText = rd.Rating.ToString();
+                HtmlAnchor a = new HtmlAnchor();
+                a.Attributes.Add("href", "#");
+                a.Attributes.Add("data-question-id", Convert.ToString(qd.PostID));
+                a.InnerText = qd.Title;
+                a.ServerClick += btnNaarVraag_Click;
 
-                    li.Controls.Add(a1);
-                }
-                // Insert message if reviews count == 0
-                if (reviews.Count == 0)
-                {
-                    HtmlGenericControl li = new HtmlGenericControl("li");
-                    reviews_list.Controls.Add(li);
+                li.Controls.Add(a);
+            }
+            // Insert message if questions count == 0
+            if (questions.Count == 0)
+            {
+                HtmlGenericControl li = new HtmlGenericControl("li");
+                vragen_list.Controls.Add(li);
+                
+                HtmlAnchor a = new HtmlAnchor();
+                a.Attributes.Add("href", "#");
+                a.InnerText = "Geen vragen geplaatst! Klik hier om een vraag te plaatsen";
+                a.ServerClick += btnPlaatsVraag_Click;
 
-                    HtmlGenericControl a = new HtmlGenericControl("a");
-                    a.Attributes.Add("href", "#");
-                    a.InnerText = "Geen reviews geplaatst! Klik hier om een review te plaatsen";
+                li.Controls.Add(a);
+            }
 
-                    li.Controls.Add(a);
-                }
-            //}
+            // Insert all reviews
+            List<Reviewdetails> reviews = GUIHandler.GetAllReviews(mainuser.ID, true);
+            foreach (Reviewdetails rd in reviews)
+            {
+                HtmlGenericControl li = new HtmlGenericControl("li");
+                reviews_list.Controls.Add(li);
+
+                HtmlGenericControl a = new HtmlGenericControl("a");
+                a.Attributes.Add("href", "#");
+                a.InnerText = rd.Rating.ToString();
+
+                li.Controls.Add(a);
+            }
+            // Insert message if reviews count == 0
+            if (reviews.Count == 0)
+            {
+                HtmlGenericControl li = new HtmlGenericControl("li");
+                reviews_list.Controls.Add(li);
+                
+                HtmlAnchor a = new HtmlAnchor();
+                a.Attributes.Add("href", "#");
+                a.InnerText = "Geen reviews geplaatst! Klik hier om een review te plaatsen";
+                a.ServerClick += btnNieuweReview_Click;
+
+                li.Controls.Add(a);
+            }
         }
 
         protected void btnTerug_Click(object sender, EventArgs e)
@@ -105,13 +109,24 @@ namespace Web_GUI_Layer
             Response.Redirect("gebruikers.aspx", false);
         }
 
-        private void A1_ServerClick(object sender, EventArgs e)
+        private void btnNaarVraag_Click(object sender, EventArgs e)
         {
             int q_id = Convert.ToInt32(((HtmlAnchor)sender).Attributes["data-question-id"].ToString());
 
             Session["QuestionDetails_id"] = q_id;
 
             Response.Redirect("vraag.aspx", false);
+        }
+
+        private void btnNieuweReview_Click(object sender, EventArgs e)
+        {
+            // TODO: Goto review
+            int r_id = Convert.ToInt32((sender as HtmlAnchor).Attributes["data-review-id"].ToString());
+
+            Session["ReviewDetails_id"] = r_id;
+
+            // TODO: Redirect to review.aspx
+            //Response.Redirect("review.aspx", false);
         }
 
         [System.Web.Services.WebMethod]
