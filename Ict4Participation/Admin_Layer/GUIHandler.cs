@@ -268,7 +268,7 @@ namespace Admin_Layer
         public bool Place(Commentdetails comment, out string message)
         {
             //Place comment
-            Comment c = new Comment(0, comment.Description, MainUser.ID, comment.PostedToID, comment.PostDate);
+            Comment c = new Comment(0, comment.Description, MainUser.ID, comment.PostedToID, false, comment.PostDate);
             c.Create();
             message = "Comment placed";
             return true;
@@ -287,7 +287,7 @@ namespace Admin_Layer
             {
                 //Edit comment
                 message = "Comment aangepast";
-                Comment c = new Comment(LoadedComments[commentIndex].PostID, comment.Description, MainUser.ID, comment.PostedToID, comment.PostDate);
+                Comment c = new Comment(LoadedComments[commentIndex].PostID, comment.Description, MainUser.ID, comment.PostedToID, false, comment.PostDate);
                 return true;
             }
             else
@@ -303,12 +303,15 @@ namespace Admin_Layer
         /// <param name="commentIndex">The index of the comment as loaded in the list</param>
         /// <param name="message">The message of the error</param>
         /// <returns>Success</returns>
-        public bool Remove(int commentIndex, out string message)
+        public bool Remove(int commentID, out string message)
         {
-            if (LoadedComments[commentIndex].PosterID == MainUser.ID)
+            //Comment c = LoadedComments.Single(i => i.PostID == commentIndex);
+            Comment c = LoadedComments.Find(i => i.PostID == commentID);
+            //if (LoadedComments[commentIndex].PosterID == MainUser.ID)
+            if (c.PosterID == MainUser.ID)
             {
                 //Remove comment
-                LoadedComments[commentIndex].Delete();
+                c.UserDelete();
                 message = "Comment verwijderd!";
                 return true;
             }

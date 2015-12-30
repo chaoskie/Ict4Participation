@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="../Content/CSS/font-awesome.min.css" />
 	<link rel="stylesheet" href="../Content/CSS/main.css" />
     <link rel="stylesheet" href="../Content/CSS/input.css" />
+	<link rel="stylesheet" href="../Content/CSS/dropdown.css" />
     <link rel="stylesheet" href="../Content/CSS/reacties.css" />
 	<link rel="stylesheet" href="../Content/CSS/vraag.css" />
 </head>
@@ -43,7 +44,7 @@
 				
 				    <!-- PROFIEL -->
 				    <div id="profiel_section" class="row">
-					    <div class="col-xs-6 col-xs-offset-3 col-sm-3 col-sm-offset-0">
+					    <div class="hidden-tn col-xs-3">
 						    <div id="img_wrapper">
 							    <%--<img src="http://i.imgur.com/BZUZBOr.jpg" alt="Profielfoto" style="width: 100%;" />--%>
                                 <asp:Image ID="qProfilePhoto" AlternateText="Profielfoto" CssClass="img-responsive" ImageUrl="http://i.imgur.com/BZUZBOr.jpg" runat="server" />
@@ -55,28 +56,43 @@
 					    </div>
 				    </div>
 
-                    <div id="vraag_data">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <p><span class="vraag-bold">Startdatum:</span> <span id="vraag_startdatum" runat="server"></span></p>
-                            </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 pull-right">
+				            <div class="row">
+					            <div class="col-xs-12 dropdown">
+						            <div class="row dropdown-title">
+							            <div class="col-xs-12">
+								            <p class="pull-left">Skills:</p>
+							            </div>
+						            </div>
+						            <div class="row dropdown-content">
+							            <ul id="skills_list" class="col-xs-12" runat="server"></ul>
+						            </div>
+					            </div>
+				            </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <p><span class="vraag-bold">Einddatum:</span> <span id="vraag_einddatum" runat="server"></span></p>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <p><span class="vraag-bold">Locatie:</span> <span id="vraag_locatie" runat="server"></span></p>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <p><span id="vraag_urgentie" style="color: #f00" runat="server"></span></p>
+                        <div class="col-xs-12 col-sm-6 pull-right">
+                            <div id="vraag_data">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <p><span class="vraag-bold">Startdatum:</span> <span id="vraag_startdatum" runat="server"></span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <p><span class="vraag-bold">Einddatum:</span> <span id="vraag_einddatum" runat="server"></span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <p><span class="vraag-bold">Locatie:</span> <span id="vraag_locatie" runat="server"></span></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <p><span id="vraag_urgentie" style="color: #f00" runat="server"></span></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -89,66 +105,7 @@
                     </div>
                     
                     <!-- Comment section -->
-                    <div id="comment_section" runat="server">
-
-                        <!-- Comment template niet-eigenaar -->
-                        <%--<div class="row comment-main">
-                            <div class="col-xs-12">
-                                <div class="row" title="Comment geplaatst op 1 januari 2016 12:34:00"l>
-
-                                    <div class="col-tn-6 col-tn-offset-3 col-xs-2">
-                                        <img src="http://i.imgur.com/BZUZBOr.jpg" class="img-responsive" alt="Foto" />
-                                    </div>
-
-                                    <div class="col-xs-10">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <h3 class="comment-author">Henk Nogwattes</h3>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <p class="comment-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit arcu a ante interdum lobortis.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>--%>
-
-
-                        <!-- Comment template eigenaar -->
-                        <%--<div class="row comment-main">
-                            <div class="col-xs-12">
-                                <div class="row" title="Comment geplaatst op 1 januari 2016 12:34:00">
-
-                                    <div class="col-tn-6 col-tn-offset-3 col-xs-2">
-                                        <img src="http://i.imgur.com/BZUZBOr.jpg" class="img-responsive" alt="Foto" />
-                                    </div>
-
-                                    <div class="col-xs-10">
-                                        <div class="row">
-                                            <div class="col-xs-8">
-                                                <h3 class="comment-author">Henk Nogwattes</h3>
-                                            </div>
-                                            <div class="col-xs-4 comment-buttons">
-                                                <button class="btn pull-right btn-custom2">Verwijder</button>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <p class="comment-body" contenteditable="true">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus suscipit arcu a ante interdum lobortis.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>--%>
-
-
-                    </div><!-- Einde Comment section -->
+                    <div id="comment_section" runat="server"></div>
 
                     <!-- Plaats comment section -->
                     <div id="plaats_comment">
@@ -175,5 +132,6 @@
 	<script src="../Content/JS/dropdown.js"></script>
 	<script src="../Content/JS/zoekprofiel.js"></script>
     <script src="../Content/JS/profiel.js"></script>
+    <script src="../Content/JS/vraag.js"></script>
 </body>
 </html>

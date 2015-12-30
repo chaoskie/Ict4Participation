@@ -197,7 +197,7 @@ namespace Admin_Layer
         public bool Place(Commentdetails comment, int userID , out string message)
         {
             //Place comment
-            Comment c = new Comment(0, comment.Description, userID, comment.PostedToID, comment.PostDate);
+            Comment c = new Comment(0, comment.Description, userID, comment.PostedToID, false, comment.PostDate);
             c.Create();
             message = "Comment placed";
             return true;
@@ -214,7 +214,7 @@ namespace Admin_Layer
         {
             //Edit comment
             message = "Comment aangepast";
-            Comment c = new Comment(commentID, comment.Description, userID, comment.PostedToID, comment.PostDate);
+            Comment c = new Comment(commentID, comment.Description, userID, comment.PostedToID, false, comment.PostDate);
             return true;
         }
 

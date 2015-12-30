@@ -30,6 +30,10 @@ namespace Class_Layer
         /// Gets the posted date of this comment
         /// </summary>
         public DateTime PostDate { get; private set; }
+        /// <summary>
+        /// Gets a boolean indicating if the comment has been deleted
+        /// </summary>
+        public bool IsDeleted { get; private set; }
 
         /// <summary>
         /// Creates this database entry
@@ -38,19 +42,27 @@ namespace Class_Layer
         public override bool Create()
         {
             //insert into database
-            Database_Layer.Database.InsertComment(this.PosterID, this.PostedToID, this.Description);
+            Database_Layer.Database.InsertComment(this.PosterID, this.PostedToID, this.Description, this.IsDeleted);
             return true;
         }
 
         /// <summary>
-        /// Deletes this database entry
+        /// Deletes this database entry as an admin
         /// </summary>
         /// <returns>Success</returns>
         public override bool Delete()
         {
             //Call database for delete query
-            Database_Layer.Database.DeleteComment(this.PostID, true);
-            return true;
+            return Database_Layer.Database.DeleteComment(this.PostID, true);
+        }
+
+        /// <summary>
+        /// Deletes this database entry as a user
+        /// </summary>
+        /// <returns></returns>
+        public bool UserDelete()
+        {
+            return Database_Layer.Database.DeleteComment(this.PostID, false);
         }
 
         /// <summary>
@@ -76,12 +88,14 @@ namespace Class_Layer
             DataTable Dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Comment\" WHERE \"QUESTION_ID\" = " + questionID);
             foreach (DataRow row in Dt.Rows)
             {
+                bool IsDeleted = Convert.ToInt32(row["IsDeleted"]) == 1;
                 comments.Add(
                     new Comment(
                         Convert.ToInt32(row["ID"]),
                         row["Description"].ToString(),
                         Convert.ToInt32(row["PosterAcc_ID"]),
                         questionID,
+                        IsDeleted,
                         Convert.ToDateTime(row["PostDate"])
                         ));
             }
@@ -91,12 +105,13 @@ namespace Class_Layer
         /// <summary>
         /// Initializes a new instance of the <see cref="Comment"/> class.
         /// </summary>
-        public Comment(int postID, string desc, int posterID, int postedToID, DateTime postDate)
+        public Comment(int postID, string desc, int posterID, int postedToID, bool isDeleted, DateTime postDate)
             : base(postID, posterID)
         {
             this.PostedToID = postedToID;
             this.PostDate = postDate;
             this.Description = desc;
+            this.IsDeleted = isDeleted;
             //nothing much
         }
     }

@@ -133,6 +133,9 @@ namespace Admin_Layer
         public int PostedToID { get; set; }
         public string Description { get; set; }
         public DateTime PostDate { get; set; }
+
+        // Added IsDeleted to see if comment has been deleted
+        public bool IsDeleted { get; set; }
     }
 
     public struct Skilldetails

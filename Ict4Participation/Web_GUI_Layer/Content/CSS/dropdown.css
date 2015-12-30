@@ -2,7 +2,7 @@
  * DROP DOWN
  * * * * * * * * * * */
 .dropdown {
-	margin-bottom: 1rem;
+	margin-bottom: 2rem;
 }
 .dropdown-title {
 	background-color: #ed1e12;
@@ -43,8 +43,10 @@
 .dropdown-content>ul li:nth-child(even) {
 	background-color: #f6f6f6;
 }
+.dropdown-content>ul li {
+    font-size: 2rem;
+}
 .dropdown-content>ul li a {
-	font-size: 2rem;
 	text-decoration: none;
 }
 .dropdown-content>ul li a:nth-child(1) {
