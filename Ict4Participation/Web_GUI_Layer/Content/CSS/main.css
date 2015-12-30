@@ -164,6 +164,8 @@ nav button p {
 	.col-tn-offset-10 { margin-left: 83.333333%; }
 	.col-tn-offset-11 { margin-left: 91.666667%; }
 	.col-tn-offset-12 { margin-left: 100%;       }
+
+    .hidden-tn { display: none!important; }
 }
 
 /*

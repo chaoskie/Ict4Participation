@@ -42,6 +42,19 @@ namespace Web_GUI_Layer
             vraag_locatie.InnerText = qd.Location;
             qProfilePhoto.ImageUrl = ad.AvatarPath;
 
+            // Display skills
+            if (qd.Skills.Count > 0)
+            {
+                foreach (string skill in qd.Skills)
+                {
+                    skills_list.Controls.Add(new LiteralControl(string.Format("<li>{0}</li>", skill)));
+                }
+            }
+            else
+            {
+                skills_list.Controls.Add(new LiteralControl(@"<li>Geen</li>"));
+            }
+
             if (qd.Urgent)
             {
                 vraag_urgentie.InnerText = "Urgent";
@@ -50,7 +63,7 @@ namespace Web_GUI_Layer
             // Insert all comments
             List<Commentdetails> cd_list = GUIHandler.GetAll(qd.PostID);
 
-            if (cd_list != null)
+            if (cd_list.Count > 0)
             {
                 foreach (Commentdetails cd in cd_list)
                 {
@@ -60,8 +73,8 @@ namespace Web_GUI_Layer
                     comment_template +=
                     @"<div class=""row comment-main"">" +
                         @"<div class=""col-xs-12"">" +
-                            @"<div class=""row"" title=""Comment geplaatst op " + cd.PostDate.ToString("d MMMM yyyy HH:mm:ss") + @""">" +
-                                @"<div class=""col-tn-6 col-tn-offset-3 col-xs-2"">";
+                            @"<div class=""row"" title=""Reactie geplaatst op " + cd.PostDate.ToString("d MMMM yyyy HH:mm:ss") + @""">" +
+                                @"<div class=""hidden-tn col-xs-2"">";
 
                                 comment_section.Controls.Add(new LiteralControl(comment_template));
 
@@ -74,7 +87,7 @@ namespace Web_GUI_Layer
 
                                 comment_template =
                                 @"</div>" +
-                                @"<div class=""col-xs-10"">" +
+                                @"<div class=""col-tn-12 col-xs-10"">" +
                                     @"<div class=""row"">";
 
                                 comment_section.Controls.Add(new LiteralControl(comment_template));
@@ -103,7 +116,7 @@ namespace Web_GUI_Layer
                                         btnVerwijder.Attributes.Add("class", "btn pull-right btn-custom2");
                                         btnVerwijder.InnerText = "Verwijder";
                                         btnVerwijder.ServerClick += new EventHandler(btnVerwijderVraag_Click);
-                                        btnVerwijder.Attributes.Add("data-comment-id", Convert.ToString(qd.PostID));
+                                        btnVerwijder.Attributes.Add("data-comment-id", Convert.ToString(cd.PostID));
 
                                         comment_section.Controls.Add(btnVerwijder);
 
@@ -141,6 +154,7 @@ namespace Web_GUI_Layer
 
                                 HtmlGenericControl commentBody = new HtmlGenericControl("p");
                                 commentBody.Attributes.Add("class", "comment-body");
+                                commentBody.Attributes.Add("data-comment-id", Convert.ToString(cd.PostID));
                                 commentBody.InnerText = cd.Description;
 
                                 if (ad_poster.ID == qd.PosterID && !cd.IsDeleted)
@@ -163,7 +177,12 @@ namespace Web_GUI_Layer
             }
             else
             {
-                // TODO: Nog geen reacties text
+                comment_section.Controls.Add(new LiteralControl(
+                    @"<div class=""row"">" +
+                        @"<div class=""col-xs-12"">" +
+                            @"<h4>Nog geen reacties geplaatst!</h4>" +
+                        @"</div>" +
+                    @"</div>"));
             }
         }
 
@@ -176,17 +195,23 @@ namespace Web_GUI_Layer
         {
             string message = string.Empty;
 
-            Commentdetails cd = new Commentdetails();
-            cd.PostedToID = q_id;
-            cd.Description = tb_vraag.Text;
-            cd.PostDate = DateTime.Now;
-
-            if (!GUIHandler.Place(cd, out message))
+            if (!string.IsNullOrEmpty(tb_vraag.Text.Trim()))
             {
-                // TODO: Show error message
+                Commentdetails cd = new Commentdetails();
+                cd.PostedToID = q_id;
+                cd.Description = tb_vraag.Text;
+                cd.PostDate = DateTime.Now;
+
+                if (!GUIHandler.Place(cd, out message))
+                {
+                    // TODO: Show error message
+                }
+
+                tb_vraag.Text = string.Empty;
             }
 
-            tb_vraag.Text = string.Empty;
+            // Reload page
+            Response.Redirect(Request.RawUrl);
         }
 
         protected void btnVerwijderVraag_Click(object sender, EventArgs e)
@@ -200,6 +225,20 @@ namespace Web_GUI_Layer
             {
                 // TODO: Show error message
             }
+
+            // Reload page
+            Response.Redirect(Request.RawUrl);
+        }
+
+        [System.Web.Services.WebMethod]
+        public static string UpdateComment(string str, string _postID)
+        {
+            GUIHandler tempGUIHandler = new GUIHandler();
+
+            int postID = Convert.ToInt32(_postID);
+
+            //tempGUIHandler.Edit()
+            return "Hallo";
         }
     }
 }

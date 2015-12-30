@@ -49,6 +49,15 @@ namespace Web_GUI_Layer {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl vraag_body;
         
         /// <summary>
+        /// skills_list control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl skills_list;
+        
+        /// <summary>
         /// vraag_startdatum control.
         /// </summary>
         /// <remarks>
