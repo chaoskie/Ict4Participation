@@ -12,7 +12,7 @@ namespace Admin_Layer
     {
         static bool invalidMail = false;
  
-        public static bool CheckAccount(Accountdetails acc, out string message)
+        public static bool CheckAccount(Accountdetails acc, out string message, bool isAdmin = false)
         {
             message = String.Empty;
             if (!Check.Birthday(acc.Birthdate))
@@ -35,18 +35,21 @@ namespace Admin_Layer
                 message = "Telefoonnummer is fout ingegeven. \r\nUw telefoon voldoet niet aan ons format: \r\nProbeer: XXX-XXX-XXXX";
                 return false;
             }
-            if (acc.VOGPath != null)
+            if (!isAdmin)
             {
-                if (!Check.isOfFileExt(acc.VOGPath, ".pdf"))
+                if (acc.VOGPath != null)
                 {
-                    message = "Uw VOG is geen pdf.";
+                    if (!Check.isOfFileExt(acc.VOGPath, ".pdf"))
+                    {
+                        message = "Uw VOG is geen pdf.";
+                        return false;
+                    }
+                }
+                if (!Check.isImage(acc.AvatarPath))
+                {
+                    message = "Uw avatar is geen afbeelding.";
                     return false;
                 }
-            }
-            if (!Check.isImage(acc.AvatarPath))
-            {
-                message = "Uw avatar is geen afbeelding.";
-                return false;
             }
             if (!Check.isLocation(acc.City, acc.Address))
             {

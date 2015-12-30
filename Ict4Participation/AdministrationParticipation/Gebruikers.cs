@@ -15,7 +15,7 @@ namespace AdministrationParticipation
     public partial class Gebruikers : Form
     {
         Accountdetails old;
-            //TODO IMP: on website deployment, change this path
+        //TODO IMP: on website deployment, change this path
         const string site = "http://localhost:9472/";
 
         string newpass = "";
@@ -33,7 +33,14 @@ namespace AdministrationParticipation
             tbPhone.Text = ad.Phonenumber;
             cbGeslacht.SelectedIndex = ad.Gender.ToLower() == "m" ? 0 : 1;
             cbTypeAcc.SelectedIndex = String.IsNullOrWhiteSpace(ad.VOGPath) ? 0 : 1;
-            pbProfielImage.ImageLocation = site + ad.AvatarPath.Substring(3);
+            pbProfielImage.ImageLocation = site + ad.AvatarPath;
+
+            DateTime zeroTime = new DateTime(1, 1, 1);
+
+            TimeSpan span = DateTime.Now - ad.Birthdate;
+            int years = (zeroTime + span).Year - 1;
+
+            lblAge.Text = years.ToString();
         }
 
         private void btnAccept_Click(object sender, EventArgs e)
@@ -46,7 +53,7 @@ namespace AdministrationParticipation
             accd.Name = tbName.Text;
             accd.Username = tbUsername.Text;
             accd.Phonenumber = tbPhone.Text;
-            accd.Gender = cbGeslacht.SelectedItem.ToString() == "Man" ? "M" : "V";            
+            accd.Gender = cbGeslacht.SelectedItem.ToString() == "Man" ? "M" : "V";
 
             string message = "";
             //bevestig en update de nieuwe input

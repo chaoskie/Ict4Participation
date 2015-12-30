@@ -547,7 +547,7 @@ namespace Class_Layer
             else //If accessed through admin form
             {
                 this.VOGPath = VOG;
-                this.AvatarPath = ID.ToString();
+                this.AvatarPath = ID.ToString() + ".jpg";
             }
         }
     }
