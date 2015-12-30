@@ -1,4 +1,8 @@
-﻿$('p.comment-body[contenteditable]').focusout(function () {
+﻿var tekstVoorEdit = '';
+$('p.comment-body[contenteditable]').focus(function () {
+    tekstVoorEdit = $(this).text();
+});
+$('p.comment-body[contenteditable]').focusout(function () {
 
     var $ele = $(this);
     var updatedTekst = $(this).text();
@@ -12,7 +16,14 @@
         contentType: 'application/json;charset=utf-8',
         dataType: 'json',
         success: function (result) {
-            $($ele).text(result.d);
+            if (result.d == '')
+            {
+                $($ele).text(tekstVoorEdit);
+            }
+            else
+            {
+                $($ele).text(result.d);
+            }
         }
     });
 
