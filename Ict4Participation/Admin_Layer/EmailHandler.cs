@@ -90,16 +90,33 @@ namespace Admin_Layer
         }
 
         /// <summary>
-        /// Sends a mail regarding an avatar that violates the terms of usage, as well as sends a mail to a webhost
+        /// Sends a mail regarding a comment that violates the terms of usage
         /// </summary>
         /// <param name="email"></param>
-        /// <param name="username"></param>
+        /// <param name="question"></param>
+        /// <param name="reason"></param>
         public static void SendWrongComment(string email, string question, string reason)
         {
             mail.To.Add(email);
             mail.Subject = "Uw reactie op de vraag " + question + " is verwijderd";
             mail.Body = "Hallo!"
                 + "\nUw reactie op de vraag " + question + " is verwijderd door een webbeheerder met de volgende reden:"
+                + "\n" + reason + emailEnd;
+            FinalSend();
+        }
+
+        /// <summary>
+        /// Sends a mail regarding a question that violates the terms of usage
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="username"></param>
+        /// <param name="reason"></param>
+        public static void SendWrongQuestion(string email, string question, string reason)
+        {
+            mail.To.Add(email);
+            mail.Subject = "Uw vraag " + question + " is verwijderd";
+            mail.Body = "Hallo!"
+                + "\nUw vraag " + question + " is verwijderd door een webbeheerder met de volgende reden:"
                 + "\n" + reason + emailEnd;
             FinalSend();
         }
