@@ -78,16 +78,7 @@
 							    </div>
 						    </div>
 						    <div class="row dropdown-content">
-							    <ul id="vragen_list" class="col-xs-12" runat="server">
-								    <%--<li>
-									    <a href="#">Dit is een melding</a>
-									    <a href="#" data-id="1">Barry Batsbak</a>
-								    </li>
-								    <li>
-									    <a href="#">Dit is een andere melding</a>
-									    <a href="#" data-id="2">Harry Nogwat</a>
-								    </li>--%>
-							    </ul>
+							    <ul id="vragen_list" class="col-xs-12" runat="server"></ul>
 						    </div>
 					    </div>
 				    </div>
