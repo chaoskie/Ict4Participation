@@ -65,6 +65,12 @@ namespace Web_GUI_Layer
                 vraag_urgentie.InnerText = "Urgent";
             }
 
+            // Disable button if user is not the owner of the question
+            if (mainuserID != qd.PosterID)
+            {
+                btnDeleteQuestion.Visible = false;
+            }
+
             // Insert all comments
             List<Commentdetails> cd_list = GUIHandler.GetAll(qd.PostID).OrderBy(i => i.PostDate).ToList();
 
@@ -120,7 +126,7 @@ namespace Web_GUI_Layer
                                         HtmlButton btnVerwijder = new HtmlButton();
                                         btnVerwijder.Attributes.Add("class", "btn pull-right btn-custom2");
                                         btnVerwijder.InnerText = "Verwijder";
-                                        btnVerwijder.ServerClick += new EventHandler(btnVerwijderVraag_Click);
+                                        btnVerwijder.ServerClick += new EventHandler(btnVerwijderReactie_Click);
                                         btnVerwijder.Attributes.Add("data-comment-id", Convert.ToString(cd.PostID));
 
                                         comment_section.Controls.Add(btnVerwijder);
@@ -219,7 +225,7 @@ namespace Web_GUI_Layer
             Response.Redirect(Request.RawUrl);
         }
 
-        protected void btnVerwijderVraag_Click(object sender, EventArgs e)
+        protected void btnVerwijderReactie_Click(object sender, EventArgs e)
         {
             string message = string.Empty;
 
@@ -232,7 +238,20 @@ namespace Web_GUI_Layer
             }
 
             // Reload page
-            Response.Redirect(Request.RawUrl);
+            Response.Redirect(Request.RawUrl, false);
+        }
+
+        protected void btnDeleteQuestion_Click(object sender, EventArgs e)
+        {
+            string message = string.Empty;
+
+            if (!GUIHandler.RemoveQuestion(q_id, out message))
+            {
+                // TODO: Show error message
+            }
+
+            // Redirect to profiel.aspx
+            Response.Redirect("profiel.aspx", false);
         }
 
         [System.Web.Services.WebMethod]

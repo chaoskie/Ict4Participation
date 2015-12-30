@@ -41,7 +41,13 @@
 		    <main id="main">
 			    <div class="container">
 				    <h2>Vraag van <span id="vraag_naam" runat="server"></span></h2>
-				
+				    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <asp:Button ID="btnDeleteQuestion" Text="Verwijder vraag" CssClass="btn btn-custom2 btn-lg btn-block" OnClick="btnDeleteQuestion_Click" runat="server" />
+                        </div>
+                    </div>
+
 				    <!-- PROFIEL -->
 				    <div id="profiel_section" class="row">
 					    <div class="hidden-tn col-xs-3">
