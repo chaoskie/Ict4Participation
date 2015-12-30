@@ -470,19 +470,26 @@ namespace Admin_Layer
         /// <param name="questionIndex">The index of the question as loaded</param>
         /// <param name="message">The message of the error</param>
         /// <returns>Success</returns>
-        public bool RemoveQuestion(int questionIndex, out string message)
+        public bool RemoveQuestion(int questionID, out string message)
         {
             //Check for rights
-            if (LoadedQuestions[questionIndex].PosterID == MainUser.ID)
+            Question q = LoadedQuestions.Find(i => i.PostID == questionID);
+
+            if (q.PosterID == MainUser.ID)
             {
                 //Remove question
-                LoadedQuestions[questionIndex].Delete();
-                message = "Question deleted";
+                if (!q.Delete())
+                {
+                    message = "Vraag kan niet worden verwijderd!";
+                    return false;
+                }
+
+                message = "Vraag is verwijderd!";
                 return true;
             }
             else
             {
-                message = "U hebt niet de rechten om deze vraag aan te passen";
+                message = "U hebt niet de rechten om deze vraag te verwijderen!";
                 return false;
             }
         }
