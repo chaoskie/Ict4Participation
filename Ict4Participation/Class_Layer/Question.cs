@@ -97,7 +97,7 @@ namespace Class_Layer
             {
                 volunteers.Add(Convert.ToInt32(VolunteersRow["ACC_ID"]));
             }
-            List<string> sks = Skill.GetAll(this.ID, false).Select(s => s.Name).ToList();
+            List<string> sks = Skill.GetAll(this.PostID, false).Select(s => s.Name).ToList();
 
             return Update(sks, volunteers);
         }
