@@ -50,7 +50,7 @@
 		    <!-- MAIN -->
 		    <main id="main">
 			    <div class="container">
-				    <h2>Eigen profiel</h2>
+				    <h2>Profielpagina</h2>
 				
 				    <!-- PROFIEL -->
 				    <div id="profiel_section" class="row">
@@ -95,34 +95,13 @@
 							    </div>
 						    </div>
 						    <div class="row dropdown-content">
-							    <ul id="reviews_list" class="col-xs-12" runat="server">
-								    <%--<li>
-									    <a href="#">Dit is een review</a>
-									    <a href="#" data-id="1">Barry Batsbak</a>
-								    </li>
-								    <li>
-									    <a href="#">Dit is een andere review</a>
-									    <a href="#" data-id="2">Harry Nogwat</a>
-								    </li>--%>
-							    </ul>
+							    <ul id="reviews_list" class="col-xs-12" runat="server"></ul>
 						    </div>
 					    </div>
 				    </div>
 
 			    </div>
 		    </main>
-
-		    <!-- Zoek profiel overlay -->
-		    <div id="zoek_profiel_overlay">
-			    <div class="zoek-profiel-left">
-				    <img class="zoek-profiel-foto" src="" />
-			    </div>
-			    <div class="zoek-profiel-right">
-				    <p class="zoek-profiel-naam">Nog niets...</p>
-				    <p class="zoek-profiel-type">Nog niets...</p>
-				    <p class="zoek-profiel-quote">Nog niets...</p>
-			    </div>
-		    </div>
 
 	    </div>
     </form>

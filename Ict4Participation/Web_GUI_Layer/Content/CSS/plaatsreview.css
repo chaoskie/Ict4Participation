@@ -1,0 +1,22 @@
+﻿#review_rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+#review_rating span {
+    color: #ed1e12;
+    display: inline-block;
+    width: 20%;
+    font-size: 60px;
+    position: relative;
+    text-align: center;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#review_rating span:hover::before,
+#review_rating span:hover ~ span::before {
+    content: "\2605";
+    position: absolute;
+}

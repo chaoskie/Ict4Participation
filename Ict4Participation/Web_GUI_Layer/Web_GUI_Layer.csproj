@@ -86,10 +86,12 @@
     <Content Include="Content\CSS\inloggen.css" />
     <Content Include="Content\CSS\input.css" />
     <Content Include="Content\CSS\main.css" />
+    <Content Include="Content\CSS\plaatsreview.css" />
     <Content Include="Content\CSS\plaatsvraag.css" />
     <Content Include="Content\CSS\profiel.css" />
     <Content Include="Content\CSS\reacties.css" />
     <Content Include="Content\CSS\registreren.css" />
+    <Content Include="Content\CSS\review.css" />
     <Content Include="Content\CSS\vraag.css" />
     <Content Include="Content\CSS\zoeken.css" />
     <Content Include="Content\Files\Woonplaatsen_Nederland.txt" />
@@ -103,9 +105,11 @@
     <Content Include="Content\JS\gebruikers.js" />
     <Content Include="Content\JS\hoofdmenu.js" />
     <Content Include="Content\JS\jquery-1.11.3.min.js" />
+    <Content Include="Content\JS\plaatsreview.js" />
     <Content Include="Content\JS\plaatsvraag.js" />
     <Content Include="Content\JS\profiel.js" />
     <Content Include="Content\JS\registreren.js" />
+    <Content Include="Content\JS\review.js" />
     <Content Include="Content\JS\vraag.js" />
     <Content Include="Content\JS\zoekprofiel.js" />
     <Content Include="ErrorPages\error.aspx" />
@@ -116,7 +120,9 @@
     <Content Include="Pages\hoofdmenu.aspx" />
     <Content Include="Pages\inloggen.aspx" />
     <Content Include="packages.config" />
+    <Content Include="Pages\plaatsreview.aspx" />
     <Content Include="Pages\plaatsvraag.aspx" />
+    <Content Include="Pages\review.aspx" />
     <Content Include="Pages\vraag.aspx" />
     <Content Include="Pages\zoeken.aspx" />
     <Content Include="Content\Fonts\fontawesome-webfont.eot" />
@@ -207,6 +213,13 @@
     <Compile Include="Pages\inloggen.aspx.designer.cs">
       <DependentUpon>inloggen.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\plaatsreview.aspx.cs">
+      <DependentUpon>plaatsreview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\plaatsreview.aspx.designer.cs">
+      <DependentUpon>plaatsreview.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\plaatsvraag.aspx.cs">
       <DependentUpon>plaatsvraag.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -227,6 +240,13 @@
     </Compile>
     <Compile Include="Pages\profiel.aspx.designer.cs">
       <DependentUpon>profiel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\review.aspx.cs">
+      <DependentUpon>review.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\review.aspx.designer.cs">
+      <DependentUpon>review.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pages\registreren.aspx.cs">

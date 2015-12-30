@@ -56,7 +56,7 @@
                                 <asp:Image ID="qProfilePhoto" AlternateText="Profielfoto" CssClass="img-responsive" ImageUrl="http://i.imgur.com/BZUZBOr.jpg" runat="server" />
 						    </div>
 					    </div>
-					    <div class="col-tn-12 col-xs-8">
+					    <div class="col-tn-12 col-xs-9">
 						    <h2 id="vraag_titel" runat="server"></h2>
 						    <h3 id="vraag_body" runat="server"></h3>
 					    </div>

@@ -87,8 +87,7 @@ namespace Web_GUI_Layer
                 
                 HtmlAnchor a = new HtmlAnchor();
                 a.Attributes.Add("href", "#");
-                a.InnerText = "Geen reviews geplaatst! Klik hier om een review te plaatsen";
-                a.ServerClick += btnNieuweReview_Click;
+                a.InnerText = "Geen reviews geplaatst!";
 
                 li.Controls.Add(a);
             }
@@ -118,15 +117,14 @@ namespace Web_GUI_Layer
             Response.Redirect("vraag.aspx", false);
         }
 
-        private void btnNieuweReview_Click(object sender, EventArgs e)
+        private void btnGaNaarReview_Click(object sender, EventArgs e)
         {
-            // TODO: Goto review
+            // Get reviewID from data attribute
             int r_id = Convert.ToInt32((sender as HtmlAnchor).Attributes["data-review-id"].ToString());
 
             Session["ReviewDetails_id"] = r_id;
 
-            // TODO: Redirect to review.aspx
-            //Response.Redirect("review.aspx", false);
+            Response.Redirect("review.aspx", false);
         }
 
         [System.Web.Services.WebMethod]
