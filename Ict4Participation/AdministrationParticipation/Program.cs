@@ -48,6 +48,8 @@ namespace AdministrationParticipation
             {
                 AdminGUIHndlr = new AdminGUIHandler();
                 AccountHander = new GUIHandler();
+                AdminGUIHndlr.GetAll();
+                AccountHander.GetAll();
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 //Run log in form
