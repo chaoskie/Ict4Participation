@@ -13,6 +13,7 @@ namespace Web_GUI_Layer
     {
         private GUIHandler GUIHandler;
         private static int q_id;
+        private static int mainuserID;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,6 +27,9 @@ namespace Web_GUI_Layer
 
             // Retrieve GUIHandler object from session
             GUIHandler = (GUIHandler)Session["GUIHandler_obj"];
+
+            // Set mainuser id
+            mainuserID = GUIHandler.GetMainuserInfo().ID;
             
             // Retrieve questiondetails from session
             q_id = Convert.ToInt32(Session["QuestionDetails_id"]);
@@ -234,11 +238,24 @@ namespace Web_GUI_Layer
         public static string UpdateComment(string str, string _postID)
         {
             GUIHandler tempGUIHandler = new GUIHandler();
-
             int postID = Convert.ToInt32(_postID);
+            string message = string.Empty;
 
-            //tempGUIHandler.Edit()
-            return "Hallo";
+            Commentdetails cd = new Commentdetails();
+            cd.Description = str;
+            cd.IsDeleted = false;
+            cd.PostDate = DateTime.Now;
+            cd.PostedToID = q_id;
+            cd.PosterID = mainuserID;
+            cd.PostID = postID;
+
+            if (!tempGUIHandler.Edit(cd, postID, out message))
+            {
+                // TODO: Show error message
+                return "";
+            }
+
+            return cd.Description;
         }
     }
 }

@@ -279,13 +279,22 @@ namespace Admin_Layer
         /// <param name="index">The index of the comment as loaded from the list</param>
         /// <param name="message">The message of the error</param>
         /// <returns>Success</returns>
-        public bool Edit(Commentdetails comment, int commentIndex, out string message)
+        public bool Edit(Commentdetails comment, int commentID, out string message)
         {
-            if (LoadedComments[commentIndex].PosterID == MainUser.ID)
+            Comment c = LoadedComments.Find(i => i.PostID == commentID);
+            // LoadedComments is null!!
+            //if (LoadedComments[commentIndex].PosterID == MainUser.ID)
+            if (c.PosterID == MainUser.ID)
             {
                 //Edit comment
+                //Comment c = new Comment(LoadedComments[commentIndex].PostID, comment.Description, MainUser.ID, comment.PostedToID, false, comment.PostDate);
+                if (!c.Update())
+                {
+                    message = "Comment aanpassen is niet gelukt!";
+                    return false;
+                }
+
                 message = "Comment aangepast";
-                Comment c = new Comment(LoadedComments[commentIndex].PostID, comment.Description, MainUser.ID, comment.PostedToID, false, comment.PostDate);
                 return true;
             }
             else
@@ -303,9 +312,7 @@ namespace Admin_Layer
         /// <returns>Success</returns>
         public bool Remove(int commentID, out string message)
         {
-            //Comment c = LoadedComments.Single(i => i.PostID == commentIndex);
             Comment c = LoadedComments.Find(i => i.PostID == commentID);
-            //if (LoadedComments[commentIndex].PosterID == MainUser.ID)
             if (c.PosterID == MainUser.ID)
             {
                 //Remove comment
