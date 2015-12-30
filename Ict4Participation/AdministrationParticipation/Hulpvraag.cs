@@ -41,7 +41,14 @@ namespace AdministrationParticipation
             string message = "";
             if (Program.AdminGUIHndlr.Edit(qd, qd.PostID, poster.ID, out message))
             {
-                MessageBox.Show("Vraag succesvol aangepast!");
+                if (message != "")
+                {
+                    MessageBox.Show("Vraag succesvol aangepast!");
+                }
+                else
+                {
+                    MessageBox.Show("Er ging iets fout tijdens het aanpassen van de vraag, mogelijk is deze verwijderd tijdens de aanpassing.");
+                }
                 this.Close();
             }
             else

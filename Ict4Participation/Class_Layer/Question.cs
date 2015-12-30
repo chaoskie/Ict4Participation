@@ -215,7 +215,7 @@ namespace Class_Layer
             } 
             #endregion
 
-            return true;
+            return flawless;
         }
 
         public static List<Question> GetAll(Nullable<int> userID)

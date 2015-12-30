@@ -346,8 +346,10 @@ namespace Admin_Layer
 
             //Edit question
             Question q = new Question(questionID, userID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, LoadedQuestions.Where(qe=>qe.PostID == questionID).First().Volunteers);
-            q.Update();
-            message = "Vraag succesvol aangepast!";
+            if (!q.Update())
+            {
+                message = "Er ging iets fout, debug.";
+            }
             return true;
         }
 
