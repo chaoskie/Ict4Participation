@@ -14,6 +14,7 @@ namespace AdministrationParticipation
         public static AdminGUIHandler AdminGUIHndlr;
         public static GUIHandler AccountHander;
         static string Credmatch = "ICT4Participation 1.0 Lars Blom, Koen Schilders, Lukas Derksen, Rowan Dings @ Fontys semester 2 maatwerk s21m";
+        public static Home home;
 
         /// <summary>
         /// The main entry point for the application.
@@ -55,7 +56,8 @@ namespace AdministrationParticipation
                 //Run log in form
                 if (Prompt.ShowDialog())
                 {
-                    Application.Run(new Home());
+                    home = new Home();
+                    Application.Run(home);
                 }
             }
         }

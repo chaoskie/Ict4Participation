@@ -78,5 +78,10 @@ namespace AdministrationParticipation
                 }
             }
         }
+
+        private void Reviews_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.home.Fill();
+        }
     }
 }

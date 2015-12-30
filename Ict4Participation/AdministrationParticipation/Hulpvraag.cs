@@ -89,5 +89,10 @@ namespace AdministrationParticipation
                 }
             }
         }
+
+        private void Hulpvraag_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.home.Fill();
+        }
     }
 }

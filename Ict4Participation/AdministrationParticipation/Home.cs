@@ -17,9 +17,18 @@ namespace AdministrationParticipation
         public Home()
         {
             InitializeComponent();
+            Init();
+        }
+
+        public void Init()
+        {
             //Set username
             lblUsername.Text = Program.AccountHander.MainUser.Name;
+            Fill();
+        }
 
+        public void Fill()
+        {
             //Start initialising the set up for the reviews
             List<int> ids = Program.AdminGUIHndlr.GetAll().Select(u => u.ID).Cast<int>().ToList();
             List<Reviewdetails> reviews = new List<Reviewdetails>();
@@ -30,10 +39,12 @@ namespace AdministrationParticipation
                 reviews.AddRange(Program.AdminGUIHndlr.GetAllReviews(id));
             }
             reviews = reviews.OrderByDescending(r => r.PostID).OrderByDescending(r => r.PostID).ToList();
+            lbNewReviews.DataSource = null;
             lbNewReviews.DataSource = reviews;
 
             //Load questions, order by postdate
             List<Questiondetails> questions = Program.AdminGUIHndlr.GetAll(true).OrderByDescending(q => q.PostDate).ToList();
+            lbNewQuestions.DataSource = null;
             lbNewQuestions.DataSource = questions;
         }
 

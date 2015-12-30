@@ -159,6 +159,7 @@
             this.MaximizeBox = false;
             this.Name = "Reviews";
             this.Text = "Reviews";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Reviews_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

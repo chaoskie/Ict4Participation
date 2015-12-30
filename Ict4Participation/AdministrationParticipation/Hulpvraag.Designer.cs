@@ -274,6 +274,7 @@
             this.MaximizeBox = false;
             this.Name = "Hulpvraag";
             this.Text = "Hulpvraag";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Hulpvraag_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
