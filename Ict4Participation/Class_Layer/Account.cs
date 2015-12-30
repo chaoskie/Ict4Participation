@@ -466,6 +466,7 @@ namespace Class_Layer
             this.Birthdate = birthdate;
             this.Skills = skills;
             this.Availability = availability;
+            this.Gender = gender;
 
             //If accessed normally
             if (System.Web.HttpContext.Current != null)
