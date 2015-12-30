@@ -42,8 +42,7 @@ namespace Class_Layer
         public override bool Create()
         {
             //insert into database
-            Database_Layer.Database.InsertComment(this.PosterID, this.PostedToID, this.Description, this.IsDeleted);
-            return true;
+            return Database_Layer.Database.InsertComment(this.PosterID, this.PostedToID, this.Description, this.IsDeleted);
         }
 
         /// <summary>
@@ -72,8 +71,7 @@ namespace Class_Layer
         public override bool Update()
         {
             //Call database for update query
-            Database_Layer.Database.UpdateComment(this.PostID, this.Description);
-            return true;
+            return Database_Layer.Database.UpdateComment(this.PostID, this.Description);
         }
 
         /// <summary>

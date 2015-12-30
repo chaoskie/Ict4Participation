@@ -279,12 +279,12 @@ namespace Admin_Layer
         /// <param name="index">The index of the comment as loaded from the list</param>
         /// <param name="message">The message of the error</param>
         /// <returns>Success</returns>
-        public bool Edit(Commentdetails comment, int commentID, out string message)
+        public bool Edit(Commentdetails comment, int commentID, int mainuserID, out string message)
         {
             Comment c = LoadedComments.Find(i => i.PostID == commentID);
             // LoadedComments is null!!
             //if (LoadedComments[commentIndex].PosterID == MainUser.ID)
-            if (c.PosterID == MainUser.ID)
+            if (c.PosterID == mainuserID)
             {
                 //Edit comment
                 //Comment c = new Comment(LoadedComments[commentIndex].PostID, comment.Description, MainUser.ID, comment.PostedToID, false, comment.PostDate);

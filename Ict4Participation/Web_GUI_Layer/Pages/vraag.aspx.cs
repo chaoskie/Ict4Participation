@@ -34,6 +34,7 @@ namespace Web_GUI_Layer
             // Retrieve questiondetails from session
             q_id = Convert.ToInt32(Session["QuestionDetails_id"]);
 
+            // Get questiondetails
             Questiondetails qd = GUIHandler.GetAll(true).Where(vraag => vraag.PostID == Convert.ToInt32(Session["QuestionDetails_id"])).ToList()[0];
 
             // Fill in forms
@@ -65,7 +66,7 @@ namespace Web_GUI_Layer
             }
 
             // Insert all comments
-            List<Commentdetails> cd_list = GUIHandler.GetAll(qd.PostID);
+            List<Commentdetails> cd_list = GUIHandler.GetAll(qd.PostID).OrderBy(i => i.PostDate).ToList();
 
             if (cd_list.Count > 0)
             {
@@ -241,6 +242,8 @@ namespace Web_GUI_Layer
             int postID = Convert.ToInt32(_postID);
             string message = string.Empty;
 
+            tempGUIHandler.GetAll(q_id);
+
             Commentdetails cd = new Commentdetails();
             cd.Description = str;
             cd.IsDeleted = false;
@@ -249,7 +252,7 @@ namespace Web_GUI_Layer
             cd.PosterID = mainuserID;
             cd.PostID = postID;
 
-            if (!tempGUIHandler.Edit(cd, postID, out message))
+            if (!tempGUIHandler.Edit(cd, postID, mainuserID, out message))
             {
                 // TODO: Show error message
                 return "";
