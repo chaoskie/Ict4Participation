@@ -60,14 +60,13 @@
 				    <!-- PROFIEL -->
 				    <div id="profiel_section" class="row">
 					    <div class="col-xs-6 col-xs-offset-3 col-sm-3 col-sm-offset-0">
-						    <div id="img_wrapper">
-							    <img src="http://i.imgur.com/BZUZBOr.jpg" alt="Profielfoto" style="width: 100%;" />
-						    </div>
+							<asp:Image ID="profielfoto" AlternateText="Profielfoto" CssClass="img-responsive" ImageUrl="http://i.imgur.com/BZUZBOr.jpg" runat="server" />
 					    </div>
 					    <div class="col-tn-12 col-xs-8">
 						    <h2 id="username" title="Klik om te wijzigen" contenteditable="true" runat="server">Barry Batsbak</h2>
 						    <h3>Hulpbehoevende</h3>
-						    <h3 id="userdescription" class="text-muted" title="Klik om te wijzigen" contenteditable="true" runat="server">Lorem ipsum dolor sit amet.</h3>
+                            <!-- TEMPORARILY DISABLED -->
+						    <h3 style="display: none;" id="userdescription" class="text-muted" title="Klik om te wijzigen" contenteditable="true" runat="server">Lorem ipsum dolor sit amet.</h3>
 					    </div>
 				    </div>
 
@@ -88,22 +87,41 @@
 					    </div>
 				    </div>
 
-				    <!-- Reviews -->
+				    <!-- Geplaatste reviews -->
 				    <div class="row">
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
-								    <p class="pull-left">Reviews</p>
+								    <p class="pull-left">Uw geplaatste reviews</p>
 								    <p class="pull-right">
 									    <i class="fa fa-chevron-up"></i>
 								    </p>
 							    </div>
 						    </div>
 						    <div class="row dropdown-content">
-							    <ul id="reviews_list" class="col-xs-12" runat="server"></ul>
+							    <ul id="reviews1_list" class="col-xs-12" runat="server"></ul>
 						    </div>
 					    </div>
 				    </div>
+
+
+				    <!-- Geplaatste reviews -->
+				    <div class="row">
+					    <div class="col-xs-12 dropdown dropdown-dynamic">
+						    <div class="row dropdown-title">
+							    <div class="col-xs-12">
+								    <p class="pull-left">Reviews geplaatst over u</p>
+								    <p class="pull-right">
+									    <i class="fa fa-chevron-up"></i>
+								    </p>
+							    </div>
+						    </div>
+						    <div class="row dropdown-content">
+							    <ul id="reviews2_list" class="col-xs-12" runat="server"></ul>
+						    </div>
+					    </div>
+				    </div>
+
 
 			    </div>
 		    </main>
@@ -115,7 +133,8 @@
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
-	<script src="../Content/JS/zoekprofiel.js"></script>
+	<script src="../Content/JS/errormessage.js"></script>
+	<%--<script src="../Content/JS/zoekprofiel.js"></script>--%>
     <script src="../Content/JS/profiel.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="gebruikers.aspx.cs" Inherits="Web_GUI_Layer.gebruikers" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="vragen.aspx.cs" Inherits="Web_GUI_Layer.Pages.vragen" %>
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -9,15 +9,14 @@
 	<meta name="author" content="ICT4Participation" />
     <meta name="description" content="Log in om verder te gaan" />
     <meta name="keywords" content="Inloggen,ICT4Participation,Hulp,Hulpbehoevende,Vrijwilliger,Eindhoven" />
-    <title>Gebruikers</title>
+    <title>Vragen</title>
     <!-- Stylesheets -->
 	<link rel="stylesheet" href="../Content/CSS/bootstrap.min.css" />
 	<link rel="stylesheet" href="../Content/CSS/font-awesome.min.css" />
 	<link rel="stylesheet" href="../Content/CSS/main.css" />
-	<link rel="stylesheet" href="../Content/CSS/gebruikers.css" />
+	<link rel="stylesheet" href="../Content/CSS/zoeken.css" />
 	<link rel="stylesheet" href="../Content/CSS/dropdown.css" />
 	<link rel="stylesheet" href="../Content/CSS/input.css" />
-    <%--<link rel="stylesheet" href="../Content/CSS/gebruiker-zoeken.css" />--%>
 </head>
 <body>
     <form runat="server">
@@ -42,55 +41,44 @@
 			    <div class="container">
 
                     <br />
-
+            
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
 				    <div class="form-group">
-					    <h2>Gebruikers</h2>
+					    <h2>Alle vragen</h2>
 					    <div class="row">
 						    <div class="col-xs-12">
 							    <label for="inputZoeken" class="sr-only">Zoeken</label>
-							    <input type="text" id="inputZoeken" class="form-control" placeholder="Zoek op naam" />
+							    <input type="text" id="inputZoeken" class="form-control" placeholder="Zoek op titel" />
 						    </div>
 					    </div>
 				    </div>
 
 				    <!-- Resultaten -->
 				    <div class="row">
-					    <div class="col-xs-12 dropdown dropdown-dynamic">
+					    <div class="col-xs-12 dropdown">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
-								    <p class="pull-left">Gebruikers</p>
-								    <p class="pull-right"><i class="fa fa-chevron-down"></i></p>
+								    <p class="pull-left">Gevonden vragen</p>
 							    </div>
 						    </div>
 						    <div class="row dropdown-content">
-							    <ul id="gebruikers_lijst" class="col-xs-12"></ul>
+							    <ul class="col-xs-12">
+								    <li><a href="#">Geen vragen gevonden</a></li>
+							    </ul>
 						    </div>
 					    </div>
 				    </div>
 
 			    </div>
 		    </main>
-
-		    <!-- Zoek profiel overlay -->
-		    <%--<div id="zoek_profiel_overlay">
-			    <div class="zoek-profiel-left">
-				    <img class="zoek-profiel-foto" src="" />
-			    </div>
-			    <div class="zoek-profiel-right">
-				    <p class="zoek-profiel-naam">Nog niets...</p>
-				    <p class="zoek-profiel-type">Nog niets...</p>
-				    <p class="zoek-profiel-quote">Nog niets...</p>
-			    </div>
-		    </div>--%>
 	    </div>
     </form>
+	
+    <!-- Scripts -->
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
-	<%--<script src="../Content/JS/zoekprofiel.js"></script>--%>
 	<script src="../Content/JS/errormessage.js"></script>
-    <script src="../Content/JS/gebruikers.js"></script>
 </body>
 </html>

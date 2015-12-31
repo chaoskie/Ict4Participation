@@ -141,7 +141,8 @@
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
-	<script src="../Content/JS/zoekprofiel.js"></script>
+	<script src="../Content/JS/errormessage.js"></script>
+	<%--<script src="../Content/JS/zoekprofiel.js"></script>--%>
     <script src="../Content/JS/profiel.js"></script>
     <script src="../Content/JS/vraag.js"></script>
 </body>

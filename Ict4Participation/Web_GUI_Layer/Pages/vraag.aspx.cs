@@ -104,7 +104,7 @@ namespace Web_GUI_Layer
                                 comment_section.Controls.Add(new LiteralControl(comment_template));
 
                                 // Check if the poster is the owner of the question
-                                if (ad_poster.ID == qd.PosterID && !cd.IsDeleted)
+                                if (qd.PosterID == mainuserID && !cd.IsDeleted)
                                 {
                                     comment_template =
                                         @"<div class=""col-xs-8"">";
@@ -167,8 +167,8 @@ namespace Web_GUI_Layer
                                 commentBody.Attributes.Add("class", "comment-body");
                                 commentBody.Attributes.Add("data-comment-id", Convert.ToString(cd.PostID));
                                 commentBody.InnerText = cd.Description;
-
-                                if (ad_poster.ID == qd.PosterID && !cd.IsDeleted)
+                    
+                                if (qd.PosterID == mainuserID && !cd.IsDeleted)
                                 {
                                     commentBody.Attributes.Add("contenteditable", "true");
                                 }

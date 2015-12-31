@@ -2,13 +2,15 @@
  * PROFIEL_SECTION STYLES
  * * * * * * * * * * */
 #profiel_section {
+    /* Aparte margin bottom en top */
+    /* Dit is zodat margin left en right worden behouden */
 	margin-bottom: 3rem;
 	margin-top: 3rem;
 }
 #profiel_section h2:nth-child(1) {
 	margin-top: 0;
 }
-#profiel_section #img_wrapper {
+#profiel_section img {
 	border: 3px solid #ed1e12;
 }
 #profiel_section *[contenteditable] {

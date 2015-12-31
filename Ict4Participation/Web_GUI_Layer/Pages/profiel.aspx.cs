@@ -31,6 +31,9 @@ namespace Web_GUI_Layer
             // Set username
             username.InnerText = mainuser.Name;
 
+            // Set image
+            profielfoto.ImageUrl = mainuser.AvatarPath;
+
 
 
             // TODO: add description to account and database
@@ -66,25 +69,85 @@ namespace Web_GUI_Layer
                 li.Controls.Add(a);
             }
 
-            // Insert all reviews
-            List<Reviewdetails> reviews = GUIHandler.GetAllReviews(mainuser.ID, true);
-            foreach (Reviewdetails rd in reviews)
+            // Insert all reviews placed by mainuser
+            List<Reviewdetails> reviews_list1 = GUIHandler.GetAllReviews(mainuser.ID, true);
+            foreach (Reviewdetails rd in reviews_list1)
+            {
+                // Insert a new listitem to contain the anchors
+                HtmlGenericControl li = new HtmlGenericControl("li");
+                reviews1_list.Controls.Add(li);
+
+                // Insert first anchor with reviewed user name
+                HtmlAnchor a1 = new HtmlAnchor();
+                a1.Attributes.Add("href", "#");
+                a1.InnerText = string.Format("Review over: {0}", GUIHandler.GetAll().Find(i => i.ID == rd.PostedToID).Name);
+                a1.Attributes.Add("data-review-id", Convert.ToString(rd.PostID));
+                a1.Attributes.Add("data-reviewacc-id", Convert.ToString(rd.PostedToID));
+                a1.ServerClick += btnGaNaarReview_Click;
+
+                li.Controls.Add(a1);
+
+                // Insert second anchor with the rating
+                HtmlAnchor a2 = new HtmlAnchor();
+                a2.Attributes.Add("href", "#");
+                a2.Attributes.Add("class", "pull-right");
+                a2.InnerText = string.Format("Aantal sterren: {0}", rd.Rating.ToString());
+                a2.Attributes.Add("data-review-id", Convert.ToString(rd.PostID));
+                a2.Attributes.Add("data-reviewacc-id", Convert.ToString(rd.PostedToID));
+                a2.ServerClick += btnGaNaarReview_Click;
+
+                li.Controls.Add(a2);
+
+            }
+            // Insert message if reviews count == 0
+            if (reviews_list1.Count == 0)
             {
                 HtmlGenericControl li = new HtmlGenericControl("li");
-                reviews_list.Controls.Add(li);
-
-                HtmlGenericControl a = new HtmlGenericControl("a");
+                reviews1_list.Controls.Add(li);
+                
+                HtmlAnchor a = new HtmlAnchor();
                 a.Attributes.Add("href", "#");
-                a.InnerText = rd.Rating.ToString();
+                a.InnerText = "Geen reviews geplaatst!";
 
                 li.Controls.Add(a);
             }
+
+            // Insert all reviews placed by other people about mainuser
+            List<Reviewdetails> reviews_list2 = GUIHandler.GetAllReviews(mainuser.ID, false);
+            foreach (Reviewdetails rd in reviews_list2)
+            {
+                // Insert a new listitem to contain the anchors
+                HtmlGenericControl li = new HtmlGenericControl("li");
+                reviews2_list.Controls.Add(li);
+
+                // Insert first anchor with reviewed user name
+                HtmlAnchor a1 = new HtmlAnchor();
+                a1.Attributes.Add("href", "#");
+                a1.InnerText = string.Format("Review over: {0}", GUIHandler.GetAll().Find(i => i.ID == rd.PostedToID).Name);
+                a1.Attributes.Add("data-review-id", Convert.ToString(rd.PostID));
+                a1.Attributes.Add("data-reviewacc-id", Convert.ToString(rd.PostedToID));
+                a1.ServerClick += btnGaNaarReview_Click;
+
+                li.Controls.Add(a1);
+
+                // Insert second anchor with the rating
+                HtmlAnchor a2 = new HtmlAnchor();
+                a2.Attributes.Add("href", "#");
+                a2.Attributes.Add("class", "pull-right");
+                a2.InnerText = string.Format("Aantal sterren: {0}", rd.Rating.ToString());
+                a2.Attributes.Add("data-review-id", Convert.ToString(rd.PostID));
+                a2.Attributes.Add("data-reviewacc-id", Convert.ToString(rd.PostedToID));
+                a2.ServerClick += btnGaNaarReview_Click;
+
+                li.Controls.Add(a2);
+            }
+
             // Insert message if reviews count == 0
-            if (reviews.Count == 0)
+            if (reviews_list2.Count == 0)
             {
                 HtmlGenericControl li = new HtmlGenericControl("li");
-                reviews_list.Controls.Add(li);
-                
+                reviews2_list.Controls.Add(li);
+
                 HtmlAnchor a = new HtmlAnchor();
                 a.Attributes.Add("href", "#");
                 a.InnerText = "Geen reviews geplaatst!";
@@ -121,8 +184,10 @@ namespace Web_GUI_Layer
         {
             // Get reviewID from data attribute
             int r_id = Convert.ToInt32((sender as HtmlAnchor).Attributes["data-review-id"].ToString());
+            int r_accID = Convert.ToInt32((sender as HtmlAnchor).Attributes["data-reviewacc-id"].ToString());
 
             Session["ReviewDetails_id"] = r_id;
+            Session["ReviewUser_id"] = r_accID;
 
             Response.Redirect("review.aspx", false);
         }

@@ -446,7 +446,7 @@
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
 	<script src="../Content/JS/bootstrap.min.js"></script>
 	<script src="../Content/JS/fileinput.min.js"></script>
-    <script src="../Content/JS/registreren.js"></script>
 	<script src="../Content/JS/errormessage.js"></script>
+    <script src="../Content/JS/registreren.js"></script>
 </body>
 </html>

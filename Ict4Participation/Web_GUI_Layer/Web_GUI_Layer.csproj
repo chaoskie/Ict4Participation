@@ -128,6 +128,8 @@
     <Content Include="Pages\plaatsvraag.aspx" />
     <Content Include="Pages\review.aspx" />
     <Content Include="Pages\vraag.aspx" />
+    <Content Include="Pages\vragen.aspx" />
+    <Content Include="Pages\wijziggegevens.aspx" />
     <Content Include="Pages\zoeken.aspx" />
     <Content Include="Content\Fonts\fontawesome-webfont.eot" />
     <Content Include="Content\Fonts\fontawesome-webfont.ttf" />
@@ -258,6 +260,20 @@
     </Compile>
     <Compile Include="Pages\review.aspx.designer.cs">
       <DependentUpon>review.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\vragen.aspx.cs">
+      <DependentUpon>vragen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\vragen.aspx.designer.cs">
+      <DependentUpon>vragen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\wijziggegevens.aspx.cs">
+      <DependentUpon>wijziggegevens.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\wijziggegevens.aspx.designer.cs">
+      <DependentUpon>wijziggegevens.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pages\registreren.aspx.cs">

@@ -44,7 +44,7 @@
             
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
-				    <h2>Review van <span id="review_naam" runat="server"></span></h2>
+				    <h2>Review over <span id="reviewende_naam1" runat="server"></span></h2>
 				    
                     <div class="row">
                         <div class="col-xs-12">
@@ -53,16 +53,17 @@
                     </div>
 
 				    <!-- PROFIEL -->
-				    <div id="profiel_section" class="row">
-					    <div class="hidden-tn col-xs-3 pull-right">
-						    <div id="img_wrapper">
-							    <%--<img src="http://i.imgur.com/BZUZBOr.jpg" alt="Profielfoto" style="width: 100%;" />--%>
-                                <asp:Image ID="qProfilePhoto" AlternateText="Profielfoto" CssClass="img-responsive" ImageUrl="http://i.imgur.com/BZUZBOr.jpg" runat="server" />
+				    <div class="profiel_section row">
+					    <div class="hidden-tn col-xs-3">
+						    <div class="img_wrapper">
+                                <asp:Image ID="reviewende_image" AlternateText="Profielfoto" CssClass="img-responsive" ImageUrl="http://i.imgur.com/BZUZBOr.jpg" runat="server" />
 						    </div>
 					    </div>
-					    <div class="col-tn-12 col-xs-9 pull-right">
-						    <h2 id="review_titel" runat="server"></h2>
-						    <h3 id="review_body" runat="server"></h3>
+					    <div class="col-tn-12 col-xs-9">
+						    <h2 id="reviewende_naam2" runat="server"></h2>
+                        </div>
+                        <div class="col-tn-12 col-xs-9">
+						    <h3 id="reviewende_type" runat="server">Hulpbehoevende</h3>
 					    </div>
 				    </div>
 
@@ -71,26 +72,30 @@
                             <h2>Review:</h2>
                         </div>
                         <div class="col-xs-12">
-                            <p>Fusce turpis nisl, venenatis eget vehicula in, porttitor blandit urna. 
-                                Sed consectetur, orci vel ornare ornare, neque sapien fringilla est, 
-                                vitae consequat ipsum velit vitae elit. Mauris viverra eleifend quam, 
-                                vitae blandit nisi sodales id. Vivamus malesuada vitae mi vel lobortis. 
-                                Ut maximus risus vitae consequat mollis. Curabitur ac ipsum eu quam 
-                                imperdiet varius et id quam. Praesent eleifend felis vitae augue 
-                                pharetra, sed maximus sem congue. Vestibulum ante ipsum primis in 
-                                faucibus orci luctus et ultrices posuere cubilia Curae; Class aptent 
-                                taciti sociosqu ad litora torquent per conubia nostra, per inceptos 
-                                himenaeos.</p>
+                            <p id="review_body" runat="server"></p>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-xs-12">
-                            <div id="review_rating">
-                                <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9734;</span><span>&#9734;</span>
-                            </div>
+						<div class="col-xs-12 col-xs-offset-0 col-sm-6 col-sm-offset-3">
+							<div id="review_rating" data-rating-nr="1" runat="server"><span id="rating1">&#9734;</span><span id="rating2">&#9734;</span><span id="rating3">&#9734;</span><span id="rating4">&#9734;</span><span id="rating5">&#9734;</span></div>
+						</div>
+					</div>
+
+                    <!-- PROFIEL -->
+				    <div class="profiel_section row">
+					    <div class="hidden-tn col-xs-3 pull-right">
+						    <div class="img_wrapper">
+                                <asp:Image ID="reviewer_image" AlternateText="Profielfoto" CssClass="img-responsive" ImageUrl="http://i.imgur.com/BZUZBOr.jpg" runat="server" />
+						    </div>
+					    </div>
+					    <div class="col-tn-12 col-xs-9 pull-right">
+						    <h2 id="reviewer_naam" class="pull-right" runat="server"></h2>
                         </div>
-                    </div>
+                        <div class="col-tn-12 col-xs-9 pull-right">
+						    <h3 id="reviewer_type" class="pull-right" runat="server">Hulpbehoevende</h3>
+					    </div>
+				    </div>
 
 			    </div>
 
@@ -103,7 +108,8 @@
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
-	<script src="../Content/JS/zoekprofiel.js"></script>
+	<%--<script src="../Content/JS/zoekprofiel.js"></script>--%>
+	<script src="../Content/JS/errormessage.js"></script>
     <script src="../Content/JS/profiel.js"></script>
     <script src="../Content/JS/review.js"></script>
 </body>

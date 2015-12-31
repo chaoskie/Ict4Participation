@@ -1,3 +1,36 @@
 ﻿/*
  * REVIEW STYLES
  * * * * * * * * * * */
+nav button {
+    width: 100%;
+}
+.profiel_section {
+    /* Aparte margin bottom en top */
+    /* Dit is zodat margin left en right worden behouden */
+    margin-bottom: 3rem;
+	margin-top: 3rem;
+}
+.profiel_section h2:nth-child(1) {
+	margin-top: 0;
+}
+.profiel_section img {
+	border: 3px solid #ed1e12;
+}
+#review_body {
+    font-size: 20px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+#review_rating span {
+    color: #ed1e12;
+    display: inline-block;
+    width: 20%;
+    font-size: 60px;
+    position: relative;
+    text-align: center;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

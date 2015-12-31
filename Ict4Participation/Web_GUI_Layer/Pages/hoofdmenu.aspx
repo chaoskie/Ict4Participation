@@ -57,14 +57,17 @@
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
 				    <h2>Hoofdmenu</h2>
+
 				    <!-- Profiel info -->
 				    <div id="profiel_section" class="row">
 					    <div class="col-tn-6 col-tn-offset-3 col-xs-3 col-xs-offset-0">
-						    <img src="http://i.imgur.com/BZUZBOr.jpg" alt="Profielfoto" style="width: 100%;" />
+                            <asp:Image ID="profielfoto" AlternateText="Profielfoto" CssClass="img-responsive" ImageUrl="http://i.imgur.com/BZUZBOr.jpg" runat="server" />
 					    </div>
 					    <div class="col-tn-12 col-xs-8">
 						    <h2 id="user_naam" runat="server">Barry Batsbak</h2>
 						    <h3 id="user_rol" runat="server">Hulpbehoevende</h3>
+                            <!-- TEMPORARILY DISABLED -->
+                            <h3 style="display: none;" id="userdescription" class="text-muted" runat="server">Lorem ipsum dolor sit amet.</h3>
 					    </div>
 				    </div>
 
@@ -80,10 +83,7 @@
 							    </div>
 						    </div>
 						    <div class="row dropdown-content">
-							    <ul class="col-xs-12">
-								    <li><a href="#">Dit is een melding</a></li>
-								    <li><a href="#">Dit is een andere melding</a></li>
-							    </ul>
+							    <ul id="activiteiten_list" class="col-xs-12" runat="server"></ul>
 						    </div>
 					    </div>
 				    </div>
@@ -160,7 +160,6 @@
 
             <br />
             <br />
-            <br />
 
 	    </div>
     </form>
@@ -169,6 +168,7 @@
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
+	<script src="../Content/JS/errormessage.js"></script>
 	<script src="../Content/JS/hoofdmenu.js"></script>
 </body>
 </html>

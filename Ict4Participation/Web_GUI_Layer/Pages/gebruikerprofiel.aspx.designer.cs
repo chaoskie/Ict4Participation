@@ -22,6 +22,15 @@ namespace Web_GUI_Layer.Pages {
         protected global::System.Web.UI.WebControls.Label error_message;
         
         /// <summary>
+        /// profielfoto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image profielfoto;
+        
+        /// <summary>
         /// username control.
         /// </summary>
         /// <remarks>
@@ -310,12 +319,21 @@ namespace Web_GUI_Layer.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl vragen_list;
         
         /// <summary>
-        /// reviews_list control.
+        /// reviews_list1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reviews_list;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reviews_list1;
+        
+        /// <summary>
+        /// reviews_list2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reviews_list2;
     }
 }

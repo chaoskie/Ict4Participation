@@ -34,6 +34,9 @@ namespace Web_GUI_Layer
                 // Insert user name and role
                 user_naam.InnerHtml = accDetails.Name;
 
+                // Set profilephoto
+                profielfoto.ImageUrl = accDetails.AvatarPath;
+
                 // Insert availability
                 List<Availabilitydetails> ad = accDetails.AvailabilityDetailList;
 
@@ -47,6 +50,10 @@ namespace Web_GUI_Layer
                     }
                 }
             }
+
+            // TODO: Fill activities
+            // Temporary message
+            activiteiten_list.Controls.Add(new LiteralControl("<li><a href=\"#\">Geen activiteiten</a>"));
         }
 
         protected void btnAfmelden_Click(object sender, EventArgs e)
@@ -59,7 +66,7 @@ namespace Web_GUI_Layer
 
         protected void btnVragen_Click(object sender, EventArgs e)
         {
-            //Response.Redirect("...");
+            Response.Redirect("vragen.aspx", false);
         }
         
         protected void btnZoeken_Click(object sender, EventArgs e)

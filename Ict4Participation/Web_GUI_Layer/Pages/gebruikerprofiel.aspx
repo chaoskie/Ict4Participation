@@ -54,7 +54,7 @@
 				    <div id="profiel_section" class="row">
 					    <div class="col-xs-6 col-xs-offset-3 col-sm-3 col-sm-offset-0">
 						    <div id="img_wrapper">
-							    <img src="http://i.imgur.com/BZUZBOr.jpg" alt="Profielfoto" style="width: 100%;" />
+							    <asp:Image ID="profielfoto" AlternateText="Profielfoto" CssClass="img-responsive" ImageUrl="http://i.imgur.com/BZUZBOr.jpg" runat="server" />
 						    </div>
 					    </div>
 					    <div class="col-tn-12 col-xs-8">
@@ -151,19 +151,36 @@
 					    </div>
 				    </div>
 
-				    <!-- Reviews -->
+				    <!-- Reviews van gebruiker -->
 				    <div class="row">
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
-								    <p class="pull-left">Reviews</p>
+								    <p class="pull-left">Reviews van <span id="gebruiker_naam1"></span></p>
 								    <p class="pull-right">
 									    <i class="fa fa-chevron-up"></i>
 								    </p>
 							    </div>
 						    </div>
 						    <div class="row dropdown-content">
-							    <ul id="reviews_list" class="col-xs-12" runat="server"></ul>
+							    <ul id="reviews_list1" class="col-xs-12" runat="server"></ul>
+						    </div>
+					    </div>
+				    </div>
+
+				    <!-- Reviews over gebruiker -->
+				    <div class="row">
+					    <div class="col-xs-12 dropdown dropdown-dynamic">
+						    <div class="row dropdown-title">
+							    <div class="col-xs-12">
+								    <p class="pull-left">Reviews over <span id="gebruiker_naam2"></span></p>
+								    <p class="pull-right">
+									    <i class="fa fa-chevron-up"></i>
+								    </p>
+							    </div>
+						    </div>
+						    <div class="row dropdown-content">
+							    <ul id="reviews_list2" class="col-xs-12" runat="server"></ul>
 						    </div>
 					    </div>
 				    </div>
@@ -178,7 +195,7 @@
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
-	<script src="../Content/JS/zoekprofiel.js"></script>
+	<script src="../Content/JS/errormessage.js"></script>
     <script src="../Content/JS/gebruikerprofiel.js"></script>
 </body>
 </html>

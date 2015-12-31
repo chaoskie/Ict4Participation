@@ -11,6 +11,7 @@ namespace Web_GUI_Layer
     public partial class inloggen : System.Web.UI.Page
     {
         private GUIHandler GUIHandler;
+        private static int failedLoginAttempts = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,8 +31,15 @@ namespace Web_GUI_Layer
             }
             else
             {
-                error_message.Text = message;
-                error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+                failedLoginAttempts++;
+
+                // Show different message if failed login attempts > 3
+                if (failedLoginAttempts > 3)
+                {
+                    message += Environment.NewLine + "Staat uw VPN aan?";
+                }
+
+                ShowErrorMessage(message);
             }
         }
 

@@ -22,6 +22,15 @@ namespace Web_GUI_Layer {
         protected global::System.Web.UI.WebControls.Label error_message;
         
         /// <summary>
+        /// profielfoto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image profielfoto;
+        
+        /// <summary>
         /// user_naam control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,24 @@ namespace Web_GUI_Layer {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl user_rol;
+        
+        /// <summary>
+        /// userdescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl userdescription;
+        
+        /// <summary>
+        /// activiteiten_list control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl activiteiten_list;
         
         /// <summary>
         /// rooster_ma_ochtend control.

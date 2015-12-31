@@ -22,13 +22,13 @@ namespace Web_GUI_Layer.Pages {
         protected global::System.Web.UI.WebControls.Label error_message;
         
         /// <summary>
-        /// review_naam control.
+        /// reviewende_naam1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl review_naam;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reviewende_naam1;
         
         /// <summary>
         /// btnDeleteReview control.
@@ -40,22 +40,31 @@ namespace Web_GUI_Layer.Pages {
         protected global::System.Web.UI.WebControls.Button btnDeleteReview;
         
         /// <summary>
-        /// qProfilePhoto control.
+        /// reviewende_image control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image qProfilePhoto;
+        protected global::System.Web.UI.WebControls.Image reviewende_image;
         
         /// <summary>
-        /// review_titel control.
+        /// reviewende_naam2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl review_titel;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reviewende_naam2;
+        
+        /// <summary>
+        /// reviewende_type control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reviewende_type;
         
         /// <summary>
         /// review_body control.
@@ -65,5 +74,41 @@ namespace Web_GUI_Layer.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl review_body;
+        
+        /// <summary>
+        /// review_rating control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl review_rating;
+        
+        /// <summary>
+        /// reviewer_image control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image reviewer_image;
+        
+        /// <summary>
+        /// reviewer_naam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reviewer_naam;
+        
+        /// <summary>
+        /// reviewer_type control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reviewer_type;
     }
 }

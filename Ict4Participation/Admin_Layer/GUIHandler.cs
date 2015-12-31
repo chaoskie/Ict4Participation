@@ -99,7 +99,7 @@ namespace Admin_Layer
             }
             else if (!Account.LogIn(username, password, out MainUser))
             {
-                message = "De combinatie van email en wachtwoord bestaat niet!";
+                message = "De combinatie van gebruikersnaam en wachtwoord bestaat niet!";
                 return false;
             }
             return true;
