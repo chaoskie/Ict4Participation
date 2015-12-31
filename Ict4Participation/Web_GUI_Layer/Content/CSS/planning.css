@@ -1,0 +1,55 @@
+﻿#planning {
+	box-shadow: 0 0 4px 0 rgba(0,0,0,0.25);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	width: 100%;
+}
+#planning .planning-row {
+    display: block;
+    height: 50px;
+    width: 100%;
+}
+#planning .planning-row > div,
+#planning .planning-row > input {
+    display: inline-block;
+    height: 50px;
+    margin: 0;
+    position: relative;
+    width: 20%;
+}
+#planning .planning-row div {
+    background-color: #ed1e12;
+    padding-left: 2rem;
+    vertical-align: top;
+}
+#planning .planning-row:nth-child(1) div {
+    padding-left: 0;
+    text-align: center;
+}
+#planning .planning-row div p {
+    line-height: 50px;
+    color: #f6f6f6;
+}
+#planning .planning-row input {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+#planning .planning-row input.beschikbaar {
+    background-color: #9cf259;
+}
+#planning:not(.static) .planning-row input:not(.beschikbaar):hover {
+    background-color: #e3fbd0;
+}
+
+@media screen and (max-width: 410px) {
+    #planning {
+        font-size: 80%;
+    }
+    #planning .planning-row div span {
+        display: none;
+    }
+}

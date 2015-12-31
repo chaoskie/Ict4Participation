@@ -14,8 +14,9 @@
 	<link rel="stylesheet" href="../Content/CSS/bootstrap.min.css" />
 	<link rel="stylesheet" href="../Content/CSS/font-awesome.min.css" />
 	<link rel="stylesheet" href="../Content/CSS/main.css" />
-	<link rel="stylesheet" href="../Content/CSS/hoofdmenu.css" />
 	<link rel="stylesheet" href="../Content/CSS/dropdown.css" />
+    <link rel="stylesheet" href="../Content/CSS/planning.css" />
+	<link rel="stylesheet" href="../Content/CSS/hoofdmenu.css" />
 </head>
 <body>
     <form runat="server">

@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="../Content/CSS/gebruikers.css" />
 	<link rel="stylesheet" href="../Content/CSS/dropdown.css" />
 	<link rel="stylesheet" href="../Content/CSS/input.css" />
-    <link rel="stylesheet" href="../Content/CSS/gebruiker-zoeken.css" />
+    <%--<link rel="stylesheet" href="../Content/CSS/gebruiker-zoeken.css" />--%>
 </head>
 <body>
     <form runat="server">
@@ -70,7 +70,7 @@
 		    </main>
 
 		    <!-- Zoek profiel overlay -->
-		    <div id="zoek_profiel_overlay">
+		    <%--<div id="zoek_profiel_overlay">
 			    <div class="zoek-profiel-left">
 				    <img class="zoek-profiel-foto" src="" />
 			    </div>
@@ -79,13 +79,13 @@
 				    <p class="zoek-profiel-type">Nog niets...</p>
 				    <p class="zoek-profiel-quote">Nog niets...</p>
 			    </div>
-		    </div>
+		    </div>--%>
 	    </div>
     </form>
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
-	<script src="../Content/JS/zoekprofiel.js"></script>
+	<%--<script src="../Content/JS/zoekprofiel.js"></script>--%>
     <script src="../Content/JS/gebruikers.js"></script>
 </body>
 </html>

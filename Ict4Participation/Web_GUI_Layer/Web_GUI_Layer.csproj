@@ -81,6 +81,7 @@
     <Content Include="Content\CSS\fileinput.min.css" />
     <Content Include="Content\CSS\font-awesome.min.css" />
     <Content Include="Content\CSS\gebruiker-zoeken.css" />
+    <Content Include="Content\CSS\gebruikerprofiel.css" />
     <Content Include="Content\CSS\gebruikers.css" />
     <Content Include="Content\CSS\hoofdmenu.css" />
     <Content Include="Content\CSS\inloggen.css" />
@@ -88,6 +89,7 @@
     <Content Include="Content\CSS\main.css" />
     <Content Include="Content\CSS\plaatsreview.css" />
     <Content Include="Content\CSS\plaatsvraag.css" />
+    <Content Include="Content\CSS\planning.css" />
     <Content Include="Content\CSS\profiel.css" />
     <Content Include="Content\CSS\reacties.css" />
     <Content Include="Content\CSS\registreren.css" />
@@ -102,6 +104,7 @@
     <Content Include="Content\JS\dropdown.js" />
     <Content Include="Content\JS\errormessage.js" />
     <Content Include="Content\JS\fileinput.min.js" />
+    <Content Include="Content\JS\gebruikerprofiel.js" />
     <Content Include="Content\JS\gebruikers.js" />
     <Content Include="Content\JS\hoofdmenu.js" />
     <Content Include="Content\JS\jquery-1.11.3.min.js" />
@@ -116,6 +119,7 @@
     <Content Include="ErrorPages\error403.aspx" />
     <Content Include="ErrorPages\error404.aspx" />
     <Content Include="ErrorPages\error500.aspx" />
+    <Content Include="Pages\gebruikerprofiel.aspx" />
     <Content Include="Pages\gebruikers.aspx" />
     <Content Include="Pages\hoofdmenu.aspx" />
     <Content Include="Pages\inloggen.aspx" />
@@ -191,6 +195,13 @@
     </Compile>
     <Compile Include="ErrorPages\error500.aspx.designer.cs">
       <DependentUpon>error500.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\gebruikerprofiel.aspx.cs">
+      <DependentUpon>gebruikerprofiel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\gebruikerprofiel.aspx.designer.cs">
+      <DependentUpon>gebruikerprofiel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\gebruikers.aspx.cs">
       <DependentUpon>gebruikers.aspx</DependentUpon>

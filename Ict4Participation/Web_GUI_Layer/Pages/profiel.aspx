@@ -61,7 +61,7 @@
 					    </div>
 					    <div class="col-tn-12 col-xs-8">
 						    <h2 id="username" title="Klik om te wijzigen" contenteditable="true" runat="server">Barry Batsbak</h2>
-						    <h3 title="Klik om te wijzigen">Hulpbehoevende</h3>
+						    <h3>Hulpbehoevende</h3>
 						    <h3 id="userdescription" class="text-muted" title="Klik om te wijzigen" contenteditable="true" runat="server">Lorem ipsum dolor sit amet.</h3>
 					    </div>
 				    </div>
