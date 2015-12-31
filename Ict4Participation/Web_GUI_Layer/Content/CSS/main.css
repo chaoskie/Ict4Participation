@@ -6,9 +6,9 @@
 /* Selector voor alles */
 /* box-sizing: border-box is belangrijk voor de positionering. Outline moet overal 0 zijn. Alles moet geanimeerd worden over 0.3 seconde */
 * {
-	box-sizing: border-box;
-	outline: 0;
-	transition: all 0.3s;
+	box-sizing: border-box !important;
+	outline: 0 !important;
+	transition: all 0.3s !important;
 }
 ul {
 	list-style-type: none;

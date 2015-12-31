@@ -1,6 +1,10 @@
-﻿nav button {
+﻿/*
+ * VRAAG STYLES
+ * * * * * * * * * * */
+nav button {
     width: 100%;
 }
+
 #profiel_section {
     /* Aparte margin bottom en top */
     /* Dit is zodat margin left en right worden behouden */
@@ -17,7 +21,6 @@
 #vraag_data p {
     font-size: 2rem;
 }
-
 .vraag-bold {
     font-weight: bold;
 }

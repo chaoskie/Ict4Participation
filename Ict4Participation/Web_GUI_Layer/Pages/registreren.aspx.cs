@@ -120,6 +120,12 @@ namespace Web_GUI_Layer
             }
         }
 
+        private void ShowErrorMessage(string message)
+        {
+            error_message.Text = message;
+            error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+        }
+
         [System.Web.Services.WebMethod]
         public static int IsCity(string str)
         {

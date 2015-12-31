@@ -1,4 +1,6 @@
-﻿$('h2#username[contenteditable]').focusout(function () {
+﻿// Functie om de gebruikersnaam te updaten door middel van ajax als de gebruiker 
+// de tekst heeft bewerkt
+$('h2#username[contenteditable]').focusout(function () {
     
     // stuur async request
     $.ajax({
@@ -8,12 +10,16 @@
         contentType: 'application/json;charset=utf-8',
         dataType: 'json',
         success: function (result) {
+            // Update de tekst clientside zodat er geen postback hoeft
+            // plaats te vinden
             $('h2#username').text(result.d);
         }
     });
 
 });
 
+// Functie om de beschrijving te updaten door middel van ajax als de gebruiker
+// de tekst heeft bewerkt
 $('h3#userdescription[contenteditable]').focusout(function () {
 
     // stuur async request
@@ -24,6 +30,8 @@ $('h3#userdescription[contenteditable]').focusout(function () {
         contentType: 'application/json;charset=utf-8',
         dataType: 'json',
         success: function (result) {
+            // Update de tekst clientside zodat er geen postback hoeft
+            // plaats te vinden
             $('h3#userdescription').text(result.d);
         }
     });
@@ -33,6 +41,7 @@ $('h3#userdescription[contenteditable]').focusout(function () {
 // Script met de functionaliteiten om profiel info te zoeken en weer te geven
 $(function () {
 
+    // Selector test alleen voor anchors die een data-id attribuut hebben
     $('a[data-id]').hover(function (event) {
 
         // Haal het data-id op van de op te halen gebruiker

@@ -40,6 +40,11 @@
 		    <!-- MAIN -->
 		    <main id="main">
 			    <div class="container">
+
+                    <br />
+            
+                    <asp:Label ID="Label1" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
+
 				    <!-- Algemene gegevens -->
 				    <div class="form-group">
 					    <h2>Registreren</h2>

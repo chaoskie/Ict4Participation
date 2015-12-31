@@ -215,7 +215,7 @@ namespace Web_GUI_Layer
 
                 if (!GUIHandler.Place(cd, out message))
                 {
-                    // TODO: Show error message
+                    ShowErrorMessage(message);
                 }
 
                 tb_vraag.Text = string.Empty;
@@ -234,7 +234,7 @@ namespace Web_GUI_Layer
 
             if (!GUIHandler.Remove(postID, out message))
             {
-                // TODO: Show error message
+                ShowErrorMessage(message);
             }
 
             // Reload page
@@ -247,11 +247,17 @@ namespace Web_GUI_Layer
 
             if (!GUIHandler.RemoveQuestion(q_id, out message))
             {
-                // TODO: Show error message
+                ShowErrorMessage(message);
             }
 
             // Redirect to profiel.aspx
             Response.Redirect("profiel.aspx", false);
+        }
+
+        private void ShowErrorMessage(string message)
+        {
+            error_message.Text = message;
+            error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
         }
 
         [System.Web.Services.WebMethod]
@@ -273,7 +279,6 @@ namespace Web_GUI_Layer
 
             if (!tempGUIHandler.Edit(cd, postID, mainuserID, out message))
             {
-                // TODO: Show error message
                 return "";
             }
 

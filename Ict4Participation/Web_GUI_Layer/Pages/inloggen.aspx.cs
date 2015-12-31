@@ -39,5 +39,11 @@ namespace Web_GUI_Layer
         {
             Response.Redirect("registreren.aspx", false);
         }
+
+        protected void ShowErrorMessage(string message)
+        {
+            error_message.Text = message;
+            error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+        }
     }
 }

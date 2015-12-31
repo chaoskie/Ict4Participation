@@ -40,6 +40,11 @@
 		    <!-- MAIN -->
 		    <main id="main">
 			    <div class="container">
+
+                    <br />
+            
+                    <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
+
 				    <h2>Vraag van <span id="vraag_naam" runat="server"></span></h2>
 				    
                     <div class="row">

@@ -30,5 +30,11 @@ namespace Web_GUI_Layer
         {
             Response.Redirect("hoofdmenu.aspx", false);
         }
+
+        private void ShowErrorMessage(string message)
+        {
+            error_message.Text = message;
+            error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+        }
     }
 }

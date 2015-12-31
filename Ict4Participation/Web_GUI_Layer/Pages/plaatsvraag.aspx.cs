@@ -48,12 +48,6 @@ namespace Web_GUI_Layer
             Response.Redirect("profiel.aspx", false);
         }
 
-        private void ShowErrorMessage(string message)
-        {
-            error_message.Text = message;
-            error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
-        }
-
         protected void btnPlaatsHulpvraag_Click(object sender, EventArgs e)
         {
             string message = string.Empty;
@@ -97,6 +91,12 @@ namespace Web_GUI_Layer
                 // Redirect to profiel.aspx if question was placed successfully
                 Response.Redirect("profiel.aspx", false);
             }
+        }
+
+        private void ShowErrorMessage(string message)
+        {
+            error_message.Text = message;
+            error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
         }
 
         [System.Web.Services.WebMethod]

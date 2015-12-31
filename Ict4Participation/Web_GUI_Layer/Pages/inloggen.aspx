@@ -38,10 +38,13 @@
 		    <!-- MAIN -->
 		    <main id="main">
 			    <div class="container">
-				    <div class="form-signin">
-					    <h2 class="form-signin-heading">Log In</h2>
 
-                        <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
+                    <br />
+
+                    <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
+				    
+                    <div class="form-signin">
+					    <h2 class="form-signin-heading">Log In</h2>
 
 					    <label for="inputGebruikersnaam" class="sr-only">Gebruikersnaam</label>
 					    <input type="text" id="inputGebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required="required" runat="server" />

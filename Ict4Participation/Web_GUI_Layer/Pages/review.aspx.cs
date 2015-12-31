@@ -42,5 +42,11 @@ namespace Web_GUI_Layer.Pages
         {
             Response.Redirect("homepage.aspx", false);
         }
+
+        private void ShowErrorMessage(string message)
+        {
+            error_message.Text = message;
+            error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+        }
     }
 }

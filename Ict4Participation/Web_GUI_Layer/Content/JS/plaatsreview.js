@@ -1,6 +1,10 @@
 ﻿// Functie om het aantal sterren te selecteren en op te slaan in het data-attribuut van de wrapper
 $(function () {
+
+    // Stuur het event mee zodat het id van het element kan worden opgevraagd
+    // Dit kan ook op andere manieren zonder event, maar de manier met event is veel sneller
     $('#review_rating>span').click(function (event) {
+
         // Haal het nr op van de geklikte ster
         var ratingNr = event.target.id.substr(evsent.target.id.length - 1);
 
@@ -15,5 +19,7 @@ $(function () {
         {
             $('#review_rating span:nth-child(' + (6 - j) + ')').html('&#9733;');
         }
+
     });
+
 });

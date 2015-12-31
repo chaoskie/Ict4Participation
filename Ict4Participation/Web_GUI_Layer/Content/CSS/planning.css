@@ -1,4 +1,7 @@
-﻿#planning {
+﻿/*
+ * PLANNING STYLES
+ * * * * * * * * * * */
+#planning {
 	box-shadow: 0 0 4px 0 rgba(0,0,0,0.25);
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -30,8 +33,8 @@
     text-align: center;
 }
 #planning .planning-row div p {
-    line-height: 50px;
     color: #f6f6f6;
+    line-height: 50px;
 }
 #planning .planning-row input {
     background-color: #fff;
@@ -44,7 +47,9 @@
 #planning:not(.static) .planning-row input:not(.beschikbaar):hover {
     background-color: #e3fbd0;
 }
-
+/* Media query om het font wat kleiner te maken */
+/* Ook wordt de span van de dag niet weergegeven waardoor
+   er een afkorting overblijft */
 @media screen and (max-width: 410px) {
     #planning {
         font-size: 80%;

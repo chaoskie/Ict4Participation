@@ -1,10 +1,12 @@
-﻿$(function () {
+﻿// Haal alle gebruikers op als de pagina geladen is
+$(function () {
     haalGebruikersOp('');
 });
 
+// Haal alle gebruikers op als er op de input wordt geklikt of een toets wordt losgelaten
 $('#inputZoeken').on('keyup click', haalGebruikersOp($(this).val()));
 
-
+// Functie om de gebruikers op te halen, door middel van ajax
 function haalGebruikersOp(val) {
 
     $.ajax({
@@ -40,6 +42,8 @@ function haalGebruikersOp(val) {
     });
 };
 
+// Functie om naar de profielpagina te gaan
+// De reden dat dit niet in de code behind staat is omdat de gebruikers dynamisch worden geladen
 function gaNaarProfiel(id) {
 
     // Ajax call naar server om naar de profielpagina te gaan

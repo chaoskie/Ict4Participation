@@ -50,6 +50,11 @@
 		    <!-- MAIN -->
 		    <main id="main">
 			    <div class="container">
+
+                    <br />
+            
+                    <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
+
 				    <h2>Profielpagina</h2>
 				
 				    <!-- PROFIEL -->

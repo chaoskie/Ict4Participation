@@ -1,12 +1,12 @@
 /*
- * DROP DOWN
+ * DROPDOWN STYLES
  * * * * * * * * * * */
 .dropdown {
 	margin-bottom: 2rem;
 }
 .dropdown-title {
 	background-color: #ed1e12;
-	color: white;
+	color: #fff;
 	cursor: pointer;
 	font-size: 3rem;
     margin: 0;

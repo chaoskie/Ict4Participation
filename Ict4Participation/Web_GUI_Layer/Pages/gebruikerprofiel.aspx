@@ -43,7 +43,12 @@
 		    <!-- MAIN -->
 		    <main id="main">
 			    <div class="container">
-				    <h2>Profielpagina</h2>
+
+                    <br />
+
+                    <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
+				    
+                    <h2>Profielpagina</h2>
 				
 				    <!-- PROFIEL -->
 				    <div id="profiel_section" class="row">

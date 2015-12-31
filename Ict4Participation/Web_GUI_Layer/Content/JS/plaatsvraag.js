@@ -10,6 +10,7 @@ $('#btnVoegToe').on('click', function () {
     // Valideer fields
     valideerFields();
 
+    // Synchroniseer de skills met de serverside
     VoegSkillsToeServerSide();
 });
 
@@ -27,12 +28,14 @@ $('#btnVerwijder').on('click', function () {
 
     $('#select_skills_output').val($('#select_skills_output option:first').val());
 
+    // Synchroniseer de skills met de serverside
     VoegSkillsToeServerSide();
 
 });
 
 // Functie om skills serverside toe te voegen
-// (ASP kan de skills in select_skills_output niet uitlezen)
+// De reden waarom dit op deze manier wordt gedaan is omdat de codebehind niet weet dat
+// er iets is toegevoegd aan het element select_skills_output
 function VoegSkillsToeServerSide() {
 
     var skills = '';
@@ -43,6 +46,8 @@ function VoegSkillsToeServerSide() {
 
         skills += skills_output[i].value.toLowerCase();
 
+        // Na elke skill (behalve de laatste) wordt een | geplaatst, zodat de
+        // server de skills kan onderscheiden
         if (i < skills_output.length - 1) {
             skills += '|';
         }
@@ -56,12 +61,15 @@ function VoegSkillsToeServerSide() {
         data: '{skills: "' + skills + '"}',
         contentType: 'application/json;charset=utf-8',
         dataType: 'json',
-        success: function (result) {}
+        success: function (result) {
+            // er worden geen resultaten teruggegeven dus deze functie is leeg
+        }
     });
 
 };
 
-
+// Na het laden van de pagina worden de huidige data ingevuld voor gebruiksvriendelijkheid
+// en worden de fields gevalideerd
 $(function () {
 
     // Zet de datum naar de huidige datum
@@ -97,6 +105,7 @@ $(function () {
 
 });
 
+// Functie om de fields te valideren door middel van reguliere expressies
 function valideerFields() {
 
     // Valideer titel
@@ -262,11 +271,13 @@ function valideerFields() {
     }
 };
 
+// Functie om alle controls van startdatum de klasse 'form-fail' te geven
 function fouteStartdateIngevoerd() {
     $('#input_startdate_1, #input_startdate_2, #input_startdate_3, #input_startdate_4, #input_startdate_5').removeClass('form-success').addClass('form-fail');
     allesgoed = false;
 };
 
+// Functie om alle controls van einddatum de klaase 'form-fail' te geven
 function fouteEinddateIngevoerd() {
     $('#input_einddate_1, #input_einddate_2, #input_einddate_3, #input_einddate_4, #input_einddate_5').removeClass('form-success').addClass('form-fail');
     allesgoed = false;

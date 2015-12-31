@@ -9,7 +9,7 @@
 	<meta name="author" content="ICT4Participation" />
     <meta name="description" content="Log in om verder te gaan" />
     <meta name="keywords" content="Inloggen,ICT4Participation,Hulp,Hulpbehoevende,Vrijwilliger,Eindhoven" />
-    <title>Index pagina</title>
+    <title>Hoofdmenu</title>
     <!-- Stylesheets -->
 	<link rel="stylesheet" href="../Content/CSS/bootstrap.min.css" />
 	<link rel="stylesheet" href="../Content/CSS/font-awesome.min.css" />
@@ -51,6 +51,11 @@
 		    <!-- MAIN -->
 		    <main id="main">
 			    <div class="container">
+
+                    <br />
+            
+                    <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
+
 				    <!-- PROFIEL -->
 				    <div id="profiel_section" class="row">
 					    <div class="col-tn-12 col-xs-8">

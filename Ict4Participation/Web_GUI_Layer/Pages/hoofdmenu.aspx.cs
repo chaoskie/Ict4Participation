@@ -46,8 +46,6 @@ namespace Web_GUI_Layer
                         btn.CssClass += "beschikbaar";
                     }
                 }
-
-                //rooster_ma_ochtend.DataBinding += delegate { rooster_change; };
             }
         }
 
@@ -74,12 +72,6 @@ namespace Web_GUI_Layer
             Response.Redirect("profiel.aspx", false);
         }
         
-
-        /// <summary>
-        /// !!!!!!! Deze methode zou moeten werken als je deze aan kan roepen
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         protected void rooster_change(object sender, EventArgs e)
         {
             string message = string.Empty;
@@ -88,10 +80,7 @@ namespace Web_GUI_Layer
             ad.Day = (sender as Button).ID.Split('_')[1];
             ad.Daytime = (sender as Button).ID.Split('_')[2];
 
-            //ad.Daytime = (sender as Button).Attributes["data-daytime"].ToString();
-
             // Check if sender has class "beschikbaar"
-            //if ((sender as Button).Attributes["class"].ToString() == "beschikbaar")
             if ((sender as Button).CssClass.Contains("beschikbaar"))
             {
                 // update availability in database
@@ -113,50 +102,14 @@ namespace Web_GUI_Layer
             // Show error if message is not empty
             if (!string.IsNullOrEmpty(message))
             {
-                // TODO: Show error message
+                ShowErrorMessage(message);
             }
         }
 
-        /// <summary>
-        /// !!!!!!!! Deze methode werkt wss niet, wordt aangeroepen vanuit hoofdmenu.js
-        /// </summary>
-        /// <param name="day"></param>
-        /// <param name="daytime"></param>
-        /// <param name="beschikbaar"></param>
-        /// <returns></returns>
-        //[System.Web.Services.WebMethod]
-        //public static string UpdateBeschikbaarheid(string day, string daytime, string beschikbaar)
-        //{
-        //    string message = string.Empty;
-
-        //    GUIHandler tempGUIHandler = new GUIHandler();
-
-        //    Availabilitydetails ad = new Availabilitydetails();
-        //    ad.Day = day;
-        //    ad.Daytime = daytime;
-
-        //    if (beschikbaar == "true")
-        //    {
-        //        if (!tempGUIHandler.AddAvailability(ad, out message))
-        //        {
-        //            // TODO: Show message
-
-        //            return "true";
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (!tempGUIHandler.RemoveAvailability(ad, out message))
-        //        {
-        //            // TODO: Show message
-
-        //            return "true";
-        //        }
-        //    }
-
-        //    // update to database
-
-        //    return string.Empty;
-        //}
+        protected void ShowErrorMessage(string message)
+        {
+            error_message.Text = message;
+            error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+        }
     }
 }

@@ -116,10 +116,22 @@ namespace Web_GUI_Layer.Pages
 
         protected void btnPlaatsReview_Click(object sender, EventArgs e)
         {
+            if (u_id == GUIHandler.GetMainuserInfo().ID)
+            {
+                ShowErrorMessage("U kunt geen review plaatsen over uzelf!");
+            }
+
             // Place ID of account to review in session
             Session["AccToReview_ID"] = u_id;
 
             Response.Redirect("plaatsreview.aspx", false);
+            return;
+        }
+
+        protected void ShowErrorMessage(string message)
+        {
+            error_message.Text = message;
+            error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
         }
     }
 }

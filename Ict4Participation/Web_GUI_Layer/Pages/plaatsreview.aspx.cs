@@ -52,7 +52,7 @@ namespace Web_GUI_Layer.Pages
                 return;
             }
 
-            // TODO: Get rating from control
+            // Get rating from control
             int ratingNr = Convert.ToInt32(review_rating.Attributes["data-rating-nr"].ToString());
             rd.Rating = ratingNr;
 

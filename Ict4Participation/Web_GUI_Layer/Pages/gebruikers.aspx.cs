@@ -10,6 +10,8 @@ namespace Web_GUI_Layer
 {
     public partial class gebruikers : System.Web.UI.Page
     {
+        private static int mainuserID;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             // Check if GUIHandler exists
@@ -19,6 +21,9 @@ namespace Web_GUI_Layer
                 Response.Redirect("inloggen.aspx", false);
                 return;
             }
+
+            // Set mainuserID to be used in static methods
+            mainuserID = ((GUIHandler)Session["GUIHandler_obj"]).GetMainuserInfo().ID;
         }
 
         protected void btnTerug_Click(object sender, EventArgs e)
@@ -36,9 +41,12 @@ namespace Web_GUI_Layer
 
             foreach (Accountdetails user in users)
             {
-                if (user.Name.ToLower().Contains(str.ToLower()))
+                if (user.ID != mainuserID)
                 {
-                    result += user.Name + "," + user.ID + ":";
+                    if (user.Name.ToLower().Contains(str.ToLower()))
+                    {
+                        result += user.Name + "," + user.ID + ":";
+                    }
                 }
             }
 
@@ -49,7 +57,13 @@ namespace Web_GUI_Layer
 
             return result;
         }
-        
+
+        protected void ShowErrorMessage(string message)
+        {
+            error_message.Text = message;
+            error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+        }
+
         [System.Web.Services.WebMethod]
         public static string GetUserInfo(string id)
         {

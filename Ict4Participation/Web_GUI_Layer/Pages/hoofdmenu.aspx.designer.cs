@@ -13,6 +13,15 @@ namespace Web_GUI_Layer {
     public partial class hoofdmenu {
         
         /// <summary>
+        /// error_message control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label error_message;
+        
+        /// <summary>
         /// user_naam control.
         /// </summary>
         /// <remarks>

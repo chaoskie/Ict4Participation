@@ -34,9 +34,9 @@ select.form-fail,
 select.form-fail:focus,
 .input-group>.file-caption.form-fail,
 .input-group>.file-caption.form-fail:focus {
-    border: 1px solid red;
-    border-color: red !important;
-    color: red;
+    border: 1px solid #f00;
+    border-color: #f00 !important;
+    color: #f00;
 }
 input:not([type="checkbox"]).form-success,
 input:not([type="checkbox"]).form-success:focus,
@@ -46,9 +46,9 @@ select.form-success,
 select.form-succes:focus,
 .input-group>.file-caption.form-success,
 .input-group>.file-caption.form-success:focus {
-    border: 1px solid green;
-    border-color: green !important;
-    color: green;
+    border: 1px solid #0f0;
+    border-color: #0f0 !important;
+    color: #0f0;
 }
 .file-caption {
     border-right-width: 2px !important;

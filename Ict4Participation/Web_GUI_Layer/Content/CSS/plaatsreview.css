@@ -1,4 +1,9 @@
-﻿#review_rating {
+﻿/*
+ * REVIEW STYLES
+ * * * * * * * * * * */
+/* Geavanceerde css om de reviewsterren goed te laten werken */
+/* De elementen worden van rechts naar links ingeladen, omdat CSS niet achteruit kan kijken */
+#review_rating {
     unicode-bidi: bidi-override;
     direction: rtl;
 }

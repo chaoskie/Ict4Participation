@@ -1,4 +1,7 @@
-﻿#comment_section .comment-author {
+﻿/*
+ * REACTIES STYLES
+ * * * * * * * * * * */
+#comment_section .comment-author {
     margin-top: 0;
 }
 #comment_section .comment-body {
@@ -30,7 +33,7 @@
     width: 30px;
 }
 #comment_section .comment-body[contenteditable]:focus::after {
+    bottom: 0;
     opacity: 0.8;
     right: 0;
-    bottom: 0;
 }

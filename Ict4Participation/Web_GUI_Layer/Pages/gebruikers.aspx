@@ -41,6 +41,10 @@
 		    <main id="main">
 			    <div class="container">
 
+                    <br />
+
+                    <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
+
 				    <div class="form-group">
 					    <h2>Gebruikers</h2>
 					    <div class="row">
