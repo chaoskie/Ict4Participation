@@ -75,6 +75,15 @@ namespace Class_Layer
         }
 
         /// <summary>
+        /// Updates the description of this comment
+        /// </summary>
+        /// <param name="newDesc">The new description of the comment</param>
+        public void SetDescription(string newDesc)
+        {
+            this.Description = newDesc;
+        }
+
+        /// <summary>
         /// Gets all the comments belonging to a question
         /// </summary>
         /// <param name="questionID"></param>

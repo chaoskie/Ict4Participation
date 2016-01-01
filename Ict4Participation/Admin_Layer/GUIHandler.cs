@@ -287,7 +287,9 @@ namespace Admin_Layer
             if (c.PosterID == mainuserID)
             {
                 //Edit comment
-                //Comment c = new Comment(LoadedComments[commentIndex].PostID, comment.Description, MainUser.ID, comment.PostedToID, false, comment.PostDate);
+                c.SetDescription(comment.Description);
+                
+                // Update the comment in the database
                 if (!c.Update())
                 {
                     message = "Comment aanpassen is niet gelukt!";
