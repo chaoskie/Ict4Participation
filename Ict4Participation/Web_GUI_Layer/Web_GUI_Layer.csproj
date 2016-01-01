@@ -115,6 +115,7 @@
     <Content Include="Content\JS\review.js" />
     <Content Include="Content\JS\vraag.js" />
     <Content Include="Content\JS\vragen.js" />
+    <Content Include="Content\JS\zoeken.js" />
     <Content Include="Content\JS\zoekprofiel.js" />
     <Content Include="ErrorPages\error.aspx" />
     <Content Include="ErrorPages\error403.aspx" />

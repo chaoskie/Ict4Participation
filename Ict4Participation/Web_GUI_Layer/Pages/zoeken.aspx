@@ -63,17 +63,8 @@
 							    </div>
 						    </div>
 						    <div class="row dropdown-content">
-							    <ul class="col-xs-12">
-								    <li><a href="#">Dit is een melding</a></li>
-								    <li><a href="#">Dit is een andere melding</a></li>
-								    <li><a href="#">Dit is nog een melding</a></li>
-								    <li><a href="#">Dit is nog een melding</a></li>
-								    <li><a href="#">Dit is nog een melding</a></li>
-								    <li><a href="#">Dit is nog een melding</a></li>
-								    <li><a href="#">Dit is nog een melding</a></li>
-								    <li><a href="#">Dit is nog een melding</a></li>
-								    <li><a href="#">Dit is nog een melding</a></li>
-								    <li><a href="#">Dit is nog een melding</a></li>
+							    <ul id="info_lijst" class="col-xs-12">
+								    <li><a href="#">Niks gevonden!</a></li>
 							    </ul>
 						    </div>
 					    </div>
@@ -89,5 +80,6 @@
     <script src="../Content/JS/bootstrap.min.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
 	<script src="../Content/JS/errormessage.js"></script>
+    <script src="../Content/JS/zoeken.js"></script>
 </body>
 </html>
