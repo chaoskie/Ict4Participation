@@ -46,9 +46,9 @@ select.form-success,
 select.form-succes:focus,
 .input-group>.file-caption.form-success,
 .input-group>.file-caption.form-success:focus {
-    border: 1px solid #0f0;
-    border-color: #0f0 !important;
-    color: #0f0;
+    border: 1px solid #0a0;
+    border-color: #0a0 !important;
+    color: #0a0;
 }
 .file-caption {
     border-right-width: 2px !important;

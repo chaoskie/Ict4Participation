@@ -65,7 +65,9 @@
 							    </div>
 						    </div>
 						    <div class="row dropdown-content">
-							    <ul id="gebruikers_lijst" class="col-xs-12"></ul>
+							    <ul id="gebruikers_lijst" class="col-xs-12">
+								    <li><a href="#">Geen gebruikers gevonden</a></li>
+							    </ul>
 						    </div>
 					    </div>
 				    </div>

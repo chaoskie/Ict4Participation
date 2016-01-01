@@ -18,8 +18,6 @@ nav button {
 }
 #review_body {
     font-size: 20px;
-    text-align: justify;
-    text-justify: inter-word;
 }
 #review_rating span {
     color: #ed1e12;

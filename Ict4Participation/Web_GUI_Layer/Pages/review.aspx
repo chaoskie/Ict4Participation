@@ -69,10 +69,10 @@
 
                     <div class="row">
                         <div class="col-xs-12">
-                            <h2>Review:</h2>
+                            <h2 class="text-center">Review:</h2>
                         </div>
                         <div class="col-xs-12">
-                            <p id="review_body" runat="server"></p>
+                            <p id="review_body" class="text-center" runat="server"></p>
                         </div>
                     </div>
 

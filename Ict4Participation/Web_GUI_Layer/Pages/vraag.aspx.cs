@@ -35,7 +35,9 @@ namespace Web_GUI_Layer
             q_id = Convert.ToInt32(Session["QuestionDetails_id"]);
 
             // Get questiondetails
-            Questiondetails qd = GUIHandler.GetAll(true).Where(vraag => vraag.PostID == Convert.ToInt32(Session["QuestionDetails_id"])).ToList()[0];
+            List<Questiondetails> qd_list = GUIHandler.GetAll(true);
+
+            Questiondetails qd = GUIHandler.GetAll(true).Where(vraag => vraag.PostID == q_id).ToList()[0];
 
             // Fill in forms
             Accountdetails ad = GUIHandler.GetAll().Where(account => account.ID == qd.PosterID).ToList()[0];

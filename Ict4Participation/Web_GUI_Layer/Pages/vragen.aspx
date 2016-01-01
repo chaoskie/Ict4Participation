@@ -63,7 +63,7 @@
 							    </div>
 						    </div>
 						    <div class="row dropdown-content">
-							    <ul class="col-xs-12">
+							    <ul id="vragen_lijst" class="col-xs-12">
 								    <li><a href="#">Geen vragen gevonden</a></li>
 							    </ul>
 						    </div>
@@ -80,5 +80,6 @@
     <script src="../Content/JS/bootstrap.min.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
 	<script src="../Content/JS/errormessage.js"></script>
+    <script src="../Content/JS/vragen.js"></script>
 </body>
 </html>

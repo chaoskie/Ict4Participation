@@ -1,10 +1,16 @@
-﻿// Haal alle gebruikers op als de pagina geladen is
-$(function () {
-    haalGebruikersOp('');
-});
+﻿$(function () {
 
-// Haal alle gebruikers op als er op de input wordt geklikt of een toets wordt losgelaten
-$('#inputZoeken').on('keyup click', haalGebruikersOp($(this).val()));
+    // Haal alle gebruikers op als de pagina geladen is
+    haalGebruikersOp('');
+
+    $('#inputZoeken').on('keyup click', function () {
+
+        // Haal alle gebruikers op als er op de input wordt geklikt of een toets wordt losgelaten
+        haalGebruikersOp($(this).val());
+
+    });
+
+});
 
 // Functie om de gebruikers op te halen, door middel van ajax
 function haalGebruikersOp(val) {
