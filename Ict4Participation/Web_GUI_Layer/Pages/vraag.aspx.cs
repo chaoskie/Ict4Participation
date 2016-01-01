@@ -206,11 +206,11 @@ namespace Web_GUI_Layer
         {
             string message = string.Empty;
 
-            if (!string.IsNullOrEmpty(tb_vraag.Text.Trim()))
+            if (!string.IsNullOrEmpty(tb_vraag.InnerText.Trim()))
             {
                 Commentdetails cd = new Commentdetails();
                 cd.PostedToID = q_id;
-                cd.Description = tb_vraag.Text;
+                cd.Description = tb_vraag.InnerText;
                 cd.PostDate = DateTime.Now;
 
                 if (!GUIHandler.Place(cd, out message))
@@ -218,7 +218,7 @@ namespace Web_GUI_Layer
                     ShowErrorMessage(message);
                 }
 
-                tb_vraag.Text = string.Empty;
+                tb_vraag.InnerText = string.Empty;
             }
 
             // Reload page

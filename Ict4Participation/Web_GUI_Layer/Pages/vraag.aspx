@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="vraag.aspx.cs" Inherits="Web_GUI_Layer.vraag" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="vraag.aspx.cs" Inherits="Web_GUI_Layer.vraag" ValidateRequest="false" %>
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -122,7 +122,7 @@
                     <div id="plaats_comment">
                         <div class="row">
                             <div class="col-tn-12 col-xs-7 col-sm-8">
-                                <asp:TextBox ID="tb_vraag" TextMode="MultiLine" runat="server"></asp:TextBox>
+                                <textarea id="tb_vraag" runat="server"></textarea>
                             </div>
                             <div class="col-tn-12 col-xs-5 col-sm-4">
                                 <asp:Button OnClick="btnPlaatsVraag_Click" CssClass="btn btn-custom btn-block btn-lg" Text="Plaats reactie" runat="server" />
