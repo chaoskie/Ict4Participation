@@ -13,6 +13,8 @@ namespace Web_GUI_Layer.Pages
     public partial class vragen : System.Web.UI.Page
     {
         private GUIHandler GUIHandler;
+        private static bool orderDescTitle;
+        private static bool orderDescUrgency;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,15 +32,11 @@ namespace Web_GUI_Layer.Pages
             // Insert questions
             List<Questiondetails> qd_list = GUIHandler.GetAll(true);
 
-            // Order list based on switches
-            bool orderByTitle = vragen_order_titel.Attributes["data-orderdesc"].ToString() == "true";
-            bool orderByUrgency = vragen_order_urgentie.Attributes["data-orderdesc"].ToString() == "true";
-
-            if (orderByTitle)
+            if (orderDescTitle)
             {
                 qd_list = qd_list.OrderByDescending(i => i.Title).ToList();
             }
-            if (orderByUrgency)
+            if (orderDescUrgency)
             {
                 qd_list = qd_list.OrderByDescending(i => i.Urgent).ToList();
             }
@@ -90,8 +88,27 @@ namespace Web_GUI_Layer.Pages
                 HtmlAnchor a3 = new HtmlAnchor();
                 a3.Attributes.Add("data-q-id", Convert.ToString(qd.PostID));
                 a3.ServerClick += Question_Click;
-                a3.InnerText = qd.Urgent ? "Niet urgent" : "Urgent";
+                a3.InnerText = qd.Urgent ? "Urgent" : "Niet urgent";
                 p3.Controls.Add(a3);
+            }
+
+            // Change icons based on bools
+            if (orderDescTitle)
+            {
+                vragen_order_titel.InnerHtml = "Vraag&nbsp;<i class=\"fa fa-fw fa-chevron-up\"></i>";
+            }
+            else
+            {
+                vragen_order_titel.InnerHtml = "Vraag&nbsp;<i class=\"fa fa-fw fa-chevron-down\"></i>";
+            }
+
+            if (orderDescUrgency)
+            {
+                vragen_order_urgentie.InnerHtml = "Urgentie&nbsp;<i class=\"fa fa-fw fa-chevron-up\"></i>";
+            }
+            else
+            {
+                vragen_order_urgentie.InnerHtml = "Urgentie&nbsp;<i class=\"fa fa-fw fa-chevron-down\"></i>";
             }
         }
 
@@ -104,6 +121,20 @@ namespace Web_GUI_Layer.Pages
         {
             error_message.Text = message;
             error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+        }
+
+        protected void ChangeOrderTitle_Click(object sender, EventArgs e)
+        {
+            orderDescTitle = !orderDescTitle;
+
+            Response.Redirect(Request.RawUrl, false);
+        }
+
+        protected void ChangeOrderUrgency_Click(object sender, EventArgs e)
+        {
+            orderDescUrgency = !orderDescUrgency;
+
+            Response.Redirect(Request.RawUrl, false);
         }
 
         private void Account_Click(object sender, EventArgs e)

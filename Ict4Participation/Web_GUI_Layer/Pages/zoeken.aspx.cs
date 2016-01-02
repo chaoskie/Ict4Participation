@@ -91,7 +91,7 @@ namespace Web_GUI_Layer
                     vs.PostID = qd.PostID;
 
                     // Add a question to the list if one of the details matches the input string
-                    if (qd.Title.ToLower().Contains(str.ToLower()))
+                    if (qd.Title.ToLower().Contains(str.ToLower()) || str == "*")
                     {
                         vs.Rank = 3;
                         vs.Relevance = str.Length/qd.Title.Length;
@@ -131,7 +131,7 @@ namespace Web_GUI_Layer
                     a_s.AccName = ad.Name;
 
                     // Add an account to the list if one of the details matches the input string
-                    if (ad.Name.ToLower().Contains(str.ToLower()))
+                    if (ad.Name.ToLower().Contains(str.ToLower()) || str == "*")
                     {
                         a_s.Rank = 5;
                         a_s.Relevance = str.Length/ad.Name.Length;

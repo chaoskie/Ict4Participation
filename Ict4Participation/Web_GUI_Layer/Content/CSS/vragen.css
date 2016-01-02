@@ -3,7 +3,7 @@
 }
 #vragen_tabel a {
     text-decoration: none;
-    color: #004499;
+    color: #337ab7;
 }
 #vragen_tabel th {
     background-color: #ed1e12;
@@ -30,11 +30,11 @@
 #vragen_tabel td p {
     font-size: 23px;
 }
-#vragen_tabel tr:nth-child(even) {
-    background-color: #fdfdfd;
-}
 #vragen_tabel tr:nth-child(odd) {
-    background-color: #f26259;
+    background-color: #fff;
+}
+#vragen_tabel tr:nth-child(even) {
+    background-color: #f6f6f6;
 }
 #vragen_tabel .vragen-col p {
     font-size: 20px;

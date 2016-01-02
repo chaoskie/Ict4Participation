@@ -564,20 +564,20 @@ namespace Admin_Layer
         /// <param name="reviewIndex">The index of the review as loaded in the list</param>
         /// <param name="message">The message of the error</param>
         /// <returns>Success</returns>
-        public bool RemoveReview(int reviewIndex, out string message)
+        public bool RemoveReview(int reviewId, out string message)
         {
-            if (LoadedReviews[reviewIndex].PosterID == MainUser.ID)
+            Review r = LoadedReviews.Find(i => i.PostID == reviewId);
+
+            if (r.PosterID == MainUser.ID)
             {
                 //Remove review
-                LoadedReviews[reviewIndex].Delete();
+                r.Delete();
                 message = "Review verwijderd";
                 return true;
             }
-            else
-            {
-                message = "U hebt niet de rechten om deze review aan te passen";
-                return false;
-            }
+
+            message = "U hebt niet de rechten om deze review aan te passen";
+            return false;
         }
         #endregion
 

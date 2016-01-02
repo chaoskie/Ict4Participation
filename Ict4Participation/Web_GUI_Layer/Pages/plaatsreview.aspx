@@ -58,7 +58,7 @@
 					
 					    <div class="row">
 						    <div class="col-xs-12 col-xs-offset-0 col-sm-6 col-sm-offset-3">
-							    <div id="review_rating" data-rating-nr="3" runat="server"><span id="rating5">&#9734;</span><span id="rating4">&#9734;</span><span id="rating3" class="selected">&#9733;</span><span id="rating2" class="selected">&#9733;</span><span id="rating1" class="selected">&#9733;</span></div>
+							    <div id="review_rating" name="ReviewRating" data-rating-nr="3" runat="server" required="required"><span id="rating5">&#9734;</span><span id="rating4">&#9734;</span><span id="rating3" class="selected">&#9733;</span><span id="rating2" class="selected">&#9733;</span><span id="rating1" class="selected">&#9733;</span></div>
 						    </div>
 					    </div>
 

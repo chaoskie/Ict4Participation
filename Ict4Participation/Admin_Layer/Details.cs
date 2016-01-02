@@ -78,7 +78,7 @@ namespace Admin_Layer
         {
             skills = new List<string>();
         }
-        //
+        
         public override string ToString()
         {
             return Title;
@@ -119,6 +119,7 @@ namespace Admin_Layer
             availabilityDetailList = new List<Availabilitydetails>();
             skillsDetailList = new List<Skilldetails>();
         }
+        public string Description { get; set; }
 
         public override string ToString()
         {

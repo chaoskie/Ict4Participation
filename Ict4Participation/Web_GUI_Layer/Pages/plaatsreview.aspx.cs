@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration.Internal;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -12,6 +13,7 @@ namespace Web_GUI_Layer.Pages
     {
         private GUIHandler GUIHandler;
         private static int AccToReviewID;
+        private static int MainuserID;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,6 +30,9 @@ namespace Web_GUI_Layer.Pages
 
             // Set id of user to be reviewed
             AccToReviewID = (int)Session["AccToReview_ID"];
+
+            // Set mainuser id
+            MainuserID = GUIHandler.GetMainuserInfo().ID;
 
             // Set name of user to be reviewed
             review_naam.InnerText = GUIHandler.GetInfo(true, AccToReviewID).Name;
@@ -53,6 +58,8 @@ namespace Web_GUI_Layer.Pages
             }
 
             // Get rating from control
+            var asdf = Request.Form["ReviewRating"];
+
             int ratingNr = Convert.ToInt32(review_rating.Attributes["data-rating-nr"].ToString());
             rd.Rating = ratingNr;
 

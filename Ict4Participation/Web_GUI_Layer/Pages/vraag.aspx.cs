@@ -203,7 +203,7 @@ namespace Web_GUI_Layer
         {
             Response.Redirect("hoofdmenu.aspx", false);
         }
-
+        
         protected void btnPlaatsVraag_Click(object sender, EventArgs e)
         {
             string message = string.Empty;

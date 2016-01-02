@@ -49,7 +49,8 @@ namespace Web_GUI_Layer.Pages
                 usertype.InnerText = "Vrijwilliger";
             }
 
-            // TODO: add user description
+            // Set description
+            userdescription.InnerText = ad.Description;
 
             // Fill in all available days
             foreach (Availabilitydetails avail in ad.AvailabilityDetailList)

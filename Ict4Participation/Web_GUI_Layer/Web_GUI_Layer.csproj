@@ -152,7 +152,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Pages\post.aspx" />
     <Content Include="Pages\profiel.aspx" />
     <Content Include="Pages\registreren.aspx" />
     <Content Include="Web.config" />
@@ -242,13 +241,6 @@
     </Compile>
     <Compile Include="Pages\plaatsvraag.aspx.designer.cs">
       <DependentUpon>plaatsvraag.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\post.aspx.cs">
-      <DependentUpon>post.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\post.aspx.designer.cs">
-      <DependentUpon>post.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\profiel.aspx.cs">
       <DependentUpon>profiel.aspx</DependentUpon>

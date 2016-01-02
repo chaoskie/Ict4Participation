@@ -81,6 +81,8 @@ namespace Web_GUI_Layer.Pages
             {
                 ShowErrorMessage(message);
             }
+
+            Response.Redirect("hoofdmenu.aspx", false);
         }
 
         protected void btnTerug_Click(object sender, EventArgs e)

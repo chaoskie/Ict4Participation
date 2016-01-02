@@ -34,14 +34,13 @@ namespace Web_GUI_Layer
             // Set image
             profielfoto.ImageUrl = mainuser.AvatarPath;
 
-
-
-            // TODO: add description to account and database
+            // Set description
+            userdescription.InnerText = mainuser.Description;
 
 
 
             // Insert all questions
-            List<Questiondetails> questions = GUIHandler.GetAll(true);
+            List<Questiondetails> questions = GUIHandler.GetAll(true).Where(i => i.PosterID == mainuser.ID).ToList();
             foreach (Questiondetails qd in questions)
             {
                 HtmlGenericControl li = new HtmlGenericControl("li");

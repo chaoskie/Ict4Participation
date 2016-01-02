@@ -97,7 +97,6 @@ namespace Class_Layer
         /// Gets the gender of the user
         /// </summary>
         public string Gender { get; private set; }
-
         /// <summary>
         /// Gets the list of availability of the user
         /// </summary>
@@ -106,6 +105,10 @@ namespace Class_Layer
         /// Gets the list of skills of this user
         /// </summary>
         public List<Skill> Skills { get; private set; }
+        /// <summary>
+        /// Gets the description of the user
+        /// </summary>
+        public string Description { get; private set; }
 
         #endregion
 
@@ -424,7 +427,8 @@ namespace Class_Layer
                 row["VOG"].ToString(),
                 row["Geslacht"].ToString(),
                 Skill.GetAll(userid),
-                Class_Layer.Availability.GetAll(userid)
+                Class_Layer.Availability.GetAll(userid),
+                row["Beschrijving"].ToString()
                 );
             return acc;
         }
@@ -450,7 +454,7 @@ namespace Class_Layer
         /// <param name="availability"></param>
         public Account(int ID, string username, string email, string name, string address, string city, string phonenumber,
             string hasLicense, string hasVehicle, DateTime lastLogin, string OVPossible, DateTime birthdate, string avatarPath, string VOG, string gender,
-            List<Skill> skills, List<Availability> availability)
+            List<Skill> skills, List<Availability> availability, string description)
         {
             this.ID = ID;
             this.Username = username;
@@ -467,6 +471,7 @@ namespace Class_Layer
             this.Skills = skills;
             this.Availability = availability;
             this.Gender = gender;
+            this.Description = description;
 
             //If accessed normally
             if (System.Web.HttpContext.Current != null)
