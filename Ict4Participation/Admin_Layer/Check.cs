@@ -45,9 +45,9 @@ namespace Admin_Layer
                         return false;
                     }
                 }
-                if (!Check.isImage(acc.AvatarPath))
+                if (!Check.isImage(acc.AvatarPath.ToLower()))
                 {
-                    message = "Uw avatar is geen afbeelding.";
+                    message = "Uw avatar is geen .PNG, .JPG of .JPEG.";
                     return false;
                 }
             }
@@ -134,21 +134,20 @@ namespace Admin_Layer
 
         public static bool isImage(string s)
         {
-            try
+            //Check if .png .jpg .jpeg
+            if (!Check.isOfFileExt(s, ".png"))
             {
-                //TO DO
-                //Download
-                //Try creating an image out of it
-                //https://msdn.microsoft.com/en-us/library/ez801hhe(v=vs.110).aspx references that may help
-                //http://stackoverflow.com/questions/307688/how-to-download-a-file-from-a-url-in-c 
-
-                return true;
-            }
-            catch
-            {
-                //Delete image
                 return false;
             }
+            if (!Check.isOfFileExt(s, ".jpg"))
+            {
+                return false;
+            }
+            if (!Check.isOfFileExt(s, ".jpeg"))
+            {
+                return false;
+            }
+            return true;
         }
 
         public static bool isEmail(string s)
