@@ -12,6 +12,7 @@ namespace Web_GUI_Layer
     public partial class profiel : System.Web.UI.Page
     {
         private GUIHandler GUIHandler;
+        private static int mainuserID;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,7 +27,11 @@ namespace Web_GUI_Layer
             // Retrieve GUIHandler object from session
             GUIHandler = (GUIHandler)Session["GUIHandler_obj"];
 
+            // Get all details of mainuser
             Accountdetails mainuser = GUIHandler.GetMainuserInfo();
+
+            // Set mainuserID
+            mainuserID = mainuser.ID;
 
             // Set username
             username.InnerText = mainuser.Name;
@@ -208,8 +213,26 @@ namespace Web_GUI_Layer
         [System.Web.Services.WebMethod]
         public static string ChangeUserDescription(string str)
         {
+            string message = string.Empty;
+
             // update username
-            return "Nieuwe description";
+            GUIHandler tempGuiHandler = new GUIHandler();
+
+            // Load all accounts
+            tempGuiHandler.GetAll();
+
+            // Get mainuser account details
+            Accountdetails ad = tempGuiHandler.GetInfo(true, mainuserID);
+
+            // Change account description
+            ad.Description = str;
+
+            // TODO: Update user details
+            // Edit doesnt work currently as this is a static method and mainuser is undefined
+            //tempGuiHandler.Edit(ad, out message);
+
+            // Return user description
+            return ad.Description;
         }
 
         [System.Web.Services.WebMethod]

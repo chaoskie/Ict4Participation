@@ -64,7 +64,6 @@ namespace Web_GUI_Layer
             // acc.OVPossible = ...
 
             // upload photo
-            GUIHandler.Download(inputProfielfoto, out message);
 
             acc.AvatarPath = "TEST/AVATAR/PATH.png";            
 
@@ -79,6 +78,11 @@ namespace Web_GUI_Layer
                 error_message.Text = "Het registreren van uw account is gelukt!";
                 error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
                 error_message.CssClass = error_message.CssClass.Replace("error-red", "error-green");
+
+                if (!GUIHandler.Download(inputProfielfoto, out message))
+                {
+                    ShowErrorMessage("Het uploaden van de foto is niet gelukt!");
+                }
             }
         }
 

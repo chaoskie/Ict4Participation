@@ -799,19 +799,19 @@ namespace Admin_Layer
             }
             string appPath = System.Web.HttpContext.Current.Request.ApplicationPath;
             string physicalPath = System.Web.HttpContext.Current.Request.MapPath(appPath);
-
-            // GAAT NIET WERKEN!
-            // Er is nog geen gebruiker ingelogd dus mainuser is null!
+            
             SaveLocation =  physicalPath + loc + "\\" + MainUser.ID + ext;
             try
             {
                 File1.PostedFile.SaveAs(SaveLocation);
                 message = "The file has been uploaded.";
+
                 return true;
             }
             catch (Exception ex)
             {
                 message = "Error: " + ex.Message;
+
                 return false;
             }
 

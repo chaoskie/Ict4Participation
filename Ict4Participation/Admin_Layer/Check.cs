@@ -37,7 +37,7 @@ namespace Admin_Layer
             }
             if (!isAdmin)
             {
-                if (acc.VOGPath != null)
+                if (acc.VOGPath != string.Empty)
                 {
                     if (!Check.isOfFileExt(acc.VOGPath, ".pdf"))
                     {
