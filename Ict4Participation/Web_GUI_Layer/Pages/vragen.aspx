@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="../Content/CSS/zoeken.css" />
 	<link rel="stylesheet" href="../Content/CSS/dropdown.css" />
 	<link rel="stylesheet" href="../Content/CSS/input.css" />
+    <link rel="stylesheet" href="../Content/CSS/vragen.css" />
 </head>
 <body>
     <form runat="server">
@@ -44,34 +45,39 @@
             
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
-				    <div class="form-group">
-					    <h2>Alle vragen</h2>
-					    <div class="row">
-						    <div class="col-xs-12">
-							    <label for="inputZoeken" class="sr-only">Zoeken</label>
-							    <input type="text" id="inputZoeken" class="form-control" placeholder="Zoek op titel" />
-						    </div>
-					    </div>
-				    </div>
+					<h2>Alle vragen</h2>
+                    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            
+                            <table id="vragen_tabel">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <p><a id="vragen_order_titel" href="#" runat="server" data-orderdesc="true">Vraag&nbsp;<i class="fa fa-fw fa-chevron-up"></i></a></p>
+                                            <span class="fa fa-fw fa-question"></span>
+                                        </th>
+                                        <th>
+                                            <p>Geplaatst door</p>
+                                            <span class="fa fa-fw fa-user"></span>
+                                        </th>
+                                        <th>
+                                            <p><a id="vragen_order_urgentie" href="#" runat="server" data-orderdesc="true">Urgentie&nbsp;<i class="fa fa-fw fa-chevron-up"></i></a></p>
+                                            <span class="fa fa-fw fa-exclamation"></span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="vragen_list" runat="server"></tbody>
+                            </table>
 
-				    <!-- Resultaten -->
-				    <div class="row">
-					    <div class="col-xs-12 dropdown">
-						    <div class="row dropdown-title">
-							    <div class="col-xs-12">
-								    <p class="pull-left">Gevonden vragen</p>
-							    </div>
-						    </div>
-						    <div class="row dropdown-content">
-							    <ul id="vragen_lijst" class="col-xs-12">
-								    <li><a href="#">Geen vragen gevonden</a></li>
-							    </ul>
-						    </div>
-					    </div>
-				    </div>
+                        </div>
+                    </div>
 
 			    </div>
 		    </main>
+
+	        <br/>
+
 	    </div>
     </form>
 	
@@ -80,6 +86,5 @@
     <script src="../Content/JS/bootstrap.min.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
 	<script src="../Content/JS/errormessage.js"></script>
-    <script src="../Content/JS/vragen.js"></script>
 </body>
 </html>

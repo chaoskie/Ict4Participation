@@ -1,0 +1,63 @@
+﻿#vragen_tabel {
+    width: 100%;
+}
+#vragen_tabel a {
+    text-decoration: none;
+    color: #004499;
+}
+#vragen_tabel th {
+    background-color: #ed1e12;
+    height: 46px;
+}
+#vragen_tabel th a {
+    color: #111;
+}
+#vragen_tabel th span {
+    display: none;
+}
+#vragen_tabel th p {
+    display: block;
+    font-size: 23px;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#vragen_tabel tr th:nth-child(1) p,
+#vragen_tabel tr td:nth-child(1) p {
+    margin-left: 10px;
+}
+#vragen_tabel td p {
+    font-size: 23px;
+}
+#vragen_tabel tr:nth-child(even) {
+    background-color: #fdfdfd;
+}
+#vragen_tabel tr:nth-child(odd) {
+    background-color: #f26259;
+}
+#vragen_tabel .vragen-col p {
+    font-size: 20px;
+}
+#vragen_tabel tr th:nth-child(1),
+#vragen_tabel tr td:nth-child(1) {
+    width: 50%;
+}
+#vragen_tabel tr th:nth-child(2),
+#vragen_tabel tr td:nth-child(2) {
+    width: 30%;
+}
+#vragen_tabel tr th:nth-child(3),
+#vragen_tabel tr td:nth-child(3) {
+    width: 20%;
+}
+
+@media screen and (max-width: 500px) {
+    #vragen_tabel tr td {
+        width: 100%;
+    }
+    #vragen_tabel tr th p,
+    #vragen_tabel tr td p {
+        font-size: 16px;
+    }
+}

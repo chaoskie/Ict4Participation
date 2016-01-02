@@ -95,6 +95,7 @@
     <Content Include="Content\CSS\registreren.css" />
     <Content Include="Content\CSS\review.css" />
     <Content Include="Content\CSS\vraag.css" />
+    <Content Include="Content\CSS\vragen.css" />
     <Content Include="Content\CSS\zoeken.css" />
     <Content Include="Content\Files\Woonplaatsen_Nederland.txt" />
     <Content Include="Content\Fonts\fontawesome-webfont.svg" />

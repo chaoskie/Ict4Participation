@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Admin_Layer;
 
@@ -24,6 +26,73 @@ namespace Web_GUI_Layer.Pages
 
             // Retrieve GUIHandler object from session
             GUIHandler = (GUIHandler)Session["GUIHandler_obj"];
+
+            // Insert questions
+            List<Questiondetails> qd_list = GUIHandler.GetAll(true);
+
+            // Order list based on switches
+            bool orderByTitle = vragen_order_titel.Attributes["data-orderdesc"].ToString() == "true";
+            bool orderByUrgency = vragen_order_urgentie.Attributes["data-orderdesc"].ToString() == "true";
+
+            if (orderByTitle)
+            {
+                qd_list = qd_list.OrderByDescending(i => i.Title).ToList();
+            }
+            if (orderByUrgency)
+            {
+                qd_list = qd_list.OrderByDescending(i => i.Urgent).ToList();
+            }
+
+            // Clear all controls inside vragen_list
+            vragen_list.Controls.Clear();
+
+            // Get all accounts
+            GUIHandler.GetAll();
+
+            // Insert questions to vragen_list
+            foreach (Questiondetails qd in qd_list)
+            {
+                // Get userdetails
+                Accountdetails ad = GUIHandler.GetInfo(false, qd.PosterID);
+
+                // Insert new row in table
+                TableRow tr = new TableRow();
+                vragen_list.Controls.Add(tr);
+
+                TableCell tc1 = new TableCell();
+                TableCell tc2 = new TableCell();
+                TableCell tc3 = new TableCell();
+
+                tr.Controls.Add(tc1);
+                tr.Controls.Add(tc2);
+                tr.Controls.Add(tc3);
+
+                HtmlGenericControl p1 = new HtmlGenericControl("p");
+                HtmlGenericControl p2 = new HtmlGenericControl("p");
+                HtmlGenericControl p3 = new HtmlGenericControl("p");
+
+                tc1.Controls.Add(p1);
+                tc2.Controls.Add(p2);
+                tc3.Controls.Add(p3);
+
+                HtmlAnchor a1 = new HtmlAnchor();
+                a1.Attributes.Add("data-q-id", Convert.ToString(qd.PostID));
+                a1.ServerClick += Question_Click;
+                a1.InnerText = qd.Title;
+                p1.Controls.Add(a1);
+
+                HtmlAnchor a2 = new HtmlAnchor();
+                a2.Attributes.Add("data-u-id", Convert.ToString(ad.ID));
+                a2.ServerClick += Account_Click;
+                a2.InnerText = ad.Name;
+                p2.Controls.Add(a2);
+
+                HtmlAnchor a3 = new HtmlAnchor();
+                a3.Attributes.Add("data-q-id", Convert.ToString(qd.PostID));
+                a3.ServerClick += Question_Click;
+                a3.InnerText = qd.Urgent ? "Niet urgent" : "Urgent";
+                p3.Controls.Add(a3);
+            }
         }
 
         protected void btnTerug_Click(object sender, EventArgs e)
@@ -37,109 +106,22 @@ namespace Web_GUI_Layer.Pages
             error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
         }
 
-        private struct VraagSetup
+        private void Account_Click(object sender, EventArgs e)
         {
-            public string Title { get; set; }
-            public string Owner { get; set; }
-            public int PostID { get; set; }
-            public int OwnerID { get; set; }
-            public int Rank { get; set; }
-            public int Relevance { get; set; }
+            int id = Convert.ToInt32((sender as HtmlAnchor).Attributes["data-u-id"].ToString());
+
+            Session["UserProfile_ID"] = Convert.ToInt32(id);
+
+            Response.Redirect("gebruikerprofiel.aspx", false);
         }
 
-        [System.Web.Services.WebMethod]
-        public static string SearchQuestions(string str)
+        private void Question_Click(object sender, EventArgs e)
         {
-            string result = string.Empty;
+            int id = Convert.ToInt32((sender as HtmlAnchor).Attributes["data-q-id"].ToString());
 
-            if (str.Trim().Length > 0)
-            {
-                GUIHandler tempGUIHandler = new GUIHandler();
+            Session["QuestionDetails_id"] = Convert.ToString(id);
 
-                List<Questiondetails> questions = tempGUIHandler.GetAll(true);
-
-                List<VraagSetup> returnlist = new List<VraagSetup>();
-
-                foreach (Questiondetails qd in questions)
-                {
-                    // SCORING SYSTEM:
-                    // qd.Title = 3
-                    // qd.Description = 2
-                    // qd.Location = 1
-                    // Higher point values get a higher priority
-                    // Questions are then rated by their relevance
-
-                    List<Accountdetails> ad_list = tempGUIHandler.GetAll();
-
-                    Accountdetails ad = ad_list.Find(i => i.ID == qd.PosterID);
-
-                    VraagSetup vs = new VraagSetup();
-                    vs.Title = qd.Title;
-                    vs.Owner = ad.Name;
-                    vs.OwnerID = qd.PosterID;
-                    vs.PostID = qd.PostID;
-
-                    // Add a question to the list if one of the details matches the input string
-                    if (qd.Title.ToLower().Contains(str.ToLower()))
-                    {
-                        vs.Rank = 3;
-                        vs.Relevance = str.Length / qd.Title.Length;
-                    }
-                    else if (qd.Description.ToLower().Contains(str.ToLower()))
-                    {
-                        vs.Rank = 2;
-                        vs.Relevance = str.Length / qd.Description.Length;
-                    }
-                    else if (qd.Location.ToLower().Contains(str.ToLower()))
-                    {
-                        vs.Rank = 1;
-                        vs.Relevance = str.Length / qd.Location.Length;
-                    }
-
-                    // Add VraagSetup if its rank has been set
-                    if (vs.Rank > 0)
-                    {
-                        returnlist.Add(vs);
-                    }
-                }
-
-                // Sort the VraagSetup list
-                returnlist = returnlist.OrderByDescending(i => i.Rank).OrderByDescending(i => i.Relevance).ToList();
-
-                // Cast returnlist to a string
-                foreach (VraagSetup vs in returnlist)
-                {
-                    result += string.Format("{0},{1},{2},{3}:", vs.Title, vs.PostID, vs.OwnerID, vs.Owner);
-                }
-
-                // Remove the last :
-                if (result.Length > 0)
-                {
-                    result = result.Substring(0, result.Length - 1);
-                }
-            }
-
-            return result;
-        }
-
-        [System.Web.Services.WebMethod]
-        public static string GaNaarVraag(int id)
-        {
-            // Set session variable
-            HttpContext.Current.Session["QuestionDetails_id"] = id;
-
-            // Path to url has to be send back because asp doesnt allow routing from webmethods
-            return "vraag.aspx";
-        }
-
-        [System.Web.Services.WebMethod]
-        public static string GaNaarProfiel(int id)
-        {
-            // Set session variable
-            HttpContext.Current.Session["UserProfile_ID"] = id;
-
-            // Path to url has to be send back because asp doesnt allow routing from webmethods
-            return "gebruikerprofiel.aspx";
+            Response.Redirect("vraag.aspx", false);
         }
     }
 }
