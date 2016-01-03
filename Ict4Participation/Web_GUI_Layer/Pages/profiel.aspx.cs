@@ -165,6 +165,11 @@ namespace Web_GUI_Layer
             Response.Redirect("hoofdmenu.aspx", false);
         }
 
+        protected void btnWijzigGegevens_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("wijziggegevens.aspx", false);
+        }
+
         protected void btnPlaatsVraag_Click(object sender, EventArgs e)
         {
             Response.Redirect("plaatsvraag.aspx", false);

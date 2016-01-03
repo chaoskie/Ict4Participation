@@ -11,6 +11,8 @@ namespace Web_GUI_Layer.Pages
     public partial class wijzigvraag : System.Web.UI.Page
     {
         private GUIHandler GUIHandler;
+        private static int q_id;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             // Check if GUIHandler exists
@@ -24,11 +26,11 @@ namespace Web_GUI_Layer.Pages
             // Retrieve GUIHandler object from session
             GUIHandler = (GUIHandler)Session["GUIHandler_obj"];
 
+            // Get question id from session
+            q_id = Convert.ToInt32(Session["QuestionDetails_id"]);
+
             if (!IsPostBack)
             {
-                // Get question id from session
-                int q_id = Convert.ToInt32(Session["QuestionDetails_id"]);
-
                 // Get questiondetails
                 List<Questiondetails> qd_list = GUIHandler.GetAll(true);
 
@@ -60,10 +62,6 @@ namespace Web_GUI_Layer.Pages
                     s_date_hour = Convert.ToInt32(((DateTime) qd.StartDate).ToString("HH"));
                     s_date_min = Convert.ToInt32(((DateTime) qd.StartDate).ToString("mm"));
                 }
-                else
-                {
-                    // TODO: Show error message
-                }
 
                 if (qd.EndDate.HasValue)
                 {
@@ -73,16 +71,20 @@ namespace Web_GUI_Layer.Pages
                     e_date_hour = Convert.ToInt32(((DateTime)qd.EndDate).ToString("HH"));
                     e_date_min = Convert.ToInt32(((DateTime)qd.EndDate).ToString("mm"));
                 }
-                else
-                {
-                    // TODO: Show error message
-                }
 
                 input_startdate_1.Items.FindByValue(Convert.ToString(s_date_day));
                 input_startdate_2.Items.FindByValue(Convert.ToString(s_date_month));
                 input_startdate_3.Items.FindByValue(Convert.ToString(s_date_year));
+                input_startdate_4.Items.FindByValue(Convert.ToString(s_date_hour));
+                input_startdate_5.Items.FindByValue(Convert.ToString(s_date_min));
 
-                // ben te moe om verder te gaan
+                input_einddate_1.Items.FindByValue(Convert.ToString(e_date_day));
+                input_einddate_2.Items.FindByValue(Convert.ToString(e_date_month));
+                input_einddate_3.Items.FindByValue(Convert.ToString(e_date_year));
+                input_einddate_4.Items.FindByValue(Convert.ToString(e_date_hour));
+                input_einddate_5.Items.FindByValue(Convert.ToString(e_date_min));
+
+                inputUrgentie.Checked = qd.Urgent;
             }
         }
 
@@ -93,15 +95,41 @@ namespace Web_GUI_Layer.Pages
 
         protected void btnWijzigVraag_Click(object sender, EventArgs e)
         {
-            // push to server
+            string message = string.Empty;
 
+            // Edit the question
+            Questiondetails qd = new Questiondetails();
+            qd.PostID = q_id;
+            qd.PosterID = GUIHandler.GetMainuserInfo().ID;
+            qd.Title = inputTitel.Value;
+            qd.Description = inputBeschrijving.Value;
+            qd.Skills = new List<string>();
 
+            // TODO: Insert skills
+            // (Keep a list on the server, push to and remove from this list with ajax)
 
-            // if no success
-                // showerrormessage
-                // return
+            qd.Location = inputLocatie.Value;
+            qd.StartDate = new DateTime(Convert.ToInt32(input_startdate_3.Value),
+                Convert.ToInt32(input_startdate_2.Value), Convert.ToInt32(input_startdate_1.Value),
+                Convert.ToInt32(input_startdate_4.Value), Convert.ToInt32(input_startdate_5.Value), 0);
+            qd.EndDate = new DateTime(Convert.ToInt32(input_einddate_3.Value),
+                Convert.ToInt32(input_einddate_2.Value), Convert.ToInt32(input_einddate_1.Value),
+                Convert.ToInt32(input_einddate_4.Value), Convert.ToInt32(input_einddate_5.Value), 0);
+            qd.AmountAccs = Convert.ToInt32(input_max_accs.Value);
+
+            if (!GUIHandler.Edit(qd, qd.PostID, out message))
+            {
+                ShowErrorMessage(message);
+                return;
+            }
 
             Response.Redirect("vraag.aspx", false);
+        }
+
+        protected void ShowErrorMessage(string message)
+        {
+            error_message.Text = message;
+            error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
         }
     }
 }
