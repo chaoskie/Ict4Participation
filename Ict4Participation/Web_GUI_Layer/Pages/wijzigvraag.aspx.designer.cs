@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Web_GUI_Layer {
+namespace Web_GUI_Layer.Pages {
     
     
-    public partial class vraag {
+    public partial class wijzigvraag {
         
         /// <summary>
         /// error_message control.
@@ -22,120 +22,165 @@ namespace Web_GUI_Layer {
         protected global::System.Web.UI.WebControls.Label error_message;
         
         /// <summary>
-        /// vraag_naam control.
+        /// inputTitel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl vraag_naam;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText inputTitel;
         
         /// <summary>
-        /// btnDeleteQuestion control.
+        /// inputBeschrijving control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDeleteQuestion;
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea inputBeschrijving;
         
         /// <summary>
-        /// btnEditQuestion control.
+        /// select_skills control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEditQuestion;
+        protected global::System.Web.UI.WebControls.DropDownList select_skills;
         
         /// <summary>
-        /// qProfilePhoto control.
+        /// select_skills_output control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image qProfilePhoto;
+        protected global::System.Web.UI.WebControls.DropDownList select_skills_output;
         
         /// <summary>
-        /// vraag_titel control.
+        /// inputLocatie control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl vraag_titel;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText inputLocatie;
         
         /// <summary>
-        /// vraag_body control.
+        /// input_startdate_1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl vraag_body;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect input_startdate_1;
         
         /// <summary>
-        /// skills_list control.
+        /// input_startdate_2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl skills_list;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect input_startdate_2;
         
         /// <summary>
-        /// vraag_startdatum control.
+        /// input_startdate_3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl vraag_startdatum;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect input_startdate_3;
         
         /// <summary>
-        /// vraag_einddatum control.
+        /// input_startdate_4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl vraag_einddatum;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect input_startdate_4;
         
         /// <summary>
-        /// vraag_locatie control.
+        /// input_startdate_5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl vraag_locatie;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect input_startdate_5;
         
         /// <summary>
-        /// vraag_urgentie control.
+        /// input_einddate_1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl vraag_urgentie;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect input_einddate_1;
         
         /// <summary>
-        /// comment_section control.
+        /// input_einddate_2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl comment_section;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect input_einddate_2;
         
         /// <summary>
-        /// tb_vraag control.
+        /// input_einddate_3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea tb_vraag;
+        protected global::System.Web.UI.HtmlControls.HtmlSelect input_einddate_3;
+        
+        /// <summary>
+        /// input_einddate_4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect input_einddate_4;
+        
+        /// <summary>
+        /// input_einddate_5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect input_einddate_5;
+        
+        /// <summary>
+        /// input_max_accs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlSelect input_max_accs;
+        
+        /// <summary>
+        /// inputUrgentie control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox inputUrgentie;
+        
+        /// <summary>
+        /// btnWijzigVraag control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnWijzigVraag;
     }
 }

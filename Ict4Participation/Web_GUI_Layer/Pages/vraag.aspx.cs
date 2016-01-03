@@ -256,6 +256,11 @@ namespace Web_GUI_Layer
             Response.Redirect("profiel.aspx", false);
         }
 
+        protected void btnEditQuestion_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("wijzigvraag.aspx", false);
+        }
+
         private void ShowErrorMessage(string message)
         {
             error_message.Text = message;

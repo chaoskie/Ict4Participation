@@ -248,11 +248,9 @@ namespace Admin_Layer
                 message = "Account edited";
                 return true;
             }
-            else
-            {
-                message = "Wachtwoorden komen niet overeen!";
-                return false;
-            }
+
+            message = "Wachtwoorden komen niet overeen!";
+            return false;
         }
         #endregion
 

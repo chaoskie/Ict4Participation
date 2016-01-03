@@ -51,7 +51,7 @@ namespace Web_GUI_Layer
             acc.Address = string.Format("{0} {1}", inputStraatnaam.Value, inputHuisnummer.Value);
             acc.City = inputWoonplaats.Value;
             acc.Phonenumber = inputTelefoonnummer.Value;
-            acc.Gender = input_geslacht.Value.ToLower() == "Man" ? "M" : "V";
+            acc.Gender = input_geslacht.Value.ToLower() == "man" ? "M" : "V";
             acc.Email = inputEmail.Value;
             acc.Username = inputGebruikersnaam.Value;
 

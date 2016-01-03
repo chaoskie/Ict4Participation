@@ -37,7 +37,7 @@ namespace Admin_Layer
             }
             if (!isAdmin)
             {
-                if (acc.VOGPath != string.Empty)
+                if (!string.IsNullOrEmpty(acc.VOGPath))
                 {
                     if (!Check.isOfFileExt(acc.VOGPath, ".pdf"))
                     {
@@ -135,19 +135,19 @@ namespace Admin_Layer
         public static bool isImage(string s)
         {
             //Check if .png .jpg .jpeg
-            if (!Check.isOfFileExt(s, ".png"))
+            if (Check.isOfFileExt(s, ".png"))
             {
-                return false;
+                return true;
             }
-            if (!Check.isOfFileExt(s, ".jpg"))
+            if (Check.isOfFileExt(s, ".jpg"))
             {
-                return false;
+                return true;
             }
-            if (!Check.isOfFileExt(s, ".jpeg"))
+            if (Check.isOfFileExt(s, ".jpeg"))
             {
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
 
         public static bool isEmail(string s)

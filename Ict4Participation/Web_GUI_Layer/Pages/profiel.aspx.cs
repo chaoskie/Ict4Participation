@@ -228,6 +228,7 @@ namespace Web_GUI_Layer
             ad.Description = str;
 
             // TODO: Update user details
+
             // Edit doesnt work currently as this is a static method and mainuser is undefined
             //tempGuiHandler.Edit(ad, out message);
 

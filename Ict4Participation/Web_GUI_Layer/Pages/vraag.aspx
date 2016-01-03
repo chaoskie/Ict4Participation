@@ -48,8 +48,11 @@
 				    <h2>Vraag van <span id="vraag_naam" runat="server"></span></h2>
 				    
                     <div class="row">
-                        <div class="col-xs-12">
+                        <div class="col-tn-12 col-xs-6">
                             <asp:Button ID="btnDeleteQuestion" Text="Verwijder vraag" CssClass="btn btn-custom2 btn-lg btn-block" OnClick="btnDeleteQuestion_Click" runat="server" />
+                        </div>
+                        <div class="col-tn-12 col-xs-6">
+                            <asp:Button ID="btnEditQuestion" Text="Wijzig vraag" CssClass="btn btn-custom2 btn-lg btn-block" OnClick="btnEditQuestion_Click" runat="server" />
                         </div>
                     </div>
 
