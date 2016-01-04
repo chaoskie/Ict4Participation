@@ -58,6 +58,42 @@ namespace Web_GUI_Layer.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl userdescription;
         
         /// <summary>
+        /// useremail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl useremail;
+        
+        /// <summary>
+        /// userphonenr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl userphonenr;
+        
+        /// <summary>
+        /// usergender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl usergender;
+        
+        /// <summary>
+        /// userlogindate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl userlogindate;
+        
+        /// <summary>
         /// rooster_ma_ochtend control.
         /// </summary>
         /// <remarks>

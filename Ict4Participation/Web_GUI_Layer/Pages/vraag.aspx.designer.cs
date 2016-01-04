@@ -28,7 +28,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl vraag_naam;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor vraag_naam;
         
         /// <summary>
         /// btnDeleteQuestion control.
@@ -38,6 +38,15 @@ namespace Web_GUI_Layer {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDeleteQuestion;
+        
+        /// <summary>
+        /// btnEditQuestion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEditQuestion;
         
         /// <summary>
         /// qProfilePhoto control.

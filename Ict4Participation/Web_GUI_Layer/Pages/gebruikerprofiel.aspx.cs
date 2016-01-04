@@ -37,10 +37,8 @@ namespace Web_GUI_Layer.Pages
             // Get user details
             Accountdetails ad = GUIHandler.GetAll().Find(i => i.ID == u_id);
 
-            // Set username
+            // Set user details
             username.InnerText = ad.Name;
-
-            // Set profilephoto
             profielfoto.ImageUrl = ad.AvatarPath;
 
             // Check if user is hulpverlener
@@ -49,8 +47,22 @@ namespace Web_GUI_Layer.Pages
                 usertype.InnerText = "Vrijwilliger";
             }
 
-            // Set description
             userdescription.InnerText = ad.Description;
+            useremail.InnerText = ad.Email;
+            userphonenr.InnerText = ad.Phonenumber;
+
+            // TODO: Add:
+            //ad.hasVehicle;
+            //ad.hasDriverLicense;
+            //ad.OVPossible;
+            
+            // Add address only if mainuser is a volunteer
+            //ad.Address;
+            //ad.City; etc.
+            //ad.Birthdate;
+
+            usergender.InnerText = ad.Gender.ToLower() == "m" ? "Man" : "Vrouw";
+            userlogindate.InnerText = string.Format("{0} heeft voor het laatst ingelogd op: {1}", ad.Name, ad.Lastlogin.ToString("dd-M-yyyy HH:mm"));
 
             // Fill in all available days
             foreach (Availabilitydetails avail in ad.AvailabilityDetailList)

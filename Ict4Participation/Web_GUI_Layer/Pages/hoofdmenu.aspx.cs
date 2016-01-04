@@ -52,6 +52,7 @@ namespace Web_GUI_Layer
             }
 
             // TODO: Fill activities
+
             // Temporary message
             activiteiten_list.Controls.Add(new LiteralControl("<li><a href=\"#\">Geen activiteiten</a>"));
         }

@@ -96,6 +96,7 @@
     <Content Include="Content\CSS\review.css" />
     <Content Include="Content\CSS\vraag.css" />
     <Content Include="Content\CSS\vragen.css" />
+    <Content Include="Content\CSS\wijzigvraag.css" />
     <Content Include="Content\CSS\zoeken.css" />
     <Content Include="Content\Files\Woonplaatsen_Nederland.txt" />
     <Content Include="Content\Fonts\fontawesome-webfont.svg" />
@@ -116,6 +117,7 @@
     <Content Include="Content\JS\review.js" />
     <Content Include="Content\JS\vraag.js" />
     <Content Include="Content\JS\vragen.js" />
+    <Content Include="Content\JS\wijzigvraag.js" />
     <Content Include="Content\JS\zoeken.js" />
     <Content Include="Content\JS\zoekprofiel.js" />
     <Content Include="ErrorPages\error.aspx" />
@@ -133,6 +135,7 @@
     <Content Include="Pages\vraag.aspx" />
     <Content Include="Pages\vragen.aspx" />
     <Content Include="Pages\wijziggegevens.aspx" />
+    <Content Include="Pages\wijzigvraag.aspx" />
     <Content Include="Pages\zoeken.aspx" />
     <Content Include="Content\Fonts\fontawesome-webfont.eot" />
     <Content Include="Content\Fonts\fontawesome-webfont.ttf" />
@@ -269,6 +272,13 @@
     </Compile>
     <Compile Include="Pages\wijziggegevens.aspx.designer.cs">
       <DependentUpon>wijziggegevens.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\wijzigvraag.aspx.cs">
+      <DependentUpon>wijzigvraag.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\wijzigvraag.aspx.designer.cs">
+      <DependentUpon>wijzigvraag.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pages\registreren.aspx.cs">
