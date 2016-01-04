@@ -43,6 +43,7 @@ namespace Admin_Layer
         /// <param name="username"></param>
         public static void SendRegistration(string email, string username)
         {
+            mail.To.Clear();
             mail.To.Add(email);
             mail.Subject = "U hebt een account geregistreerd voor ICT4Participation";
             mail.Body = "Hallo!"
@@ -59,6 +60,7 @@ namespace Admin_Layer
         /// <param name="reason"></param>
         public static void SendDeactivation(string email, string username, string reason)
         {
+            mail.To.Clear();
             mail.To.Add(email);
             mail.Subject = "Uw ICT4Participation account is gedeactiveerd";
             mail.Body = "Hallo!"
@@ -74,6 +76,7 @@ namespace Admin_Layer
         /// <param name="username"></param>
         public static void SendWrongAvatar(string email, string username)
         {
+            mail.To.Clear();
             mail.To.Add(email);
             mail.Subject = "Uw hebt een ICT4Participation waarschuwing ontvangen";
             mail.Body = "Hallo!"
@@ -81,10 +84,11 @@ namespace Admin_Layer
                 + "\nHeeft een ongepaste avatar, indien u deze niet in 24 uur aanpast, zullen de webbeheerders maatregelen nemen." + emailEnd;
             FinalSend();
 
+            mail.To.Clear();
             mail.To.Add("biepbot@gmail.com");
             mail.Subject = "ICT4Participation account gewaarschuwd";
             mail.Body = "Hallo!"
-                + "\nHet volgende account" + username
+                + "\nHet volgende account " + username
                 + "\nHeeft een waarschuwing gekregen over hun avatar, gelieve hier na 24 uur naar te kijken, of contact met de gebruiker op te nemen." + emailEnd;
             FinalSend();
         }
@@ -97,6 +101,7 @@ namespace Admin_Layer
         /// <param name="reason"></param>
         public static void SendWrongComment(string email, string question, string reason)
         {
+            mail.To.Clear();
             mail.To.Add(email);
             mail.Subject = "Uw reactie op de vraag " + question + " is verwijderd";
             mail.Body = "Hallo!"
@@ -113,6 +118,7 @@ namespace Admin_Layer
         /// <param name="reason"></param>
         public static void SendWrongQuestion(string email, string question, string reason)
         {
+            mail.To.Clear();
             mail.To.Add(email);
             mail.Subject = "Uw vraag " + question + " is verwijderd";
             mail.Body = "Hallo!"
@@ -129,6 +135,7 @@ namespace Admin_Layer
         /// <param name="reason"></param>
         public static void SendWrongReview(string email, string username, string reason)
         {
+            mail.To.Clear();
             mail.To.Add(email);
             mail.Subject = "Uw review op " + username + " is verwijderd";
             mail.Body = "Hallo!"
@@ -148,6 +155,7 @@ namespace Admin_Layer
         {
             string ex = byAdmin ? " door een administrator" : "";
 
+            mail.To.Clear();
             mail.To.Add(email);
             mail.Subject = "Uw ICT4Participation wachtwoord is veranderd";
             mail.Body = "Hallo!"
