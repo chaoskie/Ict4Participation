@@ -112,6 +112,7 @@
     <Content Include="Content\JS\jquery-1.11.3.min.js" />
     <Content Include="Content\JS\plaatsreview.js" />
     <Content Include="Content\JS\plaatsvraag.js" />
+    <Content Include="Content\JS\planmeeting.js" />
     <Content Include="Content\JS\profiel.js" />
     <Content Include="Content\JS\registreren.js" />
     <Content Include="Content\JS\review.js" />
@@ -131,6 +132,7 @@
     <Content Include="packages.config" />
     <Content Include="Pages\plaatsreview.aspx" />
     <Content Include="Pages\plaatsvraag.aspx" />
+    <Content Include="Pages\planmeeting.aspx" />
     <Content Include="Pages\review.aspx" />
     <Content Include="Pages\vraag.aspx" />
     <Content Include="Pages\vragen.aspx" />
@@ -244,6 +246,13 @@
     </Compile>
     <Compile Include="Pages\plaatsvraag.aspx.designer.cs">
       <DependentUpon>plaatsvraag.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\planmeeting.aspx.cs">
+      <DependentUpon>planmeeting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\planmeeting.aspx.designer.cs">
+      <DependentUpon>planmeeting.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\profiel.aspx.cs">
       <DependentUpon>profiel.aspx</DependentUpon>

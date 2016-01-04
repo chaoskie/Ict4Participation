@@ -42,7 +42,7 @@ namespace Web_GUI_Layer.Pages
             profielfoto.ImageUrl = ad.AvatarPath;
 
             // Check if user is hulpverlener
-            if (ad.VOGPath != null)
+            if (string.IsNullOrEmpty(ad.VOGPath))
             {
                 usertype.InnerText = "Vrijwilliger";
             }
@@ -212,6 +212,20 @@ namespace Web_GUI_Layer.Pages
             Session["AccToReview_ID"] = u_id;
 
             Response.Redirect("plaatsreview.aspx", false);
+        }
+
+        protected void btnPlanMeeting_Click(object sender, EventArgs e)
+        {
+            // Check if user can plan meeting with this person
+            if (mainuser_id == u_id)
+            {
+                ShowErrorMessage("U kunt geen ontmoeting plannen met uzelf!");
+                return;
+            }
+
+            Session["RequesterID"] = u_id;
+
+            Response.Redirect("planmeeting.aspx", false);
         }
 
         protected void btnNaarVraag_Click(object sender, EventArgs e)

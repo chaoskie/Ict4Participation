@@ -34,7 +34,11 @@
 					     --><button onserverclick="btnPlaatsReview_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
 					 		    <i class="fa fa-commenting"></i>
 					 		    <p>Plaats Review</p>
-					 	    </button>
+					 	    </button><!--
+                         --><button onserverclick="btnPlanMeeting_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
+					            <i class="fa fa-calendar-plus-o"></i>
+                             <p>Plan ontmoeting</p>
+					        </button>
 					    </div>
 				    </div>
 			    </div>
