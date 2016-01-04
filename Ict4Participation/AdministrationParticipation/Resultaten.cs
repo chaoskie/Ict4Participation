@@ -13,9 +13,13 @@ namespace AdministrationParticipation
 {
     public partial class Resultaten : Form
     {
-        public Resultaten(List<Object> objects)
+        public Resultaten(List<Object> objects, Point loc)
         {
             InitializeComponent();
+
+            loc.X += 830 + 10;
+            this.Location = loc;
+
             lbResultaten.DataSource = objects;
             lbResultaten.DisplayMember = "";
         }

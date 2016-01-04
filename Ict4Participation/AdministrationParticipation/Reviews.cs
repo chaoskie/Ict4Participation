@@ -27,6 +27,7 @@ namespace AdministrationParticipation
 
             poster = Program.AdminGUIHndlr.GetAll().Where(ac => ac.ID == rd.PosterID).First();
             posted = Program.AdminGUIHndlr.GetAll().Where(ac => ac.ID == rd.PostedToID).First();
+            Program.AdminGUIHndlr.GetAllReviews(rd.PostedToID);
         }
 
         private void btnAccept_Click(object sender, EventArgs e)

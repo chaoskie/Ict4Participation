@@ -231,7 +231,7 @@ namespace Web_GUI_Layer
             }
 
             // Reload page
-            Response.Redirect(Request.RawUrl);
+            Response.Redirect(Request.RawUrl, false);
         }
 
         protected void btnVerwijderReactie_Click(object sender, EventArgs e)
