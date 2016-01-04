@@ -134,11 +134,13 @@ namespace Admin_Layer
                 message = "Wachtwoorden komen niet overeen!";
                 return false;
             }
-            //Register account
+            List<Skill> skill = acc.SkillsDetailList.Select(c => new Skill(c.UserID, c.Name)).ToList();
+
+                //Register account
             MainUser = Account.Register(acc.Username, password1, acc.Email, acc.Name, acc.Address, acc.City, acc.Phonenumber,
                 Convert.ToBoolean(acc.hasDriverLicense),
                 Convert.ToBoolean(acc.hasVehicle),
-                Convert.ToBoolean(acc.OVPossible), acc.Birthdate, acc.AvatarPath, acc.VOGPath, acc.Gender);
+                Convert.ToBoolean(acc.OVPossible), acc.Birthdate, acc.AvatarPath, acc.VOGPath, acc.Gender, skill);
             //Send mail
             EmailHandler.SendRegistration(acc.Email, acc.Username);
             return true;

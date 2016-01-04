@@ -586,7 +586,7 @@ namespace Database_Layer
                 OracleCommand cmd = new OracleCommand("INSERT INTO \"Acc\" (\"Gebruikersnaam\" ,\"Wachtwoord\" ,\"Email\" ,\"Naam\" ,\"Adres\" ," +
                     "\"Woonplaats\" ,\"Telefoonnummer\" ,\"HeeftRijbewijs\" ,\"HeeftAuto\" , \"Uitschrijvingsdatum\", \"OVMogelijk\" ,\"Geboortedatum\" ," +
                     "\"Foto\" ,\"VOG\", \"Geslacht\") " +
-                   "VALUES(:un, :ph, :em, :na, :loc, :vil, :phon, :dl, :car, TO_DATE(:ud, 'DD-MON-YYYY HH24:MI:SS'), :ov, TO_DATE(:bd, 'dd-mm-yyyy'), :pic, :vog, :ges)");
+                   "VALUES(:un, :ph, :em, :na, :loc, :vil, :phon, :dl, :car, TO_DATE(:ud, 'DD-MON-YYYY HH24:MI:SS'), :ov, TO_DATE(:bd, 'DD-MON-YYYY HH24:MI:SS'), :pic, :vog, :ges)");
                 cmd.Parameters.Add(new OracleParameter("un", Username));
                 cmd.Parameters.Add(new OracleParameter("ph", PassHash));
                 cmd.Parameters.Add(new OracleParameter("em", Email));

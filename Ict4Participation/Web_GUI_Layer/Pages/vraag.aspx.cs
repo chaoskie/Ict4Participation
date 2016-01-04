@@ -77,6 +77,7 @@ namespace Web_GUI_Layer
             if (mainuserID != qd.PosterID)
             {
                 btnDeleteQuestion.Visible = false;
+                btnEditQuestion.Visible = false;
             }
 
             // Insert all comments

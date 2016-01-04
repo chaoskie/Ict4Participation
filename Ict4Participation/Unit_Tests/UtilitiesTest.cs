@@ -100,7 +100,7 @@ namespace Unit_Tests
                 "VOG.pdf",
                 "Man",
                 skills,
-                availability);      
+                availability, "");      
             Accountdetails ad = (Accountdetails)Creation.getDetailsObject(a);
             ad.AvailabilityDetailList = availability.Select(ava => Creation.getDetailsObject(ava)).Cast<Availabilitydetails>().ToList();
             ad.SkillsDetailList = skills.Select(ski => Creation.getDetailsObject(ski)).Cast<Skilldetails>().ToList();

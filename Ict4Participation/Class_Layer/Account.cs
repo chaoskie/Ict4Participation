@@ -207,7 +207,7 @@ namespace Class_Layer
         /// <param name="gender">The gender of the user</param>
         /// <returns>The newly created account</returns>
         public static Account Register(string username, string password, string email, string name, string address, string city, string phonenumber,
-            bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG, string gender)
+            bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG, string gender, List<Skill> iskills  )
         {
             string passTotal = PasswordHashing.CreateHash(password);
             string now = ConvertTo.OracleDateTime(DateTime.Now);
@@ -219,11 +219,18 @@ namespace Class_Layer
                 DataRow dtRow = Database.RetrieveQuery("SELECT * FROM \"Acc\" WHERE "
                     + "\"Gebruikersnaam\" = '" + username + "' AND "
                     + "\"Wachtwoord\" = '" + passTotal + "' AND "
-                    + "\"Email\" = " + email + "'").Rows[0];
+                    + "\"Email\" = '" + email + "'").Rows[0];
                 if (dtRow != null)
                 {
                     Account acc;
                     Account.LogIn(username, password, out acc);
+                    //Update skills
+                    foreach (Skill s in iskills)
+                    {
+                        s.UserID = acc.ID;
+                        s.Add();
+                        acc.Skills.Add(s);
+                    }
                     return acc;
                 }
                 else

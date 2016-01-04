@@ -147,6 +147,10 @@ namespace Admin_Layer
             {
                 return true;
             }
+            if (Check.isOfFileExt(s, ".gif"))
+            {
+                return true;
+            }
             return false;
         }
 
