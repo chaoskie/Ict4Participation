@@ -101,10 +101,6 @@
 												    <input type="text" id="inputWoonplaats" class="form-control" placeholder="Woonplaats" required="required" runat="server" />
                                                     <div id="woonplaats_results_wrapper">
                                                         <p>Eindhoven</p>
-                                                        <p>Eindhoven</p>
-                                                        <p>Eindhoven</p>
-                                                        <p>Eindhoven</p>
-                                                        <p>Eindhoven</p>
                                                     </div>
 											    </div>
                                                 <div class="col-xs-12"></div>
@@ -167,7 +163,8 @@
                                                             <option value="28">28</option>
                                                             <option value="29">29</option>
                                                             <option value="30">30</option>
-                                                            <option value="31">31</option>                                                        </select>
+                                                            <option value="31">31</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-tn-12 col-xs-3 col-sm-4">
@@ -315,7 +312,6 @@
 										    <div class="row">
 											    <div class="col-xs-12">
 												    <label for="inputProfielfoto" class="sr-only">Selecteer profielfoto</label>
-												    <%--<input id="inputProfielfoto" class="file" type="file" required="required" runat="server" />--%>
                                                     <asp:FileUpload ID="inputProfielfoto" ClientIDMode="Static" CssClass="file" required="required" runat="server" />
 											    </div>
 										    </div>
@@ -330,7 +326,7 @@
                                                 <div class="col-xs-12">
                                                     <div class="checkbox">
 						                                <label>
-							                                <input type="checkbox" value="ovmogelijkheid" />
+							                                <input name="cbOVMogelijk" type="checkbox" value="false" onchange="this.value = this.checked;" />
 							                                <span></span>
 							                                <span>OV mogelijkheid</span>
 						                                </label>
@@ -341,7 +337,7 @@
                                                 <div class="col-xs-12">
                                                     <div class="checkbox">
 						                                <label>
-							                                <input type="checkbox" value="rijbewijs" />
+							                                <input name="cbRijbewijs" type="checkbox" value="false" onchange="this.value = this.checked;" />
 							                                <span></span>
 							                                <span>Rijbewijs</span>
 						                                </label>
@@ -352,7 +348,7 @@
                                                 <div class="col-xs-12">
                                                     <div class="checkbox">
 						                                <label>
-							                                <input type="checkbox" value="auto" />
+							                                <input name="cbAuto" type="checkbox" value="false" onchange="this.value = this.checked;" />
 							                                <span></span>
 							                                <span>Auto</span>
 						                                </label>
@@ -422,7 +418,7 @@
 											    <div class="col-xs-12">
 												    <h3><abbr title="Verklaring Omtrend Gedrag">VOG</abbr></h3>
 												    <label for="inputVOG" class="sr-only">Selecteer profielfoto</label>
-												    <input id="inputVOG" class="file" type="file" runat="server" />
+                                                    <asp:FileUpload ID="inputVOG" ClientIDMode="Static" CssClass="file" required="required" runat="server" />
 											    </div>
 										    </div>
 										    <br />

@@ -10,7 +10,7 @@ namespace Class_Layer
 {
     public class Skill : IAccInfo
     {
-        public int UserID { get; private set; }
+        public int UserID { get; set; }
         public string Name { get; private set; }
 
         public Skill(int userid, string name)

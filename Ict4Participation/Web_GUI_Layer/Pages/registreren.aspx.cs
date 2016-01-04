@@ -7,12 +7,14 @@ using System.Web.UI.WebControls;
 using Admin_Layer;
 using System.IO;
 using Web_GUI_Layer.Entities;
+using System.Web.UI.HtmlControls;
 
 namespace Web_GUI_Layer
 {
     public partial class registreren : System.Web.UI.Page
     {
-        private GUIHandler GUIHandler;
+        private static GUIHandler GUIHandler;
+        private static List<Skilldetails> selected_skills;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,14 +33,16 @@ namespace Web_GUI_Layer
 
         protected void btnAnnuleren_Click(object sender, EventArgs e)
         {
+            List<Skilldetails> asdf = selected_skills;
+
+
+
+
             Response.Redirect("inloggen.aspx", false);
         }
 
-        protected void btnRegistreerHulpBehoevende_Click(object sender, EventArgs e)
+        private Accountdetails GetAccount()
         {
-            string message = string.Empty;
-
-            // maak hulpbehoevende aan
             Accountdetails acc = new Accountdetails();
             if (string.IsNullOrEmpty(inputTussenvoegsel.Value))
             {
@@ -52,20 +56,27 @@ namespace Web_GUI_Layer
             acc.City = inputWoonplaats.Value;
             acc.Phonenumber = inputTelefoonnummer.Value;
             acc.Gender = input_geslacht.Value.ToLower() == "man" ? "M" : "V";
+            acc.Birthdate = new DateTime(Convert.ToInt32(input_birthdate_3.Value), Convert.ToInt32(input_birthdate_2.Value), Convert.ToInt32(input_birthdate_1.Value));
+
             acc.Email = inputEmail.Value;
             acc.Username = inputGebruikersnaam.Value;
 
-            int addedSkills = select_skills_output.Controls.Count;
-
-
-            // acc.Birthdate = ...
-            // acc.hasDriverLicense = ...
-            // acc.hasVehicle = ...
-            // acc.OVPossible = ...
+            acc.OVPossible = Request.Form["cbOVMogelijk"] == "true";
+            acc.hasDriverLicense = Request.Form["cbRijbewijs"] == "true";
+            acc.hasVehicle = Request.Form["cbAuto"] == "true";
 
             // upload photo
+            acc.AvatarPath = inputProfielfoto.FileName;
 
-            acc.AvatarPath = "TEST/AVATAR/PATH.png";            
+            return acc;
+        }
+
+        protected void btnRegistreerHulpBehoevende_Click(object sender, EventArgs e)
+        {
+            string message = string.Empty;
+
+            // maak hulpbehoevende aan
+            Accountdetails acc = GetAccount();     
 
             if (!GUIHandler.Register(acc, inputWachtwoord1.Value, inputWachtwoord2.Value, out message))
             {
@@ -90,25 +101,16 @@ namespace Web_GUI_Layer
         {
             string message = string.Empty;
 
-            // maak hulpbehoevende aan
-            Accountdetails acc = new Accountdetails();
-            if (string.IsNullOrEmpty(inputTussenvoegsel.Value))
+            // Create a new volunteer
+            Accountdetails acc = GetAccount();
+
+            // Add skills to account skillsdetaillist
+            foreach (Skilldetails sd in selected_skills)
             {
-                acc.Name = string.Format("{0} {1}", inputVoornaam.Value, inputAchternaam.Value);
+                acc.SkillsDetailList.Add(sd);
             }
-            else
-            {
-                acc.Name = string.Format("{0} {1} {2}", inputVoornaam.Value, inputTussenvoegsel.Value, inputAchternaam.Value);
-            }
-            acc.Address = string.Format("{0} {1}", inputStraatnaam.Value, inputHuisnummer.Value);
-            acc.City = inputWoonplaats.Value;
-            acc.Phonenumber = inputTelefoonnummer.Value;
-            // TODO: account geslacht mist nog
-            acc.Email = inputEmail.Value;
-            acc.Username = inputGebruikersnaam.Value;
-            // TODO: acc.AvatarPath = ...
-            // TODO: voeg elke toegevoegde skill toe aan acc.SkillsDetailList
-            // TODO: acc.VOGPath = ...
+
+            acc.VOGPath = inputVOG.PostedFile.FileName;
 
             if (!GUIHandler.Register(acc, inputWachtwoord1.Value, inputWachtwoord2.Value, out message))
             {
@@ -118,9 +120,20 @@ namespace Web_GUI_Layer
             }
             else
             {
+
                 error_message.Text = "Het registreren van uw account is gelukt!";
                 error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
                 error_message.CssClass = error_message.CssClass.Replace("error-red", "error-green");
+
+                if (!GUIHandler.Download(inputProfielfoto, out message))
+                {
+                    ShowErrorMessage("Het uploaden van de foto is niet gelukt!");
+                }
+
+                if (!GUIHandler.Download(inputVOG, out message))
+                {
+                    ShowErrorMessage("Het uploaden van de VOG is niet gelukt!");
+                }
             }
         }
 
@@ -142,6 +155,9 @@ namespace Web_GUI_Layer
         [System.Web.Services.WebMethod]
         public static string GetCities(string str)
         {
+            // Set input to lowercase
+            str = str.ToLower();
+
             //Set the amount of found results to none
             int found = 0;
 
@@ -186,11 +202,30 @@ namespace Web_GUI_Layer
                     {
                         tempCities.RemoveRange(5, tempCities.Count - 5);
                     }
+
                     return tempCities.Select(c => c.Name).Aggregate((x, y) => x + "|" + y);
                 }
             }
 
             return "Niks gevonden";
+        }
+
+        [System.Web.Services.WebMethod]
+        public static string UpdateSkills(string skills)
+        {
+            // split skills in List<string>
+            List<string> skillList = skills.Split('|').ToList();
+
+            selected_skills = new List<Skilldetails>();
+
+            foreach (string skill in skillList)
+            {
+                Skilldetails sd = new Skilldetails();
+                sd.Name = skill.ToLower();
+                selected_skills.Add(sd);
+            }
+
+            return string.Empty;
         }
     }
 }

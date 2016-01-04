@@ -42,7 +42,8 @@ namespace Web_GUI_Layer
             // Set description
             userdescription.InnerText = mainuser.Description;
 
-
+            // Set account role
+            usertype.InnerText = string.IsNullOrEmpty(mainuser.VOGPath) ? "Hulpbehoevende" : "Vrijwilliger";
 
             // Insert all questions
             List<Questiondetails> questions = GUIHandler.GetAll(true).Where(i => i.PosterID == mainuser.ID).ToList();

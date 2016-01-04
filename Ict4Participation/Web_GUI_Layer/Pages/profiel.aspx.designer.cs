@@ -40,6 +40,15 @@ namespace Web_GUI_Layer {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl username;
         
         /// <summary>
+        /// usertype control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl usertype;
+        
+        /// <summary>
         /// userdescription control.
         /// </summary>
         /// <remarks>

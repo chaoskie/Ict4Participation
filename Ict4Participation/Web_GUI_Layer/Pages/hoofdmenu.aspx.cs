@@ -32,7 +32,10 @@ namespace Web_GUI_Layer
                 Accountdetails accDetails = GUIHandler.GetMainuserInfo();
 
                 // Insert user name and role
-                user_naam.InnerHtml = accDetails.Name;
+                user_naam.InnerText = accDetails.Name;
+
+                // Set account type
+                user_rol.InnerText = string.IsNullOrEmpty(accDetails.VOGPath) ? "Hulpbehoevende" : "Vrijwilliger";
 
                 // Set profilephoto
                 profielfoto.ImageUrl = accDetails.AvatarPath;
