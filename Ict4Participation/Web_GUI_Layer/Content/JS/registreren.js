@@ -294,12 +294,12 @@ function valideerFields() {
         allesgoed = true;
 
         // valideer profielfoto
-        if ((/^.{1,}(?:\.jpg|\.png){1}$/).test($($id).find('.file-caption-name').attr('title'))) {
-            $($id).find('.input-group>.file-caption').removeClass('form-fail').addClass('form-success');
-        } else {
-            $($id).find('.input-group>.file-caption').removeClass('form-success').addClass('form-fail');
-            allesgoed = false;
-        }
+        //if ((/^.{1,}(?:\.jpg|\.png){1}$/).test($($id).find('.file-caption-name').attr('title'))) {
+        //    $($id).find('.input-group>.file-caption').removeClass('form-fail').addClass('form-success');
+        //} else {
+        //    $($id).find('.input-group>.file-caption').removeClass('form-success').addClass('form-fail');
+        //    allesgoed = false;
+        //}
 
         // Verander data-formcomplete gebaseert op allesgoed
         if (allesgoed) {
@@ -340,12 +340,12 @@ function valideerFields() {
         }
 
         // Valideer VOG
-        if ((/^.{1,}(?:\.pdf){1}$/).test($('#tab_vrijwilliger').find('.file-caption-name').attr('title'))) {
-            $('#tab_vrijwilliger').find('.input-group>.file-caption').removeClass('form-fail').addClass('form-success');
-        } else {
-            $('#tab_vrijwilliger').find('.input-group>.file.caption').removeClass('form-success').addClass('form-fail');
-            allesgoed = false;
-        }
+        //if ((/^.{1,}(?:\.pdf){1}$/).test($('#tab_vrijwilliger').find('.file-caption-name').attr('title'))) {
+        //    $('#tab_vrijwilliger').find('.input-group>.file-caption').removeClass('form-fail').addClass('form-success');
+        //} else {
+        //    $('#tab_vrijwilliger').find('.input-group>.file.caption').removeClass('form-success').addClass('form-fail');
+        //    allesgoed = false;
+        //}
 
         // Verander data-formcomplete gebaseert op allesgoed
         if (allesgoed) {
