@@ -215,6 +215,7 @@ namespace Admin_Layer
             //Edit comment
             message = "Comment aangepast";
             Comment c = new Comment(commentID, comment.Description, userID, comment.PostedToID, false, comment.PostDate);
+            c.Update();
             return true;
         }
 

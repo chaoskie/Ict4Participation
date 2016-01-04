@@ -25,6 +25,8 @@ namespace AdministrationParticipation
             //shows time like this: 06/10/11 15:24:16 +00:00
             lblPostDate.Text = cd.PostDate.ToString("0:MM/dd/yy H:mm:ss zzz");
             tbTitleQuestion.Text = Program.AdminGUIHndlr.GetAll(true).Where(q => q.PostID == cd.PostedToID).First().Title;
+            //Load in comments
+            Program.AdminGUIHndlr.GetAll(cd.PostedToID);
 
             poster = Program.AdminGUIHndlr.GetAll().Where(ac => ac.ID == cd.PosterID).First();
         }

@@ -20,7 +20,7 @@ namespace AdministrationParticipation
         public Reviews(Reviewdetails rd)
         {
             InitializeComponent();
-            rd = old;
+            old = rd;
             tbDescription.Text = rd.Description;
             tbPoster.Text = Program.AccountHander.GetInfo(true, rd.PosterID).Name;
             tbPosted.Text = Program.AccountHander.GetInfo(true, rd.PostedToID).Name;
