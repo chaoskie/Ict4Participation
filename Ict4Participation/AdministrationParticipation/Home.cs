@@ -70,7 +70,7 @@ namespace AdministrationParticipation
                 accd.AddRange(Program.AdminGUIHndlr.Search(acc, true));
 
                 //Show results in new form
-                f = new Resultaten(accd.Cast<Object>().ToList());
+                f = new Resultaten(accd.Cast<Object>().ToList(), this.Location);
             }
             if (cbSearchField.SelectedIndex == 2)
             {
@@ -86,7 +86,7 @@ namespace AdministrationParticipation
                 qued.AddRange(Program.AdminGUIHndlr.Search(que, true));
 
                 //Show results in new form
-                f = new Resultaten(qued.Cast<Object>().ToList());
+                f = new Resultaten(qued.Cast<Object>().ToList(), this.Location);
             }
             if (cbSearchField.SelectedIndex == 3)
             {
@@ -101,7 +101,7 @@ namespace AdministrationParticipation
                 commd = commd.Where(c => c.Description.Contains(tbSearchThis.Text)).ToList();
 
                 //Show results in new form
-                f = new Resultaten(commd.Cast<Object>().ToList());
+                f = new Resultaten(commd.Cast<Object>().ToList(), this.Location);
             }
             if (cbSearchField.SelectedIndex == 4)
             {
@@ -117,7 +117,7 @@ namespace AdministrationParticipation
                 reviews = reviews.OrderByDescending(r => r.PostID).Where(r => r.Description.Contains(tbSearchThis.Text)).ToList();
 
                 //Show results in new form
-                f = new Resultaten(reviews.Cast<Object>().ToList());
+                f = new Resultaten(reviews.Cast<Object>().ToList(), this.Location);
             }
 
             //Open form
@@ -141,7 +141,7 @@ namespace AdministrationParticipation
         {
             //open het resulaten form voor de question objecten
             List<Questiondetails> questions = Program.AdminGUIHndlr.GetAll(true).OrderByDescending(q => q.PostDate).ToList();
-            Form f = new Resultaten(questions.Cast<Object>().ToList());
+            Form f = new Resultaten(questions.Cast<Object>().ToList(), this.Location);
             f.Show();
         }
 
@@ -149,7 +149,7 @@ namespace AdministrationParticipation
         {
             //open het resulaten form voor de gebruiker objecten
             List<Accountdetails> users = Program.AdminGUIHndlr.GetAll();
-            Form f = new Resultaten(users.Cast<Object>().ToList());
+            Form f = new Resultaten(users.Cast<Object>().ToList(), this.Location);
             f.Show();
         }
 
@@ -163,7 +163,7 @@ namespace AdministrationParticipation
                 commd.AddRange(Program.AdminGUIHndlr.GetAll(q.PostID));
             }
             commd = commd.OrderByDescending(c => c.PostDate).ToList();
-            Form f = new Resultaten(commd.Cast<Object>().ToList());
+            Form f = new Resultaten(commd.Cast<Object>().ToList(), this.Location);
             f.Show();
         }
 
@@ -181,7 +181,7 @@ namespace AdministrationParticipation
                 reviews.AddRange(Program.AdminGUIHndlr.GetAllReviews(id));
             }
             reviews = reviews.OrderByDescending(r => r.PostID).OrderByDescending(r => r.PostID).ToList();
-            Form f = new Resultaten(reviews.Cast<Object>().ToList());
+            Form f = new Resultaten(reviews.Cast<Object>().ToList(), this.Location);
             f.Show();
         }
 

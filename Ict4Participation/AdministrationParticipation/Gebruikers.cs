@@ -33,7 +33,8 @@ namespace AdministrationParticipation
             tbPhone.Text = ad.Phonenumber;
             cbGeslacht.SelectedIndex = ad.Gender.ToLower() == "m" ? 0 : 1;
             cbTypeAcc.SelectedIndex = String.IsNullOrWhiteSpace(ad.VOGPath) ? 0 : 1;
-            pbProfielImage.ImageLocation = site + ad.AvatarPath;
+            pbProfielImage.ImageLocation = site + @"ProfileAvatars\" + ad.AvatarPath;
+            pbProfielImage.SizeMode = PictureBoxSizeMode.Zoom;
 
             DateTime zeroTime = new DateTime(1, 1, 1);
 
