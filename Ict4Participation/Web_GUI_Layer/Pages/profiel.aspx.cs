@@ -172,7 +172,13 @@ namespace Web_GUI_Layer
 
         protected void btnPlaatsVraag_Click(object sender, EventArgs e)
         {
-            Response.Redirect("plaatsvraag.aspx", false);
+            if (string.IsNullOrEmpty(GUIHandler.GetMainuserInfo().VOGPath))
+            {
+                Response.Redirect("plaatsvraag.aspx", false);
+                return;
+            }
+
+            ShowErrorMessage("Een vrijwilliger kan geen vraag plaatsen!");
         }
 
         protected void btnGebruikers_Click(object sender, EventArgs e)
@@ -205,14 +211,6 @@ namespace Web_GUI_Layer
         {
             error_message.Text = message;
             error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
-        }
-
-        [System.Web.Services.WebMethod]
-        public static string ChangeUserName(string str)
-        {
-            // update username
-            GUIHandler tempGUIHandler = new GUIHandler();
-            return "Nieuwe username";
         }
 
         [System.Web.Services.WebMethod]

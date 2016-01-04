@@ -45,7 +45,7 @@
             
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
-				    <h2>Vraag van <span id="vraag_naam" runat="server"></span></h2>
+				    <h2>Vraag van <a id="vraag_naam" OnServerClick="btnPosterName_Click" runat="server"></a></h2>
 				    
                     <div class="row">
                         <div class="col-tn-12 col-xs-6">

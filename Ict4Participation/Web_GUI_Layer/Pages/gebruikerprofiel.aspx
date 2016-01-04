@@ -63,6 +63,40 @@
 						    <h3 id="userdescription" class="text-muted" runat="server">Lorem ipsum dolor sit amet.</h3>
 					    </div>
 				    </div>
+                    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h3>Algemene gegevens:</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p id="useremail" runat="server"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p id="userphonenr" runat="server"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p id="usergender" runat="server"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h3>Accountgegevens:</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p id="userlogindate" runat="server"></p>
+                        </div>
+                    </div>
 
                     <!-- Beschikbaarheid -->
 				    <div class="row">

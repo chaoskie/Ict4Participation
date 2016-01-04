@@ -59,7 +59,7 @@
 				    <h2>Profielpagina</h2>
                     
                     <div class="row">
-                        <div class="col-tn-12">
+                        <div class="col-xs-12">
                             <button class="btn btn-block btn-custom2 btn-lg" OnServerClick="btnWijzigGegevens_Click" runat="server">Wijzig gegevens</button>
                         </div>
                     </div>

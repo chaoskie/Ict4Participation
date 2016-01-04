@@ -13,6 +13,7 @@ namespace Web_GUI_Layer
     {
         private GUIHandler GUIHandler;
         private static int q_id;
+        private static int a_id;
         private static int mainuserID;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -31,7 +32,7 @@ namespace Web_GUI_Layer
             // Set mainuser id
             mainuserID = GUIHandler.GetMainuserInfo().ID;
             
-            // Retrieve questiondetails from session
+            // Retrieve questiondetails id from session
             q_id = Convert.ToInt32(Session["QuestionDetails_id"]);
 
             // Get questiondetails
@@ -39,8 +40,13 @@ namespace Web_GUI_Layer
 
             Questiondetails qd = GUIHandler.GetAll(true).Where(vraag => vraag.PostID == q_id).ToList()[0];
 
-            // Fill in forms
+            // Get accountdetails
             Accountdetails ad = GUIHandler.GetAll().Where(account => account.ID == qd.PosterID).ToList()[0];
+
+            // Set a_id
+            a_id = ad.ID;
+
+            // Fill in forms
             vraag_naam.InnerText = ad.Name;
             vraag_titel.InnerText = qd.Title;
             vraag_body.InnerText = qd.Description;
@@ -259,6 +265,13 @@ namespace Web_GUI_Layer
         protected void btnEditQuestion_Click(object sender, EventArgs e)
         {
             Response.Redirect("wijzigvraag.aspx", false);
+        }
+
+        protected void btnPosterName_Click(object sender, EventArgs e)
+        {
+            Session["UserProfile_ID"] = Convert.ToString(a_id);
+
+            Response.Redirect("gebruikerprofiel.aspx", false);
         }
 
         private void ShowErrorMessage(string message)
