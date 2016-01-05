@@ -11,7 +11,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Oracle.DataAccess.Client;
+using Oracle.ManagedDataAccess.Client;
 using System.Text.RegularExpressions;
 using Database_Layer.Exceptions;
 

@@ -56,6 +56,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.1.2400\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -149,6 +153,7 @@
     <Content Include="Content\Fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="ErrorPages\error.Master" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -312,7 +317,9 @@
       <DependentUpon>zoeken.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Admin_Layer\Admin_Layer.csproj">
       <Project>{5d4d65c5-92d8-4d4a-874d-bb0cad13e7ce}</Project>
