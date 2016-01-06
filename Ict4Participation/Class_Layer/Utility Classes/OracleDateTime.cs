@@ -11,7 +11,7 @@ namespace Class_Layer.Utility_Classes
     {
         public static string OracleDateTime(Nullable<DateTime> dt)
         {
-            CultureInfo ci = new CultureInfo("en-EN");
+            CultureInfo ci = new CultureInfo("en-US");
             return dt != null ? ((DateTime)dt).ToString("d-MMM-yyyy HH:mm:ss", ci) : null;
         }
     }
