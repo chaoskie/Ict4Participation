@@ -155,7 +155,13 @@ namespace Admin_Layer
         }
 
         public static bool isEmail(string s)
-        {            
+        {
+            string us = s.Substring(0, 1);
+            if (us == "_")
+            {
+                s = s.Substring(1);
+            }
+
             invalidMail = false;
             if (String.IsNullOrEmpty(s))
                 return false;
