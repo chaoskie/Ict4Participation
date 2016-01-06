@@ -74,5 +74,10 @@ namespace Web_GUI_Layer.Pages
 
             Response.Redirect("gebruikerprofiel.aspx", false);
         }
+
+        protected void cbGeenDatum_CheckChange(object sender, EventArgs e)
+        {
+            // TODO: Made dis
+        }
     }
 }

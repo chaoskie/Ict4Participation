@@ -80,9 +80,7 @@ namespace Web_GUI_Layer
                     // Higher point values get a higher priority
                     // Questions are then rated by their relevance
 
-                    List<Accountdetails> ad_list = tempGUIHandler.GetAll();
-
-                    Accountdetails ad = ad_list.Find(i => i.ID == qd.PosterID);
+                    Accountdetails ad = accounts.Find(i => i.ID == qd.PosterID);
 
                     QuestionSetup vs = new QuestionSetup();
                     vs.Title = qd.Title;
