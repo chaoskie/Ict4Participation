@@ -74,6 +74,7 @@ namespace Database_Layer
                     host = secHost;
                 }
             }
+
             return String.Format("Current host: {0}", host);
         }
 
@@ -1055,8 +1056,8 @@ namespace Database_Layer
                 if (!String.IsNullOrWhiteSpace(location)) { commando += ", \"Location\""; }
                 commando += ") VALUES (:a, :b";
 
-                if (!String.IsNullOrWhiteSpace(startDate)) { commando += ", TO_DATE(:c)"; }
-                if (!String.IsNullOrWhiteSpace(endDate)) { commando += ", TO_DATE(:d)"; }
+                if (!String.IsNullOrWhiteSpace(startDate)) { commando += ", TO_DATE(:c, 'DD-MON-YYYY HH24:MI:SS')"; }
+                if (!String.IsNullOrWhiteSpace(endDate)) { commando += ", TO_DATE(:d, 'DD-MON-YYYY HH24:MI:SS')"; }
                 if (!String.IsNullOrWhiteSpace(location)) { commando += ", :e"; }
                 commando += ")";
                 c.Open();
