@@ -1,4 +1,5 @@
 ﻿using System;
+using AdministrationParticipation;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -82,7 +83,7 @@ namespace ICT4P_HASPDetection
                         Application.EnableVisualStyles();
                         Application.SetCompatibleTextRenderingDefault(false);
                         //IMP TODO: Does this avoid the application startup thread?
-                        Application.Run(new AdministrationParticipation.Home());
+                        Application.Run(new Home());
                         Environment.Exit(0);
                     }
                 }
