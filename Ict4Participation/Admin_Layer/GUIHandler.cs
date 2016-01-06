@@ -20,6 +20,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Class_Layer;
 using Class_Layer.Enums;
+using Class_Layer.Controllers;
 
 namespace Admin_Layer
 {
@@ -72,6 +73,7 @@ namespace Admin_Layer
             LoadedAccounts = new List<Account>();
             LoadedQuestions = new List<Question>();
             LoadedComments = new List<Comment>();
+            DatabaseController.SetHost();
         }
 
         #region Account Handling

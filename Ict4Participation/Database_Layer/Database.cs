@@ -26,6 +26,7 @@ namespace Database_Layer
         /// The host IP address
         /// </summary>
         private static string host = "192.168.20.27";
+        private static string secHost = "localhost";
 
         /// <summary>
         /// The username of the host
@@ -41,6 +42,40 @@ namespace Database_Layer
         /// The connection string to connect to the host
         /// </summary>
         private static string connectionstring = "User Id=" + username + ";Password=" + dbpassword + ";Data Source= //" + host + ":1521/XE;";
+
+        /// <summary>
+        /// Checks if a connection with the 192.168.20.27 host is possible. If failed or denied, it switches to localhost
+        /// </summary>
+        public static string FindHost()
+        {
+            bool connPossible = true;
+
+            try
+            {
+                using (OracleConnection c = new OracleConnection(@connectionstring))
+                {
+                    try
+                    {
+                        c.Open();
+                        c.Close();
+                    }
+                    catch 
+                    {
+                        //Could not connect at all
+                        connPossible = false;
+                    }
+                }
+            }
+            catch
+            {
+                //Connection string is wrong
+                if (connPossible)
+                {
+                    host = secHost;
+                }
+            }
+            return String.Format("Current host: {0}", host);
+        }
 
         /// <summary>
         /// Selects and retrieves values from the database 

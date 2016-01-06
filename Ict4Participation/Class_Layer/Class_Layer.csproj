@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DatabaseController.cs" />
     <Compile Include="Exceptions\NoAccountCreatedException.cs" />
     <Compile Include="Exceptions\NoAccountFoundException.cs" />
     <Compile Include="Exceptions\NotBoundToUserException.cs" />
