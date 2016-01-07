@@ -47,6 +47,9 @@ function haalInfoOp(val) {
                 }
             }
 
+            // Update het aantal resultaten
+            aantalResultaten.text(info.length);
+
             // Append bericht als er geen info gevonden is
             if (info.length == 1 && info[0] == "") {
                 $('#info_lijst').append('<li><a href="#">Niks gevonden!</a></li>');

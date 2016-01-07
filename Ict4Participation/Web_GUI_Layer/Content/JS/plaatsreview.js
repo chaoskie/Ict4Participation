@@ -20,6 +20,16 @@ $(function () {
             $('#review_rating span:nth-child(' + (6 - j) + ')').html('&#9733;');
         }
 
+        // Sync het nummer met de server
+        $.ajax({
+            type: 'POST',
+            url: 'plaatsreview.aspx/UpdateReviewNr',
+            data: '{nr: "' + ratingNr + '"}',
+            contentType: 'application/json;charset=utf-8',
+            dataType: 'json',
+            success: function (result) {}
+        });
+
     });
 
 });

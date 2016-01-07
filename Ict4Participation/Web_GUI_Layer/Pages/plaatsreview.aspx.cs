@@ -14,6 +14,7 @@ namespace Web_GUI_Layer.Pages
         private GUIHandler GUIHandler;
         private static int AccToReviewID;
         private static int MainuserID;
+        private static int ReviewNr = 3;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -60,8 +61,7 @@ namespace Web_GUI_Layer.Pages
             // Get rating from control
             var asdf = Request.Form["ReviewRating"];
 
-            int ratingNr = Convert.ToInt32(review_rating.Attributes["data-rating-nr"].ToString());
-            rd.Rating = ratingNr;
+            rd.Rating = ReviewNr;
 
             if (rd.Rating < 1 ||
                 rd.Rating > 5)
@@ -87,6 +87,14 @@ namespace Web_GUI_Layer.Pages
         {
             error_message.Text = message;
             error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+        }
+
+        [System.Web.Services.WebMethod]
+        public static string UpdateReviewNr(int nr)
+        {
+            ReviewNr = nr;
+
+            return string.Empty;
         }
     }
 }

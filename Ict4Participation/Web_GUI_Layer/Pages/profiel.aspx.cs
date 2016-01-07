@@ -189,7 +189,7 @@ namespace Web_GUI_Layer
 
         private void btnNaarVraag_Click(object sender, EventArgs e)
         {
-            int q_id = Convert.ToInt32(((HtmlAnchor)sender).Attributes["data-question-id"].ToString());
+            int q_id = Convert.ToInt32(((HtmlAnchor)sender).Attributes["data-question-id"]);
 
             Session["QuestionDetails_id"] = q_id;
 
@@ -199,8 +199,8 @@ namespace Web_GUI_Layer
         private void btnGaNaarReview_Click(object sender, EventArgs e)
         {
             // Get reviewID from data attribute
-            int r_id = Convert.ToInt32((sender as HtmlAnchor).Attributes["data-review-id"].ToString());
-            int r_accID = Convert.ToInt32((sender as HtmlAnchor).Attributes["data-reviewacc-id"].ToString());
+            int r_id = Convert.ToInt32((sender as HtmlAnchor).Attributes["data-review-id"]);
+            int r_accID = Convert.ToInt32((sender as HtmlAnchor).Attributes["data-reviewacc-id"]);
 
             Session["ReviewDetails_id"] = r_id;
             Session["ReviewUser_id"] = r_accID;

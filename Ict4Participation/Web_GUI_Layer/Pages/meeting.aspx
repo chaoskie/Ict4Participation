@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="zoeken.aspx.cs" Inherits="Web_GUI_Layer.zoeken" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="meeting.aspx.cs" Inherits="Web_GUI_Layer.Pages.meeting" %>
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -9,19 +9,18 @@
 	<meta name="author" content="ICT4Participation" />
     <meta name="description" content="Log in om verder te gaan" />
     <meta name="keywords" content="Inloggen,ICT4Participation,Hulp,Hulpbehoevende,Vrijwilliger,Eindhoven" />
-    <title>Zoeken</title>
+    <title>Meeting</title>
     <!-- Stylesheets -->
 	<link rel="stylesheet" href="../Content/CSS/bootstrap.min.css" />
 	<link rel="stylesheet" href="../Content/CSS/font-awesome.min.css" />
 	<link rel="stylesheet" href="../Content/CSS/main.css" />
-	<link rel="stylesheet" href="../Content/CSS/zoeken.css" />
+	<link rel="stylesheet" href="../Content/CSS/plaatsvraag.css" />
 	<link rel="stylesheet" href="../Content/CSS/dropdown.css" />
 	<link rel="stylesheet" href="../Content/CSS/input.css" />
 </head>
 <body>
     <form runat="server">
 	    <div id="wrapper">
-
 		    <!-- NAVIGATION -->
 		    <nav>
 			    <div class="container-fluid">
@@ -41,33 +40,42 @@
 			    <div class="container">
 
                     <br />
-            
+
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
 				    <div class="form-group">
-					    <h2>Zoeken</h2>
-					    <div class="row">
-						    <div class="col-xs-12">
-							    <label for="inputZoeken" class="sr-only">Zoeken</label>
-							    <input type="text" id="inputZoeken" class="form-control" placeholder="Zoek op naam etc." />
-						    </div>
-					    </div>
-				    </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2>Ontmoeting tussen <span id="persoon1" runat="server"></span> en <span id="persoon2" runat="server"></span></h2>
+                            </div>
+                        </div>
 
-				    <!-- Resultaten -->
-				    <div class="row">
-					    <div class="col-xs-12 dropdown">
-						    <div class="row dropdown-title">
-							    <div class="col-xs-12">
-								    <p class="pull-left"><span id="aantalResultaten">10</span> Resultaten</p>
-							    </div>
-						    </div>
-						    <div class="row dropdown-content">
-							    <ul id="info_lijst" class="col-xs-12">
-								    <li><a href="#">Niks gevonden!</a></li>
-							    </ul>
-						    </div>
-					    </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p id="lblLocatie" runat="server"></p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p id="lblStartDatum" runat="server"></p>
+                            </div>
+                        </div>
+                            
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p id="lblEindDatum" runat="server"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <p id="lblGeenDatum" style="color: red;" runat="server">Deze meeting heeft geen datum</p>
+                            </div>
+                        </div>
+
+				        <br />
+
 				    </div>
 
 			    </div>
@@ -79,7 +87,6 @@
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
-	<script src="../Content/JS/errormessage.js"></script>
-    <script src="../Content/JS/zoeken.js"></script>
+    <script src="../Content/JS/errormessage.js"></script>
 </body>
 </html>

@@ -25,39 +25,64 @@ namespace Web_GUI_Layer
 
             // Retrieve GUIHandler object from session
             GUIHandler = (GUIHandler)Session["GUIHandler_obj"];
+            
+            // Get all user info
+            Accountdetails accDetails = GUIHandler.GetMainuserInfo();
 
-            if (!IsPostBack)
+            // Insert user name and role
+            user_naam.InnerText = accDetails.Name;
+
+            // Set account type
+            user_rol.InnerText = string.IsNullOrEmpty(accDetails.VOGPath) ? "Hulpbehoevende" : "Vrijwilliger";
+
+            // Set profilephoto
+            profielfoto.ImageUrl = accDetails.AvatarPath;
+
+            // Insert availability
+            List<Availabilitydetails> ad = accDetails.AvailabilityDetailList;
+
+            // Set tablecell class to beschikbaar if user is available on that day
+            if (ad != null)
             {
-                // Get all user info
-                Accountdetails accDetails = GUIHandler.GetMainuserInfo();
-
-                // Insert user name and role
-                user_naam.InnerText = accDetails.Name;
-
-                // Set account type
-                user_rol.InnerText = string.IsNullOrEmpty(accDetails.VOGPath) ? "Hulpbehoevende" : "Vrijwilliger";
-
-                // Set profilephoto
-                profielfoto.ImageUrl = accDetails.AvatarPath;
-
-                // Insert availability
-                List<Availabilitydetails> ad = accDetails.AvailabilityDetailList;
-
-                // Set tablecell class to beschikbaar if user is available on that day
-                if (ad != null)
+                foreach (Availabilitydetails a in ad)
                 {
-                    foreach (Availabilitydetails a in ad)
+                    Button btn = (Button)FindControl(string.Format("rooster_{0}_{1}", a.Day, a.Daytime));
+                    btn.CssClass += "beschikbaar";
+                }
+            }
+
+            // Get mainuserID
+            int mainuserID = GUIHandler.GetMainuserInfo().ID;
+
+            // Get all accounts from GUIHandler
+            List<Accountdetails> accounts_list = GUIHandler.GetAll();
+
+            // Fill activities
+            List<Meetingdetails> Meetings = GUIHandler.GetAllMeetings();
+
+            foreach (Meetingdetails md in Meetings)
+            {
+                if (md.RequesterID == mainuserID || md.PosterID == mainuserID)
+                {
+                    if (md.EndDate >= DateTime.Now)
                     {
-                        Button btn = (Button)FindControl(string.Format("rooster_{0}_{1}", a.Day, a.Daytime));
-                        btn.CssClass += "beschikbaar";
+                        HtmlAnchor a = new HtmlAnchor();
+                        a.InnerText = string.Format("Ontmoeting met {0}", accounts_list.Find(i => i.ID == md.RequesterID).Name);
+                        a.Attributes["data-meeting-id"] = Convert.ToString(md.PostID);
+                        a.ServerClick += btnGaNaarMeeting_Click;
+
+                        // Insert meeting in list
+                        activiteiten_list.Controls.Add(new LiteralControl("<li>"));
+                        activiteiten_list.Controls.Add(a);
+                        activiteiten_list.Controls.Add(new LiteralControl("</li>"));
                     }
                 }
             }
 
-            // TODO: Fill activities
-
-            // Temporary message
-            activiteiten_list.Controls.Add(new LiteralControl("<li><a href=\"#\">Geen activiteiten</a>"));
+            if (Meetings.Count == 0)
+            {
+                activiteiten_list.Controls.Add(new LiteralControl("<li><a href=\"#\">Geen activiteiten</a>"));
+            }
         }
 
         protected void btnAfmelden_Click(object sender, EventArgs e)
@@ -81,6 +106,14 @@ namespace Web_GUI_Layer
         protected void btnProfiel_Click(object sender, EventArgs e)
         {
             Response.Redirect("profiel.aspx", false);
+        }
+
+        private void btnGaNaarMeeting_Click(object sender, EventArgs e)
+        {
+            // Set meeting ID in session
+            Session["meetingID"] = Convert.ToInt32((sender as HtmlAnchor).Attributes["data-meeting-id"]); ;
+
+            Response.Redirect("meeting.aspx", false);
         }
         
         protected void rooster_change(object sender, EventArgs e)

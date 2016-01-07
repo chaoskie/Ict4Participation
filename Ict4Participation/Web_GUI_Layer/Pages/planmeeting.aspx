@@ -324,7 +324,7 @@
                         </div>
                         
                         <div class="row">
-                            <div clas="col-xs-12">
+                            <div class="col-xs-12">
                                 <asp:CheckBox Text="Heeft geen datum" OnCheckedChanged="cbGeenDatum_CheckChange" onchange="toggleData();" runat="server"/>
                             </div>
                         </div>
@@ -332,7 +332,7 @@
 
 					    <div class="row">
 						    <div class="col-xs-12">
-							    <button id="btnPlaatsMeeting" class="btn btn-custom btn-block" onserverclick="btnPlaatsMeeting_Click" runat="server">Plaats hulpvraag</button>
+							    <button id="btnPlaatsMeeting" class="btn btn-custom btn-block" onserverclick="btnPlaatsMeeting_Click" runat="server">Plaats ontmoeting</button>
 						    </div>
 					    </div>
 				    </div>
