@@ -256,7 +256,8 @@ namespace Class_Layer
                     row["Location"].ToString(),
                     Convert.ToInt32(row["AmountACCs"]),
                     Skill.GetAll(Convert.ToInt32(row["ID"]), false).Select(s => s.Name).ToList(),
-                    volunteers
+                    volunteers,
+                    Convert.ToInt32(row["Status"])
                     ));
             }
             //Return the question list
@@ -272,7 +273,7 @@ namespace Class_Layer
         /// <param name="description">The description of the question</param>
         /// <param name="questionLocation">The location of the question</param>
         public Question(int postID, int posterID, string title, Nullable<DateTime> startDate, Nullable<DateTime> endDate,
-            string description, bool urgency, string location, int amnt, List<string> skills, List<int> volunteers)
+            string description, bool urgency, string location, int amnt, List<string> skills, List<int> volunteers, int status)
             : base(postID, posterID)
         {
             this.Title = title;
@@ -284,15 +285,7 @@ namespace Class_Layer
             this.AmountAccs = amnt;
             this.Skills = skills;
             this.Volunteers = volunteers;
-        }
-
-        //Returns a full description
-        public string GetDescription(int postid, out int ID)
-        {
-            //OBSOLETE?
-            //Make a nice ToString method from this, using the GetOP method as well
-            ID = 0;
-            return "";
+            this.status = (Enums.Status)status;
         }
     }
 }

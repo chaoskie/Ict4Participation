@@ -424,8 +424,11 @@ namespace Admin_Layer
                     return false;
                 }
 
+                Class_Layer.Enums.Status status;
+                Enum.TryParse(question.Status, out status);
+
                 //Place question
-                Question q = new Question(0, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, new List<int>());
+                Question q = new Question(0, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, new List<int>(), (int)status);
                 q.Create();
                 message = "Vraag gepost!";
                 return true;
@@ -454,8 +457,12 @@ namespace Admin_Layer
                     return false;
                 }
 
+                Class_Layer.Enums.Status status;
+                Enum.TryParse(question.Status, out status);
+
                 //Edit question
-                Question q = new Question(LoadedQuestions[questionIndex].PostID, MainUser.ID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, LoadedQuestions[questionIndex].Volunteers);
+                Question q = new Question(LoadedQuestions[questionIndex].PostID, MainUser.ID, question.Title, question.StartDate, question.EndDate, 
+                    question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, LoadedQuestions[questionIndex].Volunteers, (int)status);
                 q.Update();
                 message = "Vraag succesvol aangepast!";
                 return true;
