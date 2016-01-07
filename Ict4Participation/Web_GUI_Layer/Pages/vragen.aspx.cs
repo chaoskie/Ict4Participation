@@ -13,10 +13,10 @@ namespace Web_GUI_Layer.Pages
     public partial class vragen : System.Web.UI.Page
     {
         private GUIHandler GUIHandler;
-        private static bool orderDescTitle;
-        private static bool orderDescUser;
-        private static bool orderDescUrgency;
-        private static bool orderDescStatus;
+        private bool orderDescTitle;
+        private bool orderDescUser;
+        private bool orderDescUrgency;
+        private bool orderDescStatus;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,22 +34,7 @@ namespace Web_GUI_Layer.Pages
             // Insert questions
             List<Questiondetails> qd_list = GUIHandler.GetAll(true);
 
-            if (orderDescTitle)
-            {
-                qd_list = qd_list.OrderByDescending(i => i.Title).ToList();
-            }
-            if (orderDescUser)
-            {
-                qd_list = qd_list.OrderByDescending(i => i.PosterID).ToList();
-            }
-            if (orderDescUrgency)
-            {
-                qd_list = qd_list.OrderByDescending(i => i.Urgent).ToList();
-            }
-            if (orderDescStatus)
-            {
-                qd_list = qd_list.OrderByDescending(i => i.Status).ToList();
-            }
+            qd_list = PrioritySorter.OrderBy(qd_list, orderDescTitle, false, orderDescUrgency, orderDescStatus);
 
             // Clear all controls inside vragen_list
             vragen_list.Controls.Clear();
@@ -95,6 +80,9 @@ namespace Web_GUI_Layer.Pages
 
                 HtmlAnchor a2 = new HtmlAnchor();
                 a2.Attributes.Add("data-u-id", Convert.ToString(ad.ID));
+                a2.Attributes.Add("title", string.Format("<div style='width: 350px; height: 150px;'><div style='width:90px; height: 150px; margin-right: 10px; text-align: center; line-height: 150px;' class='pull-left'><img src='{0}' style='width: 100%; margin: 0 auto; vertical-align: middle;' /></div><div style='width: 250px' class='pull-right'><p>{1}</p><p>{2}</p><p>{3}</p></div></div><div style='clear:both'></div>", ad.AvatarPath, ad.Name, ad.VOGPath == null ? "Hulpbehoevende" : "Vrijwilliger", ad.Description));
+                a2.Attributes.Add("data-html", "true");
+                a2.Attributes.Add("rel", "tooltip");
                 a2.ServerClick += Account_Click;
                 a2.InnerText = ad.Name;
                 p2.Controls.Add(a2);
@@ -164,6 +152,9 @@ namespace Web_GUI_Layer.Pages
         protected void ChangeOrderTitle_Click(object sender, EventArgs e)
         {
             orderDescTitle = !orderDescTitle;
+            orderDescStatus = false;
+            orderDescUrgency = false;
+            orderDescUser = false;
 
             Response.Redirect(Request.RawUrl, false);
         }
@@ -176,6 +167,9 @@ namespace Web_GUI_Layer.Pages
         protected void ChangeOrderUrgency_Click(object sender, EventArgs e)
         {
             orderDescUrgency = !orderDescUrgency;
+            orderDescStatus = false;
+            orderDescTitle = false;
+            orderDescUser = false;
 
             Response.Redirect(Request.RawUrl, false);
         }
@@ -183,6 +177,9 @@ namespace Web_GUI_Layer.Pages
         protected void ChangeOrderStatus_Click(object sender, EventArgs e)
         {
             orderDescStatus = !orderDescStatus;
+            orderDescUrgency = false;
+            orderDescTitle = false;
+            orderDescUser = false;
 
             Response.Redirect(Request.RawUrl, false);
         }

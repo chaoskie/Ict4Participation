@@ -42,9 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminGUIHandler.cs" />
+    <Compile Include="Comparers\IQuestiondetailsDateComparer.cs" />
+    <Compile Include="Comparers\IQuestiondetailsStatusComparer.cs" />
+    <Compile Include="Comparers\IQuestiondetailsTitleComparer.cs" />
+    <Compile Include="Comparers\IQuestiondetailsUrgencyComparer.cs" />
     <Compile Include="Details.cs" />
     <Compile Include="EmailHandler.cs" />
     <Compile Include="GUIHandler.cs" />
+    <Compile Include="PrioritySorter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Check.cs" />
     <Compile Include="Searcher.cs" />
