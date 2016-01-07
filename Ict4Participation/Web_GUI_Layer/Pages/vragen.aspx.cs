@@ -14,7 +14,9 @@ namespace Web_GUI_Layer.Pages
     {
         private GUIHandler GUIHandler;
         private static bool orderDescTitle;
+        private static bool orderDescUser;
         private static bool orderDescUrgency;
+        private static bool orderDescStatus;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,9 +38,17 @@ namespace Web_GUI_Layer.Pages
             {
                 qd_list = qd_list.OrderByDescending(i => i.Title).ToList();
             }
+            if (orderDescUser)
+            {
+                qd_list = qd_list.OrderByDescending(i => i.PosterID).ToList();
+            }
             if (orderDescUrgency)
             {
                 qd_list = qd_list.OrderByDescending(i => i.Urgent).ToList();
+            }
+            if (orderDescStatus)
+            {
+                qd_list = qd_list.OrderByDescending(i => i.Status).ToList();
             }
 
             // Clear all controls inside vragen_list
@@ -60,18 +70,22 @@ namespace Web_GUI_Layer.Pages
                 TableCell tc1 = new TableCell();
                 TableCell tc2 = new TableCell();
                 TableCell tc3 = new TableCell();
+                TableCell tc4 = new TableCell();
 
                 tr.Controls.Add(tc1);
                 tr.Controls.Add(tc2);
                 tr.Controls.Add(tc3);
+                tr.Controls.Add(tc4);
 
                 HtmlGenericControl p1 = new HtmlGenericControl("p");
                 HtmlGenericControl p2 = new HtmlGenericControl("p");
                 HtmlGenericControl p3 = new HtmlGenericControl("p");
+                HtmlGenericControl p4 = new HtmlGenericControl("p");
 
                 tc1.Controls.Add(p1);
                 tc2.Controls.Add(p2);
                 tc3.Controls.Add(p3);
+                tc4.Controls.Add(p4);
 
                 HtmlAnchor a1 = new HtmlAnchor();
                 a1.Attributes.Add("data-q-id", Convert.ToString(qd.PostID));
@@ -90,6 +104,12 @@ namespace Web_GUI_Layer.Pages
                 a3.ServerClick += Question_Click;
                 a3.InnerText = qd.Urgent ? "Urgent" : "Niet urgent";
                 p3.Controls.Add(a3);
+
+                HtmlAnchor a4 = new HtmlAnchor();
+                a4.Attributes.Add("data-q-id", Convert.ToString(qd.PostID));
+                a4.ServerClick += Question_Click;
+                a4.InnerText = qd.Status;
+                p4.Controls.Add(a4);
             }
 
             // Change icons based on bools
@@ -102,6 +122,15 @@ namespace Web_GUI_Layer.Pages
                 vragen_order_titel.InnerHtml = "Vraag&nbsp;<i class=\"fa fa-fw fa-chevron-down\"></i>";
             }
 
+            if (orderDescUser)
+            {
+                vragen_order_urgentie.InnerHtml = "Geplaatst door&nbsp;<i class=\"fa fa-fw fa-chevron-up\"></i>";
+            }
+            else
+            {
+                vragen_order_urgentie.InnerHtml = "Geplaatst door&nbsp;<i class=\"fa fa-fw fa-chevron-down\"></i>";
+            }
+
             if (orderDescUrgency)
             {
                 vragen_order_urgentie.InnerHtml = "Urgentie&nbsp;<i class=\"fa fa-fw fa-chevron-up\"></i>";
@@ -109,6 +138,15 @@ namespace Web_GUI_Layer.Pages
             else
             {
                 vragen_order_urgentie.InnerHtml = "Urgentie&nbsp;<i class=\"fa fa-fw fa-chevron-down\"></i>";
+            }
+
+            if (orderDescStatus)
+            {
+                vragen_order_status.InnerHtml = "Status&nbsp;<i class=\"fa fa-fw fa-chevron-up\"></i>";
+            }
+            else
+            {
+                vragen_order_status.InnerHtml = "Status&nbsp;<i class=\"fa fa-fw fa-chevron-down\"></i>";
             }
         }
 
@@ -130,9 +168,21 @@ namespace Web_GUI_Layer.Pages
             Response.Redirect(Request.RawUrl, false);
         }
 
+        protected void ChangeOrderUser_Click(object sender, EventArgs e)
+        {
+            
+        }
+
         protected void ChangeOrderUrgency_Click(object sender, EventArgs e)
         {
             orderDescUrgency = !orderDescUrgency;
+
+            Response.Redirect(Request.RawUrl, false);
+        }
+
+        protected void ChangeOrderStatus_Click(object sender, EventArgs e)
+        {
+            orderDescStatus = !orderDescStatus;
 
             Response.Redirect(Request.RawUrl, false);
         }
