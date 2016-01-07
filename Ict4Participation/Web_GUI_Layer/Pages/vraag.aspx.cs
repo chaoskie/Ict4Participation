@@ -68,6 +68,23 @@ namespace Web_GUI_Layer
                 skills_list.Controls.Add(new LiteralControl(@"<li>Geen</li>"));
             }
 
+            // Display max accounts
+            max_accs.InnerText = qd.AmountAccs.ToString();
+
+            // Display volunteers
+            if (qd.Volunteers.Count > 0)
+            {
+                foreach (int v in qd.Volunteers)
+                {
+                    vrijwilligers_list.Controls.Add(
+                        new LiteralControl(string.Format("<li>{0}</li>", GUIHandler.GetInfo(true, v).Name)));
+                }
+            }
+            else
+            {
+                vrijwilligers_list.Controls.Add(new LiteralControl(@"<li>Geen</li>"));
+            }
+
             if (qd.Urgent)
             {
                 vraag_urgentie.InnerText = "Urgent";

@@ -3,7 +3,7 @@
     // Haal alle info op als de pagina geladen is
     haalInfoOp('');
 
-    $('#inputZoeken').on('keyup click', function () {
+    $('#inputZoeken').on('input', function (e) {
 
         // Haal alle info op als er op de input wordt geklikt of een toets wordt losgelaten
         haalInfoOp($(this).val());
@@ -12,10 +12,17 @@
 
 });
 
+var xhr;
+
 // Functie om alle gevonden resultaten op te halen, door middel van ajax
 function haalInfoOp(val) {
+    // Abort de huidige ajax call als die bestaat
+    if (xhr != undefined) {
+        xhr.abort();
+    }
 
-    $.ajax({
+    // Maak een nieuwe asynchrone request naar de server
+    xhr = $.ajax({
         type: 'POST',
         url: 'zoeken.aspx/SearchInfo',
         data: '{str: "' + val + '"}',
@@ -48,7 +55,7 @@ function haalInfoOp(val) {
             }
 
             // Update het aantal resultaten
-            aantalResultaten.text(info.length);
+            $('#aantalResultaten').text(info.length + (info.length == 1 ? " Resultaat" : " Resultaten"));
 
             // Append bericht als er geen info gevonden is
             if (info.length == 1 && info[0] == "") {

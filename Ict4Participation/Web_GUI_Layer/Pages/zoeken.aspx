@@ -59,7 +59,7 @@
 					    <div class="col-xs-12 dropdown">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
-								    <p class="pull-left"><span id="aantalResultaten">10</span> Resultaten</p>
+								    <p class="pull-left"><span id="aantalResultaten">10 Resultaten</span></p>
 							    </div>
 						    </div>
 						    <div class="row dropdown-content">

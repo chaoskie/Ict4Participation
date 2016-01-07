@@ -111,6 +111,23 @@
                         </div>
                     </div>
                     
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 pull-right">
+				            <div class="row">
+					            <div class="col-xs-12 dropdown">
+						            <div class="row dropdown-title">
+							            <div class="col-xs-12">
+								            <p class="pull-left">Vrijwilligers (max <span id="max_accs" runat="server"></span>):</p>
+							            </div>
+						            </div>
+						            <div class="row dropdown-content">
+							            <ul id="vrijwilligers_list" class="col-xs-12" runat="server"></ul>
+						            </div>
+					            </div>
+				            </div>
+                        </div>
+                    </div>
+                    
                     <asp:Button ID="btnAccept" Text="Accepteer deze vraag" CssClass="btn btn-custom2 btn-lg btn-block" runat="server" />
 
                     <div class="row">

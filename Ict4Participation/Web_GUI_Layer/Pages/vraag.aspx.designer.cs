@@ -130,6 +130,24 @@ namespace Web_GUI_Layer {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl vraag_urgentie;
         
         /// <summary>
+        /// max_accs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl max_accs;
+        
+        /// <summary>
+        /// vrijwilligers_list control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl vrijwilligers_list;
+        
+        /// <summary>
         /// btnAccept control.
         /// </summary>
         /// <remarks>
