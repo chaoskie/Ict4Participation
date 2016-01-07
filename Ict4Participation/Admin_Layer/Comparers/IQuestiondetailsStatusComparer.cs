@@ -22,7 +22,7 @@ namespace Admin_Layer.Comparers
             //Sort on status
             if (returnable == 0)
             {
-                returnable = ((int)statusx).CompareTo((int)statusy);
+                returnable = -((int)statusy).CompareTo((int)statusx);
             }
 
             //Sort on urgency
@@ -31,7 +31,7 @@ namespace Admin_Layer.Comparers
                 //-1 = x is false, y is true
                 //0 = x is y
                 //1 =x is true, y is false
-                returnable = x.Urgent.CompareTo(y.Urgent);
+                returnable = -x.Urgent.CompareTo(y.Urgent);
             }
             //Sort on date
             if (returnable == 0)

@@ -11,6 +11,10 @@ namespace Admin_Layer
     {
         public static List<Questiondetails> OrderBy(List<Questiondetails> lqd, bool byTitle, bool byDate, bool byUrgency, bool byStatus)
         {
+            if (!byDate && !byStatus && !byTitle && !byUrgency)
+            {
+                lqd.Sort(new IQuestiondetailsStatusComparer());
+            }
             if (byTitle)
             {
                 lqd.Sort(new IQuestiondetailsTitleComparer());
