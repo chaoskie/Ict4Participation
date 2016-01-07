@@ -165,8 +165,8 @@ namespace Web_GUI_Layer
                 }
 
                 // Sort the VraagSetup list
-                returnedQuestions = returnedQuestions.OrderByDescending(i => i.Rank).OrderByDescending(i => i.Relevance).ToList();
-                returnedAccounts = returnedAccounts.OrderByDescending(i => i.Rank).OrderByDescending(i => i.Relevance).ToList();
+                returnedQuestions = returnedQuestions.OrderByDescending(i => i.Rank).ThenBy(i => i.Relevance).ToList();
+                returnedAccounts = returnedAccounts.OrderByDescending(i => i.Rank).ThenBy(i => i.Relevance).ToList();
 
                 // Cast returnedQuestions to a string
                 foreach (QuestionSetup vs in returnedQuestions)
