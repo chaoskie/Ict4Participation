@@ -73,7 +73,7 @@ namespace Web_GUI_Layer.Pages
             }
 
             // Insert all questions
-            List<Questiondetails> questions = GUIHandler.GetAll(true).Where(i => i.PosterID == mainuser_id).ToList();
+            List<Questiondetails> questions = GUIHandler.GetAll(true).Where(i => i.PosterID == u_id).ToList();
             foreach (Questiondetails qd in questions)
             {
                 HtmlGenericControl li = new HtmlGenericControl("li");
@@ -101,7 +101,7 @@ namespace Web_GUI_Layer.Pages
             }
 
             // Insert all reviews placed by mainuser
-            List<Reviewdetails> reviews_list_1 = GUIHandler.GetAllReviews(mainuser_id, false);
+            List<Reviewdetails> reviews_list_1 = GUIHandler.GetAllReviews(u_id, false);
             foreach (Reviewdetails rd in reviews_list_1)
             {
                 // Insert a new listitem to contain the anchors
@@ -144,7 +144,7 @@ namespace Web_GUI_Layer.Pages
             }
 
             // Insert all reviews placed by other people about mainuser
-            List<Reviewdetails> reviews_list_2 = GUIHandler.GetAllReviews(mainuser_id, true);
+            List<Reviewdetails> reviews_list_2 = GUIHandler.GetAllReviews(u_id, true);
             foreach (Reviewdetails rd in reviews_list_2)
             {
                 // Insert a new listitem to contain the anchors
