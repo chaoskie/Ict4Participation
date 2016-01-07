@@ -11,6 +11,8 @@ namespace Web_GUI_Layer
     public partial class zoeken : System.Web.UI.Page
     {
         private GUIHandler GUIHandler;
+        static List<Questiondetails> questions;
+        static List<Accountdetails> accounts;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,9 +23,11 @@ namespace Web_GUI_Layer
                 Response.Redirect("inloggen.aspx", false);
                 return;
             }
-
             // Retrieve GUIHandler object from session
             GUIHandler = (GUIHandler)Session["GUIHandler_obj"];
+
+            questions = GUIHandler.GetAll(true);
+            accounts = GUIHandler.GetAll();
         }
 
         protected void btnTerug_Click(object sender, EventArgs e)
@@ -64,10 +68,6 @@ namespace Web_GUI_Layer
 
             if (str.Trim().Length > 0)
             {
-                GUIHandler tempGUIHandler = new GUIHandler();
-
-                List<Questiondetails> questions = tempGUIHandler.GetAll(true);
-                List<Accountdetails> accounts = tempGUIHandler.GetAll();
 
                 List<QuestionSetup> returnedQuestions = new List<QuestionSetup>();
                 List<AccountSetup> returnedAccounts = new List<AccountSetup>();
