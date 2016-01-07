@@ -141,7 +141,15 @@ namespace Web_GUI_Layer.Pages
 
         protected void UpdateInfo_Click(object sender, EventArgs e)
         {
+
             string message = string.Empty;
+            
+            if (!GUIHandler.ValidatePassword(inputWachtwoordValidate.Value, out message))
+            {
+                //Show error
+                ShowErrorMessage(message);
+                return;
+            }
 
             // Get all info
             Accountdetails ad = GUIHandler.GetMainuserInfo();

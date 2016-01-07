@@ -16,8 +16,8 @@ namespace Web_GUI_Layer
         protected void Page_Load(object sender, EventArgs e)
         {
             GUIHandler = new GUIHandler();
-            HttpCookie usc = HttpContext.Current.Request.Cookies["usrckk"];
-            if (usc != null)
+            HttpCookie usc = Request.Cookies["usrckk"];
+            if (usc.Value != null)
             {
                 inputGebruikersnaam.Value = usc.Value;
             }
@@ -33,9 +33,8 @@ namespace Web_GUI_Layer
             {
                 if (checkbox.Checked)
                 {
-                    HttpCookie usc = new HttpCookie("usrckk");
-                    usc.HttpOnly = false;
-                    usc.Value = inputGebruikersnaam.Value;
+                    HttpCookie usc = new HttpCookie("usrckk", inputGebruikersnaam.Value);
+                    Request.Cookies.Add(usc);
                 }
 
                 Session["GUIHandler_obj"] = GUIHandler;

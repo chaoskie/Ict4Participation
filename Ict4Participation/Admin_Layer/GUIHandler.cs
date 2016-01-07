@@ -266,7 +266,7 @@ namespace Admin_Layer
         public bool ValidatePassword(string pass, out string message)
         {
             message = "";
-            if (Class_Layer.Utility_Classes.PasswordHashing.ValidatePassword(pass, Account.FindHash(MainUser.ID)))
+            if (!Class_Layer.Utility_Classes.PasswordHashing.ValidatePassword(pass, Account.FindHash(MainUser.ID)))
             {
                 message = "Wachtwoord is onjuist!";
                 return false;

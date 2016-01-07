@@ -781,24 +781,31 @@ namespace Database_Layer
         /// <returns>Succes boolean</returns>
         public static bool InsertSkillAccount(string skill, int aID)
         {
-            using (OracleConnection c = new OracleConnection(@connectionstring))
+            if (!String.IsNullOrWhiteSpace(skill))
             {
-                c.Open();
-                OracleCommand cmd = new OracleCommand("INSERT INTO \"Acc_Skill\" (\"SKILL_NAME\",\"ACC_ID\") VALUES (:A, :B)");
-                cmd.Parameters.Add(new OracleParameter("A", skill));
-                cmd.Parameters.Add(new OracleParameter("B", aID));
-                cmd.Connection = c;
-                try
+                using (OracleConnection c = new OracleConnection(@connectionstring))
                 {
-                    cmd.ExecuteNonQuery();
+                    c.Open();
+                    OracleCommand cmd = new OracleCommand("INSERT INTO \"Acc_Skill\" (\"SKILL_NAME\",\"ACC_ID\") VALUES (:A, :B)");
+                    cmd.Parameters.Add(new OracleParameter("A", skill));
+                    cmd.Parameters.Add(new OracleParameter("B", aID));
+                    cmd.Connection = c;
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (OracleException e)
+                    {
+                        Console.WriteLine(e.Message);
+                        return false;
+                    }
+                    c.Close();
+                    return true;
                 }
-                catch (OracleException e)
-                {
-                    Console.WriteLine(e.Message);
-                    return false;
-                }
-                c.Close();
-                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         /// <summary>
