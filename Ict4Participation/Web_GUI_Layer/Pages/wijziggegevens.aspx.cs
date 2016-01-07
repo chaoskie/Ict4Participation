@@ -103,8 +103,10 @@ namespace Web_GUI_Layer.Pages
                     {
                         // TODO: Add skills to select_skills_output
                     }
-
-                    inputVOG.Value = m_ad.VOGPath;
+                }
+                else
+                {
+                    formVrijwilliger.Visible = false;
                 }
             }
         }
@@ -120,24 +122,37 @@ namespace Web_GUI_Layer.Pages
 
             // Get all info
             Accountdetails ad = new Accountdetails();
-            //ad.Name = ..;
-            //ad.Address = ...;
-            //ad.City = ..;
-            //ad.Phonenumber = ..;
-            //ad.Gender = ..;
-            //ad.Birthdate = ..;
-            //ad.Email = ..;
-            //ad.Username = ..;
-            // TODO: check if both passwords are equal
-            // TODO: set password
-            //ad.AvatarPath = ..;
-            //ad.OVPossible = ..;
-            //ad.hasDriverLicense = ..;
-            //ad.hasVehicle = ..;
 
+            if (inputTussenvoegsel.Value != null)
+            {
+                ad.Name = string.Format("{0} {1} {2}", inputVoornaam.Value, inputTussenvoegsel.Value,
+                    inputAchternaam.Value);
+            }
+            else
+            {
+                ad.Name = string.Format("{0} {1}", inputVoornaam.Value, inputAchternaam.Value);
+            }
+            
+            ad.Address = string.Format("{0} {1}", inputStraatnaam.Value, inputHuisnummer.Value);
+            ad.City = inputWoonplaats.Value;
+            ad.Phonenumber = inputTelefoonnummer.Value;
+            ad.Gender = input_geslacht.Value.ToLower() == "man" ? "M" : "V";
+            ad.Birthdate = new DateTime(Convert.ToInt32(input_birthdate_3.Value), Convert.ToInt32(input_birthdate_2.Value), Convert.ToInt32(input_birthdate_1.Value));
 
+            ad.Email = inputEmail.Value;
+            ad.Username = inputGebruikersnaam.Value;
+
+            ad.OVPossible = Request.Form["cbOVMogelijk"] == "true";
+            ad.hasDriverLicense = Request.Form["cbRijbewijs"] == "true";
+            ad.hasVehicle = Request.Form["cbAuto"] == "true";
+
+            if (inputProfielfoto.HasFile)
+            {
+                ad.AvatarPath = inputProfielfoto.FileName;
+            }
+            
             // Update user settings
-            if (!GUIHandler.Edit(ad, out message))
+            if (!GUIHandler.Edit(ad, out message, inputWachtwoord1.Value, inputWachtwoord2.Value))
             {
                 ShowErrorMessage(message);
             }

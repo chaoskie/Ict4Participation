@@ -202,6 +202,15 @@ namespace Web_GUI_Layer.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox cb_auto;
         
         /// <summary>
+        /// formVrijwilliger control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl formVrijwilliger;
+        
+        /// <summary>
         /// select_skills control.
         /// </summary>
         /// <remarks>
@@ -220,12 +229,12 @@ namespace Web_GUI_Layer.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlSelect select_skills_output;
         
         /// <summary>
-        /// inputVOG control.
+        /// inputWachtwoordValidate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputFile inputVOG;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword inputWachtwoordValidate;
     }
 }

@@ -296,14 +296,14 @@
 												    <label for="inputGebruikersnaam" class="sr-only">Gebruikersnaam</label>
 												    <input type="text" id="inputGebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required="required" runat="server" />
 											    </div>
-											    <div class="col-xs-12">
-												    <label for="inputWachtwoord1" class="sr-only">Wachtwoord</label>
-												    <input type="password" id="inputWachtwoord1" class="form-control" placeholder="Wachtwoord" required="required" runat="server" />
-											    </div>
-											    <div class="col-xs-12">
-												    <label for="inputWachtwoord2" class="sr-only">Herhaal wachtwoord</label>
-												    <input type="password" id="inputWachtwoord2" class="form-control" placeholder="Herhaal wachtwoord" required="required" runat="server" />
-											    </div>
+                                                <div class="col-xs-12">
+								                    <label for="inputWachtwoord1" class="sr-only">Wachtwoord</label>
+								                    <input type="password" id="inputWachtwoord1" class="form-control" placeholder="Wachtwoord" required="required" runat="server" />
+							                    </div>
+							                    <div class="col-xs-12">
+								                    <label for="inputWachtwoord2" class="sr-only">Herhaal wachtwoord</label>
+								                    <input type="password" id="inputWachtwoord2" class="form-control" placeholder="Herhaal wachtwoord" required="required" runat="server" />
+							                    </div>
 										    </div>
 									    </div>
 								    </div>
@@ -315,7 +315,7 @@
 										    <div class="row">
 											    <div class="col-xs-12">
 												    <label for="inputProfielfoto" class="sr-only">Selecteer profielfoto</label>
-                                                    <asp:FileUpload ID="inputProfielfoto" ClientIDMode="Static" CssClass="file" required="required" runat="server" />
+                                                    <asp:FileUpload ID="inputProfielfoto" ClientIDMode="Static" CssClass="file" runat="server" />
 											    </div>
 										    </div>
 									    </div>
@@ -368,69 +368,47 @@
 				    </div>
 
 				    <!-- Rol specifieke gegevens -->
-				    <div class="form-group">
-					    <h2>Rol specifieke gegevens</h2>
-					    <div class="row">
-						    <div class="col-xs-12">
-							    <ul class="nav nav-tabs">
-								    <li class="active"><a data-toggle="tab" href="#tab_hulpbehoevende">Hulpbehoevende</a></li>
-								    <li><a data-toggle="tab" href="#tab_vrijwilliger">Vrijwilliger</a></li>
-							    </ul>
-						    </div>
-					    </div>
-					    <div class="row">
-						    <div class="col-xs-12">
-							    <div class="tab-content">
-								    <div id="tab_hulpbehoevende" class="tab-pane fade in active">
-									    <div class="form-group">
-										    <div class="row">
-											    <div class="col-xs-12">
-											        <!-- Button here -->
-											    </div>
-										    </div>
-									    </div>
-								    </div>
-								    <div id="tab_vrijwilliger" class="tab-pane fade">
-									    <div class="form-group">
-										    <div class="row">
-											    <div class="col-xs-12">
-												    <h2>Skills</h2>
-												    <div class="form-group">
-													    <label for="select_skills" class="sr-only">Skills</label>
-													    <select id="select_skills" class="form-control" runat="server"></select>
-												    </div>
-											    </div>
-										    </div>
-										    <div class="row">
-											    <div class="col-tn-12 col-xs-6">
-												    <button id="btnSkillVoegToe" class="btn btn-custom2 btn-block" formnovalidate="formnovalidate" onclick="return false;">Voeg Toe</button>
-											    </div>
-											    <div class="col-tn-12 col-xs-6">
-												    <button id="btnSkillVerwijder" class="btn btn-custom2 btn-block" formnovalidate="formnovalidate" onclick="return false;">Verwijder</button>
-											    </div>
-										    </div>
-										    <div class="row">
-											    <div class="form-group">
-												    <div class="col-xs-12">
-													    <h3>Toegevoegde skills:</h3>
-													    <select size="5" id="select_skills_output" class="form-control" runat="server"></select>
-												    </div>
-											    </div>
-										    </div>
-										    <div class="row">
-											    <div class="col-xs-12">
-												    <h3><abbr title="Verklaring Omtrend Gedrag">VOG</abbr></h3>
-												    <label for="inputVOG" class="sr-only">Selecteer profielfoto</label>
-												    <input id="inputVOG" class="file" type="file" runat="server" />
-											    </div>
-										    </div>
-                                            <br />
-									    </div>
-								    </div>
+					<div id="formVrijwilliger" class="form-group" runat="server">
+						<div class="row">
+							<div class="col-xs-12">
+								<h2>Skills</h2>
+								<div class="form-group">
+									<label for="select_skills" class="sr-only">Skills</label>
+									<select id="select_skills" class="form-control" runat="server"></select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-tn-12 col-xs-6">
+								<button id="btnSkillVoegToe" class="btn btn-custom2 btn-block" formnovalidate="formnovalidate" onclick="return false;">Voeg Toe</button>
+							</div>
+							<div class="col-tn-12 col-xs-6">
+								<button id="btnSkillVerwijder" class="btn btn-custom2 btn-block" formnovalidate="formnovalidate" onclick="return false;">Verwijder</button>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group">
+								<div class="col-xs-12">
+									<h3>Toegevoegde skills:</h3>
+									<select size="5" id="select_skills_output" class="form-control" runat="server"></select>
+								</div>
+							</div>
+						</div>
+					</div>
+                    
+                    <div class="form-group">
+                        <h2>Voeg het wachtwoord in om op te slaan</h2>
+                        <div class="row">
+                            <div class="col-xs-12">
+							    <div class="form-group">
+								    <label for="inputWachtwoordValidate" class="sr-only">Wachtwoord</label>
+								    <input type="password" id="inputWachtwoordValidate" class="form-control" placeholder="Wachtwoord" required="required" runat="server" />
 							    </div>
-						    </div>
-					    </div>
-				    </div>
+                            </div>
+                        </div>
+                    </div>
+
+			        <br/>
                     
                     <div class="row">
                         <div class="col-xs-12">
