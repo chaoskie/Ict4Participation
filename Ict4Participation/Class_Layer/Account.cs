@@ -295,7 +295,7 @@ namespace Class_Layer
         {
             string passhash = PasswordHashing.CreateHash(password);
             //If pass is blank, then don't update the password
-            if (password == "")
+            if (String.IsNullOrWhiteSpace(password))
             {
                 Database.UpdateUser(ID, username, email, name, address, city, phonenumber, hasLicense, hasVehicle, OVPossible, ConvertTo.OracleDateTime(birthdate), avatarPath, sex, VOG);
             }
