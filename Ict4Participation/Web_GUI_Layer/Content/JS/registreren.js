@@ -23,36 +23,6 @@ $('.nav.nav-tabs a').on('click', function () {
 
 });
 
-// Functie om skills toe te voegen
-$('#btnSkillVoegToe').on('click', function () {
-
-    // Haal geselecteerde skill op
-    var $option = $('#select_skills').find('option:selected');
-
-    // Plak de skill in de output
-    $('#select_skills_output').append($option);
-
-    // Valideer fields
-    valideerFields();
-
-});
-
-// Functie om skills te verwijderen
-$('#btnSkillVerwijder').on('click', function () {
-
-    // Haal geselecteerde skill op
-    var $option = $('#select_skills_output').find('option:selected');
-
-    // Plak de skill terug in het select element
-    $('#select_skills').append($option);
-
-    // Valideer fields
-    valideerFields();
-
-    $('#select_skills_output').val($('#select_skills_output option:first').val());
-
-});
-
 // Als inputWoonplaats nog niet success is maar wel tekst bevat,
 // stuur een async request om te controlleren of de woonplaats bestaat
 $('#inputWoonplaats').on('keyup click change', function () {
