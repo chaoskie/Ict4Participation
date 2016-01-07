@@ -59,6 +59,8 @@ namespace Web_GUI_Layer
         public static string SearchInfo(string str)
         {
             string result = string.Empty;
+            str = str.ToLower();
+            int length = str.Length;
 
             if (str.Trim().Length > 0)
             {
@@ -89,20 +91,20 @@ namespace Web_GUI_Layer
                     vs.PostID = qd.PostID;
 
                     // Add a question to the list if one of the details matches the input string
-                    if (qd.Title.ToLower().Contains(str.ToLower()) || str == "*")
+                    if (qd.Title.ToLower().Contains(str) || str == "*")
                     {
                         vs.Rank = 3;
-                        vs.Relevance = str.Length/qd.Title.Length;
+                        vs.Relevance = length/qd.Title.Length;
                     }
-                    else if (qd.Description.ToLower().Contains(str.ToLower()))
+                    else if (qd.Description.ToLower().Contains(str))
                     {
                         vs.Rank = 2;
-                        vs.Relevance = str.Length/qd.Description.Length;
+                        vs.Relevance = length/qd.Description.Length;
                     }
-                    else if (qd.Location.ToLower().Contains(str.ToLower()))
+                    else if (qd.Location.ToLower().Contains(str))
                     {
                         vs.Rank = 1;
-                        vs.Relevance = str.Length/qd.Location.Length;
+                        vs.Relevance = length/qd.Location.Length;
                     }
 
                     // Add VraagSetup if its rank has been set
@@ -129,30 +131,30 @@ namespace Web_GUI_Layer
                     a_s.AccName = ad.Name;
 
                     // Add an account to the list if one of the details matches the input string
-                    if (ad.Name.ToLower().Contains(str.ToLower()) || str == "*")
+                    if (ad.Name.ToLower().Contains(str) || str == "*")
                     {
                         a_s.Rank = 5;
-                        a_s.Relevance = str.Length/ad.Name.Length;
+                        a_s.Relevance = length/ad.Name.Length;
                     }
-                    else if (ad.Email.ToLower().Contains(str.ToLower()))
+                    else if (ad.Email.ToLower().Contains(str))
                     {
                         a_s.Rank = 4;
-                        a_s.Relevance = str.Length/ad.Email.Length;
+                        a_s.Relevance = length/ad.Email.Length;
                     }
-                    else if (ad.Address.ToLower().Contains(str.ToLower()))
+                    else if (ad.Address.ToLower().Contains(str))
                     {
                         a_s.Rank = 3;
-                        a_s.Relevance = str.Length/ad.Address.Length;
+                        a_s.Relevance = length/ad.Address.Length;
                     }
-                    else if (ad.Phonenumber.ToLower().Contains(str.ToLower()))
+                    else if (ad.Phonenumber.ToLower().Contains(str))
                     {
                         a_s.Rank = 2;
-                        a_s.Relevance = str.Length/ad.Phonenumber.Length;
+                        a_s.Relevance = length/ad.Phonenumber.Length;
                     }
-                    else if (ad.City.ToLower().Contains(str.ToLower()))
+                    else if (ad.City.ToLower().Contains(str))
                     {
                         a_s.Rank = 1;
-                        a_s.Relevance = str.Length/ad.City.Length;
+                        a_s.Relevance = length/ad.City.Length;
                     }
 
                     // Add AccountSetup if its rank has been set
