@@ -366,7 +366,7 @@ $('body').on('click', '#woonplaats_results_wrapper > p', function () {
 });
 
 // Functie om de woonplaats wrapper zichtbaar te maken als de input focus heeft
-$('#inputWoonplaats').focus('focus', function () {
+$('#inputWoonplaats').on('focus click keyup', function () {
 
     $('#woonplaats_results_wrapper').css({ 'display': 'block' });
 
@@ -378,9 +378,35 @@ $('#inputWoonplaats').focusout(function () {
     // Wacht 200 milliseconde zodat de geklikte woonplaats nog verwerkt kan worden
     setTimeout(function () {
         $('#woonplaats_results_wrapper').css({ 'display': 'none' });
-    }, 200);
+    }, 1000);
 
 });
+
+var prevTekst;
+
+$('#woonplaats_results_wrapper').on('click', 'p', function () {
+    prevTekst = $(this).text();
+});
+
+//$('#inputWoonplaats').change(function () {
+
+//    console.log(prevTekst);
+//    console.log($(this).val());
+
+//    if ('Niks Gevonden' == $(this).val()) {
+//        $('#woonplaats_results_wrapper').css({ 'display': 'none' });
+//    }
+//});
+
+Loop();
+
+function Loop() {
+    if ($('#inputWoonplaats').val() == prevTekst) {
+        $('#woonplaats_results_wrapper').css({ 'display': 'none' });
+    }
+
+    requestAnimationFrame(Loop);
+};
 
 
 // Functie om skills toe te voegen
@@ -402,6 +428,9 @@ $('#btnSkillVoegToe').on('click', function () {
 // Functie om skills te verwijderen
 $('#btnSkillVerwijder').on('click', function () {
 
+    // Onthoud vooraf geselecteerde option
+    var laatstgeselecteerde = $('#select_skills').val();
+
     // Haal geselecteerde skill op
     var $option = $('#select_skills_output').find('option:selected');
 
@@ -417,17 +446,18 @@ $('#btnSkillVerwijder').on('click', function () {
     VoegSkillsToeServerSide();
 
     // Sorteer de input lijst
-    var list = $('#select_skills option');
-
-    list.sort(function(a, b) {
-        a = a.value;
-        b = b.value;
-
-        return a - b;
+    var options = $('#select_skills option');
+    var arr = options.map(function (_, o) { return { t: $(o).text(), v: o.value }; }).get();
+    arr.sort(function (o1, o2) { return o1.t > o2.t ? 1 : o1.t < o2.t ? -1 : 0; });
+    options.each(function (i, o) {
+        o.value = arr[i].v;
+        $(o).text(arr[i].t);
     });
 
-    $('#select_skills').html(list);
-
+    // Zet de geselecteerde optie naar de laatstgeselecteerde option
+    if (laatstgeselecteerde != undefined) {
+        $('#select_skills').val(laatstgeselecteerde);
+    }
 });
 
 // Functie om skills serverside toe te voegen
