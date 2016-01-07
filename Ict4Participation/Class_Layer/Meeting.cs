@@ -108,7 +108,7 @@ namespace Class_Layer
             string addquery = String.Empty;
             if (userid != null)//get all the user skills of specified user
             {
-                addquery =  "WHERE \"RequesterACC_ID\"=" + userid + " OR \"RequestedACCID\"=" + userid;
+                addquery =  "WHERE \"RequesterACC_ID\"=" + userid + " OR \"RequestedACC_ID\"=" + userid;
                 //else get all meetings if no ID is specified
             }
 
