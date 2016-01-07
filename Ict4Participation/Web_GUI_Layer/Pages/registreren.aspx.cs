@@ -152,12 +152,16 @@ namespace Web_GUI_Layer
         }
 
         [System.Web.Services.WebMethod]
-        public static int IsCity(string str)
+        public static string IsCity(string str)
         {
             // If str is a city, return 1
+            if (GetCities(str) == str)
+            {
+                return "true";
+            }
 
             // else return 0
-            return 0;
+            return "false";
         }
 
         [System.Web.Services.WebMethod]

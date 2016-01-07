@@ -28,24 +28,6 @@ $('.nav.nav-tabs a').on('click', function () {
 $('#inputWoonplaats').on('keyup click change', function () {
     var val = $(this).val();
 
-    if (val.length > 0) {
-        // Haal de value op van inputWoonplaats
-
-        // stuur async request
-        $.ajax({
-            type: 'POST',
-            url: 'registreren.aspx/IsCity',
-            data: '{str: "' + val + '"}',
-            contentType: 'application/json;charset=utf-8',
-            dataType: 'json',
-            success: function (result) {
-                if (result.d == 1) {
-                    $('#inputWoonplaats').removeClass('form-fail').addClass('form-success');
-                }
-            }
-        });
-    }
-
     // Haal woonplaatsen op
     $.ajax({
         type: 'POST',
@@ -345,31 +327,18 @@ $('body').on('click', '#woonplaats_results_wrapper > p', function () {
 
     $('#inputWoonplaats').val($(this).text());
 
-    // Stuur een asynchrone request naar de server om de woonplaats
-    // te controleren
-    $.ajax({
-        type: 'POST',
-        url: 'registreren.aspx/IsCity',
-        data: '{str: "' + $('#inputWoonplaats').val() + '"}',
-        contentType: 'application/json;charset=utf-8',
-        dataType: 'json',
-        success: function (result) {
-
-            // Zet het form naar 'form-success' als de woonplaats gevalideerd is
-            if (result.d == 1) {
-                $('#inputWoonplaats').removeClass('form-fail').addClass('form-success');
-            }
-
-        }
-    });
-
 });
 
 // Functie om de woonplaats wrapper zichtbaar te maken als de input focus heeft
 $('#inputWoonplaats').on('focus click keyup', function () {
 
     $('#woonplaats_results_wrapper').css({ 'display': 'block' });
+    isChecked = false;
 
+});
+
+$('#inputWoonplaats').on('keyup', function() {
+    isChecked = false;
 });
 
 // Functie om de woonplaats wrapper onzichtbaar te maken als de input geen focus heeft
@@ -388,25 +357,47 @@ $('#woonplaats_results_wrapper').on('click', 'p', function () {
     prevTekst = $(this).text();
 });
 
-//$('#inputWoonplaats').change(function () {
-
-//    console.log(prevTekst);
-//    console.log($(this).val());
-
-//    if ('Niks Gevonden' == $(this).val()) {
-//        $('#woonplaats_results_wrapper').css({ 'display': 'none' });
-//    }
-//});
-
 Loop();
 
+var isChecked = false;
+
 function Loop() {
-    if ($('#inputWoonplaats').val() == prevTekst) {
+    if (($('#inputWoonplaats').val() == prevTekst) &&
+        !isChecked &&
+        (!$('#inputWoonplaats').hasClass('form-success')))
+    {
         $('#woonplaats_results_wrapper').css({ 'display': 'none' });
+
+        valideerWoonplaats();
+
+        isChecked = true;
+
     }
 
     requestAnimationFrame(Loop);
 };
+
+function valideerWoonplaats() {
+
+    console.log('Ik ga woonplaats valideren');
+
+    // Valideer woonplaats
+    $.ajax({
+        type: 'POST',
+        url: 'registreren.aspx/IsCity',
+        data: '{str: "' + $('#inputWoonplaats').val() + '"}',
+        contentType: 'application/json;charset=utf-8',
+        dataType: 'json',
+        success: function (result) {
+            if (result.d == "true") {
+                $('#inputWoonplaats').removeClass('form-fail').addClass('form-success');
+            } else {
+                $('#inputWoonplaats').removeClass('form-success').addClass('form-fail');
+            }
+        }
+    });
+
+}
 
 
 // Functie om skills toe te voegen
