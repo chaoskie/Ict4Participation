@@ -80,6 +80,9 @@ namespace Web_GUI_Layer.Pages
 
                 HtmlAnchor a2 = new HtmlAnchor();
                 a2.Attributes.Add("data-u-id", Convert.ToString(ad.ID));
+                a2.Attributes.Add("title", string.Format("<div style='width: 350px; height: 150px;'><div style='width:90px; height: 150px; margin-right: 10px; text-align: center; line-height: 150px;' class='pull-left'><img src='{0}' style='width: 100%; margin: 0 auto; vertical-align: middle;' /></div><div style='width: 250px' class='pull-right'><p>{1}</p><p>{2}</p><p>{3}</p></div></div><div style='clear:both'></div>", ad.AvatarPath, ad.Name, ad.VOGPath == null ? "Hulpbehoevende" : "Vrijwilliger", ad.Description));
+                a2.Attributes.Add("data-html", "true");
+                a2.Attributes.Add("rel", "tooltip");
                 a2.ServerClick += Account_Click;
                 a2.InnerText = ad.Name;
                 p2.Controls.Add(a2);
