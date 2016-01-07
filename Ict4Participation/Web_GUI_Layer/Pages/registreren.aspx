@@ -28,7 +28,7 @@
 				    <div class="row">
 					    <div class="col-xs-12">
 						    <!-- REMOVE ONCLICK -->
-						    <button onserverclick="btnAnnuleren_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
+						    <button onserverclick="btnAnnuleren_Click" runat="server" formnovalidate="formnovalidate">
 							    <i class="fa fa-times-circle"></i>
 							    <p>Annuleren</p>
 						    </button>
