@@ -17,6 +17,13 @@ namespace Admin_Layer
         /// <returns></returns>
         public static List<Accountdetails> Detailed(List<Account> Accounts, Accountdetails search)
         {
+            if (search.Address == null) { search.Address = ""; }
+            if (search.Username == null) { search.Username = ""; }
+            if (search.Name == null) { search.Name = ""; }
+            if (search.Email == null) { search.Email = ""; }
+            if (search.City == null) { search.City = ""; }
+            if (search.Phonenumber == null) { search.Phonenumber = ""; }
+
             //Search through all the details, where the details match
             List<Accountdetails> NoSkillSearchList = Accounts.Where(
                 av => av.Address.Contains(search.Address) &&
@@ -89,6 +96,13 @@ namespace Admin_Layer
         /// <returns></returns>
         public static List<Questiondetails> Detailed(List<Question> Questions, Questiondetails search)
         {
+            if (search.AmountAccs == null) { search.AmountAccs = 100; }
+            if (search.Description == null) { search.Description = ""; }
+            if (search.EndDate == null) { search.EndDate = DateTime.Now.AddYears(15); }
+            if (search.StartDate == null) { search.StartDate = DateTime.Now.AddYears(-15); }
+            if (search.Location == null) { search.Location = ""; }
+            if (search.Title == null) { search.Title = ""; }
+
             //Search through all the details, where the details match
             List<Questiondetails> NoSkillSearchList = Questions.Where(
                 qv => qv.AmountAccs <= search.AmountAccs &&
@@ -97,7 +111,7 @@ namespace Admin_Layer
                 qv.StartDate >= search.StartDate &&
                 qv.Location.Contains(search.Location) &&
                 qv.Title.Contains(search.Title) &&
-                qv.Urgent == search.Urgent
+                (search.Urgent != null ? qv.Urgent == search.Urgent : qv.Urgent != search.Urgent)
                 ).Select(qv => Creation.getDetailsObject(qv))
                 .Cast<Questiondetails>().ToList();
 
