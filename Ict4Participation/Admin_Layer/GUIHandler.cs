@@ -461,25 +461,35 @@ namespace Admin_Layer
         /// Edits a question
         /// </summary>
         /// <param name="question">The question details</param>
-        /// <param name="questionIndex">The index of the question as loaded in the list</param>
+        /// <param name="qID">The ID of the question</param>
         /// <param name="message">The message of the error</param>
+        /// <param name="isAccept">Whether it is an acception or not</param>
         /// <returns>Success</returns>
-        public bool Edit(Questiondetails question, int questionIndex, out string message)
+        public bool Edit(Questiondetails question, int qID, out string message, bool isAccept = false)
         {
+            Question q = LoadedQuestions.Where(qq => qq.PostID == qID).FirstOrDefault();
+
             //Check for rights
-            if (LoadedQuestions[questionIndex].PosterID == MainUser.ID)
+            if (q.PosterID == MainUser.ID || isAccept == true)
             {
                 if (!Check.QuestionDetails(question, out message))
                 {
-                    return false;
+                    if (!isAccept)
+                    {
+                        return false;
+                    }
                 }
 
                 Class_Layer.Enums.Status status;
                 Enum.TryParse(question.Status, out status);
+                if (question.AmountAccs == question.Volunteers.Count)
+                {
+                    status = Status.Aangenomen;
+                }
 
                 //Edit question
-                Question q = new Question(LoadedQuestions[questionIndex].PostID, MainUser.ID, question.Title, question.StartDate, question.EndDate, 
-                    question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, LoadedQuestions[questionIndex].Volunteers, (int)status);
+                q = new Question(qID, MainUser.ID, question.Title, question.StartDate, question.EndDate, 
+                    question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, question.Volunteers, (int)status);
                 q.Update();
                 message = "Vraag succesvol aangepast!";
                 return true;

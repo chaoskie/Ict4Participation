@@ -4,48 +4,48 @@
 <html lang="nl">
 <head>
     <!-- Meta information -->
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
-	<meta name="author" content="ICT4Participation" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
+    <meta name="author" content="ICT4Participation" />
     <meta name="description" content="Log in om verder te gaan" />
     <meta name="keywords" content="Inloggen,ICT4Participation,Hulp,Hulpbehoevende,Vrijwilliger,Eindhoven" />
     <title>Vraag</title>
     <!-- Stylesheets -->
-	<link rel="stylesheet" href="../Content/CSS/bootstrap.min.css" />
-	<link rel="stylesheet" href="../Content/CSS/font-awesome.min.css" />
-	<link rel="stylesheet" href="../Content/CSS/main.css" />
+    <link rel="stylesheet" href="../Content/CSS/bootstrap.min.css" />
+    <link rel="stylesheet" href="../Content/CSS/font-awesome.min.css" />
+    <link rel="stylesheet" href="../Content/CSS/main.css" />
     <link rel="stylesheet" href="../Content/CSS/input.css" />
-	<link rel="stylesheet" href="../Content/CSS/dropdown.css" />
+    <link rel="stylesheet" href="../Content/CSS/dropdown.css" />
     <link rel="stylesheet" href="../Content/CSS/reacties.css" />
-	<link rel="stylesheet" href="../Content/CSS/vraag.css" />
+    <link rel="stylesheet" href="../Content/CSS/vraag.css" />
 </head>
 <body>
     <form runat="server">
-	    <div id="wrapper">
+        <div id="wrapper">
 
-		    <!-- NAVIGATION -->
-		    <nav>
-			    <div class="container-fluid">
-				    <div class="row">
-					    <div class="col-xs-12">
-						    <button onserverclick="btnTerug_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
-							    <i class="fa fa-chevron-left"></i>
-							    <p>Terug</p>
-						    </button>
-					    </div>
-				    </div>
-			    </div>
-		    </nav>
-		
-		    <!-- MAIN -->
-		    <main id="main">
+            <!-- NAVIGATION -->
+            <nav>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button onserverclick="btnTerug_Click" runat="server" formnovalidate="formnovalidate">
+                                <i class="fa fa-chevron-left"></i>
+                                <p>Terug</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- MAIN -->
+            <main id="main">
 			    <div class="container">
 
                     <br />
             
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
-				    <h2>Vraag van <a id="vraag_naam" OnServerClick="btnPosterName_Click" runat="server"></a></h2>
+				    <h2>Vraag van <a id="vraag_naam" OnServerClick="btnPosterName_Click" runat="server"></a> (<span id="vraag_status" runat="server"></span>)</h2>
 				    
                     <div class="row">
                         <div class="col-tn-12 col-xs-6">
@@ -110,7 +110,8 @@
                             </div>
                         </div>
                     </div>
-
+                    
+                    <asp:Button ID="btnAccept" Text="Accepteer deze vraag" CssClass="btn btn-custom2 btn-lg btn-block" runat="server" />
 
                     <div class="row">
                         <div class="col-xs-12">
@@ -137,15 +138,15 @@
 
 		    </main>
 
-	    </div>
+        </div>
     </form>
-	
+
     <!-- Scripts -->
-	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
+    <script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
-	<script src="../Content/JS/dropdown.js"></script>
-	<script src="../Content/JS/errormessage.js"></script>
-	<%--<script src="../Content/JS/zoekprofiel.js"></script>--%>
+    <script src="../Content/JS/dropdown.js"></script>
+    <script src="../Content/JS/errormessage.js"></script>
+    <%--<script src="../Content/JS/zoekprofiel.js"></script>--%>
     <script src="../Content/JS/profiel.js"></script>
     <script src="../Content/JS/vraag.js"></script>
 </body>

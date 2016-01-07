@@ -74,11 +74,18 @@ namespace Admin_Layer
             get { return skills; }
             set { skills = value; }
         }
+        private List<int> volunteers;
+        public List<int> Volunteers
+        {
+            get { return volunteers; }
+            set { volunteers = value; }
+        }
+
         public Questiondetails()
         {
             skills = new List<string>();
+            volunteers = new List<int>();
         }
-        
         public override string ToString()
         {
             return Title;

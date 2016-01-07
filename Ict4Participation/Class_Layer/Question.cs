@@ -92,7 +92,7 @@ namespace Class_Layer
             //Create a list of volunteers, by default: none
             List<int> volunteers = new List<int>();
             //Fill the list of volunteers with the actual volunteers if there are any
-            DataTable VolDt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Question_Acc\" WHERE \"QUESTION_ID\"=" + this.ID);
+            DataTable VolDt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Question_Acc\" WHERE \"QUESTION_ID\"=" + base.PostID);
             foreach (DataRow VolunteersRow in VolDt.Rows)
             {
                 volunteers.Add(Convert.ToInt32(VolunteersRow["ACC_ID"]));

@@ -73,11 +73,34 @@ namespace Web_GUI_Layer
                 vraag_urgentie.InnerText = "Urgent";
             }
 
+            //Show question status
+            vraag_status.InnerText = qd.Status;
+
             // Disable button if user is not the owner of the question
             if (mainuserID != qd.PosterID)
             {
                 btnDeleteQuestion.Visible = false;
                 btnEditQuestion.Visible = false;
+                if (qd.Status != "Open" || qd.Volunteers.Contains(mainuserID) || String.IsNullOrWhiteSpace(GUIHandler.GetMainuserInfo().VOGPath) || qd.Volunteers.Count == qd.AmountAccs)
+                {
+                    if (qd.Volunteers.Contains(mainuserID))
+                    {
+                        btnAccept.Text = "Deaccepteer vraag";
+                        btnAccept.Click += btnDeclineQuestion_Click;
+                    }
+                    else
+                    {
+                        btnAccept.Visible = false;
+                    }
+                }
+                else
+                {
+                    btnAccept.Click += btnAcceptQuestion_Click;
+                }
+            }
+            else
+            {
+                btnAccept.Visible = false;
             }
 
             // Insert all comments
@@ -205,6 +228,60 @@ namespace Web_GUI_Layer
                     @"</div>"));
             }
         }
+
+        protected void btnDeclineQuestion_Click(object sender, EventArgs e)
+        {
+            Questiondetails qd = GUIHandler.GetAll(true).Where(q => q.PostID == q_id).First();
+            if (qd.Volunteers.Count > qd.Volunteers.Count)
+            {
+                //Too many accounts
+                btnAccept.Visible = false;
+                Response.Write("<script>alert('Deze vraag heeft al genoeg vrijwilligers');</script>");
+            }
+            else
+            {
+                qd.Volunteers.Remove(mainuserID);
+                string message = "";
+                if (GUIHandler.Edit(qd, qd.PostID, out message, true))
+                {
+                    //Success
+                    Response.Write("<script>alert('U heeft deze vraag succesvol geaccepteerd');</script>");
+                    Response.Redirect(Request.RawUrl, false);
+                }
+                else
+                {
+                    //Failure
+                }
+            }
+        }
+
+        protected void btnAcceptQuestion_Click(object sender, EventArgs e)
+        {
+            Questiondetails qd = GUIHandler.GetAll(true).Where(q => q.PostID == q_id).First();
+            if (qd.Volunteers.Count > qd.Volunteers.Count)
+            {
+                //Too many accounts
+                btnAccept.Visible = false;
+                Response.Write("<script>alert('Deze vraag heeft al genoeg vrijwilligers');</script>");
+            }
+            else
+            {
+                qd.Volunteers.Add(mainuserID);
+                string message = "";
+                if (GUIHandler.Edit(qd, qd.PostID, out message, true))
+                {
+                    //Success
+                    Response.Write("<script>alert('U heeft deze vraag succesvol geaccepteerd');</script>"); 
+                    Response.Redirect(Request.RawUrl, false);
+                }
+                else
+                {
+                    //Failure
+                }
+            }
+        }
+
+        
 
         protected void btnTerug_Click(object sender, EventArgs e)
         {

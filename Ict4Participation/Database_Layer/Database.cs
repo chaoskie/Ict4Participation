@@ -551,7 +551,7 @@ namespace Database_Layer
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("DELETE FROM \"Question_Acc\" WHERE \"ACC_ID\" = :A AND \"QUESTION_ID\" = :B)");
+                OracleCommand cmd = new OracleCommand("DELETE FROM \"Question_Acc\" WHERE \"ACC_ID\" = :A AND \"QUESTION_ID\" = :B");
                 cmd.Parameters.Add(new OracleParameter("A", uID));
                 cmd.Parameters.Add(new OracleParameter("B", qID));
                 cmd.Connection = c;
