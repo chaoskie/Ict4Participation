@@ -38,6 +38,41 @@ namespace Admin_Layer
                 ).Select(av => Creation.getDetailsObject(av))
                 .Cast<Accountdetails>().ToList();
 
+            return returnAccountDetails(NoSkillSearchList, Accounts, search);
+        }
+
+        /// <summary>
+        /// Iterates through a list of accounts to yield the matching accounts
+        /// </summary>
+        /// <param name="Accounts">The accounts to iterate through</param>
+        /// <param name="search">The search string</param>
+        /// <returns></returns>
+        public static List<Accountdetails> Global(List<Account> Accounts, string search)
+        {
+            if (search == null) { search = ""; }
+
+            //Search through all the details, where the details match
+            List<Accountdetails> NoSkillSearchList = Accounts.Where(
+                av => av.Address.Contains(search) ||
+                av.Username.Contains(search) ||
+                av.Name.Contains(search) ||
+                av.Email.Contains(search) ||
+                av.City.Contains(search)
+                ).Select(av => Creation.getDetailsObject(av))
+                .Cast<Accountdetails>().ToList();
+
+            return returnAccountDetails(NoSkillSearchList, Accounts, search);
+        }
+
+        /// <summary>
+        /// Finalizes the search for accounts
+        /// </summary>
+        /// <param name="NoSkillSearchList">The list of accounts without skills</param>
+        /// <param name="Accounts">The list of accounts with skills</param>
+        /// <param name="search">The search terms</param>
+        /// <returns></returns>
+        private static List<Accountdetails> returnAccountDetails(List<Accountdetails> NoSkillSearchList, List<Account> Accounts, object search)
+        {
             //add skill list for every account
             foreach (Accountdetails accd in NoSkillSearchList)
             {
@@ -56,10 +91,12 @@ namespace Admin_Layer
                     }
                 }
             }
-
             //Remember a list of items to remove
             List<int> removables = new List<int>();
 
+            //If the search is a string (global, no skill search), or detailed search object (skill search) 
+            if (search is Accountdetails)
+            { 
 
             //Search through the skills of these accounts
             foreach (Accountdetails acc in NoSkillSearchList)
@@ -67,7 +104,7 @@ namespace Admin_Layer
                 //If an account with all the skills in the list of wanted skills exist
                 //(ergo: if an account does not lack the skills)
                 //Keep it
-                if (acc.SkillsDetailList.Exists(skill => !search.SkillsDetailList.Contains(skill)))
+                if (acc.SkillsDetailList.Exists(skill => !((Accountdetails)search).SkillsDetailList.Contains(skill)))
                 {
                     //STICKER FOR YOU <3
                 }
@@ -76,6 +113,7 @@ namespace Admin_Layer
                 {
                     removables.Add(acc.ID);
                 }
+            }
             }
 
             //Add the accounts that do match properly to a new list
