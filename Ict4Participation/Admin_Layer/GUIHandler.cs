@@ -256,6 +256,23 @@ namespace Admin_Layer
             message = "Wachtwoorden komen niet overeen!";
             return false;
         }
+
+        /// <summary>
+        /// Validates the password
+        /// </summary>
+        /// <param name="pass">The entered password</param>
+        /// <param name="message">The error message</param>
+        /// <returns>Whether the password was correct or not</returns>
+        public bool ValidatePassword(string pass, out string message)
+        {
+            message = "";
+            if (Class_Layer.Utility_Classes.PasswordHashing.ValidatePassword(pass, Account.FindHash(MainUser.ID)))
+            {
+                message = "Wachtwoord is onjuist!";
+                return false;
+            }
+            return true;
+        }
         #endregion
 
         #region Comment Handling
