@@ -33,7 +33,7 @@ namespace Admin_Layer
         //
         public int PostID { get; set; }
         public int RequesterID { get; set; }
-        public int RequestedID { get; set; }
+        public int PosterID { get; set; }
         public Nullable<DateTime> StartDate { get; set; }
         public Nullable<DateTime> EndDate { get; set; }
         public DateTime CreationDate { get; set; }

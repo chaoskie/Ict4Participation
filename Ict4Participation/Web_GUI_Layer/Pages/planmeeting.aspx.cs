@@ -64,7 +64,7 @@ namespace Web_GUI_Layer.Pages
             md.CreationDate = DateTime.Now;
             md.Location = inputLocatie.Value;
             md.RequesterID = GUIHandler.GetMainuserInfo().ID;
-            md.RequestedID = RequesterID;
+            md.PosterID = RequesterID;
 
             if (!GUIHandler.Create(md, out message))
             {

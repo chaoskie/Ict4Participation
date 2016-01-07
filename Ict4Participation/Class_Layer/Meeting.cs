@@ -50,14 +50,6 @@ namespace Class_Layer
             this.StartDate = start;
             this.EndDate = end;
             this.Location = location;
-
-            //TODO
-            //Fetch usernames
-            //Set details to the following:
-            //Op xxxxx is de volgende meeting ingepland:
-            //Tijdstip: van xxxxxx tot xxxxxx
-            //Locatie: xxxxxx
-            //Uitgenodigden: xxxxxx met xxxxxx
         }
 
 

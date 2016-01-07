@@ -611,10 +611,10 @@ namespace Admin_Layer
         public bool Edit(Meetingdetails meeting, int meetingIndex, out string message)
         {
             //Check for rights
-            if (meeting.RequestedID != MainUser.ID)
+            if (meeting.PosterID != MainUser.ID)
             {
                 //Edit meeting
-                Meeting m = new Meeting(LoadedMeetings[meetingIndex].PostID, meeting.RequestedID, meeting.RequesterID, meeting.StartDate, meeting.EndDate, meeting.Location);
+                Meeting m = new Meeting(LoadedMeetings[meetingIndex].PostID, meeting.PosterID, meeting.RequesterID, meeting.StartDate, meeting.EndDate, meeting.Location);
                 m.Update();
                 message = "Meeting aangepast";
                 return true;
@@ -634,13 +634,13 @@ namespace Admin_Layer
         /// <returns>Success</returns>
         public bool Create(Meetingdetails meeting, out string message)
         {
-            Account req = LoadedAccounts.Where(acc => acc.ID == meeting.RequestedID).FirstOrDefault();
+            Account req = LoadedAccounts.Where(acc => acc.ID == meeting.PosterID).FirstOrDefault();
 
             //Check user
-            if (meeting.RequestedID != MainUser.ID)
+            if (meeting.PosterID != MainUser.ID)
             {
                 //Create meeting
-                Meeting m = new Meeting(0, meeting.RequestedID, meeting.RequesterID, meeting.StartDate, meeting.EndDate, meeting.Location);
+                Meeting m = new Meeting(0, meeting.PosterID, meeting.RequesterID, meeting.StartDate, meeting.EndDate, meeting.Location);
                 m.Create();
                 message = "Meeting aangemaakt!";
                 EmailHandler.SendMeeting(meeting, MainUser.Email, req.Email, MainUser.Username, req.Username);
