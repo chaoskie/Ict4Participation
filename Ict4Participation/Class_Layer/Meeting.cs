@@ -112,7 +112,7 @@ namespace Class_Layer
                 //else get all meetings if no ID is specified
             }
 
-            DataTable Dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Meeting\"" + addquery);
+            DataTable Dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Meeting\" " + addquery);
             foreach (DataRow row in Dt.Rows)
             {
                 meetings.Add(
