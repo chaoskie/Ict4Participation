@@ -31,6 +31,15 @@ namespace Web_GUI_Layer.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor vragen_order_titel;
         
         /// <summary>
+        /// vragen_order_gebruiker control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor vragen_order_gebruiker;
+        
+        /// <summary>
         /// vragen_order_urgentie control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace Web_GUI_Layer.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor vragen_order_urgentie;
+        
+        /// <summary>
+        /// vragen_order_status control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor vragen_order_status;
         
         /// <summary>
         /// vragen_list control.

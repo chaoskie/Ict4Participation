@@ -54,16 +54,20 @@
                                 <thead>
                                     <tr>
                                         <th>
-                                            <p><a id="vragen_order_titel" href="#" OnServerClick="ChangeOrderTitle_Click" runat="server">Vraag&nbsp;<i class="fa fa-fw fa-chevron-up"></i></a></p>
+                                            <p><a id="vragen_order_titel" href="/" OnServerClick="ChangeOrderTitle_Click" runat="server">Vraag&nbsp;<i class="fa fa-fw fa-chevron-up"></i></a></p>
                                             <span class="fa fa-fw fa-question"></span>
                                         </th>
                                         <th>
-                                            <p>Geplaatst door</p>
+                                            <p><a id="vragen_order_gebruiker" href="/" OnServerClick="ChangeOrderUser_Click" runat="server">Geplaatst door&nbsp;<i class="fa fa-fw fa-chevron-up"></i></a></p>
                                             <span class="fa fa-fw fa-user"></span>
                                         </th>
                                         <th>
-                                            <p><a id="vragen_order_urgentie" href="#" OnServerClick="ChangeOrderUrgency_Click" runat="server">Urgentie&nbsp;<i class="fa fa-fw fa-chevron-up"></i></a></p>
+                                            <p><a id="vragen_order_urgentie" href="/" OnServerClick="ChangeOrderUrgency_Click" runat="server">Urgentie&nbsp;<i class="fa fa-fw fa-chevron-up"></i></a></p>
                                             <span class="fa fa-fw fa-exclamation"></span>
+                                        </th>
+                                        <th>
+                                            <p><a id="vragen_order_status" href="/" OnServerClick="ChangeOrderStatus_Click" runat="server">Status&nbsp;<i class="fa fa-fw fa-chevron-up"></i></a></p>
+                                            <span class="fa fa-fw fa-check-square"></span>
                                         </th>
                                     </tr>
                                 </thead>
