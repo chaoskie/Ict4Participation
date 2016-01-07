@@ -169,6 +169,28 @@ nav button p {
 }
 
 /*
+ * TOOLTIP STYLES
+ * * * * * * * * * * */
+.tooltip {
+    -webkit-transition: none !important;
+    transition: none !important;
+
+}
+.tooltip.in {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+div.tooltip-inner {
+    background-color: #000;
+    border: none;
+    opacity: 1;
+    max-width: 800px;
+    transition: all 0 !important;
+
+}
+
+/*
  * ERROR STYLES
  * * * * * * * * * * */
 .error {
