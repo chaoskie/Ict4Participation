@@ -33,17 +33,13 @@ namespace Web_GUI_Layer
 
         protected void btnAnnuleren_Click(object sender, EventArgs e)
         {
-            List<Skilldetails> asdf = selected_skills;
-
-
-
-
             Response.Redirect("inloggen.aspx", false);
         }
 
         private Accountdetails GetAccount()
         {
             Accountdetails acc = new Accountdetails();
+            
             if (string.IsNullOrEmpty(inputTussenvoegsel.Value))
             {
                 acc.Name = string.Format("{0} {1}", inputVoornaam.Value, inputAchternaam.Value);
@@ -233,7 +229,7 @@ namespace Web_GUI_Layer
             foreach (string skill in skillList)
             {
                 Skilldetails sd = new Skilldetails();
-                sd.Name = skill.ToLower();
+                sd.Name = skill;
                 selected_skills.Add(sd);
             }
 

@@ -122,6 +122,7 @@
     <Content Include="Content\JS\review.js" />
     <Content Include="Content\JS\vraag.js" />
     <Content Include="Content\JS\vragen.js" />
+    <Content Include="Content\JS\wijziggegevens.js" />
     <Content Include="Content\JS\wijzigvraag.js" />
     <Content Include="Content\JS\zoeken.js" />
     <Content Include="Content\JS\zoekprofiel.js" />

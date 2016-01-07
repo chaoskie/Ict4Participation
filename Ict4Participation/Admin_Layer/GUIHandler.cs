@@ -218,11 +218,11 @@ namespace Admin_Layer
         /// <param name="acc">The account details</param>
         /// <param name="message">The message of the error</param>
         /// <returns>Success</returns>
-        public bool Edit(Accountdetails acc, out string message, string password1 = "", string password2 = "")
+        public bool Edit(Accountdetails acc, out string message, string password1 = "", string password2 = "", bool isAdmin = false)
         {
             message = string.Empty;
             //Validate details
-            if (!Check.CheckAccount(acc, out message))
+            if (!Check.CheckAccount(acc, out message, isAdmin))
             {
                 return false;
             }
