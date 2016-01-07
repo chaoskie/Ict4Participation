@@ -53,6 +53,35 @@ namespace Admin_Layer
         }
 
         /// <summary>
+        /// Sends a mail regarding a planned meeting
+        /// </summary>
+        /// <param name="m">The meeting</param>
+        /// <param name="emailReq">The mail of the account on which the meeting was made</param>
+        /// <param name="emailRed">The mail of the account the meeting was planned with</param>
+        /// <param name="usernameReq">The username of the account on which the meeting was made</param>
+        /// <param name="usernameRed">The username of the account the meeting was planned with</param>
+        public static void SendMeeting(Meetingdetails m, string emailReq, string emailRed, string usernameReq, string usernameRed)
+        {
+            string meetingdetails = "\n";
+            if (m.CreationDate != null)
+            {
+                meetingdetails += string.Format("Startdatum: {0} \nEinddatum: {1}", m.CreationDate, m.EndDate);
+            }
+            if (m.Location != null)
+            {
+                meetingdetails += string.Format("\nOp de volgende locatie: {0}", m.Location);
+            }
+
+            mail.To.Clear();
+            mail.To.Add(emailReq);
+            mail.To.Add(emailRed);
+            mail.Subject = usernameReq + " heeft een ontmoeting voor u ingepland";
+            mail.Body = "Hallo!"
+                + "\nU bent ingepland voor een ontmoeting" + meetingdetails;
+            FinalSend();
+        }
+
+        /// <summary>
         /// Sends a mail regarding a deactivation, as well as a reason
         /// </summary>
         /// <param name="email"></param>

@@ -634,6 +634,8 @@ namespace Admin_Layer
         /// <returns>Success</returns>
         public bool Create(Meetingdetails meeting, out string message)
         {
+            Account req = LoadedAccounts.Where(acc => acc.ID == meeting.RequestedID).FirstOrDefault();
+
             //Check user
             if (meeting.RequestedID != MainUser.ID)
             {
@@ -641,6 +643,7 @@ namespace Admin_Layer
                 Meeting m = new Meeting(0, meeting.RequestedID, meeting.RequesterID, meeting.StartDate, meeting.EndDate, meeting.Location);
                 m.Create();
                 message = "Meeting aangemaakt!";
+                EmailHandler.SendMeeting(meeting, MainUser.Email, req.Email, MainUser.Username, req.Username);
                 return true;
             }
             else
