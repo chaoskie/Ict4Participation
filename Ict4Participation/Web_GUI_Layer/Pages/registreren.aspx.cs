@@ -80,13 +80,11 @@ namespace Web_GUI_Layer
 
             if (!GUIHandler.Register(acc, inputWachtwoord1.Value, inputWachtwoord2.Value, out message))
             {
-                error_message.Text = message;
-                error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
-                error_message.CssClass = error_message.CssClass.Replace("error-green", "error-red");
+                DisplayFailure(message);
             }
             else
             {
-                error_message.Text = "Het registreren van uw account is gelukt!";
+                error_message.Text = "Het registreren van uw account is gelukt! U wordt teruggestuurd in 3 seconden.";
                 error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
                 error_message.CssClass = error_message.CssClass.Replace("error-red", "error-green");
 
@@ -94,6 +92,8 @@ namespace Web_GUI_Layer
                 {
                     ShowErrorMessage("Het uploaden van de foto is niet gelukt!");
                 }
+
+                Response.AddHeader("REFRESH", "3;URL=pages/inloggen.aspx");
             }
         }
 
@@ -114,14 +114,12 @@ namespace Web_GUI_Layer
 
             if (!GUIHandler.Register(acc, inputWachtwoord1.Value, inputWachtwoord2.Value, out message))
             {
-                error_message.Text = message;
-                error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
-                error_message.CssClass = error_message.CssClass.Replace("error-green", "error-red");
+                DisplayFailure(message);
             }
             else
             {
 
-                error_message.Text = "Het registreren van uw account is gelukt!";
+                error_message.Text = "Het registreren van uw account is gelukt! U wordt teruggestuurd in 3 seconden.";
                 error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
                 error_message.CssClass = error_message.CssClass.Replace("error-red", "error-green");
 
@@ -134,7 +132,17 @@ namespace Web_GUI_Layer
                 {
                     ShowErrorMessage("Het uploaden van de VOG is niet gelukt!");
                 }
+
+                Response.AddHeader("REFRESH", "3;URL=pages/inloggen.aspx");
             }
+        }
+
+        private void DisplayFailure(string message)
+        {
+            error_message.Text = message;
+            error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+            error_message.CssClass = error_message.CssClass.Replace("error-green", "error-red");
+
         }
 
         private void ShowErrorMessage(string message)
