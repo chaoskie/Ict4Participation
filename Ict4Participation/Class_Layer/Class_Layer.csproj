@@ -53,6 +53,7 @@
     <Compile Include="Enums\Status.cs" />
     <Compile Include="Interfaces\IPost.cs" />
     <Compile Include="Meeting.cs" />
+    <Compile Include="QuestionAccount.cs" />
     <Compile Include="Utility Classes\KeyGenerator.cs" />
     <Compile Include="Utility Classes\PasswordHashing.cs" />
     <Compile Include="Post.cs" />

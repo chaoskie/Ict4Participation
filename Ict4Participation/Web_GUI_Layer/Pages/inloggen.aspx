@@ -58,7 +58,7 @@
 					    <input type="password" id="inputWachtwoord" class="form-control" placeholder="Wachtwoord" required="required" runat="server" />
 					    <div class="checkbox">
 						    <label>
-							    <input type="checkbox" value="remember-me" />
+							    <input type="checkbox" id="checkbox" runat="server" />
 							    <span></span>
 							    <span>Onthoud mij</span>
 						    </label>

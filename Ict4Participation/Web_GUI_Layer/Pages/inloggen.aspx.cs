@@ -16,6 +16,11 @@ namespace Web_GUI_Layer
         protected void Page_Load(object sender, EventArgs e)
         {
             GUIHandler = new GUIHandler();
+            HttpCookie usc = HttpContext.Current.Request.Cookies["usrckk"];
+            if (usc != null)
+            {
+                inputGebruikersnaam.Value = usc.Value;
+            }
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -26,6 +31,13 @@ namespace Web_GUI_Layer
 
             if (GUIHandler.LogIn(username, password, out message))
             {
+                if (checkbox.Checked)
+                {
+                    HttpCookie usc = new HttpCookie("usrckk");
+                    usc.HttpOnly = false;
+                    usc.Value = inputGebruikersnaam.Value;
+                }
+
                 Session["GUIHandler_obj"] = GUIHandler;
                 Response.Redirect("hoofdmenu.aspx", false);
             }

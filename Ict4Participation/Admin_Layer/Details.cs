@@ -162,4 +162,18 @@ namespace Admin_Layer
         public int UserID { get; set; }
         public string Name { get; set; }
     }
+
+    public class QuestionAccountdetails
+    {
+        public int AccID { get; set; }
+        public string AccName { get; set; }
+        public int QueID { get; set; }
+        public string QueName  { get; set; }
+        public DateTime AcceptionDate { get; set; }
+
+        public override string ToString()
+        {
+            return String.Format("Op {0} heeft {1} zich aangemeld voor de vraag {2}", AcceptionDate.ToLongDateString(), AccName, QueName);
+        }
+    }
 }
