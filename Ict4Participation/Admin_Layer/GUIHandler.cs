@@ -138,7 +138,7 @@ namespace Admin_Layer
             }
             List<Skill> skill = acc.SkillsDetailList.Select(c => new Skill(c.UserID, c.Name)).ToList();
 
-                //Register account
+            //Register account
             MainUser = Account.Register(acc.Username, password1, acc.Email, acc.Name, acc.Address, acc.City, acc.Phonenumber,
                 Convert.ToBoolean(acc.hasDriverLicense),
                 Convert.ToBoolean(acc.hasVehicle),
@@ -307,7 +307,7 @@ namespace Admin_Layer
             {
                 //Edit comment
                 c.SetDescription(comment.Description);
-                
+
                 // Update the comment in the database
                 if (!c.Update())
                 {
@@ -488,7 +488,7 @@ namespace Admin_Layer
                 }
 
                 //Edit question
-                q = new Question(qID, MainUser.ID, question.Title, question.StartDate, question.EndDate, 
+                q = new Question(qID, MainUser.ID, question.Title, question.StartDate, question.EndDate,
                     question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, question.Volunteers, (int)status);
                 q.Update();
                 message = "Vraag succesvol aangepast!";
@@ -838,8 +838,8 @@ namespace Admin_Layer
             }
             string appPath = System.Web.HttpContext.Current.Request.ApplicationPath;
             string physicalPath = System.Web.HttpContext.Current.Request.MapPath(appPath);
-            
-            SaveLocation =  physicalPath + loc + "\\" + MainUser.ID + ext;
+
+            SaveLocation = physicalPath + loc + "\\" + MainUser.ID + ext;
             try
             {
                 File1.PostedFile.SaveAs(SaveLocation);
@@ -859,28 +859,29 @@ namespace Admin_Layer
 
         #endregion
 
-        /// <summary>
-        /// If the GUI is unloaded, log the user out
-        /// </summary>
-        ~GUIHandler()
-        {
-            Console.WriteLine("User log out state entered. Check if true!");
-            //LogOut();
-        }
+        #region Activity Handling
 
         /// <summary>
-        /// Check if the user is logged in
+        /// Yields the subscription activity on all the posts of the main user
         /// </summary>
-        /// <returns>Returns true if a mainuser has been found, and false if mainuser is null</returns>
-        public bool UserIsLoggedIn()
+        /// <returns>A list of actions, unfiltered of time</returns>
+        public List<QuestionAccountDetails> GetActivity()
         {
-            if (MainUser == null)
+            List<QuestionAccountDetails> qactions = QuestionAccount.FetchQuestionActions(MainUser.ID).Select(qa => Creation.getDetailsObject(qa)).Cast<QuestionAccountDetails>().ToList();
+
+            if (LoadedAccounts.Count == 0) { GetAll(); }
+            if (LoadedQuestions.Count == 0) { GetAll(true); }
+
+            for (int i = 0; i < qactions.Count; i++)
             {
-                return false;
+                qactions[i].AccName = LoadedAccounts.Where(a => a.ID == qactions[i].AccID).FirstOrDefault().Name;
+                qactions[i].QueName = LoadedQuestions.Where(a => a.PostID == qactions[i].AccID).FirstOrDefault().Title;
             }
 
-            return true;
+            return qactions;
         }
+
+        #endregion
 
         /// <summary>
         /// Gets the main user information, including skills and availability

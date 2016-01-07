@@ -162,4 +162,13 @@ namespace Admin_Layer
         public int UserID { get; set; }
         public string Name { get; set; }
     }
+
+    public class QuestionAccountDetails
+    {
+        public int AccID { get; set; }
+        public string AccName { get; set; }
+        public int QueID { get; set; }
+        public string QueName  { get; set; }
+        public DateTime AcceptionDate { get; set; }
+    }
 }
