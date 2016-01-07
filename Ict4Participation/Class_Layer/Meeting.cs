@@ -108,7 +108,7 @@ namespace Class_Layer
             string addquery = String.Empty;
             if (userid != null)//get all the user skills of specified user
             {
-                addquery =  "WHERE \"RequesterAcc_ID\"=" + userid + " OR \"RequestedAccID\"=" + userid;
+                addquery =  "WHERE \"RequesterACC_ID\"=" + userid + " OR \"RequestedACCID\"=" + userid;
                 //else get all meetings if no ID is specified
             }
 
@@ -118,8 +118,8 @@ namespace Class_Layer
                 meetings.Add(
                     new Meeting(
                         Convert.ToInt32(row["ID"]),
-                        Convert.ToInt32(row["RequestedAcc_ID"]),
-                        Convert.ToInt32(row["RequesterAcc_ID"]),
+                        Convert.ToInt32(row["RequestedACC_ID"]),
+                        Convert.ToInt32(row["RequesterACC_ID"]),
                         Convert.ToDateTime(row["StartDate"]),
                         Convert.ToDateTime(row["EndDate"]),
                         row["Location"].ToString()
