@@ -59,6 +59,7 @@ namespace Web_GUI_Layer
 
             // Fill activities
             List<Meetingdetails> Meetings = GUIHandler.GetAllMeetings();
+            List<QuestionAccountdetails> Activities = GUIHandler.GetActivity();
 
             foreach (Meetingdetails md in Meetings)
             {
@@ -79,7 +80,17 @@ namespace Web_GUI_Layer
                 }
             }
 
-            if (Meetings.Count == 0)
+            foreach (QuestionAccountdetails act in Activities)
+            {
+                HtmlAnchor a = new HtmlAnchor();
+                a.InnerText = act.ToString();
+
+                activiteiten_list.Controls.Add(new LiteralControl("<li>"));
+                activiteiten_list.Controls.Add(a);
+                activiteiten_list.Controls.Add(new LiteralControl("</li>"));
+            }
+
+            if (Meetings.Count == 0 && Activities.Count == 0)
             {
                 activiteiten_list.Controls.Add(new LiteralControl("<li><a href=\"#\">Geen activiteiten</a>"));
             }

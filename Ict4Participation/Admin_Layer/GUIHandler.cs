@@ -864,21 +864,32 @@ namespace Admin_Layer
         /// <summary>
         /// Yields the subscription activity on all the posts of the main user
         /// </summary>
-        /// <returns>A list of actions, unfiltered of time</returns>
-        public List<QuestionAccountDetails> GetActivity()
+        /// <returns>A list of actions</returns>
+        public List<QuestionAccountdetails> GetActivity()
         {
-            List<QuestionAccountDetails> qactions = QuestionAccount.FetchQuestionActions(MainUser.ID).Select(qa => Creation.getDetailsObject(qa)).Cast<QuestionAccountDetails>().ToList();
+            List<QuestionAccountdetails> qactions = QuestionAccount.FetchQuestionActions(MainUser.ID).Select(qa => Creation.getDetailsObject(qa)).Cast<QuestionAccountdetails>().ToList();
+            List<QuestionAccountdetails> qactionsReturn = new List<QuestionAccountdetails>();
 
             if (LoadedAccounts.Count == 0) { GetAll(); }
             if (LoadedQuestions.Count == 0) { GetAll(true); }
 
             for (int i = 0; i < qactions.Count; i++)
             {
-                qactions[i].AccName = LoadedAccounts.Where(a => a.ID == qactions[i].AccID).FirstOrDefault().Name;
-                qactions[i].QueName = LoadedQuestions.Where(a => a.PostID == qactions[i].AccID).FirstOrDefault().Title;
+                if (LoadedQuestions.Where(a => a.PostID == qactions[i].QueID).FirstOrDefault().EndDate == null)
+                {
+                    qactions[i].AccName = LoadedAccounts.Where(a => a.ID == qactions[i].AccID).FirstOrDefault().Name;
+                    qactions[i].QueName = LoadedQuestions.Where(a => a.PostID == qactions[i].AccID).FirstOrDefault().Title;
+                    qactionsReturn.Add(qactions[i]);
+                }
+                else if (LoadedQuestions.Where(a => a.PostID == qactions[i].QueID).FirstOrDefault().EndDate > DateTime.Now)
+                {
+                    qactions[i].AccName = LoadedAccounts.Where(a => a.ID == qactions[i].AccID).FirstOrDefault().Name;
+                    qactions[i].QueName = LoadedQuestions.Where(a => a.PostID == qactions[i].QueID).FirstOrDefault().Title;
+                    qactionsReturn.Add(qactions[i]);
+                }
             }
 
-            return qactions;
+            return qactionsReturn;
         }
 
         #endregion

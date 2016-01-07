@@ -35,7 +35,7 @@ namespace Class_Layer
         {
             List<QuestionAccount> qactions = new List<QuestionAccount>();
 
-            DataTable dt = Database.RetrieveQuery("SELECT * FROM \"Question_Acc\" WHERE \"QUESTION_ID\" IN (SELECT * FROM \"Question\" WHERE \"PosterACC_ID\" = " + userID + ")");
+            DataTable dt = Database.RetrieveQuery("SELECT * FROM \"Question_Acc\" WHERE \"QUESTION_ID\" IN (SELECT \"ID\" FROM \"Question\" WHERE \"PosterACC_ID\" = " + userID + ")");
             foreach (DataRow row in dt.Rows)
             {
                 qactions.Add(new QuestionAccount(
