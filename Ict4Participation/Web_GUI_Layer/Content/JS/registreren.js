@@ -416,6 +416,18 @@ $('#btnSkillVerwijder').on('click', function () {
     // Synchroniseer de skills met de serverside
     VoegSkillsToeServerSide();
 
+    // Sorteer de input lijst
+    var list = $('#select_skills option');
+
+    list.sort(function(a, b) {
+        a = a.value;
+        b = b.value;
+
+        return a - b;
+    });
+
+    $('#select_skills').html(list);
+
 });
 
 // Functie om skills serverside toe te voegen
