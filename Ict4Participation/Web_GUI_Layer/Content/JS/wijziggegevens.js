@@ -415,7 +415,7 @@ function VoegSkillsToeServerSide() {
     // Push elke skill naar de skills array
     for (i = 0; i < skills_output.length; i++) {
 
-        skills += skills_output[i].value.toLowerCase();
+        skills += skills_output[i].value;
 
         // Na elke skill (behalve de laatste) wordt een | geplaatst, zodat de
         // server de skills kan onderscheiden
