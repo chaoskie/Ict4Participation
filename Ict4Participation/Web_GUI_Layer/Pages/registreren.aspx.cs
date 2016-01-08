@@ -89,7 +89,7 @@ namespace Web_GUI_Layer
                     ShowErrorMessage("Het uploaden van de foto is niet gelukt!");
                 }
 
-                Response.AddHeader("REFRESH", "3;URL=pages/inloggen.aspx");
+                Response.AddHeader("REFRESH", "3;URL=inloggen.aspx");
             }
         }
 
