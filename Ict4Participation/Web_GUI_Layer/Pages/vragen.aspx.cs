@@ -13,10 +13,10 @@ namespace Web_GUI_Layer.Pages
     public partial class vragen : System.Web.UI.Page
     {
         private GUIHandler GUIHandler;
-        private bool orderDescTitle;
-        private bool orderDescUser;
-        private bool orderDescUrgency;
-        private bool orderDescStatus;
+        private static bool orderDescTitle;
+        private static bool orderDescUser;
+        private static bool orderDescUrgency;
+        private static bool orderDescStatus;
 
         protected void Page_Load(object sender, EventArgs e)
         {
