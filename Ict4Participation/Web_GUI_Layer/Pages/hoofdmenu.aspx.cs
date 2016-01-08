@@ -159,6 +159,10 @@ namespace Web_GUI_Layer
             {
                 ShowErrorMessage(message);
             }
+            else
+            {
+                Response.Redirect(Request.RawUrl, false);
+            }
         }
 
         protected void ShowErrorMessage(string message)
