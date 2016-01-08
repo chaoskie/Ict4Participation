@@ -60,8 +60,17 @@ namespace Web_GUI_Layer
         }
 
         [System.Web.Services.WebMethod]
-        public static string SearchInfo(string str)
+        public static string SearchInfo(string str, string fvolunteers, string fhelpreq, string fquestions)
         {
+            List<Accountdetails> accTemp = accounts;
+            if (fhelpreq == "false")
+            {
+                accTemp = accTemp.Where(a => a.VOGPath != "").ToList();
+            }
+            if (fvolunteers == "false")
+            {
+                accTemp = accTemp.Where(a => a.VOGPath == "").ToList();
+            }
             string result = string.Empty;
             str = str.ToLower();
             int length = str.Length;
@@ -72,50 +81,53 @@ namespace Web_GUI_Layer
                 List<QuestionSetup> returnedQuestions = new List<QuestionSetup>();
                 List<AccountSetup> returnedAccounts = new List<AccountSetup>();
 
-                // Cast Questiondetails to QuestionSetup
-                foreach (Questiondetails qd in questions)
+                if (fquestions == "true")
                 {
-                    // SCORING SYSTEM:
-                    // qd.Title = 3
-                    // qd.Description = 2
-                    // qd.Location = 1
-                    // Higher point values get a higher priority
-                    // Questions are then rated by their relevance
-
-                    Accountdetails ad = accounts.Find(i => i.ID == qd.PosterID);
-
-                    QuestionSetup vs = new QuestionSetup();
-                    vs.Title = qd.Title;
-                    vs.Owner = ad.Name;
-                    vs.OwnerID = qd.PosterID;
-                    vs.PostID = qd.PostID;
-
-                    // Add a question to the list if one of the details matches the input string
-                    if (qd.Title.ToLower().Contains(str) || str == "*")
+                    // Cast Questiondetails to QuestionSetup
+                    foreach (Questiondetails qd in questions)
                     {
-                        vs.Rank = 3;
-                        vs.Relevance = length/qd.Title.Length;
-                    }
-                    else if (qd.Description.ToLower().Contains(str))
-                    {
-                        vs.Rank = 2;
-                        vs.Relevance = length/qd.Description.Length;
-                    }
-                    else if (qd.Location.ToLower().Contains(str))
-                    {
-                        vs.Rank = 1;
-                        vs.Relevance = length/qd.Location.Length;
-                    }
+                        // SCORING SYSTEM:
+                        // qd.Title = 3
+                        // qd.Description = 2
+                        // qd.Location = 1
+                        // Higher point values get a higher priority
+                        // Questions are then rated by their relevance
 
-                    // Add VraagSetup if its rank has been set
-                    if (vs.Rank > 0)
-                    {
-                        returnedQuestions.Add(vs);
+                        Accountdetails ad = accounts.Find(i => i.ID == qd.PosterID);
+
+                        QuestionSetup vs = new QuestionSetup();
+                        vs.Title = qd.Title;
+                        vs.Owner = ad.Name;
+                        vs.OwnerID = qd.PosterID;
+                        vs.PostID = qd.PostID;
+
+                        // Add a question to the list if one of the details matches the input string
+                        if (qd.Title.ToLower().Contains(str) || str == "*")
+                        {
+                            vs.Rank = 3;
+                            vs.Relevance = length / qd.Title.Length;
+                        }
+                        else if (qd.Description.ToLower().Contains(str))
+                        {
+                            vs.Rank = 2;
+                            vs.Relevance = length / qd.Description.Length;
+                        }
+                        else if (qd.Location.ToLower().Contains(str))
+                        {
+                            vs.Rank = 1;
+                            vs.Relevance = length / qd.Location.Length;
+                        }
+
+                        // Add VraagSetup if its rank has been set
+                        if (vs.Rank > 0)
+                        {
+                            returnedQuestions.Add(vs);
+                        }
                     }
                 }
 
                 // Cast Accountdetails to AccountSetup
-                foreach (Accountdetails ad in accounts)
+                foreach (Accountdetails ad in accTemp)
                 {
                     // SCORING SYSTEM:
                     // ad.Name = 5

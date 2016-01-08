@@ -4,10 +4,11 @@
     haalInfoOp('');
 
     $('#inputZoeken').on('input', function (e) {
-
+        var fvolunteers = $('#fvolunteers').is(':checked');
+        var fhelpreq = $('#fhelpreq').is(':checked');
+        var fquestions = $('#fquestions').is(':checked');
         // Haal alle info op als er op de input wordt geklikt of een toets wordt losgelaten
-        haalInfoOp($(this).val());
-
+        haalInfoOp($(this).val(), fvolunteers, fhelpreq, fquestions);
     });
 
 });
@@ -15,7 +16,7 @@
 var xhr;
 
 // Functie om alle gevonden resultaten op te halen, door middel van ajax
-function haalInfoOp(val) {
+function haalInfoOp(val, b1, b2, b3) {
     // Abort de huidige ajax call als die bestaat
     if (xhr != undefined) {
         xhr.abort();
@@ -25,7 +26,7 @@ function haalInfoOp(val) {
     xhr = $.ajax({
         type: 'POST',
         url: 'zoeken.aspx/SearchInfo',
-        data: '{str: "' + val + '"}',
+        data: '{str: "' + val + '", fvolunteers: "' + b1 + '", fhelpreq: "' + b2 + '", fquestions: "' + b3 + '"}',
         contentType: 'application/json;charset=utf-8',
         dataType: 'json',
         success: function (result) {

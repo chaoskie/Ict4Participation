@@ -54,6 +54,24 @@
 					    </div>
 				    </div>
 
+                    <!-- Search options -->
+				    <div class="row">
+					    <div class="col-xs-12 dropdown dropdown-dynamic">
+						    <div class="row dropdown-title">
+							    <div class="col-xs-12">
+								    <p class="pull-left"><span>Zoekopties</span></p>
+							    </div>
+						    </div>
+						    <div class="row dropdown-content">
+							    <ul id="selectie_lijst" class="col-xs-12">
+								    <li class="checkbox"><label><input type="checkbox" checked id="fvolunteers" runat="server"/><span></span><span>Vind vrijwilligers</span></label></li>
+								    <li class="checkbox"><label><input type="checkbox" checked id="fhelpreq" runat="server"/><span></span><span>Vind hulpbehoevenden</span></label></li>
+								    <li class="checkbox"><label><input type="checkbox" checked id="fquestions" runat="server"/><span></span><span>Vind vragen</span></label></li>
+							    </ul>
+						    </div>
+					    </div>
+				    </div>
+
 				    <!-- Resultaten -->
 				    <div class="row">
 					    <div class="col-xs-12 dropdown">
