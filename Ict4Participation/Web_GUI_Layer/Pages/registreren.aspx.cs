@@ -39,7 +39,7 @@ namespace Web_GUI_Layer
         private Accountdetails GetAccount()
         {
             Accountdetails acc = new Accountdetails();
-            
+
             if (string.IsNullOrEmpty(inputTussenvoegsel.Value))
             {
                 acc.Name = string.Format("{0} {1}", inputVoornaam.Value, inputAchternaam.Value);
@@ -72,7 +72,7 @@ namespace Web_GUI_Layer
             string message = string.Empty;
 
             // maak hulpbehoevende aan
-            Accountdetails acc = GetAccount();     
+            Accountdetails acc = GetAccount();
 
             if (!GUIHandler.Register(acc, inputWachtwoord1.Value, inputWachtwoord2.Value, out message))
             {
@@ -151,9 +151,13 @@ namespace Web_GUI_Layer
         public static string IsCity(string str)
         {
             // If str is a city, return 1
-            if (GetCities(str) == str)
+            string[] cities = GetCities(str).Split('|');
+            foreach (string city in cities)
             {
-                return "true";
+                if (city == str)
+                {
+                    return "true";
+                }
             }
 
             // else return 0
@@ -196,7 +200,7 @@ namespace Web_GUI_Layer
                 List<CityStruct> tempCities = new List<CityStruct>();
 
                 // Loop through foundCities
-                foreach(string city in foundCities)
+                foreach (string city in foundCities)
                 {
                     decimal bullshit = (decimal)str.Length / (decimal)city.Length;
                     tempCities.Add(new CityStruct(city, bullshit));

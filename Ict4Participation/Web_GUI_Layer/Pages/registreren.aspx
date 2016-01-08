@@ -291,7 +291,7 @@
 											    </div>
 											    <div class="col-xs-12">
 												    <label for="inputGebruikersnaam" class="sr-only">Gebruikersnaam</label>
-												    <input type="text" id="inputGebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required="required" runat="server" />
+												    <input type="text" id="inputGebruikersnaam" class="form-control" placeholder="Gebruikersnaam (minimaal 6 karakters)" required="required" runat="server" />
 											    </div>
 											    <div class="col-xs-12">
 												    <label for="inputWachtwoord1" class="sr-only">Wachtwoord</label>
