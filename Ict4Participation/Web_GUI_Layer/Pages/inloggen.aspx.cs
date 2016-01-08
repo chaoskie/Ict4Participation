@@ -17,9 +17,12 @@ namespace Web_GUI_Layer
         {
             GUIHandler = new GUIHandler();
             HttpCookie usc = Request.Cookies["usrckk"];
-            if (usc.Value != null)
+            if (usc != null)
             {
-                inputGebruikersnaam.Value = usc.Value;
+                if (usc.Value != null)
+                {
+                    inputGebruikersnaam.Value = usc.Value;
+                }
             }
         }
 
