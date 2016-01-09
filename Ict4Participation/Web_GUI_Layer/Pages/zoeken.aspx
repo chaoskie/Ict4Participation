@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="../Content/CSS/main.css" />
 	<link rel="stylesheet" href="../Content/CSS/zoeken.css" />
 	<link rel="stylesheet" href="../Content/CSS/dropdown.css" />
+    <link rel="stylesheet" href="../Content/CSS/zoekopties.css" />
 	<link rel="stylesheet" href="../Content/CSS/input.css" />
 </head>
 <body>

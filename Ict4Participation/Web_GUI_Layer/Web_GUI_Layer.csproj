@@ -102,6 +102,7 @@
     <Content Include="Content\CSS\vragen.css" />
     <Content Include="Content\CSS\wijzigvraag.css" />
     <Content Include="Content\CSS\zoeken.css" />
+    <Content Include="Content\CSS\zoekopties.css" />
     <Content Include="Content\Files\Woonplaatsen_Nederland.txt" />
     <Content Include="Content\Fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.svg" />
