@@ -23,19 +23,26 @@ $('.nav.nav-tabs a').on('click', function () {
 
 });
 
+var xhr;
+
 // Als inputWoonplaats nog niet success is maar wel tekst bevat,
 // stuur een async request om te controlleren of de woonplaats bestaat
 $('#inputWoonplaats').on('keyup click change', function () {
     var val = $(this).val();
 
+    // Abort de huidige ajax call als die bestaat
+    if (xhr != undefined) {
+        xhr.abort();
+    }
+
     // Haal woonplaatsen op
-    $.ajax({
+    xhr = $.ajax({
         type: 'POST',
         url: 'registreren.aspx/GetCities',
         data: '{str: "' + val + '"}',
         contentType: 'application/json;charset=utf-8',
         dataType: 'json',
-        success: function (result) {
+        success: function(result) {
             var res = result.d.split('|');
 
             // Maak #woonplaats_result_wrapper leeg
@@ -46,7 +53,7 @@ $('#inputWoonplaats').on('keyup click change', function () {
                 $('#woonplaats_results_wrapper').append('<p class="city_gen">' + res[r_i] + '</p>');
             }
         }
-    })
+    });
 });
 
 function validateName(textbox) {
@@ -337,6 +344,8 @@ $('#inputWoonplaats').focusout(function () {
         $('#woonplaats_results_wrapper').css({ 'display': 'none' });
     }, 1000);
 
+    valideerWoonplaats();
+
 });
 
 var prevTekst;
@@ -366,8 +375,6 @@ function Loop() {
 
 function valideerWoonplaats() {
 
-    console.log('Ik ga woonplaats valideren');
-
     // Valideer woonplaats
     $.ajax({
         type: 'POST',
@@ -384,7 +391,7 @@ function valideerWoonplaats() {
         }
     });
 
-}
+};
 
 
 // Functie om skills toe te voegen
