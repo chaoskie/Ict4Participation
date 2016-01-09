@@ -44,7 +44,7 @@
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
 				    <div class="form-group">
-					    <h2>Plan ontmoeting in</h2>
+					    <h2>Plan ontmoeting in<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Geef hier in wanneer u deze persoon wilt ontmoeten"></i></h2>
                         
                         <div class="row">
                             <div class="col-xs-12">
@@ -54,7 +54,7 @@
 
                         <div class="row">
                             <div class="col-xs-12">
-                                <h3>Locatie:</h3>
+                                <h3>Locatie<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="De locatie van de ontmoeting"></i></h3>
                             </div>
                         </div>
 
@@ -67,7 +67,7 @@
 
                         <div class="row">
                             <div class="col-xs-12">
-                                <h3>Begintijd</h3>
+                                <h3>Begintijd<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="De begintijd van de ontmoeting (optioneel)"></i></h3>
                             </div>
                         </div>
 
@@ -196,7 +196,7 @@
 
                         <div class="row">
                             <div class="col-xs-12">
-                                <h3>Eindtijd</h3>
+                                <h3>Eindtijd<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="De eindtijd van de ontmoeting (optioneel)"></i></h3>
                             </div>
                         </div>
 
@@ -325,7 +325,7 @@
                         
                         <div class="row">
                             <div class="col-xs-12">
-                                <asp:CheckBox Text="Heeft geen datum" OnCheckedChanged="cbGeenDatum_CheckChange" onchange="toggleData();" runat="server"/>
+                                <asp:CheckBox Text="Heeft geen datum" OnCheckedChanged="cbGeenDatum_CheckChange" onchange="toggleData();" runat="server"/><i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Vink dit vakje aan als de ontmoeting niet tijsgebonden is"></i>
                             </div>
                         </div>
 					    <br />
@@ -345,6 +345,7 @@
     <!-- Scripts -->
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
+    <script src="../Content/JS/tooltips.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
     <script src="../Content/JS/errormessage.js"></script>
     <script src="../Content/JS/plaatsvraag.js"></script>

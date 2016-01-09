@@ -45,7 +45,7 @@
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
 				    <div class="form-group">
-                        <h2>Plaats review voor <span id="review_naam" runat="server"></span></h2>
+                        <h2>Plaats review voor <span id="review_naam" runat="server"></span><i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Geef hier in wat u van deze persoon vind, en welke rating u deze persoon zou geven"></i></h2>
 
                         <br />
 
@@ -79,6 +79,7 @@
     <!-- Scripts -->
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
+    <script src="../Content/JS/tooltips.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
     <script src="../Content/JS/errormessage.js"></script>
     <script src="../Content/JS/plaatsreview.js"></script>

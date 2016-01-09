@@ -45,7 +45,7 @@
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
 				    <div class="form-group">
-					    <h2>Wijzig vraag</h2>
+					    <h2>Wijzig vraag<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Hier kunt de informatie over de hulpvraag wijzigen"></i></h2>
 					    <div class="row">
 						    <div class="col-xs-12">
 							    <label for="inputTitel" class="sr-only">Titel</label>
@@ -64,7 +64,7 @@
 							    <!-- Select skills -->
 							    <div class="row">
 								    <div class="col-xs-12">
-									    <h3>Skills</h3>
+									    <h3>Skills<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="De skills die u denkt nodig te hebben voor de hulpvraag"></i></h3>
 									    <div class="form-group">
 										    <label for="select_skills" class="sr-only">Skills</label>
                                             <asp:DropDownList ID="select_skills" ClientIDMode="Static" CssClass="form-control" runat="server"></asp:DropDownList>
@@ -96,7 +96,7 @@
 
                         <div class="row">
                             <div class="col-xs-12">
-                                <h3>Locatie</h3>
+                                <h3>Locatie<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="De locatie waar de hulp plaats moet vinden"></i></h3>
                             </div>
                         </div>
 
@@ -109,7 +109,7 @@
 
                         <div class="row">
                             <div class="col-xs-12">
-                                <h3>Begintijd</h3>
+                                <h3>Begintijd<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="De begintijd van de hulp"></i></h3>
                             </div>
                         </div>
 
@@ -238,7 +238,7 @@
 
                         <div class="row">
                             <div class="col-xs-12">
-                                <h3>Eindtijd</h3>
+                                <h3>Eindtijd<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="De eindtijd van de hulp"></i></h3>
                             </div>
                         </div>
 
@@ -367,7 +367,7 @@
 
                         <div class="row">
                             <div class="col-xs-12">
-                                <h3>Maximaal aantal hulpverleners</h3>
+                                <h3>Maximaal aantal hulpverleners<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Het maximale aantal hulpverleners u denkt nodig te hebben voor de hulp"></i></h3>
                             </div>
                         </div>
 
@@ -397,7 +397,7 @@
 						            <label>
 							            <input id="inputUrgentie" ClientIDMode="Static" type="checkbox" value="urgent" runat="server" />
 							            <span></span>
-							            <span>Urgent</span>
+							            <span>Urgent<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Vink dit vakje aan als uw hulpvraag urgent is"></i></span>
 						            </label>
 					            </div>
                             </div>
@@ -424,9 +424,9 @@
     <!-- Scripts -->
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
+    <script src="../Content/JS/tooltips.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
 	<script src="../Content/JS/errormessage.js"></script>
-	<%--<script src="../Content/JS/zoekprofiel.js"></script>--%>
     <script src="../Content/JS/profiel.js"></script>
     <script src="../Content/JS/wijzigvraag.js"></script>
 </body>

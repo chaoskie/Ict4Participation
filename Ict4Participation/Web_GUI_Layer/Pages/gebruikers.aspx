@@ -96,8 +96,8 @@
     </form>
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
+    <script src="../Content/JS/tooltips.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
-	<%--<script src="../Content/JS/zoekprofiel.js"></script>--%>
 	<script src="../Content/JS/errormessage.js"></script>
     <script src="../Content/JS/gebruikers.js"></script>
 </body>
