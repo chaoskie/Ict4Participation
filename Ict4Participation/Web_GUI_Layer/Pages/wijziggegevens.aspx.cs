@@ -197,6 +197,13 @@ namespace Web_GUI_Layer.Pages
                     ShowErrorMessage(message);
                     return;
                 }
+                else
+                {
+                    //Clear cache
+                    string removable = @"ProfileAvatars\" + ad.ID + ad.AvatarPath.Split('.').Last();
+                    if (Cache[removable] != null)
+                        Cache.Remove(removable);
+                }
             }
 
             // Return to profilepage
