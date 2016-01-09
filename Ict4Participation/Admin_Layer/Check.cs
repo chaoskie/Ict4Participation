@@ -168,7 +168,7 @@ namespace Admin_Layer
                 }
             }
 
-            s = s.Replace(@"/ +/g", "");
+            s = s.Replace(" ", string.Empty);
             //Check if every symbol is what it needs to be
             if (!Regex.IsMatch(s, @"^[\u00C0-\u017Fa-zA-Z'-.]{1,}$"))
             {

@@ -245,10 +245,8 @@ namespace Web_GUI_Layer
             // Change account description
             ad.Description = str;
             
-            tempGuiHandler.Edit(ad, out message);
-
             // Edit doesnt work currently as this is a static method and mainuser is undefined
-            //tempGuiHandler.Edit(ad, out message);
+            tempGuiHandler.Edit(ad, out message);
 
             // Return user description
             return ad.Description;
