@@ -308,6 +308,7 @@ namespace Admin_Layer
                     acc.AvailabilityDetailList.Select(a => new Availability(MainUser.ID, a.Day, a.Daytime)).Cast<Availability>().ToList(),
                     MainUser.Skills,
                     MainUser.Availability,
+                    acc.Description,
                     password1
                     );
                 message = "Account edited";
