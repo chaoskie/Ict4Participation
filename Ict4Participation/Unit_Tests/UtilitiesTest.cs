@@ -123,7 +123,18 @@ namespace Unit_Tests
                     Assert.Fail("Failed to write Rating properly");
                 }
             }
-                
+        }
+
+        [TestMethod]
+        public void RegexTest()
+        {
+            string s = "lol oke";
+            s = s.Replace(" ", "");
+
+            if (s != "loloke")
+            {
+                Assert.Fail();
+            }
         }
     }
 }

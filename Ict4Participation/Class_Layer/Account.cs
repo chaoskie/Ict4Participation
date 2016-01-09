@@ -291,19 +291,19 @@ namespace Class_Layer
 
         public static Account Update(int ID, string username, string email, string name, string address, string city,
             string phonenumber, bool hasLicense, bool hasVehicle, bool OVPossible, DateTime birthdate, string avatarPath, string VOG, string sex,
-            List<Skill> skills, List<Availability> availability, List<Skill> oldSkills, List<Availability> oldAvailability, string password = "")
+            List<Skill> skills, List<Availability> availability, List<Skill> oldSkills, List<Availability> oldAvailability, string description, string password = "")
         {
             string passhash = "";
             //If pass is blank, then don't update the password
             if (String.IsNullOrWhiteSpace(password))
             {
-                Database.UpdateUser(ID, username, email, name, address, city, phonenumber, hasLicense, hasVehicle, OVPossible, ConvertTo.OracleDateTime(birthdate), avatarPath, sex, VOG);
+                Database.UpdateUser(ID, username, email, name, address, city, phonenumber, hasLicense, hasVehicle, OVPossible, ConvertTo.OracleDateTime(birthdate), avatarPath, sex, VOG, description);
             }
             //Else, update the password as well
             else
             {
                 passhash = PasswordHashing.CreateHash(password);
-                Database.UpdateUser(ID, username, passhash, email, name, address, city, phonenumber, hasLicense, hasVehicle, OVPossible, ConvertTo.OracleDateTime(birthdate), avatarPath, sex, VOG);
+                Database.UpdateUser(ID, username, passhash, email, name, address, city, phonenumber, hasLicense, hasVehicle, OVPossible, ConvertTo.OracleDateTime(birthdate), avatarPath, sex, VOG, description);
             }
 
             //Check for different skill names: 
