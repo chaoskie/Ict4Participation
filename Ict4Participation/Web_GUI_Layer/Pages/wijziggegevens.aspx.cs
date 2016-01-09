@@ -207,9 +207,14 @@ namespace Web_GUI_Layer.Pages
         public static string IsCity(string str)
         {
             // If str is a city, return 1
-            if (GetCities(str) == str)
+            string[] cities = GetCities(str).Split('|');
+            foreach (string city in cities)
             {
-                return "true";
+                if (city == str &&
+                    city != "Niks gevonden")
+                {
+                    return "true";
+                }
             }
 
             // else return 0
