@@ -148,7 +148,8 @@ namespace Web_GUI_Layer
             string[] cities = GetCities(str).Split('|');
             foreach (string city in cities)
             {
-                if (city == str)
+                if (city == str &&
+                    city != "Niks gevonden")
                 {
                     return "true";
                 }
