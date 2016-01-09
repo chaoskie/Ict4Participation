@@ -73,7 +73,7 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 pull-right">
 				            <div class="row">
-					            <div class="col-xs-12 dropdown">
+					            <div class="col-xs-12 dropdown dropdown-dynamic">
 						            <div class="row dropdown-title">
 							            <div class="col-xs-12">
 								            <p class="pull-left">Skills:</p>
@@ -114,7 +114,7 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 pull-right">
 				            <div class="row">
-					            <div class="col-xs-12 dropdown">
+					            <div class="col-xs-12 dropdown dropdown-dynamic">
 						            <div class="row dropdown-title">
 							            <div class="col-xs-12">
 								            <p class="pull-left">Vrijwilligers (max <span id="max_accs" runat="server"></span>):</p>

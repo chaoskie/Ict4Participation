@@ -382,6 +382,15 @@ namespace Web_GUI_Layer.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl vragen_list;
         
         /// <summary>
+        /// RowRevsFrom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl RowRevsFrom;
+        
+        /// <summary>
         /// reviews_list1 control.
         /// </summary>
         /// <remarks>
@@ -389,6 +398,15 @@ namespace Web_GUI_Layer.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl reviews_list1;
+        
+        /// <summary>
+        /// RowRevsOf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl RowRevsOf;
         
         /// <summary>
         /// reviews_list2 control.

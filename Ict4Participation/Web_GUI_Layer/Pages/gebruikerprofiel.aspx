@@ -190,7 +190,7 @@
 				    </div>
 
 				    <!-- Reviews van gebruiker -->
-				    <div class="row">
+				    <div class="row" id="RowRevsFrom" runat="server">
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
@@ -207,7 +207,7 @@
 				    </div>
 
 				    <!-- Reviews over gebruiker -->
-				    <div class="row">
+				    <div class="row" id="RowRevsOf" runat="server">
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">

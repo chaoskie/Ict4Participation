@@ -45,11 +45,18 @@ namespace Web_GUI_Layer
             // Set account role
             usertype.InnerText = string.IsNullOrEmpty(mainuser.VOGPath) ? "Hulpbehoevende" : "Vrijwilliger";
 
+            //If the user is a 'hulpbehoevende'
             if (!string.IsNullOrEmpty(mainuser.VOGPath))
             {
                 btnPlaatsVraag.Visible = false;
                 btnTerug.Style["width"] = "50%";
                 btnGebruikers.Style["width"] = "50%";
+                ReviewsOf.Visible = false;
+                QuestionsOf.Visible = false;
+            }
+            else
+            {
+                ReviewsTo.Visible = false;
             }
 
             // Insert all questions

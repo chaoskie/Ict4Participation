@@ -37,6 +37,8 @@ namespace Web_GUI_Layer.Pages
             // Get user details
             Accountdetails ad = GUIHandler.GetAll().Find(i => i.ID == u_id);
 
+            Page.Title = "Profiel van " + ad.Name.Split()[0];
+
             // Set user details
             username.InnerText = ad.Name;
             profielfoto.ImageUrl = ad.AvatarPath;
@@ -45,6 +47,11 @@ namespace Web_GUI_Layer.Pages
             if (!string.IsNullOrEmpty(ad.VOGPath))
             {
                 usertype.InnerText = "Vrijwilliger";
+                RowRevsFrom.Visible = false;
+            }
+            else
+            {
+                RowRevsOf.Visible = false;
             }
 
             userdescription.InnerText = ad.Description;

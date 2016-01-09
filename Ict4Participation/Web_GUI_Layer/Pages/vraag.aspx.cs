@@ -40,6 +40,8 @@ namespace Web_GUI_Layer
 
             Questiondetails qd = GUIHandler.GetAll(true).Where(vraag => vraag.PostID == q_id).ToList()[0];
 
+            Page.Title = qd.Title;
+
             // Get accountdetails
             Accountdetails ad = GUIHandler.GetAll().Where(account => account.ID == qd.PosterID).ToList()[0];
 

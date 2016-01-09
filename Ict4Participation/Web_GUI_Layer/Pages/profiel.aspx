@@ -73,8 +73,8 @@
 					    </div>
 				    </div>
 
-				    <!-- Vragen -->
-				    <div class="row">
+				    <!-- Geplaatste vragen -->
+				    <div class="row" id="QuestionsOf" runat="server">
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
@@ -91,7 +91,7 @@
 				    </div>
 
 				    <!-- Geplaatste reviews -->
-				    <div class="row">
+				    <div class="row" id="ReviewsOf" runat="server">
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
@@ -108,8 +108,8 @@
 				    </div>
 
 
-				    <!-- Geplaatste reviews -->
-				    <div class="row">
+				    <!-- Ontvangen reviews -->
+				    <div class="row" id="ReviewsTo" runat="server">
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
