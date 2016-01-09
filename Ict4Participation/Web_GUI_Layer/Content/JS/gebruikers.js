@@ -4,21 +4,22 @@
     haalGebruikersOp('');
 
     $('#inputZoeken').on('keyup click', function () {
-
+        var fvolunteers = $('#fvolunteers').is(':checked');
+        var fhelpreq = $('#fhelpreq').is(':checked');
         // Haal alle gebruikers op als er op de input wordt geklikt of een toets wordt losgelaten
-        haalGebruikersOp($(this).val());
+        haalGebruikersOp($(this).val(), fvolunteers, fhelpreq);
 
     });
 
 });
 
 // Functie om de gebruikers op te halen, door middel van ajax
-function haalGebruikersOp(val) {
+function haalGebruikersOp(val, b1, b2) {
 
     $.ajax({
         type: 'POST',
         url: 'gebruikers.aspx/SearchUsers',
-        data: '{str: "' + val + '"}',
+        data: '{str: "' + val + '", fvolunteers: "' + b1 + '", fhelpreq: "' + b2 + '"}',
         contentType: 'application/json;charset=utf-8',
         dataType: 'json',
         success: function (result) {

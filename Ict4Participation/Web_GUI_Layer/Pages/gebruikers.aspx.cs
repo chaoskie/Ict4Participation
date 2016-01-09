@@ -11,9 +11,12 @@ namespace Web_GUI_Layer
     public partial class gebruikers : System.Web.UI.Page
     {
         private static int mainuserID;
+        static List<Accountdetails> accounts;
+        static GUIHandler GUIHandler;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            accounts = new List<Accountdetails>();
             // Check if GUIHandler exists
             if (Session["GUIHandler_obj"] == null)
             {
@@ -23,7 +26,9 @@ namespace Web_GUI_Layer
             }
 
             // Set mainuserID to be used in static methods
-            mainuserID = ((GUIHandler)Session["GUIHandler_obj"]).GetMainuserInfo().ID;
+            GUIHandler = ((GUIHandler)Session["GUIHandler_obj"]);
+            mainuserID = GUIHandler.GetMainuserInfo().ID;
+            accounts = GUIHandler.GetAll();
         }
 
         protected void btnTerug_Click(object sender, EventArgs e)
@@ -32,14 +37,29 @@ namespace Web_GUI_Layer
         }
 
         [System.Web.Services.WebMethod]
-        public static string SearchUsers(string str)
+        public static string SearchUsers(string str, string fvolunteers, string fhelpreq)
         {
+            if (accounts == null)
+            {
+                accounts = new List<Accountdetails>();
+            }
+            if (accounts.Count == 0 && GUIHandler != null)
+            {
+                accounts = GUIHandler.GetAll();
+            }
+
             string result = string.Empty;
-            GUIHandler tempGUIHandler = new GUIHandler();
+            List<Accountdetails> accTemp = accounts;
+            if (fhelpreq == "false")
+            {
+                accTemp = accTemp.Where(a => a.VOGPath != "").ToList();
+            }
+            if (fvolunteers == "false")
+            {
+                accTemp = accTemp.Where(a => a.VOGPath == "").ToList();
+            }
 
-            List<Accountdetails> users = tempGUIHandler.GetAll();
-
-            foreach (Accountdetails user in users)
+            foreach (Accountdetails user in accTemp)
             {
                 if (user.ID != mainuserID)
                 {

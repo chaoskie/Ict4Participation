@@ -13,6 +13,33 @@ namespace Web_GUI_Layer {
     public partial class profiel {
         
         /// <summary>
+        /// btnTerug control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnTerug;
+        
+        /// <summary>
+        /// btnPlaatsVraag control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnPlaatsVraag;
+        
+        /// <summary>
+        /// btnGebruikers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnGebruikers;
+        
+        /// <summary>
         /// error_message control.
         /// </summary>
         /// <remarks>

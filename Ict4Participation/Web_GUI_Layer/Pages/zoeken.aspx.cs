@@ -10,12 +10,13 @@ namespace Web_GUI_Layer
 {
     public partial class zoeken : System.Web.UI.Page
     {
-        private GUIHandler GUIHandler;
+        static GUIHandler GUIHandler;
         static List<Questiondetails> questions;
         static List<Accountdetails> accounts;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            accounts = new List<Accountdetails>();
             // Check if GUIHandler exists
             if (Session["GUIHandler_obj"] == null)
             {
@@ -62,6 +63,15 @@ namespace Web_GUI_Layer
         [System.Web.Services.WebMethod]
         public static string SearchInfo(string str, string fvolunteers, string fhelpreq, string fquestions)
         {
+            if (accounts == null)
+            {
+                accounts = new List<Accountdetails>();
+            }
+            if (accounts.Count == 0 && GUIHandler != null)
+            {
+                accounts = GUIHandler.GetAll();
+            }
+
             List<Accountdetails> accTemp = accounts;
             if (fhelpreq == "false")
             {

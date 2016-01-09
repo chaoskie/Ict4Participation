@@ -45,6 +45,13 @@ namespace Web_GUI_Layer
             // Set account role
             usertype.InnerText = string.IsNullOrEmpty(mainuser.VOGPath) ? "Hulpbehoevende" : "Vrijwilliger";
 
+            if (!string.IsNullOrEmpty(mainuser.VOGPath))
+            {
+                btnPlaatsVraag.Visible = false;
+                btnTerug.Style["width"] = "50%";
+                btnGebruikers.Style["width"] = "50%";
+            }
+
             // Insert all questions
             List<Questiondetails> questions = GUIHandler.GetAll(true).Where(i => i.PosterID == mainuser.ID).ToList();
             foreach (Questiondetails qd in questions)
