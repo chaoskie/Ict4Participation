@@ -46,7 +46,7 @@
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
 				    <div class="form-group">
-					    <h2>Gebruikers</h2>
+					    <h2>Gebruikers<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Hier kunt u zoeken op gebruikers"></i></h2>
 					    <div class="row">
 						    <div class="col-xs-12">
 							    <label for="inputZoeken" class="sr-only">Zoeken</label>
@@ -77,7 +77,7 @@
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
-								    <p class="pull-left">Gebruikers</p>
+								    <p class="pull-left">Gebruikers<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Alle gevonden resultaten zijn hieronder weergegeven"></i></p>
 								    <p class="pull-right"><i class="fa fa-chevron-down"></i></p>
 							    </div>
 						    </div>
@@ -92,17 +92,6 @@
 			    </div>
 		    </main>
 
-		    <!-- Zoek profiel overlay -->
-		    <%--<div id="zoek_profiel_overlay">
-			    <div class="zoek-profiel-left">
-				    <img class="zoek-profiel-foto" src="" />
-			    </div>
-			    <div class="zoek-profiel-right">
-				    <p class="zoek-profiel-naam">Nog niets...</p>
-				    <p class="zoek-profiel-type">Nog niets...</p>
-				    <p class="zoek-profiel-quote">Nog niets...</p>
-			    </div>
-		    </div>--%>
 	    </div>
     </form>
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>

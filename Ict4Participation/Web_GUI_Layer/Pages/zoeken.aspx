@@ -45,7 +45,7 @@
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
 				    <div class="form-group">
-					    <h2>Zoeken</h2>
+					    <h2>Zoeken<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Zoek aan de hand van zoekopties"></i></h2>
 					    <div class="row">
 						    <div class="col-xs-12">
 							    <label for="inputZoeken" class="sr-only">Zoeken</label>
@@ -59,7 +59,7 @@
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
-								    <p class="pull-left"><span>Zoekopties</span></p>
+								    <p class="pull-left"><span>Zoekopties</span><i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Hier kunt u de zoekopties ingeven"></i></p>
 							    </div>
 						    </div>
 						    <div class="row dropdown-content">
@@ -77,7 +77,7 @@
 					    <div class="col-xs-12 dropdown">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
-								    <p class="pull-left"><span id="aantalResultaten">10 Resultaten</span></p>
+								    <p class="pull-left"><span id="aantalResultaten">10 Resultaten</span><i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Alle resultaten zijn hieronder weergegeven"></i></p>
 							    </div>
 						    </div>
 						    <div class="row dropdown-content">
@@ -96,6 +96,7 @@
     <!-- Scripts -->
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
+    <script src="../Content/JS/tooltips.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
 	<script src="../Content/JS/errormessage.js"></script>
     <script src="../Content/JS/zoeken.js"></script>

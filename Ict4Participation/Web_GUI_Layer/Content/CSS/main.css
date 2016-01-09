@@ -184,12 +184,11 @@ nav button p {
 div.tooltip-inner {
     background-color: #000;
     border: none;
+    font-size: 18px;
     opacity: 1;
     max-width: 800px;
     transition: all 0 !important;
-
 }
-
 /*
  * ERROR STYLES
  * * * * * * * * * * */

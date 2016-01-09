@@ -50,7 +50,7 @@
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 				    
                     <div class="form-signin">
-					    <h2 class="form-signin-heading">Log In</h2>
+					    <h2 class="form-signin-heading">Log In<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Om in te loggen vult u uw gebruikersnaam en wachtwoord in, welke u heeft aangegeven bij het registreren"></i></h2>
 
 					    <label for="inputGebruikersnaam" class="sr-only">Gebruikersnaam</label>
 					    <input type="text" id="inputGebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required="required" runat="server" />
@@ -74,6 +74,7 @@
     <!-- Scripts -->
     <script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
+    <script src="../Content/JS/tooltips.js"></script>
 	<script src="../Content/JS/errormessage.js"></script>
 </body>
 </html>

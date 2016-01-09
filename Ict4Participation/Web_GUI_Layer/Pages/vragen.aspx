@@ -45,7 +45,7 @@
             
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
-					<h2>Alle vragen</h2>
+					<h2>Alle vragen<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Alle hulpvragen zijn hieronder weergegeven"></i></h2>
                     
                     <div class="row">
                         <div class="col-xs-12">
@@ -88,6 +88,7 @@
     <!-- Scripts -->
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
+    <script src="../Content/JS/tooltips.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
 	<script src="../Content/JS/errormessage.js"></script>
     <script src="../Content/JS/vragen.js"></script>
