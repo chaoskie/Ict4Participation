@@ -699,8 +699,8 @@ namespace Database_Layer
                 cmd.Parameters.Add(new OracleParameter("pic", Picture));
                 cmd.Parameters.Add(new OracleParameter("sex", Sex));
                 cmd.Parameters.Add(new OracleParameter("vog", VOG));
-                cmd.Parameters.Add(new OracleParameter("id", uID));
                 cmd.Parameters.Add(new OracleParameter("desc", description));
+                cmd.Parameters.Add(new OracleParameter("id", uID));
                 cmd.Connection = c;
                 try
                 {
@@ -759,8 +759,8 @@ namespace Database_Layer
                 cmd.Parameters.Add(new OracleParameter("pic", Picture));
                 cmd.Parameters.Add(new OracleParameter("sex", Sex));
                 cmd.Parameters.Add(new OracleParameter("vog", VOG));
-                cmd.Parameters.Add(new OracleParameter("id", uID));
                 cmd.Parameters.Add(new OracleParameter("desc", description));
+                cmd.Parameters.Add(new OracleParameter("id", uID));
                 cmd.Connection = c;
                 try
                 {
