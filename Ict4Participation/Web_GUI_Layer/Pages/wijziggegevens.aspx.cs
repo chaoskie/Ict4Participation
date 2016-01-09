@@ -38,7 +38,7 @@ namespace Web_GUI_Layer.Pages
                 // General info
                 string[] name_list = m_ad.Name.Split(' ');
 
-                m_ad.Name = inputFullName.Value;
+                inputFullName.Value = m_ad.Name;
 
                 string[] street_list = m_ad.Address.Split(' ');
                 string adresnr = street_list[street_list.Length-1];

@@ -68,7 +68,7 @@
 								    <!-- Algemene gegevens -->
 								    <div id="tab_form1" class="tab-pane fade in active">
 									    <div class="form-group">
-										    <h2>Algemene gegevens</h2>
+										    <h2>Algemene gegevens<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Hier vult u uw persoonlijke gegevens in"></i></h2>
 										    <div class="row">
 											    <div class="col-xs-12">
 												    <label for="inputFullName" class="sr-only">Volledige naam</label>
@@ -273,7 +273,7 @@
 								    <!-- Account gegevens -->
 								    <div id="tab_form2" class="tab-pane fade">
 									    <div class="form-group">
-										    <h2>Account gegevens</h2>
+										    <h2>Account gegevens<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Hier vult u uw accountgegevens in, welke u moet gebruiken om in te loggen"></i></h2>
 										    <div class="row">
 											    <div class="col-xs-12">
 												    <label for="inputEmail" class="sr-only">Email adres</label>
@@ -298,7 +298,7 @@
 								    <!-- Profielfoto -->
 								    <div id="tab_form3" class="tab-pane fade">
 									    <div class="form-group">
-										    <h2>Profielfoto</h2>
+										    <h2>Profielfoto<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Hier kunt u een profielfoto uploaden, welke de andere gebruikers kunnen zien"></i></h2>
 										    <div class="row">
 											    <div class="col-xs-12">
 												    <label for="inputProfielfoto" class="sr-only">Selecteer profielfoto</label>
@@ -311,7 +311,7 @@
                                     <!-- Vervoer -->
                                     <div id="tab_form4" class="tab-pane fade">
                                         <div class="form-group">
-                                            <h2>Vervoer</h2>
+                                            <h2>Vervoer<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Heeft u vervoersmogelijkheden? Geef deze mogelijkheden hier aan"></i></h2>
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="checkbox">
@@ -381,7 +381,7 @@
 									    <div class="form-group">
 										    <div class="row">
 											    <div class="col-xs-12">
-												    <h2>Skills</h2>
+												    <h2>Skills<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Waar bent u goed in, en welke karaktereigenschappen heeft u?"></i></h2>
 												    <div class="form-group">
 													    <label for="select_skills" class="sr-only">Skills</label>
 													    <select id="select_skills" class="form-control" runat="server"></select>
@@ -406,7 +406,7 @@
 										    </div>
 										    <div class="row">
 											    <div class="col-xs-12">
-												    <h3><abbr title="Verklaring Omtrend Gedrag">VOG</abbr></h3>
+												    <h3><abbr title="Verklaring Omtrend Gedrag">VOG<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Om te kunnen registreren als vrijwilliger heeft u een geldig VOG nodig"></i></abbr></h3>
 												    <label for="inputVOG" class="sr-only">Selecteer profielfoto</label>
                                                     <asp:FileUpload ID="inputVOG" ClientIDMode="Static" CssClass="file" required="required" runat="server" />
 											    </div>
@@ -431,6 +431,7 @@
     <!-- Scripts -->
     <script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
+    <script src="../Content/JS/tooltips.js"></script>
     <script src="../Content/JS/fileinput.min.js"></script>
     <script src="../Content/JS/errormessage.js"></script>
     <script src="../Content/JS/registreren.js"></script>

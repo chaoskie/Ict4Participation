@@ -56,7 +56,7 @@
             
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
-				    <h2>Profielpagina</h2>
+				    <h2>Profielpagina<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Hier is alle belangrijke informatie over u weergegeven"></i></h2>
                     
                     <div class="row">
                         <div class="col-xs-12">
@@ -81,7 +81,7 @@
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
-								    <p class="pull-left">Vragen</p>
+								    <p class="pull-left">Vragen<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Alle hulpvragen die u heeft geplaats"></i></p>
 								    <p class="pull-right">
 									    <i class="fa fa-chevron-up"></i>
 								    </p>
@@ -98,7 +98,7 @@
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
-								    <p class="pull-left">Uw geplaatste reviews</p>
+								    <p class="pull-left">Uw geplaatste reviews<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Alle reviews die u heeft geplaatst"></i></p>
 								    <p class="pull-right">
 									    <i class="fa fa-chevron-up"></i>
 								    </p>
@@ -116,7 +116,7 @@
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
-								    <p class="pull-left">Reviews geplaatst over u</p>
+								    <p class="pull-left">Reviews geplaatst over u<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Alle reviews die hulpbehoevenden over u hebben geplaatst"></i></p>
 								    <p class="pull-right">
 									    <i class="fa fa-chevron-up"></i>
 								    </p>
@@ -138,9 +138,9 @@
     <!-- Scripts -->
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
+    <script src="../Content/JS/tooltips.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
 	<script src="../Content/JS/errormessage.js"></script>
-	<%--<script src="../Content/JS/zoekprofiel.js"></script>--%>
     <script src="../Content/JS/profiel.js"></script>
 </body>
 </html>

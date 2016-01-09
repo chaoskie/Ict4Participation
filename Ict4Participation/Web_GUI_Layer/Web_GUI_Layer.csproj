@@ -120,6 +120,7 @@
     <Content Include="Content\JS\profiel.js" />
     <Content Include="Content\JS\registreren.js" />
     <Content Include="Content\JS\review.js" />
+    <Content Include="Content\JS\tooltips.js" />
     <Content Include="Content\JS\vraag.js" />
     <Content Include="Content\JS\vragen.js" />
     <Content Include="Content\JS\wijziggegevens.js" />

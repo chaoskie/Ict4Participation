@@ -56,7 +56,7 @@
 
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
-				    <h2>Hoofdmenu</h2>
+				    <h2>Hoofdmenu<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Hier vind u een overzicht van belangrijke zaken"></i></h2>
 
 				    <!-- Profiel info -->
 				    <div id="profiel_section" class="row">
@@ -64,10 +64,10 @@
                             <asp:Image ID="profielfoto" AlternateText="Profielfoto" CssClass="img-responsive" ImageUrl="http://i.imgur.com/BZUZBOr.jpg" runat="server" />
 					    </div>
 					    <div class="col-tn-12 col-xs-8">
-						    <h2 id="user_naam" runat="server">Barry Batsbak</h2>
-						    <h3 id="user_rol" runat="server">Hulpbehoevende</h3>
+						    <h2 id="user_naam" runat="server"></h2>
+						    <h3 id="user_rol" runat="server"></h3>
                             <!-- TEMPORARILY DISABLED -->
-                            <h3 style="display: none;" id="userdescription" class="text-muted" runat="server">Lorem ipsum dolor sit amet.</h3>
+                            <h3 style="display: none;" id="userdescription" class="text-muted" runat="server"></h3>
 					    </div>
 				    </div>
 
@@ -76,7 +76,7 @@
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
-								    <p class="pull-left">Activiteiten</p>
+								    <p class="pull-left">Activiteiten<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Alle recente activiteiten zijn hier weergegeven"></i></p>
 								    <p class="pull-right">
 									    <i class="fa fa-chevron-up"></i>
 								    </p>
@@ -91,7 +91,7 @@
 				    <!-- Beschikbaarheid -->
 				    <div class="row">
 					    <div class="col-xs-12">
-						    <h2>Beschikbaarheid</h2>
+						    <h2>Beschikbaarheid<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Vul hier uw beschikbaarheid in, welke zichtbaar is voor de andere gebruikers"></i></h2>
 						    <!-- PLANNING -->
                             <%-- Pijltjes laten staan! --%>
                             <div id="planning">
@@ -167,6 +167,7 @@
     <!-- SCRIPTS -->
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
+    <script src="../Content/JS/tooltips.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
 	<script src="../Content/JS/errormessage.js"></script>
 	<script src="../Content/JS/hoofdmenu.js"></script>
