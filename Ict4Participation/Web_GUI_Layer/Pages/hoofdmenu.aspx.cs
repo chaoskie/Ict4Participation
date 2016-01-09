@@ -29,6 +29,8 @@ namespace Web_GUI_Layer
             // Get all user info
             Accountdetails accDetails = GUIHandler.GetMainuserInfo();
 
+            Page.Title = "Welkom, " + accDetails.Name.Split()[0];
+
             // Insert user name and role
             user_naam.InnerText = accDetails.Name;
 

@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="nl">
-<head>
+<head runat="server">
     <!-- Meta information -->
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />

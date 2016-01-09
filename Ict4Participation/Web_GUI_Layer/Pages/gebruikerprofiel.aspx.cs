@@ -37,25 +37,40 @@ namespace Web_GUI_Layer.Pages
             // Get user details
             Accountdetails ad = GUIHandler.GetAll().Find(i => i.ID == u_id);
 
+            Page.Title = "Profiel van " + ad.Name.Split()[0];
+
             // Set user details
             username.InnerText = ad.Name;
             profielfoto.ImageUrl = ad.AvatarPath;
 
             // Check if user is hulpverlener
-            if (string.IsNullOrEmpty(ad.VOGPath))
+            if (!string.IsNullOrEmpty(ad.VOGPath))
             {
                 usertype.InnerText = "Vrijwilliger";
+                RowRevsFrom.Visible = false;
+            }
+            else
+            {
+                RowRevsOf.Visible = false;
             }
 
             userdescription.InnerText = ad.Description;
             useremail.InnerText = ad.Email;
             userphonenr.InnerText = ad.Phonenumber;
 
+            //If the main user is not a 'hulpbehoevende' or if the user selected is a 'hulpbehoevende'
+            if (!string.IsNullOrEmpty(GUIHandler.GetMainuserInfo().VOGPath) || string.IsNullOrEmpty(ad.VOGPath))
+            {
+                btnPlaatsReview.Visible = false;
+                btnTerug.Style["width"] = "50%";
+                btnPlanMeeting.Style["width"] = "50%";
+            }
+
             // TODO: Add:
             //ad.hasVehicle;
             //ad.hasDriverLicense;
             //ad.OVPossible;
-            
+
             // Add address only if mainuser is a volunteer
             //ad.Address;
             //ad.City; etc.

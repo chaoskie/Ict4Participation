@@ -13,6 +13,33 @@ namespace Web_GUI_Layer {
     public partial class profiel {
         
         /// <summary>
+        /// btnTerug control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnTerug;
+        
+        /// <summary>
+        /// btnPlaatsVraag control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnPlaatsVraag;
+        
+        /// <summary>
+        /// btnGebruikers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnGebruikers;
+        
+        /// <summary>
         /// error_message control.
         /// </summary>
         /// <remarks>
@@ -58,6 +85,15 @@ namespace Web_GUI_Layer {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl userdescription;
         
         /// <summary>
+        /// QuestionsOf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl QuestionsOf;
+        
+        /// <summary>
         /// vragen_list control.
         /// </summary>
         /// <remarks>
@@ -67,6 +103,15 @@ namespace Web_GUI_Layer {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl vragen_list;
         
         /// <summary>
+        /// ReviewsOf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ReviewsOf;
+        
+        /// <summary>
         /// reviews1_list control.
         /// </summary>
         /// <remarks>
@@ -74,6 +119,15 @@ namespace Web_GUI_Layer {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl reviews1_list;
+        
+        /// <summary>
+        /// ReviewsTo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ReviewsTo;
         
         /// <summary>
         /// reviews2_list control.

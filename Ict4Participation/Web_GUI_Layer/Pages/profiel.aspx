@@ -27,22 +27,19 @@
 			    <div class="container-fluid">
 				    <div class="row">
 					    <div class="col-xs-12">
-						    <button onserverclick="btnTerug_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
+						    <button onserverclick="btnTerug_Click" id="btnTerug" class="button-1-3" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
 							    <i class="fa fa-chevron-left"></i>
 							    <p>Terug</p>
 						    </button><!--
-					     --><button onserverclick="btnPlaatsVraag_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
+					     --><button onserverclick="btnPlaatsVraag_Click" id="btnPlaatsVraag" class="button-1-3" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
 					 		    <i class="fa fa-question"></i>
 					 		    <p>Plaats Vraag</p>
 					 	    </button><!--
-					     --><button onserverclick="btnGebruikers_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
+					     --><button onserverclick="btnGebruikers_Click" id="btnGebruikers" class="button-1-3" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
 					 		    <i class="fa fa-user"></i>
 					 		    <p>Gebruikers</p>
 					 	    </button><!--
-					     --><button>
-					 		    <i class="fa fa-users"></i>
-					 		    <p>Meeting</p>
-					 	    </button>
+                                 -->
 					    </div>
 				    </div>
 			    </div>
@@ -76,8 +73,8 @@
 					    </div>
 				    </div>
 
-				    <!-- Vragen -->
-				    <div class="row">
+				    <!-- Geplaatste vragen -->
+				    <div class="row" id="QuestionsOf" runat="server">
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
@@ -94,7 +91,7 @@
 				    </div>
 
 				    <!-- Geplaatste reviews -->
-				    <div class="row">
+				    <div class="row" id="ReviewsOf" runat="server">
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
@@ -111,8 +108,8 @@
 				    </div>
 
 
-				    <!-- Geplaatste reviews -->
-				    <div class="row">
+				    <!-- Ontvangen reviews -->
+				    <div class="row" id="ReviewsTo" runat="server">
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">

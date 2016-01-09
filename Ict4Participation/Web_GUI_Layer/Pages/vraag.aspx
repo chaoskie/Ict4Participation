@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="nl">
-<head>
+<head runat="server">
     <!-- Meta information -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
@@ -73,7 +73,7 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 pull-right">
 				            <div class="row">
-					            <div class="col-xs-12 dropdown">
+					            <div class="col-xs-12 dropdown dropdown-dynamic">
 						            <div class="row dropdown-title">
 							            <div class="col-xs-12">
 								            <p class="pull-left">Skills:<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="De skills die deze persoon nodig heeft"></i></p>
@@ -114,7 +114,7 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 pull-right">
 				            <div class="row">
-					            <div class="col-xs-12 dropdown">
+					            <div class="col-xs-12 dropdown dropdown-dynamic">
 						            <div class="row dropdown-title">
 							            <div class="col-xs-12">
 								            <p class="pull-left">Vrijwilligers (max <span id="max_accs" runat="server"></span>):</p>
