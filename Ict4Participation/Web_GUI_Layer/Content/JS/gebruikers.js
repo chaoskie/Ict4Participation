@@ -4,10 +4,20 @@
     haalGebruikersOp('');
 
     $('#inputZoeken').on('keyup click', function () {
+
         var fvolunteers = $('#fvolunteers').is(':checked');
         var fhelpreq = $('#fhelpreq').is(':checked');
         // Haal alle gebruikers op als er op de input wordt geklikt of een toets wordt losgelaten
         haalGebruikersOp($(this).val(), fvolunteers, fhelpreq);
+
+    });
+
+    $('input[type="checkbox"]').change(function() {
+
+            var fvolunteers = $('#fvolunteers').is(':checked');
+            var fhelpreq = $('#fhelpreq').is(':checked');
+            // Haal alle gebruikers op als er op de input wordt geklikt of een toets wordt losgelaten
+            haalGebruikersOp($('#inputZoeken').val(), fvolunteers, fhelpreq);
 
     });
 

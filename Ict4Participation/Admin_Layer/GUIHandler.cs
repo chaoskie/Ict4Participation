@@ -290,7 +290,7 @@ namespace Admin_Layer
             //Update account
             if (password1 == password2)
             {
-                Account.Update(MainUser.ID,
+                MainUser = Account.Update(MainUser.ID,
                     acc.Username,
                     acc.Email,
                     acc.Name,

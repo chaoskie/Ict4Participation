@@ -161,6 +161,12 @@ namespace Web_GUI_Layer.Pages
 
             ad.SkillsDetailList = selected_skills;
 
+            // Create a new list if skilldetailslist is null
+            if (ad.SkillsDetailList == null)
+            {
+                ad.SkillsDetailList = new List<Skilldetails>();
+            }
+
             // Check if user has updated avatar
             if (inputProfielfoto.HasFile)
             {

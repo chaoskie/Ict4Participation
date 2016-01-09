@@ -16,8 +16,8 @@
 	<link rel="stylesheet" href="../Content/CSS/main.css" />
 	<link rel="stylesheet" href="../Content/CSS/gebruikers.css" />
 	<link rel="stylesheet" href="../Content/CSS/dropdown.css" />
+    <link rel="stylesheet" href="../Content/CSS/zoekopties.css" />
 	<link rel="stylesheet" href="../Content/CSS/input.css" />
-    <%--<link rel="stylesheet" href="../Content/CSS/gebruiker-zoeken.css" />--%>
 </head>
 <body>
     <form runat="server">
