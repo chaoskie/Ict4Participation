@@ -46,7 +46,7 @@
 
 				    <!-- Algemene gegevens -->
 				    <div class="form-group">
-					    <h2>Wijzig gegevens</h2>
+					    <h2>Wijzig gegevens<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Hier kunt u uw gegevens wijzigen"></i></h2>
 
 					    <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
@@ -67,7 +67,7 @@
 								    <!-- Algemene gegevens -->
 								    <div id="tab_form1" class="tab-pane fade in active">
 									    <div class="form-group">
-										    <h2>Algemene gegevens</h2>
+										    <h2>Algemene gegevens<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Hier kunt u uw persoonsgegevens wijzigen"></i></h2>
 										    <div class="row">
 											    <div class="col-xs-12">
 												    <label for="inputFullName" class="sr-only">Volledige naam</label>
@@ -87,7 +87,7 @@
 										    <div class="row">
 											    <div class="col-xs-12">
 												    <label for="inputWoonplaats" class="sr-only">Woonplaats</label>
-												    <input type="text" id="inputWoonplaats" class="form-control" placeholder="Woonplaats" required="required" runat="server" />
+												    <input type="text" id="inputWoonplaats" class="form-control form-success" placeholder="Woonplaats" required="required" runat="server" />
                                                     <div id="woonplaats_results_wrapper">
                                                         <p>Eindhoven</p>
                                                         <p>Eindhoven</p>
@@ -276,7 +276,7 @@
 								    <!-- Account gegevens -->
 								    <div id="tab_form2" class="tab-pane fade">
 									    <div class="form-group">
-										    <h2>Account gegevens</h2>
+										    <h2>Account gegevens<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Hier kunt u uw accountgegevens wijzigen"></i></h2>
 										    <div class="row">
 											    <div class="col-xs-12">
 												    <label for="inputEmail" class="sr-only">Email adres</label>
@@ -301,7 +301,7 @@
 								    <!-- Profielfoto -->
 								    <div id="tab_form3" class="tab-pane fade">
 									    <div class="form-group">
-										    <h2>Profielfoto</h2>
+										    <h2>Profielfoto<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Hier kunt u uw profielfoto wijzigen"></i></h2>
 										    <div class="row">
 											    <div class="col-xs-12">
 												    <label for="inputProfielfoto" class="sr-only">Selecteer profielfoto</label>
@@ -314,7 +314,7 @@
                                     <!-- Vervoer -->
                                     <div id="tab_form4" class="tab-pane fade">
                                         <div class="form-group">
-                                            <h2>Vervoer</h2>
+                                            <h2>Vervoer<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Hier kunt u uw vervoersgegevens wijzigen"></i></h2>
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="checkbox">
@@ -361,7 +361,7 @@
 					<div id="formVrijwilliger" class="form-group" runat="server">
 						<div class="row">
 							<div class="col-xs-12">
-								<h2>Skills</h2>
+								<h2>Skills<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Hier kunt u uw skills wijzigen"></i></h2>
 								<div class="form-group">
 									<label for="select_skills" class="sr-only">Skills</label>
 									<select id="select_skills" class="form-control" runat="server"></select>
@@ -387,7 +387,7 @@
 					</div>
                     
                     <div class="form-group">
-                        <h2>Voeg het wachtwoord in om op te slaan</h2>
+                        <h2>Voeg het wachtwoord in om op te slaan<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="U moet uw huidige wachtwoord invoeren om de wijzigingen door te voeren"></i></h2>
                         <div class="row">
                             <div class="col-xs-12">
 							    <div class="form-group">
@@ -413,6 +413,7 @@
     <!-- Scripts -->
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
 	<script src="../Content/JS/bootstrap.min.js"></script>
+    <script src="../Content/JS/tooltips.js"></script>
 	<script src="../Content/JS/fileinput.min.js"></script>
 	<script src="../Content/JS/errormessage.js"></script>
     <script src="../Content/JS/wijziggegevens.js"></script>

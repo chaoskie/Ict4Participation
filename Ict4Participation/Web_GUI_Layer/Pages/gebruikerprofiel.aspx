@@ -52,7 +52,7 @@
 
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 				    
-                    <h2>Profielpagina</h2>
+                    <h2>Profielpagina<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Alle informatie over deze persoon is hieronder te vinden"></i></h2>
 				
 				    <!-- PROFIEL -->
 				    <div id="profiel_section" class="row">
@@ -62,15 +62,15 @@
 						    </div>
 					    </div>
 					    <div class="col-tn-12 col-xs-8">
-						    <h2 id="username" runat="server">Barry Batsbak</h2>
-						    <h3 id="usertype" runat="server">Hulpbehoevende</h3>
-						    <h3 id="userdescription" class="text-muted" runat="server">Lorem ipsum dolor sit amet.</h3>
+						    <h2 id="username" runat="server"></h2>
+						    <h3 id="usertype" runat="server"></h3>
+						    <h3 id="userdescription" class="text-muted" runat="server"></h3>
 					    </div>
 				    </div>
                     
                     <div class="row">
                         <div class="col-xs-12">
-                            <h3>Algemene gegevens:</h3>
+                            <h3>Algemene gegevens:<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Dit zijn de persoonsgegevens van deze persoon"></i></h3>
                         </div>
                     </div>
                     
@@ -92,7 +92,7 @@
                     
                     <div class="row">
                         <div class="col-xs-12">
-                            <h3>Accountgegevens:</h3>
+                            <h3>Accountgegevens:<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="De activiteit van deze persoon"></i></h3>
                         </div>
                     </div>
                     
@@ -105,7 +105,7 @@
                     <!-- Beschikbaarheid -->
 				    <div class="row">
 					    <div class="col-xs-12">
-						    <h2>Beschikbaarheid</h2>
+						    <h2>Beschikbaarheid<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Hieronder is de beschikbaarheid van deze persoon weergegeven"></i></h2>
 						    <!-- PLANNING -->
                             <%-- Pijltjes laten staan! --%>
                             <div id="planning" class="static">
@@ -177,7 +177,7 @@
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
-								    <p class="pull-left">Vragen</p>
+								    <p class="pull-left">Vragen<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Hieronder zijn alle hulpvragen weergegeven die deze persoon heeft geplaatst"></i></p>
 								    <p class="pull-right">
 									    <i class="fa fa-chevron-up"></i>
 								    </p>
@@ -194,7 +194,7 @@
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
-								    <p class="pull-left">Reviews van <span id="gebruiker_naam1"></span></p>
+								    <p class="pull-left">Reviews van <span id="gebruiker_naam1"></span><i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Alle reviews die deze persoon heeft geplaatst"></i></p>
 								    <p class="pull-right">
 									    <i class="fa fa-chevron-up"></i>
 								    </p>
@@ -211,7 +211,7 @@
 					    <div class="col-xs-12 dropdown dropdown-dynamic">
 						    <div class="row dropdown-title">
 							    <div class="col-xs-12">
-								    <p class="pull-left">Reviews over <span id="gebruiker_naam2"></span></p>
+								    <p class="pull-left">Reviews over <span id="gebruiker_naam2"></span><i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Alle reviews die andere gebruikers over deze persoon hebben geplaatst"></i></p>
 								    <p class="pull-right">
 									    <i class="fa fa-chevron-up"></i>
 								    </p>
@@ -232,6 +232,7 @@
     <!-- Scripts -->
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
+    <script src="../Content/JS/tooltips.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
 	<script src="../Content/JS/errormessage.js"></script>
     <script src="../Content/JS/gebruikerprofiel.js"></script>

@@ -46,7 +46,7 @@
 				    <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12">
-                                <h2>Ontmoeting tussen <span id="persoon1" runat="server"></span> en <span id="persoon2" runat="server"></span></h2>
+                                <h2>Ontmoeting tussen <span id="persoon1" runat="server"></span> en <span id="persoon2" runat="server"></span><i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Alle informatie over deze ontmoeting is hier weergegeven"></i></h2>
                             </div>
                         </div>
 
@@ -86,6 +86,7 @@
     <!-- Scripts -->
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
+    <script src="../Content/JS/tooltips.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
     <script src="../Content/JS/errormessage.js"></script>
 </body>

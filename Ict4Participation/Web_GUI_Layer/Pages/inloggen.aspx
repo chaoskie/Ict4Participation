@@ -60,7 +60,7 @@
 						    <label>
 							    <input type="checkbox" id="checkbox" runat="server" />
 							    <span></span>
-							    <span>Onthoud mij</span>
+							    <span>Onthoud mij<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Vink dit vakje aan als u uw gebruikersnaam wilt onthouden"></i></span>
 						    </label>
 					    </div>
 					    <br />

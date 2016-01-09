@@ -44,7 +44,7 @@
             
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
-				    <h2>Review over <span id="reviewende_naam1" runat="server"></span></h2>
+				    <h2>Review over <span id="reviewende_naam1" runat="server"></span><i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Alle informatie over een review over deze persoon is hieronder weergegeven"></i></h2>
 				    
                     <div class="row">
                         <div class="col-xs-12">
@@ -63,7 +63,7 @@
 						    <h2 id="reviewende_naam2" runat="server"></h2>
                         </div>
                         <div class="col-tn-12 col-xs-9">
-						    <h3 id="reviewende_type" runat="server">Hulpbehoevende</h3>
+						    <h3 id="reviewende_type" runat="server"></h3>
 					    </div>
 				    </div>
 
@@ -93,7 +93,7 @@
 						    <h2 id="reviewer_naam" class="pull-right" runat="server"></h2>
                         </div>
                         <div class="col-tn-12 col-xs-9 pull-right">
-						    <h3 id="reviewer_type" class="pull-right" runat="server">Hulpbehoevende</h3>
+						    <h3 id="reviewer_type" class="pull-right" runat="server"></h3>
 					    </div>
 				    </div>
 
@@ -107,8 +107,8 @@
     <!-- Scripts -->
 	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
     <script src="../Content/JS/bootstrap.min.js"></script>
+    <script src="../Content/JS/tooltips.js"></script>
 	<script src="../Content/JS/dropdown.js"></script>
-	<%--<script src="../Content/JS/zoekprofiel.js"></script>--%>
 	<script src="../Content/JS/errormessage.js"></script>
     <script src="../Content/JS/profiel.js"></script>
     <script src="../Content/JS/review.js"></script>
