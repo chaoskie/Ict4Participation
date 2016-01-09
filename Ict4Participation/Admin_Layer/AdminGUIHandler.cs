@@ -189,21 +189,6 @@ namespace Admin_Layer
 
         #region Comment Handling
         /// <summary>
-        /// Places a comment
-        /// </summary>
-        /// <param name="comment">The comment details</param>
-        /// <param name="message">The message of the error</param>
-        /// <returns>Success</returns>
-        public bool Place(Commentdetails comment, int userID , out string message)
-        {
-            //Place comment
-            Comment c = new Comment(0, comment.Description, userID, comment.PostedToID, false, comment.PostDate);
-            c.Create();
-            message = "Comment placed";
-            return true;
-        }
-
-        /// <summary>
         /// Edits a comment
         /// </summary>
         /// <param name="comment">The comment details</param>
@@ -274,66 +259,6 @@ namespace Admin_Layer
         }
 
         /// <summary>
-        /// Places a question
-        /// </summary>
-        /// <param name="question">The question details</param>
-        /// <param name="message">The message of the error</param>
-        /// <returns>Success</returns>
-        public bool Place(Questiondetails question, int userID, out string message)
-        {
-            // Validate details
-            if (string.IsNullOrEmpty(question.Title))
-            {
-                message = "Voer een geldige titel in!";
-                return false;
-            }
-            if (string.IsNullOrEmpty(question.Description))
-            {
-                message = "Voer een geldige beschrijving in!";
-                return false;
-            }
-            if (question.Skills.Count == 0)
-            {
-                message = "Geen skills toegevoegd!";
-                return false;
-            }
-            if (string.IsNullOrEmpty(question.Location))
-            {
-                message = "Voer een geldige locatie in!";
-                return false;
-            }
-            DateTime? Now = DateTime.Now;
-            if (question.StartDate < Now)
-            {
-                message = "De startdatum is al geweest!";
-                return false;
-            }
-            if (question.EndDate < Now)
-            {
-                message = "De einddatum is al geweest!";
-                return false;
-            }
-            if (question.AmountAccs < 0)
-            {
-                message = "Het maximaal aantal hulpverleners is te laag!";
-                return false;
-            }
-            if (question.AmountAccs > 8)
-            {
-                message = "Het maximaal aantal hulpverleners is te hoog!";
-                return false;
-            }
-            Class_Layer.Enums.Status status;
-            Enum.TryParse(question.Status, out status);
-
-            //Place question
-            Question q = new Question(0, userID, question.Title, question.StartDate, question.EndDate, question.Description, question.Urgent, question.Location, question.AmountAccs, question.Skills, new List<int>(), (int)status);
-            q.Create();
-            message = "Vraag gepost!";
-            return true;
-        }
-
-        /// <summary>
         /// Edits a question
         /// </summary>
         /// <param name="question">The question details</param>
@@ -386,29 +311,6 @@ namespace Admin_Layer
         {
             LoadedReviews = Review.GetAll(userid, isPoster);
             return LoadedReviews.Select(r => Creation.getDetailsObject(r)).Cast<Reviewdetails>().ToList();
-        }
-
-        /// <summary>
-        /// Places a review
-        /// </summary>
-        /// <param name="review">The review details</param>
-        /// <param name="message">The message of the error</param>
-        /// <returns>Success</returns>
-        public bool Place(Reviewdetails review, int userID, out string message)
-        {
-            if (userID != review.PostedToID)
-            {
-                //Place review
-                Review r = new Review(0, review.Rating, userID, review.PostedToID, review.Description);
-                r.Create();
-                message = "Review succesvol geplaatst";
-                return true;
-            }
-            else
-            {
-                message = "Het is niet mogelijk om een review te plaatsen op hetzelfde persoon!";
-                return false;
-            }
         }
 
         /// <summary>
