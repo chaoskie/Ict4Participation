@@ -115,7 +115,7 @@ function valideerFields() {
 
         // Valideer telefoonnummer
         //if ((/(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)/).test($('#inputTelefoonnummer').val())) {
-        if ((/([+]\d{2} ){0,1}\d{3}[-.]?\d{3}[-.]?\d{4}/).test($('#inputTelefoonnummer').val())) {
+        if ((/^([+]\d{2} ){0,1}\d{3}[-.]?\d{3}[-.]?\d{4}$/).test($('#inputTelefoonnummer').val())) {
             $('#inputTelefoonnummer').removeClass('form-fail').addClass('form-success');
         } else {
             $('#inputTelefoonnummer').removeClass('form-success').addClass('form-fail');
