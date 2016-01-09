@@ -118,6 +118,44 @@ namespace Admin_Layer
         }
 
         /// <summary>
+        /// Returns whether an email already exists
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="message"></param>
+        /// <returns>Existance</returns>
+        public bool ValidateEmail(string email, out string message)
+        {
+            message = "";
+            if (LoadedAccounts.Count == 0) { GetAll(); }
+
+            if (LoadedAccounts.Where(acc => acc.Email == email).FirstOrDefault() != null)
+            {
+                message = "Dit email is al in gebruik. Wilt u misschien inloggen?";
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Returns whether a username already exists
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="message"></param>
+        /// <returns>Existance</returns>
+        public bool ValidateUsername(string username, out string message)
+        {
+            message = "";
+            if (LoadedAccounts.Count == 0) { GetAll(); }
+
+            if (LoadedAccounts.Where(acc => acc.Username == username).FirstOrDefault() != null)
+            {
+                message = "Deze gebruikersnaam is al in gebruik. Wilt u misschien inloggen?";
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
         /// Registers a new account
         /// </summary>
         /// <param name="acc">The account details</param>
@@ -125,9 +163,20 @@ namespace Admin_Layer
         /// <returns>Yields a true if the user could be created</returns>
         public bool Register(Accountdetails acc, string password1, string password2, out string message)
         {
+            message = string.Empty;
+            //Check if email already exists
+            if (ValidateEmail(acc.Email, out message))
+            {
+                return false;
+            }
+            //Check if username already exists
+            if (ValidateUsername(acc.Username, out message))
+            {
+                return false;
+            }
+
             acc.Name = acc.Name.Trim().Replace(@"/\s\s+/g", " ");
 
-            message = string.Empty;
             //Validate details
             if (!Check.CheckAccount(acc, out message))
             {

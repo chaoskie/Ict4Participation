@@ -112,7 +112,7 @@ namespace Class_Layer
 
         #endregion
 
-        #region DataCollection
+        #region Data collection
         /// <summary>
         /// Retrieves all the accounts from the database
         /// </summary>
