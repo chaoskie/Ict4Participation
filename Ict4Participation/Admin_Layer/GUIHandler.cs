@@ -15,6 +15,7 @@ using System.Linq;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
+using System.Web;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -32,7 +33,11 @@ namespace Admin_Layer
         /// <summary>
         /// The main user's account
         /// </summary>
-        public Account MainUser;
+        public Account MainUser
+        {
+            get { return HttpContext.Current.Session["MainUser"] as Account; }
+            set { HttpContext.Current.Session["MainUser"] = value; }
+        }
 
         /// <summary>
         /// A list of loaded accounts
@@ -89,6 +94,8 @@ namespace Admin_Layer
         {
             message = string.Empty;
             //Fetch matching account
+            Account accnew;
+
             if (string.IsNullOrEmpty(username))
             {
                 message = "Gebruikersnaam is niet ingevuld!";
@@ -99,11 +106,12 @@ namespace Admin_Layer
                 message = "Wachtwoord is niet ingevuld!";
                 return false;
             }
-            else if (!Account.LogIn(username, password, out MainUser))
+            else if (!Account.LogIn(username, password, out accnew))
             {
                 message = "De combinatie van gebruikersnaam en wachtwoord bestaat niet!";
                 return false;
             }
+            MainUser = accnew;
             return true;
         }
 
