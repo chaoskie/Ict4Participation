@@ -54,9 +54,14 @@ function haalInfoOp(val, b1, b2, b3) {
                     }
                 }
             }
+            var amnts = info.length == 1 ? " Resultaat" : " Resultaten";
+            if (info[0] == "")
+            {
+                amnts = " Resultaten";
+            }
 
             // Update het aantal resultaten
-            $('#aantalResultaten').text(info.length + (info.length == 1 ? " Resultaat" : " Resultaten"));
+            $('#aantalResultaten').text((info[0] == "" ? "0" : info.length) + amnts);
 
             // Append bericht als er geen info gevonden is
             if (info.length == 1 && info[0] == "") {
