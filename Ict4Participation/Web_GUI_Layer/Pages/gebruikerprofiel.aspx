@@ -27,15 +27,15 @@
 			    <div class="container-fluid">
 				    <div class="row">
 					    <div class="col-xs-12">
-						    <button onserverclick="btnTerug_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
+						    <button onserverclick="btnTerug_Click" id="btnTerug" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
 							    <i class="fa fa-chevron-left"></i>
 							    <p>Terug</p>
 						    </button><!--
-					     --><button onserverclick="btnPlaatsReview_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
+					     --><button onserverclick="btnPlaatsReview_Click" id="btnPlaatsReview" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
 					 		    <i class="fa fa-commenting"></i>
 					 		    <p>Plaats Review</p>
 					 	    </button><!--
-                         --><button onserverclick="btnPlanMeeting_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
+                         --><button onserverclick="btnPlanMeeting_Click" id="btnPlanMeeting" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
 					            <i class="fa fa-calendar-plus-o"></i>
                              <p>Plan ontmoeting</p>
 					        </button>

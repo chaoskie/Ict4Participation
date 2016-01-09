@@ -42,7 +42,7 @@ namespace Web_GUI_Layer.Pages
             profielfoto.ImageUrl = ad.AvatarPath;
 
             // Check if user is hulpverlener
-            if (string.IsNullOrEmpty(ad.VOGPath))
+            if (!string.IsNullOrEmpty(ad.VOGPath))
             {
                 usertype.InnerText = "Vrijwilliger";
             }
@@ -51,11 +51,19 @@ namespace Web_GUI_Layer.Pages
             useremail.InnerText = ad.Email;
             userphonenr.InnerText = ad.Phonenumber;
 
+            //If the main user is not a 'hulpbehoevende' or if the user selected is a 'hulpbehoevende'
+            if (!string.IsNullOrEmpty(GUIHandler.GetMainuserInfo().VOGPath) || string.IsNullOrEmpty(ad.VOGPath))
+            {
+                btnPlaatsReview.Visible = false;
+                btnTerug.Style["width"] = "50%";
+                btnPlanMeeting.Style["width"] = "50%";
+            }
+
             // TODO: Add:
             //ad.hasVehicle;
             //ad.hasDriverLicense;
             //ad.OVPossible;
-            
+
             // Add address only if mainuser is a volunteer
             //ad.Address;
             //ad.City; etc.

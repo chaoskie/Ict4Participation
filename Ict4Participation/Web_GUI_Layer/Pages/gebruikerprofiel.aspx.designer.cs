@@ -13,6 +13,33 @@ namespace Web_GUI_Layer.Pages {
     public partial class gebruikerprofiel {
         
         /// <summary>
+        /// btnTerug control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnTerug;
+        
+        /// <summary>
+        /// btnPlaatsReview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnPlaatsReview;
+        
+        /// <summary>
+        /// btnPlanMeeting control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnPlanMeeting;
+        
+        /// <summary>
         /// error_message control.
         /// </summary>
         /// <remarks>
