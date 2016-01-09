@@ -174,7 +174,7 @@ nav button p {
 .tooltip {
     -webkit-transition: none !important;
     transition: none !important;
-
+    z-index: 999 !important;
 }
 .tooltip.in {
   opacity: 1;

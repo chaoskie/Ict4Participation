@@ -22,9 +22,6 @@
 .dropdown-title.dropdown-dynamic:hover {
 	background-color: #d51b10;
 }
-.dropdown-content {
-	overflow: hidden;
-}
 .dropdown-content>ul {
     /* Gebruik van max-height zodat de hoogte geanimeerd kan worden */
     /* Zet naar een value hoger dan het element ooit zal worden */
