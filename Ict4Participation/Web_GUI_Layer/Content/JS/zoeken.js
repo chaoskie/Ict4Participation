@@ -13,6 +13,10 @@
 
 });
 
+$('#info_lijst').tooltip({
+    selector: "a[rel=tooltip]"
+});
+
 var xhr;
 
 // Functie om alle gevonden resultaten op te halen, door middel van ajax
@@ -43,14 +47,16 @@ function haalInfoOp(val, b1, b2, b3) {
                     // Split de infostring om de naam en het id van de info te scheiden
                     info[i] = info[i].split(',');
 
+                    console.log(info[i]);
+
                     if (info[i][0] == '1') {
                         // Append nieuwe vraag in lijst
                         $('#info_lijst').append('<li><a href="#" data-vraag-id="' + info[i][2] + '" onclick="gaNaarVraag($(this).attr(\'data-vraag-id\'));">' + info[i][1] + '</a>' +
-                                                  '<a href="#" data-gebr-id="' + info[i][3] + '" class="pull-right" onclick="gaNaarProfiel($(this).attr(\'data-gebr-id\'));">' + info[i][4] + '</a></li>');
+                                                  '<a href="#" data-toggle="tooltip" data-html="true" rel="tooltip" data-gebr-id="' + info[i][3] + '" class="pull-right" onclick="gaNaarProfiel($(this).attr(\'data-gebr-id\'));" title="<div style=\'width: 350px; height: 150px;\'><div style=\'width:90px; height: 150px; margin-right: 10px; text-align: center; line-height: 150px;\' class=\'pull-left\'><img src=\'' + info[i][7] + '\' style=\'width: 100%; margin: 0 auto; vertical-align: middle;\' /></div><div style=\'width: 250px class=\'pull-right\'><p>' + info[i][4] + '</p><p>' + info[i][5] +'</p><p>' + info[i][6] + '</p></div></div><div style=\'clear:both\'></div>">' + info[i][4] + '</a></li>');
                     }
                     if (info[i][0] == '2') {
                         // Append nieuwe account in lijst
-                        $('#info_lijst').append('<li><a href="#" data-id="' + info[i][2] + '" onclick="gaNaarProfiel($(this).attr(\'data-id\'));">' + info[i][1] + '</a></li>');
+                        $('#info_lijst').append('<li><a href="#" data-toggle="tooltip" data-html="true" rel="tooltip" data-id="' + info[i][1] + '" onclick="gaNaarProfiel($(this).attr(\'data-id\'));" title="<div style=\'width: 350px; height: 150px;\'><div style=\'width:90px; height: 150px; margin-right: 10px; text-align: center; line-height: 150px;\' class=\'pull-left\'><img src=\'' + info[i][5] + '\' style=\'width: 100%; margin: 0 auto; vertical-align: middle;\' /></div><div style=\'width: 250px class=\'pull-right\'><p>' + info[i][2] + '</p><p>' + info[i][3] + '</p><p>' + info[i][4] + '</p></div></div><div style=\'clear:both\'></div>">' + info[i][2] + '</a></li>');
                     }
                 }
             }

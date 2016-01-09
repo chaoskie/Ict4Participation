@@ -45,17 +45,23 @@ namespace Web_GUI_Layer
         private struct QuestionSetup
         {
             public string Title { get; set; }
-            public string Owner { get; set; }
             public int PostID { get; set; }
             public int OwnerID { get; set; }
+            public string OwnerAvatar { get; set; }
+            public string OwnerName { get; set; }
+            public string OwnerType { get; set; }
+            public string OwnerDescription { get; set; }
             public int Rank { get; set; }
             public int Relevance { get; set; }
         }
 
         private struct AccountSetup
         {
-            public string AccName { get; set; }
             public int AccId { get; set; }
+            public string AccName { get; set; }
+            public string AccType { get; set; }
+            public string AccDescription { get; set; }
+            public string AccAvatar { get; set; }
             public int Rank { get; set; }
             public int Relevance { get; set; }
         }
@@ -107,8 +113,11 @@ namespace Web_GUI_Layer
 
                         QuestionSetup vs = new QuestionSetup();
                         vs.Title = qd.Title;
-                        vs.Owner = ad.Name;
+                        vs.OwnerName = ad.Name;
                         vs.OwnerID = qd.PosterID;
+                        vs.OwnerAvatar = ad.AvatarPath;
+                        vs.OwnerType = ad.VOGPath == null ? "Hulpbehoevende" : "Vrijwilliger";
+                        vs.OwnerDescription = ad.Description;
                         vs.PostID = qd.PostID;
 
                         // Add a question to the list if one of the details matches the input string
@@ -151,6 +160,9 @@ namespace Web_GUI_Layer
                     AccountSetup a_s = new AccountSetup();
                     a_s.AccId = ad.ID;
                     a_s.AccName = ad.Name;
+                    a_s.AccType = ad.VOGPath == null ? "Hulpbehoevende" : "Vrijwilliger";
+                    a_s.AccDescription = ad.Description;
+                    a_s.AccAvatar = ad.AvatarPath;
 
                     // Add an account to the list if one of the details matches the input string
                     if (ad.Name.ToLower().Contains(str) || str == "*")
@@ -193,13 +205,13 @@ namespace Web_GUI_Layer
                 // Cast returnedQuestions to a string
                 foreach (QuestionSetup vs in returnedQuestions)
                 {
-                    result += string.Format("1,{0},{1},{2},{3}:", vs.Title, vs.PostID, vs.OwnerID, vs.Owner);
+                    result += string.Format("1,{0},{1},{2},{3},{4},{5},{6}:", vs.Title, vs.PostID, vs.OwnerID, vs.OwnerName, vs.OwnerType, vs.OwnerDescription, vs.OwnerAvatar);
                 }
 
                 // Cast returnedAccounts to a string
                 foreach (AccountSetup a_s in returnedAccounts)
                 {
-                    result += string.Format("2,{0},{1}:", a_s.AccName, a_s.AccId);
+                    result += string.Format("2,{0},{1},{2},{3},{4}:", a_s.AccId, a_s.AccName, a_s.AccType, a_s.AccDescription, a_s.AccAvatar);
                 }
 
                 // Remove the last :
