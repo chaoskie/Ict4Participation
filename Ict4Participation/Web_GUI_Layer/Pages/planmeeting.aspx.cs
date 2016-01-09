@@ -59,8 +59,11 @@ namespace Web_GUI_Layer.Pages
 
             // insert new meeting
             Meetingdetails md = new Meetingdetails();
+            //TODO
+            //If checkbox = unchecked, then the following
             md.StartDate = new DateTime(Convert.ToInt32(input_startdate_3.Value), Convert.ToInt32(input_startdate_2.Value), Convert.ToInt32(input_startdate_1.Value), Convert.ToInt32(input_startdate_4.Value), Convert.ToInt32(input_startdate_5.Value), 0);
             md.EndDate = new DateTime(Convert.ToInt32(input_einddate_3.Value), Convert.ToInt32(input_einddate_2.Value), Convert.ToInt32(input_einddate_1.Value), Convert.ToInt32(input_einddate_4.Value), Convert.ToInt32(input_einddate_5.Value), 0);
+            
             md.CreationDate = DateTime.Now;
             md.Location = inputLocatie.Value;
             md.RequesterID = GUIHandler.GetMainuserInfo().ID;
