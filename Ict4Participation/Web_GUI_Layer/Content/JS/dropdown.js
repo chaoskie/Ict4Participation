@@ -7,7 +7,7 @@ $(function () {
         $(this).next().find('ul').toggleClass('is-hiding');
 
         // Toggle het icoontje
-        $(this).find('i.fa').toggleClass('fa-chevron-down fa-chevron-up');
+        $(this).find('i.fa:last').toggleClass('fa-chevron-down fa-chevron-up');
 
 	});
 
