@@ -35,7 +35,7 @@ namespace Web_GUI_Layer
             user_naam.InnerText = accDetails.Name;
 
             // Set account type
-            user_rol.InnerText = !string.IsNullOrEmpty(accDetails.VOGPath) ? "Hulpbehoevende" : "Vrijwilliger";
+            user_rol.InnerText = string.IsNullOrEmpty(accDetails.VOGPath) ? "Hulpbehoevende" : "Vrijwilliger";
 
             // Set profilephoto
             profielfoto.ImageUrl = accDetails.AvatarPath;
