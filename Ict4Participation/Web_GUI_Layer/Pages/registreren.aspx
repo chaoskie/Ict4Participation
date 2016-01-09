@@ -4,41 +4,41 @@
 <html lang="nl">
 <head>
     <!-- Meta information -->
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
-	<meta name="author" content="ICT4Participation" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1" />
+    <meta name="author" content="ICT4Participation" />
     <meta name="description" content="Log in om verder te gaan" />
     <meta name="keywords" content="Inloggen,ICT4Participation,Hulp,Hulpbehoevende,Vrijwilliger,Eindhoven" />
     <title>Registreren</title>
     <!-- Stylesheets -->
-	<link rel="stylesheet" href="../Content/CSS/bootstrap.min.css" />
-	<link rel="stylesheet" href="../Content/CSS/font-awesome.min.css" />
-	<link rel="stylesheet" href="../Content/CSS/fileinput.min.css" />
-	<link rel="stylesheet" href="../Content/CSS/main.css" />
-	<link rel="stylesheet" href="../Content/CSS/registreren.css" />
-	<link rel="stylesheet" href="../Content/CSS/input.css" />
+    <link rel="stylesheet" href="../Content/CSS/bootstrap.min.css" />
+    <link rel="stylesheet" href="../Content/CSS/font-awesome.min.css" />
+    <link rel="stylesheet" href="../Content/CSS/fileinput.min.css" />
+    <link rel="stylesheet" href="../Content/CSS/main.css" />
+    <link rel="stylesheet" href="../Content/CSS/registreren.css" />
+    <link rel="stylesheet" href="../Content/CSS/input.css" />
 </head>
 <body>
     <form runat="server">
-	    <div id="wrapper">
+        <div id="wrapper">
 
-		    <!-- NAVIGATION -->
-		    <nav>
-			    <div class="container-fluid">
-				    <div class="row">
-					    <div class="col-xs-12">
-						    <!-- REMOVE ONCLICK -->
-						    <button onserverclick="btnAnnuleren_Click" runat="server" formnovalidate="formnovalidate">
-							    <i class="fa fa-times-circle"></i>
-							    <p>Annuleren</p>
-						    </button>
-					    </div>
-				    </div>
-			    </div>
-		    </nav>
-		
-		    <!-- MAIN -->
-		    <main id="main">
+            <!-- NAVIGATION -->
+            <nav>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!-- REMOVE ONCLICK -->
+                            <button onserverclick="btnAnnuleren_Click" runat="server" formnovalidate="formnovalidate">
+                                <i class="fa fa-times-circle"></i>
+                                <p>Annuleren</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- MAIN -->
+            <main id="main">
 			    <div class="container">
 
                     <br />
@@ -70,20 +70,10 @@
 									    <div class="form-group">
 										    <h2>Algemene gegevens</h2>
 										    <div class="row">
-											    <div class="col-tn-12 col-xs-8">
-												    <label for="inputVoornaam" class="sr-only">Voornaam</label>
-												    <input type="text" id="inputVoornaam" class="form-control" placeholder="Voornaam" required="required" runat="server" />
-											    </div>
-											    <div class="col-tn-12 col-xs-4">
-												    <label for="inputTussenvoegsel" class="sr-only">Tussenvoegsel</label>
-												    <input type="text" id="inputTussenvoegsel" class="form-control" placeholder="Tussenvoegsel" runat="server" />
-											    </div>
-										    </div>
-										    <div class="row">
 											    <div class="col-xs-12">
-												    <label for="inputAchternaam" class="sr-only">Achternaam</label>
-												    <input type="text" id="inputAchternaam" class="form-control" placeholder="Achternaam" required="required" runat="server" />
-											    </div>
+												    <label for="inputFullName" class="sr-only">Volledige naam</label>
+												    <input type="text" id="inputFullName" class="form-control" placeholder="Volledige naam" required="required" runat="server" />
+                                                </div>
 										    </div>
 										    <div class="row">
 											    <div class="col-tn-12 col-xs-8">
@@ -435,14 +425,14 @@
 				    </div>
 			    </div>
 		    </main>
-	    </div>
+        </div>
     </form>
-	
+
     <!-- Scripts -->
-	<script src="../Content/JS/jquery-1.11.3.min.js"></script>
-	<script src="../Content/JS/bootstrap.min.js"></script>
-	<script src="../Content/JS/fileinput.min.js"></script>
-	<script src="../Content/JS/errormessage.js"></script>
+    <script src="../Content/JS/jquery-1.11.3.min.js"></script>
+    <script src="../Content/JS/bootstrap.min.js"></script>
+    <script src="../Content/JS/fileinput.min.js"></script>
+    <script src="../Content/JS/errormessage.js"></script>
     <script src="../Content/JS/registreren.js"></script>
 </body>
 </html>

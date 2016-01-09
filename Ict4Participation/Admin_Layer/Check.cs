@@ -11,7 +11,7 @@ namespace Admin_Layer
     abstract class Check
     {
         static bool invalidMail = false;
- 
+
         public static bool CheckAccount(Accountdetails acc, out string message, bool isAdmin = false)
         {
             message = String.Empty;
@@ -20,9 +20,9 @@ namespace Admin_Layer
                 message = "Verjaardag is fout ingegeven.";
                 return false;
             }
-            if (!Check.Name(acc.Name))
+            if (!Check.Name(acc.Name, out message))
             {
-                message = "Naam is fout ingegeven. \r\nDeze mag geen nummers of speciale tekens bevatten!";
+                message = "Naam is fout ingegeven. \r\n" + message;
                 return false;
             }
             if (!Check.LiteralUsername(acc.Username))
@@ -106,9 +106,68 @@ namespace Admin_Layer
         /// </summary>
         /// <param name="s"></param>
         /// <returns>Yields true when this is the case</returns>
-        public static bool Name(string s)
+        public static bool Name(string s, out string message)
         {
-            return Regex.IsMatch(s, @"([\u00C0-\u017Fa-zA-Z']{0,}[\u00C0-\u017Fa-zA-Z-' ]{0,}[\u00C0-\u017Fa-zA-Z']{0,}){1,}");
+            message = "";
+            //Check if the string is longer than 255
+            if (s.Length > 255)
+            {
+                message = "Uw naam is te lang.";
+                return false;
+            }
+
+            //Check if the full name contains at least 1 space (= 2 words)
+            if (!s.Contains(' '))
+            {
+                message = "Uw volledige naam bestaat uit minimaal twee woorden";
+                return false;
+            }
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                char current = s[i];
+                char prev = i == 0 ? ' ' : s[i - 1];
+                char next = i == s.Length - 1 ? ' ' : s[i + 1];
+                char nextdot = i == s.Length - 2 ? ' ' : s[i + 2];
+
+                //Check if the dots are preceded by a letter, and have a space placed after, or another dot 2 places further
+                if (current == '.')
+                {
+                    //If there is no proper character 1 place before this character
+                    if (!Regex.IsMatch(prev.ToString(), @"([\u00C0-\u017Fa-zA-Z]{1}"))
+                    {
+                        //If this is not the case
+                        message = "Een puntteken zoals in 'J.K. Rowling' moet altijd worden geplaatst na een letter.";
+                        return false;
+                    }
+
+                    //If there is no other dot 2 places away AND the next character is no space
+                    if (current != nextdot && next != ' ')
+                    {
+                        message = "Een naam-afkorting moet of gevolgd worden door nog een afkorting, of een spatie. Zie de J.K. in 'J.K. Rowling'.";
+                        return false;
+                    }
+                }
+
+                //Check if the minus symbol is surrounded by letters
+                if (current == '-')
+                {
+                    if (!Regex.IsMatch(prev.ToString(), @"([\u00C0-\u017Fa-zA-Z]{1}") && !Regex.IsMatch(next.ToString(), @"([\u00C0-\u017Fa-zA-Z]{1}"))
+                    {
+                        message = "Een streepje zoals in 'Henk van Bart-Veldden' moet altijd tussen letters komen te staan";
+                        return false;
+                    }
+                }
+            }
+
+            s = s.Replace(@"/ +/g", "");
+            //Check if every symbol is what it needs to be
+            if (!Regex.IsMatch(s, @"([\u00C0-\u017Fa-zA-Z'-.]{1,}"))
+            {
+                message = "Naam bevat ongeldige tekens!";
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -297,7 +356,7 @@ namespace Admin_Layer
         /// <returns></returns>
         public static bool checkSkillCountIsEmpty(int Content)
         {
-            return Content ==0; 
+            return Content == 0;
         }
     }
 }

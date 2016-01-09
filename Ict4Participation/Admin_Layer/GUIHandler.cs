@@ -125,6 +125,8 @@ namespace Admin_Layer
         /// <returns>Yields a true if the user could be created</returns>
         public bool Register(Accountdetails acc, string password1, string password2, out string message)
         {
+            acc.Name = acc.Name.Trim().Replace(@"/\s\s+/g", " ");
+
             message = string.Empty;
             //Validate details
             if (!Check.CheckAccount(acc, out message))
@@ -220,6 +222,8 @@ namespace Admin_Layer
         /// <returns>Success</returns>
         public bool Edit(Accountdetails acc, out string message, string password1 = "", string password2 = "", bool isAdmin = false)
         {
+            acc.Name = acc.Name.Trim().Replace(@"/\s\s+/g", " ");
+
             message = string.Empty;
             //Validate details
             if (!Check.CheckAccount(acc, out message, isAdmin))

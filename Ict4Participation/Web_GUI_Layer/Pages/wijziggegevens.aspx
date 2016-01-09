@@ -69,20 +69,10 @@
 									    <div class="form-group">
 										    <h2>Algemene gegevens</h2>
 										    <div class="row">
-											    <div class="col-tn-12 col-xs-8">
-												    <label for="inputVoornaam" class="sr-only">Voornaam</label>
-												    <input type="text" id="inputVoornaam" class="form-control" placeholder="Voornaam" required="required" runat="server" />
-											    </div>
-											    <div class="col-tn-12 col-xs-4">
-												    <label for="inputTussenvoegsel" class="sr-only">Tussenvoegsel</label>
-												    <input type="text" id="inputTussenvoegsel" class="form-control" placeholder="Tussenvoegsel" runat="server" />
-											    </div>
-										    </div>
-										    <div class="row">
 											    <div class="col-xs-12">
-												    <label for="inputAchternaam" class="sr-only">Achternaam</label>
-												    <input type="text" id="inputAchternaam" class="form-control" placeholder="Achternaam" required="required" runat="server" />
-											    </div>
+												    <label for="inputFullName" class="sr-only">Volledige naam</label>
+												    <input type="text" id="inputFullName" class="form-control" placeholder="Volledige naam" required="required" runat="server" />
+                                                </div>
 										    </div>
 										    <div class="row">
 											    <div class="col-tn-12 col-xs-8">

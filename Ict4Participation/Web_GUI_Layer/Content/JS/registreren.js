@@ -11,7 +11,7 @@ $('.form-control, .input-group-btn').on('keyup click', function () {
 
     // Valideer fields
     valideerFields();
-        
+
 });
 
 // Functie om de inputs te valideren na het drukken op een tabje
@@ -49,6 +49,22 @@ $('#inputWoonplaats').on('keyup click change', function () {
     })
 });
 
+function validateName(textbox) {
+    var allesgoed = true;
+    var testtext = $(textbox).val();
+    if (textbox == '#inputFullName') {
+        testtext = testtext.replace(/ +/g, "")
+    }
+        if ((/^([\u00C0-\u017Fa-zA-Z'-.]){1,}$/).test(testtext)) {
+            $(textbox).removeClass('form-fail').addClass('form-success');
+        } else {
+            $(textbox).removeClass('form-success').addClass('form-fail');
+            allesgoed = false;
+        }
+
+    return allesgoed;
+}
+
 // Functie om de zichtbare fields te valideren
 function valideerFields() {
 
@@ -63,33 +79,8 @@ function valideerFields() {
 
         allesgoed = true;
 
-        // Valideer voornaam
-        if ((/^([\u00C0-\u017Fa-zA-Z']){1,}$/).test($('#inputVoornaam').val())) {
-            $('#inputVoornaam').removeClass('form-fail').addClass('form-success');
-        } else {
-            $('#inputVoornaam').removeClass('form-success').addClass('form-fail');
-            allesgoed = false;
-        }
-
-        // Valideer tussenvoegsel als het is ingevuld
-        if ($('#inputTussenvoegsel').val().length > 0) {
-            if ((/^([\u00C0-\u017Fa-zA-Z']){1,}$/).test($('#inputTussenvoegsel').val())) {
-                $('#inputTussenvoegsel').removeClass('form-fail').addClass('form-success');
-            } else {
-                $('#inputTussenvoegsel').removeClass('form-success').addClass('form-fail');
-                allesgoed = false;
-            }
-        } else {
-            $('#inputTussenvoegsel').removeClass('form-success form-fail');
-        }
-
-        // Valideer achternaam
-        if ((/^([\u00C0-\u017Fa-zA-Z']){1,}$/).test($('#inputAchternaam').val())) {
-            $('#inputAchternaam').removeClass('form-fail').addClass('form-success');
-        } else {
-            $('#inputAchternaam').removeClass('form-success').addClass('form-fail');
-            allesgoed = false;
-        }
+        // Validate full name
+        allesgoed = validateName('#inputFullName');
 
         // Valideer straatnaam
         if ((/^\D{2,}$/).test($('#inputStraatnaam').val())) {
@@ -180,8 +171,7 @@ function valideerFields() {
             }
             // Disable 29 bij schrikkeljaar
             if (bd_dag == '29' &&
-                bd_jaar%4 != 0)
-            {
+                bd_jaar % 4 != 0) {
                 fouteDagIngevoerd();
             }
         }
@@ -271,8 +261,7 @@ function valideerFields() {
     if ($('#tab_form1').data('formcomplete') &&
         $('#tab_form2').data('formcomplete') &&
         $('#tab_form3').data('formcomplete') &&
-        $('#tab_form4').data('formbekeken'))
-    {
+        $('#tab_form4').data('formbekeken')) {
         $('#btn_registreerhulpbehoevende').prop('disabled', false);
     } else {
         $('#btn_registreerhulpbehoevende').prop('disabled', true);
@@ -313,8 +302,7 @@ function valideerFields() {
         $('#tab_form2').data('formcomplete') &&
         $('#tab_form3').data('formcomplete') &&
         $('#tab_form4').data('formbekeken') &&
-        $('#tab_vrijwilliger').data('formcomplete'))
-    {
+        $('#tab_vrijwilliger').data('formcomplete')) {
         $('#btn_registreervrijwilliger').prop('disabled', false);
     } else {
         $('#btn_registreervrijwilliger').prop('disabled', true);
@@ -337,7 +325,7 @@ $('#inputWoonplaats').on('focus click keyup', function () {
 
 });
 
-$('#inputWoonplaats').on('keyup', function() {
+$('#inputWoonplaats').on('keyup', function () {
     isChecked = false;
 });
 
@@ -364,8 +352,7 @@ var isChecked = false;
 function Loop() {
     if (($('#inputWoonplaats').val() == prevTekst) &&
         !isChecked &&
-        (!$('#inputWoonplaats').hasClass('form-success')))
-    {
+        (!$('#inputWoonplaats').hasClass('form-success'))) {
         $('#woonplaats_results_wrapper').css({ 'display': 'none' });
 
         valideerWoonplaats();

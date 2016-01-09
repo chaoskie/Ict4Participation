@@ -49,6 +49,22 @@ $('#inputWoonplaats').on('keyup click change', function () {
     })
 });
 
+function validateName(textbox) {
+    var allesgoed = true;
+    var testtext = $(textbox).val();
+    if (textbox == '#inputFullName') {
+        testtext = testtext.replace(/ +/g, "")
+    }
+    if ((/^([\u00C0-\u017Fa-zA-Z'-.]){1,}$/).test(testtext)) {
+        $(textbox).removeClass('form-fail').addClass('form-success');
+    } else {
+        $(textbox).removeClass('form-success').addClass('form-fail');
+        allesgoed = false;
+    }
+
+    return allesgoed;
+}
+
 // Functie om de zichtbare fields te valideren
 function valideerFields() {
 
@@ -63,33 +79,8 @@ function valideerFields() {
 
         allesgoed = true;
 
-        // Valideer voornaam
-        if ((/^([\u00C0-\u017Fa-zA-Z']){1,}$/).test($('#inputVoornaam').val())) {
-            $('#inputVoornaam').removeClass('form-fail').addClass('form-success');
-        } else {
-            $('#inputVoornaam').removeClass('form-success').addClass('form-fail');
-            allesgoed = false;
-        }
-
-        // Valideer tussenvoegsel als het is ingevuld
-        if ($('#inputTussenvoegsel').val().length > 0) {
-            if ((/^([\u00C0-\u017Fa-zA-Z']){1,}$/).test($('#inputTussenvoegsel').val())) {
-                $('#inputTussenvoegsel').removeClass('form-fail').addClass('form-success');
-            } else {
-                $('#inputTussenvoegsel').removeClass('form-success').addClass('form-fail');
-                allesgoed = false;
-            }
-        } else {
-            $('#inputTussenvoegsel').removeClass('form-success form-fail');
-        }
-
-        // Valideer achternaam
-        if ((/^([\u00C0-\u017Fa-zA-Z']){1,}$/).test($('#inputAchternaam').val())) {
-            $('#inputAchternaam').removeClass('form-fail').addClass('form-success');
-        } else {
-            $('#inputAchternaam').removeClass('form-success').addClass('form-fail');
-            allesgoed = false;
-        }
+        // Validate full name
+        allesgoed = validateName('#inputFullName');
 
         // Valideer straatnaam
         if ((/^\D{2,}$/).test($('#inputStraatnaam').val())) {

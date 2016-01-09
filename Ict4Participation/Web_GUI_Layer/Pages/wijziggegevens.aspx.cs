@@ -38,17 +38,7 @@ namespace Web_GUI_Layer.Pages
                 // General info
                 string[] name_list = m_ad.Name.Split(' ');
 
-                if (name_list.Length == 2)
-                {
-                    inputVoornaam.Value = name_list[0];
-                    inputAchternaam.Value = name_list[1];
-                }
-                else if (name_list.Length == 3)
-                {
-                    inputVoornaam.Value = name_list[0];
-                    inputTussenvoegsel.Value = name_list[1];
-                    inputAchternaam.Value = name_list[2];
-                }
+                m_ad.Name = inputFullName.Value;
 
                 string[] street_list = m_ad.Address.Split(' ');
                 string adresnr = street_list[street_list.Length-1];
@@ -154,15 +144,7 @@ namespace Web_GUI_Layer.Pages
             // Get all info
             Accountdetails ad = GUIHandler.GetMainuserInfo();
 
-            if (inputTussenvoegsel.Value != null)
-            {
-                ad.Name = string.Format("{0} {1} {2}", inputVoornaam.Value, inputTussenvoegsel.Value,
-                    inputAchternaam.Value);
-            }
-            else
-            {
-                ad.Name = string.Format("{0} {1}", inputVoornaam.Value, inputAchternaam.Value);
-            }
+            ad.Name = inputFullName.Value;
             
             ad.Address = string.Format("{0} {1}", inputStraatnaam.Value, inputHuisnummer.Value);
             ad.City = inputWoonplaats.Value;

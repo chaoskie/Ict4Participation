@@ -40,14 +40,8 @@ namespace Web_GUI_Layer
         {
             Accountdetails acc = new Accountdetails();
 
-            if (string.IsNullOrEmpty(inputTussenvoegsel.Value))
-            {
-                acc.Name = string.Format("{0} {1}", inputVoornaam.Value, inputAchternaam.Value);
-            }
-            else
-            {
-                acc.Name = string.Format("{0} {1} {2}", inputVoornaam.Value, inputTussenvoegsel.Value, inputAchternaam.Value);
-            }
+            acc.Name = inputFullName.Value;
+
             acc.Address = string.Format("{0} {1}", inputStraatnaam.Value, inputHuisnummer.Value);
             acc.City = inputWoonplaats.Value;
             acc.Phonenumber = inputTelefoonnummer.Value;

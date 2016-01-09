@@ -31,31 +31,13 @@ namespace Web_GUI_Layer {
         protected global::System.Web.UI.WebControls.Label error_message;
         
         /// <summary>
-        /// inputVoornaam control.
+        /// inputFullName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText inputVoornaam;
-        
-        /// <summary>
-        /// inputTussenvoegsel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText inputTussenvoegsel;
-        
-        /// <summary>
-        /// inputAchternaam control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText inputAchternaam;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText inputFullName;
         
         /// <summary>
         /// inputStraatnaam control.
