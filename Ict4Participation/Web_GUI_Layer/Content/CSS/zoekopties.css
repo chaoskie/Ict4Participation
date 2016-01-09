@@ -1,0 +1,7 @@
+﻿.dropdown .checkbox {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.dropdown input[type="checkbox"] + span {
+    top: 6px;
+}
