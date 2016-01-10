@@ -117,13 +117,11 @@ function validateName(textbox) {
         message = "Naam bevat ongeldige tekens!";
         allesgoed = false;
     }
-    if (!allesgoed && s.length > 0)
-    {
+    if (!allesgoed && s.length > 0) {
         $('#Label1').removeClass("error-hidden");
         $('#Label1').text(message);
     }
-    else
-    {
+    else {
         $('#Label1').addClass("error-hidden");
         $('#Label1').text();
     }
@@ -270,18 +268,57 @@ function valideerFields() {
         }
 
         // valideer gebruikersnaam
-        if ((/^[a-zA-Z0-9]{6,255}$/).test($('#inputGebruikersnaam').val())) {
+        var username = $('#inputGebruikersnaam').val();
+        var usernamevalid = false;
+        if ((/^[a-zA-Z0-9-._]{6,255}$/).test(username)) {
             $('#inputGebruikersnaam').removeClass('form-fail').addClass('form-success');
+            $('#Label1').addClass("error-hidden");
+            usernamevalid = true;
         } else {
             $('#inputGebruikersnaam').removeClass('form-success').addClass('form-fail');
+            if (username.length > 0) {
+                $('#Label1').removeClass("error-hidden");
+                if (username.length < 6) {
+                    $('#Label1').text("Uw gebruikersnaam moet minimaal 6 tekens bevatten");
+                }
+                if (username.length > 255) {
+                    $('#Label1').text("Uw gebruikersnaam mag niet meer dan 255 tekens bevatten");
+                }
+                if (username.length <= 255 && username.length >= 6) {
+                    $('#Label1').text("Uw gebruikersnaam mag geen andere tekens bevatten dan letters, underscores, hyphes en punten");
+                }
+            }
+            else {
+                $('#Label1').addClass("error-hidden");
+            }
+            usernamevalid = false;
             allesgoed = false;
         }
 
         // valideer wachtwoord
-        if ((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,255}$/).test($('#inputWachtwoord1').val())) {
+        var pass = $('#inputWachtwoord1').val();
+        if ((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,255}$/).test(pass)) {
             $('#inputWachtwoord1').removeClass('form-fail').addClass('form-success');
+            $('#Label1').addClass("error-hidden");
         } else {
             $('#inputWachtwoord1').removeClass('form-success').addClass('form-fail');
+            if (pass.length > 0 && usernamevalid) {
+                $('#Label1').removeClass("error-hidden");
+                if (pass.length < 8) {
+                    $('#Label1').text("Uw wachtwoord moet minimaal 8 tekens bevatten");
+                }
+                if (pass.length > 255) {
+                    $('#Label1').text("Uw wachtwoord mag niet meer dan 255 tekens bevatten");
+                }
+                if (pass.length <= 255 && pass.length >= 6) {
+                    $('#Label1').text("Uw wachtwoord moet minimaal 1 hoofdletter en 1 speciaal karakter bevatten");
+                }
+            }
+            else {
+                if (usernamevalid) {
+                    $('#Label1').addClass("error-hidden");
+                }
+            }
             allesgoed = false;
         }
 
