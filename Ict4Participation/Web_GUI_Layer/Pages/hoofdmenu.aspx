@@ -104,52 +104,52 @@
                                 --></div><!--
                                 --><div class="planning-row"><!--
                                     --><div><p>Ma<span>andag</span></p></div><!--
-                                    --><asp:Button ID="rooster_ma_ochtend" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_ma_middag" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_ma_avond" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_ma_nacht" OnClick="rooster_change" runat="server" /><!--
+                                    --><input type="button" id="rooster_ma_ochtend" runat="server" /><!--
+                                    --><input type="button" id="rooster_ma_middag" runat="server" /><!--
+                                    --><input type="button" id="rooster_ma_avond" runat="server" /><!--
+                                    --><input type="button" id="rooster_ma_nacht" runat="server" /><!--
                                 --></div><!--
                                 --><div class="planning-row"><!--
                                     --><div><p>Di<span>nsdag</span></p></div><!--
-                                    --><asp:Button ID="rooster_di_ochtend" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_di_middag" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_di_avond" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_di_nacht" OnClick="rooster_change" runat="server" /><!--
+                                    --><input type="button" id="rooster_di_ochtend" runat="server" /><!--
+                                    --><input type="button" id="rooster_di_middag" runat="server" /><!--
+                                    --><input type="button" id="rooster_di_avond" runat="server" /><!--
+                                    --><input type="button" id="rooster_di_nacht" runat="server" /><!--
                                 --></div><!--
                                 --><div class="planning-row"><!--
                                     --><div><p>Wo<span>ensdag</span></p></div><!--
-                                    --><asp:Button ID="rooster_wo_ochtend" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_wo_middag" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_wo_avond" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_wo_nacht" OnClick="rooster_change" runat="server" /><!--
+                                    --><input type="button" id="rooster_wo_ochtend" runat="server" /><!--
+                                    --><input type="button" id="rooster_wo_middag" runat="server" /><!--
+                                    --><input type="button" id="rooster_wo_avond" runat="server" /><!--
+                                    --><input type="button" id="rooster_wo_nacht" runat="server" /><!--
                                 --></div><!--
                                 --><div class="planning-row"><!--
                                     --><div><p>Do<span>nderdag</span></p></div><!--
-                                    --><asp:Button ID="rooster_do_ochtend" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_do_middag" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_do_avond" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_do_nacht" OnClick="rooster_change" runat="server" /><!--
+                                    --><input type="button" id="rooster_do_ochtend" runat="server" /><!--
+                                    --><input type="button" id="rooster_do_middag" runat="server" /><!--
+                                    --><input type="button" id="rooster_do_avond" runat="server" /><!--
+                                    --><input type="button" id="rooster_do_nacht" runat="server" /><!--
                                 --></div><!--
                                 --><div class="planning-row"><!--
                                     --><div><p>Vr<span>ijdag</span></p></div><!--
-                                    --><asp:Button ID="rooster_vr_ochtend" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_vr_middag" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_vr_avond" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_vr_nacht" OnClick="rooster_change" runat="server" /><!--
+                                    --><input type="button" id="rooster_vr_ochtend" runat="server" /><!--
+                                    --><input type="button" id="rooster_vr_middag" runat="server" /><!--
+                                    --><input type="button" id="rooster_vr_avond" runat="server" /><!--
+                                    --><input type="button" id="rooster_vr_nacht" runat="server" /><!--
                                 --></div><!--
                                 --><div class="planning-row"><!--
                                     --><div><p>Za<span>terdag</span></p></div><!--
-                                    --><asp:Button ID="rooster_za_ochtend" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_za_middag" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_za_avond" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_za_nacht" OnClick="rooster_change" runat="server" /><!--
+                                    --><input type="button" id="rooster_za_ochtend" runat="server" /><!--
+                                    --><input type="button" id="rooster_za_middag" runat="server" /><!--
+                                    --><input type="button" id="rooster_za_avond" runat="server" /><!--
+                                    --><input type="button" id="rooster_za_nacht" runat="server" /><!--
                                 --></div><!--
                                 --><div class="planning-row"><!--
                                     --><div><p>Zo<span>ndag</span></p></div><!--
-                                    --><asp:Button ID="rooster_zo_ochtend" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_zo_middag" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_zo_avond" OnClick="rooster_change" runat="server" /><!--
-                                    --><asp:Button ID="rooster_zo_nacht" OnClick="rooster_change" runat="server" /><!--
+                                    --><input type="button" id="rooster_zo_ochtend" runat="server" /><!--
+                                    --><input type="button" id="rooster_zo_middag" runat="server" /><!--
+                                    --><input type="button" id="rooster_zo_avond" runat="server" /><!--
+                                    --><input type="button" id="rooster_zo_nacht" runat="server" /><!--
                                 --></div>
                             </div>
 
@@ -158,7 +158,6 @@
 			    </div>
 		    </main>
 
-            <br />
             <br />
 
 	    </div>
