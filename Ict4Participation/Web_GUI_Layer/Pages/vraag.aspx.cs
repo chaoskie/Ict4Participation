@@ -92,18 +92,25 @@ namespace Web_GUI_Layer
                 vraag_urgentie.InnerText = "Urgent";
             }
 
-            //Show question status
-            vraag_status.InnerText = qd.Status;
-
             // Hide button if the question is too late, but show if there's a time
             bool hasValidDate = qd.EndDate == null;
             if (!hasValidDate)
             {
                 hasValidDate = ((DateTime)qd.EndDate > DateTime.Now);
             }
+            // If the question has expired
             if (!hasValidDate)
             {
+                // Do not allow people to accept the question
                 btnAccept.Visible = false;
+
+                // Show question status
+                vraag_status.InnerText = qd.Status == "Open" ? "Vervallen" : "Voltooid";
+            }
+            else
+            {
+                // Show question status
+                vraag_status.InnerText = qd.Status;
             }
             // Disable button if user is not the owner of the question
             if (mainuserID != qd.PosterID)
