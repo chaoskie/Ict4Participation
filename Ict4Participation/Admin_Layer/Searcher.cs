@@ -61,7 +61,7 @@ namespace Admin_Layer
                 ).Select(av => Creation.getDetailsObject(av))
                 .Cast<Accountdetails>().ToList();
 
-            return returnAccountDetails(NoSkillSearchList, Accounts, search);
+            return returnAccountDetails(NoSkillSearchList, Accounts, search).Distinct().ToList();
         }
 
         /// <summary>

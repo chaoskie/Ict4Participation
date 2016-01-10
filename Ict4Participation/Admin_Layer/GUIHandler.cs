@@ -30,13 +30,35 @@ namespace Admin_Layer
     /// </summary>
     public class GUIHandler
     {
+        private Account mainUser;
+
         /// <summary>
         /// The main user's account
         /// </summary>
         public Account MainUser
         {
-            get { return HttpContext.Current.Session["MainUser"] as Account; }
-            set { HttpContext.Current.Session["MainUser"] = value; }
+            get
+            {
+                if (HttpContext.Current != null)
+                {
+                    return HttpContext.Current.Session["MainUser"] as Account;
+                }
+                else
+                {
+                    return mainUser;
+                }
+            }
+            set
+            {
+                if (HttpContext.Current != null)
+                {
+                    HttpContext.Current.Session["MainUser"] = value;
+                }
+                else
+                {
+                    mainUser = value;
+                }
+            }
         }
 
         /// <summary>
