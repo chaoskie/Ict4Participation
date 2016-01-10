@@ -325,7 +325,13 @@
                         
                         <div class="row">
                             <div class="col-xs-12">
-                                <asp:CheckBox Text="Heeft geen datum" OnCheckedChanged="cbGeenDatum_CheckChange" onchange="toggleData();" runat="server"/><i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Vink dit vakje aan als de ontmoeting niet tijsgebonden is"></i>
+                                <div class="checkbox">
+						            <label>
+							            <input type="checkbox" id="cbGeenDatum" runat="server" />
+							            <span></span>
+							            <span>Deze ontmoeting is niet tijsgebonden<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Vink dit vakje aan als u geen start en eindtijd voor deze ontmoeting wilt gebruiken."></i></span>
+						            </label>
+					            </div>
                             </div>
                         </div>
 					    <br />
