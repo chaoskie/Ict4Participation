@@ -84,7 +84,7 @@
 												    <input type="text" id="inputHuisnummer" class="form-control" placeholder="Huisnr" required="required" runat="server" />
 											    </div>
 										    </div>
-										    <div class="row">
+										    <div class="row" id="INPWP">
 											    <div class="col-xs-12">
 												    <label for="inputWoonplaats" class="sr-only">Woonplaats</label>
 												    <input type="text" id="inputWoonplaats" class="form-control form-success" placeholder="Woonplaats" required="required" runat="server" />

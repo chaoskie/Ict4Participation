@@ -144,7 +144,14 @@ function valideerFields() {
         allesgoed = true;
 
         // Validate full name
-        allesgoed = validateName('#inputFullName');
+        var namegoed = validateName('#inputFullName');
+        if (namegoed) {
+            $('#inputFullName').removeClass('form-fail').addClass('form-success');
+        }
+        else {
+            $('#inputFullName').removeClass('form-success').addClass('form-fail');
+            allesgoed = false;
+        }
 
         // Valideer straatnaam
         if ((/^\D{2,}$/).test($('#inputStraatnaam').val())) {
@@ -510,6 +517,26 @@ function VoegSkillsToeServerSide() {
     });
 
 };
+
+$('a[href="#tab_form1"]').click(function () {
+    $('#btnVorigeTab').addClass('disabled');
+    $('#btnVolgendeTab').removeClass('disabled');
+});
+
+$('a[href="#tab_form2"]').click(function () {
+    $('#btnVolgendeTab').removeClass('disabled');
+    $('#btnVorigeTab').removeClass('disabled');
+});
+
+$('a[href="#tab_form3"]').click(function () {
+    $('#btnVolgendeTab').removeClass('disabled');
+    $('#btnVorigeTab').removeClass('disabled');
+});
+
+$('a[href="#tab_form4"]').click(function () {
+    $('#btnVolgendeTab').addClass('disabled');
+    $('#btnVorigeTab').removeClass('disabled');
+});
 
 $('#btnVorigeTab').click(function () {
     // Haal href op van huidige tab
