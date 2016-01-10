@@ -4,126 +4,155 @@
 // </copyright>
 // <author>ICT4Participation</author>
 //-----------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Class_Layer
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+
     /// <summary>
-    /// Manages information about a meeting
+    /// The <see cref="Meeting"/> class manages information about a meeting.
     /// </summary>
     public class Meeting : Post
     {
+        #region Constructors
         /// <summary>
-        /// Gets the ID of the user who requested this meeting
+        /// Initializes a new instance of the <see cref="Meeting"/> class.
         /// </summary>
-        public int RequesterID { get; private set; }
-        /// <summary>
-        /// Gets the start time of the meeting
-        /// </summary>
-        public Nullable<DateTime> StartDate { get; private set; }
-        /// <summary>
-        /// Gets the end time of the meeting
-        /// </summary>
-        public Nullable<DateTime> EndDate { get; private set; }
-        /// <summary>
-        /// Gets the creation date of the meeting
-        /// </summary>
-        public DateTime CreationDate { get; private set; }
-        /// <summary>
-        /// Gets the location of the meeting
-        /// </summary>
-        public string Location { get; private set; }
-        /// <summary>
-        /// Gets the details of the meeting
-        /// </summary>
-        public string Details { get; private set; }
-
-        public Meeting(int ID, int requestedTo, int requester, Nullable<DateTime> start, Nullable<DateTime> end, string location)
-            : base(ID, requestedTo)
+        /// <param name="id">The ID of the meeting.</param>
+        /// <param name="requestedTo">The requested account ID of the meeting.</param>
+        /// <param name="requester">The requester account ID of the meeting.</param>
+        /// <param name="start">The start date of the meeting.</param>
+        /// <param name="end">The end date of the meeting.</param>
+        /// <param name="location">The location of the meeting.</param>
+        public Meeting(int id, int requestedTo, int requester, DateTime? start, DateTime? end, string location)
+            : base(id, requestedTo)
         {
             this.RequesterID = requester;
             this.StartDate = start;
             this.EndDate = end;
             this.Location = location;
         }
+        #endregion
 
+        #region Properties
+        /// <summary>
+        /// Gets the ID of the user who requested this meeting.
+        /// </summary>
+        /// <value>The ID of the user who requested this meeting.</value>
+        public int RequesterID { get; private set; }
 
         /// <summary>
-        /// Creates this database entry
+        /// Gets the start time of the meeting.
         /// </summary>
-        /// <returns>Success</returns>
+        /// <value>The start time of the meeting.</value>
+        public DateTime? StartDate { get; private set; }
+
+        /// <summary>
+        /// Gets the end time of the meeting.
+        /// </summary>
+        /// <value>The end time of the meeting.</value>
+        public DateTime? EndDate { get; private set; }
+
+        /// <summary>
+        /// Gets the creation date of the meeting.
+        /// </summary>
+        /// <value>The creation date of the meeting.</value>
+        public DateTime CreationDate { get; private set; }
+
+        /// <summary>
+        /// Gets the location of the meeting.
+        /// </summary>
+        /// <value>The location of the meeting.</value>
+        public string Location { get; private set; }
+
+        /// <summary>
+        /// Gets the details of the meeting.
+        /// </summary>
+        /// <value>The details of the meeting.</value>
+        public string Details { get; private set; }
+        #endregion
+
+        #region Static Methods
+        /// <summary>
+        /// Retrieves all the meetings belonging to a specific or unspecified user from the database.
+        /// </summary>
+        /// <param name="userid">The userID of the specific user.</param>
+        /// <returns>Returns a list of said meetings.</returns>
+        public static List<Meeting> GetAll(int? userid = null)
+        {
+            List<Meeting> meetings = new List<Meeting>();
+            string addquery = string.Empty;
+            if (userid != null)
+            {
+                // Get all the user skills of specified user
+                addquery = "WHERE \"RequesterACC_ID\"=" + userid + " OR \"RequestedACC_ID\"=" + userid;
+            }
+
+            // Else get all meetings if no ID is specified
+            DataTable dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Meeting\" " + addquery);
+            foreach (DataRow row in dt.Rows)
+            {
+                meetings.Add(new Meeting(
+                        Convert.ToInt32(row["ID"]),
+                        Convert.ToInt32(row["RequestedACC_ID"]),
+                        Convert.ToInt32(row["RequesterACC_ID"]),
+                        row["StartDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["StartDate"]),
+                        row["EndDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["EndDate"]),
+                        row["Location"].ToString()));
+            }
+
+            // Return a list with all the found meetings
+            return meetings;
+        }
+        #endregion
+
+        #region Non-Static Methods
+        /// <summary>
+        /// Creates this database entry.
+        /// </summary>
+        /// <returns>Returns a boolean, indicating whether the meeting has been successfully created or not.</returns>
         public override bool Create()
         {
-            //insert into database
+            // Insert into database
             string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
             string et = Utility_Classes.ConvertTo.OracleDateTime(this.EndDate);
-            ///Read PosterID as the requester, and RequesterID as the ID of the participant who was requested to join
+
+            // Read PosterID as the requester, and RequesterID as the ID of the participant who was requested to join
             return Database_Layer.Database.InsertMeeting(this.PosterID, this.RequesterID, st, et, this.Location);
         }
 
         /// <summary>
-        /// Deletes this database entry
+        /// Deletes this database entry.
         /// </summary>
-        /// <returns>Success</returns>
+        /// <returns>Returns a boolean, indicating whether the meeting has been successfully deleted or not.</returns>
         public override bool Delete()
         {
-            //Call database for delete query
+            // Call database for delete query
             return Database_Layer.Database.DeleteMeeting(this.PostID);
         }
 
         /// <summary>
-        /// Updates this database entry
+        /// Updates this database entry.
         /// </summary>
-        /// <returns>Success</returns>
+        /// <returns>Returns a boolean, indicating whether the the meeting has been successfully updated or not.</returns>
         public override bool Update()
         {
             string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
             string et = Utility_Classes.ConvertTo.OracleDateTime(this.EndDate);
-            //Call database for update query
+
+            // Call database for update query
             return Database_Layer.Database.UpdateMeeting(this.PostID, st, et, this.Location);
         }
 
         /// <summary>
-        /// Retrieves all the meetings belonging to a specific user from the database. Or unspecified
+        /// Method to return this object in string format.
         /// </summary>
-        /// <param name="userid">the userID of the specific user</param>
-        /// <returns>Yields a list of said meetings</returns>
-        public static List<Meeting> GetAll(Nullable<int> userid = null)
-        {
-
-            List<Meeting> meetings = new List<Meeting>();
-            string addquery = String.Empty;
-            if (userid != null)//get all the user skills of specified user
-            {
-                addquery =  "WHERE \"RequesterACC_ID\"=" + userid + " OR \"RequestedACC_ID\"=" + userid;
-                //else get all meetings if no ID is specified
-            }
-
-            DataTable Dt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Meeting\" " + addquery);
-            foreach (DataRow row in Dt.Rows)
-            {
-                meetings.Add(
-                    new Meeting(
-                        Convert.ToInt32(row["ID"]),
-                        Convert.ToInt32(row["RequestedACC_ID"]),
-                        Convert.ToInt32(row["RequesterACC_ID"]),
-                        (row["StartDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["StartDate"])),
-                        (row["EndDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["EndDate"])),
-                        row["Location"].ToString()
-                        ));
-            }
-            //Return a list with all the found meetings
-            return meetings;
-        }
-
+        /// <returns>Returns this object in string format.</returns>
         public override string ToString()
         {
-            return Details;
+            return this.Details;
         }
+        #endregion
     }
 }
