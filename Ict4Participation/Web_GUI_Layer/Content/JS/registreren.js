@@ -553,6 +553,25 @@ function VoegSkillsToeServerSide() {
 
 };
 
+$('tab_form1').click(function () {
+    $('#btnVorigeTab').addClass('disabled');
+    $('#btnVolgendeTab').removeClass('disabled');
+});
+
+$('tab_form2').click(function () {
+    $('#btnVorigeTab').removeClass('disabled');
+    $('#btnVolgendeTab').removeClass('disabled');
+});
+
+$('tab_form3').click(function () {
+    $('#btnVorigeTab').removeClass('disabled');
+    $('#btnVolgendeTab').removeClass('disabled');
+});
+
+$('tab_form4').click(function () {
+    $('#btnVorigeTab').removeClass('disabled');
+    $('#btnVolgendeTab').addClass('disabled');
+});
 $('#btnVorigeTab').click(function () {
     // Haal href op van huidige tab
     var href = $('.nav-tabs').find('li.active > a').attr('href');
