@@ -78,6 +78,19 @@ namespace Web_GUI_Layer
                         activiteiten_list.Controls.Add(a);
                         activiteiten_list.Controls.Add(new LiteralControl("</li>"));
                     }
+
+                    if (md.EndDate == null)
+                    {
+                        HtmlAnchor a = new HtmlAnchor();
+                        a.InnerText = string.Format("Tijdloze ontmoeting met {0}", accounts_list.Find(i => i.ID == md.RequesterID).Name);
+                        a.Attributes["data-meeting-id"] = Convert.ToString(md.PostID);
+                        a.ServerClick += btnGaNaarMeeting_Click;
+
+                        // Insert meeting in list
+                        activiteiten_list.Controls.Add(new LiteralControl("<li>"));
+                        activiteiten_list.Controls.Add(a);
+                        activiteiten_list.Controls.Add(new LiteralControl("</li>"));
+                    }
                 }
             }
 
