@@ -49,6 +49,7 @@ namespace Web_GUI_Layer.Pages
             {
                 usertype.InnerText = "Vrijwilliger";
                 RowRevsFrom.Visible = false;
+                RowQuestionsFrom.Visible = false;
             }
             else
             {

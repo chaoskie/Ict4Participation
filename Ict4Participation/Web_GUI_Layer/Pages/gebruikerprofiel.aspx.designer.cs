@@ -481,6 +481,15 @@ namespace Web_GUI_Layer.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlInputButton rooster_zo_nacht;
         
         /// <summary>
+        /// RowQuestionsFrom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl RowQuestionsFrom;
+        
+        /// <summary>
         /// vragen_list control.
         /// </summary>
         /// <remarks>
