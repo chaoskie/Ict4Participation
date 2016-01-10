@@ -101,35 +101,43 @@ namespace Web_GUI_Layer
             {
                 hasValidDate = ((DateTime)qd.EndDate > DateTime.Now);
             }
-            if (hasValidDate)
+            if (!hasValidDate)
             {
-                // Disable button if user is not the owner of the question
-                if (mainuserID != qd.PosterID)
+                btnAccept.Visible = false;
+            }
+            // Disable button if user is not the owner of the question
+            if (mainuserID != qd.PosterID)
+            {
+                // If it is not his post, he cannot edit it
+                btnDeleteQuestion.Visible = false;
+                btnEditQuestion.Visible = false;
+                // If the question is not open OR the volunteers contains the user OR the user is a helpreq OR the amount of volunteers has exceeded
+                if (qd.Status != "Open" || qd.Volunteers.Contains(mainuserID) || String.IsNullOrWhiteSpace(GUIHandler.GetMainuserInfo().VOGPath) || qd.Volunteers.Count == qd.AmountAccs)
                 {
-                    btnDeleteQuestion.Visible = false;
-                    btnEditQuestion.Visible = false;
-                    if (qd.Status != "Open" || qd.Volunteers.Contains(mainuserID) || String.IsNullOrWhiteSpace(GUIHandler.GetMainuserInfo().VOGPath) || qd.Volunteers.Count == qd.AmountAccs)
+                    // If the volunteers include the user
+                    if (qd.Volunteers.Contains(mainuserID))
                     {
-                        if (qd.Volunteers.Contains(mainuserID))
-                        {
-                            btnAccept.Text = "Deaccepteer vraag";
-                            btnAccept.Click += btnDeclineQuestion_Click;
-                        }
-                        else
-                        {
-                            btnAccept.Visible = false;
-                        }
+                        // Allow him to reject the question
+                        btnAccept.Text = "Deaccepteer vraag";
+                        btnAccept.Click += btnDeclineQuestion_Click;
                     }
                     else
                     {
-                        btnAccept.Click += btnAcceptQuestion_Click;
+                        // Else don't
+                        btnAccept.Visible = false;
                     }
                 }
                 else
                 {
-                    btnAccept.Visible = false;
+                    btnAccept.Click += btnAcceptQuestion_Click;
                 }
             }
+            else
+            {
+                // If it is his own post, he cannot accept it
+                btnAccept.Visible = false;
+            }
+
 
             // Insert all comments
             List<Commentdetails> cd_list = GUIHandler.GetAll(qd.PostID).OrderBy(i => i.PostDate).ToList();
