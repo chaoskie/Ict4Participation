@@ -119,7 +119,7 @@ namespace Admin_Layer
             }
 
             //Check if the full name contains at least 1 space (= 2 words)
-            if (s.Contains(' '))
+            if (!s.Contains(' '))
             {
                 message = "Uw volledige naam bestaat uit minimaal twee delen";
                 return false;
@@ -179,7 +179,7 @@ namespace Admin_Layer
         /// <returns></returns>
         public static bool LiteralUsername(string s)
         {
-            return Regex.IsMatch(s, "[a-zA-Z0-9_-.]{6,255}");
+            return Regex.IsMatch(s, "[-a-zA-Z0-9_.]{6,255}");
         }
 
         /// <summary>

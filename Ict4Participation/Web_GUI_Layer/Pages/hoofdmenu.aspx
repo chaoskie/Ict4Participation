@@ -66,8 +66,7 @@
 					    <div class="col-tn-12 col-xs-8">
 						    <h2 id="user_naam" runat="server"></h2>
 						    <h3 id="user_rol" runat="server"></h3>
-                            <!-- TEMPORARILY DISABLED -->
-                            <h3 style="display: none;" id="userdescription" class="text-muted" runat="server"></h3>
+                            <h3 id="user_description" class="text-muted" runat="server"></h3>
 					    </div>
 				    </div>
 

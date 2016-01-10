@@ -63,7 +63,7 @@
 					    </div>
 					    <div class="col-tn-12 col-xs-8">
 						    <h2 id="username" runat="server"></h2>
-						    <h3 id="usertype" runat="server"></h3>
+						    <h3 id="usertype" runat="server">Hulpbehoevende</h3>
 						    <h3 id="userdescription" class="text-muted" runat="server"></h3>
 					    </div>
 				    </div>
@@ -76,19 +76,39 @@
                     
                     <div class="row">
                         <div class="col-xs-12">
-                            <p id="useremail" runat="server"></p>
+                            <h4><b>Email:</b>&nbsp;<span id="useremail" runat="server"></span></h4>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <p id="userphonenr" runat="server"></p>
+                            <h4><b>Telefoonnummer:</b>&nbsp;<span id="userphonenr" runat="server"></span></h4>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <p id="usergender" runat="server"></p>
+                            <h4><b>Geslacht:</b>&nbsp;<span id="usergender" runat="server"></span></h4>
                         </div>
                     </div>
+                    
+                    <span id="vrijwilliger_only" Visible="False" runat="server">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4><b>Straatnaam:</b>&nbsp;<span id="userstreet" runat="server"></span></h4>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4><b>Woonplaats:</b>&nbsp;<span id="usercity" runat="server"></span></h4>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4><b>Geboortedatum:</b>&nbsp;<span id="userbirthdate" runat="server"></span></h4>
+                            </div>
+                        </div>
+                    </span>
                     
                     <div class="row">
                         <div class="col-xs-12">
@@ -98,7 +118,37 @@
                     
                     <div class="row">
                         <div class="col-xs-12">
-                            <p id="userlogindate" runat="server"></p>
+                            <h4 id="userlogindate" runat="server"></h4>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h3>Vervoersmogelijkheden:<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="De vervoersmogelijkheden van deze persoon"></i></h3>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h4 id="vervoer_auto" Visible="False" runat="server"><span id="username2" runat="server"></span>&nbsp;heeft een auto</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h4 id="vervoer_rijbewijs" Visible="False" runat="server"><span id="username3" runat="server"></span>&nbsp;heeft een rijbewijs</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h4 id="vervoer_ov" Visible="False" runat="server"><span id="username4" runat="server"></span>&nbsp;kan reizen met het Openbaar Vervoer</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h4 id="vervoer_geen" Visible="False" runat="server"><span id="username5" runat="server"></span>&nbsp;heeft géén vervoersmogelijkheden</h4>
                         </div>
                     </div>
 
@@ -118,52 +168,52 @@
                                 --></div><!--
                                 --><div class="planning-row"><!--
                                     --><div><p>Ma<span>andag</span></p></div><!--
-                                    --><asp:Button ID="rooster_ma_ochtend" runat="server" /><!--
-                                    --><asp:Button ID="rooster_ma_middag" runat="server" /><!--
-                                    --><asp:Button ID="rooster_ma_avond" runat="server" /><!--
-                                    --><asp:Button ID="rooster_ma_nacht" runat="server" /><!--
+                                    --><input type="button" id="rooster_ma_ochtend" runat="server" /><!--
+                                    --><input type="button" id="rooster_ma_middag" runat="server" /><!--
+                                    --><input type="button" id="rooster_ma_avond" runat="server" /><!--
+                                    --><input type="button" id="rooster_ma_nacht" runat="server" /><!--
                                 --></div><!--
                                 --><div class="planning-row"><!--
                                     --><div><p>Di<span>nsdag</span></p></div><!--
-                                    --><asp:Button ID="rooster_di_ochtend" runat="server" /><!--
-                                    --><asp:Button ID="rooster_di_middag" runat="server" /><!--
-                                    --><asp:Button ID="rooster_di_avond" runat="server" /><!--
-                                    --><asp:Button ID="rooster_di_nacht" runat="server" /><!--
+                                    --><input type="button" id="rooster_di_ochtend" runat="server" /><!--
+                                    --><input type="button" id="rooster_di_middag" runat="server" /><!--
+                                    --><input type="button" id="rooster_di_avond" runat="server" /><!--
+                                    --><input type="button" id="rooster_di_nacht" runat="server" /><!--
                                 --></div><!--
                                 --><div class="planning-row"><!--
                                     --><div><p>Wo<span>ensdag</span></p></div><!--
-                                    --><asp:Button ID="rooster_wo_ochtend" runat="server" /><!--
-                                    --><asp:Button ID="rooster_wo_middag" runat="server" /><!--
-                                    --><asp:Button ID="rooster_wo_avond" runat="server" /><!--
-                                    --><asp:Button ID="rooster_wo_nacht" runat="server" /><!--
+                                    --><input type="button" id="rooster_wo_ochtend" runat="server" /><!--
+                                    --><input type="button" id="rooster_wo_middag" runat="server" /><!--
+                                    --><input type="button" id="rooster_wo_avond" runat="server" /><!--
+                                    --><input type="button" id="rooster_wo_nacht" runat="server" /><!--
                                 --></div><!--
                                 --><div class="planning-row"><!--
                                     --><div><p>Do<span>nderdag</span></p></div><!--
-                                    --><asp:Button ID="rooster_do_ochtend" runat="server" /><!--
-                                    --><asp:Button ID="rooster_do_middag" runat="server" /><!--
-                                    --><asp:Button ID="rooster_do_avond" runat="server" /><!--
-                                    --><asp:Button ID="rooster_do_nacht" runat="server" /><!--
+                                    --><input type="button" id="rooster_do_ochtend" runat="server" /><!--
+                                    --><input type="button" id="rooster_do_middag" runat="server" /><!--
+                                    --><input type="button" id="rooster_do_avond" runat="server" /><!--
+                                    --><input type="button" id="rooster_do_nacht" runat="server" /><!--
                                 --></div><!--
                                 --><div class="planning-row"><!--
                                     --><div><p>Vr<span>ijdag</span></p></div><!--
-                                    --><asp:Button ID="rooster_vr_ochtend" runat="server" /><!--
-                                    --><asp:Button ID="rooster_vr_middag" runat="server" /><!--
-                                    --><asp:Button ID="rooster_vr_avond" runat="server" /><!--
-                                    --><asp:Button ID="rooster_vr_nacht" runat="server" /><!--
+                                    --><input type="button" id="rooster_vr_ochtend" runat="server" /><!--
+                                    --><input type="button" id="rooster_vr_middag" runat="server" /><!--
+                                    --><input type="button" id="rooster_vr_avond" runat="server" /><!--
+                                    --><input type="button" id="rooster_vr_nacht" runat="server" /><!--
                                 --></div><!--
                                 --><div class="planning-row"><!--
                                     --><div><p>Za<span>terdag</span></p></div><!--
-                                    --><asp:Button ID="rooster_za_ochtend" runat="server" /><!--
-                                    --><asp:Button ID="rooster_za_middag" runat="server" /><!--
-                                    --><asp:Button ID="rooster_za_avond" runat="server" /><!--
-                                    --><asp:Button ID="rooster_za_nacht" runat="server" /><!--
+                                    --><input type="button" id="rooster_za_ochtend" runat="server" /><!--
+                                    --><input type="button" id="rooster_za_middag" runat="server" /><!--
+                                    --><input type="button" id="rooster_za_avond" runat="server" /><!--
+                                    --><input type="button" id="rooster_za_nacht" runat="server" /><!--
                                 --></div><!--
                                 --><div class="planning-row"><!--
                                     --><div><p>Zo<span>ndag</span></p></div><!--
-                                    --><asp:Button ID="rooster_zo_ochtend" runat="server" /><!--
-                                    --><asp:Button ID="rooster_zo_middag" runat="server" /><!--
-                                    --><asp:Button ID="rooster_zo_avond" runat="server" /><!--
-                                    --><asp:Button ID="rooster_zo_nacht" runat="server" /><!--
+                                    --><input type="button" id="rooster_zo_ochtend" runat="server" /><!--
+                                    --><input type="button" id="rooster_zo_middag" runat="server" /><!--
+                                    --><input type="button" id="rooster_zo_avond" runat="server" /><!--
+                                    --><input type="button" id="rooster_zo_nacht" runat="server" /><!--
                                 --></div>
                             </div>
 

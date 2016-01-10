@@ -31,11 +31,10 @@ namespace Web_GUI_Layer
 
             Page.Title = "Welkom, " + accDetails.Name.Split()[0];
 
-            // Insert user name and role
+            // Insert user name, role and description
             user_naam.InnerText = accDetails.Name;
-
-            // Set account type
             user_rol.InnerText = string.IsNullOrEmpty(accDetails.VOGPath) ? "Hulpbehoevende" : "Vrijwilliger";
+            user_description.InnerText = accDetails.Description;
 
             // Set profilephoto
             profielfoto.ImageUrl = accDetails.AvatarPath;

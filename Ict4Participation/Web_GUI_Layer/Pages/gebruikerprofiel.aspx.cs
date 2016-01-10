@@ -40,8 +40,9 @@ namespace Web_GUI_Layer.Pages
             Page.Title = "Profiel van " + ad.Name.Split()[0];
 
             // Set user details
-            username.InnerText = ad.Name;
             profielfoto.ImageUrl = ad.AvatarPath;
+            username.InnerText = ad.Name;
+            userdescription.InnerText = ad.Description;
 
             // Check if user is hulpverlener
             if (!string.IsNullOrEmpty(ad.VOGPath))
@@ -66,25 +67,56 @@ namespace Web_GUI_Layer.Pages
                 btnPlanMeeting.Style["width"] = "50%";
             }
 
-            // TODO: Add:
-            //ad.hasVehicle;
-            //ad.hasDriverLicense;
-            //ad.OVPossible;
-
-            // Add address only if mainuser is a volunteer
-            //ad.Address;
-            //ad.City; etc.
-            //ad.Birthdate;
-
             usergender.InnerText = ad.Gender.ToLower() == "m" ? "Man" : "Vrouw";
             userlogindate.InnerText = string.Format("{0} heeft voor het laatst ingelogd op: {1}", ad.Name, ad.Lastlogin.ToString("dd-M-yyyy HH:mm"));
+            
+            if ((bool) ad.hasVehicle)
+            {
+                vervoer_auto.Visible = true;
+                username2.InnerText = ad.Name;
+            }
+
+            if ((bool) ad.hasDriverLicense)
+            {
+                vervoer_auto.Visible = true;
+                username3.InnerText = ad.Name;
+            }
+
+            if ((bool) ad.OVPossible)
+            {
+                vervoer_ov.Visible = true;
+                username4.InnerText = ad.Name;
+            }
+
+            // Enable text if user has no traveling options
+            if (!(bool) ad.hasVehicle &&
+                !(bool) ad.hasDriverLicense &&
+                !(bool) ad.OVPossible)
+            {
+                vervoer_geen.Visible = true;
+                username5.InnerText = ad.Name;
+            }
+
+            // Get mainuser accountdetails
+            Accountdetails m_ad = GUIHandler.GetMainuserInfo();
+
+            // Add address, city and birthdate only if mainuser is a volunteer
+            if (!string.IsNullOrEmpty(m_ad.VOGPath))
+            {
+                vrijwilliger_only.Visible = true;
+
+                userstreet.InnerText = ad.Address;
+                usercity.InnerText = ad.City;
+                userbirthdate.InnerText = ad.Birthdate.ToString("dd MMM yyyy");
+            }
+
 
             // Fill in all available days
             foreach (Availabilitydetails avail in ad.AvailabilityDetailList)
             {
                 string dayToUpdate = string.Format("rooster_{0}_{1}", avail.Day, avail.Daytime);
 
-                ((Button)FindControl(dayToUpdate)).Attributes["class"] = "beschikbaar";
+                ((HtmlInputButton) FindControl(dayToUpdate)).Attributes["class"] = "beschikbaar";
             }
 
             // Insert all questions
@@ -150,12 +182,11 @@ namespace Web_GUI_Layer.Pages
             {
                 HtmlGenericControl li = new HtmlGenericControl("li");
                 reviews_list1.Controls.Add(li);
+                
+                HtmlGenericControl p = new HtmlGenericControl("p");
+                p.InnerText = "Geen reviews geplaatst!";
 
-                HtmlAnchor a = new HtmlAnchor();
-                a.Attributes.Add("href", "#");
-                a.InnerText = "Geen reviews geplaatst!";
-
-                li.Controls.Add(a);
+                li.Controls.Add(p);
             }
 
             // Insert all reviews placed by other people about mainuser
@@ -193,12 +224,11 @@ namespace Web_GUI_Layer.Pages
             {
                 HtmlGenericControl li = new HtmlGenericControl("li");
                 reviews_list2.Controls.Add(li);
+                
+                HtmlGenericControl p = new HtmlGenericControl("p");
+                p.InnerText = "Geen reviews geplaatst!";
 
-                HtmlAnchor a = new HtmlAnchor();
-                a.Attributes.Add("href", "#");
-                a.InnerText = "Geen reviews geplaatst!";
-
-                li.Controls.Add(a);
+                li.Controls.Add(p);
             }
         }
 
