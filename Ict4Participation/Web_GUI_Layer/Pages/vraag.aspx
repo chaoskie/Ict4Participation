@@ -104,7 +104,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <p><span id="vraag_urgentie" style="color: #f00" runat="server"></span><i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Deze hulpvraag is urgent"></i></p>
+                                        <p id="urgnx" runat="server"><span id="vraag_urgentie" style="color: #f00" runat="server"></span><i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Deze hulpvraag is urgent"></i></p>
                                     </div>
                                 </div>
                             </div>

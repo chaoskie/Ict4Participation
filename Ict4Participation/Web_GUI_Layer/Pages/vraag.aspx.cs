@@ -93,7 +93,7 @@ namespace Web_GUI_Layer
             }
             else
             {
-                vraag_urgentie.Visible = false;
+                urgnx.Visible = false;
             }
 
             // Hide button if the question is too late, but show if there's a time
