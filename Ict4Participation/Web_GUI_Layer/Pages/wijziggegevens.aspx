@@ -286,10 +286,13 @@
 												    <label for="inputGebruikersnaam" class="sr-only">Gebruikersnaam</label>
 												    <input type="text" id="inputGebruikersnaam" class="form-control" placeholder="Gebruikersnaam" required="required" runat="server" />
 											    </div>
-                                                <div class="col-xs-12">
+                                                <div class="col-xs-11">
 								                    <label for="inputWachtwoord1" class="sr-only">Wachtwoord</label>
 								                    <input type="password" id="inputWachtwoord1" class="form-control" placeholder="Wachtwoord" required="required" runat="server" />
 							                    </div>
+											    <div class="col-xs-1">
+                                                    <i class="psr fa fa-eye" style="font-size: 4em;"></i>
+                                                </div>
 							                    <div class="col-xs-12">
 								                    <label for="inputWachtwoord2" class="sr-only">Herhaal wachtwoord</label>
 								                    <input type="password" id="inputWachtwoord2" class="form-control" placeholder="Herhaal wachtwoord" required="required" runat="server" />
