@@ -72,7 +72,12 @@ function validateName(textbox) {
         message = "Uw volledige naam bestaat uit minimaal twee delen";
         allesgoed = false;
     }
-    console.log(s);
+    if (s.split(' ')[1] != undefined) {
+        if (s.split(' ')[1].length < 1) {
+            message = "Uw volledige naam bestaat uit minimaal twee delen";
+            allesgoed = false;
+        }
+    }
 
     for (var i = 0; i < s.length; i++) {
 
@@ -111,6 +116,16 @@ function validateName(textbox) {
     if (!(/^[\u00C0-\u017Fa-zA-Z'-.]{1,}$/).test(s)) {
         message = "Naam bevat ongeldige tekens!";
         allesgoed = false;
+    }
+    if (!allesgoed && s.length > 0)
+    {
+        $('#Label1').removeClass("error-hidden");
+        $('#Label1').text(message);
+    }
+    else
+    {
+        $('#Label1').addClass("error-hidden");
+        $('#Label1').text();
     }
     return allesgoed;
 };
