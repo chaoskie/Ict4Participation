@@ -101,7 +101,7 @@ namespace Web_GUI_Layer.Pages
                     }
                     else
                     {
-                        selected_skills.Add(skill);
+                        select_skills_output.Items.Add(skill.Name);
                     }
                 }
 
@@ -124,6 +124,7 @@ namespace Web_GUI_Layer.Pages
 
             // TODO: Insert skills
             // (Keep a list on the server, push to and remove from this list with ajax)
+            var items = select_skills_output.Items;
 
             qd.Location = inputLocatie.Value;
             qd.StartDate = new DateTime(Convert.ToInt32(input_startdate_3.Value),
