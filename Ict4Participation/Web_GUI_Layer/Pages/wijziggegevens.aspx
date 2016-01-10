@@ -351,6 +351,15 @@
 
                                         </div>
                                     </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 pull-left">
+                                            <button id="btnVorigeTab" class="btn btn-block btn-custom2 btn-lg disabled">Vorige</button>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 pull-right">
+                                            <button id="btnVolgendeTab" class="btn btn-block btn-custom2 btn-lg">Volgende</button>
+                                        </div>
+                                    </div>
 
 							    </div>
 						    </div>

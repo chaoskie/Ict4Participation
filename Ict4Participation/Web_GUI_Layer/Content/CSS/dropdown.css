@@ -28,8 +28,12 @@
 	max-height: 1000px;
 	transition: max-height 0.5s ease-in;
 }
+.dropdown-dynamic .dropdown-content {
+    overflow-y: hidden;
+}
+
 .dropdown-content>ul.is-hiding {
-	max-height: 0px;
+	max-height: 0;
 	transition: max-height 0.5s ease-out;
 }
 .dropdown-content>ul li {

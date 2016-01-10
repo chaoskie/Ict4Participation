@@ -544,3 +544,41 @@ function VoegSkillsToeServerSide() {
     });
 
 };
+
+$('#btnVorigeTab').click(function () {
+    // Haal href op van huidige tab
+    var href = $('.nav-tabs').find('li.active > a').attr('href');
+
+    // Haal het tab nummer uit de href
+    var nr = parseInt(href.substr(href.length - 1, href.length));
+
+    // Ga naar de volgende tab
+    $('.nav-tabs a[href="#tab_form' + (nr - 1) + '"]').tab('show');
+
+    // Disable 'Vorige' knop als nr <= 2
+    if (nr <= 2) {
+        $('#btnVorigeTab').addClass('disabled');
+    }
+
+    // Enable 'Vorige' knop
+    $('#btnVolgendeTab').removeClass('disabled');
+});
+
+$('#btnVolgendeTab').click(function () {
+    // Haal href op van huidige tab
+    var href = $('.nav-tabs').find('li.active > a').attr('href');
+    
+    // Haal het tab nummer uit de href
+    var nr = parseInt(href.substr(href.length - 1, href.length));
+
+    // Ga naar de volgende tab
+    $('.nav-tabs a[href="#tab_form' + (nr + 1) + '"]').tab('show');
+
+    // Disable 'Volgende' knop als nr >= 3
+    if (nr >= 3) {
+        $('#btnVolgendeTab').addClass('disabled');
+    }
+
+    // Enable 'Vorige' knop
+    $('#btnVorigeTab').removeClass('disabled');
+});
