@@ -27,7 +27,7 @@ var xhr;
 
 // Als inputWoonplaats nog niet success is maar wel tekst bevat,
 // stuur een async request om te controlleren of de woonplaats bestaat
-$('#inputWoonplaats').on('keyup click change', function () {
+$('#inputWoonplaats').on('keyup click', function () {
     var val = $(this).val();
 
     // Abort de huidige ajax call als die bestaat
@@ -54,6 +54,7 @@ $('#inputWoonplaats').on('keyup click change', function () {
             }
         }
     });
+    $('#woonplaats_results_wrapper').css({ 'display': 'block' });
 });
 
 function validateName(textbox) {
@@ -419,12 +420,6 @@ function valideerFields() {
 
 };
 
-// Functie om de woonplaats wrapper zichtbaar te maken als de input focus heeft
-$('#inputWoonplaats').on('focus click keyup', function () {
-    $('#woonplaats_results_wrapper').css({ 'display': 'block' });
-    console.log("parent triggered");
-});
-
 function onMouseOut(event) {
     //If the element is the parent element or a child element, return
     e = event.toElement || event.relatedTarget;
@@ -437,9 +432,7 @@ function onMouseOut(event) {
         return;
     }
     //Else, hide the city_gens
-    setTimeout(function () {
-        $('#woonplaats_results_wrapper').css({ 'display': 'none' });
-    }, 1000);
+    $('#woonplaats_results_wrapper').css({ 'display': 'none' });
 
     console.log("parent on focus out triggered");
     valideerWoonplaats();
@@ -448,7 +441,7 @@ function onMouseOut(event) {
 document.getElementById("INPWP").addEventListener('mouseout', onMouseOut, true);
 
 
-$('#woonplaats_results_wrapper').on('click', 'p', function () {
+$('#woonplaats_results_wrapper').on('click', '.city_gen', function () {
     prevTekst = $(this).text();
     $('#inputWoonplaats').val(prevTekst);
     $('#woonplaats_results_wrapper').css({ 'display': 'none' });
