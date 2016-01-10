@@ -124,11 +124,10 @@ namespace Web_GUI_Layer
                 HtmlGenericControl li = new HtmlGenericControl("li");
                 reviews1_list.Controls.Add(li);
                 
-                HtmlAnchor a = new HtmlAnchor();
-                a.Attributes.Add("href", "#");
-                a.InnerText = "Geen reviews geplaatst!";
+                HtmlGenericControl p = new HtmlGenericControl("p");
+                p.InnerText = "Geen reviews geplaatst!";
 
-                li.Controls.Add(a);
+                li.Controls.Add(p);
             }
 
             // Insert all reviews placed by other people about mainuser
@@ -167,11 +166,10 @@ namespace Web_GUI_Layer
                 HtmlGenericControl li = new HtmlGenericControl("li");
                 reviews2_list.Controls.Add(li);
 
-                HtmlAnchor a = new HtmlAnchor();
-                a.Attributes.Add("href", "#");
-                a.InnerText = "Geen reviews geplaatst!";
+                HtmlGenericControl p = new HtmlGenericControl("p");
+                p.InnerText = "Geen reviews geplaatst!";
 
-                li.Controls.Add(a);
+                li.Controls.Add(p);
             }
         }
 

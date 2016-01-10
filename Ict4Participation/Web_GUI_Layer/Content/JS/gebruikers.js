@@ -53,7 +53,7 @@ function haalGebruikersOp(val, b1, b2) {
 
             // Append bericht als er geen gebruikers gevonden zijn
             if (gebruikers.length == 1 && gebruikers[0] == "") {
-                $('#gebruikers_lijst').append('<li><a href="#">Geen gebruikers gevonden</a></li>');
+                $('#gebruikers_lijst').append('<li><p>Geen gebruikers gevonden</p></li>');
             }
         }
     });

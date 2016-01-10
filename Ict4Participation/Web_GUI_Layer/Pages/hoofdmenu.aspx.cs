@@ -94,7 +94,7 @@ namespace Web_GUI_Layer
 
             if (Meetings.Count == 0 && Activities.Count == 0)
             {
-                activiteiten_list.Controls.Add(new LiteralControl("<li><a href=\"#\">Er zijn geen recente activeiten om weer te geven</a>"));
+                activiteiten_list.Controls.Add(new LiteralControl("<li><p>Er zijn geen recente activeiten om weer te geven</p></li>"));
             }
         }
 

@@ -71,7 +71,7 @@ function haalInfoOp(val, b1, b2, b3) {
 
             // Append bericht als er geen info gevonden is
             if (info.length == 1 && info[0] == "") {
-                $('#info_lijst').append('<li><a href="#">Niks gevonden!</a></li>');
+                $('#info_lijst').append('<li><p>Niks gevonden!</p></li>');
             }
         }
     });

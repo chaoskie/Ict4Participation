@@ -285,11 +285,11 @@
 											    </div>
 											    <div class="col-xs-12">
 												    <label for="inputWachtwoord1" class="sr-only">Wachtwoord</label>
-												    <input type="password" id="inputWachtwoord1" class="form-control" placeholder="Wachtwoord" required="required" runat="server" />
+												    <input type="text" id="inputWachtwoord1" class="form-control" placeholder="Wachtwoord" required="required" runat="server" />
 											    </div>
 											    <div class="col-xs-12">
 												    <label for="inputWachtwoord2" class="sr-only">Herhaal wachtwoord</label>
-												    <input type="password" id="inputWachtwoord2" class="form-control" placeholder="Herhaal wachtwoord" required="required" runat="server" />
+												    <input type="text" id="inputWachtwoord2" class="form-control" placeholder="Herhaal wachtwoord" required="required" runat="server" />
 											    </div>
 										    </div>
 									    </div>
