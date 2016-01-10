@@ -40,8 +40,10 @@
 .dropdown-content>ul li:nth-child(even) {
 	background-color: #f6f6f6;
 }
-.dropdown-content>ul li {
+.dropdown-content>ul li p,
+.dropdown-content>ul li a {
     font-size: 2rem;
+    margin-bottom: 0;
 }
 .dropdown-content>ul li a {
 	text-decoration: none;
