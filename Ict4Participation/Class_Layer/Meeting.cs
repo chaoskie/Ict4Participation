@@ -112,8 +112,8 @@ namespace Class_Layer
                         Convert.ToInt32(row["ID"]),
                         Convert.ToInt32(row["RequestedACC_ID"]),
                         Convert.ToInt32(row["RequesterACC_ID"]),
-                        Convert.ToDateTime(row["StartDate"]),
-                        Convert.ToDateTime(row["EndDate"]),
+                        (row["StartDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["StartDate"])),
+                        (row["EndDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["EndDate"])),
                         row["Location"].ToString()
                         ));
             }

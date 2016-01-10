@@ -11,6 +11,21 @@ namespace Admin_Layer
     {
         public static List<Questiondetails> OrderBy(List<Questiondetails> lqd, bool byTitle, bool byDate, bool byUrgency, bool byStatus)
         {
+            foreach (Questiondetails qd in lqd)
+            {
+                bool hasValidDate = qd.EndDate == null;
+                if (!hasValidDate)
+                {
+                    hasValidDate = ((DateTime)qd.EndDate > DateTime.Now);
+                }
+                // If the question has expired
+                if (!hasValidDate)
+                {
+                    // Update question status
+                    qd.Status = qd.Status == "Open" ? "Vervallen" : "Voltooid";
+                }
+            }
+
             if (!byDate && !byStatus && !byTitle && !byUrgency)
             {
                 lqd.Sort(new IQuestiondetailsStatusComparer());

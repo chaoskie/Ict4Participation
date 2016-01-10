@@ -19,7 +19,7 @@ $('.nav.nav-tabs a').on('click', function () {
 
     // Valideer fields na een delay van 400ms.
     // De te checken inputs zijn namelijk nog onzichtbaar voor 400ms.
-    setTimeout(valideerFields, 100);
+    setTimeout(valideerFields, 400);
 
 });
 
@@ -553,6 +553,25 @@ function VoegSkillsToeServerSide() {
 
 };
 
+$('a[href="#tab_form1"]').click(function () {
+    $('#btnVorigeTab').addClass('disabled');
+    $('#btnVolgendeTab').removeClass('disabled');
+});
+
+$('a[href="#tab_form2"]').click(function () {
+    $('#btnVolgendeTab').removeClass('disabled');
+    $('#btnVorigeTab').removeClass('disabled');
+});
+
+$('a[href="#tab_form3"]').click(function () {
+    $('#btnVolgendeTab').removeClass('disabled');
+    $('#btnVorigeTab').removeClass('disabled');
+});
+
+$('a[href="#tab_form4"]').click(function () {
+    $('#btnVolgendeTab').addClass('disabled');
+    $('#btnVorigeTab').removeClass('disabled');
+});
 $('#btnVorigeTab').click(function () {
     // Haal href op van huidige tab
     var href = $('.nav-tabs').find('li.active > a').attr('href');

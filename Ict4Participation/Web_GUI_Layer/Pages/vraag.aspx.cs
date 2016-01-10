@@ -31,7 +31,7 @@ namespace Web_GUI_Layer
 
             // Set mainuser id
             mainuserID = GUIHandler.GetMainuserInfo().ID;
-            
+
             // Retrieve questiondetails id from session
             q_id = Convert.ToInt32(Session["QuestionDetails_id"]);
 
@@ -92,23 +92,45 @@ namespace Web_GUI_Layer
                 vraag_urgentie.InnerText = "Urgent";
             }
 
-            //Show question status
-            vraag_status.InnerText = qd.Status;
+            // Hide button if the question is too late, but show if there's a time
+            bool hasValidDate = qd.EndDate == null;
+            if (!hasValidDate)
+            {
+                hasValidDate = ((DateTime)qd.EndDate > DateTime.Now);
+            }
+            // If the question has expired
+            if (!hasValidDate)
+            {
+                // Do not allow people to accept the question
+                btnAccept.Visible = false;
 
+                // Show question status
+                vraag_status.InnerText = qd.Status == "Open" ? "Vervallen" : "Voltooid";
+            }
+            else
+            {
+                // Show question status
+                vraag_status.InnerText = qd.Status;
+            }
             // Disable button if user is not the owner of the question
             if (mainuserID != qd.PosterID)
             {
+                // If it is not his post, he cannot edit it
                 btnDeleteQuestion.Visible = false;
                 btnEditQuestion.Visible = false;
+                // If the question is not open OR the volunteers contains the user OR the user is a helpreq OR the amount of volunteers has exceeded
                 if (qd.Status != "Open" || qd.Volunteers.Contains(mainuserID) || String.IsNullOrWhiteSpace(GUIHandler.GetMainuserInfo().VOGPath) || qd.Volunteers.Count == qd.AmountAccs)
                 {
+                    // If the volunteers include the user
                     if (qd.Volunteers.Contains(mainuserID))
                     {
+                        // Allow him to reject the question
                         btnAccept.Text = "Deaccepteer vraag";
                         btnAccept.Click += btnDeclineQuestion_Click;
                     }
                     else
                     {
+                        // Else don't
                         btnAccept.Visible = false;
                     }
                 }
@@ -119,8 +141,10 @@ namespace Web_GUI_Layer
             }
             else
             {
+                // If it is his own post, he cannot accept it
                 btnAccept.Visible = false;
             }
+
 
             // Insert all comments
             List<Commentdetails> cd_list = GUIHandler.GetAll(qd.PostID).OrderBy(i => i.PostDate).ToList();
@@ -138,101 +162,101 @@ namespace Web_GUI_Layer
                             @"<div class=""row"" title=""Reactie geplaatst op " + cd.PostDate.ToString("d MMMM yyyy HH:mm:ss") + @""">" +
                                 @"<div class=""hidden-tn col-xs-2"">";
 
-                                comment_section.Controls.Add(new LiteralControl(comment_template));
+                    comment_section.Controls.Add(new LiteralControl(comment_template));
 
-                                HtmlImage htmlimage = new HtmlImage();
-                                htmlimage.Attributes.Add("class", "img-responsive");
-                                htmlimage.Src = ad_poster.AvatarPath;
-                                htmlimage.Alt = "Foto";
+                    HtmlImage htmlimage = new HtmlImage();
+                    htmlimage.Attributes.Add("class", "img-responsive");
+                    htmlimage.Src = ad_poster.AvatarPath;
+                    htmlimage.Alt = "Foto";
 
-                                comment_section.Controls.Add(htmlimage);
+                    comment_section.Controls.Add(htmlimage);
 
-                                comment_template =
-                                @"</div>" +
-                                @"<div class=""col-tn-12 col-xs-10"">" +
-                                    @"<div class=""row"">";
+                    comment_template =
+                    @"</div>" +
+                    @"<div class=""col-tn-12 col-xs-10"">" +
+                        @"<div class=""row"">";
 
-                                comment_section.Controls.Add(new LiteralControl(comment_template));
+                    comment_section.Controls.Add(new LiteralControl(comment_template));
 
-                                // Check if the poster is the owner of the question
-                                if (cd.PosterID == mainuserID && !cd.IsDeleted)
-                                {
-                                    comment_template =
-                                        @"<div class=""col-xs-8"">";
+                    // Check if the poster is the owner of the question
+                    if (cd.PosterID == mainuserID && !cd.IsDeleted)
+                    {
+                        comment_template =
+                            @"<div class=""col-xs-8"">";
 
-                                    comment_section.Controls.Add(new LiteralControl(comment_template));
+                        comment_section.Controls.Add(new LiteralControl(comment_template));
 
-                                    HtmlGenericControl commentAuthor1 = new HtmlGenericControl("h3");
-                                    commentAuthor1.Attributes.Add("class", "comment-author");
-                                    commentAuthor1.InnerText = ad_poster.Name;
+                        HtmlGenericControl commentAuthor1 = new HtmlGenericControl("h3");
+                        commentAuthor1.Attributes.Add("class", "comment-author");
+                        commentAuthor1.InnerText = ad_poster.Name;
 
-                                    comment_section.Controls.Add(commentAuthor1);
+                        comment_section.Controls.Add(commentAuthor1);
 
-                                    comment_template =
-                                        @"</div>" +
-                                        @"<div class=""col-xs-4 comment-buttons"">";
+                        comment_template =
+                            @"</div>" +
+                            @"<div class=""col-xs-4 comment-buttons"">";
 
-                                        comment_section.Controls.Add(new LiteralControl(comment_template));
+                        comment_section.Controls.Add(new LiteralControl(comment_template));
 
-                                        HtmlButton btnVerwijder = new HtmlButton();
-                                        btnVerwijder.Attributes.Add("class", "btn pull-right btn-custom2");
-                                        btnVerwijder.InnerText = "Verwijder";
-                                        btnVerwijder.ServerClick += new EventHandler(btnVerwijderReactie_Click);
-                                        btnVerwijder.Attributes.Add("data-comment-id", Convert.ToString(cd.PostID));
+                        HtmlButton btnVerwijder = new HtmlButton();
+                        btnVerwijder.Attributes.Add("class", "btn pull-right btn-custom2");
+                        btnVerwijder.InnerText = "Verwijder";
+                        btnVerwijder.ServerClick += new EventHandler(btnVerwijderReactie_Click);
+                        btnVerwijder.Attributes.Add("data-comment-id", Convert.ToString(cd.PostID));
 
-                                        comment_section.Controls.Add(btnVerwijder);
+                        comment_section.Controls.Add(btnVerwijder);
 
-                                        comment_template =
-                                            @"</div>" +
-                                        @"</div>";
+                        comment_template =
+                            @"</div>" +
+                        @"</div>";
 
-                                        comment_section.Controls.Add(new LiteralControl(comment_template));
-                                }
-                                else
-                                {
-                                    comment_template =
-                                        @"<div class=""col-xs-12"">";
+                        comment_section.Controls.Add(new LiteralControl(comment_template));
+                    }
+                    else
+                    {
+                        comment_template =
+                            @"<div class=""col-xs-12"">";
 
-                                    comment_section.Controls.Add(new LiteralControl(comment_template));
+                        comment_section.Controls.Add(new LiteralControl(comment_template));
 
-                                    HtmlGenericControl commentAuthor2 = new HtmlGenericControl("h3");
-                                    commentAuthor2.Attributes.Add("class", "comment-author");
-                                    commentAuthor2.InnerText = ad_poster.Name;
+                        HtmlGenericControl commentAuthor2 = new HtmlGenericControl("h3");
+                        commentAuthor2.Attributes.Add("class", "comment-author");
+                        commentAuthor2.InnerText = ad_poster.Name;
 
-                                    comment_section.Controls.Add(commentAuthor2);
+                        comment_section.Controls.Add(commentAuthor2);
 
-                                    comment_template =
-                                        @"</div>" +
-                                    @"</div>";
+                        comment_template =
+                            @"</div>" +
+                        @"</div>";
 
-                                    comment_section.Controls.Add(new LiteralControl(comment_template));
-                                }
-                                        
-                                comment_template =
-                                    @"<div class=""row"">" +
-                                        @"<div class=""col-xs-12"">";
+                        comment_section.Controls.Add(new LiteralControl(comment_template));
+                    }
 
-                                comment_section.Controls.Add(new LiteralControl(comment_template));
+                    comment_template =
+                        @"<div class=""row"">" +
+                            @"<div class=""col-xs-12"">";
 
-                                HtmlGenericControl commentBody = new HtmlGenericControl("p");
-                                commentBody.Attributes.Add("class", "comment-body");
-                                commentBody.Attributes.Add("data-comment-id", Convert.ToString(cd.PostID));
-                                commentBody.InnerText = cd.Description;
-                    
-                                if (cd.PosterID == mainuserID && !cd.IsDeleted)
-                                {
-                                    commentBody.Attributes.Add("contenteditable", "true");
-                                }
+                    comment_section.Controls.Add(new LiteralControl(comment_template));
 
-                                comment_section.Controls.Add(commentBody);
+                    HtmlGenericControl commentBody = new HtmlGenericControl("p");
+                    commentBody.Attributes.Add("class", "comment-body");
+                    commentBody.Attributes.Add("data-comment-id", Convert.ToString(cd.PostID));
+                    commentBody.InnerText = cd.Description;
 
-                                comment_template =
-                                        @"</div>" +
-                                    @"</div>" +
-                                @"</div>" +
+                    if (cd.PosterID == mainuserID && !cd.IsDeleted)
+                    {
+                        commentBody.Attributes.Add("contenteditable", "true");
+                    }
+
+                    comment_section.Controls.Add(commentBody);
+
+                    comment_template =
                             @"</div>" +
                         @"</div>" +
-                    @"</div>";
+                    @"</div>" +
+                @"</div>" +
+            @"</div>" +
+        @"</div>";
 
                     comment_section.Controls.Add(new LiteralControl(comment_template));
                 }
@@ -290,7 +314,7 @@ namespace Web_GUI_Layer
                 if (GUIHandler.Edit(qd, qd.PostID, out message, true))
                 {
                     //Success
-                    Response.Write("<script>alert('U heeft deze vraag succesvol geaccepteerd');</script>"); 
+                    Response.Write("<script>alert('U heeft deze vraag succesvol geaccepteerd');</script>");
                     Response.Redirect(Request.RawUrl, false);
                 }
                 else
@@ -300,13 +324,13 @@ namespace Web_GUI_Layer
             }
         }
 
-        
+
 
         protected void btnTerug_Click(object sender, EventArgs e)
         {
             Response.Redirect("hoofdmenu.aspx", false);
         }
-        
+
         protected void btnPlaatsVraag_Click(object sender, EventArgs e)
         {
             string message = string.Empty;

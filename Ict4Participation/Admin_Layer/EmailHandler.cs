@@ -65,7 +65,7 @@ namespace Admin_Layer
             string meetingdetails = "\n";
             if (m.CreationDate != null)
             {
-                meetingdetails += string.Format("Startdatum: {0} \nEinddatum: {1}", m.CreationDate, m.EndDate);
+                meetingdetails += string.Format("Startdatum: {0} \nEinddatum: {1}", m.StartDate, m.EndDate);
             }
             if (m.Location != null)
             {
