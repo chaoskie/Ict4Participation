@@ -48,8 +48,8 @@ namespace Web_GUI_Layer
             {
                 foreach (Availabilitydetails a in ad)
                 {
-                    Button btn = (Button)FindControl(string.Format("rooster_{0}_{1}", a.Day, a.Daytime));
-                    btn.CssClass += "beschikbaar";
+                    HtmlInputButton btn = (HtmlInputButton)FindControl(string.Format("rooster_{0}_{1}", a.Day, a.Daytime));
+                    btn.Attributes["class"] = "beschikbaar";
                 }
             }
 
@@ -171,6 +171,41 @@ namespace Web_GUI_Layer
         {
             error_message.Text = message;
             error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+        }
+
+        [System.Web.Services.WebMethod]
+        public static string UpdateAvailability(string id, string beschikbaar)
+        {
+            // Create a new guihandler object
+            GUIHandler tempGUIHandler = new GUIHandler();
+
+            string message = string.Empty;
+
+            // Create new Availabilitydetails
+            Availabilitydetails ad = new Availabilitydetails();
+            ad.Day = id.Split('_')[1];
+            ad.Daytime = id.Split('_')[2];
+            
+            // Check if sender has class "beschikbaar"
+            if (beschikbaar == "true")
+            {
+                // update availability in database
+                if (tempGUIHandler.RemoveAvailability(ad, out message))
+                {
+                    // Update visual style on button
+                    return "false";
+                }
+            }
+            else
+            {
+                // update availability in database
+                if (tempGUIHandler.AddAvailability(ad, out message))
+                {
+                    return "true";
+                }
+            }
+            
+            return "nothing";
         }
     }
 }
