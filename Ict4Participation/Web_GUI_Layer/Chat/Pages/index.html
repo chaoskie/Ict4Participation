@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+    <style>
+        img {
+            width: 500px;
+        }
+    </style>
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/chatstyles.css"/>
+    <link rel="stylesheet" href="css/stylesheet.css"/>
+</head>
+<body>
+<p>Dit is een of andere pagina</p>
+
+<div id="chatwrapper">
+    <div id="chatheader">
+        <p>Chat</p>
+        <p id="collapse"><i class="fa fa-caret-down"></i>
+        </p>
+    </div>
+
+    <!-- Chat scene wrapper -->
+    <div id="chat-scene-wrapper">
+        <!-- Chat scene 1 -->
+        <div id="chat-scene-1" class="chat-scene">
+            <div id="chat">
+                <!-- Header -->
+                <div id="header">
+                    <div class="left">
+                        <p>Hoofdmenu</p>
+                    </div>
+                    <div class="right">
+                        <!-- Nothing -->
+                    </div>
+                </div><!-- End Header -->
+
+
+
+
+                <div id="temp_wrapper">
+                    <label for="inputUsername">Username:</label>
+                    <input id="inputUsername" type="text"/>
+
+                    <br/>
+
+                    <label for="inputID">ID:</label>
+                    <input id="inputID" type="number"/>
+
+                    <br/>
+
+                    <button onclick="client_login()">Log in</button>
+                </div>
+
+
+
+
+                <ul id="list_rooms"></ul>
+
+            </div><!-- END Chat -->
+        </div><!-- END Chat scene 1 -->
+        <!-- Chat scene 2 -->
+        <div id="chat-scene-2" class="chat-scene">
+            <div id="chat">
+                <!-- Header -->
+                <div id="header">
+                    <div class="left">
+                        <a href="#" id="chat-go-back">Terug</a>
+                    </div>
+                    <div class="right">
+                        <select id="chat_people"></select>
+                    </div>
+                    <div class="right">
+                        <p>Aan het chatten met</p>
+                    </div>
+                </div><!-- End Header -->
+                <!-- Messages -->
+                <div id="messages">
+                    <ul>
+                        <!-- <li class="message-master">
+                            <span class="timestamp">13:39</span>
+                            <p class="message">Dit is een master bericht!<p>
+                        </li>
+                        <li class="message-other">
+                            <span class="owner">Lukas Derksen:</span>
+                            <span class="timestamp">13:40</span>
+                            <p class="message">Hallo! Hoe is het?<br/>Dit is een multiline comment!<p>
+                        </li>
+                        <li class="message-own">
+                            <span class="owner">Koen Schilders:</span>
+                            <span class="timestamp">13:40</span>
+                            <p class="message">Hallo! Hoe is het?<br/>Dit is een multiline comment!<p>
+                        </li> -->
+                    </ul>
+                </div><!-- END Messages -->
+                <!-- Send message -->
+                <div id="sendmessage">
+                    <textarea placeholder="Plaats een bericht..."></textarea>
+                    <!--
+                    -->
+                    <button><i class="fa fa-paper-plane"></i></button>
+                </div>
+            </div><!-- END Chat -->
+        </div><!-- END Chat scene 2 -->
+    </div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="../../Content/JS/jquery-1.11.3.min.js"></script>
+<script src="socket.io.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/chat.js"></script>
+</body>
+</html>

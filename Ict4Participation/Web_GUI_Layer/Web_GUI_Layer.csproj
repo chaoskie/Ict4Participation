@@ -79,6 +79,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Authorisation\credentials.aspx" />
+    <Content Include="Chat\Content\css\chatstyles.css" />
+    <Content Include="Chat\Content\css\stylesheet.css" />
+    <Content Include="Chat\Content\js\animations.js" />
+    <Content Include="Chat\Content\js\chat.js" />
+    <Content Include="Chat\Pages\chat.html" />
+    <Content Include="Chat\Pages\index.html" />
     <Content Include="Content\CSS\bootstrap.min.css" />
     <Content Include="Content\CSS\dropdown.css" />
     <Content Include="Content\CSS\error.css" />
@@ -336,6 +342,9 @@
       <Project>{5d4d65c5-92d8-4d4a-874d-bb0cad13e7ce}</Project>
       <Name>Admin_Layer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Chat\Content\fonts\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
