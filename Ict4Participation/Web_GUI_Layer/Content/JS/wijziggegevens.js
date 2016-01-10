@@ -58,19 +58,75 @@ $('#inputWoonplaats').on('keyup click change', function () {
 
 function validateName(textbox) {
     var allesgoed = true;
-    var testtext = $(textbox).val();
-    if (textbox == '#inputFullName') {
-        testtext = testtext.replace(/ +/g, "")
-    }
-    if ((/^([\u00C0-\u017Fa-zA-Z'-.]){1,}$/).test(testtext)) {
-        $(textbox).removeClass('form-fail').addClass('form-success');
-    } else {
-        $(textbox).removeClass('form-success').addClass('form-fail');
+    var message;
+    var s = $(textbox).val();
+
+    //Check if the string is longer than 255
+    if (s.length > 255) {
+        message = "Uw naam is te lang.";
         allesgoed = false;
     }
 
+    //Check if the full name contains at least 1 space (= 2 words)
+    if (s.split(' ')[1] == undefined) {
+        message = "Uw volledige naam bestaat uit minimaal twee delen";
+        allesgoed = false;
+    }
+    if (s.split(' ')[1] != undefined) {
+        if (s.split(' ')[1].length < 1) {
+            message = "Uw volledige naam bestaat uit minimaal twee delen";
+            allesgoed = false;
+        }
+    }
+
+    for (var i = 0; i < s.length; i++) {
+
+        var current = s[i];
+        var prev = i == 0 ? ' ' : s[i - 1];
+        var next = i >= s.length - 1 ? ' ' : s[i + 1];
+        var nextdot = i >= s.length - 2 ? ' ' : s[i + 2];
+
+        //Check if the dots are preceded by a letter, and have a space placed after, or another dot 2 places further
+        if (current == '.') {
+            //If a space is placed before this character, it is wrong
+            if (prev == ' ') {
+                message = "Een puntteken zoals in 'J.K. Rowling' moet altijd worden geplaatst na een letter.";
+                allesgoed = false;
+            }
+
+            //If a letter comes after, but not another dot, it is wrong
+            if ((/[\u00C0-\u017Fa-zA-Z]{1}/).test(next) && nextdot != '.') {
+                message = "Een puntteken zoals in 'J.K. Rowling' moet alleen met een letter staan, of nog een afkorting";
+                allesgoed = false;
+            }
+        }
+
+        //Check if the minus symbol is surrounded by letters
+        if (current == '-') {
+            if (!((/[\u00C0-\u017Fa-zA-Z]{1}/).test(prev) && (/[\u00C0-\u017Fa-zA-Z]{1}/).test(next))) {
+                message = "Een streepje zoals in 'Henk van Bart-Veldden' moet altijd tussen letters komen te staan";
+                allesgoed = false;
+            }
+        }
+    }
+    while (s.split(' ')[1] != undefined) {
+        s = s.replace(" ", "");
+    }
+    //Check if every symbol is what it needs to be
+    if (!(/^[\u00C0-\u017Fa-zA-Z'-.]{1,}$/).test(s)) {
+        message = "Naam bevat ongeldige tekens!";
+        allesgoed = false;
+    }
+    if (!allesgoed && s.length > 0) {
+        $('#Label1').removeClass("error-hidden");
+        $('#Label1').text(message);
+    }
+    else {
+        $('#Label1').addClass("error-hidden");
+        $('#Label1').text();
+    }
     return allesgoed;
-}
+};
 
 // Functie om de zichtbare fields te valideren
 function valideerFields() {
@@ -197,10 +253,57 @@ function valideerFields() {
         }
 
         // valideer gebruikersnaam
-        if ((/^[a-zA-Z0-9]{6,255}$/).test($('#inputGebruikersnaam').val())) {
+        var username = $('#inputGebruikersnaam').val();
+        var usernamevalid = false;
+        if ((/^[a-zA-Z0-9-._]{6,255}$/).test(username)) {
             $('#inputGebruikersnaam').removeClass('form-fail').addClass('form-success');
+            $('#Label1').addClass("error-hidden");
+            usernamevalid = true;
         } else {
             $('#inputGebruikersnaam').removeClass('form-success').addClass('form-fail');
+            if (username.length > 0) {
+                $('#Label1').removeClass("error-hidden");
+                if (username.length < 6) {
+                    $('#Label1').text("Uw gebruikersnaam moet minimaal 6 tekens bevatten");
+                }
+                if (username.length > 255) {
+                    $('#Label1').text("Uw gebruikersnaam mag niet meer dan 255 tekens bevatten");
+                }
+                if (username.length <= 255 && username.length >= 6) {
+                    $('#Label1').text("Uw gebruikersnaam mag geen andere tekens bevatten dan letters, underscores, hyphes en punten");
+                }
+            }
+            else {
+                $('#Label1').addClass("error-hidden");
+            }
+            usernamevalid = false;
+            allesgoed = false;
+        }
+
+        // valideer wachtwoord
+        var pass = $('#inputWachtwoord1').val();
+        if ((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,255}$/).test(pass)) {
+            $('#inputWachtwoord1').removeClass('form-fail').addClass('form-success');
+            $('#Label1').addClass("error-hidden");
+        } else {
+            $('#inputWachtwoord1').removeClass('form-success').addClass('form-fail');
+            if (pass.length > 0 && (usernamevalid && username.length > 0)) {
+                $('#Label1').removeClass("error-hidden");
+                if (pass.length < 8) {
+                    $('#Label1').text("Uw wachtwoord moet minimaal 8 tekens bevatten");
+                }
+                if (pass.length > 255) {
+                    $('#Label1').text("Uw wachtwoord mag niet meer dan 255 tekens bevatten");
+                }
+                if (pass.length <= 255 && pass.length >= 6) {
+                    $('#Label1').text("Uw wachtwoord moet minimaal 1 hoofdletter en 1 speciaal karakter bevatten");
+                }
+            }
+            else {
+                if (usernamevalid) {
+                    $('#Label1').addClass("error-hidden");
+                }
+            }
             allesgoed = false;
         }
 

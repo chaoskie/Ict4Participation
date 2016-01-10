@@ -302,7 +302,7 @@ function valideerFields() {
             $('#Label1').addClass("error-hidden");
         } else {
             $('#inputWachtwoord1').removeClass('form-success').addClass('form-fail');
-            if (pass.length > 0 && usernamevalid) {
+            if (pass.length > 0 && (usernamevalid && username.length > 0)) {
                 $('#Label1').removeClass("error-hidden");
                 if (pass.length < 8) {
                     $('#Label1').text("Uw wachtwoord moet minimaal 8 tekens bevatten");
