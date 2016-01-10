@@ -136,7 +136,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword inputWachtwoord1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText inputWachtwoord1;
         
         /// <summary>
         /// inputWachtwoord2 control.
@@ -145,7 +145,7 @@ namespace Web_GUI_Layer {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword inputWachtwoord2;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText inputWachtwoord2;
         
         /// <summary>
         /// inputProfielfoto control.
