@@ -419,61 +419,42 @@ function valideerFields() {
 
 };
 
-// Functie om woonplaats uit suggesties te halen en in tekstbox te zetten
-$('body').on('click', '#woonplaats_results_wrapper > p', function () {
-
-    $('#inputWoonplaats').val($(this).text());
-
-});
-
 // Functie om de woonplaats wrapper zichtbaar te maken als de input focus heeft
 $('#inputWoonplaats').on('focus click keyup', function () {
-
     $('#woonplaats_results_wrapper').css({ 'display': 'block' });
-    isChecked = false;
-
+    console.log("parent triggered");
 });
 
-$('#inputWoonplaats').on('keyup', function () {
-    isChecked = false;
-});
-
-// Functie om de woonplaats wrapper onzichtbaar te maken als de input geen focus heeft
-$('#inputWoonplaats').focusout(function () {
-
-    // Wacht 200 milliseconde zodat de geklikte woonplaats nog verwerkt kan worden
+function onMouseOut(event) {
+    //If the element is the parent element or a child element, return
+    e = event.toElement || event.relatedTarget;
+    if (e.parentNode == this ||
+                           e == this) {
+        return;
+    }
+    //If the element is a city_gen, return
+    if (e.className == "city_gen") {
+        return;
+    }
+    //Else, hide the city_gens
     setTimeout(function () {
         $('#woonplaats_results_wrapper').css({ 'display': 'none' });
     }, 1000);
 
+    console.log("parent on focus out triggered");
     valideerWoonplaats();
+};
+//Add listener
+document.getElementById("INPWP").addEventListener('mouseout', onMouseOut, true);
 
-});
-
-var prevTekst;
 
 $('#woonplaats_results_wrapper').on('click', 'p', function () {
     prevTekst = $(this).text();
+    $('#inputWoonplaats').val(prevTekst);
+    $('#woonplaats_results_wrapper').css({ 'display': 'none' });
+    valideerWoonplaats();
+    console.log("child triggered");
 });
-
-Loop();
-
-var isChecked = false;
-
-function Loop() {
-    if (($('#inputWoonplaats').val() == prevTekst) &&
-        !isChecked &&
-        (!$('#inputWoonplaats').hasClass('form-success'))) {
-        $('#woonplaats_results_wrapper').css({ 'display': 'none' });
-
-        valideerWoonplaats();
-
-        isChecked = true;
-
-    }
-
-    requestAnimationFrame(Loop);
-};
 
 function valideerWoonplaats() {
 
@@ -604,7 +585,7 @@ $('#btnVorigeTab').click(function () {
 $('#btnVolgendeTab').click(function () {
     // Haal href op van huidige tab
     var href = $('.nav-tabs').find('li.active > a').attr('href');
-    
+
     // Haal het tab nummer uit de href
     var nr = parseInt(href.substr(href.length - 1, href.length));
 

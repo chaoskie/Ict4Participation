@@ -86,10 +86,14 @@
 											    </div>
 										    </div>
 										    <div class="row">
-											    <div class="col-xs-12">
+											    <div class="col-xs-12" id="INPWP">
 												    <label for="inputWoonplaats" autocomplete="off" class="sr-only">Woonplaats</label>
 												    <input type="text" id="inputWoonplaats" class="form-control" placeholder="Woonplaats" required="required" runat="server" />
                                                     <div id="woonplaats_results_wrapper">
+                                                        <p>Eindhoven</p>
+                                                        <p>Eindhoven</p>
+                                                        <p>Eindhoven</p>
+                                                        <p>Eindhoven</p>
                                                         <p>Eindhoven</p>
                                                     </div>
 											    </div>
