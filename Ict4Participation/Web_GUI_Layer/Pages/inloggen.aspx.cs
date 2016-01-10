@@ -47,7 +47,7 @@ namespace Web_GUI_Layer
                 Accountdetails ad = GUIHandler.GetMainuserInfo();
 
                 // Open new window with chat, and redirect to hoofdmenu.aspx
-                string queryString = "http://192.168.20.27:8081?userID=" + ad.ID + "&userName=" + ad.Name
+                string queryString = "http://192.168.20.27:8081?userID=" + ad.ID + "&userName=" + ad.Name;
                 ClientScript.RegisterStartupScript(this.GetType(), "OpenWin",
                  "<script>openNewWin('" + queryString + "','" + "hoofdmenu.aspx')</script>");
             }
