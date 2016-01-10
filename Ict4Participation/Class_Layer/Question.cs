@@ -61,55 +61,55 @@ namespace Class_Layer
         /// Gets the ID of the question.
         /// </summary>
         /// <value>The ID of the question.</value>
-        public int ID { get; }
+        public int ID { get; private set; }
 
         /// <summary>
         /// Gets the title of the question.
         /// </summary>
         /// <value>The title of the question.</value>
-        public string Title { get; }
+        public string Title { get; private set; }
 
         /// <summary>
         /// Gets the start date of help for this question.
         /// </summary>
         /// <value>The start date of the question.</value>
-        public DateTime? StartDate { get; }
+        public DateTime? StartDate { get; private set; }
 
         /// <summary>
         /// Gets the end date of help for this question.
         /// </summary>
         /// <value>The end date of the question.</value>
-        public DateTime? EndDate { get; }
+        public DateTime? EndDate { get; private set; }
 
         /// <summary>
         /// Gets the post date of this question.
         /// </summary>
         /// <value>The post date of this question.</value>
-        public DateTime PostDate { get; }
+        public DateTime PostDate { get; private set; }
 
         /// <summary>
         /// Gets the description of this question.
         /// </summary>
         /// <value>The description of the question.</value>
-        public string Description { get; }
+        public string Description { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether the question is urgent or not.
         /// </summary>
         /// <value>The urgency of this question.</value>
-        public bool Urgent { get; }
+        public bool Urgent { get; private set; }
 
         /// <summary>
         /// Gets the location of this question.
         /// </summary>
         /// <value>The location of the question.</value>
-        public string Location { get; }
+        public string Location { get; private set; }
 
         /// <summary>
         /// Gets the maximum amount of volunteers on this question.
         /// </summary>
         /// <value>The maximum amount of volunteers on this question.</value>
-        public int AmountAccs { get; }
+        public int AmountAccs { get; private set; }
 
         /// <summary>
         /// Gets the status of this question.
@@ -132,13 +132,13 @@ namespace Class_Layer
         /// Gets the list of skills of the question.
         /// </summary>
         /// <value>The list of skills of the question.</value>
-        public List<string> Skills { get; }
+        public List<string> Skills { get; private set; }
 
         /// <summary>
         /// Gets the IDs of all volunteers of the question.
         /// </summary>
         /// <value>The IDs of all volunteers of the question.</value>
-        public List<int> Volunteers { get; }
+        public List<int> Volunteers { get; private set; }
         #endregion
 
         #region Static Methods

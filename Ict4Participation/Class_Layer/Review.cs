@@ -38,19 +38,19 @@ namespace Class_Layer
         /// Gets the rating of the review.
         /// </summary>
         /// <value>The rating of the review.</value>
-        public int Rating { get; }
+        public int Rating { get; private set; }
 
         /// <summary>
         /// Gets the accountID of the author.
         /// </summary>
         /// <value>The accountID of the author.</value>
-        public int PostedToID { get; }
+        public int PostedToID { get; private set; }
 
         /// <summary>
         /// Gets the description of the review.
         /// </summary>
         /// <value>The description of the review.</value>
-        public string Description { get; }
+        public string Description { get; private set; }
         #endregion
 
         #region Static Methods

@@ -40,7 +40,7 @@ namespace Class_Layer
         /// Gets the name of the skill.
         /// </summary>
         /// <value>The name of the skill.</value>
-        public string Name { get; }
+        public string Name { get; private set; }
         #endregion
 
         #region Static Methods
