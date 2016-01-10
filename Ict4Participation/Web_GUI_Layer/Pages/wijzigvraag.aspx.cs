@@ -102,6 +102,7 @@ namespace Web_GUI_Layer.Pages
                     else
                     {
                         select_skills_output.Items.Add(skill.Name);
+                        selected_skills.Add(skill);
                     }
                 }
 
@@ -152,7 +153,7 @@ namespace Web_GUI_Layer.Pages
         [System.Web.Services.WebMethod]
         public static string UpdateSkills(string skills)
         {
-            // split skills in List<string>
+            // Split skills in List<string>
             List<string> skillList = skills.Split('|').ToList();
 
             selected_skills = new List<Skilldetails>();

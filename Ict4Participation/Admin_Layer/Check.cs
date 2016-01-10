@@ -331,7 +331,7 @@ namespace Admin_Layer
                 }
                 if (!isEndDateNull && !isStartDateNull)
                 {
-                    if ((DateTime)qd.StartDate < (DateTime)qd.EndDate)
+                    if ((DateTime)qd.StartDate > (DateTime)qd.EndDate)
                     {
                         message = "De einddatum mag niet eerder zijn dan/gelijk zijn aan de startdatum!";
                         return false;
