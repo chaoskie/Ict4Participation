@@ -31,6 +31,22 @@ namespace Web_GUI_Layer.Pages
             // Retrieve GUIHandler object from session
             GUIHandler = (GUIHandler)Session["GUIHandler_obj"];
 
+            // If the main user is a volunteer, hide the place question button
+            Accountdetails mainuser = GUIHandler.GetMainuserInfo();
+            if (string.IsNullOrWhiteSpace(mainuser.VOGPath))
+            {
+                //Set button widths to 25%
+                btnPlaceQuestion.Style["width"] = "25%";
+                btnTerug.Style["width"] = "25%";
+                btnSearch.Style["width"] = "25%";
+                btnProfile.Style["width"] = "25%";
+            }
+            else
+            {
+                //Remove question button
+                btnPlaceQuestion.Visible = false;
+            }
+
             // Insert questions
             List<Questiondetails> qd_list = GUIHandler.GetAll(true);
 
@@ -141,6 +157,21 @@ namespace Web_GUI_Layer.Pages
         protected void btnTerug_Click(object sender, EventArgs e)
         {
             Response.Redirect("hoofdmenu.aspx", false);
+        }
+
+        protected void btnPlaceQuestion_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("plaatsvraag.aspx", false);
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("zoeken.aspx", false);
+        }
+
+        protected void btnProfile_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("profiel.aspx", false);
         }
 
         private void ShowErrorMessage(string message)

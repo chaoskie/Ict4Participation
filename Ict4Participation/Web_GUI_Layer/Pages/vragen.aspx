@@ -28,9 +28,21 @@
 			    <div class="container-fluid">
 				    <div class="row">
 					    <div class="col-xs-12">
-						    <button onserverclick="btnTerug_Click" runat="server" formnovalidate="formnovalidate" onclientclick="return false;">
+						    <button onserverclick="btnTerug_Click" id="btnTerug" runat="server" formnovalidate="formnovalidate">
 							    <i class="fa fa-chevron-left"></i>
 							    <p>Terug</p>
+						    </button><!--
+                            --><button onserverclick="btnPlaceQuestion_Click" id="btnPlaceQuestion" runat="server" formnovalidate="formnovalidate">
+							    <i class="fa fa-question"></i>
+							    <p>Plaats vraag</p>
+						    </button><!--
+                            --><button onserverclick="btnSearch_Click" runat="server" id ="btnSearch" formnovalidate="formnovalidate">
+							    <i class="fa fa-search"></i>
+							    <p>Zoeken</p>
+						    </button><!--
+                            --><button onserverclick="btnProfile_Click" runat="server" id="btnProfile" formnovalidate="formnovalidate">
+							    <i class="fa fa-user"></i>
+							    <p>Profiel</p>
 						    </button>
 					    </div>
 				    </div>

@@ -36,6 +36,16 @@ namespace Web_GUI_Layer
             Response.Redirect("hoofdmenu.aspx", false);
         }
 
+        protected void btnQuestions_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("vragen.aspx", false);
+        }
+
+        protected void btnProfile_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("profiel.aspx", false);
+        }
+
         private void ShowErrorMessage(string message)
         {
             error_message.Text = message;
