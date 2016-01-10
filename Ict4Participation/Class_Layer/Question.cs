@@ -274,7 +274,7 @@ namespace Class_Layer
             string st = Utility_Classes.ConvertTo.OracleDateTime(this.StartDate);
             string et = Utility_Classes.ConvertTo.OracleDateTime(this.EndDate);
 
-            this.status = this.AmountAccs < oldvolunteers.Count ? Enums.Status.Open : Enums.Status.Aangenomen;
+            this.status = this.AmountAccs > oldvolunteers.Count ? Enums.Status.Open : Enums.Status.Aangenomen;
 
             // Call database for update query
             if (!Database_Layer.Database.UpdateQuestion(this.PostID, this.Title, this.PosterID, st, et, this.Description, this.Urgent, this.Location, this.AmountAccs, (int)this.status))
