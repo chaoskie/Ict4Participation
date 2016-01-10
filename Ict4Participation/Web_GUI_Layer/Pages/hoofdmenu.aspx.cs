@@ -66,10 +66,13 @@ namespace Web_GUI_Layer
             {
                 if (md.RequesterID == mainuserID || md.PosterID == mainuserID)
                 {
+                    // Find the other user, not this user
+                    int findID = mainuserID == md.RequesterID ? md.PosterID : md.RequesterID;
+
                     if (md.EndDate >= DateTime.Now)
                     {
                         HtmlAnchor a = new HtmlAnchor();
-                        a.InnerText = string.Format("Ontmoeting met {0}", accounts_list.Find(i => i.ID == md.RequesterID).Name);
+                        a.InnerText = string.Format("Ontmoeting met {0}", accounts_list.Find(i => i.ID == findID).Name);
                         a.Attributes["data-meeting-id"] = Convert.ToString(md.PostID);
                         a.ServerClick += btnGaNaarMeeting_Click;
 
@@ -82,7 +85,7 @@ namespace Web_GUI_Layer
                     if (md.EndDate == null)
                     {
                         HtmlAnchor a = new HtmlAnchor();
-                        a.InnerText = string.Format("Tijdloze ontmoeting met {0}", accounts_list.Find(i => i.ID == md.RequesterID).Name);
+                        a.InnerText = string.Format("Tijdloze ontmoeting met {0}", accounts_list.Find(i => i.ID == findID).Name);
                         a.Attributes["data-meeting-id"] = Convert.ToString(md.PostID);
                         a.ServerClick += btnGaNaarMeeting_Click;
 
