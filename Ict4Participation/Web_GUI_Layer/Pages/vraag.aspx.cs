@@ -91,6 +91,10 @@ namespace Web_GUI_Layer
             {
                 vraag_urgentie.InnerText = "Urgent";
             }
+            else
+            {
+                vraag_urgentie.Visible = false;
+            }
 
             // Hide button if the question is too late, but show if there's a time
             bool hasValidDate = qd.EndDate == null;
