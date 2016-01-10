@@ -83,7 +83,7 @@ namespace Admin_Layer
         public List<Accountdetails> Search(Accountdetails search, bool all = true)
         {
             //Search through all the accounts where the account-details match
-            return Searcher.Detailed(LoadedAccounts, search);
+            return Searcher.Global(LoadedAccounts, search.Name);
         }
 
         /// <summary>
