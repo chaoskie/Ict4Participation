@@ -329,7 +329,7 @@
 						            <label>
 							            <input type="checkbox" id="cbGeenDatum" runat="server" />
 							            <span></span>
-							            <span>Deze ontmoeting is niet tijsgebonden<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Vink dit vakje aan als u geen start en eindtijd voor deze ontmoeting wilt gebruiken."></i></span>
+							            <span>Deze ontmoeting is niet tijdsgebonden<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Vink dit vakje aan als u geen start en eindtijd voor deze ontmoeting wilt gebruiken."></i></span>
 						            </label>
 					            </div>
                             </div>
