@@ -59,7 +59,7 @@ namespace Web_GUI_Layer.Pages
 
             // Insert new meeting
             Meetingdetails md = new Meetingdetails();
-            
+
             // Only set start and end date if checkbox is not checked
             if (!cbGeenDatum.Checked)
             {
@@ -69,7 +69,17 @@ namespace Web_GUI_Layer.Pages
                 md.EndDate = new DateTime(Convert.ToInt32(input_einddate_3.Value),
                     Convert.ToInt32(input_einddate_2.Value), Convert.ToInt32(input_einddate_1.Value),
                     Convert.ToInt32(input_einddate_4.Value), Convert.ToInt32(input_einddate_5.Value), 0);
+
+                TimeSpan compSpan = (DateTime)md.EndDate - (DateTime)md.StartDate;
+
+                if (compSpan.Ticks < 0)
+                {
+                    message = "De einddatum mag niet eerder zijn dan de startdatum";
+                    ShowErrorMessage(message);
+                    return;
+                }
             }
+
 
             md.CreationDate = DateTime.Now;
             md.Location = inputLocatie.Value;
