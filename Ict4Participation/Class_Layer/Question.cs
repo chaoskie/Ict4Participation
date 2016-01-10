@@ -197,28 +197,23 @@ namespace Class_Layer
 
         #region Non-Static Methods
         /// <summary>
-        /// THIS METHOD IS OBSOLETE.
+        /// Updates the question
         /// </summary>
-        /// <returns>Returns nothing.</returns>
+        /// <returns></returns>
         public override bool Update()
         {
-            // ===============================================================
-            // Code is being disabled, can be removed if application runs fine
-            // ===============================================================
+            //Create a list of volunteers, by default: none
+            List<int> volunteers = new List<int>();
+            //Fill the list of volunteers with the actual volunteers if there are any
+            DataTable VolDt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Question_Acc\" WHERE \"QUESTION_ID\"=" + base.PostID);
+            foreach (DataRow VolunteersRow in VolDt.Rows)
+            {
+                volunteers.Add(Convert.ToInt32(VolunteersRow["ACC_ID"]));
+            }
+            List<string> sks = Skill.GetAll(this.PostID, false).Select(s => s.Name).ToList();
 
-            //////Create a list of volunteers, by default: none
-            ////List<int> volunteers = new List<int>();
-            //////Fill the list of volunteers with the actual volunteers if there are any
-            ////DataTable VolDt = Database_Layer.Database.RetrieveQuery("SELECT * FROM \"Question_Acc\" WHERE \"QUESTION_ID\"=" + base.PostID);
-            ////foreach (DataRow VolunteersRow in VolDt.Rows)
-            ////{
-            ////    volunteers.Add(Convert.ToInt32(VolunteersRow["ACC_ID"]));
-            ////}
-            ////List<string> sks = Skill.GetAll(this.PostID, false).Select(s => s.Name).ToList();
+            return Update(sks, volunteers);
 
-            ////return Update(sks, volunteers);
-
-            return false;
         }
 
         /// <summary>
