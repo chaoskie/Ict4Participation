@@ -170,7 +170,7 @@ namespace Web_GUI_Layer
 
             string result = string.Empty;
 
-            List<string> foundCities = new List<string>();
+            List<CityData> foundCities = new List<CityData>();
 
             string fileloc = HttpContext.Current.Server.MapPath(@"~\Content\Files\Woonplaatsen_Nederland.txt");
 
@@ -186,31 +186,22 @@ namespace Web_GUI_Layer
                         //Check if the line contains the search
                         if (line.ToLower().Contains(str))
                         {
-                            foundCities.Add(line.ToString());
+                            foundCities.Add(new CityData(line.ToLower().IndexOf(str), line.ToString()));
                             found++;
                         }
                     }
                 }
 
-                List<CityStruct> tempCities = new List<CityStruct>();
+                foundCities = foundCities.OrderBy(c => c.IntegerData).ToList();
 
-                // Loop through foundCities
-                foreach (string city in foundCities)
+                if (foundCities.Count > 0)
                 {
-                    decimal bullshit = (decimal)str.Length / (decimal)city.Length;
-                    tempCities.Add(new CityStruct(city, bullshit));
-                }
-
-                tempCities = tempCities.OrderByDescending(c => c.Percentage).ToList();
-
-                if (tempCities.Count > 0)
-                {
-                    if (tempCities.Count > 5)
+                    if (foundCities.Count > 5)
                     {
-                        tempCities.RemoveRange(5, tempCities.Count - 5);
+                        foundCities.RemoveRange(5, foundCities.Count - 5);
                     }
 
-                    return tempCities.Select(c => c.Name).Aggregate((x, y) => x + "|" + y);
+                    return foundCities.Select(c => c.StringData).Aggregate((x, y) => x + "|" + y);
                 }
             }
 

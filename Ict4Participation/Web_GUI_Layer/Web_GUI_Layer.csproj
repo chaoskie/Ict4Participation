@@ -184,6 +184,7 @@
     <Compile Include="Authorisation\credentials.aspx.designer.cs">
       <DependentUpon>credentials.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Entities\CityData.cs" />
     <Compile Include="Entities\CityStruct.cs" />
     <Compile Include="ErrorPages\error.aspx.cs">
       <DependentUpon>error.aspx</DependentUpon>

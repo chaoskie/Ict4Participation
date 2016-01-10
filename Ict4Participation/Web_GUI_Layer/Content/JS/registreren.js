@@ -269,7 +269,7 @@ function valideerFields() {
 
         // valideer gebruikersnaam
         var username = $('#inputGebruikersnaam').val();
-        var usernamevalid = false;
+        var usernamevalid = true;
         if ((/^[a-zA-Z0-9-._]{6,255}$/).test(username)) {
             $('#inputGebruikersnaam').removeClass('form-fail').addClass('form-success');
             $('#Label1').addClass("error-hidden");
@@ -287,11 +287,11 @@ function valideerFields() {
                 if (username.length <= 255 && username.length >= 6) {
                     $('#Label1').text("Uw gebruikersnaam mag geen andere tekens bevatten dan letters, underscores, hyphes en punten");
                 }
+                usernamevalid = false;
             }
             else {
                 $('#Label1').addClass("error-hidden");
             }
-            usernamevalid = false;
             allesgoed = false;
         }
 
@@ -302,7 +302,7 @@ function valideerFields() {
             $('#Label1').addClass("error-hidden");
         } else {
             $('#inputWachtwoord1').removeClass('form-success').addClass('form-fail');
-            if (pass.length > 0 && (usernamevalid && username.length > 0)) {
+            if (pass.length > 0 && usernamevalid) {
                 $('#Label1').removeClass("error-hidden");
                 if (pass.length < 8) {
                     $('#Label1').text("Uw wachtwoord moet minimaal 8 tekens bevatten");
