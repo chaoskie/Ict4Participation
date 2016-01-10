@@ -114,6 +114,7 @@
     <Content Include="Content\JS\gebruikerprofiel.js" />
     <Content Include="Content\JS\gebruikers.js" />
     <Content Include="Content\JS\hoofdmenu.js" />
+    <Content Include="Content\JS\inloggen.js" />
     <Content Include="Content\JS\jquery-1.11.3.min.js" />
     <Content Include="Content\JS\plaatsreview.js" />
     <Content Include="Content\JS\plaatsvraag.js" />

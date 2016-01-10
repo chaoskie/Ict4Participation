@@ -111,12 +111,6 @@ namespace Web_GUI_Layer
             {
                 activiteiten_list.Controls.Add(new LiteralControl("<li><p>Er zijn geen recente activeiten om weer te geven</p></li>"));
             }
-
-            // Open new window with chat
-            // TODO: Fix URL
-            string queryString = "http://192.168.20.27:8081"; //"?userID=" + accDetails.ID + "&userName" + accDetails.Name;
-            string newwin = "window.open('" + queryString + "');";
-            ClientScript.RegisterStartupScript(this.GetType(), "pop", newwin, true);
         }
 
         protected void btnAfmelden_Click(object sender, EventArgs e)

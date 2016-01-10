@@ -39,9 +39,17 @@ namespace Web_GUI_Layer
                     HttpCookie usc = new HttpCookie("usrckk", inputGebruikersnaam.Value);
                     Request.Cookies.Add(usc);
                 }
-
+                
+                // Put GUIHandler in session
                 Session["GUIHandler_obj"] = GUIHandler;
-                Response.Redirect("hoofdmenu.aspx", false);
+
+                // Get accountdetails of logged in person
+                Accountdetails ad = GUIHandler.GetMainuserInfo();
+
+                // Open new window with chat, and redirect to hoofdmenu.aspx
+                string queryString = "http://192.168.20.27:8081?userID=" + ad.ID + "&userName=" + ad.Name
+                ClientScript.RegisterStartupScript(this.GetType(), "OpenWin",
+                 "<script>openNewWin('" + queryString + "','" + "hoofdmenu.aspx')</script>");
             }
             else
             {

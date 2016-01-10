@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="../Content/CSS/main.css" />
 	<link rel="stylesheet" href="../Content/CSS/inloggen.css" />
 	<link rel="stylesheet" href="../Content/CSS/input.css" />
+    <script src="../Content/JS/inloggen.js"></script>
 </head>
 <body>
     <form runat="server">
