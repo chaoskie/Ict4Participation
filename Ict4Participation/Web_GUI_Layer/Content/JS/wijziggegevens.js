@@ -391,8 +391,6 @@ function onMouseOut(event) {
     }
     //Else, hide the city_gens
     $('#woonplaats_results_wrapper').css({ 'display': 'none' });
-
-    console.log("parent on focus out triggered");
     valideerWoonplaats();
 };
 //Add listener
@@ -404,7 +402,6 @@ $('#woonplaats_results_wrapper').on('click', '.city_gen', function () {
     $('#inputWoonplaats').val(prevTekst);
     $('#woonplaats_results_wrapper').css({ 'display': 'none' });
     valideerWoonplaats();
-    console.log("child triggered");
 });
 
 function valideerWoonplaats() {
