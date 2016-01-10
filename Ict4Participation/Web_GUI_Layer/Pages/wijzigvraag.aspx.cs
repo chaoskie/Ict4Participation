@@ -122,9 +122,7 @@ namespace Web_GUI_Layer.Pages
             qd.Title = inputTitel.Value;
             qd.Description = inputBeschrijving.Value;
 
-            // TODO: Insert skills
-            // (Keep a list on the server, push to and remove from this list with ajax)
-            var items = select_skills_output.Items;
+            qd.Skills = selected_skills.Select(sk => sk.Name).ToList();
 
             qd.Location = inputLocatie.Value;
             qd.StartDate = new DateTime(Convert.ToInt32(input_startdate_3.Value),
