@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="plaatsreview.aspx.cs" Inherits="Web_GUI_Layer.Pages.plaatsreview" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="plaatsreview.aspx.cs" Inherits="Web_GUI_Layer.Pages.plaatsreview" EnableEventValidation="false"  %>
 
 <!DOCTYPE html>
 <html lang="nl">

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="wijziggegevens.aspx.cs" Inherits="Web_GUI_Layer.Pages.wijziggegevens" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="wijziggegevens.aspx.cs" Inherits="Web_GUI_Layer.Pages.wijziggegevens" EnableEventValidation="false"  %>
 
 <!DOCTYPE html>
 <html lang="nl">

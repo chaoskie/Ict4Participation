@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="wijzigvraag.aspx.cs" Inherits="Web_GUI_Layer.Pages.wijzigvraag" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="wijzigvraag.aspx.cs" Inherits="Web_GUI_Layer.Pages.wijzigvraag" EnableEventValidation="false" %>
 
 <!DOCTYPE html>
 <html lang="nl">
