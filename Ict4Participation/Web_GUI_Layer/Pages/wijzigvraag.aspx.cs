@@ -10,8 +10,9 @@ namespace Web_GUI_Layer.Pages
 {
     public partial class wijzigvraag : System.Web.UI.Page
     {
-        private GUIHandler GUIHandler;
-        private static int q_id;
+        private static GUIHandler GUIHandler;
+        private static Questiondetails qd;
+        private static List<Skilldetails> selected_skills;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,14 +28,14 @@ namespace Web_GUI_Layer.Pages
             GUIHandler = (GUIHandler)Session["GUIHandler_obj"];
 
             // Get question id from session
-            q_id = Convert.ToInt32(Session["QuestionDetails_id"]);
+            int q_id = Convert.ToInt32(Session["QuestionDetails_id"]);
 
             if (!IsPostBack)
             {
                 // Get questiondetails
                 List<Questiondetails> qd_list = GUIHandler.GetAll(true);
 
-                Questiondetails qd = GUIHandler.GetAll(true).Where(vraag => vraag.PostID == q_id).ToList()[0];
+                qd = GUIHandler.GetAll(true).Where(vraag => vraag.PostID == q_id).FirstOrDefault();
 
                 // update inputs
                 inputTitel.Value = qd.Title;
@@ -85,6 +86,25 @@ namespace Web_GUI_Layer.Pages
                 input_einddate_5.Items.FindByValue(Convert.ToString(e_date_min));
 
                 inputUrgentie.Checked = qd.Urgent;
+
+                // Empty select_skills
+                select_skills.Items.Clear();
+                selected_skills = new List<Skilldetails>();
+
+                // Add all skills in select_skills
+                List<Skilldetails> skills = GUIHandler.GetAllSkills();
+                foreach (Skilldetails skill in skills)
+                {
+                    if (!qd.Skills.Contains(skill.Name))
+                    {
+                        select_skills.Items.Add(skill.Name);
+                    }
+                    else
+                    {
+                        selected_skills.Add(skill);
+                    }
+                }
+
             }
         }
 
@@ -98,12 +118,9 @@ namespace Web_GUI_Layer.Pages
             string message = string.Empty;
 
             // Edit the question
-            Questiondetails qd = new Questiondetails();
-            qd.PostID = q_id;
             qd.PosterID = GUIHandler.GetMainuserInfo().ID;
             qd.Title = inputTitel.Value;
             qd.Description = inputBeschrijving.Value;
-            qd.Skills = new List<string>();
 
             // TODO: Insert skills
             // (Keep a list on the server, push to and remove from this list with ajax)
@@ -130,6 +147,26 @@ namespace Web_GUI_Layer.Pages
         {
             error_message.Text = message;
             error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+        }
+
+
+        [System.Web.Services.WebMethod]
+        public static string UpdateSkills(string skills)
+        {
+            // split skills in List<string>
+            List<string> skillList = skills.Split('|').ToList();
+
+            selected_skills = new List<Skilldetails>();
+
+            foreach (string skill in skillList)
+            {
+                Skilldetails sd = new Skilldetails();
+                sd.Name = skill;
+                sd.UserID = GUIHandler.GetMainuserInfo().ID;
+                selected_skills.Add(sd);
+            }
+
+            return string.Empty;
         }
     }
 }

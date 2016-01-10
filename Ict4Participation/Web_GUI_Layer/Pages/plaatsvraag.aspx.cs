@@ -110,7 +110,7 @@ namespace Web_GUI_Layer
             foreach (string skill in skillList)
             {
                 Skilldetails sd = new Skilldetails();
-                sd.Name = skill.ToLower();
+                sd.Name = skill;
                 sd.UserID = GUIHandler.GetMainuserInfo().ID;
                 selected_skills.Add(sd);
             }
