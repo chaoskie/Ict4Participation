@@ -73,10 +73,10 @@
 							    </div>
 							    <div class="row">
 								    <div class="col-tn-12 col-xs-6">
-									    <button id="btnVoegToe" class="btn btn-custom2 btn-block" formnovalidate="formnovalidate" onclick="return false;">Voeg Toe</button>
+									    <button id="btnSkillVoegToe" class="btn btn-custom2 btn-block" formnovalidate="formnovalidate" onclick="return false;">Voeg Toe</button>
 								    </div>
 								    <div class="col-tn-12 col-xs-6">
-									    <button id="btnVerwijder" class="btn btn-custom2 btn-block" formnovalidate="formnovalidate" onclick="return false;">Verwijder</button>
+									    <button id="btnSkillVerwijder" class="btn btn-custom2 btn-block" formnovalidate="formnovalidate" onclick="return false;">Verwijder</button>
 								    </div>
 							    </div>
 						    </div>
