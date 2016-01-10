@@ -42,7 +42,7 @@ $('#inputWoonplaats').on('keyup click change', function () {
         data: '{str: "' + val + '"}',
         contentType: 'application/json;charset=utf-8',
         dataType: 'json',
-        success: function(result) {
+        success: function (result) {
             var res = result.d.split('|');
 
             // Maak #woonplaats_result_wrapper leeg
@@ -58,19 +58,62 @@ $('#inputWoonplaats').on('keyup click change', function () {
 
 function validateName(textbox) {
     var allesgoed = true;
-    var testtext = $(textbox).val();
-    if (textbox == '#inputFullName') {
-        testtext = testtext.replace(/ +/g, "")
+    var message;
+    var s = $(textbox).val();
+
+    //Check if the string is longer than 255
+    if (s.length > 255) {
+        message = "Uw naam is te lang.";
+        allesgoed = false;
     }
-        if ((/^([\u00C0-\u017Fa-zA-Z'-.]){1,}$/).test(testtext)) {
-            $(textbox).removeClass('form-fail').addClass('form-success');
-        } else {
-            $(textbox).removeClass('form-success').addClass('form-fail');
-            allesgoed = false;
+
+    //Check if the full name contains at least 1 space (= 2 words)
+    if (s.split(' ')[1] == undefined) {
+        message = "Uw volledige naam bestaat uit minimaal twee delen";
+        allesgoed = false;
+    }
+    console.log(s);
+
+    for (var i = 0; i < s.length; i++) {
+
+        var current = s[i];
+        var prev = i == 0 ? ' ' : s[i - 1];
+        var next = i >= s.length - 1 ? ' ' : s[i + 1];
+        var nextdot = i >= s.length - 2 ? ' ' : s[i + 2];
+
+        //Check if the dots are preceded by a letter, and have a space placed after, or another dot 2 places further
+        if (current == '.') {
+            //If a space is placed before this character, it is wrong
+            if (prev == ' ') {
+                message = "Een puntteken zoals in 'J.K. Rowling' moet altijd worden geplaatst na een letter.";
+                allesgoed = false;
+            }
+
+            //If a letter comes after, but not another dot, it is wrong
+            if ((/[\u00C0-\u017Fa-zA-Z]{1}/).test(next) && nextdot != '.') {
+                message = "Een puntteken zoals in 'J.K. Rowling' moet alleen met een letter staan, of nog een afkorting";
+                allesgoed = false;
+            }
         }
 
+        //Check if the minus symbol is surrounded by letters
+        if (current == '-') {
+            if (!((/[\u00C0-\u017Fa-zA-Z]{1}/).test(prev) && (/[\u00C0-\u017Fa-zA-Z]{1}/).test(next))) {
+                message = "Een streepje zoals in 'Henk van Bart-Veldden' moet altijd tussen letters komen te staan";
+                allesgoed = false;
+            }
+        }
+    }
+    while (s.split(' ')[1] != undefined) {
+        s = s.replace(" ", "");
+    }
+    //Check if every symbol is what it needs to be
+    if (!(/^[\u00C0-\u017Fa-zA-Z'-.]{1,}$/).test(s)) {
+        message = "Naam bevat ongeldige tekens!";
+        allesgoed = false;
+    }
     return allesgoed;
-}
+};
 
 // Functie om de zichtbare fields te valideren
 function valideerFields() {
@@ -87,7 +130,14 @@ function valideerFields() {
         allesgoed = true;
 
         // Validate full name
-        allesgoed = validateName('#inputFullName');
+        var namegoed = validateName('#inputFullName');
+        if (namegoed) {
+            $('#inputFullName').removeClass('form-fail').addClass('form-success');
+        }
+        else {
+            $('#inputFullName').removeClass('form-success').addClass('form-fail');
+            allesgoed = false;
+        }
 
         // Valideer straatnaam
         if ((/^\D{2,}$/).test($('#inputStraatnaam').val())) {

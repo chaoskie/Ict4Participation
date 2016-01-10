@@ -108,7 +108,9 @@ namespace Admin_Layer
         /// <returns>Yields true when this is the case</returns>
         public static bool Name(string s, out string message)
         {
+
             message = "";
+
             //Check if the string is longer than 255
             if (s.Length > 255)
             {
@@ -117,40 +119,32 @@ namespace Admin_Layer
             }
 
             //Check if the full name contains at least 1 space (= 2 words)
-            if (!s.Contains(' '))
+            if (s.Contains(' '))
             {
                 message = "Uw volledige naam bestaat uit minimaal twee delen";
                 return false;
             }
 
-            for (int i = 0; i < s.Length; i++)
+            for (var i = 0; i < s.Length; i++)
             {
+
                 char current = s[i];
                 char prev = i == 0 ? ' ' : s[i - 1];
                 char next = i >= s.Length - 1 ? ' ' : s[i + 1];
                 char nextdot = i >= s.Length - 2 ? ' ' : s[i + 2];
-                char prevdot = i < 2 ? ' ' : s[i-2];
 
                 //Check if the dots are preceded by a letter, and have a space placed after, or another dot 2 places further
                 if (current == '.')
                 {
-                    //If there is no proper character 1 place before this character
-                    if (!Regex.IsMatch(prev.ToString(), @"[\u00C0-\u017Fa-zA-Z]{1}"))
+                    //If a space is placed before this character, it is wrong
+                    if (prev == ' ')
                     {
-                        //If this is not the case
                         message = "Een puntteken zoals in 'J.K. Rowling' moet altijd worden geplaatst na een letter.";
                         return false;
                     }
 
-                    //If there is no other dot 2 places away AND the next character is no space
-                    if (current != nextdot && next != ' ')
-                    {
-                        message = "Een naam-afkorting moet of gevolgd worden door nog een afkorting, of een spatie. Zie de J.K. in 'J.K. Rowling'.";
-                        return false;
-                    }
-
-                    //If there is no other dot, or space, 2 places before this one
-                    if (prevdot != ' ' && prevdot != '.')
+                    //If a letter comes after, but not another dot, it is wrong
+                    if (Regex.IsMatch(next.ToString(), @"[\u00C0-\u017Fa-zA-Z]{1}") && nextdot != '.')
                     {
                         message = "Een puntteken zoals in 'J.K. Rowling' moet alleen met een letter staan, of nog een afkorting";
                         return false;
@@ -160,22 +154,21 @@ namespace Admin_Layer
                 //Check if the minus symbol is surrounded by letters
                 if (current == '-')
                 {
-                    if (!(Regex.IsMatch(prev.ToString(), @"[\u00C0-\u017Fa-zA-Z]{1}") && Regex.IsMatch(next.ToString(), @"[\u00C0-\u017Fa-zA-Z]{1}")))
+                    if (!(Regex.IsMatch(prev.ToString(), @"[\u00C0-\u017Fa-zA-Z]{1}") && Regex.IsMatch(next.ToString(), "[\u00C0-\u017Fa-zA-Z]{1}")))
                     {
                         message = "Een streepje zoals in 'Henk van Bart-Veldden' moet altijd tussen letters komen te staan";
                         return false;
                     }
                 }
             }
+            s = s.Replace(" ", "");
 
-            s = s.Replace(" ", string.Empty);
             //Check if every symbol is what it needs to be
-            if (!Regex.IsMatch(s, @"^[\u00C0-\u017Fa-zA-Z'-.]{1,}$"))
+            if (!Regex.IsMatch(s, "^[\u00C0-\u017Fa-zA-Z'-.]{1,}$"))
             {
                 message = "Naam bevat ongeldige tekens!";
                 return false;
             }
-
             return true;
         }
 
