@@ -111,9 +111,9 @@ namespace Web_GUI_Layer
 
             // Open new window with chat
             // TODO: Fix URL
-            //string queryString = "ga/naar/Pages/index.html?userID=" + accDetails.ID + "&userName" + accDetails.Name;
-            //string newwin = "window.open('" + queryString + "');";
-            //ClientScript.RegisterStartupScript(this.GetType(), "pop", newwin, true);
+            string queryString = "http://192.168.20.27:8081"; //"?userID=" + accDetails.ID + "&userName" + accDetails.Name;
+            string newwin = "window.open('" + queryString + "');";
+            ClientScript.RegisterStartupScript(this.GetType(), "pop", newwin, true);
         }
 
         protected void btnAfmelden_Click(object sender, EventArgs e)

@@ -392,7 +392,7 @@ namespace Admin_Layer
         /// </summary>
         /// <param name="commentIndex">The index of the comment as loaded in the list</param>
         /// <param name="message">The message of the error</param>
-        /// <returns>Success</returns>
+        /// <returns>Returns a boolean, indicating whether the comment has been successfully removed or not.</returns>
         public bool Remove(int commentID, out string message)
         {
             Comment c = LoadedComments.Find(i => i.PostID == commentID);
@@ -411,10 +411,10 @@ namespace Admin_Layer
         }
 
         /// <summary>
-        /// Gets all the comments belonging to a question
+        /// Gets all the comments belonging to a question.
         /// </summary>
-        /// <param name="questionID">The ID of specified question</param>
-        /// <returns>A list of all the comments</returns>
+        /// <param name="questionID">The ID of specified question.</param>
+        /// <returns>Returns a list of all the comments</returns>
         public List<Commentdetails> GetAll(int questionID)
         {
             //Fetch all the comments matching for this question
@@ -425,10 +425,10 @@ namespace Admin_Layer
 
         #region Question Handling
         /// <summary>
-        /// Load in questions
+        /// Load in questions.
         /// </summary>
-        /// <param name="all">Whether all the questions should be loaded, or the main users</param>
-        /// <returns>A list of all the details regarding the questions</returns>
+        /// <param name="all">Whether all the questions should be loaded, or the main users.</param>
+        /// <returns>Returns a list of all the details regarding the questions.</returns>
         public List<Questiondetails> GetAll(bool all)
         {
             //Load in questions
@@ -438,11 +438,11 @@ namespace Admin_Layer
         }
 
         /// <summary>
-        /// Searches through the list of questions
+        /// Searches through the list of questions.
         /// </summary>
-        /// <param name="all">Specifies whether there is a search going through a smaller list or the full list</param>
-        /// <param name="search">The question details to search by</param>
-        /// <returns>The questions that match</returns>
+        /// <param name="all">Specifies whether there is a search going through a smaller list or the full list.</param>
+        /// <param name="search">The question details to search by.</param>
+        /// <returns>Return the questions that match</returns>
         public List<Questiondetails> Search(Questiondetails search, bool all = true)
         {
             //Search through the questions
@@ -450,11 +450,11 @@ namespace Admin_Layer
         }
 
         /// <summary>
-        /// Places a question
+        /// Places a question.
         /// </summary>
-        /// <param name="question">The question details</param>
-        /// <param name="message">The message of the error</param>
-        /// <returns>Success</returns>
+        /// <param name="question">The question details.</param>
+        /// <param name="message">The message of the error.</param>
+        /// <returns>Returns a boolean, indicating whether the question has been placed successfully or not.</returns>
         public bool Place(Questiondetails question, out string message)
         {
             //Check for rights
@@ -520,12 +520,12 @@ namespace Admin_Layer
         }
 
         /// <summary>
-        /// Edits a question
+        /// Edits a question.
         /// </summary>
-        /// <param name="question">The question details</param>
-        /// <param name="qID">The ID of the question</param>
-        /// <param name="message">The message of the error</param>
-        /// <param name="isAccept">Whether it is an acception or not</param>
+        /// <param name="question">The question details.</param>
+        /// <param name="qID">The ID of the question.</param>
+        /// <param name="message">The message of the error.</param>
+        /// <param name="isAccept">Whether it is an acception or not.</param>
         /// <returns>Success</returns>
         public bool Edit(Questiondetails question, int qID, out string message, bool isAccept = false)
         {
@@ -565,10 +565,10 @@ namespace Admin_Layer
         }
 
         /// <summary>
-        /// Removes a question
+        /// Removes a question.
         /// </summary>
-        /// <param name="questionIndex">The index of the question as loaded</param>
-        /// <param name="message">The message of the error</param>
+        /// <param name="questionIndex">The index of the question as loaded.</param>
+        /// <param name="message">The message of the error.</param>
         /// <returns>Success</returns>
         public bool RemoveQuestion(int questionID, out string message)
         {
@@ -597,11 +597,11 @@ namespace Admin_Layer
 
         #region Review Handling
         /// <summary>
-        /// Gets all the reviews from a user
+        /// Gets all the reviews from a user.
         /// </summary>
-        /// <param name="userid">The userID of the user</param>
-        /// <param name="isPoster">Whether the user has posted the reviews, or received them</param>
-        /// <returns>A list regarding all the details of the reviews</returns>
+        /// <param name="userid">The userID of the user.</param>
+        /// <param name="isPoster">Whether the user has posted the reviews, or received them.</param>
+        /// <returns>A list regarding all the details of the reviews.</returns>
         public List<Reviewdetails> GetAllReviews(int userid, bool isPoster = false)
         {
             LoadedReviews = Review.GetAll(userid, isPoster);
@@ -609,10 +609,10 @@ namespace Admin_Layer
         }
 
         /// <summary>
-        /// Places a review
+        /// Places a review.
         /// </summary>
-        /// <param name="review">The review details</param>
-        /// <param name="message">The message of the error</param>
+        /// <param name="review">The review details.</param>
+        /// <param name="message">The message of the error.</param>
         /// <returns>Success</returns>
         public bool Place(Reviewdetails review, out string message)
         {
@@ -632,10 +632,10 @@ namespace Admin_Layer
         }
 
         /// <summary>
-        /// Edits a review
+        /// Edits a review.
         /// </summary>
-        /// <param name="review">The review details</param>
-        /// <param name="reviewIndex">The index of the review as loaded in the list</param>
+        /// <param name="review">The review details.</param>
+        /// <param name="reviewIndex">The index of the review as loaded in the list.</param>
         /// <param name="message">The message of the error</param>
         /// <returns>Success</returns>
         public bool Edit(Reviewdetails review, int reviewIndex, out string message)
@@ -657,10 +657,10 @@ namespace Admin_Layer
         }
 
         /// <summary>
-        /// Removes a review
+        /// Removes a review.
         /// </summary>
-        /// <param name="reviewIndex">The index of the review as loaded in the list</param>
-        /// <param name="message">The message of the error</param>
+        /// <param name="reviewIndex">The index of the review as loaded in the list.</param>
+        /// <param name="message">The message of the error.</param>
         /// <returns>Success</returns>
         public bool RemoveReview(int reviewId, out string message)
         {
@@ -681,9 +681,9 @@ namespace Admin_Layer
 
         #region Meeting Handling
         /// <summary>
-        /// Get all meetings planned in for the main user
+        /// Get all meetings planned in for the main user.
         /// </summary>
-        /// <returns>All details regarding these meetings</returns>
+        /// <returns>All details regarding these meetings.</returns>
         public List<Meetingdetails> GetAllMeetings()
         {
             LoadedMeetings = Meeting.GetAll(MainUser.ID);
@@ -691,11 +691,11 @@ namespace Admin_Layer
         }
 
         /// <summary>
-        /// Edits a meeting
+        /// Edits a meeting.
         /// </summary>
-        /// <param name="meeting">The details of the meeting</param>
-        /// <param name="meetingIndex">The index of the meeting, as loaded in the list</param>
-        /// <param name="message">The message of the error</param>
+        /// <param name="meeting">The details of the meeting.</param>
+        /// <param name="meetingIndex">The index of the meeting, as loaded in the list.</param>
+        /// <param name="message">The message of the error.</param>
         /// <returns>Success</returns>
         public bool Edit(Meetingdetails meeting, int meetingIndex, out string message)
         {
@@ -716,10 +716,10 @@ namespace Admin_Layer
         }
 
         /// <summary>
-        /// Creates a meeting
+        /// Creates a meeting.
         /// </summary>
-        /// <param name="meeting">The details of the meeting</param>
-        /// <param name="message">The message of the error</param>
+        /// <param name="meeting">The details of the meeting.</param>
+        /// <param name="message">The message of the error.</param>
         /// <returns>Success</returns>
         public bool Create(Meetingdetails meeting, out string message)
         {

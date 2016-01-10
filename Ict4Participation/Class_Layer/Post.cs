@@ -4,58 +4,60 @@
 // </copyright>
 // <author>ICT4Participation</author>
 //-----------------------------------------------------------------------
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Class_Layer.Interfaces;
-
 namespace Class_Layer
 {
+    using Interfaces;
+
     /// <summary>
-    /// Abstract class to hold the subclasses of post
+    /// The <see cref="Post"/> class is an abstract class to hold the subclasses of post.
     /// </summary>
     public abstract class Post : IPost
     {
-        /// <summary>
-        /// Gets the ID of the post
-        /// </summary>
-        public int PostID { get; private set; }
-        /// <summary>
-        /// 
-        /// Gets the accountID of the author
-        /// </summary>
-        public int PosterID { get; private set; }
-
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="Post"/> class.
         /// </summary>
-        /// <param name="postID">The ID of the post</param>
-        /// <param name="title">The title of the post</param>
+        /// <param name="postID">The ID of the post.</param>
+        /// <param name="posterID">The poster ID of the post.</param>
         public Post(int postID, int posterID)
         {
             this.PostID = postID;
             this.PosterID = posterID;
         }
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// Gets the ID of the post.
+        /// </summary>
+        /// <value>The ID of the post.</value>
+        public int PostID { get; private set; }
 
         /// <summary>
-        /// Creates a post and uploads it to the database
+        /// Gets the account ID of the author.
         /// </summary>
-        /// <returns></returns>
+        /// <value>The account ID of the author.</value>
+        public int PosterID { get; private set; }
+        #endregion
+
+        #region Non-Static Methods
+        /// <summary>
+        /// Creates a post and uploads it to the database.
+        /// </summary>
+        /// <returns>Returns a boolean, indicating whether the post has been successfully created or not.</returns>
         public abstract bool Create();
 
         /// <summary>
-        /// Deletes a post from the database
+        /// Deletes a post from the database.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns a boolean, indicating whether the post has been successfully deleted or not.</returns>
         public abstract bool Delete();
 
         /// <summary>
-        /// Updates a post from the database
+        /// Updates a post from the database.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns a boolean, indicating whether the post has been successfully updated or not.</returns>
         public abstract bool Update();
+        #endregion
     }
 }
