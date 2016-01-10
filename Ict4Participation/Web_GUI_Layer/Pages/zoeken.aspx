@@ -19,8 +19,12 @@
     <link rel="stylesheet" href="../Content/CSS/zoekopties.css" />
 	<link rel="stylesheet" href="../Content/CSS/input.css" />
 </head>
-<body>
+<body>>
     <form runat="server">
+        <!-- Button is onzichtbaar, en is nodig zodat je in kan loggen door op
+             de enter-toets te drukken (kan niet anders omdat de eerste button
+             op een pagina altijd aan wordt geroepen als je op enter drukt) -->
+        <button style="position: absolute; left: -10000px;" onserverclick="return false;" runat="server"></button>
 	    <div id="wrapper">
 
 		    <!-- NAVIGATION -->
