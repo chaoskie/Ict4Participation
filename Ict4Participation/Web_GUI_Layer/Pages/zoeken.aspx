@@ -33,7 +33,7 @@
 							    <p>Terug</p>
 						    </button><!--
                             --><button onserverclick="btnQuestions_Click" runat="server" formnovalidate="formnovalidate">
-							    <i class="fa fa-search"></i>
+							    <i class="fa fa-question"></i>
 							    <p>Vragen</p>
 						    </button><!--
                             --><button onserverclick="btnProfile_Click" runat="server" formnovalidate="formnovalidate">
