@@ -12,18 +12,7 @@ namespace Web_GUI_Layer.Authorisation
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                // if they came to the page directly, ReturnUrl will be null.
-                if (String.IsNullOrEmpty(Request["ReturnUrl"]))
-                {
 
-                }
-                else
-                {
-
-                }
-            }
         }
         protected void Login_Authenticate(object sender, AuthenticateEventArgs e)
         {
