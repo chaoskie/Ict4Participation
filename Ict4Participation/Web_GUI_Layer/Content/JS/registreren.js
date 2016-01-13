@@ -169,14 +169,6 @@ function valideerFields() {
             allesgoed = false;
         }
 
-        // Valideer woonplaats
-        //if ((/^\D{2,}$/).test($('#inputWoonplaats').val())) {
-        //    $('#inputWoonplaats').removeClass('form-fail').addClass('form-success');
-        //} else {
-        //    $('#inputWoonplaats').removeClass('form-success').addClass('form-fail');
-        //    allesgoed = false;
-        //}
-
         // Valideer telefoonnummer
         //if ((/(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)/).test($('#inputTelefoonnummer').val())) {
         if ((/^([+]\d{2} ){0,1}\d{3}[-.]?\d{3}[-.]?\d{4}$/).test($('#inputTelefoonnummer').val())) {
@@ -345,14 +337,6 @@ function valideerFields() {
 
         allesgoed = true;
 
-        // valideer profielfoto
-        //if ((/^.{1,}(?:\.jpg|\.png){1}$/).test($($id).find('.file-caption-name').attr('title'))) {
-        //    $($id).find('.input-group>.file-caption').removeClass('form-fail').addClass('form-success');
-        //} else {
-        //    $($id).find('.input-group>.file-caption').removeClass('form-success').addClass('form-fail');
-        //    allesgoed = false;
-        //}
-
         // Verander data-formcomplete gebaseert op allesgoed
         if (allesgoed) {
             $('#tab_form3').data('formcomplete', true);
@@ -390,14 +374,6 @@ function valideerFields() {
             allesgoed = false;
         }
 
-        // Valideer VOG
-        //if ((/^.{1,}(?:\.pdf){1}$/).test($('#tab_vrijwilliger').find('.file-caption-name').attr('title'))) {
-        //    $('#tab_vrijwilliger').find('.input-group>.file-caption').removeClass('form-fail').addClass('form-success');
-        //} else {
-        //    $('#tab_vrijwilliger').find('.input-group>.file.caption').removeClass('form-success').addClass('form-fail');
-        //    allesgoed = false;
-        //}
-
         // Verander data-formcomplete gebaseert op allesgoed
         if (allesgoed) {
             $('#tab_vrijwilliger').data('formcomplete', true);
@@ -423,8 +399,7 @@ function valideerFields() {
 function onMouseOut(event) {
     //If the element is the parent element or a child element, return
     e = event.toElement || event.relatedTarget;
-    if (e.parentNode == this ||
-                           e == this) {
+    if (e.parentNode == this || e == this) {
         return;
     }
     //If the element is a city_gen, return
@@ -589,6 +564,9 @@ $('#btnVorigeTab').click(function () {
 
     // Enable 'Vorige' knop
     $('#btnVolgendeTab').removeClass('disabled');
+
+    // Valideer fields van de huidige tab
+    valideerFields();
 });
 
 $('#btnVolgendeTab').click(function () {
@@ -608,4 +586,7 @@ $('#btnVolgendeTab').click(function () {
 
     // Enable 'Vorige' knop
     $('#btnVorigeTab').removeClass('disabled');
+
+    // Valideer fields van de huidige tab
+    valideerFields();
 });
