@@ -73,17 +73,17 @@ namespace Web_GUI_Layer.Pages
                     e_date_min = Convert.ToInt32(((DateTime)qd.EndDate).ToString("mm"));
                 }
 
-                input_startdate_1.Items.FindByValue(Convert.ToString(s_date_day));
-                input_startdate_2.Items.FindByValue(Convert.ToString(s_date_month));
-                input_startdate_3.Items.FindByValue(Convert.ToString(s_date_year));
-                input_startdate_4.Items.FindByValue(Convert.ToString(s_date_hour));
-                input_startdate_5.Items.FindByValue(Convert.ToString(s_date_min));
+                input_startdate_1.Value = input_startdate_1.Items.FindByValue(Convert.ToString(s_date_day)).ToString();
+                input_startdate_2.Value = input_startdate_2.Items.FindByValue(Convert.ToString(s_date_month)).ToString();
+                input_startdate_3.Value = input_startdate_3.Items.FindByValue(Convert.ToString(s_date_year)).ToString();
+                input_startdate_4.Value = input_startdate_4.Items.FindByValue(Convert.ToString(s_date_hour)).ToString();
+                input_startdate_5.Value = input_startdate_5.Items.FindByValue(Convert.ToString(s_date_min)).ToString();
 
-                input_einddate_1.Items.FindByValue(Convert.ToString(e_date_day));
-                input_einddate_2.Items.FindByValue(Convert.ToString(e_date_month));
-                input_einddate_3.Items.FindByValue(Convert.ToString(e_date_year));
-                input_einddate_4.Items.FindByValue(Convert.ToString(e_date_hour));
-                input_einddate_5.Items.FindByValue(Convert.ToString(e_date_min));
+                input_einddate_1.Value = input_einddate_1.Items.FindByValue(Convert.ToString(e_date_day)).ToString();
+                input_einddate_2.Value = input_einddate_2.Items.FindByValue(Convert.ToString(e_date_month)).ToString();
+                input_einddate_3.Value = input_einddate_3.Items.FindByValue(Convert.ToString(e_date_year)).ToString();
+                input_einddate_4.Value = input_einddate_4.Items.FindByValue(Convert.ToString(e_date_hour)).ToString();
+                input_einddate_5.Value = input_einddate_5.Items.FindByValue(Convert.ToString(e_date_min)).ToString();
 
                 inputUrgentie.Checked = qd.Urgent;
 
@@ -133,6 +133,7 @@ namespace Web_GUI_Layer.Pages
                 Convert.ToInt32(input_einddate_2.Value), Convert.ToInt32(input_einddate_1.Value),
                 Convert.ToInt32(input_einddate_4.Value), Convert.ToInt32(input_einddate_5.Value), 0);
             qd.AmountAccs = Convert.ToInt32(input_max_accs.Value);
+            qd.Urgent = inputUrgentie.Checked;
 
             if (!GUIHandler.Edit(qd, qd.PostID, out message))
             {

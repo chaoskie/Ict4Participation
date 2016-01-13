@@ -238,7 +238,7 @@ namespace Web_GUI_Layer
             tempGuiHandler.GetAll();
 
             // Get mainuser account details
-            Accountdetails ad = tempGuiHandler.GetInfo(true, mainuserID);
+            Accountdetails ad = tempGuiHandler.GetMainuserInfo();
 
             // Change account description
             ad.Description = str;
