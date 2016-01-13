@@ -146,7 +146,7 @@
                                 <textarea id="tb_vraag" runat="server"></textarea>
                             </div>
                             <div class="col-tn-12 col-xs-5 col-sm-4">
-                                <asp:Button OnClick="btnPlaatsVraag_Click" CssClass="btn btn-custom btn-block btn-lg" Text="Plaats reactie" runat="server" />
+                                <button id="btnPlaatsReactie" class="btn btn-block btn-custom btn-lg disabled">Plaats Reactie</button>
                             </div>
                         </div>
                     </div><!-- Einde Plaats comment section -->

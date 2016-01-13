@@ -389,6 +389,11 @@ namespace Admin_Layer
             //if (LoadedComments[commentIndex].PosterID == MainUser.ID)
             if (c.PosterID == mainuserID)
             {
+                if (c.IsDeleted)
+                {
+                    message = "Deze comment is verwijderd door u of een administrator!";
+                    return false;
+                }
                 //Edit comment
                 c.SetDescription(comment.Description);
 
@@ -415,9 +420,19 @@ namespace Admin_Layer
         /// <param name="commentIndex">The index of the comment as loaded in the list</param>
         /// <param name="message">The message of the error</param>
         /// <returns>Returns a boolean, indicating whether the comment has been successfully removed or not.</returns>
-        public bool Remove(int commentID, out string message)
+        public bool Remove(int commentID, out string message, int? q_id = null)
         {
+            if (LoadedComments.Count == 0 && q_id != null)
+            {
+                GetAll((int)q_id);
+            }
+
             Comment c = LoadedComments.Find(i => i.PostID == commentID);
+            if (c == null)
+            {
+                message = "Er is een onverwachte error opgetreden, ververs de pagina!";
+                return false;
+            }
             if (c.PosterID == MainUser.ID)
             {
                 //Remove comment

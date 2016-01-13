@@ -40,16 +40,16 @@ namespace Web_GUI_Layer
         {
             Accountdetails acc = new Accountdetails();
 
-            acc.Name = inputFullName.Value;
+            acc.Name = inputFullName.Value.Trim();
 
-            acc.Address = string.Format("{0} {1}", inputStraatnaam.Value, inputHuisnummer.Value);
-            acc.City = inputWoonplaats.Value;
-            acc.Phonenumber = inputTelefoonnummer.Value;
-            acc.Gender = input_geslacht.Value.ToLower() == "man" ? "M" : "V";
-            acc.Birthdate = new DateTime(Convert.ToInt32(input_birthdate_3.Value), Convert.ToInt32(input_birthdate_2.Value), Convert.ToInt32(input_birthdate_1.Value));
+            acc.Address = string.Format("{0} {1}", inputStraatnaam.Value.Trim(), inputHuisnummer.Value.Trim());
+            acc.City = inputWoonplaats.Value.Trim();
+            acc.Phonenumber = inputTelefoonnummer.Value.Trim();
+            acc.Gender = input_geslacht.Value.Trim().ToLower() == "man" ? "M" : "V";
+            acc.Birthdate = new DateTime(Convert.ToInt32(input_birthdate_3.Value.Trim()), Convert.ToInt32(input_birthdate_2.Value.Trim()), Convert.ToInt32(input_birthdate_1.Value.Trim()));
 
-            acc.Email = inputEmail.Value;
-            acc.Username = inputGebruikersnaam.Value;
+            acc.Email = inputEmail.Value.Trim();
+            acc.Username = inputGebruikersnaam.Value.Trim();
 
             acc.OVPossible = Request.Form["cbOVMogelijk"] == "true";
             acc.hasDriverLicense = Request.Form["cbRijbewijs"] == "true";

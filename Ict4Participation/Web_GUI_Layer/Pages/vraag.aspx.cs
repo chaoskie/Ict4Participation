@@ -202,13 +202,15 @@ namespace Web_GUI_Layer
 
                         comment_section.Controls.Add(new LiteralControl(comment_template));
 
-                        HtmlButton btnVerwijder = new HtmlButton();
-                        btnVerwijder.Attributes.Add("class", "btn pull-right btn-custom2");
-                        btnVerwijder.InnerText = "Verwijder";
-                        btnVerwijder.ServerClick += new EventHandler(btnVerwijderReactie_Click);
-                        btnVerwijder.Attributes.Add("data-comment-id", Convert.ToString(cd.PostID));
+                        //HtmlButton btnVerwijder = new HtmlButton();
+                        //btnVerwijder.Attributes.Add("class", "btn pull-right btn-custom2");
+                        //btnVerwijder.InnerText = "Verwijder";
+                        //btnVerwijder.ServerClick += new EventHandler(btnVerwijderReactie_Click);
+                        //btnVerwijder.Attributes.Add("data-comment-id", Convert.ToString(cd.PostID));
 
-                        comment_section.Controls.Add(btnVerwijder);
+                        comment_section.Controls.Add(new LiteralControl(@"<button class=""btn btn-custom2 pull-right"" data-comment-id=""" + cd.PostID + @""">Verwijder</button>"));
+
+                        //comment_section.Controls.Add(btnVerwijder);
 
                         comment_template =
                             @"</div>" +
@@ -358,21 +360,109 @@ namespace Web_GUI_Layer
             Response.Redirect(Request.RawUrl, false);
         }
 
-        protected void btnVerwijderReactie_Click(object sender, EventArgs e)
+        [System.Web.Services.WebMethod]
+        public static string PlaceComment(string str)
         {
             string message = string.Empty;
 
-            // Get commentID from data attribute
-            int postID = Convert.ToInt32((sender as HtmlButton).Attributes["data-comment-id"].ToString());
+            GUIHandler tempGuiHandler = new GUIHandler();
+            Accountdetails m_acc = tempGuiHandler.GetMainuserInfo();
 
-            if (!GUIHandler.Remove(postID, out message))
+            if (!string.IsNullOrWhiteSpace(str))
             {
-                ShowErrorMessage(message);
+                Commentdetails cd = new Commentdetails();
+                cd.PostedToID = q_id;
+                cd.Description = str;
+                cd.PostDate = DateTime.Now;
+
+                if (tempGuiHandler.Place(cd, out message))
+                {
+                    List<Commentdetails> cds = tempGuiHandler.GetAll(q_id).Where(cmd => cmd.PosterID == m_acc.ID).OrderBy(c => c.PostDate).ToList();
+                    cd = cds.LastOrDefault();
+
+                    message =
+                    @"<div class=""row comment-main"">" +
+                        @"<div class=""col-xs-12"">" +
+                            @"<div class=""row"" title=""Reactie geplaatst op " + cd.PostDate.ToString("d MMMM yyyy HH:mm:ss") + @""">" +
+                                @"<div class=""hidden-tn col-xs-2"">";
+                    
+                        message += @"<img src=""" + m_acc.AvatarPath + @""" class=""img-responsive"" alt=""Profielfoto"">";
+
+                                message +=
+                                @"</div>" +
+                                @"<div class=""col-tn-12 col-xs-10"">" +
+                                    @"<div class=""row"">";
+                        message +=
+                            @"<div class=""col-xs-8"">";
+
+                        message += @"<h3 class=""comment-author"">" + m_acc.Name + @"</h3>";
+
+                        message +=
+                            @"</div>" +
+                            @"<div class=""col-xs-4 comment-buttons"">";
+
+                        message += @"<button class=""btn btn-custom2 pull-right"" data-comment-id=""" + cd.PostID + @""">Verwijder</button>";
+
+                        message +=
+                            @"</div>" +
+                        @"</div>";                    
+
+                    message +=
+                        @"<div class=""row"">" +
+                            @"<div class=""col-xs-12"">";
+
+                    message += @"<p class=""comment-body"" data-comment-id=""" + cd.PostID + @""" contenteditable>" + cd.Description + "</p>";
+
+                    message +=
+                            @"</div>" +
+                        @"</div>" +
+                    @"</div>" +
+                @"</div>" +
+            @"</div>" +
+        @"</div>";
+                }
+            }
+            else
+            {
+                message = "Niks ingevuld!";
             }
 
-            // Reload page
-            Response.Redirect(Request.RawUrl, false);
+            return message;
         }
+
+        [System.Web.Services.WebMethod]
+        public static string DeleteComment(string id)
+        {
+            string message = string.Empty;
+            GUIHandler tempGuiHandler = new GUIHandler();
+
+            if (tempGuiHandler.Remove(Convert.ToInt32(id), out message, q_id))
+            {
+                message = "true";
+            }
+            else
+            {
+                HttpContext.Current.Response.AddHeader("REFRESH", "0;URL=vraag.aspx");
+            }
+
+            return message;
+        }
+
+        //protected void btnVerwijderReactie_Click(object sender, EventArgs e)
+        //{
+        //    string message = string.Empty;
+
+        //    // Get commentID from data attribute
+        //    int postID = Convert.ToInt32((sender as HtmlButton).Attributes["data-comment-id"].ToString());
+
+        //    if (!GUIHandler.Remove(postID, out message))
+        //    {
+        //        ShowErrorMessage(message);
+        //    }
+
+        //    // Reload page
+        //    Response.Redirect(Request.RawUrl, false);
+        //}
 
         protected void btnDeleteQuestion_Click(object sender, EventArgs e)
         {
