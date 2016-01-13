@@ -25,7 +25,7 @@ namespace Database_Layer
         /// <summary>
         /// The host IP address
         /// </summary>
-        private static string host = "192.168.20.27";
+        private static string host = "localhost";
         private static string secHost = "localhost";
 
         /// <summary>

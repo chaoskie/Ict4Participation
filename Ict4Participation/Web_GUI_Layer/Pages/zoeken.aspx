@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="../Content/CSS/zoekopties.css" />
 	<link rel="stylesheet" href="../Content/CSS/input.css" />
 </head>
-<body>>
+<body>
     <form runat="server">
         <!-- Button is onzichtbaar, en is nodig zodat je in kan loggen door op
              de enter-toets te drukken (kan niet anders omdat de eerste button
