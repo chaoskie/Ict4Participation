@@ -62,7 +62,7 @@
 					    <div class="row">
 						    <div class="col-xs-12">
 							    <label for="inputZoeken" class="sr-only">Zoeken</label>
-							    <input type="text" id="inputZoeken" class="form-control" placeholder="Zoek op naam etc." />
+							    <input onkeypress="if (event.keyCode == 13) {return false};" type="text" id="inputZoeken" class="form-control" placeholder="Zoek op naam etc." />
 						    </div>
 					    </div>
 				    </div>
