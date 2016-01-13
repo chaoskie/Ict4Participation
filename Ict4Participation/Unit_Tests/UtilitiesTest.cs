@@ -13,6 +13,17 @@ namespace Unit_Tests
     [TestClass]
     public class UtilitiesTest
     {
+        private const bool sendMail = true;
+
+        [TestMethod]
+        public void SendMail()
+        {
+            if (sendMail)
+            {
+                EmailHandler.SendRegistration("biepbot@live.nl", "biepbot");
+            }
+        }
+
         [TestMethod]
         public void DateConversion()
         {

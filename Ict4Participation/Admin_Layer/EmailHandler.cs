@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace Admin_Layer
 {
-    public class EmailHandler
+    public static class EmailHandler
     {
-        private static string emailHead;
-        private static string emailTitle;
-        private static string emailDescription;
+        private static string emailHead = "gfjfaskdas";
+        private static string emailTitle = "sadjsdhusaj";
+        private static string emailDescription = "sadsadasdsadsa";
 
-        private static string emailBody =
+        private static string emailBody = 
     @"<!DOCTYPE html PUBLIC ""-//W3C//DTD XHTML 1.0 Transitional//EN"" ""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"">
 <html xmlns=""http://www.w3.org/1999/xhtml"">
 	<head>
         <meta http-equiv=""Content-Type"" content=""text/html; charset=UTF-8"">
-        <title>Een gebruiker heeft een fout gemeld.</title>
+        <title>{0}</title>
     </head>
     <body leftmargin=""0"" marginwidth=""0"" topmargin=""0"" marginheight=""0"" offset=""0"" style=""-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;margin: 0;padding: 0;background-color: #EEE;height: 100% !important;width: 100% !important;"">
     	<center>
@@ -34,8 +34,8 @@ namespace Admin_Layer
                                     <table border=""0"" cellpadding=""0"" cellspacing=""0"" width=""100%"" id=""templatePreheader"" style=""-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;background-color: #F3F3F3;border-bottom: 1px solid #CCCCCC;border-collapse: collapse !important;"">
                                         <tr>
                                             <td valign=""top"" class=""preheaderContent"" style=""padding-top: 10px;padding-right: 20px;padding-bottom: 10px;padding-left: 20px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #808080;font-family: Helvetica;font-size: 10px;line-height: 125%;text-align: left;"" mc:edit=""preheader_content00"">
-                                                " + emailHead +
-                                            @"</td>
+                                                {0}
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
@@ -55,10 +55,10 @@ namespace Admin_Layer
                             	<td align=""center"" valign=""top"" style=""-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"">
                                     <table border=""0"" cellpadding=""0"" cellspacing=""0"" width=""100%"" id=""templateBody"" style=""-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;background-color: #FFF;border-top: 1px solid #FFFFFF;border-bottom: 1px solid #CCCCCC;border-collapse: collapse !important;"">
                                         <tr>
-                                            <td valign=""top"" class=""bodyContent"" mc:edit=""body_content"" style=""-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #505050;font-family: Helvetica;font-size: 20px;line-height: 150%;padding-top: 20px;padding-right: 20px;padding-bottom: 20px;padding-left: 20px;text-align: left;"">
-                                                " + emailTitle +
-                                                @"<br>" + emailDescription +
-                                            @"</td>
+                                            <td valign=""top"" class=""bodyContent"" mc:edit=""body_content"" style=""-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #505050;font-family: Helvetica;font-size: 16px;line-height: 150%;padding-top: 20px;padding-right: 20px;padding-bottom: 20px;padding-left: 20px;text-align: left;"">
+                                                   {0}
+                                                <br> {1}
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>
@@ -107,10 +107,10 @@ namespace Admin_Layer
         /// Contains the standard email end message
         /// </summary>
         private const string emailEnd =
-                "\nVoor vragen en contact kunt u het volgende emailadres mailen: s21mplumbum@gmail.com"
-                + "\n"
-                + "\nMet vriendelijke groet,"
-                + "\nHet ICT4Participation-Team";
+                "<br />Voor vragen en contact kunt u het volgende emailadres mailen: s21mplumbum@gmail.com"
+                + "<br />"
+                + "<br />Met vriendelijke groet,"
+                + "<br />Het ICT4Participation-Team";
 
         /// <summary>
         /// Sends a mail regarding a registration
@@ -123,8 +123,8 @@ namespace Admin_Layer
             mail.To.Add(email);
             emailHead = emailTitle = mail.Subject = "U hebt een account geregistreerd voor ICT4Participation";
             emailDescription = "Hallo!"
-                + "\nU kunt nu registreren door middel van uw account:"
-                + "\n" + username + emailEnd;
+                + "<br />U kunt nu registreren door middel van uw account:"
+                + "<br />" + username + emailEnd;
             FinalSend();
         }
 
@@ -138,14 +138,14 @@ namespace Admin_Layer
         /// <param name="usernameRed">The username of the account the meeting was planned with</param>
         public static void SendMeeting(Meetingdetails m, string emailReq, string emailRed, string usernameReq, string usernameRed)
         {
-            string meetingdetails = "\n";
+            string meetingdetails = "<br />";
             if (m.CreationDate != null)
             {
-                meetingdetails += string.Format("Startdatum: {0} \nEinddatum: {1}", m.StartDate, m.EndDate);
+                meetingdetails += string.Format("Startdatum: {0} <br />Einddatum: {1}", m.StartDate, m.EndDate);
             }
             if (m.Location != null)
             {
-                meetingdetails += string.Format("\nOp de volgende locatie: {0}", m.Location);
+                meetingdetails += string.Format("<br />Op de volgende locatie: {0}", m.Location);
             }
 
             mail.To.Clear();
@@ -153,7 +153,7 @@ namespace Admin_Layer
             mail.To.Add(emailRed);
             emailHead = emailTitle = mail.Subject = usernameReq + " heeft een ontmoeting voor u ingepland";
             emailDescription = "Hallo!"
-                + "\nU bent ingepland voor een ontmoeting" + meetingdetails;
+                + "<br />U bent ingepland voor een ontmoeting" + meetingdetails;
             FinalSend();
         }
 
@@ -169,8 +169,8 @@ namespace Admin_Layer
             mail.To.Add(email);
             emailHead = emailTitle = mail.Subject = "Uw ICT4Participation account is gedeactiveerd";
             emailDescription = "Hallo!"
-                + "\nUw account " + username
-                + "\nIs gedeactiveerd om de volgende reden: " + reason + emailEnd;
+                + "<br />Uw account " + username
+                + "<br />Is gedeactiveerd om de volgende reden: " + reason + emailEnd;
             FinalSend();
         }
 
@@ -185,16 +185,16 @@ namespace Admin_Layer
             mail.To.Add(email);
             emailHead = emailTitle = mail.Subject = "Uw hebt een ICT4Participation waarschuwing ontvangen";
             emailDescription = "Hallo!"
-               + "\nUw account " + username
-               + "\nHeeft een ongepaste avatar, indien u deze niet in 24 uur aanpast, zullen de webbeheerders maatregelen nemen." + emailEnd;
+               + "<br />Uw account " + username
+               + "<br />Heeft een ongepaste avatar, indien u deze niet in 24 uur aanpast, zullen de webbeheerders maatregelen nemen." + emailEnd;
             FinalSend();
 
             mail.To.Clear();
             mail.To.Add("biepbot@gmail.com");
             emailHead = emailTitle = mail.Subject = "ICT4Participation account gewaarschuwd";
             emailDescription = "Hallo!"
-               + "\nHet volgende account " + username
-               + "\nHeeft een waarschuwing gekregen over hun avatar, gelieve hier na 24 uur naar te kijken, of contact met de gebruiker op te nemen." + emailEnd;
+               + "<br />Het volgende account " + username
+               + "<br />Heeft een waarschuwing gekregen over hun avatar, gelieve hier na 24 uur naar te kijken, of contact met de gebruiker op te nemen." + emailEnd;
             FinalSend();
         }
 
@@ -210,8 +210,8 @@ namespace Admin_Layer
             mail.To.Add(email);
             emailHead = emailTitle = mail.Subject = "Uw reactie op de vraag " + question + " is verwijderd";
             emailDescription = "Hallo!"
-               + "\nUw reactie op de vraag " + question + " is verwijderd door een webbeheerder met de volgende reden:"
-               + "\n" + reason + emailEnd;
+               + "<br />Uw reactie op de vraag " + question + " is verwijderd door een webbeheerder met de volgende reden:"
+               + "<br />" + reason + emailEnd;
             FinalSend();
         }
 
@@ -227,8 +227,8 @@ namespace Admin_Layer
             mail.To.Add(email);
             emailHead = emailTitle = mail.Subject = "Uw vraag " + question + " is verwijderd";
             emailDescription = "Hallo!"
-               + "\nUw vraag " + question + " is verwijderd door een webbeheerder met de volgende reden:"
-               + "\n" + reason + emailEnd;
+               + "<br />Uw vraag " + question + " is verwijderd door een webbeheerder met de volgende reden:"
+               + "<br />" + reason + emailEnd;
             FinalSend();
         }
 
@@ -244,8 +244,8 @@ namespace Admin_Layer
             mail.To.Add(email);
             emailHead = emailTitle = mail.Subject = "Uw review op " + username + " is verwijderd";
             emailDescription = "Hallo!"
-               + "\nUw review is verwijderd door een webbeheerder met de volgende reden:"
-               + "\n" + reason + emailEnd;
+               + "<br />Uw review is verwijderd door een webbeheerder met de volgende reden:"
+               + "<br />" + reason + emailEnd;
             FinalSend();
         }
 
@@ -264,9 +264,9 @@ namespace Admin_Layer
             mail.To.Add(email);
             emailHead = emailTitle = mail.Subject = "Uw ICT4Participation wachtwoord is veranderd";
             emailDescription = "Hallo!"
-               + "\nHet wachtwoord van uw account: " + username + " is" + ex + " aangepast."
-               + "\nUw nieuwe wachtwoord is: " + password
-               + "\nWe raden dit wachtwoord aan te passen zodra u inlogt" + emailEnd;
+               + "<br />Het wachtwoord van uw account: " + username + " is" + ex + " aangepast."
+               + "<br />Uw nieuwe wachtwoord is: " + password
+               + "<br />We raden dit wachtwoord aan te passen zodra u inlogt" + emailEnd;
             FinalSend();
         }
 
@@ -275,7 +275,10 @@ namespace Admin_Layer
         /// </summary>
         private static void FinalSend()
         {
+            mail.IsBodyHtml = true;
+            emailBody = String.Format(emailBody, emailTitle, emailDescription);
             mail.Body = emailBody;
+
             SmtpServer.Send(mail);
         }
     }
