@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 using Class_Layer;
 using Class_Layer.Enums;
 using Class_Layer.Controllers;
+using Class_Layer.Utility_Classes;
 
 namespace Admin_Layer
 {
@@ -356,6 +357,22 @@ namespace Admin_Layer
                 return false;
             }
             return true;
+        }
+
+        public void ChangePass(int acc_id, out string message)
+        {
+            // Generate password
+            string password = KeyGenerator.GetUniqueKey(8);
+            Account user = Account.GetUser(acc_id);
+
+            EmailHandler.SendPassChange(user.Email, user.Username, password, false);
+
+            message = "Een nieuw wachtwoord is verstuurd naar het volgende email adres: " + user.Email;
+
+            // Change password of user
+            Account.Update(user.ID, user.Username, user.Email, user.Name, user.Address, user.City, user.Phonenumber,
+                user.hasDriverLicense, user.hasVehicle, user.OVPossible, user.Birthdate, user.AvatarPath, user.VOGPath,
+                user.Gender, user.Skills, user.Availability, user.Skills, user.Availability, user.Description, password);
         }
         #endregion
 

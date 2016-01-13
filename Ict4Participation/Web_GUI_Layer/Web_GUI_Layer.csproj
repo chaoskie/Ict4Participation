@@ -100,6 +100,7 @@
     <Content Include="Content\CSS\review.css" />
     <Content Include="Content\CSS\vraag.css" />
     <Content Include="Content\CSS\vragen.css" />
+    <Content Include="Content\CSS\wachtwoordvergeten.css" />
     <Content Include="Content\CSS\wijzigvraag.css" />
     <Content Include="Content\CSS\zoeken.css" />
     <Content Include="Content\CSS\zoekopties.css" />
@@ -145,6 +146,7 @@
     <Content Include="Pages\review.aspx" />
     <Content Include="Pages\vraag.aspx" />
     <Content Include="Pages\vragen.aspx" />
+    <Content Include="Pages\wachtwoordvergeten.aspx" />
     <Content Include="Pages\wijziggegevens.aspx" />
     <Content Include="Pages\wijzigvraag.aspx" />
     <Content Include="Pages\zoeken.aspx" />
@@ -292,6 +294,13 @@
     </Compile>
     <Compile Include="Pages\vragen.aspx.designer.cs">
       <DependentUpon>vragen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\wachtwoordvergeten.aspx.cs">
+      <DependentUpon>wachtwoordvergeten.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\wachtwoordvergeten.aspx.designer.cs">
+      <DependentUpon>wachtwoordvergeten.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\wijziggegevens.aspx.cs">
       <DependentUpon>wijziggegevens.aspx</DependentUpon>

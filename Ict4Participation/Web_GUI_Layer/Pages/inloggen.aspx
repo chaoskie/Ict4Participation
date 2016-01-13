@@ -66,6 +66,8 @@
 					    </div>
 					    <br />
                         <asp:Button ID="btnInloggen" ClientIDMode="Static" CssClass="btn btn-custom btn-block" OnClick="btnLogin_Click" Text="Login" runat="server" />
+                        
+                        <asp:Button ID="btnForgotPassword" runat="server" CssClass="btn btn-custom btn-block" formnovalidate="formnovalidate" OnClick="btnForgotPassword_Click" Text="Wachtwoord vergeten?" />
 				    </div>
 			    </div>
 		    </main>

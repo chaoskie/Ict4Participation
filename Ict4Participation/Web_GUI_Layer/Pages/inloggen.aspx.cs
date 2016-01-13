@@ -70,6 +70,11 @@ namespace Web_GUI_Layer
             Response.Redirect("registreren.aspx", false);
         }
 
+        protected void btnForgotPassword_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("wachtwoordvergeten.aspx", false);
+        }
+
         protected void ShowErrorMessage(string message)
         {
             error_message.Text = message;
