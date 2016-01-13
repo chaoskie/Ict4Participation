@@ -389,6 +389,12 @@ namespace Admin_Layer
             //if (LoadedComments[commentIndex].PosterID == MainUser.ID)
             if (c.PosterID == mainuserID)
             {
+                if (c.IsDeleted)
+                {
+                    message = "Deze comment is verwijderd door u of een administrator!";
+                    return false;
+                }
+
                 //Edit comment
                 c.SetDescription(comment.Description);
 
@@ -420,6 +426,12 @@ namespace Admin_Layer
             Comment c = LoadedComments.Find(i => i.PostID == commentID);
             if (c.PosterID == MainUser.ID)
             {
+                if (c.IsDeleted)
+                {
+                    message = "Deze comment is verwijderd door u of een administrator!";
+                    return false;
+                }
+
                 //Remove comment
                 c.UserDelete();
                 message = "Comment verwijderd!";
