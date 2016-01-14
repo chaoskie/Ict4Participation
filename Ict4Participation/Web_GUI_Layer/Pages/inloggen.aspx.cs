@@ -12,10 +12,13 @@ namespace Web_GUI_Layer
     {
         private GUIHandler GUIHandler;
         private static int failedLoginAttempts = 0;
-        private static string[] mobileDevices = new string[] {"iphone","ppc",
+        private static readonly string[] mobileDevices = {"iphone","ppc",
                                                       "windows ce","blackberry",
                                                       "opera mini","mobile","palm",
-                                                      "portable","opera mobi" };
+                                                      "portable","opera mobi", "ipad",
+                                                      "android", "android 3.0", "xoom",
+                                                      "sch-i800", "playbook", "tablet",
+                                                      "kindle", "nexus" };
 
         protected void Page_Load(object sender, EventArgs e)
         {
