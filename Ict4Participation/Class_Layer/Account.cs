@@ -573,6 +573,7 @@ namespace Class_Layer
             //Call database to insert a new value into the "RecoveryPass" table, where
             //Hash = hashed username
             string hashedUsername = PasswordHashing.CreateHash(this.Username);
+            string hash = hashedUsername.Substring(6, hashedUsername.Length - 6);
             Database.AddRequest(hashedUsername);
             return hashedUsername;
         }

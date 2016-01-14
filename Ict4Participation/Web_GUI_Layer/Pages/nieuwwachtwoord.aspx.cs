@@ -26,6 +26,7 @@ namespace Web_GUI_Layer.Pages
             {
                 hash = Request.QueryString["q"];
                 hash = hash.Replace(' ', '+');
+                hash = "10000:" + hash;
                 try
                 {
                     GUIHandler.Unhash("", hash);
