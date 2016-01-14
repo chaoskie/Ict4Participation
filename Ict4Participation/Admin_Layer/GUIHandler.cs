@@ -389,6 +389,11 @@ namespace Admin_Layer
             return Edit(user, out message, password1, password2, true);
         }
 
+        /// <summary>
+        /// Checks if the hash is not expired
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public bool CheckValidRecoveryPassword(string url)
         {
             return Account.isPRExpired(url);

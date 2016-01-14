@@ -25,11 +25,6 @@ namespace Web_GUI_Layer.Pages
             else
             {
                 hash = Request.QueryString["q"];
-                if (GUIHandler.CheckValidRecoveryPassword(hash))
-                {
-                    Response.Redirect("inloggen.aspx", false);
-                    return;
-                }
                 try
                 {
                     GUIHandler.Unhash("", hash);
@@ -37,6 +32,12 @@ namespace Web_GUI_Layer.Pages
                 catch
                 {
                     Response.Redirect("inloggen.aspx", false);
+                    return;
+                }
+                if (GUIHandler.CheckValidRecoveryPassword(hash))
+                {
+                    Response.Redirect("inloggen.aspx", false);
+                    return;
                 }
             }
         }
