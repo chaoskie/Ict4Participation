@@ -154,10 +154,18 @@ function valideerFields() {
         }
 
         // Valideer straatnaam
-        if ((/^\D{2,}$/).test($('#inputStraatnaam').val())) {
+        if ((/^[A-Z]\D{2,}$/).test($('#inputStraatnaam').val())) {
             $('#inputStraatnaam').removeClass('form-fail').addClass('form-success');
+            $('#Label1').addClass("error-hidden");
+            $('#Label1').text();
         } else {
             $('#inputStraatnaam').removeClass('form-success').addClass('form-fail');
+            if ($('#inputStraatnaam').val().length > 0) {
+                if (!(/^[A-Z]/).test($('#inputStraatnaam').val())) {
+                    $('#Label1').removeClass("error-hidden");
+                    $('#Label1').text("Straat moet beginnen met een hoofdletter");
+                }
+            }
             allesgoed = false;
         }
 
