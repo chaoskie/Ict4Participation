@@ -4,11 +4,13 @@
     haalInfoOp('');
 
     $('#inputZoeken').on('input', function (e) {
-        var fvolunteers = $('#fvolunteers').is(':checked');
-        var fhelpreq = $('#fhelpreq').is(':checked');
-        var fquestions = $('#fquestions').is(':checked');
+        
         // Haal alle info op als er op de input wordt geklikt of een toets wordt losgelaten
-        haalInfoOp($(this).val(), fvolunteers, fhelpreq, fquestions);
+        haalInfoOp($(this).val());
+    });
+
+    $('input[type="checkbox"]').on('change', function() {
+        haalInfoOp();
     });
 
 });
@@ -20,11 +22,17 @@ $('#info_lijst').tooltip({
 var xhr;
 
 // Functie om alle gevonden resultaten op te halen, door middel van ajax
-function haalInfoOp(val, b1, b2, b3) {
+function haalInfoOp() {
     // Abort de huidige ajax call als die bestaat
     if (xhr != undefined) {
         xhr.abort();
     }
+
+    var val = $('#inputZoeken').val();
+
+    var b1 = $('#fvolunteers').is(':checked');
+    var b2 = $('#fhelpreq').is(':checked');
+    var b3 = $('#fquestions').is(':checked');
 
     // Maak een nieuwe asynchrone request naar de server
     xhr = $.ajax({

@@ -54,7 +54,7 @@ namespace Web_GUI_Layer.Pages
             reviewende_naam2.InnerText = ad.Name;
             reviewende_image.ImageUrl = ad.AvatarPath;
 
-            if (ad.VOGPath != null)
+            if (!string.IsNullOrWhiteSpace(ad.VOGPath))
             {
                 reviewende_type.InnerText = "Vrijwilliger";
             }
