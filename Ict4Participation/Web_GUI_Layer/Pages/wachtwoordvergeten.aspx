@@ -45,7 +45,7 @@
                     <asp:Label ID="error_message" ClientIDMode="Static" CssClass="error error-red error-hidden" runat="server"></asp:Label>
 
 				    <div class="form-group">
-					    <h2>Wachtwoord vergeten<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Voer de gebruikersnaam of email in welke u heeft gebruikt om te registreren. Wij sturen u dan direct een nieuw wachtwoord."></i></h2>
+					    <h2>Wachtwoord opnieuw aanvragen<i class="fa fa-fw fa-question-circle" data-toggle="tooltip" title="Voer de gebruikersnaam of email in welke u heeft gebruikt om te registreren. Wij sturen u dan direct bevestigingslink om een nieuw wachtwoord aan te maken."></i></h2>
 					    <div class="row">
 						    <div class="col-xs-12">
 							    <label for="inputForgotPassword" class="sr-only">Voer email in</label>
@@ -55,7 +55,7 @@
                         <br />
                         <div class="row">
                             <div class="col-xs-12">
-                                <button id="btnForgotPassword" class="btn btn-block btn-custom btn-lg" OnServerClick="btnForgotPassword_Click" runat="server">Verstuur nieuw wachtwoord</button>
+                                <button id="btnForgotPassword" class="btn btn-block btn-custom btn-lg" OnServerClick="btnForgotPassword_Click" runat="server">Verstuur aanvraag nieuw wachtwoord</button>
                             </div>
                         </div>
 				    </div>
