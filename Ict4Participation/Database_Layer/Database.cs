@@ -1159,5 +1159,59 @@ namespace Database_Layer
         }
 
         #endregion
+
+        #region passRequests
+        /// <summary>
+        /// Adds a password recovery request to the database for user
+        /// </summary>
+        /// <param name="hash"></param>
+        public static void AddRequest(string hash)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("INSERT INTO \"RecoveryPass\" (\"Hash\") " +
+                    "VALUES (:a)");
+                cmd.Parameters.Add(new OracleParameter("a", hash));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                c.Close();
+            }
+        }
+
+
+        /// <summary>
+        /// Updates 
+        /// </summary>
+        /// <returns></returns>
+        public static bool UseRequest(string hash)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("UPDATE \"RecoveryPass\" SET \"Used\" = 1 WHERE \"Hash\" = :a");
+                cmd.Parameters.Add(new OracleParameter("a", hash));
+                cmd.Connection = c;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (OracleException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return false;
+                }
+                c.Close();
+                return true;
+            }
+        }
+        #endregion
     }
 }

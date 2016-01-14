@@ -271,6 +271,25 @@ namespace Admin_Layer
         }
 
         /// <summary>
+        /// Sends a mail regarding a password change
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="byAdmin"></param>
+        public static void SendPassChange(string email, string username, string url)
+        {
+            mail.To.Clear();
+            mail.To.Add(email);
+            emailHead = emailTitle = mail.Subject = "Uw ICT4Participation aanvraag voor wachtwoord resetten";
+            emailDescription = "Hallo!"
+               + "<br />De aanvraag van uw wachtwoord is succesvol verwerkt."
+               + "<br />Gebruik de volgende url om uw wachtwoord aan te passen: " + url
+               + "<br />" + emailEnd;
+            FinalSend();
+        }
+
+        /// <summary>
         /// Finalises and sends the mail
         /// </summary>
         private static void FinalSend()

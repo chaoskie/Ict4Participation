@@ -161,7 +161,7 @@ namespace Admin_Layer
 
             if (LoadedAccounts.Where(acc => acc.Email == email).FirstOrDefault() != null)
             {
-                message = "Dit email is al in gebruik. Wilt u misschien inloggen?";
+                message = "Dit email is al in gebruik.";
                 return true;
             }
             return false;
@@ -180,7 +180,7 @@ namespace Admin_Layer
 
             if (LoadedAccounts.Where(acc => acc.Username == username).FirstOrDefault() != null)
             {
-                message = "Deze gebruikersnaam is al in gebruik. Wilt u misschien inloggen?";
+                message = "Deze gebruikersnaam bestaat al.";
                 return true;
             }
             return false;
@@ -359,21 +359,47 @@ namespace Admin_Layer
             return true;
         }
 
-        public void ChangePass(int acc_id, out string message)
+        /// <summary>
+        /// Requests a password change for the specified user
+        /// </summary>
+        /// <param name="acc_id"></param>
+        /// <param name="message"></param>
+        public void RequestPasswordChange(int userid, out string message)
         {
             // Generate password
-            string password = KeyGenerator.GetUniqueKey(8);
-            Account user = Account.GetUser(acc_id);
+            Account user = Account.GetUser(userid);
+            string hash = user.RequestPass();
+            EmailHandler.SendPassChange(user.Email, user.Username, "http://192.168.20.27/pages/nieuwwachtwoord.aspx?q=" + hash);
 
-            EmailHandler.SendPassChange(user.Email, user.Username, password, false);
-
-            message = "Een nieuw wachtwoord is verstuurd naar het volgende email adres: " + user.Email;
-
-            // Change password of user
-            Account.Update(user.ID, user.Username, user.Email, user.Name, user.Address, user.City, user.Phonenumber,
-                user.hasDriverLicense, user.hasVehicle, user.OVPossible, user.Birthdate, user.AvatarPath, user.VOGPath,
-                user.Gender, user.Skills, user.Availability, user.Skills, user.Availability, user.Description, password);
+            message = "Een wachtwoordaanvraag is verstuurd naar het volgende email adres: " + user.Email;
         }
+        
+        /// <summary>
+        /// Changes the password of a user
+        /// </summary>
+        /// <param name="userid">The ID of the user</param>
+        /// <param name="password1">The entered password</param>
+        /// <param name="password2">The entered repeated password</param>
+        /// <param name="message">The error message</param>
+        /// <returns></returns>
+        public bool ChangePassword(int userid, string password1, string password2, out string message)
+        {
+            message = string.Empty;
+            Accountdetails user = GetAll().Where(u => userid == u.ID).FirstOrDefault();
+            return Edit(user, out message, password1, password2, true);
+        }
+
+        /// <summary>
+        /// Validates a hash
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="hash"></param>
+        /// <returns></returns>
+        public bool Unhash(string input, string hash)
+        {
+            return PasswordHashing.ValidatePassword(input, hash);
+        }
+
         #endregion
 
         #region Comment Handling

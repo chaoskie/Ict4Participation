@@ -36,35 +36,19 @@ namespace Web_GUI_Layer.Pages
                 return;
             }
 
-            // Get info of all users
-            List<Accountdetails> all_accounts = GUIHandler.GetAll();
-            Accountdetails user = null;
-
-            // Check if accounts are retrieved
-            if (all_accounts.Count > 0)
-            {
-                // Check if the input has an email format
-                if (Check.isEmail(input))
-                {
-                    // Find the correct user in the accounts (emails are converted to lower to avoid capitalize mistakes, as emails capitalization shouldnt matter)
-                    user = all_accounts.Find(i => i.Email.ToLower() == input.ToLower());
-                }
-                else
-                {
-                    user = all_accounts.Find(i => i.Username == input);
-                }
-            }
-
-            if (user != null)
-            {
-                GUIHandler.ChangePass(user.ID, out message);
-
-                ShowErrorMessage(message, false);
-            }
-            else
+            if (!GUIHandler.ValidateEmail(input, out message) && !GUIHandler.ValidateUsername(input, out message))
             {
                 message = "Er is geen gebruiker gevonden met die gebruikersnaam of email.";
                 ShowErrorMessage(message, true);
+            }
+            else
+            {
+                //Get user id
+                int uid = GUIHandler.GetAll().Where(u => u.Email == input || u.Username == input).Select(u => u.ID).FirstOrDefault();
+
+                //Send mail
+                GUIHandler.RequestPasswordChange(uid, out message);
+                ShowErrorMessage(message, false);
             }
         }
 

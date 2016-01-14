@@ -563,5 +563,24 @@ namespace Class_Layer
                 this.AvatarPath = ID.ToString() + "." + avatarPath.Split('.').Last();
             }
         }
+
+        /// <summary>
+        /// Adds a password recovery request to the database for user
+        /// </summary>
+        /// <param name="url"></param>
+        public string RequestPass()
+        {
+            //Call database to insert a new value into the "RecoveryPass" table, where
+            //Hash = hashed username
+            string hashedUsername = PasswordHashing.CreateHash(this.Username);
+            Database.AddRequest(hashedUsername);
+            return hashedUsername;
+        }
+
+        public static void ExpireRequest(string hash)
+        {
+            //Call database to set the "RecoveryPass" table, column "used" to false where hash = url
+            Database.UseRequest(hash);
+        }
     }
 }
