@@ -12,6 +12,10 @@ namespace Web_GUI_Layer
     {
         private GUIHandler GUIHandler;
         private static int failedLoginAttempts = 0;
+        private static string[] mobileDevices = new string[] {"iphone","ppc",
+                                                      "windows ce","blackberry",
+                                                      "opera mini","mobile","palm",
+                                                      "portable","opera mobi" };
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,6 +28,17 @@ namespace Web_GUI_Layer
                     inputGebruikersnaam.Value = usc.Value;
                 }
             }
+        }
+
+        private static bool IsMobileDevice(string userAgent)
+        {
+            if (userAgent != null)
+            {
+                userAgent = userAgent.ToLower();
+                return mobileDevices.Any(x => userAgent.Contains(x));
+            }
+
+            return false;
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -47,7 +62,7 @@ namespace Web_GUI_Layer
                 Accountdetails ad = GUIHandler.GetMainuserInfo();
 
                 // Open new window with chat, and redirect to hoofdmenu.aspx (if client is not a mobile device)
-                if (!Request.Browser.IsMobileDevice)
+                if (!Request.Browser.IsMobileDevice && !IsMobileDevice(Request.UserAgent))
                 {
                     string queryString = "http://192.168.20.27:8081?userID=" + ad.ID + "&userName=" + ad.Name;
                     ClientScript.RegisterStartupScript(this.GetType(), "OpenWin",
