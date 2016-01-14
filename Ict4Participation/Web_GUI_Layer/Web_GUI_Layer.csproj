@@ -140,6 +140,7 @@
     <Content Include="Pages\inloggen.aspx" />
     <Content Include="packages.config" />
     <Content Include="Pages\meeting.aspx" />
+    <Content Include="Pages\nieuwwachtwoord.aspx" />
     <Content Include="Pages\plaatsreview.aspx" />
     <Content Include="Pages\plaatsvraag.aspx" />
     <Content Include="Pages\planmeeting.aspx" />
@@ -252,6 +253,13 @@
     </Compile>
     <Compile Include="Pages\meeting.aspx.designer.cs">
       <DependentUpon>meeting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\nieuwwachtwoord.aspx.cs">
+      <DependentUpon>nieuwwachtwoord.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\nieuwwachtwoord.aspx.designer.cs">
+      <DependentUpon>nieuwwachtwoord.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\plaatsreview.aspx.cs">
       <DependentUpon>plaatsreview.aspx</DependentUpon>

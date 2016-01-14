@@ -126,7 +126,7 @@ namespace Web_GUI_Layer
                         vs.OwnerName = ad.Name;
                         vs.OwnerID = qd.PosterID;
                         vs.OwnerAvatar = ad.AvatarPath;
-                        vs.OwnerType = ad.VOGPath == null ? "Hulpbehoevende" : "Vrijwilliger";
+                        vs.OwnerType = string.IsNullOrWhiteSpace(ad.VOGPath) ? "Hulpbehoevende" : "Vrijwilliger";
                         vs.OwnerDescription = ad.Description;
                         vs.PostID = qd.PostID;
 
@@ -170,7 +170,7 @@ namespace Web_GUI_Layer
                     AccountSetup a_s = new AccountSetup();
                     a_s.AccId = ad.ID;
                     a_s.AccName = ad.Name;
-                    a_s.AccType = ad.VOGPath == null ? "Hulpbehoevende" : "Vrijwilliger";
+                    a_s.AccType = string.IsNullOrWhiteSpace(ad.VOGPath) ? "Hulpbehoevende" : "Vrijwilliger");
                     a_s.AccDescription = ad.Description;
                     a_s.AccAvatar = ad.AvatarPath;
 
