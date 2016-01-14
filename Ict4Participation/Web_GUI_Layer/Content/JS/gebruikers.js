@@ -4,27 +4,23 @@
     haalGebruikersOp('');
 
     $('#inputZoeken').on('keyup click', function () {
-
-        var fvolunteers = $('#fvolunteers').is(':checked');
-        var fhelpreq = $('#fhelpreq').is(':checked');
         // Haal alle gebruikers op als er op de input wordt geklikt of een toets wordt losgelaten
-        haalGebruikersOp($(this).val(), fvolunteers, fhelpreq);
-
+        haalGebruikersOp();
     });
 
     $('input[type="checkbox"]').change(function() {
-
-            var fvolunteers = $('#fvolunteers').is(':checked');
-            var fhelpreq = $('#fhelpreq').is(':checked');
             // Haal alle gebruikers op als er op de input wordt geklikt of een toets wordt losgelaten
-            haalGebruikersOp($('#inputZoeken').val(), fvolunteers, fhelpreq);
-
+            haalGebruikersOp();
     });
 
 });
 
 // Functie om de gebruikers op te halen, door middel van ajax
-function haalGebruikersOp(val, b1, b2) {
+function haalGebruikersOp() {
+
+    var val = $('#inputZoeken').val();
+    var b1 = $('#fvolunteers').is(':checked');
+    var b2 = $('#fhelpreq').is(':checked');
 
     $.ajax({
         type: 'POST',

@@ -21,6 +21,11 @@
 </head>
 <body>
     <form runat="server">
+        <!-- Button is onzichtbaar, en is nodig zodat je in kan loggen door op
+             de enter-toets te drukken (kan niet anders omdat de eerste button
+             op een pagina altijd aan wordt geroepen als je op enter drukt) -->
+        <button style="position: absolute; left: -10000px;" id="none"></button>
+
 	    <div id="wrapper">
 
 		    <!-- NAVIGATION -->
@@ -50,7 +55,7 @@
 					    <div class="row">
 						    <div class="col-xs-12">
 							    <label for="inputZoeken" class="sr-only">Zoeken</label>
-							    <input type="text" id="inputZoeken" class="form-control" placeholder="Zoek op naam" />
+							    <input onkeypress="if (event.keyCode == 13) { haalGebruikersOp(); return false; };" type="text" id="inputZoeken" class="form-control" placeholder="Zoek op naam" />
 						    </div>
 					    </div>
 				    </div>
