@@ -1212,6 +1212,45 @@ namespace Database_Layer
                 return true;
             }
         }
+
+        /// <summary>
+        /// Returns whether the RP key is expired or not
+        /// </summary>
+        /// <param name="hash"></param>
+        /// <returns></returns>
+        public static bool isValidRequest(string hash)
+        {
+            using (OracleConnection c = new OracleConnection(@connectionstring))
+            {
+                c.Open();
+                OracleCommand cmd = new OracleCommand("SELECT \"expireDate\" FROM \"RecoveryPass\" WHERE \"Hash\" = :a");
+                cmd.Parameters.Add(new OracleParameter("a", hash));
+                cmd.Connection = c;
+                try
+                {
+                    OracleDataReader r = cmd.ExecuteReader();
+                    DataTable result = new DataTable();
+                    result.Load(r);
+                    c.Close();
+                    bool isExpired = true;
+                    foreach (DataRow row in result.Rows)
+                    {
+                        DateTime toCheck = Convert.ToDateTime(row["expireDate"]);
+                        if (toCheck < DateTime.Now)
+                        {
+                            isExpired = false;
+                        }
+                    }
+
+                    return isExpired;
+                }
+                catch (OracleException e)
+                {
+                    Console.Write(e.Message);
+                    return true;
+                }
+            }
+        }
         #endregion
     }
 }

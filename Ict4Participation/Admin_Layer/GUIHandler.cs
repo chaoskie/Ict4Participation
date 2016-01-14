@@ -389,6 +389,11 @@ namespace Admin_Layer
             return Edit(user, out message, password1, password2, true);
         }
 
+        public bool CheckValidRecoveryPassword(string url)
+        {
+            return Account.isPRExpired(url);
+        }
+
         /// <summary>
         /// Validates a hash
         /// </summary>

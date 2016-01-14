@@ -577,10 +577,24 @@ namespace Class_Layer
             return hashedUsername;
         }
 
+        /// <summary>
+        /// Uses a password recovery
+        /// </summary>
+        /// <param name="hash"></param>
         public static void ExpireRequest(string hash)
         {
             //Call database to set the "RecoveryPass" table, column "used" to false where hash = url
             Database.UseRequest(hash);
+        }
+
+        /// <summary>
+        /// Checks if the password recovery is expired or not
+        /// </summary>
+        /// <param name="hash"></param>
+        /// <returns></returns>
+        public static bool isPRExpired(string hash)
+        {
+            return Database.isValidRequest(hash);
         }
     }
 }
