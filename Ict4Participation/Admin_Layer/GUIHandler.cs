@@ -382,11 +382,19 @@ namespace Admin_Layer
         /// <param name="password2">The entered repeated password</param>
         /// <param name="message">The error message</param>
         /// <returns></returns>
-        public bool ChangePassword(int userid, string password1, string password2, out string message)
+        public bool ChangePassword(int userid, string password1, string password2, string hash, out string message)
         {
             message = string.Empty;
             Accountdetails user = GetAll().Where(u => userid == u.ID).FirstOrDefault();
-            return Edit(user, out message, password1, password2, true);
+            MainUser = Account.GetUser(user.ID);
+            bool success = Edit(user, out message, password1, password2, true);
+            if (success)
+            {
+                Account.ExpireRequest(hash);
+                return true;
+            }
+            else
+            { return false; }
         }
 
         /// <summary>
@@ -407,7 +415,14 @@ namespace Admin_Layer
         /// <returns></returns>
         public bool Unhash(string input, string hash)
         {
-            return PasswordHashing.ValidatePassword(input, hash);
+            try
+            {
+                return PasswordHashing.ValidatePassword(input, hash);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         #endregion

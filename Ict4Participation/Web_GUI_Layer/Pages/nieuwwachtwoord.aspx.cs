@@ -25,6 +25,7 @@ namespace Web_GUI_Layer.Pages
             else
             {
                 hash = Request.QueryString["q"];
+                hash = hash.Replace(' ', '+');
                 try
                 {
                     GUIHandler.Unhash("", hash);
@@ -71,13 +72,13 @@ namespace Web_GUI_Layer.Pages
 
             if (acc != null)
             {
-                if (!GUIHandler.ChangePassword(acc.ID, password1, password2, out message))
+                if (!GUIHandler.ChangePassword(acc.ID, password1, password2, hash, out message))
                 {
                     ShowErrorMessage(message, true);
                 }
                 else
                 {
-                    ShowErrorMessage("Het wachtwoord is gewijzigd!", false);
+                    ShowErrorMessage("Het wachtwoord is gewijzigd! U wordt teruggestuurd in 3 seconden", false);
                 }
             }
             else

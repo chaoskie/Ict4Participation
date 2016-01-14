@@ -1223,7 +1223,7 @@ namespace Database_Layer
             using (OracleConnection c = new OracleConnection(@connectionstring))
             {
                 c.Open();
-                OracleCommand cmd = new OracleCommand("SELECT \"expireDate\" FROM \"RecoveryPass\" WHERE \"Hash\" = :a");
+                OracleCommand cmd = new OracleCommand("SELECT \"ExpireDate\", \"Used\" FROM \"RecoveryPass\" WHERE \"Hash\" = :a");
                 cmd.Parameters.Add(new OracleParameter("a", hash));
                 cmd.Connection = c;
                 try
@@ -1235,10 +1235,19 @@ namespace Database_Layer
                     bool isExpired = true;
                     foreach (DataRow row in result.Rows)
                     {
-                        DateTime toCheck = Convert.ToDateTime(row["expireDate"]);
-                        if (toCheck < DateTime.Now)
+                        DateTime toCheck = Convert.ToDateTime(row["ExpireDate"]);
+                        if (toCheck > DateTime.Now)
                         {
                             isExpired = false;
+                        }
+                        bool notUsed = row["Used"].ToString() == "0" ? false : true;
+                        if (notUsed && !isExpired)
+                        {
+                            return true;
+                        }
+                        if (notUsed == false)
+                        {
+                            return false;
                         }
                     }
 
