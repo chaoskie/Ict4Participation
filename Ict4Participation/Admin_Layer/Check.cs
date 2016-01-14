@@ -77,7 +77,7 @@ namespace Admin_Layer
         /// <returns>Yields true when this is the case</returns>
         public static bool Phonenumber(string s)
         {
-            s = Regex.Replace(s, " ", "", RegexOptions.None);
+            s = s.Trim();
             return Regex.IsMatch(s, @"^([+]\d{2} ){0,1}\d{3}[-.]?\d{3}[-.]?\d{4}$");
         }
 
