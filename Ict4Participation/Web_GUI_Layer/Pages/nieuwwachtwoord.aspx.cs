@@ -12,6 +12,7 @@ namespace Web_GUI_Layer.Pages
     {
         private GUIHandler GUIHandler;
         private string unhash;
+        private string hash;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,11 +24,11 @@ namespace Web_GUI_Layer.Pages
             }
             else
             {
-                string hash = Request.QueryString["q"];
+                hash = Request.QueryString["q"];
 
                 try
                 {
-                    //unhash = 
+                    GUIHandler.Unhash("", hash);
                 }
                 catch
                 {
@@ -43,16 +44,52 @@ namespace Web_GUI_Layer.Pages
 
         protected void btnResetPassword_Click(object sender, EventArgs e)
         {
+            string message = string.Empty;
+
             // Get first password
             string password1 = inputWachtwoord.Value;
 
             // Get second password
             string password2 = inputHerhaalWachtwoord.Value;
+            List<Accountdetails> allaccs = GUIHandler.GetAll();
 
-            // Get hash from url
+            Accountdetails acc = null;
+            foreach (Accountdetails a in allaccs)
+            {
+                if (GUIHandler.Unhash(a.Username, hash))
+                {
+                    unhash = a.Username;
+                    acc = a;
+                    break;
+                }
+            }
 
-            //Accountdetails acc = GUIHandler.GetAll().Where(i => i.Username == );
+            if (acc != null)
+            {
+                if (!GUIHandler.ChangePassword(acc.ID, password1, password2, out message))
+                {
+                    ShowErrorMessage(message, true);
+                }
+                else
+                {
+                    ShowErrorMessage("Het wachtwoord is gewijzigd!", false);
+                }
+            }
+            else
+            {
+                ShowErrorMessage("Kan gebruiker niet vinden!", true);
+            }
 
+            Response.AddHeader("REFRESH", "3;URL=inloggen.aspx");
+        }
+
+        protected void ShowErrorMessage(string message, bool isError)
+        {
+            error_message.Text = message;
+            error_message.CssClass = error_message.CssClass.Replace("error-hidden", "");
+
+            error_message.CssClass = isError ? error_message.CssClass.Replace("error-green", "error-red")
+                                             : error_message.CssClass.Replace("error-red", "error-green");
         }
     }
 }
