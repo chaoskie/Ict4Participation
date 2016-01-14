@@ -46,10 +46,17 @@ namespace Web_GUI_Layer
                 // Get accountdetails of logged in person
                 Accountdetails ad = GUIHandler.GetMainuserInfo();
 
-                // Open new window with chat, and redirect to hoofdmenu.aspx
-                string queryString = "http://192.168.20.27:8081?userID=" + ad.ID + "&userName=" + ad.Name;
-                ClientScript.RegisterStartupScript(this.GetType(), "OpenWin",
-                 "<script>openNewWin('" + queryString + "','" + "hoofdmenu.aspx')</script>");
+                // Open new window with chat, and redirect to hoofdmenu.aspx (if client is not a mobile device)
+                if (!Request.Browser.IsMobileDevice)
+                {
+                    string queryString = "http://192.168.20.27:8081?userID=" + ad.ID + "&userName=" + ad.Name;
+                    ClientScript.RegisterStartupScript(this.GetType(), "OpenWin",
+                        "<script>openNewWin('" + queryString + "','" + "hoofdmenu.aspx')</script>");
+                }
+                else
+                {
+                    Response.Redirect("hoofdmenu.aspx", false);
+                }
             }
             else
             {
