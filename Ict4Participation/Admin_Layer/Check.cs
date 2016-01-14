@@ -53,7 +53,8 @@ namespace Admin_Layer
             }
             if (!Check.isLocation(acc.City, acc.Address))
             {
-                message = "Uw locatie kon niet gevonden worden.";
+                // For later
+                message = "Uw locatie moet beginnen met een hoofdletter";
                 return false;
             }
             if (!Check.isEmail(acc.Email))
@@ -276,6 +277,10 @@ namespace Admin_Layer
             //TODO
             //Check if valid address
             //http://www.postcodedata.nl/ check voor relevante info
+            if (address.Substring(0, 1) != address.Substring(0, 1).ToUpper())
+            {
+                return false;
+            }
             return true;
         }
 

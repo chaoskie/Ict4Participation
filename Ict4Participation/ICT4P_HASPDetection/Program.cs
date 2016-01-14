@@ -83,7 +83,7 @@ namespace ICT4P_HASPDetection
                         Application.EnableVisualStyles();
                         Application.SetCompatibleTextRenderingDefault(false);
                         //IMP TODO: Does this avoid the application startup thread?
-                        Application.Run(new Home());
+                        Process.Start(@"C:\Users\Rowan\Source\Repos\Ict4ParticipationMR\Ict4Participation\AdministrationParticipation\bin\Debug\AdministrationParticipation.exe");
                         Environment.Exit(0);
                     }
                 }
