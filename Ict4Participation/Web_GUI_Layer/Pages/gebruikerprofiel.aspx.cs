@@ -149,7 +149,7 @@ namespace Web_GUI_Layer.Pages
             }
 
             // Insert all reviews placed by mainuser
-            List<Reviewdetails> reviews_list_1 = GUIHandler.GetAllReviews(u_id, false);
+            List<Reviewdetails> reviews_list_1 = GUIHandler.GetAllReviews(u_id, true);
             foreach (Reviewdetails rd in reviews_list_1)
             {
                 // Insert a new listitem to contain the anchors
@@ -191,7 +191,7 @@ namespace Web_GUI_Layer.Pages
             }
 
             // Insert all reviews placed by other people about mainuser
-            List<Reviewdetails> reviews_list_2 = GUIHandler.GetAllReviews(u_id, true);
+            List<Reviewdetails> reviews_list_2 = GUIHandler.GetAllReviews(u_id, false);
             foreach (Reviewdetails rd in reviews_list_2)
             {
                 // Insert a new listitem to contain the anchors
@@ -201,7 +201,7 @@ namespace Web_GUI_Layer.Pages
                 // Insert first anchor with reviewed user name
                 HtmlAnchor a1 = new HtmlAnchor();
                 a1.Attributes.Add("href", "#");
-                a1.InnerText = string.Format("Review over: {0}", GUIHandler.GetAll().Find(i => i.ID == rd.PostedToID).Name);
+                a1.InnerText = string.Format("Review van: {0}", GUIHandler.GetAll().Find(i => i.ID == rd.PosterID).Name);
                 a1.Attributes.Add("data-review-id", Convert.ToString(rd.PostID));
                 a1.Attributes.Add("data-reviewacc-id", Convert.ToString(rd.PostedToID));
                 a1.ServerClick += btnNaarReview_Click;
