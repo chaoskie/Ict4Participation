@@ -575,7 +575,7 @@ namespace Class_Layer
             string hashedUsername = PasswordHashing.CreateHash(this.Username);
             string hash = hashedUsername.Substring(6, hashedUsername.Length - 6);
             Database.AddRequest(hashedUsername);
-            return hashedUsername;
+            return hash;
         }
 
         /// <summary>
