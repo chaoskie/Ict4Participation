@@ -55,7 +55,7 @@
                         <br />
                         <div class="row">
                             <div class="col-xs-12">
-                                <button id="btnForgotPassword" class="btn btn-block btn-custom btn-lg" OnServerClick="btnForgotPassword_Click" runat="server">Verstuur aanvraag nieuw wachtwoord</button>
+                                <button id="btnForgotPassword" class="btn btn-block btn-custom btn-lg" OnServerClick="btnForgotPassword_Click" runat="server">Vraag nieuw wachtwoord aan</button>
                             </div>
                         </div>
 				    </div>
